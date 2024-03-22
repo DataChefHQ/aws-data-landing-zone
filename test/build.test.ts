@@ -26,9 +26,6 @@ test('Local build and debug', () => {
 
   // assert.ok(managementStack);
   const template = Template.fromStack(dlz.managementStack);
-
-
   template.hasResource('AWS::SNS::Topic', { });
-  console.log(dlz.managementTopic.topicName);
 });
 
