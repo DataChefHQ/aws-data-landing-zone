@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: "18"
       - name: Install dependencies
         run: npm install
       - name: build
@@ -93,7 +93,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: "18"
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:

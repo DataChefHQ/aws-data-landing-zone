@@ -38,31 +38,35 @@
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.133.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "jest": "^29.7.0",
     "jest-junit": "^15",
-    "jsii": "~5.0.0",
+    "jsii": "~5.3.0",
     "jsii-diff": "^1.95.0",
     "jsii-docgen": "^10.3.24",
     "jsii-pacmak": "^1.95.0",
-    "jsii-rosetta": "~5.0.0",
+    "jsii-rosetta": "~5.3.0",
     "projen": "^0.80.12",
     "standard-version": "^9",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "~5.3.0"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.133.0",
     "constructs": "^10.0.5"
   },
   "keywords": [
     "cdk"
   ],
+  "engines": {
+    "node": "~18.*",
+    "npm": "~9.*"
+  },
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "version": "0.0.0",
