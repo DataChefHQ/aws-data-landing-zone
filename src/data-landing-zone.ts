@@ -1,5 +1,6 @@
-import { ManagementStack } from './stacks/management-stack';
-import {App} from "aws-cdk-lib";
+import { App } from 'aws-cdk-lib';
+// import { bootstrapManagement } from './scripts';
+import { ManagementStack } from './stacks';
 
 /**
  * Control Tower Supported Regions as listed here
@@ -165,6 +166,9 @@ export interface DlzRegions {
    */
   readonly regional: Region[];
 }
+export function DlzAllRegions(regions: DlzRegions): Region[] {
+  return [regions.global, ...regions.regional];
+}
 
 export interface DLzAccount {
   readonly accountId: string;
@@ -184,11 +188,12 @@ export interface DataLandingZoneProps {
 export class DataLandingZone {
   public readonly managementStack: ManagementStack;
 
-  constructor(app: App, props: DataLandingZoneProps) {
-    this.managementStack =  new ManagementStack(app, 'dlz-management', {
+  //TODO remove the privates here
+  constructor(private app: App, private props: DataLandingZoneProps) {
+    this.managementStack = new ManagementStack(this.app, 'dlz-management', {
       env: {
-        account: props.accounts.management.accountId,
-        region: props.regions.global,
+        account: this.props.accounts.management.accountId,
+        region: this.props.regions.global,
       },
     });
   }

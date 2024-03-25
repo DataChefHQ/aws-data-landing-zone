@@ -33,7 +33,16 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   workflowNodeVersion: '18',
-  // deps: [],                /* Runtime dependencies of this module. */
+  publishToPypi: {
+    distName: 'recipes_dlz',
+    module: 'recipes_dlz',
+  },
+  /* Runtime dependencies of this module that are jsii-enabled. */
+  // deps: [ ],
+  /*  Runtime dependencies of this module that are NOT jsii-enabled. */
+  bundledDeps: ['execa', 'yargs', 'deasync', '@aws-sdk/client-sts', '@aws-sdk/credential-providers'],
+  devDeps: ['@types/deasync']
+
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */

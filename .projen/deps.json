@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@types/deasync",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },
@@ -84,6 +88,26 @@
       "name": "typescript",
       "version": "~5.3.0",
       "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-sts",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/credential-providers",
+      "type": "bundled"
+    },
+    {
+      "name": "deasync",
+      "type": "bundled"
+    },
+    {
+      "name": "execa",
+      "type": "bundled"
+    },
+    {
+      "name": "yargs",
+      "type": "bundled"
     },
     {
       "name": "aws-cdk-lib",
