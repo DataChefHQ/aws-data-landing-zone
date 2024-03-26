@@ -1,12 +1,33 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
-export class DlzStack extends cdk.Stack {
-  private readonly id: string;
+export interface DlzStackNameProps {
+  readonly ou?: string;
+  readonly account?: string;
+  readonly stack: string;
+  readonly region: string;
+}
+export interface DlzStackProps extends Omit<cdk.StackProps,"stackName"> {
+  name: DlzStackNameProps
+}
 
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-    this.id = id;
+const DlzStackNamePrefix = "dlz-";
+export class DlzStack extends cdk.Stack {
+  public readonly id: string;
+  constructor(scope: Construct, props: DlzStackProps) {
+    const stackId = [
+      props.name.ou,
+      props.name.account,
+      props.name.stack,
+      props.name.region
+    ].filter(Boolean).join('--');
+
+    super(scope, stackId, {
+      ...props,
+      stackName: DlzStackNamePrefix + props.name.stack,
+    });
+
+    this.id = stackId;
   }
 
   /**
@@ -14,6 +35,6 @@ export class DlzStack extends cdk.Stack {
    * @param resourceId
    */
   resourceName(resourceId: string): string {
-    return this.id + '-' + resourceId;
+    return this.stackName + '-' + resourceId;
   }
 }

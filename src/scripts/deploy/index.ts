@@ -6,6 +6,8 @@ export async function all(props: DataLandingZoneProps) {
     'deploy',
     '"**"',
     '--require-approval never',
+    '--progress events',
+    '--concurrency 10',
     process.env.CI ? '' : `--profile ${props.localProfile}`,
   ].join(' '));
 }

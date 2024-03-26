@@ -1,6 +1,138 @@
 # Data Landing Zone
 
-..TODO
+## Directory structure
+
+The directory structure in `src/organization` will always map directly to the AWS Orgainzation structure. 
+We don't nest OUs because it has partial support in AWS Control Tower. This means the structure will always be in the 
+form of Level 1 OUs, Level 2 accounts and Level 3 stacks. This can be visually represented as follows:
+```
+src/organization
+├── root-stack.ts
+├── /ou1
+│   └── /account1
+│       ├── stack1.ts
+│       └── stack2.ts
+```
+
+Example of current layout and organization:
+```
+src/organization
+├── management-stack.ts
+├── security
+│   ├── log
+│   │   ├── global-stack.ts
+│   │   └── regional-stack.ts
+│   └── audit
+│       ├── global-stack.ts
+│       └── regional-stack.ts
+├── workloads
+│   ├── develop
+│   │   ├── global-stack.ts
+│   │   └── regional-stack.ts
+│   └── production
+│       ├── global-stack.ts
+│       └── regional-stack.ts
+└── sandbox
+    └── rehan-sandbox
+        ├── global-stack.ts
+        └── regional-stack.ts
+```
+
+Shared code between stacks, accounts and OUs will be placed as close to possible to the usage. In the example below the 
+shared code is at the OU level and can be used by all the stacks in all accounts in that OU. If the shared code was within
+the `log` folder, it would only be available to the stacks in the `log` folder/account. Nothing enforces this 
+convention, but it is a good practice to follow.
+```
+src/organization
+├── management-stack.ts
+├── security
+│   ├── shared.ts
+│   ├── log
+│   │   ├── global-stack.ts
+│   │   └── regional-stack.ts
+│   └── audit
+│       ├── global-stack.ts
+│       └── regional-stack.ts
+```
+
+## Stacks
+
+Each account will have a `global-stack.ts` and a `regional-stack.ts` by default. Most of the time their contents will
+be the same, but the `global-stack.ts` will contain extra resources that are global to the account, like IAM roles,
+DNS records, etc. The global stack will be in the same global region as the management account and the regional stack
+will be deployed in each region that is specified. 
+
+### Stack IDs
+
+Stack IDs have a specific convention so that it enables us to selectively decide what stacks need to be deployed. 
+``` 
+ou--account--stack--region
+```
+
+Double dashes are used to separate the different parts of the stack ID and will not be used in any stack name. Example
+of a few stack ids: 
+```
+root--management--global--eu-west-1
+security--log--global--eu-west-1
+security--log--regional--us-east-1
+security--log--regional--us-west-1
+security--auidt--global--eu-west-1
+security--auidt--regional--us-east-1
+security--auidt--regional--us-west-1
+```
+
+This enables the following patterns of deployment:
+- `cdk deploy "security--**"` will deploy all stacks in the Security account.
+- `cdk deploy "security--log--**"` will deploy all stacks in the Log account.
+- `cdk deploy "security--log--regional--**"` will deploy all regional stacks in the Log account.
+- `cdk deploy "*--eu-west-1"` will deploy all stacks in the `eu-west-1` region.
+
+We will not make use of these different patterns now, its nice for local testing but the pipelines will always deploy
+all stacks. It is just good to have this option as it is setting the construct id of the stack which is a one way door.
+
+## Stack Names
+The Stack ID is only used to identify the stack in the CDK, the stack name is what is used in AWS. All stack names 
+will be prefixed with `dlz-`. All resources within a stack will prefix their name with the stack name. This is to 
+ensure that all resources are easily identifiable as part of the Data Landing Zone. 
+
+For example, the stack ID `security--log--global--eu-west-1`:
+- Will have a stack name of `dlz-global`
+- A resource like an SNS topic will be `dlz-global-my-topic`
+
+### Stack deployment order
+
+Global stacks will always be deployed before the regional stacks such that the regional stacks can depend on the global
+resources. Similarly, the management account will also be deployed first and then all the other accounts.
+
+Legend: 
+🌊 - Waves are deployed sequentially
+🔲 - Stage are deployed in parallel within a wave
+📄 - Stack, indentation shows deployment order, where an indented stack depends on the non lesser indented stack.
+
+The concept of Waves and Stages are concepts and not real AWS resources/constructs.
+
+``` 
+🌊 All
+    🔲 Management
+        📄 root--management--global--eu-west-1
+            📄 security--log--global--eu-west-1
+                📄 security--log--regional--us-east-1
+                📄 security--log--regional--us-west-1
+            📄 security--auidt--global--eu-west-1
+                📄 security--auidt--regional--us-east-1
+                📄 security--auidt--regional--us-west-1
+                
+🌊 Workloads
+    🔲 Develop
+        📄 workloads--develop--global--eu-west-1
+            📄 workloads--develop--regional--us-east-1
+            📄 workloads--develop--regional--us-west-1
+    🔲 Production
+        📄 workloads--production--global--eu-west-1
+            📄 workloads--production--regional--us-east-1
+            📄 workloads--production--regional--us-west-1
+```
+
 
 ## Testing the package locally
 
