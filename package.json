@@ -17,6 +17,7 @@
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:js": "npx projen package:js",
+    "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
@@ -29,8 +30,8 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "rehanvdm",
-    "email": "rehan.vdm4@gmail.com",
+    "name": "DataChefHQ",
+    "email": "hi@datachef.co",
     "organization": false
   },
   "devDependencies": {
@@ -60,6 +61,16 @@
     "aws-cdk-lib": "^2.133.0",
     "constructs": "^10.0.5"
   },
+  "dependencies": {
+    "@aws-sdk/client-sts": "^3.540.0",
+    "@aws-sdk/credential-providers": "^3.540.0",
+    "execa": "5.1.1"
+  },
+  "bundledDependencies": [
+    "@aws-sdk/client-sts",
+    "@aws-sdk/credential-providers",
+    "execa"
+  ],
   "keywords": [
     "cdk"
   ],
@@ -116,7 +127,12 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "recipes_dlz",
+        "module": "recipes_dlz"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
