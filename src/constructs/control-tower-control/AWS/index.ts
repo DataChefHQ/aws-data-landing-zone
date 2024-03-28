@@ -1,0 +1,1 @@
+export * from './AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS';

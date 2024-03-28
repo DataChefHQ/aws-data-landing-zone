@@ -3,11 +3,10 @@ import { Construct } from 'constructs';
 import { DlzStack } from '../../constructs';
 import {
   ControlTowerEnabledControl,
-  ControlTowerEnabledControlProps,
+  IControlTowerControl,
 } from '../../constructs/control-tower-control';
-import { AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS } from '../../constructs/control-tower-controls';
-import { SH_SecretsManager_3 } from '../../constructs/control-tower-controls/SH_SecretsManager_3';
-import { DlzStackProps } from '../../constructs/dlz-stack';
+
+import { DlzStackProps } from '../../constructs';
 import { DataLandingZoneProps, Ou, Region } from '../../data-landing-zone';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 
@@ -34,33 +33,29 @@ export class ManagementStack extends DlzStack {
     const allOus = [Ou.SECURITY, Ou.WORKLOADS];
     console.assert(this.props.regions.global === Region.EU_WEST_1);
 
-    const controlProps: Pick<ControlTowerEnabledControlProps, 'controlTowerAccountId' | 'organizationId' | 'controlTowerRegion'> = {
-      controlTowerAccountId: this.props.organization.rootAccounts.management.accountId,
-      organizationId: this.props.organization.organizationId,
-      controlTowerRegion: this.props.regions.global,
-    };
+    const standardControls = ControlTowerEnabledControl.standardControls();
+    const controls: IControlTowerControl[] = [
+      standardControls["AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS"],
+      standardControls["SH.SecretsManager.3"],
+    ];
 
-    const allControls: Construct[] = [];
-    for (const ou of allOus) {
-      allControls.push(
-        new ControlTowerEnabledControl(this,
-          this.resourceName('AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS' + ou), {
-            ...controlProps,
-            appliedOu: this.props.organization.ous[ou].ouId,
-            control: new AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS(),
-          }).control);
-
-      allControls.push(
-        new ControlTowerEnabledControl(this,
-          this.resourceName('SH_SecretsManager_3' + ou), {
-            ...controlProps,
-            appliedOu: this.props.organization.ous[ou].ouId,
-            control: new SH_SecretsManager_3({
-              unusedForDays: 365,
-            }),
-          }).control);
+    const enabledControls: Construct[] = [];
+    for(const control of controls)
+    {
+      for (const ou of allOus)
+      {
+        enabledControls.push(
+          new ControlTowerEnabledControl(this,
+            this.resourceName(control.controlFriendlyName + ou), {
+              controlTowerAccountId: this.props.organization.rootAccounts.management.accountId,
+              organizationId: this.props.organization.organizationId,
+              controlTowerRegion: this.props.regions.global,
+              appliedOu: this.props.organization.ous[ou].ouId,
+              control: control,
+            }).control);
+      }
     }
-    limitCfnExecutions(allControls, 10);
+    limitCfnExecutions(enabledControls, 10);
 
   }
 }
