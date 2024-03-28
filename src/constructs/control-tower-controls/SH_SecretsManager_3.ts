@@ -1,5 +1,5 @@
-import {IControlTowerControl} from "./index";
-import {Region} from "../../data-landing-zone";
+import { IControlTowerControl } from './index';
+import { Region } from '../../data-landing-zone';
 
 
 export interface SH_SecretsManager_3Props {
@@ -8,7 +8,7 @@ export interface SH_SecretsManager_3Props {
    * @default 90
    * Minimum: 1, Maximum: 365
    */
-  unusedForDays: number
+  unusedForDays: number;
 }
 
 /**
@@ -19,18 +19,18 @@ export interface SH_SecretsManager_3Props {
  * https://docs.aws.amazon.com/securityhub/latest/userguide/secretsmanager-controls.html#secretsmanager-3
  * */
 export class SH_SecretsManager_3 implements IControlTowerControl {
-  public controlFriendlyName: string = "SH.SecretsManager.3";
+  public controlFriendlyName: string = 'SH.SecretsManager.3';
   public controlIdName = {
-    [Region.EU_WEST_1]: "KRZOMDMWLCLU",
-    [Region.US_EAST_1]: "QQURRKYALIYF"
+    [Region.EU_WEST_1]: 'KRZOMDMWLCLU',
+    [Region.US_EAST_1]: 'QQURRKYALIYF',
   };
-  public parameters?: Record<string, any>
+  public parameters?: Record<string, any>;
   constructor(props?: SH_SecretsManager_3Props) {
 
-    if(!props) {
+    if (!props) {
       props = {
-        unusedForDays: 90
-      }
+        unusedForDays: 90,
+      };
     }
     this.parameters = props as Record<string, any>;
   }

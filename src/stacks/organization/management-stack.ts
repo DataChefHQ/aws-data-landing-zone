@@ -1,15 +1,15 @@
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { DlzStack } from '../../constructs';
-import { DlzStackProps } from '../../constructs/dlz-stack';
 import {
   ControlTowerEnabledControl,
-  ControlTowerEnabledControlProps
-} from "../../constructs/control-tower-control";
-import {DataLandingZoneProps, Ou, Region} from "../../data-landing-zone";
-import {AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS} from "../../constructs/control-tower-controls";
-import {SH_SecretsManager_3} from "../../constructs/control-tower-controls/SH_SecretsManager_3";
-import {limitCfnExecutions} from "../../lib/cfn-utils";
+  ControlTowerEnabledControlProps,
+} from '../../constructs/control-tower-control';
+import { AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS } from '../../constructs/control-tower-controls';
+import { SH_SecretsManager_3 } from '../../constructs/control-tower-controls/SH_SecretsManager_3';
+import { DlzStackProps } from '../../constructs/dlz-stack';
+import { DataLandingZoneProps, Ou, Region } from '../../data-landing-zone';
+import { limitCfnExecutions } from '../../lib/cfn-utils';
 
 export interface ManagementStackProps extends DataLandingZoneProps { }
 
@@ -32,23 +32,22 @@ export class ManagementStack extends DlzStack {
    */
   private rootControls() {
     const allOus = [Ou.SECURITY, Ou.WORKLOADS];
-    console.assert(this.props.regions.global === Region.EU_WEST_1)
+    console.assert(this.props.regions.global === Region.EU_WEST_1);
 
-    const controlProps: Pick<ControlTowerEnabledControlProps, "controlTowerAccountId" | "organizationId" | "controlTowerRegion"> = {
+    const controlProps: Pick<ControlTowerEnabledControlProps, 'controlTowerAccountId' | 'organizationId' | 'controlTowerRegion'> = {
       controlTowerAccountId: this.props.organization.rootAccounts.management.accountId,
       organizationId: this.props.organization.organizationId,
       controlTowerRegion: this.props.regions.global,
-    }
+    };
 
     const allControls: Construct[] = [];
-    for (const ou of allOus)
-    {
+    for (const ou of allOus) {
       allControls.push(
         new ControlTowerEnabledControl(this,
           this.resourceName('AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS' + ou), {
             ...controlProps,
             appliedOu: this.props.organization.ous[ou].ouId,
-            control: new AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS()
+            control: new AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS(),
           }).control);
 
       allControls.push(
@@ -57,11 +56,11 @@ export class ManagementStack extends DlzStack {
             ...controlProps,
             appliedOu: this.props.organization.ous[ou].ouId,
             control: new SH_SecretsManager_3({
-              unusedForDays: 365
-            })
+              unusedForDays: 365,
+            }),
           }).control);
     }
-    limitCfnExecutions(allControls,10);
+    limitCfnExecutions(allControls, 10);
 
   }
 }

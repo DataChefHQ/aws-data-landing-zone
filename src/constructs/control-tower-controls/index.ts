@@ -1,9 +1,9 @@
-import {Region} from "../../data-landing-zone";
+import { Region } from '../../data-landing-zone';
 
 
 export interface ControlTowerControlIdNameProps {
-  [Region.EU_WEST_1]: string
-  [Region.US_EAST_1]: string
+  [Region.EU_WEST_1]: string;
+  [Region.US_EAST_1]: string;
 }
 
 export interface IControlTowerControl {
@@ -20,7 +20,7 @@ export interface IControlTowerControl {
   /**
    * Optional parameters for the control
    */
-  parameters?: Record<string, any>
+  parameters?: Record<string, any>;
 }
 
 export * from './AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS';
