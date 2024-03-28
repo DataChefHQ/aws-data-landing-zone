@@ -1,7 +1,7 @@
+import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
-import {DlzStack} from "../../../../constructs";
-import * as sns from "aws-cdk-lib/aws-sns";
-import {DlzStackProps} from "../../../../constructs/dlz-stack";
+import { DlzStack } from '../../../../constructs';
+import { DlzStackProps } from '../../../../constructs/dlz-stack';
 
 export class LogGlobalStack extends DlzStack {
   constructor(scope: Construct, props: DlzStackProps) {

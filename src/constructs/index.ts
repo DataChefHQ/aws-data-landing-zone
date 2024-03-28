@@ -1,1 +1,1 @@
-export { DlzStack } from './dlz-stack';
+export * from './dlz-stack';

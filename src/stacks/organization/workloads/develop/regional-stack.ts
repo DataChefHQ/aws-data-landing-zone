@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import { DlzStack } from '../../../../constructs';
 import { DlzStackProps } from '../../../../constructs/dlz-stack';
 
-export class LogRegionalStack extends DlzStack {
+export class DevelopRegionalStack extends DlzStack {
   constructor(scope: Construct, props: DlzStackProps) {
     super(scope, props);
 

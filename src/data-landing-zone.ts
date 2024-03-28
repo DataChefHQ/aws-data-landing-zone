@@ -1,10 +1,14 @@
-import {App, Stack} from 'aws-cdk-lib';
+import { App, Stack } from 'aws-cdk-lib';
+import { DlzStack } from './constructs';
 import { ManagementStack } from './stacks';
-import {LogGlobalStack} from "./stacks/organization/security/log/global-stack";
-import {AuditGlobalStack} from "./stacks/organization/security/audit/global-stack";
-import {LogRegionalStack} from "./stacks/organization/security/log/regional-stack";
-import {AuditRegionalStack} from "./stacks/organization/security/audit/regional-stack";
-import {DlzStack} from "./constructs";
+import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
+import { AuditRegionalStack } from './stacks/organization/security/audit/regional-stack';
+import { LogGlobalStack } from './stacks/organization/security/log/global-stack';
+import { LogRegionalStack } from './stacks/organization/security/log/regional-stack';
+import {DevelopRegionalStack} from "./stacks/organization/workloads/develop/regional-stack";
+import {DevelopGlobalStack} from "./stacks/organization/workloads/develop/global-stack";
+import {ProductionGlobalStack} from "./stacks/organization/workloads/production/global-stack";
+import {ProductionRegionalStack} from "./stacks/organization/workloads/production/regional-stack";
 
 /**
  * Control Tower Supported Regions as listed here
@@ -177,75 +181,116 @@ export function DlzAllRegions(regions: DlzRegions): Region[] {
 export interface DLzAccount {
   readonly accountId: string;
 }
-export interface DLzAccounts {
-  readonly management: DLzAccount;
-  readonly log: DLzAccount;
-  readonly audit: DLzAccount;
+
+export enum Ou {
+  SECURITY = 'security',
+  WORKLOADS = 'workloads',
+  SUSPENDED = 'suspended',
+}
+
+export interface DLzOrganization {
+  readonly organizationId: string;
+  readonly rootAccounts: {
+    readonly management: DLzAccount;
+  };
+  readonly ous: {
+    readonly [Ou.SECURITY]: {
+      readonly ouId: string;
+      readonly accounts: {
+        readonly log: DLzAccount;
+        readonly audit: DLzAccount;
+      };
+    };
+    readonly [Ou.WORKLOADS]: {
+      readonly ouId: string;
+      readonly accounts: {
+        readonly develop: DLzAccount;
+        readonly production: DLzAccount;
+      };
+    };
+    readonly [Ou.SUSPENDED]: {
+      readonly ouId: string;
+    };
+  };
 }
 
 export interface DataLandingZoneProps {
   readonly localProfile: string;
-  readonly accounts: DLzAccounts;
+  readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
 }
 
 type DeploymentOrder = {
   [wave: string]: {
-    [stage: string]: DlzStack[]
+    [stage: string]: DlzStack[];
   };
 }
 
 export interface LogStacks {
-  global: LogGlobalStack;
-  regional: LogGlobalStack[];
+  readonly global: LogGlobalStack;
+  readonly regional: LogGlobalStack[];
 }
 
 export interface AuditStacks {
-  global: AuditGlobalStack;
-  regional: AuditRegionalStack[];
+  readonly global: AuditGlobalStack;
+  readonly regional: AuditRegionalStack[];
 }
+
+export interface DevelopStacks {
+  readonly global: DevelopGlobalStack;
+  readonly regional: DevelopRegionalStack[];
+}
+
+export interface ProductionStacks {
+  readonly global: ProductionGlobalStack;
+  readonly regional: ProductionRegionalStack[];
+}
+
 
 export class DataLandingZone {
   public managementStack!: ManagementStack;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
+  public developStacks!: DevelopStacks;
+  public productionStacks!: ProductionStacks;
 
-  constructor(app: App, props: DataLandingZoneProps) {
-
-  const stageManagement = () =>
-  {
-    const management = new ManagementStack(app,{
-      name: { ou: 'root', account: 'management', stack: 'global', region: props.regions.global },
-      env: {
-        account: props.accounts.management.accountId,
-        region: props.regions.global,
+  stageManagement() {
+    const management = new ManagementStack(this.app, {
+        name: {ou: "root", account: "management", stack: 'global', region: this.props.regions.global},
+        env: {
+          account: this.props.organization.rootAccounts.management.accountId,
+          region: this.props.regions.global,
+        },
       },
-    });
+      this.props,);
 
     this.managementStack = management;
 
     return [
       this.managementStack,
     ];
-  }
+  };
 
-  const stageLog = () =>
+  stageLog()
   {
-    const logGlobal = new LogGlobalStack(app,{
-      name: { ou: 'security', account: 'log', stack: 'global', region: props.regions.global },
+    const ou = "security";
+    const account = "log";
+
+    const logGlobal = new LogGlobalStack(this.app, {
+      name: {ou, account, stack: 'global', region: this.props.regions.global},
       env: {
-        account: props.accounts.log.accountId,
-        region: props.regions.global,
+        account: this.props.organization.ous.security.accounts.log.accountId,
+        region: this.props.regions.global,
       },
     });
 
     const logRegionalStacks: AuditRegionalStack[] = [];
-    for (const region of props.regions.regional) {
-      const logRegional = new LogRegionalStack(app, {
-        name: { ou: 'security', account: 'log', stack: 'regional', region },
+    for (const region of this.props.regions.regional) {
+      const logRegional = new LogRegionalStack(this.app, {
+        name: {ou, account, stack: 'regional', region},
         env: {
-          account: props.accounts.log.accountId,
-          region: region
+          account: this.props.organization.ous.security.accounts.log.accountId,
+          region: region,
         },
       });
       logRegional.addDependency(logGlobal);
@@ -261,32 +306,32 @@ export class DataLandingZone {
       this.logStacks.global,
       ...this.logStacks.regional,
     ];
-  }
+  };
 
-  const stageAudit = () =>
+  stageAudit()
   {
-    // ----------------------------- Audit Stacks -------------------------- //
-    const auditGlobalStack = new AuditGlobalStack(app,{
-      name: { ou: 'security', account: 'audit', stack: 'global', region: props.regions.global },
+    const ou = "security";
+    const account = "audit";
+    const auditGlobalStack = new AuditGlobalStack(this.app, {
+      name: {  ou,  account,  stack: 'global',   region: this.props.regions.global },
       env: {
-        account: props.accounts.audit.accountId,
-        region: props.regions.global,
+        account: this.props.organization.ous.security.accounts.audit.accountId,
+        region: this.props.regions.global,
       },
     });
 
     const auditRegionalStacks: AuditRegionalStack[] = [];
-    for (const region of props.regions.regional) {
-      const auditRegional = new AuditRegionalStack(app, {
-        name: { ou: 'security', account: 'audit', stack: 'regional', region },
+    for (const region of this.props.regions.regional) {
+      const auditRegional = new AuditRegionalStack(this.app, {
+        name: { ou,  account,  stack: 'regional',  region: region },
         env: {
-          account: props.accounts.audit.accountId,
-          region: region
+          account: this.props.organization.ous.security.accounts.audit.accountId,
+          region: region,
         },
       });
       auditRegional.addDependency(auditGlobalStack);
       auditRegionalStacks.push(auditRegional);
     }
-    // ---------------------------------------------------------------------- //
 
     this.auditStacks = {
       global: auditGlobalStack,
@@ -295,37 +340,116 @@ export class DataLandingZone {
 
     return [
       this.auditStacks.global,
-      ...this.auditStacks.regional
+      ...this.auditStacks.regional,
     ];
-  }
-
-  const deploymentOrder: DeploymentOrder = {
-    'Management': {
-      'Management': stageManagement()
-    },
-    'Security': {
-      'Log': stageLog(),
-      'Audit': stageAudit()
-    }
   };
 
-  console.log("")
-  console.log("ORDER OF DEPLOYMENT")
-  console.log("🌊 Waves  - Deployed sequentially");
-  console.log("🔲 Stages - Deployed in parallel, all stages within a wave are deployed at the same time")
-  console.log("📄 Stacks - Dependency driven, stacks are deployed in the order of their dependency within the stage " +
-              "(stack dependency not visualized below")
-  console.log("")
-  for (const wave of Object.keys(deploymentOrder)) {
-    console.log(`🌊 ${wave}`)
-    for (const stage of  Object.keys(deploymentOrder[wave])) {
-      console.log(`  🔲 ${stage}`)
-      for (const stack of deploymentOrder[wave][stage]) {
-        console.log(`    📄 ${stack.id}`)
+  stageDevelop() {
+    const ou = "workloads";
+    const account = "develop";
+
+    const developGlobalStack = new DevelopGlobalStack(this.app, {
+      name: {ou, account, stack: 'global', region: this.props.regions.global},
+      env: {
+        account: this.props.organization.ous.workloads.accounts.develop.accountId,
+        region: this.props.regions.global,
+      },
+    });
+
+    const developRegionalStacks: DevelopRegionalStack[] = [];
+    for (const region of this.props.regions.regional) {
+      const developRegional = new DevelopRegionalStack(this.app, {
+        name: {ou, account, stack: 'regional', region: region},
+        env: {
+          account: this.props.organization.ous.workloads.accounts.develop.accountId,
+          region: region,
+        },
+      });
+      developRegional.addDependency(developGlobalStack);
+      developRegionalStacks.push(developRegional);
+    }
+
+    this.developStacks = {
+      global: developGlobalStack,
+      regional: developRegionalStacks,
+    };
+
+    return [
+      this.developStacks.global,
+      ...this.developStacks.regional,
+    ];
+  };
+
+  stageProduction() {
+    const ou = "workloads";
+    const account = "production";
+
+    const productionGlobalStack = new ProductionGlobalStack(this.app, {
+      name: {ou, account, stack: 'global', region: this.props.regions.global},
+      env: {
+        account: this.props.organization.ous.workloads.accounts.production.accountId,
+        region: this.props.regions.global,
+      },
+    });
+
+    const productionRegionalStacks: ProductionRegionalStack[] = [];
+    for (const region of this.props.regions.regional) {
+      const productionRegional = new ProductionRegionalStack(this.app, {
+        name: {ou, account, stack: 'regional', region: region},
+        env: {
+          account: this.props.organization.ous.workloads.accounts.production.accountId,
+          region: region,
+        },
+      });
+      productionRegional.addDependency(productionGlobalStack);
+      productionRegionalStacks.push(productionRegional);
+    }
+
+
+    this.productionStacks = {
+      global: productionGlobalStack,
+      regional: productionRegionalStacks,
+    };
+
+    return [
+      this.productionStacks.global,
+      ...this.productionStacks.regional,
+    ];
+  };
+
+  constructor(private app: App, private props: DataLandingZoneProps) {
+
+    const deploymentOrder: DeploymentOrder = {
+      Management: {
+        Management: this.stageManagement(),
+      },
+      Security: {
+        Log: this.stageLog(),
+        Audit: this.stageAudit(),
+      },
+      WorkloadsSandBoxesSuspended: {
+        Develop: this.stageDevelop(),
+        Production: this.stageProduction(),
+      },
+    };
+
+    console.log('');
+    console.log('ORDER OF DEPLOYMENT');
+    console.log('🌊 Waves  - Deployed sequentially');
+    console.log('🔲 Stages - Deployed in parallel, all stages within a wave are deployed at the same time');
+    console.log('📄 Stacks - Dependency driven, stacks are deployed in the order of their dependency within the stage ' +
+              '(stack dependency not visualized below');
+    console.log('');
+    for (const wave of Object.keys(deploymentOrder)) {
+      console.log(`🌊 ${wave}`);
+      for (const stage of Object.keys(deploymentOrder[wave])) {
+        console.log(`  🔲 ${stage}`);
+        for (const stack of deploymentOrder[wave][stage]) {
+          console.log(`    📄 ${stack.id}`);
+        }
       }
     }
-  }
-  console.log("")
+    console.log('');
 
     const waves = Object.keys(deploymentOrder).map(waveName => {
       const wave = deploymentOrder[waveName];
@@ -334,7 +458,7 @@ export class DataLandingZone {
         waveElement.stages.push({ stacks: deploymentOrder[waveName][stage] });
       }
       return waveElement;
-    })
+    });
 
     for (let i = 1; i < waves.length; i++) {
       for (const stage of waves[i].stages) {
@@ -343,7 +467,7 @@ export class DataLandingZone {
           for (const stageStack of stage.stacks) {
             for (const dependantStack of dependantStage.stacks) {
               // console.log(`> Stack ${stageStack.id} depends on ${dependantStack.id}`)
-              stageStack.addDependency(dependantStack)
+              stageStack.addDependency(dependantStack);
             }
           }
         }

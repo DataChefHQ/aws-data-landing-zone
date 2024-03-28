@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import { Environment } from 'aws-cdk-lib/core/lib/environment';
 import { Construct } from 'constructs';
 
 export interface DlzStackNameProps {
@@ -7,11 +8,12 @@ export interface DlzStackNameProps {
   readonly stack: string;
   readonly region: string;
 }
-export interface DlzStackProps extends Omit<cdk.StackProps,"stackName"> {
-  name: DlzStackNameProps
+export interface DlzStackProps {
+  readonly name: DlzStackNameProps;
+  readonly env: Environment;
 }
 
-const DlzStackNamePrefix = "dlz-";
+const DlzStackNamePrefix = 'dlz-';
 export class DlzStack extends cdk.Stack {
   public readonly id: string;
   constructor(scope: Construct, props: DlzStackProps) {
@@ -19,7 +21,7 @@ export class DlzStack extends cdk.Stack {
       props.name.ou,
       props.name.account,
       props.name.stack,
-      props.name.region
+      props.name.region,
     ].filter(Boolean).join('--');
 
     super(scope, stackId, {
