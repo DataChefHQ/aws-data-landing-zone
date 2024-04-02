@@ -7,9 +7,10 @@ import {
 } from '../../constructs/control-tower-control';
 
 import { DlzStackProps } from '../../constructs';
-import { DataLandingZoneProps, Ou, Region } from '../../data-landing-zone';
+import {DataLandingZone, DataLandingZoneProps, Ou, Region} from '../../data-landing-zone';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 import { Annotations } from 'aws-cdk-lib';
+import {ServiceControlPolicy} from "../../constructs/organization-policies";
 
 export interface ManagementStackProps extends DataLandingZoneProps { }
 
@@ -74,5 +75,60 @@ export class ManagementStack extends DlzStack {
     }
     limitCfnExecutions(enabledControls, 10);
 
+    this.workloadAccountsScps();
+    this.suspendedOuScp();
   }
+
+  /**
+   * Service Control Policies applied at the account level to enable customization per account
+   */
+  workloadAccountsScps() {
+    const denyService = this.props.denyServiceList || DataLandingZone.defaultDenyServiceList();
+
+    const commonStatements = [
+      ServiceControlPolicy.denyServiceActionStatements(denyService)
+    ]
+
+    new ServiceControlPolicy(this,
+      this.resourceName('scp-development-account'), {
+        name: this.resourceName('scp-development-account'),
+        description: 'SCP statements applied to the development account',
+        targetIds: [
+          this.props.organization.ous.workloads.accounts.develop.accountId,
+        ],
+        statements: [
+          ...commonStatements
+        ],
+      });
+
+    new ServiceControlPolicy(this,
+      this.resourceName('scp-production-account'), {
+        name: this.resourceName('scp-production-account'),
+        description: 'SCP statements applied to the production account',
+        targetIds: [
+          this.props.organization.ous.workloads.accounts.develop.accountId,
+        ],
+        statements: [
+          ...commonStatements
+        ],
+      });
+  }
+
+  /**
+   * Service Control Policies applied at the OU level because we won't need any customizations per account
+   */
+  suspendedOuScp() {
+    new ServiceControlPolicy(this,
+      this.resourceName('scp-suspended-ou'), {
+        name: this.resourceName('scp-suspended-ou'),
+        description: 'SCP statements applied to the suspended OU',
+        targetIds: [
+          this.props.organization.ous.suspended.ouId,
+        ],
+        statements: [
+          ServiceControlPolicy.denyServiceActionStatements(["*"])
+        ]
+      });
+  }
+
 }

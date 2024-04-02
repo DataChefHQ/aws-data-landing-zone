@@ -229,6 +229,12 @@ export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
+
+  /**
+   * List of services to deny in the organization SCP. If not specified, the default defined by
+   * DataLandingZone.defaultDenyServiceList() is used.
+   */
+  readonly denyServiceList?: string[];
 }
 
 type DeploymentOrder = {
@@ -484,6 +490,14 @@ export class DataLandingZone {
       ...this.productionStacks.regional,
     ];
   };
+
+  public static defaultDenyServiceList()
+  {
+    return [
+      "eks:*",
+      "ec2:*",
+    ]
+  }
 }
 
 export default DataLandingZone;
