@@ -55,7 +55,7 @@ export class ManagementStack extends DlzStack {
     {
       for (const ou of allOus)
       {
-        if(ou === Ou.SECURITY && !control.controlFriendlyName.startsWith("AWS-"))
+        if(ou === Ou.SECURITY && !ControlTowerEnabledControl.canBeAppliedToSecurityOU(control))
         {
           Annotations.of(this).addInfo(`Skipping control ${control.controlFriendlyName} for the Security OU, not supported.`);
           continue;

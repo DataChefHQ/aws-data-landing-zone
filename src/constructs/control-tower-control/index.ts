@@ -44,7 +44,19 @@ export interface ControlTowerControlIdNameProps {
   [Region.US_EAST_1]: string;
 }
 
+export enum ControlTowerControlFormat {
+  LEGACY = 'LEGACY',
+  STANDARD = 'STANDARD',
+}
+
 export interface IControlTowerControl {
+  /**
+   * The format of the control, LEGACY or STANDARD
+   * LEGACY controls include the control name in the controlIdentifier
+   * STANDARD controls do not include the control name in the controlIdentifier and can not be applied to the Security OU
+   */
+  readonly format: ControlTowerControlFormat;
+
   /**
    * The short name of the control, example: AWS-GR_ENCRYPTED_VOLUMES
    */
@@ -59,6 +71,16 @@ export interface IControlTowerControl {
    * Optional parameters for the control
    */
   readonly parameters?: Record<string, any>;
+
+  /**
+   * Description of the control
+   */
+  readonly description: string;
+
+  /**
+   * External link to the control documentation
+   */
+  readonly externalLink: string;
 }
 
 export interface ControlTowerEnabledControlProps {
@@ -118,6 +140,13 @@ export class ControlTowerEnabledControl {
       [ControlTowerStandardControls["SH.SecretsManager.3"]]: new SH.SH_SecretsManager_3(),
     };
     return map;
+  }
+
+  /**
+   * Check if the control can be applied to the Security OU. Only LEGACY controls can be applied to the Security OU.
+   */
+  public static canBeAppliedToSecurityOU(control: IControlTowerControl): boolean {
+    return control.format === ControlTowerControlFormat.LEGACY;
   }
 }
 

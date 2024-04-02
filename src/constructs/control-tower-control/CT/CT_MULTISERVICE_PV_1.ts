@@ -1,5 +1,5 @@
 import {Region} from "../../../data-landing-zone";
-import {IControlTowerControl} from "../index";
+import {ControlTowerControlFormat, IControlTowerControl} from "../index";
 import {ControlTowerSpecializedControls} from "../index";
 
 export interface CT_MULTISERVICE_PV_1Props {
@@ -31,11 +31,15 @@ export interface CT_MULTISERVICE_PV_1Props {
  *
  * This is considered a specialized control by Control Tower, and will not be in the ControlsMap.
  *
+ * Format: Standard Control
  * Owner: SCP
  * https://docs.aws.amazon.com/controltower/latest/userguide/ou-region-deny.html
  * */
 export class CT_MULTISERVICE_PV_1 implements IControlTowerControl {
   public readonly controlFriendlyName = ControlTowerSpecializedControls["CT.MULTISERVICE.PV.1"];
+  public readonly description = 'Deny access to AWS based on the requested AWS Region for an organizational unit';
+  public readonly format = ControlTowerControlFormat.STANDARD;
+  public readonly externalLink = 'https://docs.aws.amazon.com/controltower/latest/userguide/ou-region-deny.html';
   public readonly controlIdName = {
     [Region.EU_WEST_1]: 'LGTPYJYCCRAP',
     [Region.US_EAST_1]: 'JBVFPCBYGPJM',
