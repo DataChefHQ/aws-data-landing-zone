@@ -1,4 +1,4 @@
-# Single SCP
+# Account Level Service Control Policy
 
 **Status:** accepted
 
@@ -21,9 +21,11 @@ SCP will be applied on the account level so that we can customize the SCP conten
 want to be more restrictive in the production account than the development account. If we applied the SCP to the OU,
 then we won't be able to apply another SCP on the production account because we are already on the 5 SCPs per account. 
 
-For Suspended OU accounts, the SCP will be applied to the OU level. This is because we don't need to customize the SCP
+The exception is the Suspended OU, the SCP will be applied to the OU level. This is because we don't need to customize the SCP
 per account and we can apply the same SCP that denies all to the OU that then applies it to all the accounts in the OU.
 
+All SCPs will be ignored if using the `AWSControlTowerExecution` role. This is to ensure that the SCPs don't interfere 
+with the ControlTower stacks and resources. 
 
 ## Consequences
 

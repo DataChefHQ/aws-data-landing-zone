@@ -2,6 +2,7 @@ import * as organizations from "aws-cdk-lib/aws-organizations";
 import * as iam from "aws-cdk-lib/aws-iam";
 import {CfnPolicyProps} from "aws-cdk-lib/aws-organizations/lib/organizations.generated";
 import {Construct} from "constructs";
+import {Tag} from "./tag-policy";
 
 const excludeCtRoles = {
   "ArnNotLike": {
@@ -26,7 +27,7 @@ export class ServiceControlPolicy {
         type: "SERVICE_CONTROL_POLICY",
         description: props.description,
         targetIds: props.targetIds,
-        content: new iam.PolicyDocument({ statements: props.statements }).toJSON(),
+        content: new iam.PolicyDocument({statements: props.statements}).toJSON(),
       });
   }
 
@@ -38,7 +39,21 @@ export class ServiceControlPolicy {
       resources: ["*"],
       conditions: excludeCtRoles,
     })
-
   }
 
+  public static denyCfnStacksWithoutStandardTags(tags: Tag[]) {
+    return new iam.PolicyStatement({
+      sid: 'DenyCfnStacksWithoutStandardTags',
+      effect: iam.Effect.DENY,
+      actions: ["cloudformation:CreateStack"],
+      resources: ["*"],
+      conditions: {
+        "Null": tags.reduce<Record<string, boolean>>((acc ,tag) => {
+          acc[`aws:RequestTag/${tag.name}`] = true;
+          return acc;
+        }, {})
+      }
+    })
+  }
 }
+

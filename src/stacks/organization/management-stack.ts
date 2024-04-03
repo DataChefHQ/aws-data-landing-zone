@@ -7,17 +7,17 @@ import {
 } from '../../constructs/control-tower-control';
 
 import { DlzStackProps } from '../../constructs';
-import {DataLandingZone, DataLandingZoneProps, Ou, Region} from '../../data-landing-zone';
+import {DataLandingZoneProps, Ou, Region} from '../../data-landing-zone';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 import { Annotations } from 'aws-cdk-lib';
 import {ServiceControlPolicy} from "../../constructs/organization-policies";
-
-export interface ManagementStackProps extends DataLandingZoneProps { }
+import {TagPolicy} from "../../constructs/organization-policies/tag-policy";
+import {PropsOrDefaults} from "../../defaults";
 
 export class ManagementStack extends DlzStack {
   public readonly topic: sns.Topic;
 
-  constructor(scope: Construct, stackProps: DlzStackProps, private props: ManagementStackProps) {
+  constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
     super(scope, stackProps);
 
     this.topic = new sns.Topic(this, this.resourceName('test-topic'), {
@@ -26,6 +26,9 @@ export class ManagementStack extends DlzStack {
     });
 
     this.rootControls();
+
+    this.workloadAccountsOrgPolicies();
+    this.suspendedOuPolicies();
   }
 
   /**
@@ -74,19 +77,18 @@ export class ManagementStack extends DlzStack {
       }
     }
     limitCfnExecutions(enabledControls, 10);
-
-    this.workloadAccountsScps();
-    this.suspendedOuScp();
   }
 
   /**
-   * Service Control Policies applied at the account level to enable customization per account
+   * Service Control Policies and Tag Policies applied at the account level to enable customization per account
    */
-  workloadAccountsScps() {
-    const denyService = this.props.denyServiceList || DataLandingZone.defaultDenyServiceList();
+  workloadAccountsOrgPolicies() {
+    const denyService = PropsOrDefaults.getDenyServiceList(this.props);
+    const tags = PropsOrDefaults.getOrganizationTags(this.props);
 
     const commonStatements = [
-      ServiceControlPolicy.denyServiceActionStatements(denyService)
+      ServiceControlPolicy.denyServiceActionStatements(denyService),
+      ServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags)
     ]
 
     new ServiceControlPolicy(this,
@@ -100,24 +102,40 @@ export class ManagementStack extends DlzStack {
           ...commonStatements
         ],
       });
+    new TagPolicy(this,
+      this.resourceName('tag-policy-development-account'), {
+        name: this.resourceName('tag-policy-development-account'),
+        description: 'Tag policy for the development account',
+        targetIds: [this.props.organization.ous.workloads.accounts.develop.accountId],
+        policyTags: tags
+      });
 
     new ServiceControlPolicy(this,
       this.resourceName('scp-production-account'), {
         name: this.resourceName('scp-production-account'),
         description: 'SCP statements applied to the production account',
         targetIds: [
-          this.props.organization.ous.workloads.accounts.develop.accountId,
+          this.props.organization.ous.workloads.accounts.production.accountId,
         ],
         statements: [
           ...commonStatements
         ],
       });
+    new TagPolicy(this,
+      this.resourceName('tag-policy-production-account'), {
+        name: this.resourceName('tag-policy-production-account'),
+        description: 'Tag policy for the production account',
+        targetIds: [this.props.organization.ous.workloads.accounts.production.accountId],
+        policyTags: tags
+      });
   }
 
   /**
-   * Service Control Policies applied at the OU level because we won't need any customizations per account
+   * Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account
    */
-  suspendedOuScp() {
+  suspendedOuPolicies() {
+    const tags = PropsOrDefaults.getOrganizationTags(this.props);
+
     new ServiceControlPolicy(this,
       this.resourceName('scp-suspended-ou'), {
         name: this.resourceName('scp-suspended-ou'),
@@ -129,6 +147,12 @@ export class ManagementStack extends DlzStack {
           ServiceControlPolicy.denyServiceActionStatements(["*"])
         ]
       });
+    new TagPolicy(this,
+      this.resourceName('tag-policy-suspended-ou'), {
+        name: this.resourceName('tag-policy-suspended-ou'),
+        description: 'Tag policy for the suspended OU',
+        targetIds: [this.props.organization.ous.suspended.ouId],
+        policyTags: tags
+      });
   }
-
 }

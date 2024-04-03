@@ -3,6 +3,7 @@ import { fromIni } from '@aws-sdk/credential-providers';
 import { DataLandingZoneProps, DlzAllRegions } from '../../data-landing-zone';
 import { runCommand } from '../lib/helpers';
 
+const tags = "--tags Owner=infra --tags Project=dlz --tags Environment=dlz";
 async function assumeRole(profile: string, region: string, roleArn: string) {
   const stsClient = new STS({
     region,
@@ -27,6 +28,7 @@ async function bootstrapChildAccount(props: DataLandingZoneProps, bootstrapRoleN
     'bootstrap',
     '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess', // Needs to be specified if using --trust
     `--trust ${props.organization.rootAccounts.management.accountId}`,
+     tags,
     `aws://${accountId}/${region}`,
   ].join(' '),
   {
@@ -45,6 +47,7 @@ export async function management(props: DataLandingZoneProps) {
     'bootstrap',
     '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess',
     `--profile ${props.localProfile}`,
+    tags,
     `aws://${props.organization.rootAccounts.management.accountId}/${props.regions.global}`,
   ].join(' '));
 }

@@ -1,4 +1,4 @@
-import { App, Stack } from 'aws-cdk-lib';
+import { App, Stack, Tags } from 'aws-cdk-lib';
 import { DlzStack } from './constructs';
 import { ManagementStack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
@@ -9,6 +9,7 @@ import { DevelopGlobalStack } from './stacks/organization/workloads/develop/glob
 import { DevelopRegionalStack } from './stacks/organization/workloads/develop/regional-stack';
 import { ProductionGlobalStack } from './stacks/organization/workloads/production/global-stack';
 import { ProductionRegionalStack } from './stacks/organization/workloads/production/regional-stack';
+import {Tag} from "./constructs/organization-policies/tag-policy";
 
 /**
  * Control Tower Supported Regions as listed here
@@ -232,9 +233,32 @@ export interface DataLandingZoneProps {
 
   /**
    * List of services to deny in the organization SCP. If not specified, the default defined by
-   * DataLandingZone.defaultDenyServiceList() is used.
+   *
+   * @default DataLandingZone.defaultDenyServiceList()
    */
   readonly denyServiceList?: string[];
+
+  /**
+   * List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort.
+   *
+   * Mandatory tags are defined in Defaults.mandatoryTags() which are:
+   * - Owner, the team responsible for the resource
+   * - Project, the project the resource is part of
+   * - Environment, the environment the resource is part of
+   *
+   * It creates:
+   * 1. A tag policy in the organization
+   * 2. An SCP on the organization that all CFN stacks must have these tags when created
+   * 3. An AWS Config rule that checks for these tags on all CFN stacks and resources
+   *
+   * For all stacks created by DLZ the following tags are applied:
+   * - Owner: infra
+   * - Project: dlz
+   * - Environment: dlz
+   *
+   * @default Defaults.mandatoryTags()
+   */
+  readonly additionalMandatoryTags?: Tag[];
 }
 
 type DeploymentOrder = {
@@ -307,9 +331,9 @@ export class DataLandingZone {
 
     const waves = Object.keys(deploymentOrder).map(waveName => {
       const wave = deploymentOrder[waveName];
-      const waveElement: { stages: {stacks: Stack[] }[] } = { stages: [] };
+      const waveElement: { stages: { stacks: Stack[] }[] } = {stages: []};
       for (const stage of Object.keys(wave)) {
-        waveElement.stages.push({ stacks: deploymentOrder[waveName][stage] });
+        waveElement.stages.push({stacks: deploymentOrder[waveName][stage]});
       }
       return waveElement;
     });
@@ -328,17 +352,21 @@ export class DataLandingZone {
       }
     }
 
+
+    Tags.of(app).add("Owner", "infra");
+    Tags.of(app).add("Project", "dlz");
+    Tags.of(app).add("Environment", "dlz");
   }
 
   stageManagement() {
     const management = new ManagementStack(this.app, {
-      name: { ou: 'root', account: 'management', stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.rootAccounts.management.accountId,
-        region: this.props.regions.global,
+        name: {ou: 'root', account: 'management', stack: 'global', region: this.props.regions.global},
+        env: {
+          account: this.props.organization.rootAccounts.management.accountId,
+          region: this.props.regions.global,
+        },
       },
-    },
-    this.props);
+      this.props);
 
     this.managementStack = management;
 
@@ -352,7 +380,7 @@ export class DataLandingZone {
     const account = 'log';
 
     const logGlobal = new LogGlobalStack(this.app, {
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
+      name: {ou, account, stack: 'global', region: this.props.regions.global},
       env: {
         account: this.props.organization.ous.security.accounts.log.accountId,
         region: this.props.regions.global,
@@ -362,7 +390,7 @@ export class DataLandingZone {
     const logRegionalStacks: AuditRegionalStack[] = [];
     for (const region of this.props.regions.regional) {
       const logRegional = new LogRegionalStack(this.app, {
-        name: { ou, account, stack: 'regional', region },
+        name: {ou, account, stack: 'regional', region},
         env: {
           account: this.props.organization.ous.security.accounts.log.accountId,
           region: region,
@@ -387,7 +415,7 @@ export class DataLandingZone {
     const ou = 'security';
     const account = 'audit';
     const auditGlobalStack = new AuditGlobalStack(this.app, {
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
+      name: {ou, account, stack: 'global', region: this.props.regions.global},
       env: {
         account: this.props.organization.ous.security.accounts.audit.accountId,
         region: this.props.regions.global,
@@ -397,7 +425,7 @@ export class DataLandingZone {
     const auditRegionalStacks: AuditRegionalStack[] = [];
     for (const region of this.props.regions.regional) {
       const auditRegional = new AuditRegionalStack(this.app, {
-        name: { ou, account, stack: 'regional', region: region },
+        name: {ou, account, stack: 'regional', region: region},
         env: {
           account: this.props.organization.ous.security.accounts.audit.accountId,
           region: region,
@@ -423,22 +451,24 @@ export class DataLandingZone {
     const account = 'develop';
 
     const developGlobalStack = new DevelopGlobalStack(this.app, {
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.ous.workloads.accounts.develop.accountId,
-        region: this.props.regions.global,
+        name: {ou, account, stack: 'global', region: this.props.regions.global},
+        env: {
+          account: this.props.organization.ous.workloads.accounts.develop.accountId,
+          region: this.props.regions.global,
+        },
       },
-    });
+      this.props);
 
     const developRegionalStacks: DevelopRegionalStack[] = [];
     for (const region of this.props.regions.regional) {
       const developRegional = new DevelopRegionalStack(this.app, {
-        name: { ou, account, stack: 'regional', region: region },
-        env: {
-          account: this.props.organization.ous.workloads.accounts.develop.accountId,
-          region: region,
+          name: {ou, account, stack: 'regional', region: region},
+          env: {
+            account: this.props.organization.ous.workloads.accounts.develop.accountId,
+            region: region,
+          },
         },
-      });
+        this.props);
       developRegional.addDependency(developGlobalStack);
       developRegionalStacks.push(developRegional);
     }
@@ -459,22 +489,24 @@ export class DataLandingZone {
     const account = 'production';
 
     const productionGlobalStack = new ProductionGlobalStack(this.app, {
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.ous.workloads.accounts.production.accountId,
-        region: this.props.regions.global,
+        name: {ou, account, stack: 'global', region: this.props.regions.global},
+        env: {
+          account: this.props.organization.ous.workloads.accounts.production.accountId,
+          region: this.props.regions.global,
+        },
       },
-    });
+      this.props);
 
     const productionRegionalStacks: ProductionRegionalStack[] = [];
     for (const region of this.props.regions.regional) {
       const productionRegional = new ProductionRegionalStack(this.app, {
-        name: { ou, account, stack: 'regional', region: region },
-        env: {
-          account: this.props.organization.ous.workloads.accounts.production.accountId,
-          region: region,
+          name: {ou, account, stack: 'regional', region: region},
+          env: {
+            account: this.props.organization.ous.workloads.accounts.production.accountId,
+            region: region,
+          },
         },
-      });
+        this.props);
       productionRegional.addDependency(productionGlobalStack);
       productionRegionalStacks.push(productionRegional);
     }
@@ -490,14 +522,6 @@ export class DataLandingZone {
       ...this.productionStacks.regional,
     ];
   };
-
-  public static defaultDenyServiceList()
-  {
-    return [
-      "eks:*",
-      "ec2:*",
-    ]
-  }
 }
 
 export default DataLandingZone;
