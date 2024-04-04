@@ -1,4 +1,4 @@
-import {Tag} from "./constructs/organization-policies/tag-policy";
+import {DlzTag} from "./constructs/organization-policies/tag-policy";
 import {DataLandingZoneProps} from "./data-landing-zone";
 
 export class Defaults {
@@ -15,7 +15,7 @@ export class Defaults {
   /** *
    * Mandatory tags for the organization
    */
-  public static mandatoryTags(): Tag[] {
+  public static mandatoryTags(): DlzTag[] {
     return [{
       name: 'Owner',
     }, {

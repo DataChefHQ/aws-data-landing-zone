@@ -5,12 +5,13 @@ import {Construct} from "constructs";
 import * as assert from "assert";
 import * as SH from "./SH";
 import * as AWS from "./AWS";
+import {IReportResource, ReportResource, ReportType} from "../../lib/report";
 
 
 /**
  * Controls that do not take parameters
  */
-export enum ControlTowerStandardControls {
+export enum DlzControlTowerStandardControls {
   'AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS' = 'AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS',
   'AWS-GR_ENCRYPTED_VOLUMES' = 'AWS-GR_ENCRYPTED_VOLUMES',
   'AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK' = 'AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK',
@@ -28,7 +29,7 @@ export enum ControlTowerStandardControls {
 /**
  * Controls that take parameters
  */
-export enum ControlTowerSpecializedControls {
+export enum DlzControlTowerSpecializedControls {
   'CT.MULTISERVICE.PV.1' = 'CT.MULTISERVICE.PV.1',
 }
 
@@ -39,33 +40,33 @@ export enum ControlTowerSpecializedControls {
 //   [ControlTowerStandardControls["SH.SecretsManager.3"]]: new SH.SH_SecretsManager_3(),
 // };
 
-export interface ControlTowerControlIdNameProps {
+export interface DlzControlTowerControlIdNameProps {
   [Region.EU_WEST_1]: string;
   [Region.US_EAST_1]: string;
 }
 
-export enum ControlTowerControlFormat {
+export enum DlzControlTowerControlFormat {
   LEGACY = 'LEGACY',
   STANDARD = 'STANDARD',
 }
 
-export interface IControlTowerControl {
+export interface IDlzControlTowerControl {
   /**
    * The format of the control, LEGACY or STANDARD
    * LEGACY controls include the control name in the controlIdentifier
    * STANDARD controls do not include the control name in the controlIdentifier and can not be applied to the Security OU
    */
-  readonly format: ControlTowerControlFormat;
+  readonly format: DlzControlTowerControlFormat;
 
   /**
    * The short name of the control, example: AWS-GR_ENCRYPTED_VOLUMES
    */
-  readonly controlFriendlyName: ControlTowerStandardControls | ControlTowerSpecializedControls;
+  readonly controlFriendlyName: DlzControlTowerStandardControls | DlzControlTowerSpecializedControls;
   /**
    * The control ID name used to construct the controlIdentifier, example: AWS-GR_ENCRYPTED_VOLUMES
    * This can differ from the controlFriendlyName for newer controls
    */
-  readonly controlIdName: ControlTowerControlIdNameProps;
+  readonly controlIdName: DlzControlTowerControlIdNameProps;
 
   /**
    * Optional parameters for the control
@@ -83,19 +84,20 @@ export interface IControlTowerControl {
   readonly externalLink: string;
 }
 
-export interface ControlTowerEnabledControlProps {
+export interface DlzControlTowerEnabledControlProps {
   controlTowerRegion: Region;
   controlTowerAccountId: string;
   organizationId: string;
   appliedOu: string;
-  control: IControlTowerControl;
+  control: IDlzControlTowerControl;
   tags?: CfnTag[];
 }
 
-export class ControlTowerEnabledControl {
+export class DlzControlTowerEnabledControl implements IReportResource {
   readonly control: controltower.CfnEnabledControl;
+  public readonly reportResource: ReportResource;
 
-  constructor(scope: Construct, id: string, props: ControlTowerEnabledControlProps) {
+  constructor(scope: Construct, id: string, props: DlzControlTowerEnabledControlProps) {
 
     assert.ok([Region.EU_WEST_1, Region.US_EAST_1].includes(props.controlTowerRegion),
       `Control Tower region must be one of ${Region.EU_WEST_1} or ${Region.US_EAST_1}`);
@@ -122,22 +124,28 @@ export class ControlTowerEnabledControl {
       parameters,
       tags: props.tags,
     });
+    this.reportResource = {
+      type: ReportType.ControlTowerControl,
+      name: props.control.controlFriendlyName,
+      description: props.control.description,
+      externalLink: props.control.externalLink,
+    }
   }
 
   public static standardControls() {
-    const map: Record<ControlTowerStandardControls, IControlTowerControl> = {
-      [ControlTowerStandardControls['AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS']]: new AWS.AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS(),
-      [ControlTowerStandardControls['AWS-GR_ENCRYPTED_VOLUMES']]: new AWS.AWS_GR_ENCRYPTED_VOLUMES(),
-      [ControlTowerStandardControls['AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK']]: new AWS.AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK(),
-      [ControlTowerStandardControls['AWS-GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED']]: new AWS.AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED(),
-      [ControlTowerStandardControls['AWS-GR_RDS_STORAGE_ENCRYPTED']]: new AWS.AWS_GR_RDS_STORAGE_ENCRYPTED(),
-      [ControlTowerStandardControls['AWS-GR_RESTRICTED_SSH']]: new AWS.AWS_GR_RESTRICTED_SSH(),
-      [ControlTowerStandardControls['AWS-GR_RESTRICT_ROOT_USER']]: new AWS.AWS_GR_RESTRICT_ROOT_USER(),
-      [ControlTowerStandardControls['AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS']]: new AWS.AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS(),
-      [ControlTowerStandardControls['AWS-GR_ROOT_ACCOUNT_MFA_ENABLED']]: new AWS.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED(),
-      [ControlTowerStandardControls['AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED']]: new AWS.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED(),
-      [ControlTowerStandardControls['AWS-GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED']]: new AWS.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED(),
-      [ControlTowerStandardControls["SH.SecretsManager.3"]]: new SH.SH_SecretsManager_3(),
+    const map: Record<DlzControlTowerStandardControls, IDlzControlTowerControl> = {
+      [DlzControlTowerStandardControls['AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS']]: new AWS.AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS(),
+      [DlzControlTowerStandardControls['AWS-GR_ENCRYPTED_VOLUMES']]: new AWS.AWS_GR_ENCRYPTED_VOLUMES(),
+      [DlzControlTowerStandardControls['AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK']]: new AWS.AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK(),
+      [DlzControlTowerStandardControls['AWS-GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED']]: new AWS.AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED(),
+      [DlzControlTowerStandardControls['AWS-GR_RDS_STORAGE_ENCRYPTED']]: new AWS.AWS_GR_RDS_STORAGE_ENCRYPTED(),
+      [DlzControlTowerStandardControls['AWS-GR_RESTRICTED_SSH']]: new AWS.AWS_GR_RESTRICTED_SSH(),
+      [DlzControlTowerStandardControls['AWS-GR_RESTRICT_ROOT_USER']]: new AWS.AWS_GR_RESTRICT_ROOT_USER(),
+      [DlzControlTowerStandardControls['AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS']]: new AWS.AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS(),
+      [DlzControlTowerStandardControls['AWS-GR_ROOT_ACCOUNT_MFA_ENABLED']]: new AWS.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED(),
+      [DlzControlTowerStandardControls['AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED']]: new AWS.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED(),
+      [DlzControlTowerStandardControls['AWS-GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED']]: new AWS.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED(),
+      [DlzControlTowerStandardControls["SH.SecretsManager.3"]]: new SH.SH_SecretsManager_3(),
     };
     return map;
   }
@@ -145,8 +153,8 @@ export class ControlTowerEnabledControl {
   /**
    * Check if the control can be applied to the Security OU. Only LEGACY controls can be applied to the Security OU.
    */
-  public static canBeAppliedToSecurityOU(control: IControlTowerControl): boolean {
-    return control.format === ControlTowerControlFormat.LEGACY;
+  public static canBeAppliedToSecurityOU(control: IDlzControlTowerControl): boolean {
+    return control.format === DlzControlTowerControlFormat.LEGACY;
   }
 }
 

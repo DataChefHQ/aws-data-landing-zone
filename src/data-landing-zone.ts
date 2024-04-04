@@ -9,7 +9,8 @@ import { DevelopGlobalStack } from './stacks/organization/workloads/develop/glob
 import { DevelopRegionalStack } from './stacks/organization/workloads/develop/regional-stack';
 import { ProductionGlobalStack } from './stacks/organization/workloads/production/global-stack';
 import { ProductionRegionalStack } from './stacks/organization/workloads/production/regional-stack';
-import {Tag} from "./constructs/organization-policies/tag-policy";
+import {DlzTag} from "./constructs/organization-policies/tag-policy";
+import {Report} from "./lib/report";
 
 /**
  * Control Tower Supported Regions as listed here
@@ -258,7 +259,7 @@ export interface DataLandingZoneProps {
    *
    * @default Defaults.mandatoryTags()
    */
-  readonly additionalMandatoryTags?: Tag[];
+  readonly additionalMandatoryTags?: DlzTag[];
 }
 
 type DeploymentOrder = {
@@ -352,11 +353,13 @@ export class DataLandingZone {
       }
     }
 
-
     Tags.of(app).add("Owner", "infra");
     Tags.of(app).add("Project", "dlz");
     Tags.of(app).add("Environment", "dlz");
+
+    Report.printConsoleReport();
   }
+
 
   stageManagement() {
     const management = new ManagementStack(this.app, {

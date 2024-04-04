@@ -2,17 +2,18 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { DlzStack } from '../../constructs';
 import {
-  ControlTowerEnabledControl,
-  IControlTowerControl,
+  DlzControlTowerEnabledControl,
+  IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
 
 import { DlzStackProps } from '../../constructs';
 import {DataLandingZoneProps, Ou, Region} from '../../data-landing-zone';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 import { Annotations } from 'aws-cdk-lib';
-import {ServiceControlPolicy} from "../../constructs/organization-policies";
-import {TagPolicy} from "../../constructs/organization-policies/tag-policy";
+import {DlzServiceControlPolicy} from "../../constructs/organization-policies";
 import {PropsOrDefaults} from "../../defaults";
+import {DlzTagPolicy} from "../../constructs/organization-policies/tag-policy";
+import {Report} from "../../lib/report";
 
 export class ManagementStack extends DlzStack {
   public readonly topic: sns.Topic;
@@ -38,8 +39,8 @@ export class ManagementStack extends DlzStack {
     const allOus = [Ou.SECURITY, Ou.WORKLOADS, Ou.SUSPENDED];
     console.assert(this.props.regions.global === Region.EU_WEST_1);
 
-    const standardControls = ControlTowerEnabledControl.standardControls();
-    const controls: IControlTowerControl[] = [
+    const standardControls = DlzControlTowerEnabledControl.standardControls();
+    const controls: IDlzControlTowerControl[] = [
       standardControls["AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS"],
       standardControls["AWS-GR_ENCRYPTED_VOLUMES"],
       standardControls["AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK"],
@@ -59,21 +60,28 @@ export class ManagementStack extends DlzStack {
     {
       for (const ou of allOus)
       {
-        if(ou === Ou.SECURITY && !ControlTowerEnabledControl.canBeAppliedToSecurityOU(control))
+        if(ou === Ou.SECURITY && !DlzControlTowerEnabledControl.canBeAppliedToSecurityOU(control))
         {
           Annotations.of(this).addInfo(`Skipping control ${control.controlFriendlyName} for the Security OU, not supported.`);
           continue;
         }
 
-        enabledControls.push(
-          new ControlTowerEnabledControl(this,
-            this.resourceName(control.controlFriendlyName + ou), {
-              controlTowerAccountId: this.props.organization.rootAccounts.management.accountId,
-              organizationId: this.props.organization.organizationId,
-              controlTowerRegion: this.props.regions.global,
-              appliedOu: this.props.organization.ous[ou].ouId,
-              control: control,
-            }).control);
+        const enableControl = new DlzControlTowerEnabledControl(this,
+          this.resourceName(control.controlFriendlyName + ou), {
+            controlTowerAccountId: this.props.organization.rootAccounts.management.accountId,
+            organizationId: this.props.organization.organizationId,
+            controlTowerRegion: this.props.regions.global,
+            appliedOu: this.props.organization.ous[ou].ouId,
+            control: control,
+          });
+
+        enabledControls.push(enableControl.control);
+
+        Report.addReportForOuAccountRegions(
+          this.props.organization.ous[ou],
+          this.props.regions,
+          enableControl.reportResource
+        );
       }
     }
     limitCfnExecutions(enabledControls, 10);
@@ -87,11 +95,15 @@ export class ManagementStack extends DlzStack {
     const tags = PropsOrDefaults.getOrganizationTags(this.props);
 
     const commonStatements = [
-      ServiceControlPolicy.denyServiceActionStatements(denyService),
-      ServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags)
+      DlzServiceControlPolicy.denyServiceActionStatements(denyService),
+      DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags)
     ]
 
-    new ServiceControlPolicy(this,
+    // ============================================================================================
+    // ======================================= DEVELOPMENT ========================================
+    // ============================================================================================
+
+    const dlzScpDevelop = new DlzServiceControlPolicy(this,
       this.resourceName('scp-development-account'), {
         name: this.resourceName('scp-development-account'),
         description: 'SCP statements applied to the development account',
@@ -102,15 +114,29 @@ export class ManagementStack extends DlzStack {
           ...commonStatements
         ],
       });
-    new TagPolicy(this,
+     const dlzTagPolicyDevelop = new DlzTagPolicy(this,
       this.resourceName('tag-policy-development-account'), {
         name: this.resourceName('tag-policy-development-account'),
         description: 'Tag policy for the development account',
         targetIds: [this.props.organization.ous.workloads.accounts.develop.accountId],
         policyTags: tags
       });
+    Report.addReportForAccountRegion(
+      "develop",
+      "*",
+      dlzScpDevelop.reportResource,
+    );
+    Report.addReportForAccountRegion(
+      "develop",
+      "*",
+      dlzTagPolicyDevelop.reportResource
+    );
 
-    new ServiceControlPolicy(this,
+     // ============================================================================================
+     // ======================================== PRODUCTION ========================================
+     // ============================================================================================
+
+    const dlzScpProd = new DlzServiceControlPolicy(this,
       this.resourceName('scp-production-account'), {
         name: this.resourceName('scp-production-account'),
         description: 'SCP statements applied to the production account',
@@ -121,13 +147,24 @@ export class ManagementStack extends DlzStack {
           ...commonStatements
         ],
       });
-    new TagPolicy(this,
+    const dlzTagPolicyProduction = new DlzTagPolicy(this,
       this.resourceName('tag-policy-production-account'), {
         name: this.resourceName('tag-policy-production-account'),
         description: 'Tag policy for the production account',
         targetIds: [this.props.organization.ous.workloads.accounts.production.accountId],
         policyTags: tags
       });
+
+    Report.addReportForAccountRegion(
+      "production",
+      "*",
+      dlzScpProd.reportResource
+    );
+    Report.addReportForAccountRegion(
+      "production",
+      "*",
+      dlzTagPolicyProduction.reportResource
+    );
   }
 
   /**
@@ -136,7 +173,7 @@ export class ManagementStack extends DlzStack {
   suspendedOuPolicies() {
     const tags = PropsOrDefaults.getOrganizationTags(this.props);
 
-    new ServiceControlPolicy(this,
+    new DlzServiceControlPolicy(this,
       this.resourceName('scp-suspended-ou'), {
         name: this.resourceName('scp-suspended-ou'),
         description: 'SCP statements applied to the suspended OU',
@@ -144,10 +181,10 @@ export class ManagementStack extends DlzStack {
           this.props.organization.ous.suspended.ouId,
         ],
         statements: [
-          ServiceControlPolicy.denyServiceActionStatements(["*"])
+          DlzServiceControlPolicy.denyServiceActionStatements(["*"])
         ]
       });
-    new TagPolicy(this,
+    new DlzTagPolicy(this,
       this.resourceName('tag-policy-suspended-ou'), {
         name: this.resourceName('tag-policy-suspended-ou'),
         description: 'Tag policy for the suspended OU',

@@ -2,7 +2,8 @@ import * as organizations from "aws-cdk-lib/aws-organizations";
 import * as iam from "aws-cdk-lib/aws-iam";
 import {CfnPolicyProps} from "aws-cdk-lib/aws-organizations/lib/organizations.generated";
 import {Construct} from "constructs";
-import {Tag} from "./tag-policy";
+import {DlzTag} from "./tag-policy";
+import {IReportResource, ReportResource, ReportType} from "../../lib/report";
 
 const excludeCtRoles = {
   "ArnNotLike": {
@@ -12,15 +13,15 @@ const excludeCtRoles = {
   }
 }
 
-export interface ServiceControlPolicyProps extends  Omit<CfnPolicyProps, "type" | "content"> {
+export interface DlzServiceControlPolicyProps extends  Omit<CfnPolicyProps, "type" | "content"> {
   readonly statements: iam.PolicyStatement[];
-
 }
 
-export class ServiceControlPolicy {
+export class DlzServiceControlPolicy implements IReportResource {
   public readonly policy: organizations.CfnPolicy;
+  public readonly reportResource: ReportResource;
 
-  constructor(scope: Construct, id: string, props: ServiceControlPolicyProps) {
+  constructor(scope: Construct, id: string, props: DlzServiceControlPolicyProps) {
     this.policy = new organizations.CfnPolicy(scope,
       id, {
         name: props.name,
@@ -29,6 +30,15 @@ export class ServiceControlPolicy {
         targetIds: props.targetIds,
         content: new iam.PolicyDocument({statements: props.statements}).toJSON(),
       });
+
+    const statementNames = props.statements.map((statement) => statement.sid);
+
+    this.reportResource = {
+      type: ReportType.ServiceControlPolicy,
+      name: props.name,
+      description: statementNames.join(", "),
+      externalLink: ""
+    }
   }
 
   public static denyServiceActionStatements(serviceActions: string[]) {
@@ -41,7 +51,7 @@ export class ServiceControlPolicy {
     })
   }
 
-  public static denyCfnStacksWithoutStandardTags(tags: Tag[]) {
+  public static denyCfnStacksWithoutStandardTags(tags: DlzTag[]) {
     return new iam.PolicyStatement({
       sid: 'DenyCfnStacksWithoutStandardTags',
       effect: iam.Effect.DENY,

@@ -40,7 +40,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   /* Runtime dependencies of this module that are jsii-enabled. */
   // deps: [ ],
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
-  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers'],
+  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', 'table'],
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */

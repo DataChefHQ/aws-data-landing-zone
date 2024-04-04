@@ -1,13 +1,14 @@
 import * as organizations from "aws-cdk-lib/aws-organizations";
 import {CfnPolicyProps} from "aws-cdk-lib/aws-organizations/lib/organizations.generated";
 import {Construct} from "constructs";
+import {IReportResource, ReportResource, ReportType} from "../../lib/report";
 
 
-export interface Tag {
+export interface DlzTag {
   name: string;
 }
-export interface TagPolicyProps extends  Omit<CfnPolicyProps, "type" | "content"> {
-  readonly policyTags: Tag[];
+export interface DlzTagPolicyProps extends  Omit<CfnPolicyProps, "type" | "content"> {
+  readonly policyTags: DlzTag[];
 }
 
 type PolicyTags = {
@@ -18,10 +19,11 @@ type PolicyTags = {
   }
 };
 
-export class TagPolicy {
+export class DlzTagPolicy implements IReportResource {
   public readonly policy: organizations.CfnPolicy;
+  public readonly reportResource: ReportResource;
 
-  constructor(scope: Construct, id: string, props: TagPolicyProps) {
+  constructor(scope: Construct, id: string, props: DlzTagPolicyProps) {
     let policyTags = props.policyTags.reduce<PolicyTags>((acc, tag) => {
       acc[tag.name] = {
         "tag_key": {
@@ -41,5 +43,11 @@ export class TagPolicy {
           "tags": policyTags
         },
       });
+    this.reportResource = {
+      type: ReportType.TagPolicy,
+      name: props.name,
+      description: props.description || "",
+      externalLink: ""
+    }
   }
 }

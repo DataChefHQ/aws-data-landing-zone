@@ -99,6 +99,10 @@
       "type": "bundled"
     },
     {
+      "name": "table",
+      "type": "bundled"
+    },
+    {
       "name": "aws-cdk-lib",
       "version": "^2.133.0",
       "type": "peer"

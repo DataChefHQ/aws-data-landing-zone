@@ -64,12 +64,14 @@
   "dependencies": {
     "@aws-sdk/client-sts": "^3.540.0",
     "@aws-sdk/credential-providers": "^3.540.0",
-    "execa": "5.1.1"
+    "execa": "5.1.1",
+    "table": "^6.8.2"
   },
   "bundledDependencies": [
     "@aws-sdk/client-sts",
     "@aws-sdk/credential-providers",
-    "execa"
+    "execa",
+    "table"
   ],
   "keywords": [
     "cdk"
