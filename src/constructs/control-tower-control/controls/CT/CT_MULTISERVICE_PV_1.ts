@@ -1,6 +1,6 @@
-import {Region} from "../../../data-landing-zone";
-import {DlzControlTowerControlFormat, IDlzControlTowerControl} from "../index";
-import {DlzControlTowerSpecializedControls} from "../index";
+import { Region } from '../../../../data-landing-zone';
+import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
+import { DlzControlTowerSpecializedControls } from '../index';
 
 export interface CT_MULTISERVICE_PV_1Props {
   /**
@@ -36,13 +36,13 @@ export interface CT_MULTISERVICE_PV_1Props {
  * https://docs.aws.amazon.com/controltower/latest/userguide/ou-region-deny.html
  * */
 export class CT_MULTISERVICE_PV_1 implements IDlzControlTowerControl {
-  public readonly controlFriendlyName = DlzControlTowerSpecializedControls["CT.MULTISERVICE.PV.1"];
+  public readonly controlFriendlyName = DlzControlTowerSpecializedControls.CT_MULTISERVICE_PV_1;
   public readonly description = 'Deny access to AWS based on the requested AWS Region for an organizational unit';
   public readonly format = DlzControlTowerControlFormat.STANDARD;
   public readonly externalLink = 'https://docs.aws.amazon.com/controltower/latest/userguide/ou-region-deny.html';
   public readonly controlIdName = {
-    [Region.EU_WEST_1]: 'LGTPYJYCCRAP',
-    [Region.US_EAST_1]: 'JBVFPCBYGPJM',
+    euWest1: 'LGTPYJYCCRAP',
+    usEast1: 'JBVFPCBYGPJM',
   };
   public readonly parameters?: Record<string, any>;
   constructor(props?: CT_MULTISERVICE_PV_1Props) {

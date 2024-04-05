@@ -2,8 +2,8 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { DlzStack } from '../../../../constructs';
 import { DlzStackProps } from '../../../../constructs/dlz-stack';
-import {SharedWorkloads} from "../shared-workloads";
-import {DataLandingZoneProps} from "../../../../data-landing-zone";
+import { DataLandingZoneProps } from '../../../../data-landing-zone';
+import { SharedWorkloads } from '../shared-workloads';
 
 export class DevelopGlobalStack extends DlzStack {
 

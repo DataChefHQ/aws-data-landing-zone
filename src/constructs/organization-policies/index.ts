@@ -1,2 +1,2 @@
-export * from './service-control-policy'
-export * from './tag-policy'
+export * from './service-control-policy';
+export * from './tag-policy';

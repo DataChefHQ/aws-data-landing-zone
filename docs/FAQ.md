@@ -24,6 +24,12 @@ assumption is that they don't want us to mess with the Security OU.
 The Management Account is a special account that is not in any OU. CT Controls can only be applied to OUs. We follow
 the lead of AWS and do not apply any controls, Config rules, SCPs or SecurityHub Standards to it.
 
+## Why can some classes like the controls be upper snake case?
+JSII allows this because there is nothing that directly exposes the class to the outside world. So its ignored by JSII. 
+An example is the `AWS_GR_ENCRYPTED_VOLUMES` class. Its not exposed in the upper level `index.ts` files and ignored by
+JSII.
+
+
 ## CloudFormation Errors
 
 ### Resource handler returned message: "Invalid request provided: NoAvailableConfigurationRecorder"

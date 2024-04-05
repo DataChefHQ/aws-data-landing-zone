@@ -44,9 +44,19 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
+  jestOptions: {
+    jestConfig: {
+      moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
+    },
+  },
 });
 
 project.package.addEngine('node', '~18.*');
 project.package.addEngine('npm', '~9.*');
+
+// Need to clear before compiling and packaging. Have to remove these because they are not cleared for some reason,
+// only new files are added and it causes issues especially because when changing the folder structure the whole time.
+const clear = project.addTask('clear-lib-and-dist');
+clear.exec('rm -rf lib/ dist/');
 
 project.synth();

@@ -7,6 +7,7 @@
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
+    "clear-lib-and-dist": "npx projen clear-lib-and-dist",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",
@@ -84,6 +85,16 @@
   "license": "Apache-2.0",
   "version": "0.0.0",
   "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "mjs",
+      "cjs",
+      "jsx",
+      "json",
+      "node"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
       "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)"
