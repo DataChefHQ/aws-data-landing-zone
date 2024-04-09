@@ -1,5 +1,4 @@
-import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
-import { DlzControlTowerStandardControls } from '../index';
+import { DlzControlTowerControlFormat, IDlzControlTowerControl, DlzControlTowerStandardControls } from '../index';
 
 /**
  * Secure your AWS accounts by disallowing account access with root user credentials, which are credentials of the

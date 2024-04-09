@@ -42,7 +42,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
   bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', 'table'],
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
+  devDeps: ['husky'],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
   jestOptions: {
     jestConfig: {
@@ -58,5 +58,7 @@ project.package.addEngine('npm', '~9.*');
 // only new files are added and it causes issues especially because when changing the folder structure the whole time.
 const clear = project.addTask('clear-lib-and-dist');
 clear.exec('rm -rf lib/ dist/');
+
+project.package.setScript('prepare', 'husky')
 
 project.synth();

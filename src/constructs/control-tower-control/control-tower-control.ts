@@ -4,8 +4,7 @@ import * as controltower from 'aws-cdk-lib/aws-controltower';
 import { Construct } from 'constructs';
 import { DlzControlTowerControlFormat, IDlzControlTowerControl } from './controls';
 import { Region } from '../../data-landing-zone';
-import { kebabToCamelCase } from '../../lib';
-import { IReportResource, ReportResource, ReportType } from '../../lib';
+import { IReportResource, ReportResource, ReportType, kebabToCamelCase } from '../../lib';
 
 
 export interface DlzControlTowerEnabledControlProps {
@@ -18,6 +17,14 @@ export interface DlzControlTowerEnabledControlProps {
 }
 
 export class DlzControlTowerEnabledControl implements IReportResource {
+
+  /**
+   * Check if the control can be applied to the Security OU. Only LEGACY controls can be applied to the Security OU.
+   */
+  public static canBeAppliedToSecurityOU(control: IDlzControlTowerControl): boolean {
+    return control.format === DlzControlTowerControlFormat.LEGACY;
+  }
+
   readonly control: controltower.CfnEnabledControl;
   public readonly reportResource: ReportResource;
 
@@ -60,12 +67,6 @@ export class DlzControlTowerEnabledControl implements IReportResource {
     };
   }
 
-  /**
-   * Check if the control can be applied to the Security OU. Only LEGACY controls can be applied to the Security OU.
-   */
-  public static canBeAppliedToSecurityOU(control: IDlzControlTowerControl): boolean {
-    return control.format === DlzControlTowerControlFormat.LEGACY;
-  }
 }
 
 

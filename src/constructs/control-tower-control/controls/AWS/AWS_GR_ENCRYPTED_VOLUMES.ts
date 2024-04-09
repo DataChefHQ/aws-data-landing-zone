@@ -1,5 +1,4 @@
-import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
-import { DlzControlTowerStandardControls } from '../index';
+import { DlzControlTowerControlFormat, IDlzControlTowerControl, DlzControlTowerStandardControls } from '../index';
 
 /**
  * Detect if the EBS volumes that are attached to an Amazon EC2 instance are encrypted.

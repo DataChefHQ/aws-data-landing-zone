@@ -1,8 +1,7 @@
 import { Annotations } from 'aws-cdk-lib';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
-import { ControlTowerControlMappings, DlzStack } from '../../constructs';
-import { DlzStackProps } from '../../constructs';
+import { ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,

@@ -37,6 +37,7 @@ export type PartialOu = {
 }
 
 export class Report {
+
   public static reports: ReportItem[] = [];
 
   public static addReportForAccountRegion(accountName: string, region: string, reportResource: ReportResource) {
@@ -77,48 +78,6 @@ export class Report {
         });
       }
     }
-  }
-
-  private static groupByAccountTypeNameAggregatedRegions() {
-    const grouped: {
-      [accountName: string]: {
-        [type: string]: {
-          appliedFrom: string;
-          name: string;
-          description: string;
-          externalLink: string;
-          regions: string;
-        }[];
-      };
-    } = { };
-
-    const groupedByAccount = groupByField(this.reports, 'accountName');
-    for (const accountName in groupedByAccount) {
-      grouped[accountName] = {};
-      const accountItems = groupedByAccount[accountName];
-
-      const groupedByAccountItemsByType = groupByField(accountItems, 'type');
-      for (const type in groupedByAccountItemsByType) {
-        grouped[accountName][type] = [];
-        const accountItemsByType = groupedByAccountItemsByType[type];
-        const groupedByAccountItemsByTypeByName = groupByField(accountItemsByType, 'name');
-
-        // const accountTypeNameAggregatedRegions: (Pick<ReportItem, "appliedFrom" | "name" | "description" | "externalLink"> & { regions: string })[] = [];
-        for (const name in groupedByAccountItemsByTypeByName) {
-
-          const reportItem = groupedByAccountItemsByTypeByName[name][0];
-          grouped[accountName][type].push({
-            appliedFrom: reportItem.appliedFrom,
-            name: reportItem.name,
-            description: reportItem.description,
-            externalLink: reportItem.externalLink,
-            regions: groupedByAccountItemsByTypeByName[name].map(item => item.region).join(', '),
-          });
-        }
-      }
-    }
-
-    return grouped;
   }
 
   public static printConsoleReport() {
@@ -201,6 +160,48 @@ export class Report {
 
       fs.writeFileSync(`./.dlz-reports/account-${accountName}.json`, JSON.stringify(accountTypes, null, 2));
     }
+  }
+
+  private static groupByAccountTypeNameAggregatedRegions() {
+    const grouped: {
+      [accountName: string]: {
+        [type: string]: {
+          appliedFrom: string;
+          name: string;
+          description: string;
+          externalLink: string;
+          regions: string;
+        }[];
+      };
+    } = { };
+
+    const groupedByAccount = groupByField(this.reports, 'accountName');
+    for (const accountName in groupedByAccount) {
+      grouped[accountName] = {};
+      const accountItems = groupedByAccount[accountName];
+
+      const groupedByAccountItemsByType = groupByField(accountItems, 'type');
+      for (const type in groupedByAccountItemsByType) {
+        grouped[accountName][type] = [];
+        const accountItemsByType = groupedByAccountItemsByType[type];
+        const groupedByAccountItemsByTypeByName = groupByField(accountItemsByType, 'name');
+
+        // const accountTypeNameAggregatedRegions: (Pick<ReportItem, "appliedFrom" | "name" | "description" | "externalLink"> & { regions: string })[] = [];
+        for (const name in groupedByAccountItemsByTypeByName) {
+
+          const reportItem = groupedByAccountItemsByTypeByName[name][0];
+          grouped[accountName][type].push({
+            appliedFrom: reportItem.appliedFrom,
+            name: reportItem.name,
+            description: reportItem.description,
+            externalLink: reportItem.externalLink,
+            regions: groupedByAccountItemsByTypeByName[name].map(item => item.region).join(', '),
+          });
+        }
+      }
+    }
+
+    return grouped;
   }
 
 }

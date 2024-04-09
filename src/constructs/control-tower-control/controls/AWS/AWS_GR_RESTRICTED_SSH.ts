@@ -1,5 +1,4 @@
-import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
-import { DlzControlTowerStandardControls } from '../index';
+import { DlzControlTowerControlFormat, IDlzControlTowerControl, DlzControlTowerStandardControls } from '../index';
 
 /**
  * Detect unrestricted connectivity to remote console services such as SSH.

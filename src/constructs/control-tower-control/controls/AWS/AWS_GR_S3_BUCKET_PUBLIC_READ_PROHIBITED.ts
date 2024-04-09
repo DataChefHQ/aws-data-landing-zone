@@ -1,5 +1,4 @@
-import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
-import { DlzControlTowerStandardControls } from '../index';
+import { DlzControlTowerControlFormat, IDlzControlTowerControl, DlzControlTowerStandardControls } from '../index';
 
 /**
  * Secure access to data stored in Amazon S3 buckets by detecting whether public read access is allowed.

@@ -24,28 +24,6 @@ export interface DlzServiceControlPolicyProps {
 }
 
 export class DlzServiceControlPolicy implements IReportResource {
-  public readonly policy: organizations.CfnPolicy;
-  public readonly reportResource: ReportResource;
-
-  constructor(scope: Construct, id: string, props: DlzServiceControlPolicyProps) {
-    this.policy = new organizations.CfnPolicy(scope,
-      id, {
-        name: props.name,
-        type: 'SERVICE_CONTROL_POLICY',
-        description: props.description,
-        targetIds: props.targetIds,
-        content: new iam.PolicyDocument({ statements: props.statements }).toJSON(),
-      });
-
-    const statementNames = props.statements.map((statement) => statement.sid);
-
-    this.reportResource = {
-      type: ReportType.SERVICE_CONTROL_POLICY,
-      name: props.name,
-      description: statementNames.join(', '),
-      externalLink: '',
-    };
-  }
 
   public static denyServiceActionStatements(serviceActions: string[]) {
     return new iam.PolicyStatement({
@@ -70,6 +48,29 @@ export class DlzServiceControlPolicy implements IReportResource {
         }, {}),
       },
     });
+  }
+
+  public readonly policy: organizations.CfnPolicy;
+  public readonly reportResource: ReportResource;
+
+  constructor(scope: Construct, id: string, props: DlzServiceControlPolicyProps) {
+    this.policy = new organizations.CfnPolicy(scope,
+      id, {
+        name: props.name,
+        type: 'SERVICE_CONTROL_POLICY',
+        description: props.description,
+        targetIds: props.targetIds,
+        content: new iam.PolicyDocument({ statements: props.statements }).toJSON(),
+      });
+
+    const statementNames = props.statements.map((statement) => statement.sid);
+
+    this.reportResource = {
+      type: ReportType.SERVICE_CONTROL_POLICY,
+      name: props.name,
+      description: statementNames.join(', '),
+      externalLink: '',
+    };
   }
 }
 

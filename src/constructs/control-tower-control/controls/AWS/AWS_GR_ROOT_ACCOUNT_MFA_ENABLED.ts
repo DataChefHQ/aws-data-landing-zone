@@ -1,5 +1,4 @@
-import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
-import { DlzControlTowerStandardControls } from '../index';
+import { DlzControlTowerControlFormat, IDlzControlTowerControl, DlzControlTowerStandardControls } from '../index';
 
 /**
  * Detect whether root user has Multi-Factor Authentication (MFA) enabled.
