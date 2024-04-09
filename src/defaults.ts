@@ -16,13 +16,25 @@ export class Defaults {
   /** *
    * Mandatory tags for the organization
    */
-  public static mandatoryTags(): DlzTag[] {
+  public static mandatoryTags(props: DataLandingZoneProps): DlzTag[] {
     return [{
       name: 'Owner',
+      values: [
+        'infra',
+        ...props.mandatoryTags.owner
+      ]
     }, {
       name: 'Project',
+      values: [
+        'dlz',
+        ...props.mandatoryTags.project
+      ]
     }, {
       name: 'Environment',
+      values: [
+        'dlz',
+        ...props.mandatoryTags.environment
+      ]
     }];
   }
 
@@ -56,7 +68,7 @@ export class PropsOrDefaults {
 
   public static getOrganizationTags(props: DataLandingZoneProps) {
     return [
-      ...Defaults.mandatoryTags(),
+      ...Defaults.mandatoryTags(props),
       ...(props.additionalMandatoryTags ? props.additionalMandatoryTags : []),
     ];
   }

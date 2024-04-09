@@ -42,8 +42,8 @@ export class DlzServiceControlPolicy implements IReportResource {
       actions: ['cloudformation:CreateStack'],
       resources: ['*'],
       conditions: {
-        Null: tags.reduce<Record<string, boolean>>((acc, tag) => {
-          acc[`aws:RequestTag/${tag.name}`] = true;
+        Null: tags.reduce<Record<string, string[] | boolean>>((acc, tag) => {
+          acc[`aws:RequestTag/${tag.name}`] = tag.values ? tag.values : true;
           return acc;
         }, {}),
       },

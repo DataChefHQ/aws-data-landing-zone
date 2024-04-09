@@ -14,6 +14,11 @@ test('Local build and debug', () => {
       global: Region.EU_WEST_1,
       regional: [Region.US_EAST_1],
     },
+    mandatoryTags: {
+      owner: ['backend'],
+      project: ['accounting-internal'],
+      environment: ['development', 'staging', 'production'],
+    },
     organization: {
       organizationId: 'o-05ev6vk6fa',
       root: {

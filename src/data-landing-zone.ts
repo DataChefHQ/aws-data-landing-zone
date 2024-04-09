@@ -241,6 +241,12 @@ export interface DLzOrganization {
   readonly ous: OrgOus;
 }
 
+export interface MandatoryTags {
+  readonly owner: string[];
+  readonly project: string[];
+  readonly environment: string[];
+}
+
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
@@ -275,6 +281,14 @@ export interface DataLandingZoneProps {
    */
   readonly additionalMandatoryTags?: DlzTag[];
 
+  /**
+   * The values of the mandatory tags that all resources must have.
+   * The following values are already specified and used by the DLZ constructs
+   * - Owner: [infra]
+   * - Project: [dlz]
+   * - Environment: [dlz]
+   */
+  readonly mandatoryTags: MandatoryTags;
 
   /**
    * Print the deployment order to the console
