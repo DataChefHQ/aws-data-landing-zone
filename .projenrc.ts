@@ -60,5 +60,6 @@ const clear = project.addTask('clear-lib-and-dist');
 clear.exec('rm -rf lib/ dist/');
 
 project.package.setScript('prepare', 'husky');
+project.gitignore.addPatterns('.dlz-reports');
 
 project.synth();
