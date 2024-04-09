@@ -2,7 +2,7 @@
 import { App } from 'aws-cdk-lib';
 // import { Template } from 'aws-cdk-lib/assertions';
 // import {DataLandingZone, DlzControlTowerStandardControls, Region} from '../src';
-import { DataLandingZone, Defaults, DlzControlTowerStandardControls, Region } from '../src';
+import { DataLandingZone, Defaults, DlzAccountType, DlzControlTowerStandardControls, Region } from '../src';
 
 
 test('Local build and debug', () => {
@@ -44,14 +44,57 @@ test('Local build and debug', () => {
         },
         workloads: {
           ouId: 'ou-vh4d-nc2zzf9z',
-          accounts: {
-            develop: {
+
+          // Small Org, all workloads/projects in the same accounts
+          accounts: [
+            {
+              name: 'development',
               accountId: '381491899779',
+              type: DlzAccountType.DEVELOP,
             },
-            production: {
+            {
+              name: 'production',
               accountId: '891377027267',
+              type: DlzAccountType.PRODUCTION,
             },
-          },
+          ],
+
+          // // Big Org, all workloads/projects per account
+          // accounts: [
+          //   {
+          //     name: 'project-1-develop',
+          //     accountId: '381491899779',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-1-production',
+          //     accountId: '234567890123',
+          //     type: DlzAccountType.PRODUCTION,
+          //   },
+          //
+          //   {
+          //     name: 'project-2-develop',
+          //     accountId: '1111',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-2-test',
+          //     accountId: '22222',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-3-stage',
+          //     accountId: '333333',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-2-production',
+          //     accountId: '4444444',
+          //     type: DlzAccountType.PRODUCTION,
+          //   },
+          // ]
+
+          // controls: [ ] //This will be possible but has not been done...
         },
         suspended: {
           ouId: 'ou-vh4d-rhcmhzsy',

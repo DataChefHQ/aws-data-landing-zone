@@ -62,14 +62,11 @@ export async function audit(props: DataLandingZoneProps, bootstrapRoleName: stri
   }
 }
 
-export async function develop(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
-  for (let region of DlzAllRegions(props.regions)) {
-    await bootstrapChildAccount(props, bootstrapRoleName, props.organization.ous.workloads.accounts.develop.accountId, region);
-  }
-}
-export async function production(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
-  for (let region of DlzAllRegions(props.regions)) {
-    await bootstrapChildAccount(props, bootstrapRoleName, props.organization.ous.workloads.accounts.production.accountId, region);
+export async function workloadAccounts(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
+  for (const account of props.organization.ous.workloads.accounts) {
+    for (let region of DlzAllRegions(props.regions)) {
+      await bootstrapChildAccount(props, bootstrapRoleName, account.accountId, region);
+    }
   }
 }
 
@@ -77,6 +74,5 @@ export async function all(props: DataLandingZoneProps, bootstrapRoleName: string
   await management(props);
   await log(props, bootstrapRoleName);
   await audit(props, bootstrapRoleName);
-  await develop(props, bootstrapRoleName);
-  await production(props, bootstrapRoleName);
+  await workloadAccounts(props, bootstrapRoleName);
 }

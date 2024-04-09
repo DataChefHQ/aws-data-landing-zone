@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { table } from 'table';
-import { DLzAccount, DlzRegions } from '../../data-landing-zone';
+import { DLzAccount, DlzRegions, OrgOuSecurity } from '../../data-landing-zone';
 import { groupByField } from '../ts-utils';
 
 export enum ReportType {
@@ -31,9 +31,9 @@ export interface ReportItem extends ReportResource {
   readonly region: string;
 }
 
-export type PartialOu = {
+export interface PartialOu {
   readonly ouId: string;
-  readonly accounts?: Record<string, DLzAccount>;
+  readonly accounts?: DLzAccount[];
 }
 
 export class Report {
@@ -61,17 +61,32 @@ export class Report {
     }
   }
 
-  public static addReportForOuAccountRegions(ou: any, regions: DlzRegions, reportResource: ReportResource) {
-    //TODO: Fix this any later
-    const partialOu = ou as PartialOu;
-
+  public static addReportForSecurityOuAccountRegions(securityOu: OrgOuSecurity, regions: DlzRegions, reportResource: ReportResource) {
     const allRegions = [regions.global, ...regions.regional];
-    const accountNames = Object.keys(partialOu.accounts || []);
+    const accountNames = Object.keys(securityOu.accounts || []);
     for (const accountName of accountNames) {
       // const account = ou.accounts[accountName];
       for (const region of allRegions) {
         this.reports.push({
           accountName: accountName,
+          appliedFrom: 'ou',
+          region: region,
+          ...reportResource,
+        });
+      }
+    }
+  }
+
+  public static addReportForOuAccountRegions(partialOu: PartialOu, regions: DlzRegions, reportResource: ReportResource) {
+    const allRegions = [regions.global, ...regions.regional];
+
+    if (!partialOu.accounts) {return;}
+
+    for (const dlzAccount of partialOu.accounts) {
+      // const account = ou.accounts[accountName];
+      for (const region of allRegions) {
+        this.reports.push({
+          accountName: dlzAccount.name,
           appliedFrom: 'ou',
           region: region,
           ...reportResource,
@@ -161,6 +176,7 @@ export class Report {
       fs.writeFileSync(`./.dlz-reports/account-${accountName}.json`, JSON.stringify(accountTypes, null, 2));
     }
   }
+
 
   private static groupByAccountTypeNameAggregatedRegions() {
     const grouped: {

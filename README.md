@@ -4,36 +4,47 @@
 
 The directory structure in `src/organization` will always map directly to the AWS Orgainzation structure. 
 We don't nest OUs because it has partial support in AWS Control Tower. This means the structure will always be in the 
-form of Level 1 OUs, Level 2 accounts and Level 3 stacks. This can be visually represented as follows:
+form of Level 1 OUs, Level 2 accounts (or account types) and Level 3 stacks. This can be visually represented as follows:
 ```
-src/organization
+src/stacks/organization
 ├── root-stack.ts
 ├── /ou1
-│   └── /account1
+│   └── /account1 OR /account-type
 │       ├── stack1.ts
 │       └── stack2.ts
 ```
 
+An Account Type can be seen as the "template" used for the stacks in the account. For example, you might have multiple
+develop accounts for different teams/projects: 
+``` 
+dev-project1
+dev-project2
+dev-project3
+department-a-dev
+```
+
+These accounts will all have the same `develop` stacks in them. The same applies for production.
+
 Example of current layout and organization:
 ```
-src/organization
+src/stacks/organization
 ├── management-stack.ts
 ├── security
-│   ├── log
+│   ├── log (account)
 │   │   ├── global-stack.ts
 │   │   └── regional-stack.ts
-│   └── audit
+│   └── audit (account)
 │       ├── global-stack.ts
 │       └── regional-stack.ts
 ├── workloads
-│   ├── develop
+│   ├── develop (account type)
 │   │   ├── global-stack.ts
 │   │   └── regional-stack.ts
-│   └── production
+│   └── production (account type)
 │       ├── global-stack.ts
 │       └── regional-stack.ts
 └── sandbox
-    └── rehan-sandbox
+    └── sandbox (account type) 
         ├── global-stack.ts
         └── regional-stack.ts
 ```
@@ -43,10 +54,10 @@ shared code is at the OU level and can be used by all the stacks in all accounts
 the `log` folder, it would only be available to the stacks in the `log` folder/account. Nothing enforces this 
 convention, but it is a good practice to follow.
 ```
-src/organization
+src/stacks/organization
 ├── management-stack.ts
 ├── security
-│   ├── shared.ts
+│   ├── shared-workloads.ts    <<<
 │   ├── log
 │   │   ├── global-stack.ts
 │   │   └── regional-stack.ts

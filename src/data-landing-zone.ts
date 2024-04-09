@@ -180,8 +180,18 @@ export function DlzAllRegions(regions: DlzRegions): Region[] {
   return [regions.global, ...regions.regional];
 }
 
+export enum DlzAccountType {
+  // SANDBOX = 'sandbox',
+  DEVELOP = 'develop',
+  PRODUCTION = 'production'
+}
+export interface DLzManagementAccount {
+  readonly accountId: string;
+}
 export interface DLzAccount {
   readonly accountId: string;
+  readonly name: string;
+  readonly type: DlzAccountType;
 }
 
 export enum Ou {
@@ -191,25 +201,21 @@ export enum Ou {
 }
 
 export interface OrgRootAccounts {
-  readonly management: DLzAccount;
+  readonly management: DLzManagementAccount;
 }
 
 export interface OrgOuSecurityAccounts {
-  readonly log: DLzAccount;
-  readonly audit: DLzAccount;
+  readonly log: DLzManagementAccount;
+  readonly audit: DLzManagementAccount;
 }
 export interface OrgOuSecurity {
   readonly ouId: string;
   readonly accounts: OrgOuSecurityAccounts;
 }
 
-export interface OrgOuyWorkloads {
-  readonly develop: DLzAccount;
-  readonly production: DLzAccount;
-}
 export interface OrgOuWorkloads {
   readonly ouId: string;
-  readonly accounts: OrgOuyWorkloads;
+  readonly accounts: DLzAccount[];
 }
 
 export interface OrgOuSuspended {
@@ -308,14 +314,25 @@ export interface AuditStacks {
   readonly regional: AuditRegionalStack[];
 }
 
+
 export interface DevelopStacks {
   readonly global: DevelopGlobalStack;
   readonly regional: DevelopRegionalStack[];
+}
+export interface DevelopAccountStacks {
+  readonly accountId: string;
+  readonly name: string;
+  readonly stacks: DevelopStacks;
 }
 
 export interface ProductionStacks {
   readonly global: ProductionGlobalStack;
   readonly regional: ProductionRegionalStack[];
+}
+export interface ProductionAccountStacks {
+  readonly accountId: string;
+  readonly name: string;
+  readonly stacks: ProductionStacks;
 }
 
 
@@ -343,8 +360,8 @@ export class DataLandingZone {
   public managementStack!: ManagementStack;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
-  public developStacks!: DevelopStacks;
-  public productionStacks!: ProductionStacks;
+  public developAccountStacks: DevelopAccountStacks[] = [];
+  public productionAccountStacks: ProductionAccountStacks[] = [];
 
   constructor(private app: App, private props: DataLandingZoneProps) {
 
@@ -357,8 +374,8 @@ export class DataLandingZone {
         Audit: this.stageAudit(),
       },
       WorkloadsSandBoxesSuspended: {
-        Develop: this.stageDevelop(),
-        Production: this.stageProduction(),
+        Develop: this.stageWorkloadDevelopType(),
+        Production: this.stageWorkloadProductionType(),
       },
     };
 
@@ -484,81 +501,98 @@ export class DataLandingZone {
     ];
   };
 
-  stageDevelop() {
+  stageWorkloadDevelopType() {
     const ou = 'workloads';
-    const account = 'develop';
 
-    const developGlobalStack = new DevelopGlobalStack(this.app, {
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.ous.workloads.accounts.develop.accountId,
-        region: this.props.regions.global,
-      },
-    },
-    this.props);
+    const developAccounts = this.props.organization.ous.workloads.accounts
+      .filter(account => account.type === DlzAccountType.DEVELOP);
 
-    const developRegionalStacks: DevelopRegionalStack[] = [];
-    for (const region of this.props.regions.regional) {
-      const developRegional = new DevelopRegionalStack(this.app, {
-        name: { ou, account, stack: 'regional', region: region },
+    const developStacks: DlzStack[] = [];
+    for (const dlzAccount of developAccounts) {
+      const developGlobalStack = new DevelopGlobalStack(this.app, {
+        name: { ou, account: dlzAccount.name, stack: 'global', region: this.props.regions.global },
         env: {
-          account: this.props.organization.ous.workloads.accounts.develop.accountId,
-          region: region,
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
         },
       },
       this.props);
-      developRegional.addDependency(developGlobalStack);
-      developRegionalStacks.push(developRegional);
+
+      const developRegionalStacks: DevelopRegionalStack[] = [];
+      for (const region of this.props.regions.regional) {
+        const developRegional = new DevelopRegionalStack(this.app, {
+          name: { ou, account: dlzAccount.name, stack: 'regional', region: region },
+          env: {
+            account: dlzAccount.accountId,
+            region: region,
+          },
+        },
+        this.props);
+        developRegional.addDependency(developGlobalStack);
+        developRegionalStacks.push(developRegional);
+      }
+
+      this.developAccountStacks.push({
+        accountId: dlzAccount.accountId,
+        name: dlzAccount.name,
+        stacks: {
+          global: developGlobalStack,
+          regional: developRegionalStacks,
+        },
+      });
+
+      developStacks.push(developGlobalStack);
+      developStacks.push(...developRegionalStacks);
     }
 
-    this.developStacks = {
-      global: developGlobalStack,
-      regional: developRegionalStacks,
-    };
-
-    return [
-      this.developStacks.global,
-      ...this.developStacks.regional,
-    ];
+    return developStacks;
   };
 
-  stageProduction() {
+  stageWorkloadProductionType() {
     const ou = 'workloads';
-    const account = 'production';
 
-    const productionGlobalStack = new ProductionGlobalStack(this.app, {
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.ous.workloads.accounts.production.accountId,
-        region: this.props.regions.global,
-      },
-    },
-    this.props);
+    const productionAccounts = this.props.organization.ous.workloads.accounts
+      .filter(account => account.type === DlzAccountType.PRODUCTION);
 
-    const productionRegionalStacks: ProductionRegionalStack[] = [];
-    for (const region of this.props.regions.regional) {
-      const productionRegional = new ProductionRegionalStack(this.app, {
-        name: { ou, account, stack: 'regional', region: region },
+    const productionStacks: DlzStack[] = [];
+    for (const dlzAccount of productionAccounts) {
+      const productionGlobalStack = new ProductionGlobalStack(this.app, {
+        name: { ou, account: dlzAccount.name, stack: 'global', region: this.props.regions.global },
         env: {
-          account: this.props.organization.ous.workloads.accounts.production.accountId,
-          region: region,
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
         },
       },
       this.props);
-      productionRegional.addDependency(productionGlobalStack);
-      productionRegionalStacks.push(productionRegional);
+
+      const productionRegionalStacks: ProductionRegionalStack[] = [];
+      for (const region of this.props.regions.regional) {
+        const productionRegional = new ProductionRegionalStack(this.app, {
+          name: { ou, account: dlzAccount.name, stack: 'regional', region: region },
+          env: {
+            account: dlzAccount.accountId,
+            region: region,
+          },
+        },
+        this.props);
+        productionRegional.addDependency(productionGlobalStack);
+        productionRegionalStacks.push(productionRegional);
+      }
+
+      this.productionAccountStacks.push({
+        accountId: dlzAccount.accountId,
+        name: dlzAccount.name,
+        stacks: {
+          global: productionGlobalStack,
+          regional: productionRegionalStacks,
+        },
+      });
+
+      productionStacks.push(productionGlobalStack);
+      productionStacks.push(...productionRegionalStacks);
     }
 
-
-    this.productionStacks = {
-      global: productionGlobalStack,
-      regional: productionRegionalStacks,
-    };
-
-    return [
-      this.productionStacks.global,
-      ...this.productionStacks.regional,
-    ];
+    return productionStacks;
   };
 }
 
