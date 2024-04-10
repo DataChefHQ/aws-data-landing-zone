@@ -1,4 +1,5 @@
 import * as bootstrap from './bootstrap';
+import * as cost from './cost-allocation-tags';
 import * as deploy from './deploy';
 import * as diff from './diff';
 
@@ -7,4 +8,5 @@ export const scripts = {
   bootstrap,
   diff,
   deploy,
+  cost,
 };

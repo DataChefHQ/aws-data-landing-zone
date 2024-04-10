@@ -1,7 +1,7 @@
 import { Annotations } from 'aws-cdk-lib';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
-import { ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
+import { Budget, ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
@@ -27,6 +27,7 @@ export class ManagementStack extends DlzStack {
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
+    this.budgets();
   }
 
   /**
@@ -190,4 +191,11 @@ export class ManagementStack extends DlzStack {
         policyTags: tags,
       });
   }
+
+  budgets() {
+    for (const budget of this.props.budgets ) {
+      new Budget(this, this.resourceName(`budget-${budget.name}`), budget);
+    }
+  }
+
 }

@@ -6407,6 +6407,7 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
 
@@ -6817,6 +6818,12 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
+
+##### `budgets` <a name="budgets" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.budgets"></a>
+
+```typescript
+public budgets(): void
+```
 
 ##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
 
@@ -9157,6 +9164,106 @@ public readonly regional: AuditRegionalStack[];
 
 ---
 
+### BudgetProps <a name="BudgetProps" id="recipes_data-landing-zone_data-landing-zone.BudgetProps"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.Initializer"></a>
+
+```typescript
+import { BudgetProps } from 'recipes_data-landing-zone_data-landing-zone'
+
+const budgetProps: BudgetProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.amount">amount</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.subscribers">subscribers</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.forTags">forTags</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+
+---
+
+##### `amount`<sup>Required</sup> <a name="amount" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.amount"></a>
+
+```typescript
+public readonly amount: number;
+```
+
+- *Type:* number
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.subscribers"></a>
+
+```typescript
+public readonly subscribers: BudgetSubscribers;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
+
+---
+
+##### `forTags`<sup>Optional</sup> <a name="forTags" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.forTags"></a>
+
+```typescript
+public readonly forTags: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+
+---
+
+### BudgetSubscribers <a name="BudgetSubscribers" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.Initializer"></a>
+
+```typescript
+import { BudgetSubscribers } from 'recipes_data-landing-zone_data-landing-zone'
+
+const budgetSubscribers: BudgetSubscribers = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slackChannels">slackChannels</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails"></a>
+
+```typescript
+public readonly emails: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `slackChannels`<sup>Optional</sup> <a name="slackChannels" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slackChannels"></a>
+
+```typescript
+public readonly slackChannels: string[];
+```
+
+- *Type:* string[]
+
+---
+
 ### DataLandingZoneProps <a name="DataLandingZoneProps" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps"></a>
 
 #### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.Initializer"></a>
@@ -9171,6 +9278,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.budgets">budgets</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>[]</code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
@@ -9180,6 +9288,16 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
+
+---
+
+##### `budgets`<sup>Required</sup> <a name="budgets" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.budgets"></a>
+
+```typescript
+public readonly budgets: BudgetProps[];
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>[]
 
 ---
 
@@ -10617,6 +10735,74 @@ Control Tower Controls applied to all the OUs in the organization.
 
 ## Classes <a name="Classes" id="Classes"></a>
 
+### Budget <a name="Budget" id="recipes_data-landing-zone_data-landing-zone.Budget"></a>
+
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer"></a>
+
+```typescript
+import { Budget } from 'recipes_data-landing-zone_data-landing-zone'
+
+new Budget(scope: Construct, id: string, props: BudgetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>
+
+---
+
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.property.budget">budget</a></code> | <code>aws-cdk-lib.aws_budgets.CfnBudget</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.property.notificationTopic">notificationTopic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+
+---
+
+##### `budget`<sup>Required</sup> <a name="budget" id="recipes_data-landing-zone_data-landing-zone.Budget.property.budget"></a>
+
+```typescript
+public readonly budget: CfnBudget;
+```
+
+- *Type:* aws-cdk-lib.aws_budgets.CfnBudget
+
+---
+
+##### `notificationTopic`<sup>Required</sup> <a name="notificationTopic" id="recipes_data-landing-zone_data-landing-zone.Budget.property.notificationTopic"></a>
+
+```typescript
+public readonly notificationTopic: Topic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.Topic
+
+---
+
+
 ### DataLandingZone <a name="DataLandingZone" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone"></a>
 
 #### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer"></a>
@@ -10772,9 +10958,44 @@ new Defaults()
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
+
+---
+
+##### `budgets` <a name="budgets" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets"></a>
+
+```typescript
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
+
+Defaults.budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers)
+```
+
+Budgets for the organization.
+
+###### `orgTotal`<sup>Required</sup> <a name="orgTotal" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.orgTotal"></a>
+
+- *Type:* number
+
+Total budget for the organization in USD.
+
+---
+
+###### `infraDlz`<sup>Required</sup> <a name="infraDlz" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.infraDlz"></a>
+
+- *Type:* number
+
+Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD.
+
+---
+
+###### `subscribers`<sup>Required</sup> <a name="subscribers" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.subscribers"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
+
+Subscribers for the budget.
 
 ---
 

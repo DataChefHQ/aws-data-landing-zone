@@ -3,11 +3,16 @@ import { App } from 'aws-cdk-lib';
 // import { Template } from 'aws-cdk-lib/assertions';
 // import {DataLandingZone, DlzControlTowerStandardControls, Region} from '../src';
 import { DataLandingZone, Defaults, DlzAccountType, DlzControlTowerStandardControls, Region } from '../src';
-
+// import * as sns from 'aws-cdk-lib/aws-sns';
 
 test('Local build and debug', () => {
   const app = new App();
   // const dlz = new DataLandingZone(app, {
+
+  // const budgetAlarmTopic = new sns.Topic(app, 'BudgetAlarmTopic', {
+  //   topicName: 'BudgetAlarmTopic',
+  // });
+
   new DataLandingZone(app, {
     localProfile: 'ct-sandbox-exported',
     regions: {
@@ -19,6 +24,33 @@ test('Local build and debug', () => {
       project: ['accounting-internal'],
       environment: ['development', 'staging', 'production'],
     },
+    budgets: [
+      ...Defaults.budgets(100, 20, {
+        emails: ['rehan+dc-budget--defaults@datachef.co'],
+      }),
+      {
+        name: 'backend',
+        forTags: {
+          owner: 'backend',
+        },
+        amount: 100,
+        subscribers: {
+          emails: ['rehan+dc-budget--backend@datachef.co'],
+        },
+      },
+      {
+        name: 'backend-accounting-internal-development',
+        forTags: {
+          owner: 'backend',
+          project: 'accounting-internal',
+          environment: 'development',
+        },
+        amount: 100,
+        subscribers: {
+          emails: ['rehan+dc-budget--backend-accounting-internal-development@datachef.co'],
+        },
+      },
+    ],
     organization: {
       organizationId: 'o-05ev6vk6fa',
       root: {

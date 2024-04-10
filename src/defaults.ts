@@ -1,4 +1,5 @@
-import { DlzControlTowerStandardControls } from './constructs/';
+import { BudgetSubscribers, DlzControlTowerStandardControls } from './constructs/';
+import { BudgetProps } from './constructs/budget';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps } from './data-landing-zone';
 
@@ -54,6 +55,31 @@ export class Defaults {
       DlzControlTowerStandardControls.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED,
       DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED,
       DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED,
+    ];
+  }
+
+  /**
+   * Budgets for the organization
+   * @param orgTotal Total budget for the organization in USD
+   * @param infraDlz Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD
+   * @param subscribers Subscribers for the budget
+   */
+  public static budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers): BudgetProps[] {
+    return [
+      {
+        name: 'org-total',
+        amount: orgTotal,
+        subscribers,
+      },
+      {
+        name: 'infra-dlz',
+        amount: infraDlz,
+        forTags: {
+          Owner: 'infra',
+          Project: 'dlz',
+        },
+        subscribers,
+      },
     ];
   }
 }

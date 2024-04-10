@@ -15,6 +15,8 @@ We use SOPs to document all ClickOps operations. Include all relevant informatio
    and `Sandbox`.
 - [Create an AWS Account](create-an-aws-account.md) should be followed when creating a new AWS account. We create two 
    accounts: `Develop` and `Production` in the `Workloads` OU. This SOP can be used to create `Sandbox` accounts as well.
+- [Set Cost Allocation Tags](set-cost-allocation-tags.md) will set the cost allocation tags in the main Organization 
+  account used for billing.
 
 --- 
 
