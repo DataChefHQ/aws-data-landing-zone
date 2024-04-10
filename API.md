@@ -9172,6 +9172,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
@@ -9189,6 +9190,23 @@ public readonly localProfile: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `mandatoryTags`<sup>Required</sup> <a name="mandatoryTags" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags"></a>
+
+```typescript
+public readonly mandatoryTags: MandatoryTags;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a>
+
+The values of the mandatory tags that all resources must have.
+
+The following values are already specified and used by the DLZ constructs
+- Owner: [infra]
+- Project: [dlz]
+- Environment: [dlz]
 
 ---
 
@@ -9865,6 +9883,7 @@ const dlzTag: DlzTag = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag.property.values">values</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
@@ -9875,6 +9894,16 @@ public readonly name: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `values`<sup>Optional</sup> <a name="values" id="recipes_data-landing-zone_data-landing-zone.DlzTag.property.values"></a>
+
+```typescript
+public readonly values: string[];
+```
+
+- *Type:* string[]
 
 ---
 
@@ -9986,6 +10015,56 @@ public readonly regional: LogGlobalStack[];
 ```
 
 - *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]
+
+---
+
+### MandatoryTags <a name="MandatoryTags" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.Initializer"></a>
+
+```typescript
+import { MandatoryTags } from 'recipes_data-landing-zone_data-landing-zone'
+
+const mandatoryTags: MandatoryTags = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.environment"></a>
+
+```typescript
+public readonly environment: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `owner`<sup>Required</sup> <a name="owner" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.owner"></a>
+
+```typescript
+public readonly owner: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `project`<sup>Required</sup> <a name="project" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.project"></a>
+
+```typescript
+public readonly project: string[];
+```
+
+- *Type:* string[]
 
 ---
 
@@ -10714,10 +10793,16 @@ Defaults.denyServiceList()
 ```typescript
 import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
 
-Defaults.mandatoryTags()
+Defaults.mandatoryTags(props: DataLandingZoneProps)
 ```
 
 * Mandatory tags for the organization.
+
+###### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags.parameter.props"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
 
 ##### `rootControls` <a name="rootControls" id="recipes_data-landing-zone_data-landing-zone.Defaults.rootControls"></a>
 

@@ -49,4 +49,8 @@ junit.xml
 tsconfig.json
 !/API.md
 .dlz-reports
+.idea
+*.js
+*.d.ts
+*.DS_Store
 !/.projenrc.ts

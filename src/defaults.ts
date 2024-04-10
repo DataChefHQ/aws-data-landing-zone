@@ -21,20 +21,20 @@ export class Defaults {
       name: 'Owner',
       values: [
         'infra',
-        ...props.mandatoryTags.owner
-      ]
+        ...props.mandatoryTags.owner,
+      ],
     }, {
       name: 'Project',
       values: [
         'dlz',
-        ...props.mandatoryTags.project
-      ]
+        ...props.mandatoryTags.project,
+      ],
     }, {
       name: 'Environment',
       values: [
         'dlz',
-        ...props.mandatoryTags.environment
-      ]
+        ...props.mandatoryTags.environment,
+      ],
     }];
   }
 

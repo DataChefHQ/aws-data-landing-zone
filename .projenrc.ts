@@ -61,5 +61,9 @@ clear.exec('rm -rf lib/ dist/');
 
 project.package.setScript('prepare', 'husky');
 project.gitignore.addPatterns('.dlz-reports');
+project.gitignore.addPatterns('.idea');
+project.gitignore.addPatterns('*.js');
+project.gitignore.addPatterns('*.d.ts');
+project.gitignore.addPatterns('*.DS_Store');
 
 project.synth();

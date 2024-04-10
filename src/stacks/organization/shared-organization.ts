@@ -21,7 +21,7 @@ export class SharedOrganization {
     let tagIndex = 1;
     for (const key in tags) {
       inputParameters[`tag${tagIndex}Key`] = tags[key].name;
-      if(tags[key].values){
+      if (tags[key].values) {
         inputParameters[`tag${tagIndex}Value`] = tags[key].values!.join(',');
       }
       tagIndex++;

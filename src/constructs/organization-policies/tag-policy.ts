@@ -41,9 +41,9 @@ export class DlzTagPolicy implements IReportResource {
         },
         ...(tag.values ? {
           tag_value: {
-            '@@assign': tag.values
+            '@@assign': tag.values,
           },
-        } : {})
+        } : {}),
       };
       return acc;
     }, {});
