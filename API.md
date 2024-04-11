@@ -9240,7 +9240,7 @@ const budgetSubscribers: BudgetSubscribers = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slackChannels">slackChannels</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slack">slack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId">SlackChannelId</a></code> | *No description.* |
 
 ---
 
@@ -9254,13 +9254,13 @@ public readonly emails: string[];
 
 ---
 
-##### `slackChannels`<sup>Optional</sup> <a name="slackChannels" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slackChannels"></a>
+##### `slack`<sup>Optional</sup> <a name="slack" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slack"></a>
 
 ```typescript
-public readonly slackChannels: string[];
+public readonly slack: SlackChannelId;
 ```
 
-- *Type:* string[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId">SlackChannelId</a>
 
 ---
 
@@ -10733,7 +10733,168 @@ Control Tower Controls applied to all the OUs in the organization.
 
 ---
 
+### SlackChannelId <a name="SlackChannelId" id="recipes_data-landing-zone_data-landing-zone.SlackChannelId"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SlackChannelId.Initializer"></a>
+
+```typescript
+import { SlackChannelId } from 'recipes_data-landing-zone_data-landing-zone'
+
+const slackChannelId: SlackChannelId = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId.property.slackChannelConfigurationName">slackChannelConfigurationName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId.property.slackChannelId">slackChannelId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId.property.slackWorkspaceId">slackWorkspaceId</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `slackChannelConfigurationName`<sup>Required</sup> <a name="slackChannelConfigurationName" id="recipes_data-landing-zone_data-landing-zone.SlackChannelId.property.slackChannelConfigurationName"></a>
+
+```typescript
+public readonly slackChannelConfigurationName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `slackChannelId`<sup>Required</sup> <a name="slackChannelId" id="recipes_data-landing-zone_data-landing-zone.SlackChannelId.property.slackChannelId"></a>
+
+```typescript
+public readonly slackChannelId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `slackWorkspaceId`<sup>Required</sup> <a name="slackWorkspaceId" id="recipes_data-landing-zone_data-landing-zone.SlackChannelId.property.slackWorkspaceId"></a>
+
+```typescript
+public readonly slackWorkspaceId: string;
+```
+
+- *Type:* string
+
+---
+
 ## Classes <a name="Classes" id="Classes"></a>
+
+### AccountChatbots <a name="AccountChatbots" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots"></a>
+
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.Initializer"></a>
+
+```typescript
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
+
+new AccountChatbots()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel">addSlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel">existsSlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel">findSlackChannel</a></code> | *No description.* |
+
+---
+
+##### `addSlackChannel` <a name="addSlackChannel" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel"></a>
+
+```typescript
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
+
+AccountChatbots.addSlackChannel(scope: Construct, id: string, chatbotProps: SlackChannelConfigurationProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.chatbotProps"></a>
+
+- *Type:* aws-cdk-lib.aws_chatbot.SlackChannelConfigurationProps
+
+---
+
+##### `existsSlackChannel` <a name="existsSlackChannel" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel"></a>
+
+```typescript
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
+
+AccountChatbots.existsSlackChannel(scope: Construct, chatbotProps: SlackChannelId)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel.parameter.chatbotProps"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId">SlackChannelId</a>
+
+---
+
+##### `findSlackChannel` <a name="findSlackChannel" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel"></a>
+
+```typescript
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
+
+AccountChatbots.findSlackChannel(scope: Construct, chatbotProps: SlackChannelId)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel.parameter.chatbotProps"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId">SlackChannelId</a>
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.property.slackChatBots">slackChatBots</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_chatbot.SlackChannelConfiguration}</code> | *No description.* |
+
+---
+
+##### `slackChatBots`<sup>Required</sup> <a name="slackChatBots" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.property.slackChatBots"></a>
+
+```typescript
+public readonly slackChatBots: {[ key: string ]: SlackChannelConfiguration};
+```
+
+- *Type:* {[ key: string ]: aws-cdk-lib.aws_chatbot.SlackChannelConfiguration}
+
+---
+
 
 ### Budget <a name="Budget" id="recipes_data-landing-zone_data-landing-zone.Budget"></a>
 

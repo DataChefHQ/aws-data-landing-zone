@@ -3,10 +3,12 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
+import { AccountChatbots, SlackChannelId } from '../account-chatbots';
+
 
 export interface BudgetSubscribers {
   readonly emails?: string[];
-  readonly slackChannels?: string[];
+  readonly slack?: SlackChannelId;
 }
 
 export interface BudgetProps {
@@ -34,20 +36,16 @@ export class Budget {
       topicName: `${id}-topic`,
     });
     this.notificationTopic.grantPublish(new iam.ServicePrincipal('budgets.amazonaws.com'));
-    // topic.addToResourcePolicy(
-    //   new iam.PolicyStatement({
-    //     effect: iam.Effect.ALLOW,
-    //     actions: ["SNS:Publish"],
-    //     principals: [new iam.ServicePrincipal("budgets.amazonaws.com")],
-    //     resources: [topic.topicArn]
-    //   })
-    // );
+
     if (props.subscribers.emails) {
       for (let emailAddress of props.subscribers.emails) {
         this.notificationTopic.addSubscription(new subscriptions.EmailSubscription(emailAddress));
       }
     }
-
+    if (props.subscribers.slack) {
+      const slackChannel = AccountChatbots.findSlackChannel(scope, props.subscribers.slack);
+      slackChannel.addNotificationTopic(this.notificationTopic);
+    }
 
     this.budget = new budgets.CfnBudget(scope, id, {
       budget: {

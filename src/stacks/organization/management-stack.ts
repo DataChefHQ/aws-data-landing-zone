@@ -1,7 +1,8 @@
 import { Annotations } from 'aws-cdk-lib';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
-import { Budget, ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
+import { AccountChatbots, Budget, ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
@@ -12,6 +13,7 @@ import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-lan
 import { PropsOrDefaults } from '../../defaults';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 import { Report } from '../../lib/report';
+
 export class ManagementStack extends DlzStack {
   public readonly topic: sns.Topic;
 
@@ -27,6 +29,7 @@ export class ManagementStack extends DlzStack {
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
+
     this.budgets();
   }
 
@@ -193,9 +196,36 @@ export class ManagementStack extends DlzStack {
   }
 
   budgets() {
+    const budgetSlackChannels = this.props.budgets
+      .filter(budget => budget.subscribers.slack)
+      .map(budget => budget.subscribers.slack!);
+
+    const denyAllPolicy = new iam.ManagedPolicy(this, this.resourceName('deny-all-guardrail-policies'), {
+      managedPolicyName: this.resourceName('deny-all-guardrail-policies'),
+      description: 'Deny all guardrail policies',
+      statements: [
+        new iam.PolicyStatement({
+          effect: iam.Effect.DENY,
+          actions: ['*'],
+          resources: ['*'],
+        }),
+      ],
+    });
+
+    for (const slackChannel of budgetSlackChannels) {
+      const id = this.resourceName(`slack-bot-${slackChannel.slackWorkspaceId}-${slackChannel.slackChannelId}`);
+      if (!AccountChatbots.existsSlackChannel(this, slackChannel)) {
+        AccountChatbots.addSlackChannel(this, id, {
+          ...slackChannel,
+          guardrailPolicies: [
+            denyAllPolicy,
+          ],
+        });
+      }
+    }
+
     for (const budget of this.props.budgets ) {
       new Budget(this, this.resourceName(`budget-${budget.name}`), budget);
     }
   }
-
 }
