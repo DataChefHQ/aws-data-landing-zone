@@ -2,16 +2,25 @@
 import { App } from 'aws-cdk-lib';
 // import { Template } from 'aws-cdk-lib/assertions';
 // import {DataLandingZone, DlzControlTowerStandardControls, Region} from '../src';
-import { DataLandingZone, Defaults, DlzAccountType, DlzControlTowerStandardControls, Region } from '../src';
+import {
+  DataLandingZone,
+  Defaults,
+  DlzAccountType,
+  DlzControlTowerStandardControls,
+  Region,
+  SlackChannelId,
+} from '../src';
 // import * as sns from 'aws-cdk-lib/aws-sns';
 
 test('Local build and debug', () => {
   const app = new App();
   // const dlz = new DataLandingZone(app, {
 
-  // const budgetAlarmTopic = new sns.Topic(app, 'BudgetAlarmTopic', {
-  //   topicName: 'BudgetAlarmTopic',
-  // });
+  const slackBudgetNotifications: SlackChannelId = {
+    slackChannelConfigurationName: 'budget-alerts',
+    slackWorkspaceId: 'T1',
+    slackChannelId: 'C2',
+  };
 
   new DataLandingZone(app, {
     localProfile: 'ct-sandbox-exported',
@@ -26,6 +35,7 @@ test('Local build and debug', () => {
     },
     budgets: [
       ...Defaults.budgets(100, 20, {
+        slack: slackBudgetNotifications,
         emails: ['rehan+dc-budget--defaults@datachef.co'],
       }),
       {
@@ -35,6 +45,7 @@ test('Local build and debug', () => {
         },
         amount: 100,
         subscribers: {
+          slack: slackBudgetNotifications,
           emails: ['rehan+dc-budget--backend@datachef.co'],
         },
       },
@@ -47,6 +58,7 @@ test('Local build and debug', () => {
         },
         amount: 100,
         subscribers: {
+          slack: slackBudgetNotifications,
           emails: ['rehan+dc-budget--backend-accounting-internal-development@datachef.co'],
         },
       },
