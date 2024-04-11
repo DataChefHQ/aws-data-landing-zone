@@ -1,6 +1,6 @@
 # Initial Setup
 
-## Steps
+## Create Control Tower
 
 1. Create a new root AWS account by following https://portal.aws.amazon.com/billing/signup
    - Be sure to use an email address that is not already associated with an AWS account and that you can access.
@@ -15,6 +15,21 @@
 1. Create two AWS accounts by following the steps in [Create an AWS Account](Create%20an%20AWS%20Account.md)
    1. Create a `Develop` account
    2. Create a `Production` account
+
+## (OPTIONALLY) Configure Slack in the Management and Audit Account
+
+If you specify notifications to be delivered to a Slack channel, a once-off setup is required to configure the Slack and
+AWS integration before specifying Slack channel details in the CDK.
+
+1. Log into the Management account and go to the AWS Chatbot service. Enable slack integration and follow the
+   instructions to link the AWS Chatbot to your Slack workspace.
+2. Repeat for the Audit account.
+
+## Configure the CDK
+
+> [!WARNING]
+> OUTDATED 
+
 1. Create a new CDK project and fill in account numbers and other relevant information. Ensure that the regions that 
    you specify in the config aligns with what is CT. Ex:
    ```ts
@@ -43,3 +58,4 @@
       }
     };
    ```
+
