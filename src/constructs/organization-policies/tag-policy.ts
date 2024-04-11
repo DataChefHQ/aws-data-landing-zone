@@ -6,6 +6,7 @@ import { IReportResource, ReportResource, ReportType } from '../../lib/report';
 
 export interface DlzTag {
   readonly name: string;
+  readonly values?: string[];
 }
 export interface DlzTagPolicyProps {
   readonly policyTags: DlzTag[];
@@ -22,6 +23,9 @@ type PolicyTags = {
     tag_key: {
       '@@assign': string;
     };
+    tag_value?: {
+      '@@assign': string[];
+    };
   };
 };
 
@@ -35,6 +39,11 @@ export class DlzTagPolicy implements IReportResource {
         tag_key: {
           '@@assign': tag.name, //Makes it case-sensitive
         },
+        ...(tag.values ? {
+          tag_value: {
+            '@@assign': tag.values,
+          },
+        } : {}),
       };
       return acc;
     }, {});

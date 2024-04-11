@@ -20,7 +20,11 @@ export class SharedOrganization {
     const inputParameters: Record<string, string> = {};
     let tagIndex = 1;
     for (const key in tags) {
-      inputParameters[`tag${tagIndex++}Key`] = tags[key].name;
+      inputParameters[`tag${tagIndex}Key`] = tags[key].name;
+      if (tags[key].values) {
+        inputParameters[`tag${tagIndex}Value`] = tags[key].values!.join(',');
+      }
+      tagIndex++;
     }
 
     const rule = new DlzConfigRule(this.stack,
