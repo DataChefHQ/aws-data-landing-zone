@@ -8,7 +8,7 @@ import {
   DlzAccountType,
   DlzControlTowerStandardControls,
   Region,
-  SlackChannelId,
+  SlackChannel,
 } from '../src';
 // import * as sns from 'aws-cdk-lib/aws-sns';
 
@@ -16,7 +16,7 @@ test('Local build and debug', () => {
   const app = new App();
   // const dlz = new DataLandingZone(app, {
 
-  const slackBudgetNotifications: SlackChannelId = {
+  const slackBudgetNotifications: SlackChannel = {
     slackChannelConfigurationName: 'budget-alerts',
     slackWorkspaceId: 'T1',
     slackChannelId: 'C2',
@@ -63,6 +63,16 @@ test('Local build and debug', () => {
         },
       },
     ],
+    securityHubNotifications: {
+      lowPriority: {
+        emails: ['rehan+dc-sh-low@datachef.co'],
+        slack: slackBudgetNotifications,
+      },
+      highPriority: {
+        emails: ['rehan+dc-sh-high@datachef.co'],
+        slack: slackBudgetNotifications,
+      },
+    },
     organization: {
       organizationId: 'o-05ev6vk6fa',
       root: {

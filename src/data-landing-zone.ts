@@ -1,5 +1,5 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
-import { BudgetProps, DlzControlTowerStandardControls, DlzStack } from './constructs';
+import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -247,6 +247,16 @@ export interface MandatoryTags {
   readonly environment: string[];
 }
 
+export interface SecurityHubNotification {
+  readonly emails?: string[];
+  readonly slack?: SlackChannel;
+}
+
+export interface SecurityHubNotifications {
+  readonly lowPriority: SecurityHubNotification;
+  readonly highPriority: SecurityHubNotification;
+}
+
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
@@ -312,6 +322,8 @@ export interface DataLandingZoneProps {
   readonly saveReport?: boolean;
 
   readonly budgets: BudgetProps[];
+
+  readonly securityHubNotifications: SecurityHubNotifications;
 }
 
 type DeploymentOrder = {
@@ -491,7 +503,8 @@ export class DataLandingZone {
         account: this.props.organization.ous.security.accounts.audit.accountId,
         region: this.props.regions.global,
       },
-    });
+    },
+    this.props);
 
     const auditRegionalStacks: AuditRegionalStack[] = [];
     for (const region of this.props.regions.regional) {
