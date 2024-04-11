@@ -8,7 +8,7 @@ import {
 } from '../../constructs/control-tower-control';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps, Ou, Region } from '../../data-landing-zone';
+import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
 import { PropsOrDefaults } from '../../defaults';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 import { Report } from '../../lib/report';
@@ -36,16 +36,6 @@ export class ManagementStack extends DlzStack {
     const allOus = [Ou.SECURITY, Ou.WORKLOADS, Ou.SUSPENDED];
     console.assert(this.props.regions.global === Region.EU_WEST_1);
 
-    // console.log("TEST")
-    // console.log("TEST1", DlzControlTowerEnabledControl)
-    // const mappp = new Mappings();
-    // console.log("TEST2", mappp)
-    // console.log("TEST3", mappp.defaults())
-    // console.log("TEST4", Mappings)
-    // console.log("TEST5", Mappings._standardControlMap())
-    //
-    // console.log("TEST6", DlzControlTowerEnabledControl._standardControlMap())
-
     const standardControls = ControlTowerControlMappings.standardControl();
     const selectedControlNames = PropsOrDefaults.getRootControls(this.props);
     const selectedControls: IDlzControlTowerControl[] = [];
@@ -72,11 +62,19 @@ export class ManagementStack extends DlzStack {
 
         enabledControls.push(enableControl.control);
 
-        Report.addReportForOuAccountRegions(
-          this.props.organization.ous[ou],
-          this.props.regions,
-          enableControl.reportResource,
-        );
+        if (ou === Ou.SECURITY) {
+          Report.addReportForSecurityOuAccountRegions(
+            this.props.organization.ous[ou],
+            this.props.regions,
+            enableControl.reportResource,
+          );
+        } else {
+          Report.addReportForOuAccountRegions(
+            this.props.organization.ous[ou],
+            this.props.regions,
+            enableControl.reportResource,
+          );
+        }
       }
     }
     limitCfnExecutions(enabledControls, 10);
@@ -98,68 +96,73 @@ export class ManagementStack extends DlzStack {
     // ======================================= DEVELOPMENT ========================================
     // ============================================================================================
 
-    const dlzScpDevelop = new DlzServiceControlPolicy(this,
-      this.resourceName('scp-development-account'), {
-        name: this.resourceName('scp-development-account'),
-        description: 'SCP statements applied to the development account',
-        targetIds: [
-          this.props.organization.ous.workloads.accounts.develop.accountId,
-        ],
-        statements: [
-          ...commonStatements,
-        ],
-      });
-    const dlzTagPolicyDevelop = new DlzTagPolicy(this,
-      this.resourceName('tag-policy-development-account'), {
-        name: this.resourceName('tag-policy-development-account'),
-        description: 'Tag policy for the development account',
-        targetIds: [this.props.organization.ous.workloads.accounts.develop.accountId],
-        policyTags: tags,
-      });
-    Report.addReportForAccountRegion(
-      'develop',
-      '*',
-      dlzScpDevelop.reportResource,
-    );
-    Report.addReportForAccountRegion(
-      'develop',
-      '*',
-      dlzTagPolicyDevelop.reportResource,
-    );
+    const developAccounts = this.props.organization.ous.workloads.accounts
+      .filter(account => account.type === DlzAccountType.DEVELOP);
+    for (const dlzAccount of developAccounts) {
+      const dlzScpDevelop = new DlzServiceControlPolicy(this,
+        this.resourceName(`scp-${dlzAccount.name}-account`), {
+          name: this.resourceName(`scp-${dlzAccount.name}-account`),
+          description: `SCP statements applied to the ${dlzAccount.name} account`,
+          targetIds: [dlzAccount.accountId],
+          statements: [
+            ...commonStatements,
+          ],
+        });
+      const dlzTagPolicyDevelop = new DlzTagPolicy(this,
+        this.resourceName(`tag-policy-${dlzAccount.name}-account`), {
+          name: this.resourceName(`tag-policy-${dlzAccount.name}-account`),
+          description: `Tag policy for the ${dlzAccount.name} account`,
+          targetIds: [dlzAccount.accountId],
+          policyTags: tags,
+        });
+      Report.addReportForAccountRegion(
+        dlzAccount.name,
+        '*',
+        dlzScpDevelop.reportResource,
+      );
+      Report.addReportForAccountRegion(
+        dlzAccount.name,
+        '*',
+        dlzTagPolicyDevelop.reportResource,
+      );
+    }
+
 
     // ============================================================================================
     // ======================================== PRODUCTION ========================================
     // ============================================================================================
 
-    const dlzScpProd = new DlzServiceControlPolicy(this,
-      this.resourceName('scp-production-account'), {
-        name: this.resourceName('scp-production-account'),
-        description: 'SCP statements applied to the production account',
-        targetIds: [
-          this.props.organization.ous.workloads.accounts.production.accountId,
-        ],
-        statements: [
-          ...commonStatements,
-        ],
-      });
-    const dlzTagPolicyProduction = new DlzTagPolicy(this,
-      this.resourceName('tag-policy-production-account'), {
-        name: this.resourceName('tag-policy-production-account'),
-        description: 'Tag policy for the production account',
-        targetIds: [this.props.organization.ous.workloads.accounts.production.accountId],
-        policyTags: tags,
-      });
+    const prodAccounts = this.props.organization.ous.workloads.accounts
+      .filter(account => account.type === DlzAccountType.PRODUCTION);
+    for (const dlzAccount of prodAccounts) {
+      const dlzScpProd = new DlzServiceControlPolicy(this,
+        this.resourceName(`scp-${dlzAccount.name}-account`), {
+          name: this.resourceName(`scp-${dlzAccount.name}-account`),
+          description: `SCP statements applied to the ${dlzAccount.name} account`,
+          targetIds: [dlzAccount.accountId],
+          statements: [
+            ...commonStatements,
+          ],
+        });
+      const dlzTagPolicyProduction = new DlzTagPolicy(this,
+        this.resourceName(`tag-policy-${dlzAccount.name}-account`), {
+          name: this.resourceName(`tag-policy-${dlzAccount.name}-account`),
+          description: `Tag policy for the ${dlzAccount.name} account`,
+          targetIds: [dlzAccount.accountId],
+          policyTags: tags,
+        });
 
-    Report.addReportForAccountRegion(
-      'production',
-      '*',
-      dlzScpProd.reportResource,
-    );
-    Report.addReportForAccountRegion(
-      'production',
-      '*',
-      dlzTagPolicyProduction.reportResource,
-    );
+      Report.addReportForAccountRegion(
+        dlzAccount.name,
+        '*',
+        dlzScpProd.reportResource,
+      );
+      Report.addReportForAccountRegion(
+        dlzAccount.name,
+        '*',
+        dlzTagPolicyProduction.reportResource,
+      );
+    }
   }
 
   /**
