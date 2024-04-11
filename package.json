@@ -7,6 +7,7 @@
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
+    "clear-lib-and-dist": "npx projen clear-lib-and-dist",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",
@@ -17,6 +18,7 @@
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:js": "npx projen package:js",
+    "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
@@ -26,11 +28,12 @@
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
-    "projen": "npx projen"
+    "projen": "npx projen",
+    "prepare": "husky"
   },
   "author": {
-    "name": "rehanvdm",
-    "email": "rehan.vdm4@gmail.com",
+    "name": "DataChefHQ",
+    "email": "hi@datachef.co",
     "organization": false
   },
   "devDependencies": {
@@ -38,35 +41,62 @@
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.133.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
+    "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-junit": "^15",
-    "jsii": "~5.0.0",
+    "jsii": "~5.3.0",
     "jsii-diff": "^1.95.0",
     "jsii-docgen": "^10.3.24",
     "jsii-pacmak": "^1.95.0",
-    "jsii-rosetta": "~5.0.0",
+    "jsii-rosetta": "~5.3.0",
     "projen": "^0.80.12",
     "standard-version": "^9",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "~5.3.0"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.133.0",
     "constructs": "^10.0.5"
   },
+  "dependencies": {
+    "@aws-sdk/client-sts": "^3.540.0",
+    "@aws-sdk/credential-providers": "^3.540.0",
+    "execa": "5.1.1",
+    "table": "^6.8.2"
+  },
+  "bundledDependencies": [
+    "@aws-sdk/client-sts",
+    "@aws-sdk/credential-providers",
+    "execa",
+    "table"
+  ],
   "keywords": [
     "cdk"
   ],
+  "engines": {
+    "node": "~18.*",
+    "npm": "~9.*"
+  },
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "version": "0.0.0",
   "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "mjs",
+      "cjs",
+      "jsx",
+      "json",
+      "node"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
       "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)"
@@ -112,7 +142,12 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "recipes_dlz",
+        "module": "recipes_dlz"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
