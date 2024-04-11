@@ -63,6 +63,16 @@ test('Local build and debug', () => {
         },
       },
     ],
+    securityHubNotifications: {
+      lowPriority: {
+        emails: ['rehan+dc-sh-low@datachef.co'],
+        slack: slackBudgetNotifications,
+      },
+      highPriority: {
+        emails: ['rehan+dc-sh-high@datachef.co'],
+        slack: slackBudgetNotifications,
+      },
+    },
     organization: {
       organizationId: 'o-05ev6vk6fa',
       root: {

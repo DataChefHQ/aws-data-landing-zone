@@ -9,13 +9,14 @@
 ```typescript
 import { AuditGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
-new AuditGlobalStack(scope: Construct, props: DlzStackProps)
+new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
@@ -25,9 +26,15 @@ new AuditGlobalStack(scope: Construct, props: DlzStackProps)
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.stackProps"></a>
 
 - *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -51,6 +58,7 @@ new AuditGlobalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.securityHubNotifications">securityHubNotifications</a></code> | *No description.* |
 
 ---
 
@@ -459,6 +467,12 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
+
+##### `securityHubNotifications` <a name="securityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.securityHubNotifications"></a>
+
+```typescript
+public securityHubNotifications(): void
+```
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -9283,6 +9297,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications">SecurityHubNotifications</a></code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
@@ -9345,6 +9360,16 @@ public readonly regions: DlzRegions;
 ```
 
 - *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
+
+---
+
+##### `securityHubNotifications`<sup>Required</sup> <a name="securityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications"></a>
+
+```typescript
+public readonly securityHubNotifications: SecurityHubNotifications;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications">SecurityHubNotifications</a>
 
 ---
 
@@ -10730,6 +10755,84 @@ public readonly controls: DlzControlTowerStandardControls[];
 - *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a>[]
 
 Control Tower Controls applied to all the OUs in the organization.
+
+---
+
+### SecurityHubNotification <a name="SecurityHubNotification" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.Initializer"></a>
+
+```typescript
+import { SecurityHubNotification } from 'recipes_data-landing-zone_data-landing-zone'
+
+const securityHubNotification: SecurityHubNotification = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.slack">slack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId">SlackChannelId</a></code> | *No description.* |
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.emails"></a>
+
+```typescript
+public readonly emails: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `slack`<sup>Optional</sup> <a name="slack" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.slack"></a>
+
+```typescript
+public readonly slack: SlackChannelId;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannelId">SlackChannelId</a>
+
+---
+
+### SecurityHubNotifications <a name="SecurityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.Initializer"></a>
+
+```typescript
+import { SecurityHubNotifications } from 'recipes_data-landing-zone_data-landing-zone'
+
+const securityHubNotifications: SecurityHubNotifications = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.highPriority">highPriority</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.lowPriority">lowPriority</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a></code> | *No description.* |
+
+---
+
+##### `highPriority`<sup>Required</sup> <a name="highPriority" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.highPriority"></a>
+
+```typescript
+public readonly highPriority: SecurityHubNotification;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>
+
+---
+
+##### `lowPriority`<sup>Required</sup> <a name="lowPriority" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.lowPriority"></a>
+
+```typescript
+public readonly lowPriority: SecurityHubNotification;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>
 
 ---
 
