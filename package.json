@@ -65,12 +65,14 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
+    "@aws-sdk/client-cost-explorer": "^3.552.0",
     "@aws-sdk/client-sts": "^3.540.0",
     "@aws-sdk/credential-providers": "^3.540.0",
     "execa": "5.1.1",
     "table": "^6.8.2"
   },
   "bundledDependencies": [
+    "@aws-sdk/client-cost-explorer",
     "@aws-sdk/client-sts",
     "@aws-sdk/credential-providers",
     "execa",

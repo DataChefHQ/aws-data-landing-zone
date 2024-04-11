@@ -90,6 +90,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-cost-explorer",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-sts",
       "type": "bundled"
     },

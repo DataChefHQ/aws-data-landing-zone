@@ -1,5 +1,5 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
-import { DlzControlTowerStandardControls, DlzStack } from './constructs';
+import { BudgetProps, DlzControlTowerStandardControls, DlzStack } from './constructs';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -310,6 +310,8 @@ export interface DataLandingZoneProps {
    * @default true
    */
   readonly saveReport?: boolean;
+
+  readonly budgets: BudgetProps[];
 }
 
 type DeploymentOrder = {
