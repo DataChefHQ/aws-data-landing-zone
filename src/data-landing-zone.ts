@@ -1,5 +1,5 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
-import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannelId } from './constructs';
+import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -249,7 +249,7 @@ export interface MandatoryTags {
 
 export interface SecurityHubNotification {
   readonly emails?: string[];
-  readonly slack?: SlackChannelId;
+  readonly slack?: SlackChannel;
 }
 
 export interface SecurityHubNotifications {

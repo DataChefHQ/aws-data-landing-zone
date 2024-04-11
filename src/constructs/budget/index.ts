@@ -3,12 +3,12 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
-import { AccountChatbots, SlackChannelId } from '../account-chatbots';
+import { AccountChatbots, SlackChannel } from '../account-chatbots';
 
 
 export interface BudgetSubscribers {
   readonly emails?: string[];
-  readonly slack?: SlackChannelId;
+  readonly slack?: SlackChannel;
 }
 
 export interface BudgetProps {
@@ -19,7 +19,7 @@ export interface BudgetProps {
 }
 
 export class Budget {
-  public readonly budget: budgets.CfnBudget;
+  public readonly cfnBudget: budgets.CfnBudget;
   public readonly notificationTopic: sns.Topic;
 
   constructor(scope: Construct, id: string, props: BudgetProps) {
@@ -47,7 +47,7 @@ export class Budget {
       slackChannel.addNotificationTopic(this.notificationTopic);
     }
 
-    this.budget = new budgets.CfnBudget(scope, id, {
+    this.cfnBudget = new budgets.CfnBudget(scope, id, {
       budget: {
         budgetName: props.name,
         budgetType: 'COST',
