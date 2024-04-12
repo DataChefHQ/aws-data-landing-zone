@@ -7,7 +7,7 @@ import {
   Defaults,
   DlzAccountType,
   DlzControlTowerStandardControls,
-  Region,
+  Region, SecurityHubNotificationSeverity, SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
 } from '../src';
 // import * as sns from 'aws-cdk-lib/aws-sns';
@@ -63,16 +63,42 @@ test('Local build and debug', () => {
         },
       },
     ],
-    securityHubNotifications: {
-      lowPriority: {
-        emails: ['rehan+dc-sh-low@datachef.co'],
-        slack: slackBudgetNotifications,
+    securityHubNotifications: [
+      {
+        id: 'notify-high',
+        severity: [
+          SecurityHubNotificationSeverity.MEDIUM,
+          SecurityHubNotificationSeverity.HIGH,
+          SecurityHubNotificationSeverity.CRITICAL,
+        ],
+        workflowStatus: [
+          SecurityHubNotificationSWorkflowStatus.NEW,
+        ],
+        notification: {
+          // emails: ['rehan+dc-sh-high@datachef.co'],// Looks terrible
+          slack: {
+            slackChannelConfigurationName: 'security-hub-high',
+            slackWorkspaceId: 'T06UBGRJCAC',
+            slackChannelId: 'C06TEKK87E3',
+          },
+        },
       },
-      highPriority: {
-        emails: ['rehan+dc-sh-high@datachef.co'],
-        slack: slackBudgetNotifications,
+      {
+        id: 'notify-resolved',
+        workflowStatus: [
+          SecurityHubNotificationSWorkflowStatus.RESOLVED,
+          SecurityHubNotificationSWorkflowStatus.SUPPRESSED,
+        ],
+        notification: {
+          // emails: ['rehan+dc-sh-resolved@datachef.co'],// Looks terrible
+          slack: {
+            slackChannelConfigurationName: 'security-hub-resolved',
+            slackWorkspaceId: 'T06UBGRJCAC',
+            slackChannelId: 'C06U0E6QEBU',
+          },
+        },
       },
-    },
+    ],
     organization: {
       organizationId: 'o-05ev6vk6fa',
       root: {

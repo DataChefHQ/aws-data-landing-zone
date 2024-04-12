@@ -247,14 +247,37 @@ export interface MandatoryTags {
   readonly environment: string[];
 }
 
-export interface SecurityHubNotification {
+export interface SecurityHubNotificationProps {
   readonly emails?: string[];
   readonly slack?: SlackChannel;
 }
 
-export interface SecurityHubNotifications {
-  readonly lowPriority: SecurityHubNotification;
-  readonly highPriority: SecurityHubNotification;
+/**
+ * https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html
+ */
+export enum SecurityHubNotificationSeverity {
+  INFORMATIONAL = 'INFORMATIONAL',
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  CRITICAL = 'CRITICAL',
+}
+
+/**
+ * https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Workflow.html
+ */
+export enum SecurityHubNotificationSWorkflowStatus {
+  NEW = 'NEW',
+  NOTIFIED = 'NOTIFIED',
+  SUPPRESSED = 'SUPPRESSED',
+  RESOLVED = 'RESOLVED',
+}
+
+export interface SecurityHubNotification {
+  readonly id: string;
+  readonly severity?: SecurityHubNotificationSeverity[];
+  readonly workflowStatus?: SecurityHubNotificationSWorkflowStatus[];
+  readonly notification: SecurityHubNotificationProps;
 }
 
 export interface DataLandingZoneProps {
@@ -323,7 +346,7 @@ export interface DataLandingZoneProps {
 
   readonly budgets: BudgetProps[];
 
-  readonly securityHubNotifications: SecurityHubNotifications;
+  readonly securityHubNotifications: SecurityHubNotification[];
 }
 
 type DeploymentOrder = {
