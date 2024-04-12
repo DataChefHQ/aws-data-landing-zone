@@ -9297,7 +9297,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications">SecurityHubNotifications</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
@@ -9366,10 +9366,10 @@ public readonly regions: DlzRegions;
 ##### `securityHubNotifications`<sup>Required</sup> <a name="securityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications"></a>
 
 ```typescript
-public readonly securityHubNotifications: SecurityHubNotifications;
+public readonly securityHubNotifications: SecurityHubNotification[];
 ```
 
-- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications">SecurityHubNotifications</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]
 
 ---
 
@@ -10772,12 +10772,73 @@ const securityHubNotification: SecurityHubNotification = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.slack">slack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.notification">notification</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.severity">severity</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity">SecurityHubNotificationSeverity</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.workflowStatus">workflowStatus</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus">SecurityHubNotificationSWorkflowStatus</a>[]</code> | *No description.* |
 
 ---
 
-##### `emails`<sup>Optional</sup> <a name="emails" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.emails"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+##### `notification`<sup>Required</sup> <a name="notification" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.notification"></a>
+
+```typescript
+public readonly notification: SecurityHubNotificationProps;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a>
+
+---
+
+##### `severity`<sup>Optional</sup> <a name="severity" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.severity"></a>
+
+```typescript
+public readonly severity: SecurityHubNotificationSeverity[];
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity">SecurityHubNotificationSeverity</a>[]
+
+---
+
+##### `workflowStatus`<sup>Optional</sup> <a name="workflowStatus" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.workflowStatus"></a>
+
+```typescript
+public readonly workflowStatus: SecurityHubNotificationSWorkflowStatus[];
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus">SecurityHubNotificationSWorkflowStatus</a>[]
+
+---
+
+### SecurityHubNotificationProps <a name="SecurityHubNotificationProps" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.Initializer"></a>
+
+```typescript
+import { SecurityHubNotificationProps } from 'recipes_data-landing-zone_data-landing-zone'
+
+const securityHubNotificationProps: SecurityHubNotificationProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.slack">slack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.emails"></a>
 
 ```typescript
 public readonly emails: string[];
@@ -10787,52 +10848,13 @@ public readonly emails: string[];
 
 ---
 
-##### `slack`<sup>Optional</sup> <a name="slack" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.slack"></a>
+##### `slack`<sup>Optional</sup> <a name="slack" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.slack"></a>
 
 ```typescript
 public readonly slack: SlackChannel;
 ```
 
 - *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
-
----
-
-### SecurityHubNotifications <a name="SecurityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications"></a>
-
-#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.Initializer"></a>
-
-```typescript
-import { SecurityHubNotifications } from 'recipes_data-landing-zone_data-landing-zone'
-
-const securityHubNotifications: SecurityHubNotifications = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.highPriority">highPriority</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a></code> | *No description.* |
-| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.lowPriority">lowPriority</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a></code> | *No description.* |
-
----
-
-##### `highPriority`<sup>Required</sup> <a name="highPriority" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.highPriority"></a>
-
-```typescript
-public readonly highPriority: SecurityHubNotification;
-```
-
-- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>
-
----
-
-##### `lowPriority`<sup>Required</sup> <a name="lowPriority" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotifications.property.lowPriority"></a>
-
-```typescript
-public readonly lowPriority: SecurityHubNotification;
-```
-
-- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>
 
 ---
 
@@ -12294,6 +12316,82 @@ Hyderabad No Control Tower SecurityHub Standard support.
 
 
 ##### `SERVICE_CONTROL_POLICY` <a name="SERVICE_CONTROL_POLICY" id="recipes_data-landing-zone_data-landing-zone.ReportType.SERVICE_CONTROL_POLICY"></a>
+
+---
+
+
+### SecurityHubNotificationSeverity <a name="SecurityHubNotificationSeverity" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity"></a>
+
+https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.INFORMATIONAL">INFORMATIONAL</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.LOW">LOW</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.MEDIUM">MEDIUM</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.HIGH">HIGH</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.CRITICAL">CRITICAL</a></code> | *No description.* |
+
+---
+
+##### `INFORMATIONAL` <a name="INFORMATIONAL" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.INFORMATIONAL"></a>
+
+---
+
+
+##### `LOW` <a name="LOW" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.LOW"></a>
+
+---
+
+
+##### `MEDIUM` <a name="MEDIUM" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.MEDIUM"></a>
+
+---
+
+
+##### `HIGH` <a name="HIGH" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.HIGH"></a>
+
+---
+
+
+##### `CRITICAL` <a name="CRITICAL" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.CRITICAL"></a>
+
+---
+
+
+### SecurityHubNotificationSWorkflowStatus <a name="SecurityHubNotificationSWorkflowStatus" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus"></a>
+
+https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Workflow.html.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NEW">NEW</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NOTIFIED">NOTIFIED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.SUPPRESSED">SUPPRESSED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED">RESOLVED</a></code> | *No description.* |
+
+---
+
+##### `NEW` <a name="NEW" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NEW"></a>
+
+---
+
+
+##### `NOTIFIED` <a name="NOTIFIED" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NOTIFIED"></a>
+
+---
+
+
+##### `SUPPRESSED` <a name="SUPPRESSED" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.SUPPRESSED"></a>
+
+---
+
+
+##### `RESOLVED` <a name="RESOLVED" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED"></a>
 
 ---
 
