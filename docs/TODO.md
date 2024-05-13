@@ -1,11 +1,20 @@
 # TODO
 
 ## Features
+1. Delete default VPC, or instruct not to create with ControlTower.
+1. 
 
 
 ## Enhancements
 1. Improve the readability of email notifications of SecurityHub. Or better yet send a daily report of all findings.
 1. For Slack+Email notifications validate that one of the two is passed.
+1. Arrays passed to the disable Config Rules need to be for the rules of that Default, or error if you are trying to 
+disable a rule not in that Default.
+1. Create dedicated stacks per environment for: 
+   - ConfigRules
+   - TODO Other stacks with possibly a lot of resources
+1. Show that the ConfigConformance pack that is being used in the report and also the rules that are excluded with reason.
+
 
 ## Chores
 1. Move all the types in `data-landing-zone.ts` somewhere else, maybe consider breaking it down into smaller files.
@@ -18,3 +27,4 @@ SecurityHub findings, then it will reuse the same slack channel if previously de
 bots have the same permissions and that is deny all. If we change this, then we need to emit a warning if the slack
 channel is already defined and the permissions are different.
 4. Put SOPs in directories or somehow contain their images close to them, also name images properly.
+5. Add other popular ConfigRule Conformance packs

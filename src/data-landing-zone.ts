@@ -1,5 +1,6 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
 import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
+import { ConfigRule } from './constructs/config/rules';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -11,6 +12,7 @@ import { DevelopGlobalStack } from './stacks/organization/workloads/develop/glob
 import { DevelopRegionalStack } from './stacks/organization/workloads/develop/regional-stack';
 import { ProductionGlobalStack } from './stacks/organization/workloads/production/global-stack';
 import { ProductionRegionalStack } from './stacks/organization/workloads/production/regional-stack';
+
 
 /**
  * Control Tower Supported Regions as listed here
@@ -192,6 +194,7 @@ export interface DLzAccount {
   readonly accountId: string;
   readonly name: string;
   readonly type: DlzAccountType;
+  readonly configRules?: ConfigRule[];
 }
 
 export enum Ou {
@@ -234,6 +237,11 @@ export interface RootOptions {
    * Control Tower Controls applied to all the OUs in the organization
    */
   readonly controls?: DlzControlTowerStandardControls[];
+
+  /**
+   * ConfigRules applied to all the OUs in the organization
+   */
+  readonly configRules?: ConfigRule[];
 }
 export interface DLzOrganization {
   readonly organizationId: string;
@@ -462,7 +470,6 @@ export class DataLandingZone {
     }
     if (this.props.saveReport !== false) {Report.saveConsoleReport();}
   }
-
 
   stageManagement() {
     const management = new ManagementStack(this.app, {

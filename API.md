@@ -9561,6 +9561,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.configRules">configRules</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ConfigRule">ConfigRule</a>[]</code> | *No description.* |
 
 ---
 
@@ -9591,6 +9592,168 @@ public readonly type: DlzAccountType;
 ```
 
 - *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzAccountType">DlzAccountType</a>
+
+---
+
+##### `configRules`<sup>Optional</sup> <a name="configRules" id="recipes_data-landing-zone_data-landing-zone.DLzAccount.property.configRules"></a>
+
+```typescript
+public readonly configRules: ConfigRule[];
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ConfigRule">ConfigRule</a>[]
+
+---
+
+### DlzConfigRuleProps <a name="DlzConfigRuleProps" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.Initializer"></a>
+
+```typescript
+import { DlzConfigRuleProps } from 'recipes_data-landing-zone_data-landing-zone'
+
+const dlzConfigRuleProps: DlzConfigRuleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.configRuleName">configRuleName</a></code> | <code>string</code> | A name for the AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.description">description</a></code> | <code>string</code> | A description about this AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.inputParameters">inputParameters</a></code> | <code>{[ key: string ]: any}</code> | Input parameter values that are passed to the AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.maximumExecutionFrequency">maximumExecutionFrequency</a></code> | <code>aws-cdk-lib.aws_config.MaximumExecutionFrequency</code> | The maximum frequency at which the AWS Config rule runs evaluations. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.ruleScope">ruleScope</a></code> | <code>aws-cdk-lib.aws_config.RuleScope</code> | Defines which resources trigger an evaluation for an AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.identifier">identifier</a></code> | <code>string</code> | The identifier of the AWS managed rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.reportItem">reportItem</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem">DlzConfigRuleReportItem</a></code> | *No description.* |
+
+---
+
+##### `configRuleName`<sup>Optional</sup> <a name="configRuleName" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.configRuleName"></a>
+
+```typescript
+public readonly configRuleName: string;
+```
+
+- *Type:* string
+- *Default:* CloudFormation generated name
+
+A name for the AWS Config rule.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+- *Default:* No description
+
+A description about this AWS Config rule.
+
+---
+
+##### `inputParameters`<sup>Optional</sup> <a name="inputParameters" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.inputParameters"></a>
+
+```typescript
+public readonly inputParameters: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* No input parameters
+
+Input parameter values that are passed to the AWS Config rule.
+
+---
+
+##### `maximumExecutionFrequency`<sup>Optional</sup> <a name="maximumExecutionFrequency" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.maximumExecutionFrequency"></a>
+
+```typescript
+public readonly maximumExecutionFrequency: MaximumExecutionFrequency;
+```
+
+- *Type:* aws-cdk-lib.aws_config.MaximumExecutionFrequency
+- *Default:* MaximumExecutionFrequency.TWENTY_FOUR_HOURS
+
+The maximum frequency at which the AWS Config rule runs evaluations.
+
+---
+
+##### `ruleScope`<sup>Optional</sup> <a name="ruleScope" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.ruleScope"></a>
+
+```typescript
+public readonly ruleScope: RuleScope;
+```
+
+- *Type:* aws-cdk-lib.aws_config.RuleScope
+- *Default:* evaluations for the rule are triggered when any resource in the recording group changes.
+
+Defines which resources trigger an evaluation for an AWS Config rule.
+
+---
+
+##### `identifier`<sup>Required</sup> <a name="identifier" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.identifier"></a>
+
+```typescript
+public readonly identifier: string;
+```
+
+- *Type:* string
+
+The identifier of the AWS managed rule.
+
+> [https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html)
+
+---
+
+##### `reportItem`<sup>Required</sup> <a name="reportItem" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps.property.reportItem"></a>
+
+```typescript
+public readonly reportItem: DlzConfigRuleReportItem;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem">DlzConfigRuleReportItem</a>
+
+---
+
+### DlzConfigRuleReportItem <a name="DlzConfigRuleReportItem" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem"></a>
+
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem.Initializer"></a>
+
+```typescript
+import { DlzConfigRuleReportItem } from 'recipes_data-landing-zone_data-landing-zone'
+
+const dlzConfigRuleReportItem: DlzConfigRuleReportItem = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem.property.description">description</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `description`<sup>Required</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+
+---
+
+##### `externalLink`<sup>Required</sup> <a name="externalLink" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem.property.externalLink"></a>
+
+```typescript
+public readonly externalLink: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -11245,6 +11408,7 @@ new Defaults()
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.configConformancePackRulesCis">configConformancePackRulesCis</a></code> | ConfigRules that come with the CIS conformance pack. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
@@ -11285,6 +11449,16 @@ Subscribers for the budget.
 
 ---
 
+##### `configConformancePackRulesCis` <a name="configConformancePackRulesCis" id="recipes_data-landing-zone_data-landing-zone.Defaults.configConformancePackRulesCis"></a>
+
+```typescript
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
+
+Defaults.configConformancePackRulesCis()
+```
+
+ConfigRules that come with the CIS conformance pack.
+
 ##### `denyServiceList` <a name="denyServiceList" id="recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList"></a>
 
 ```typescript
@@ -11321,6 +11495,76 @@ Defaults.rootControls()
 
 Control Tower Controls applied to all the OUs in the organization.
 
+
+
+### DlzConfigRule <a name="DlzConfigRule" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule"></a>
+
+- *Implements:* <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
+
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer"></a>
+
+```typescript
+import { DlzConfigRule } from 'recipes_data-landing-zone_data-landing-zone'
+
+new DlzConfigRule(scope: Construct, id: string, props: DlzConfigRuleProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps">DlzConfigRuleProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleProps">DlzConfigRuleProps</a>
+
+---
+
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRule.property.managedRule">managedRule</a></code> | <code>aws-cdk-lib.aws_config.ManagedRule</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRule.property.reportResource">reportResource</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `managedRule`<sup>Required</sup> <a name="managedRule" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule.property.managedRule"></a>
+
+```typescript
+public readonly managedRule: ManagedRule;
+```
+
+- *Type:* aws-cdk-lib.aws_config.ManagedRule
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.DlzConfigRule.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+
+---
 
 
 ### DlzControlTowerEnabledControl <a name="DlzControlTowerEnabledControl" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl"></a>
@@ -11764,6 +12008,114 @@ public readonly reports: ReportItem[];
 
 ## Protocols <a name="Protocols" id="Protocols"></a>
 
+### IDlzConfigRule <a name="IDlzConfigRule" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule"></a>
+
+- *Implemented By:* <a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule">IDlzConfigRule</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.identifier">identifier</a></code> | <code>string</code> | The identifier of the AWS managed rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.reportItem">reportItem</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem">DlzConfigRuleReportItem</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.configRuleName">configRuleName</a></code> | <code>string</code> | A name for the AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.description">description</a></code> | <code>string</code> | A description about this AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.inputParameters">inputParameters</a></code> | <code>{[ key: string ]: any}</code> | Input parameter values that are passed to the AWS Config rule. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.maximumExecutionFrequency">maximumExecutionFrequency</a></code> | <code>aws-cdk-lib.aws_config.MaximumExecutionFrequency</code> | The maximum frequency at which the AWS Config rule runs evaluations. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.ruleScope">ruleScope</a></code> | <code>aws-cdk-lib.aws_config.RuleScope</code> | Defines which resources trigger an evaluation for an AWS Config rule. |
+
+---
+
+##### `identifier`<sup>Required</sup> <a name="identifier" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.identifier"></a>
+
+```typescript
+public readonly identifier: string;
+```
+
+- *Type:* string
+
+The identifier of the AWS managed rule.
+
+> [https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html)
+
+---
+
+##### `reportItem`<sup>Required</sup> <a name="reportItem" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.reportItem"></a>
+
+```typescript
+public readonly reportItem: DlzConfigRuleReportItem;
+```
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRuleReportItem">DlzConfigRuleReportItem</a>
+
+---
+
+##### `configRuleName`<sup>Optional</sup> <a name="configRuleName" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.configRuleName"></a>
+
+```typescript
+public readonly configRuleName: string;
+```
+
+- *Type:* string
+- *Default:* CloudFormation generated name
+
+A name for the AWS Config rule.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+- *Default:* No description
+
+A description about this AWS Config rule.
+
+---
+
+##### `inputParameters`<sup>Optional</sup> <a name="inputParameters" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.inputParameters"></a>
+
+```typescript
+public readonly inputParameters: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* No input parameters
+
+Input parameter values that are passed to the AWS Config rule.
+
+---
+
+##### `maximumExecutionFrequency`<sup>Optional</sup> <a name="maximumExecutionFrequency" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.maximumExecutionFrequency"></a>
+
+```typescript
+public readonly maximumExecutionFrequency: MaximumExecutionFrequency;
+```
+
+- *Type:* aws-cdk-lib.aws_config.MaximumExecutionFrequency
+- *Default:* MaximumExecutionFrequency.TWENTY_FOUR_HOURS
+
+The maximum frequency at which the AWS Config rule runs evaluations.
+
+---
+
+##### `ruleScope`<sup>Optional</sup> <a name="ruleScope" id="recipes_data-landing-zone_data-landing-zone.IDlzConfigRule.property.ruleScope"></a>
+
+```typescript
+public readonly ruleScope: RuleScope;
+```
+
+- *Type:* aws-cdk-lib.aws_config.RuleScope
+- *Default:* evaluations for the rule are triggered when any resource in the recording group changes.
+
+Defines which resources trigger an evaluation for an AWS Config rule.
+
+---
+
 ### IDlzControlTowerControl <a name="IDlzControlTowerControl" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl"></a>
 
 - *Implemented By:* <a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
@@ -11856,7 +12208,7 @@ Optional parameters for the control.
 
 ### IReportResource <a name="IReportResource" id="recipes_data-landing-zone_data-landing-zone.IReportResource"></a>
 
-- *Implemented By:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
+- *Implemented By:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzConfigRule">DlzConfigRule</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
 
 Behavioral, used with Inheritance.
 
@@ -11880,6 +12232,23 @@ public readonly reportResource: ReportResource;
 ---
 
 ## Enums <a name="Enums" id="Enums"></a>
+
+### ConfigRule <a name="ConfigRule" id="recipes_data-landing-zone_data-landing-zone.ConfigRule"></a>
+
+Controls that do not take parameters.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ConfigRule.ACCESS_KEYS_ROTATED">ACCESS_KEYS_ROTATED</a></code> | *No description.* |
+
+---
+
+##### `ACCESS_KEYS_ROTATED` <a name="ACCESS_KEYS_ROTATED" id="recipes_data-landing-zone_data-landing-zone.ConfigRule.ACCESS_KEYS_ROTATED"></a>
+
+---
+
 
 ### DlzAccountType <a name="DlzAccountType" id="recipes_data-landing-zone_data-landing-zone.DlzAccountType"></a>
 

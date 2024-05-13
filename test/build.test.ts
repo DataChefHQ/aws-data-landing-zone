@@ -3,11 +3,14 @@ import { App } from 'aws-cdk-lib';
 // import { Template } from 'aws-cdk-lib/assertions';
 // import {DataLandingZone, DlzControlTowerStandardControls, Region} from '../src';
 import {
+  ConfigRule,
   DataLandingZone,
   Defaults,
   DlzAccountType,
   DlzControlTowerStandardControls,
-  Region, SecurityHubNotificationSeverity, SecurityHubNotificationSWorkflowStatus,
+  Region,
+  SecurityHubNotificationSeverity,
+  SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
 } from '../src';
 // import * as sns from 'aws-cdk-lib/aws-sns';
@@ -21,6 +24,14 @@ test('Local build and debug', () => {
     slackWorkspaceId: 'T1',
     slackChannelId: 'C2',
   };
+
+  const configRules = [
+    ...Defaults.configConformancePackOperationalBestPracticesForCISAWS_v1_4_Level2([{
+      rule: ConfigRule.VPC_DEFAULT_SECURITY_GROUP_CLOSED,
+      reason: 'The default VPC has been deleted', //TODO actually, just showcasing it is possible to disable
+    }]),
+  ];
+
 
   new DataLandingZone(app, {
     localProfile: 'ct-sandbox-exported',
@@ -107,13 +118,16 @@ test('Local build and debug', () => {
             accountId: '882070149987',
           },
         },
+
+        /* Applied to all Accounts */
+        // configRules: configRules,
+
         /* Specify all the default controls and then an extra one */
         controls: [
           ...Defaults.rootControls(),
           DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3,
         ],
       },
-
 
       ous: {
         security: {
@@ -136,11 +150,13 @@ test('Local build and debug', () => {
               name: 'development',
               accountId: '381491899779',
               type: DlzAccountType.DEVELOP,
+              configRules: configRules,
             },
             {
               name: 'production',
               accountId: '891377027267',
               type: DlzAccountType.PRODUCTION,
+              configRules: configRules,
             },
           ],
 

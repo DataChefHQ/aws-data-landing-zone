@@ -42,7 +42,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
   bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table'],
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: ['husky'], /* Build dependencies for this module. */
+  devDeps: ['husky', 'js-yaml', '@types/js-yaml'], /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
   jestOptions: {
     jestConfig: {
@@ -65,5 +65,8 @@ project.gitignore.addPatterns('.idea');
 project.gitignore.addPatterns('*.js');
 project.gitignore.addPatterns('*.d.ts');
 project.gitignore.addPatterns('*.DS_Store');
+
+const createCdk = project.addTask('create-cdk');
+createCdk.exec('npx ts-node --prefer-ts-exts scripts/create-cdk-config-rules-and-conformance-packs/index.ts');
 
 project.synth();

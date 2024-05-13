@@ -9,6 +9,14 @@ export function kebabToCamelCase(input: string): string {
   }).join('');
 }
 
+export function toUpperSnake(text: string): string {
+  return text
+    .split('-')
+    .map(word => word.toUpperCase())
+    .join('_');
+}
+
+
 export function groupByField<T>(items: T[], field: keyof T): {[key: string]: T[]} {
   return items.reduce<{[key: string]: T[]}>((acc, item) => {
     const key = String(item[field]);
