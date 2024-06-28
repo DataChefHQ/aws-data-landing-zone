@@ -2,39 +2,39 @@
 
 ## Constructs <a name="Constructs" id="Constructs"></a>
 
-### AuditGlobalStack <a name="AuditGlobalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack"></a>
+### AuditGlobalStack <a name="AuditGlobalStack" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer"></a>
 
 ```typescript
-import { AuditGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -42,27 +42,27 @@ new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLan
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.securityHubNotifications">securityHubNotifications</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.securityHubNotifications">securityHubNotifications</a></code> | *No description.* |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -70,7 +70,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -81,19 +81,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -105,19 +105,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -138,7 +138,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -146,7 +146,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -172,19 +172,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -235,19 +235,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -269,13 +269,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -291,7 +291,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -299,7 +299,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -323,19 +323,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -346,19 +346,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -369,7 +369,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -377,7 +377,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -385,13 +385,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -404,7 +404,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -412,7 +412,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -420,7 +420,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -428,19 +428,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -448,13 +448,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -462,13 +462,13 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
 ---
 
-##### `securityHubNotifications` <a name="securityHubNotifications" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.securityHubNotifications"></a>
+##### `securityHubNotifications` <a name="securityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.securityHubNotifications"></a>
 
 ```typescript
 public securityHubNotifications(): void
@@ -478,23 +478,23 @@ public securityHubNotifications(): void
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isConstruct"></a>
 
 ```typescript
-import { AuditGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 AuditGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -502,10 +502,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isStack"></a>
 
 ```typescript
-import { AuditGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 AuditGlobalStack.isStack(x: any)
 ```
@@ -514,16 +514,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.of"></a>
 
 ```typescript
-import { AuditGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 AuditGlobalStack.of(construct: IConstruct)
 ```
@@ -532,7 +532,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -544,33 +544,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -582,7 +582,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -611,7 +611,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -623,7 +623,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -646,7 +646,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -658,7 +658,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -670,7 +670,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -694,7 +694,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -706,7 +706,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -718,7 +718,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -730,7 +730,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -759,7 +759,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -779,7 +779,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -800,7 +800,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -812,7 +812,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -824,7 +824,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -838,7 +838,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -850,7 +850,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -862,7 +862,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -874,7 +874,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -888,7 +888,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -900,7 +900,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -910,7 +910,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.AuditGlobalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -921,32 +921,32 @@ public readonly id: string;
 ---
 
 
-### AuditRegionalStack <a name="AuditRegionalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack"></a>
+### AuditRegionalStack <a name="AuditRegionalStack" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer"></a>
 
 ```typescript
-import { AuditRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
@@ -954,26 +954,26 @@ new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -981,7 +981,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -992,19 +992,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -1016,19 +1016,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -1049,7 +1049,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -1057,7 +1057,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -1083,19 +1083,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -1146,19 +1146,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -1180,13 +1180,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -1202,7 +1202,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -1210,7 +1210,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -1234,19 +1234,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -1257,19 +1257,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -1280,7 +1280,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -1288,7 +1288,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -1296,13 +1296,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -1315,7 +1315,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -1323,7 +1323,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -1331,7 +1331,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -1339,19 +1339,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -1359,13 +1359,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -1373,7 +1373,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -1383,23 +1383,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isConstruct"></a>
 
 ```typescript
-import { AuditRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 AuditRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -1407,10 +1407,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isStack"></a>
 
 ```typescript
-import { AuditRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 AuditRegionalStack.isStack(x: any)
 ```
@@ -1419,16 +1419,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.of"></a>
 
 ```typescript
-import { AuditRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 AuditRegionalStack.of(construct: IConstruct)
 ```
@@ -1437,7 +1437,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -1449,33 +1449,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -1487,7 +1487,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -1516,7 +1516,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -1528,7 +1528,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -1551,7 +1551,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -1563,7 +1563,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -1575,7 +1575,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -1599,7 +1599,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -1611,7 +1611,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -1623,7 +1623,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -1635,7 +1635,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -1664,7 +1664,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -1684,7 +1684,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -1705,7 +1705,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -1717,7 +1717,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -1729,7 +1729,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -1743,7 +1743,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -1755,7 +1755,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -1767,7 +1767,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -1779,7 +1779,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -1793,7 +1793,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -1805,7 +1805,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -1815,7 +1815,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.AuditRegionalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -1826,39 +1826,39 @@ public readonly id: string;
 ---
 
 
-### DevelopGlobalStack <a name="DevelopGlobalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack"></a>
+### DevelopGlobalStack <a name="DevelopGlobalStack" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer"></a>
 
 ```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DevelopGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -1866,26 +1866,26 @@ new DevelopGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataL
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -1893,7 +1893,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -1904,19 +1904,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -1928,19 +1928,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -1961,7 +1961,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -1969,7 +1969,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -1995,19 +1995,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -2058,19 +2058,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -2092,13 +2092,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -2114,7 +2114,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -2122,7 +2122,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -2146,19 +2146,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -2169,19 +2169,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -2192,7 +2192,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -2200,7 +2200,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -2208,13 +2208,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -2227,7 +2227,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -2235,7 +2235,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -2243,7 +2243,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -2251,19 +2251,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -2271,13 +2271,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -2285,7 +2285,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -2295,23 +2295,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isConstruct"></a>
 
 ```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DevelopGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -2319,10 +2319,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isStack"></a>
 
 ```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DevelopGlobalStack.isStack(x: any)
 ```
@@ -2331,16 +2331,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.of"></a>
 
 ```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DevelopGlobalStack.of(construct: IConstruct)
 ```
@@ -2349,7 +2349,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -2361,33 +2361,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -2399,7 +2399,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -2428,7 +2428,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -2440,7 +2440,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -2463,7 +2463,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -2475,7 +2475,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -2487,7 +2487,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -2511,7 +2511,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -2523,7 +2523,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -2535,7 +2535,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -2547,7 +2547,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -2576,7 +2576,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -2596,7 +2596,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -2617,7 +2617,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -2629,7 +2629,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -2641,7 +2641,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -2655,7 +2655,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -2667,7 +2667,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -2679,7 +2679,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -2691,7 +2691,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -2705,7 +2705,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -2717,7 +2717,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -2727,7 +2727,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -2738,39 +2738,39 @@ public readonly id: string;
 ---
 
 
-### DevelopRegionalStack <a name="DevelopRegionalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack"></a>
+### DevelopRegionalStack <a name="DevelopRegionalStack" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer"></a>
 
 ```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DevelopRegionalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -2778,26 +2778,26 @@ new DevelopRegionalStack(scope: Construct, stackProps: DlzStackProps, props: Dat
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -2805,7 +2805,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -2816,19 +2816,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -2840,19 +2840,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -2873,7 +2873,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -2881,7 +2881,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -2907,19 +2907,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -2970,19 +2970,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -3004,13 +3004,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -3026,7 +3026,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -3034,7 +3034,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -3058,19 +3058,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -3081,19 +3081,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -3104,7 +3104,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -3112,7 +3112,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -3120,13 +3120,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -3139,7 +3139,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -3147,7 +3147,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -3155,7 +3155,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -3163,19 +3163,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -3183,13 +3183,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -3197,7 +3197,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -3207,23 +3207,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isConstruct"></a>
 
 ```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DevelopRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -3231,10 +3231,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isStack"></a>
 
 ```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DevelopRegionalStack.isStack(x: any)
 ```
@@ -3243,16 +3243,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.of"></a>
 
 ```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DevelopRegionalStack.of(construct: IConstruct)
 ```
@@ -3261,7 +3261,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -3273,33 +3273,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -3311,7 +3311,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -3340,7 +3340,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -3352,7 +3352,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -3375,7 +3375,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -3387,7 +3387,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -3399,7 +3399,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -3423,7 +3423,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -3435,7 +3435,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -3447,7 +3447,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -3459,7 +3459,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -3488,7 +3488,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -3508,7 +3508,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -3529,7 +3529,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -3541,7 +3541,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -3553,7 +3553,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -3567,7 +3567,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -3579,7 +3579,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -3591,7 +3591,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -3603,7 +3603,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -3617,7 +3617,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -3629,7 +3629,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -3639,7 +3639,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -3650,32 +3650,32 @@ public readonly id: string;
 ---
 
 
-### DlzStack <a name="DlzStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack"></a>
+### DlzStack <a name="DlzStack" id="recipes_data-landing-zone_data-landing-zone.DlzStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer"></a>
 
 ```typescript
-import { DlzStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DlzStack(scope: Construct, props: DlzStackProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DlzStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
@@ -3683,26 +3683,26 @@ new DlzStack(scope: Construct, props: DlzStackProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.DlzStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -3710,7 +3710,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -3721,19 +3721,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -3745,19 +3745,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -3778,7 +3778,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.DlzStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -3786,7 +3786,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -3812,19 +3812,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.DlzStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -3875,19 +3875,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.DlzStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.DlzStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -3909,13 +3909,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.DlzStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -3931,7 +3931,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.DlzStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -3939,7 +3939,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -3963,19 +3963,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.DlzStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -3986,19 +3986,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.DlzStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -4009,7 +4009,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.DlzStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -4017,7 +4017,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.DlzStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -4025,13 +4025,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DlzStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -4044,7 +4044,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -4052,7 +4052,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.DlzStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -4060,7 +4060,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -4068,19 +4068,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.DlzStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.DlzStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -4088,13 +4088,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.DlzStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.DlzStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -4102,7 +4102,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -4112,23 +4112,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.DlzStack.isConstruct"></a>
 
 ```typescript
-import { DlzStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DlzStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.DlzStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -4136,10 +4136,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.DlzStack.isStack"></a>
 
 ```typescript
-import { DlzStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DlzStack.isStack(x: any)
 ```
@@ -4148,16 +4148,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.DlzStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.DlzStack.of"></a>
 
 ```typescript
-import { DlzStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 DlzStack.of(construct: IConstruct)
 ```
@@ -4166,7 +4166,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.DlzStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -4178,33 +4178,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -4216,7 +4216,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -4245,7 +4245,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -4257,7 +4257,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -4280,7 +4280,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -4292,7 +4292,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -4304,7 +4304,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -4328,7 +4328,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -4340,7 +4340,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -4352,7 +4352,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -4364,7 +4364,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -4393,7 +4393,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -4413,7 +4413,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -4434,7 +4434,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -4446,7 +4446,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -4458,7 +4458,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -4472,7 +4472,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -4484,7 +4484,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -4496,7 +4496,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -4508,7 +4508,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -4522,7 +4522,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -4534,7 +4534,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -4544,7 +4544,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DlzStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -4555,32 +4555,32 @@ public readonly id: string;
 ---
 
 
-### LogGlobalStack <a name="LogGlobalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack"></a>
+### LogGlobalStack <a name="LogGlobalStack" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer"></a>
 
 ```typescript
-import { LogGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new LogGlobalStack(scope: Construct, props: DlzStackProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
@@ -4588,26 +4588,26 @@ new LogGlobalStack(scope: Construct, props: DlzStackProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -4615,7 +4615,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -4626,19 +4626,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -4650,19 +4650,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -4683,7 +4683,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -4691,7 +4691,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -4717,19 +4717,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -4780,19 +4780,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -4814,13 +4814,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -4836,7 +4836,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -4844,7 +4844,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -4868,19 +4868,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -4891,19 +4891,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -4914,7 +4914,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -4922,7 +4922,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -4930,13 +4930,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -4949,7 +4949,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -4957,7 +4957,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -4965,7 +4965,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -4973,19 +4973,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -4993,13 +4993,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -5007,7 +5007,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -5017,23 +5017,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isConstruct"></a>
 
 ```typescript
-import { LogGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 LogGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -5041,10 +5041,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isStack"></a>
 
 ```typescript
-import { LogGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 LogGlobalStack.isStack(x: any)
 ```
@@ -5053,16 +5053,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.of"></a>
 
 ```typescript
-import { LogGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 LogGlobalStack.of(construct: IConstruct)
 ```
@@ -5071,7 +5071,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -5083,33 +5083,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -5121,7 +5121,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -5150,7 +5150,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -5162,7 +5162,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -5185,7 +5185,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -5197,7 +5197,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -5209,7 +5209,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -5233,7 +5233,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -5245,7 +5245,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -5257,7 +5257,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -5269,7 +5269,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -5298,7 +5298,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -5318,7 +5318,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -5339,7 +5339,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -5351,7 +5351,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -5363,7 +5363,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -5377,7 +5377,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -5389,7 +5389,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -5401,7 +5401,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -5413,7 +5413,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -5427,7 +5427,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -5439,7 +5439,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -5449,7 +5449,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.LogGlobalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -5460,32 +5460,32 @@ public readonly id: string;
 ---
 
 
-### LogRegionalStack <a name="LogRegionalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack"></a>
+### LogRegionalStack <a name="LogRegionalStack" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer"></a>
 
 ```typescript
-import { LogRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new LogRegionalStack(scope: Construct, props: DlzStackProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
@@ -5493,26 +5493,26 @@ new LogRegionalStack(scope: Construct, props: DlzStackProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -5520,7 +5520,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -5531,19 +5531,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -5555,19 +5555,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -5588,7 +5588,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -5596,7 +5596,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -5622,19 +5622,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -5685,19 +5685,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -5719,13 +5719,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -5741,7 +5741,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -5749,7 +5749,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -5773,19 +5773,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -5796,19 +5796,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -5819,7 +5819,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -5827,7 +5827,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -5835,13 +5835,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -5854,7 +5854,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -5862,7 +5862,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -5870,7 +5870,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -5878,19 +5878,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -5898,13 +5898,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -5912,7 +5912,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -5922,23 +5922,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isConstruct"></a>
 
 ```typescript
-import { LogRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 LogRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -5946,10 +5946,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isStack"></a>
 
 ```typescript
-import { LogRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 LogRegionalStack.isStack(x: any)
 ```
@@ -5958,16 +5958,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.of"></a>
 
 ```typescript
-import { LogRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 LogRegionalStack.of(construct: IConstruct)
 ```
@@ -5976,7 +5976,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -5988,33 +5988,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -6026,7 +6026,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -6055,7 +6055,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -6067,7 +6067,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -6090,7 +6090,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -6102,7 +6102,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -6114,7 +6114,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -6138,7 +6138,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -6150,7 +6150,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -6162,7 +6162,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -6174,7 +6174,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -6203,7 +6203,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -6223,7 +6223,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -6244,7 +6244,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -6256,7 +6256,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -6268,7 +6268,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -6282,7 +6282,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -6294,7 +6294,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -6306,7 +6306,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -6318,7 +6318,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -6332,7 +6332,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -6344,7 +6344,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -6354,7 +6354,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.LogRegionalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -6365,39 +6365,39 @@ public readonly id: string;
 ---
 
 
-### ManagementStack <a name="ManagementStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack"></a>
+### ManagementStack <a name="ManagementStack" id="recipes_data-landing-zone_data-landing-zone.ManagementStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer"></a>
 
 ```typescript
-import { ManagementStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ManagementStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -6405,30 +6405,30 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -6436,7 +6436,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -6447,19 +6447,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -6471,19 +6471,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -6504,7 +6504,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -6512,7 +6512,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -6538,19 +6538,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -6601,19 +6601,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -6635,13 +6635,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -6657,7 +6657,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -6665,7 +6665,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -6689,19 +6689,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -6712,19 +6712,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -6735,7 +6735,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -6743,7 +6743,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -6751,13 +6751,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -6770,7 +6770,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -6778,7 +6778,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -6786,7 +6786,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -6794,19 +6794,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -6814,13 +6814,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -6828,25 +6828,25 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
 ---
 
-##### `budgets` <a name="budgets" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.budgets"></a>
+##### `budgets` <a name="budgets" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.budgets"></a>
 
 ```typescript
 public budgets(): void
 ```
 
-##### `deploymentPlatformGitHub` <a name="deploymentPlatformGitHub" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.deploymentPlatformGitHub"></a>
+##### `deploymentPlatformGitHub` <a name="deploymentPlatformGitHub" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.deploymentPlatformGitHub"></a>
 
 ```typescript
 public deploymentPlatformGitHub(): void
 ```
 
-##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
+##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
 
 ```typescript
 public suspendedOuPolicies(): void
@@ -6854,7 +6854,7 @@ public suspendedOuPolicies(): void
 
 Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account.
 
-##### `workloadAccountsOrgPolicies` <a name="workloadAccountsOrgPolicies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.workloadAccountsOrgPolicies"></a>
+##### `workloadAccountsOrgPolicies` <a name="workloadAccountsOrgPolicies" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.workloadAccountsOrgPolicies"></a>
 
 ```typescript
 public workloadAccountsOrgPolicies(): void
@@ -6866,23 +6866,23 @@ Service Control Policies and Tag Policies applied at the account level to enable
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.isConstruct"></a>
 
 ```typescript
-import { ManagementStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ManagementStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ManagementStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -6890,10 +6890,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.isStack"></a>
 
 ```typescript
-import { ManagementStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ManagementStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ManagementStack.isStack(x: any)
 ```
@@ -6902,16 +6902,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.of"></a>
 
 ```typescript
-import { ManagementStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ManagementStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ManagementStack.of(construct: IConstruct)
 ```
@@ -6920,7 +6920,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -6932,34 +6932,34 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -6971,7 +6971,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -7000,7 +7000,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -7012,7 +7012,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -7035,7 +7035,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -7047,7 +7047,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -7059,7 +7059,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -7083,7 +7083,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -7095,7 +7095,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -7107,7 +7107,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -7119,7 +7119,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -7148,7 +7148,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -7168,7 +7168,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -7189,7 +7189,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -7201,7 +7201,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -7213,7 +7213,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -7227,7 +7227,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -7239,7 +7239,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -7251,7 +7251,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -7263,7 +7263,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -7277,7 +7277,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -7289,7 +7289,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -7299,7 +7299,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -7309,7 +7309,7 @@ public readonly id: string;
 
 ---
 
-##### `topic`<sup>Required</sup> <a name="topic" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack.property.topic"></a>
+##### `topic`<sup>Required</sup> <a name="topic" id="recipes_data-landing-zone_data-landing-zone.ManagementStack.property.topic"></a>
 
 ```typescript
 public readonly topic: Topic;
@@ -7320,39 +7320,39 @@ public readonly topic: Topic;
 ---
 
 
-### ProductionGlobalStack <a name="ProductionGlobalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack"></a>
+### ProductionGlobalStack <a name="ProductionGlobalStack" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new ProductionGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -7360,26 +7360,26 @@ new ProductionGlobalStack(scope: Construct, stackProps: DlzStackProps, props: Da
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -7387,7 +7387,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -7398,19 +7398,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -7422,19 +7422,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -7455,7 +7455,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -7463,7 +7463,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -7489,19 +7489,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -7552,19 +7552,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -7586,13 +7586,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -7608,7 +7608,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -7616,7 +7616,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -7640,19 +7640,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -7663,19 +7663,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -7686,7 +7686,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -7694,7 +7694,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -7702,13 +7702,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -7721,7 +7721,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -7729,7 +7729,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -7737,7 +7737,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -7745,19 +7745,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -7765,13 +7765,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -7779,7 +7779,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -7789,23 +7789,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isConstruct"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ProductionGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -7813,10 +7813,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isStack"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ProductionGlobalStack.isStack(x: any)
 ```
@@ -7825,16 +7825,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.of"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionGlobalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ProductionGlobalStack.of(construct: IConstruct)
 ```
@@ -7843,7 +7843,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -7855,33 +7855,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -7893,7 +7893,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -7922,7 +7922,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -7934,7 +7934,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -7957,7 +7957,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -7969,7 +7969,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -7981,7 +7981,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -8005,7 +8005,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -8017,7 +8017,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -8029,7 +8029,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -8041,7 +8041,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -8070,7 +8070,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -8090,7 +8090,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -8111,7 +8111,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -8123,7 +8123,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -8135,7 +8135,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -8149,7 +8149,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -8161,7 +8161,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -8173,7 +8173,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -8185,7 +8185,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -8199,7 +8199,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -8211,7 +8211,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -8221,7 +8221,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -8232,39 +8232,39 @@ public readonly id: string;
 ---
 
 
-### ProductionRegionalStack <a name="ProductionRegionalStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack"></a>
+### ProductionRegionalStack <a name="ProductionRegionalStack" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 new ProductionRegionalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -8272,26 +8272,26 @@ new ProductionRegionalStack(scope: Construct, stackProps: DlzStackProps, props: 
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toString"></a>
+##### `toString` <a name="toString" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -8299,7 +8299,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -8310,19 +8310,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -8334,19 +8334,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -8367,7 +8367,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -8375,7 +8375,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -8401,19 +8401,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -8464,19 +8464,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -8498,13 +8498,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -8520,7 +8520,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -8528,7 +8528,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -8552,19 +8552,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -8575,19 +8575,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -8598,7 +8598,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -8606,7 +8606,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -8614,13 +8614,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -8633,7 +8633,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -8641,7 +8641,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -8649,7 +8649,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -8657,19 +8657,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -8677,13 +8677,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -8691,7 +8691,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -8701,23 +8701,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isConstruct"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ProductionRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -8725,10 +8725,10 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isStack"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ProductionRegionalStack.isStack(x: any)
 ```
@@ -8737,16 +8737,16 @@ Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.of"></a>
+##### `of` <a name="of" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.of"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionRegionalStack } from 'recipes_data-landing-zone_data-landing-zone'
 
 ProductionRegionalStack.of(construct: IConstruct)
 ```
@@ -8755,7 +8755,7 @@ Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -8767,33 +8767,33 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -8805,7 +8805,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -8834,7 +8834,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -8846,7 +8846,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -8869,7 +8869,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -8881,7 +8881,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -8893,7 +8893,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -8917,7 +8917,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -8929,7 +8929,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -8941,7 +8941,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -8953,7 +8953,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -8982,7 +8982,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -9002,7 +9002,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -9023,7 +9023,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -9035,7 +9035,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -9047,7 +9047,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -9061,7 +9061,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -9073,7 +9073,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -9085,7 +9085,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -9097,7 +9097,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -9111,7 +9111,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -9123,7 +9123,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -9133,7 +9133,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -9146,12 +9146,12 @@ public readonly id: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
-### AuditStacks <a name="AuditStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks"></a>
+### AuditStacks <a name="AuditStacks" id="recipes_data-landing-zone_data-landing-zone.AuditStacks"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.AuditStacks.Initializer"></a>
 
 ```typescript
-import { AuditStacks } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AuditStacks } from 'recipes_data-landing-zone_data-landing-zone'
 
 const auditStacks: AuditStacks = { ... }
 ```
@@ -9160,37 +9160,37 @@ const auditStacks: AuditStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack">AuditGlobalStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack">AuditRegionalStack</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditStacks.property.global">global</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack">AuditGlobalStack</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditStacks.property.regional">regional</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack">AuditRegionalStack</a>[]</code> | *No description.* |
 
 ---
 
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks.property.global"></a>
+##### `global`<sup>Required</sup> <a name="global" id="recipes_data-landing-zone_data-landing-zone.AuditStacks.property.global"></a>
 
 ```typescript
 public readonly global: AuditGlobalStack;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditGlobalStack">AuditGlobalStack</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.AuditGlobalStack">AuditGlobalStack</a>
 
 ---
 
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks.property.regional"></a>
+##### `regional`<sup>Required</sup> <a name="regional" id="recipes_data-landing-zone_data-landing-zone.AuditStacks.property.regional"></a>
 
 ```typescript
 public readonly regional: AuditRegionalStack[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditRegionalStack">AuditRegionalStack</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.AuditRegionalStack">AuditRegionalStack</a>[]
 
 ---
 
-### BudgetProps <a name="BudgetProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps"></a>
+### BudgetProps <a name="BudgetProps" id="recipes_data-landing-zone_data-landing-zone.BudgetProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.Initializer"></a>
 
 ```typescript
-import { BudgetProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { BudgetProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const budgetProps: BudgetProps = { ... }
 ```
@@ -9199,14 +9199,14 @@ const budgetProps: BudgetProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.amount">amount</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.subscribers">subscribers</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.forTags">forTags</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.amount">amount</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.subscribers">subscribers</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps.property.forTags">forTags</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
 
 ---
 
-##### `amount`<sup>Required</sup> <a name="amount" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.amount"></a>
+##### `amount`<sup>Required</sup> <a name="amount" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.amount"></a>
 
 ```typescript
 public readonly amount: number;
@@ -9216,7 +9216,7 @@ public readonly amount: number;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -9226,17 +9226,17 @@ public readonly name: string;
 
 ---
 
-##### `subscribers`<sup>Required</sup> <a name="subscribers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.subscribers"></a>
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.subscribers"></a>
 
 ```typescript
 public readonly subscribers: BudgetSubscribers;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
 
 ---
 
-##### `forTags`<sup>Optional</sup> <a name="forTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps.property.forTags"></a>
+##### `forTags`<sup>Optional</sup> <a name="forTags" id="recipes_data-landing-zone_data-landing-zone.BudgetProps.property.forTags"></a>
 
 ```typescript
 public readonly forTags: {[ key: string ]: string};
@@ -9246,12 +9246,12 @@ public readonly forTags: {[ key: string ]: string};
 
 ---
 
-### BudgetSubscribers <a name="BudgetSubscribers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers"></a>
+### BudgetSubscribers <a name="BudgetSubscribers" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.Initializer"></a>
 
 ```typescript
-import { BudgetSubscribers } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { BudgetSubscribers } from 'recipes_data-landing-zone_data-landing-zone'
 
 const budgetSubscribers: BudgetSubscribers = { ... }
 ```
@@ -9260,12 +9260,12 @@ const budgetSubscribers: BudgetSubscribers = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slack">slack</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slack">slack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
 
 ---
 
-##### `emails`<sup>Optional</sup> <a name="emails" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails"></a>
+##### `emails`<sup>Optional</sup> <a name="emails" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.emails"></a>
 
 ```typescript
 public readonly emails: string[];
@@ -9275,22 +9275,22 @@ public readonly emails: string[];
 
 ---
 
-##### `slack`<sup>Optional</sup> <a name="slack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slack"></a>
+##### `slack`<sup>Optional</sup> <a name="slack" id="recipes_data-landing-zone_data-landing-zone.BudgetSubscribers.property.slack"></a>
 
 ```typescript
 public readonly slack: SlackChannel;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
 
 ---
 
-### DataLandingZoneProps <a name="DataLandingZoneProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps"></a>
+### DataLandingZoneProps <a name="DataLandingZoneProps" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.Initializer"></a>
 
 ```typescript
-import { DataLandingZoneProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DataLandingZoneProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dataLandingZoneProps: DataLandingZoneProps = { ... }
 ```
@@ -9299,32 +9299,32 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.budgets">budgets</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.budgets">budgets</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
 
 ---
 
-##### `budgets`<sup>Required</sup> <a name="budgets" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.budgets"></a>
+##### `budgets`<sup>Required</sup> <a name="budgets" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.budgets"></a>
 
 ```typescript
 public readonly budgets: BudgetProps[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>[]
 
 ---
 
-##### `localProfile`<sup>Required</sup> <a name="localProfile" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.localProfile"></a>
+##### `localProfile`<sup>Required</sup> <a name="localProfile" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.localProfile"></a>
 
 ```typescript
 public readonly localProfile: string;
@@ -9334,13 +9334,13 @@ public readonly localProfile: string;
 
 ---
 
-##### `mandatoryTags`<sup>Required</sup> <a name="mandatoryTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags"></a>
+##### `mandatoryTags`<sup>Required</sup> <a name="mandatoryTags" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.mandatoryTags"></a>
 
 ```typescript
 public readonly mandatoryTags: MandatoryTags;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags">MandatoryTags</a>
 
 The values of the mandatory tags that all resources must have.
 
@@ -9351,43 +9351,43 @@ The following values are already specified and used by the DLZ constructs
 
 ---
 
-##### `organization`<sup>Required</sup> <a name="organization" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization"></a>
+##### `organization`<sup>Required</sup> <a name="organization" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.organization"></a>
 
 ```typescript
 public readonly organization: DLzOrganization;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization">DLzOrganization</a>
 
 ---
 
-##### `regions`<sup>Required</sup> <a name="regions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions"></a>
+##### `regions`<sup>Required</sup> <a name="regions" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.regions"></a>
 
 ```typescript
 public readonly regions: DlzRegions;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
 
 ---
 
-##### `securityHubNotifications`<sup>Required</sup> <a name="securityHubNotifications" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications"></a>
+##### `securityHubNotifications`<sup>Required</sup> <a name="securityHubNotifications" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.securityHubNotifications"></a>
 
 ```typescript
 public readonly securityHubNotifications: SecurityHubNotification[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]
 
 ---
 
-##### `additionalMandatoryTags`<sup>Optional</sup> <a name="additionalMandatoryTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags"></a>
+##### `additionalMandatoryTags`<sup>Optional</sup> <a name="additionalMandatoryTags" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags"></a>
 
 ```typescript
 public readonly additionalMandatoryTags: DlzTag[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]
 - *Default:* Defaults.mandatoryTags()
 
 List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort.
@@ -9409,7 +9409,7 @@ For all stacks created by DLZ the following tags are applied:
 
 ---
 
-##### `denyServiceList`<sup>Optional</sup> <a name="denyServiceList" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.denyServiceList"></a>
+##### `denyServiceList`<sup>Optional</sup> <a name="denyServiceList" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.denyServiceList"></a>
 
 ```typescript
 public readonly denyServiceList: string[];
@@ -9424,17 +9424,17 @@ If not specified, the default defined by
 
 ---
 
-##### `deploymentPlatform`<sup>Optional</sup> <a name="deploymentPlatform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.deploymentPlatform"></a>
+##### `deploymentPlatform`<sup>Optional</sup> <a name="deploymentPlatform" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.deploymentPlatform"></a>
 
 ```typescript
 public readonly deploymentPlatform: DeploymentPlatform;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatform">DeploymentPlatform</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DeploymentPlatform">DeploymentPlatform</a>
 
 ---
 
-##### `printDeploymentOrder`<sup>Optional</sup> <a name="printDeploymentOrder" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder"></a>
+##### `printDeploymentOrder`<sup>Optional</sup> <a name="printDeploymentOrder" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder"></a>
 
 ```typescript
 public readonly printDeploymentOrder: boolean;
@@ -9447,7 +9447,7 @@ Print the deployment order to the console.
 
 ---
 
-##### `printReport`<sup>Optional</sup> <a name="printReport" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printReport"></a>
+##### `printReport`<sup>Optional</sup> <a name="printReport" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.printReport"></a>
 
 ```typescript
 public readonly printReport: boolean;
@@ -9460,7 +9460,7 @@ Print the report grouped by account, type and aggregated regions to the console.
 
 ---
 
-##### `saveReport`<sup>Optional</sup> <a name="saveReport" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.saveReport"></a>
+##### `saveReport`<sup>Optional</sup> <a name="saveReport" id="recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps.property.saveReport"></a>
 
 ```typescript
 public readonly saveReport: boolean;
@@ -9473,12 +9473,12 @@ Save the raw report items and the reports grouped by account to a `./.dlz-report
 
 ---
 
-### DeploymentPlatform <a name="DeploymentPlatform" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatform"></a>
+### DeploymentPlatform <a name="DeploymentPlatform" id="recipes_data-landing-zone_data-landing-zone.DeploymentPlatform"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatform.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DeploymentPlatform.Initializer"></a>
 
 ```typescript
-import { DeploymentPlatform } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DeploymentPlatform } from 'recipes_data-landing-zone_data-landing-zone'
 
 const deploymentPlatform: DeploymentPlatform = { ... }
 ```
@@ -9487,26 +9487,26 @@ const deploymentPlatform: DeploymentPlatform = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatform.property.gitHub">gitHub</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub">DeploymentPlatformGitHub</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DeploymentPlatform.property.gitHub">gitHub</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub">DeploymentPlatformGitHub</a></code> | *No description.* |
 
 ---
 
-##### `gitHub`<sup>Optional</sup> <a name="gitHub" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatform.property.gitHub"></a>
+##### `gitHub`<sup>Optional</sup> <a name="gitHub" id="recipes_data-landing-zone_data-landing-zone.DeploymentPlatform.property.gitHub"></a>
 
 ```typescript
 public readonly gitHub: DeploymentPlatformGitHub;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub">DeploymentPlatformGitHub</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub">DeploymentPlatformGitHub</a>
 
 ---
 
-### DeploymentPlatformGitHub <a name="DeploymentPlatformGitHub" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub"></a>
+### DeploymentPlatformGitHub <a name="DeploymentPlatformGitHub" id="recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub.Initializer"></a>
 
 ```typescript
-import { DeploymentPlatformGitHub } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DeploymentPlatformGitHub } from 'recipes_data-landing-zone_data-landing-zone'
 
 const deploymentPlatformGitHub: DeploymentPlatformGitHub = { ... }
 ```
@@ -9515,26 +9515,26 @@ const deploymentPlatformGitHub: DeploymentPlatformGitHub = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub.property.references">references</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference">GitHubReference</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub.property.references">references</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.GitHubReference">GitHubReference</a>[]</code> | *No description.* |
 
 ---
 
-##### `references`<sup>Required</sup> <a name="references" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub.property.references"></a>
+##### `references`<sup>Required</sup> <a name="references" id="recipes_data-landing-zone_data-landing-zone.DeploymentPlatformGitHub.property.references"></a>
 
 ```typescript
 public readonly references: GitHubReference[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference">GitHubReference</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.GitHubReference">GitHubReference</a>[]
 
 ---
 
-### DevelopAccountStacks <a name="DevelopAccountStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks"></a>
+### DevelopAccountStacks <a name="DevelopAccountStacks" id="recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.Initializer"></a>
 
 ```typescript
-import { DevelopAccountStacks } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopAccountStacks } from 'recipes_data-landing-zone_data-landing-zone'
 
 const developAccountStacks: DevelopAccountStacks = { ... }
 ```
@@ -9543,13 +9543,13 @@ const developAccountStacks: DevelopAccountStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.stacks">stacks</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks">DevelopStacks</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.stacks">stacks</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopStacks">DevelopStacks</a></code> | *No description.* |
 
 ---
 
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.accountId"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.accountId"></a>
 
 ```typescript
 public readonly accountId: string;
@@ -9559,7 +9559,7 @@ public readonly accountId: string;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -9569,22 +9569,22 @@ public readonly name: string;
 
 ---
 
-##### `stacks`<sup>Required</sup> <a name="stacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.stacks"></a>
+##### `stacks`<sup>Required</sup> <a name="stacks" id="recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks.property.stacks"></a>
 
 ```typescript
 public readonly stacks: DevelopStacks;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks">DevelopStacks</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DevelopStacks">DevelopStacks</a>
 
 ---
 
-### DevelopStacks <a name="DevelopStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks"></a>
+### DevelopStacks <a name="DevelopStacks" id="recipes_data-landing-zone_data-landing-zone.DevelopStacks"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DevelopStacks.Initializer"></a>
 
 ```typescript
-import { DevelopStacks } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DevelopStacks } from 'recipes_data-landing-zone_data-landing-zone'
 
 const developStacks: DevelopStacks = { ... }
 ```
@@ -9593,37 +9593,37 @@ const developStacks: DevelopStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack">DevelopGlobalStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack">DevelopRegionalStack</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.global">global</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack">DevelopGlobalStack</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.regional">regional</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack">DevelopRegionalStack</a>[]</code> | *No description.* |
 
 ---
 
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.global"></a>
+##### `global`<sup>Required</sup> <a name="global" id="recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.global"></a>
 
 ```typescript
 public readonly global: DevelopGlobalStack;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack">DevelopGlobalStack</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DevelopGlobalStack">DevelopGlobalStack</a>
 
 ---
 
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.regional"></a>
+##### `regional`<sup>Required</sup> <a name="regional" id="recipes_data-landing-zone_data-landing-zone.DevelopStacks.property.regional"></a>
 
 ```typescript
 public readonly regional: DevelopRegionalStack[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack">DevelopRegionalStack</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DevelopRegionalStack">DevelopRegionalStack</a>[]
 
 ---
 
-### DLzAccount <a name="DLzAccount" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount"></a>
+### DLzAccount <a name="DLzAccount" id="recipes_data-landing-zone_data-landing-zone.DLzAccount"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DLzAccount.Initializer"></a>
 
 ```typescript
-import { DLzAccount } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DLzAccount } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dLzAccount: DLzAccount = { ... }
 ```
@@ -9632,13 +9632,13 @@ const dLzAccount: DLzAccount = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
 
 ---
 
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.property.accountId"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="recipes_data-landing-zone_data-landing-zone.DLzAccount.property.accountId"></a>
 
 ```typescript
 public readonly accountId: string;
@@ -9648,7 +9648,7 @@ public readonly accountId: string;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.DLzAccount.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -9658,24 +9658,24 @@ public readonly name: string;
 
 ---
 
-##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount.property.type"></a>
+##### `type`<sup>Required</sup> <a name="type" id="recipes_data-landing-zone_data-landing-zone.DLzAccount.property.type"></a>
 
 ```typescript
 public readonly type: DlzAccountType;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType">DlzAccountType</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzAccountType">DlzAccountType</a>
 
 ---
 
-### DlzControlTowerControlIdNameProps <a name="DlzControlTowerControlIdNameProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps"></a>
+### DlzControlTowerControlIdNameProps <a name="DlzControlTowerControlIdNameProps" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps"></a>
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Do not export any of the controls in the folders, they do not conform to JSII, class names are snake case caps and the controlIdName properties are also snake case caps. This will cause the JSII build to fail. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.Initializer"></a>
 
 ```typescript
-import { DlzControlTowerControlIdNameProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzControlTowerControlIdNameProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzControlTowerControlIdNameProps: DlzControlTowerControlIdNameProps = { ... }
 ```
@@ -9684,12 +9684,12 @@ const dlzControlTowerControlIdNameProps: DlzControlTowerControlIdNameProps = { .
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.euWest1">euWest1</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.usEast1">usEast1</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.euWest1">euWest1</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.usEast1">usEast1</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `euWest1`<sup>Required</sup> <a name="euWest1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.euWest1"></a>
+##### `euWest1`<sup>Required</sup> <a name="euWest1" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.euWest1"></a>
 
 ```typescript
 public readonly euWest1: string;
@@ -9699,7 +9699,7 @@ public readonly euWest1: string;
 
 ---
 
-##### `usEast1`<sup>Required</sup> <a name="usEast1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.usEast1"></a>
+##### `usEast1`<sup>Required</sup> <a name="usEast1" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps.property.usEast1"></a>
 
 ```typescript
 public readonly usEast1: string;
@@ -9709,12 +9709,12 @@ public readonly usEast1: string;
 
 ---
 
-### DlzControlTowerEnabledControlProps <a name="DlzControlTowerEnabledControlProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps"></a>
+### DlzControlTowerEnabledControlProps <a name="DlzControlTowerEnabledControlProps" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.Initializer"></a>
 
 ```typescript
-import { DlzControlTowerEnabledControlProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzControlTowerEnabledControlProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzControlTowerEnabledControlProps: DlzControlTowerEnabledControlProps = { ... }
 ```
@@ -9723,16 +9723,16 @@ const dlzControlTowerEnabledControlProps: DlzControlTowerEnabledControlProps = {
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.appliedOu">appliedOu</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.control">control</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerAccountId">controlTowerAccountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerRegion">controlTowerRegion</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region">Region</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.appliedOu">appliedOu</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.control">control</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerAccountId">controlTowerAccountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerRegion">controlTowerRegion</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.Region">Region</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | *No description.* |
 
 ---
 
-##### `appliedOu`<sup>Required</sup> <a name="appliedOu" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.appliedOu"></a>
+##### `appliedOu`<sup>Required</sup> <a name="appliedOu" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.appliedOu"></a>
 
 ```typescript
 public readonly appliedOu: string;
@@ -9742,17 +9742,17 @@ public readonly appliedOu: string;
 
 ---
 
-##### `control`<sup>Required</sup> <a name="control" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.control"></a>
+##### `control`<sup>Required</sup> <a name="control" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.control"></a>
 
 ```typescript
 public readonly control: IDlzControlTowerControl;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
 
 ---
 
-##### `controlTowerAccountId`<sup>Required</sup> <a name="controlTowerAccountId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerAccountId"></a>
+##### `controlTowerAccountId`<sup>Required</sup> <a name="controlTowerAccountId" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerAccountId"></a>
 
 ```typescript
 public readonly controlTowerAccountId: string;
@@ -9762,17 +9762,17 @@ public readonly controlTowerAccountId: string;
 
 ---
 
-##### `controlTowerRegion`<sup>Required</sup> <a name="controlTowerRegion" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerRegion"></a>
+##### `controlTowerRegion`<sup>Required</sup> <a name="controlTowerRegion" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.controlTowerRegion"></a>
 
 ```typescript
 public readonly controlTowerRegion: Region;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region">Region</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.Region">Region</a>
 
 ---
 
-##### `organizationId`<sup>Required</sup> <a name="organizationId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.organizationId"></a>
+##### `organizationId`<sup>Required</sup> <a name="organizationId" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.organizationId"></a>
 
 ```typescript
 public readonly organizationId: string;
@@ -9782,7 +9782,7 @@ public readonly organizationId: string;
 
 ---
 
-##### `tags`<sup>Optional</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.tags"></a>
+##### `tags`<sup>Optional</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps.property.tags"></a>
 
 ```typescript
 public readonly tags: CfnTag[];
@@ -9792,12 +9792,12 @@ public readonly tags: CfnTag[];
 
 ---
 
-### DLzManagementAccount <a name="DLzManagementAccount" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount"></a>
+### DLzManagementAccount <a name="DLzManagementAccount" id="recipes_data-landing-zone_data-landing-zone.DLzManagementAccount"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DLzManagementAccount.Initializer"></a>
 
 ```typescript
-import { DLzManagementAccount } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DLzManagementAccount } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dLzManagementAccount: DLzManagementAccount = { ... }
 ```
@@ -9806,11 +9806,11 @@ const dLzManagementAccount: DLzManagementAccount = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount.property.accountId"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="recipes_data-landing-zone_data-landing-zone.DLzManagementAccount.property.accountId"></a>
 
 ```typescript
 public readonly accountId: string;
@@ -9820,12 +9820,12 @@ public readonly accountId: string;
 
 ---
 
-### DLzOrganization <a name="DLzOrganization" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization"></a>
+### DLzOrganization <a name="DLzOrganization" id="recipes_data-landing-zone_data-landing-zone.DLzOrganization"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DLzOrganization.Initializer"></a>
 
 ```typescript
-import { DLzOrganization } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DLzOrganization } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dLzOrganization: DLzOrganization = { ... }
 ```
@@ -9834,13 +9834,13 @@ const dLzOrganization: DLzOrganization = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.ous">ous</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus">OrgOus</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.root">root</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions">RootOptions</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.ous">ous</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOus">OrgOus</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.root">root</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.RootOptions">RootOptions</a></code> | *No description.* |
 
 ---
 
-##### `organizationId`<sup>Required</sup> <a name="organizationId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.organizationId"></a>
+##### `organizationId`<sup>Required</sup> <a name="organizationId" id="recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.organizationId"></a>
 
 ```typescript
 public readonly organizationId: string;
@@ -9850,32 +9850,32 @@ public readonly organizationId: string;
 
 ---
 
-##### `ous`<sup>Required</sup> <a name="ous" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.ous"></a>
+##### `ous`<sup>Required</sup> <a name="ous" id="recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.ous"></a>
 
 ```typescript
 public readonly ous: OrgOus;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus">OrgOus</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgOus">OrgOus</a>
 
 ---
 
-##### `root`<sup>Required</sup> <a name="root" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.root"></a>
+##### `root`<sup>Required</sup> <a name="root" id="recipes_data-landing-zone_data-landing-zone.DLzOrganization.property.root"></a>
 
 ```typescript
 public readonly root: RootOptions;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions">RootOptions</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.RootOptions">RootOptions</a>
 
 ---
 
-### DlzRegions <a name="DlzRegions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions"></a>
+### DlzRegions <a name="DlzRegions" id="recipes_data-landing-zone_data-landing-zone.DlzRegions"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzRegions.Initializer"></a>
 
 ```typescript
-import { DlzRegions } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzRegions } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzRegions: DlzRegions = { ... }
 ```
@@ -9884,41 +9884,41 @@ const dlzRegions: DlzRegions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions.property.global">global</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region">Region</a></code> | Also known as the Home region for Control Tower. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region">Region</a>[]</code> | The other regions to support (do not specify the global region again). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions.property.global">global</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.Region">Region</a></code> | Also known as the Home region for Control Tower. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions.property.regional">regional</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.Region">Region</a>[]</code> | The other regions to support (do not specify the global region again). |
 
 ---
 
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions.property.global"></a>
+##### `global`<sup>Required</sup> <a name="global" id="recipes_data-landing-zone_data-landing-zone.DlzRegions.property.global"></a>
 
 ```typescript
 public readonly global: Region;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region">Region</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.Region">Region</a>
 
 Also known as the Home region for Control Tower.
 
 ---
 
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions.property.regional"></a>
+##### `regional`<sup>Required</sup> <a name="regional" id="recipes_data-landing-zone_data-landing-zone.DlzRegions.property.regional"></a>
 
 ```typescript
 public readonly regional: Region[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region">Region</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.Region">Region</a>[]
 
 The other regions to support (do not specify the global region again).
 
 ---
 
-### DlzServiceControlPolicyProps <a name="DlzServiceControlPolicyProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps"></a>
+### DlzServiceControlPolicyProps <a name="DlzServiceControlPolicyProps" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.Initializer"></a>
 
 ```typescript
-import { DlzServiceControlPolicyProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzServiceControlPolicyProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzServiceControlPolicyProps: DlzServiceControlPolicyProps = { ... }
 ```
@@ -9927,15 +9927,15 @@ const dlzServiceControlPolicyProps: DlzServiceControlPolicyProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.statements">statements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.statements">statements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.description">description</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -9945,7 +9945,7 @@ public readonly name: string;
 
 ---
 
-##### `statements`<sup>Required</sup> <a name="statements" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.statements"></a>
+##### `statements`<sup>Required</sup> <a name="statements" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.statements"></a>
 
 ```typescript
 public readonly statements: PolicyStatement[];
@@ -9955,7 +9955,7 @@ public readonly statements: PolicyStatement[];
 
 ---
 
-##### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -9965,7 +9965,7 @@ public readonly description: string;
 
 ---
 
-##### `tags`<sup>Optional</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.tags"></a>
+##### `tags`<sup>Optional</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.tags"></a>
 
 ```typescript
 public readonly tags: CfnTag[];
@@ -9975,7 +9975,7 @@ public readonly tags: CfnTag[];
 
 ---
 
-##### `targetIds`<sup>Optional</sup> <a name="targetIds" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.targetIds"></a>
+##### `targetIds`<sup>Optional</sup> <a name="targetIds" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps.property.targetIds"></a>
 
 ```typescript
 public readonly targetIds: string[];
@@ -9985,12 +9985,12 @@ public readonly targetIds: string[];
 
 ---
 
-### DlzStackNameProps <a name="DlzStackNameProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps"></a>
+### DlzStackNameProps <a name="DlzStackNameProps" id="recipes_data-landing-zone_data-landing-zone.DlzStackNameProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.Initializer"></a>
 
 ```typescript
-import { DlzStackNameProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzStackNameProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzStackNameProps: DlzStackNameProps = { ... }
 ```
@@ -9999,14 +9999,14 @@ const dlzStackNameProps: DlzStackNameProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.region">region</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.stack">stack</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.account">account</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.ou">ou</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.stack">stack</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.account">account</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.ou">ou</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -10016,7 +10016,7 @@ public readonly region: string;
 
 ---
 
-##### `stack`<sup>Required</sup> <a name="stack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.stack"></a>
+##### `stack`<sup>Required</sup> <a name="stack" id="recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.stack"></a>
 
 ```typescript
 public readonly stack: string;
@@ -10026,7 +10026,7 @@ public readonly stack: string;
 
 ---
 
-##### `account`<sup>Optional</sup> <a name="account" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.account"></a>
+##### `account`<sup>Optional</sup> <a name="account" id="recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -10036,7 +10036,7 @@ public readonly account: string;
 
 ---
 
-##### `ou`<sup>Optional</sup> <a name="ou" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.ou"></a>
+##### `ou`<sup>Optional</sup> <a name="ou" id="recipes_data-landing-zone_data-landing-zone.DlzStackNameProps.property.ou"></a>
 
 ```typescript
 public readonly ou: string;
@@ -10046,12 +10046,12 @@ public readonly ou: string;
 
 ---
 
-### DlzStackProps <a name="DlzStackProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps"></a>
+### DlzStackProps <a name="DlzStackProps" id="recipes_data-landing-zone_data-landing-zone.DlzStackProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzStackProps.Initializer"></a>
 
 ```typescript
-import { DlzStackProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzStackProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzStackProps: DlzStackProps = { ... }
 ```
@@ -10060,12 +10060,12 @@ const dlzStackProps: DlzStackProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.name">name</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
 
 ---
 
-##### `env`<sup>Required</sup> <a name="env" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.env"></a>
+##### `env`<sup>Required</sup> <a name="env" id="recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.env"></a>
 
 ```typescript
 public readonly env: Environment;
@@ -10075,22 +10075,22 @@ public readonly env: Environment;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.DlzStackProps.property.name"></a>
 
 ```typescript
 public readonly name: DlzStackNameProps;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzStackNameProps">DlzStackNameProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzStackNameProps">DlzStackNameProps</a>
 
 ---
 
-### DlzTag <a name="DlzTag" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag"></a>
+### DlzTag <a name="DlzTag" id="recipes_data-landing-zone_data-landing-zone.DlzTag"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzTag.Initializer"></a>
 
 ```typescript
-import { DlzTag } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzTag } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzTag: DlzTag = { ... }
 ```
@@ -10099,12 +10099,12 @@ const dlzTag: DlzTag = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag.property.values">values</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag.property.values">values</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.DlzTag.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -10114,7 +10114,7 @@ public readonly name: string;
 
 ---
 
-##### `values`<sup>Optional</sup> <a name="values" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag.property.values"></a>
+##### `values`<sup>Optional</sup> <a name="values" id="recipes_data-landing-zone_data-landing-zone.DlzTag.property.values"></a>
 
 ```typescript
 public readonly values: string[];
@@ -10124,12 +10124,12 @@ public readonly values: string[];
 
 ---
 
-### DlzTagPolicyProps <a name="DlzTagPolicyProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps"></a>
+### DlzTagPolicyProps <a name="DlzTagPolicyProps" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.Initializer"></a>
 
 ```typescript
-import { DlzTagPolicyProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzTagPolicyProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const dlzTagPolicyProps: DlzTagPolicyProps = { ... }
 ```
@@ -10138,15 +10138,15 @@ const dlzTagPolicyProps: DlzTagPolicyProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.policyTags">policyTags</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.policyTags">policyTags</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.description">description</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -10156,17 +10156,17 @@ public readonly name: string;
 
 ---
 
-##### `policyTags`<sup>Required</sup> <a name="policyTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.policyTags"></a>
+##### `policyTags`<sup>Required</sup> <a name="policyTags" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.policyTags"></a>
 
 ```typescript
 public readonly policyTags: DlzTag[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]
 
 ---
 
-##### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -10176,7 +10176,7 @@ public readonly description: string;
 
 ---
 
-##### `tags`<sup>Optional</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.tags"></a>
+##### `tags`<sup>Optional</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.tags"></a>
 
 ```typescript
 public readonly tags: CfnTag[];
@@ -10186,7 +10186,7 @@ public readonly tags: CfnTag[];
 
 ---
 
-##### `targetIds`<sup>Optional</sup> <a name="targetIds" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.targetIds"></a>
+##### `targetIds`<sup>Optional</sup> <a name="targetIds" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps.property.targetIds"></a>
 
 ```typescript
 public readonly targetIds: string[];
@@ -10196,12 +10196,12 @@ public readonly targetIds: string[];
 
 ---
 
-### GitHubReference <a name="GitHubReference" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference"></a>
+### GitHubReference <a name="GitHubReference" id="recipes_data-landing-zone_data-landing-zone.GitHubReference"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.GitHubReference.Initializer"></a>
 
 ```typescript
-import { GitHubReference } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { GitHubReference } from 'recipes_data-landing-zone_data-landing-zone'
 
 const gitHubReference: GitHubReference = { ... }
 ```
@@ -10210,13 +10210,13 @@ const gitHubReference: GitHubReference = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.property.owner">owner</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.property.repo">repo</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.property.filter">filter</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.GitHubReference.property.owner">owner</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.GitHubReference.property.repo">repo</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.GitHubReference.property.filter">filter</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `owner`<sup>Required</sup> <a name="owner" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.property.owner"></a>
+##### `owner`<sup>Required</sup> <a name="owner" id="recipes_data-landing-zone_data-landing-zone.GitHubReference.property.owner"></a>
 
 ```typescript
 public readonly owner: string;
@@ -10226,7 +10226,7 @@ public readonly owner: string;
 
 ---
 
-##### `repo`<sup>Required</sup> <a name="repo" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.property.repo"></a>
+##### `repo`<sup>Required</sup> <a name="repo" id="recipes_data-landing-zone_data-landing-zone.GitHubReference.property.repo"></a>
 
 ```typescript
 public readonly repo: string;
@@ -10236,7 +10236,7 @@ public readonly repo: string;
 
 ---
 
-##### `filter`<sup>Optional</sup> <a name="filter" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.GitHubReference.property.filter"></a>
+##### `filter`<sup>Optional</sup> <a name="filter" id="recipes_data-landing-zone_data-landing-zone.GitHubReference.property.filter"></a>
 
 ```typescript
 public readonly filter: string;
@@ -10246,12 +10246,12 @@ public readonly filter: string;
 
 ---
 
-### LogStacks <a name="LogStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks"></a>
+### LogStacks <a name="LogStacks" id="recipes_data-landing-zone_data-landing-zone.LogStacks"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.LogStacks.Initializer"></a>
 
 ```typescript
-import { LogStacks } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { LogStacks } from 'recipes_data-landing-zone_data-landing-zone'
 
 const logStacks: LogStacks = { ... }
 ```
@@ -10260,37 +10260,37 @@ const logStacks: LogStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogStacks.property.global">global</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.LogStacks.property.regional">regional</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]</code> | *No description.* |
 
 ---
 
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks.property.global"></a>
+##### `global`<sup>Required</sup> <a name="global" id="recipes_data-landing-zone_data-landing-zone.LogStacks.property.global"></a>
 
 ```typescript
 public readonly global: LogGlobalStack;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>
 
 ---
 
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks.property.regional"></a>
+##### `regional`<sup>Required</sup> <a name="regional" id="recipes_data-landing-zone_data-landing-zone.LogStacks.property.regional"></a>
 
 ```typescript
 public readonly regional: LogGlobalStack[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]
 
 ---
 
-### MandatoryTags <a name="MandatoryTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags"></a>
+### MandatoryTags <a name="MandatoryTags" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.Initializer"></a>
 
 ```typescript
-import { MandatoryTags } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { MandatoryTags } from 'recipes_data-landing-zone_data-landing-zone'
 
 const mandatoryTags: MandatoryTags = { ... }
 ```
@@ -10299,13 +10299,13 @@ const mandatoryTags: MandatoryTags = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.environment"></a>
 
 ```typescript
 public readonly environment: string[];
@@ -10315,7 +10315,7 @@ public readonly environment: string[];
 
 ---
 
-##### `owner`<sup>Required</sup> <a name="owner" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.owner"></a>
+##### `owner`<sup>Required</sup> <a name="owner" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.owner"></a>
 
 ```typescript
 public readonly owner: string[];
@@ -10325,7 +10325,7 @@ public readonly owner: string[];
 
 ---
 
-##### `project`<sup>Required</sup> <a name="project" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.project"></a>
+##### `project`<sup>Required</sup> <a name="project" id="recipes_data-landing-zone_data-landing-zone.MandatoryTags.property.project"></a>
 
 ```typescript
 public readonly project: string[];
@@ -10335,12 +10335,12 @@ public readonly project: string[];
 
 ---
 
-### OrgOus <a name="OrgOus" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus"></a>
+### OrgOus <a name="OrgOus" id="recipes_data-landing-zone_data-landing-zone.OrgOus"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.OrgOus.Initializer"></a>
 
 ```typescript
-import { OrgOus } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { OrgOus } from 'recipes_data-landing-zone_data-landing-zone'
 
 const orgOus: OrgOus = { ... }
 ```
@@ -10349,48 +10349,48 @@ const orgOus: OrgOus = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.property.security">security</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity">OrgOuSecurity</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.property.suspended">suspended</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSuspended">OrgOuSuspended</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.property.workloads">workloads</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads">OrgOuWorkloads</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOus.property.security">security</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurity">OrgOuSecurity</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOus.property.suspended">suspended</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSuspended">OrgOuSuspended</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOus.property.workloads">workloads</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads">OrgOuWorkloads</a></code> | *No description.* |
 
 ---
 
-##### `security`<sup>Required</sup> <a name="security" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.property.security"></a>
+##### `security`<sup>Required</sup> <a name="security" id="recipes_data-landing-zone_data-landing-zone.OrgOus.property.security"></a>
 
 ```typescript
 public readonly security: OrgOuSecurity;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity">OrgOuSecurity</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurity">OrgOuSecurity</a>
 
 ---
 
-##### `suspended`<sup>Required</sup> <a name="suspended" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.property.suspended"></a>
+##### `suspended`<sup>Required</sup> <a name="suspended" id="recipes_data-landing-zone_data-landing-zone.OrgOus.property.suspended"></a>
 
 ```typescript
 public readonly suspended: OrgOuSuspended;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSuspended">OrgOuSuspended</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSuspended">OrgOuSuspended</a>
 
 ---
 
-##### `workloads`<sup>Required</sup> <a name="workloads" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOus.property.workloads"></a>
+##### `workloads`<sup>Required</sup> <a name="workloads" id="recipes_data-landing-zone_data-landing-zone.OrgOus.property.workloads"></a>
 
 ```typescript
 public readonly workloads: OrgOuWorkloads;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads">OrgOuWorkloads</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads">OrgOuWorkloads</a>
 
 ---
 
-### OrgOuSecurity <a name="OrgOuSecurity" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity"></a>
+### OrgOuSecurity <a name="OrgOuSecurity" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurity"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.Initializer"></a>
 
 ```typescript
-import { OrgOuSecurity } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { OrgOuSecurity } from 'recipes_data-landing-zone_data-landing-zone'
 
 const orgOuSecurity: OrgOuSecurity = { ... }
 ```
@@ -10399,22 +10399,22 @@ const orgOuSecurity: OrgOuSecurity = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.accounts">accounts</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts">OrgOuSecurityAccounts</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.accounts">accounts</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts">OrgOuSecurityAccounts</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.accounts"></a>
+##### `accounts`<sup>Required</sup> <a name="accounts" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.accounts"></a>
 
 ```typescript
 public readonly accounts: OrgOuSecurityAccounts;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts">OrgOuSecurityAccounts</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts">OrgOuSecurityAccounts</a>
 
 ---
 
-##### `ouId`<sup>Required</sup> <a name="ouId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.ouId"></a>
+##### `ouId`<sup>Required</sup> <a name="ouId" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurity.property.ouId"></a>
 
 ```typescript
 public readonly ouId: string;
@@ -10424,12 +10424,12 @@ public readonly ouId: string;
 
 ---
 
-### OrgOuSecurityAccounts <a name="OrgOuSecurityAccounts" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts"></a>
+### OrgOuSecurityAccounts <a name="OrgOuSecurityAccounts" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.Initializer"></a>
 
 ```typescript
-import { OrgOuSecurityAccounts } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { OrgOuSecurityAccounts } from 'recipes_data-landing-zone_data-landing-zone'
 
 const orgOuSecurityAccounts: OrgOuSecurityAccounts = { ... }
 ```
@@ -10438,37 +10438,37 @@ const orgOuSecurityAccounts: OrgOuSecurityAccounts = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.audit">audit</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.log">log</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.audit">audit</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.log">log</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a></code> | *No description.* |
 
 ---
 
-##### `audit`<sup>Required</sup> <a name="audit" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.audit"></a>
+##### `audit`<sup>Required</sup> <a name="audit" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.audit"></a>
 
 ```typescript
 public readonly audit: DLzManagementAccount;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a>
 
 ---
 
-##### `log`<sup>Required</sup> <a name="log" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.log"></a>
+##### `log`<sup>Required</sup> <a name="log" id="recipes_data-landing-zone_data-landing-zone.OrgOuSecurityAccounts.property.log"></a>
 
 ```typescript
 public readonly log: DLzManagementAccount;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a>
 
 ---
 
-### OrgOuSuspended <a name="OrgOuSuspended" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSuspended"></a>
+### OrgOuSuspended <a name="OrgOuSuspended" id="recipes_data-landing-zone_data-landing-zone.OrgOuSuspended"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSuspended.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.OrgOuSuspended.Initializer"></a>
 
 ```typescript
-import { OrgOuSuspended } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { OrgOuSuspended } from 'recipes_data-landing-zone_data-landing-zone'
 
 const orgOuSuspended: OrgOuSuspended = { ... }
 ```
@@ -10477,11 +10477,11 @@ const orgOuSuspended: OrgOuSuspended = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSuspended.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSuspended.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `ouId`<sup>Required</sup> <a name="ouId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSuspended.property.ouId"></a>
+##### `ouId`<sup>Required</sup> <a name="ouId" id="recipes_data-landing-zone_data-landing-zone.OrgOuSuspended.property.ouId"></a>
 
 ```typescript
 public readonly ouId: string;
@@ -10491,12 +10491,12 @@ public readonly ouId: string;
 
 ---
 
-### OrgOuWorkloads <a name="OrgOuWorkloads" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads"></a>
+### OrgOuWorkloads <a name="OrgOuWorkloads" id="recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.Initializer"></a>
 
 ```typescript
-import { OrgOuWorkloads } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { OrgOuWorkloads } from 'recipes_data-landing-zone_data-landing-zone'
 
 const orgOuWorkloads: OrgOuWorkloads = { ... }
 ```
@@ -10505,22 +10505,22 @@ const orgOuWorkloads: OrgOuWorkloads = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.accounts">accounts</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.accounts">accounts</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.accounts"></a>
+##### `accounts`<sup>Required</sup> <a name="accounts" id="recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.accounts"></a>
 
 ```typescript
 public readonly accounts: DLzAccount[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]
 
 ---
 
-##### `ouId`<sup>Required</sup> <a name="ouId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.ouId"></a>
+##### `ouId`<sup>Required</sup> <a name="ouId" id="recipes_data-landing-zone_data-landing-zone.OrgOuWorkloads.property.ouId"></a>
 
 ```typescript
 public readonly ouId: string;
@@ -10530,12 +10530,12 @@ public readonly ouId: string;
 
 ---
 
-### OrgRootAccounts <a name="OrgRootAccounts" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgRootAccounts"></a>
+### OrgRootAccounts <a name="OrgRootAccounts" id="recipes_data-landing-zone_data-landing-zone.OrgRootAccounts"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgRootAccounts.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.OrgRootAccounts.Initializer"></a>
 
 ```typescript
-import { OrgRootAccounts } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { OrgRootAccounts } from 'recipes_data-landing-zone_data-landing-zone'
 
 const orgRootAccounts: OrgRootAccounts = { ... }
 ```
@@ -10544,26 +10544,26 @@ const orgRootAccounts: OrgRootAccounts = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgRootAccounts.property.management">management</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgRootAccounts.property.management">management</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a></code> | *No description.* |
 
 ---
 
-##### `management`<sup>Required</sup> <a name="management" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgRootAccounts.property.management"></a>
+##### `management`<sup>Required</sup> <a name="management" id="recipes_data-landing-zone_data-landing-zone.OrgRootAccounts.property.management"></a>
 
 ```typescript
 public readonly management: DLzManagementAccount;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DLzManagementAccount">DLzManagementAccount</a>
 
 ---
 
-### PartialOu <a name="PartialOu" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu"></a>
+### PartialOu <a name="PartialOu" id="recipes_data-landing-zone_data-landing-zone.PartialOu"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.PartialOu.Initializer"></a>
 
 ```typescript
-import { PartialOu } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { PartialOu } from 'recipes_data-landing-zone_data-landing-zone'
 
 const partialOu: PartialOu = { ... }
 ```
@@ -10572,12 +10572,12 @@ const partialOu: PartialOu = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu.property.accounts">accounts</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.PartialOu.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.PartialOu.property.accounts">accounts</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]</code> | *No description.* |
 
 ---
 
-##### `ouId`<sup>Required</sup> <a name="ouId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu.property.ouId"></a>
+##### `ouId`<sup>Required</sup> <a name="ouId" id="recipes_data-landing-zone_data-landing-zone.PartialOu.property.ouId"></a>
 
 ```typescript
 public readonly ouId: string;
@@ -10587,22 +10587,22 @@ public readonly ouId: string;
 
 ---
 
-##### `accounts`<sup>Optional</sup> <a name="accounts" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu.property.accounts"></a>
+##### `accounts`<sup>Optional</sup> <a name="accounts" id="recipes_data-landing-zone_data-landing-zone.PartialOu.property.accounts"></a>
 
 ```typescript
 public readonly accounts: DLzAccount[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DLzAccount">DLzAccount</a>[]
 
 ---
 
-### ProductionAccountStacks <a name="ProductionAccountStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks"></a>
+### ProductionAccountStacks <a name="ProductionAccountStacks" id="recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.Initializer"></a>
 
 ```typescript
-import { ProductionAccountStacks } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionAccountStacks } from 'recipes_data-landing-zone_data-landing-zone'
 
 const productionAccountStacks: ProductionAccountStacks = { ... }
 ```
@@ -10611,13 +10611,13 @@ const productionAccountStacks: ProductionAccountStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.stacks">stacks</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks">ProductionStacks</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.stacks">stacks</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionStacks">ProductionStacks</a></code> | *No description.* |
 
 ---
 
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.accountId"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.accountId"></a>
 
 ```typescript
 public readonly accountId: string;
@@ -10627,7 +10627,7 @@ public readonly accountId: string;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -10637,22 +10637,22 @@ public readonly name: string;
 
 ---
 
-##### `stacks`<sup>Required</sup> <a name="stacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.stacks"></a>
+##### `stacks`<sup>Required</sup> <a name="stacks" id="recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks.property.stacks"></a>
 
 ```typescript
 public readonly stacks: ProductionStacks;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks">ProductionStacks</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ProductionStacks">ProductionStacks</a>
 
 ---
 
-### ProductionStacks <a name="ProductionStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks"></a>
+### ProductionStacks <a name="ProductionStacks" id="recipes_data-landing-zone_data-landing-zone.ProductionStacks"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.ProductionStacks.Initializer"></a>
 
 ```typescript
-import { ProductionStacks } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ProductionStacks } from 'recipes_data-landing-zone_data-landing-zone'
 
 const productionStacks: ProductionStacks = { ... }
 ```
@@ -10661,37 +10661,37 @@ const productionStacks: ProductionStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack">ProductionGlobalStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack">ProductionRegionalStack</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.global">global</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack">ProductionGlobalStack</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.regional">regional</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack">ProductionRegionalStack</a>[]</code> | *No description.* |
 
 ---
 
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.global"></a>
+##### `global`<sup>Required</sup> <a name="global" id="recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.global"></a>
 
 ```typescript
 public readonly global: ProductionGlobalStack;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack">ProductionGlobalStack</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ProductionGlobalStack">ProductionGlobalStack</a>
 
 ---
 
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.regional"></a>
+##### `regional`<sup>Required</sup> <a name="regional" id="recipes_data-landing-zone_data-landing-zone.ProductionStacks.property.regional"></a>
 
 ```typescript
 public readonly regional: ProductionRegionalStack[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack">ProductionRegionalStack</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ProductionRegionalStack">ProductionRegionalStack</a>[]
 
 ---
 
-### ReportItem <a name="ReportItem" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem"></a>
+### ReportItem <a name="ReportItem" id="recipes_data-landing-zone_data-landing-zone.ReportItem"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.ReportItem.Initializer"></a>
 
 ```typescript
-import { ReportItem } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ReportItem } from 'recipes_data-landing-zone_data-landing-zone'
 
 const reportItem: ReportItem = { ... }
 ```
@@ -10700,17 +10700,17 @@ const reportItem: ReportItem = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.type">type</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.appliedFrom">appliedFrom</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.description">description</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.type">type</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.appliedFrom">appliedFrom</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem.property.region">region</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `description`<sup>Required</sup> <a name="description" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.description"></a>
+##### `description`<sup>Required</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -10720,7 +10720,7 @@ public readonly description: string;
 
 ---
 
-##### `externalLink`<sup>Required</sup> <a name="externalLink" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.externalLink"></a>
+##### `externalLink`<sup>Required</sup> <a name="externalLink" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.externalLink"></a>
 
 ```typescript
 public readonly externalLink: string;
@@ -10730,7 +10730,7 @@ public readonly externalLink: string;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -10740,17 +10740,17 @@ public readonly name: string;
 
 ---
 
-##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.type"></a>
+##### `type`<sup>Required</sup> <a name="type" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.type"></a>
 
 ```typescript
 public readonly type: ReportType;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a>
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -10760,7 +10760,7 @@ public readonly accountName: string;
 
 ---
 
-##### `appliedFrom`<sup>Required</sup> <a name="appliedFrom" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.appliedFrom"></a>
+##### `appliedFrom`<sup>Required</sup> <a name="appliedFrom" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.appliedFrom"></a>
 
 ```typescript
 public readonly appliedFrom: string;
@@ -10770,7 +10770,7 @@ public readonly appliedFrom: string;
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.ReportItem.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -10780,12 +10780,12 @@ public readonly region: string;
 
 ---
 
-### ReportResource <a name="ReportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource"></a>
+### ReportResource <a name="ReportResource" id="recipes_data-landing-zone_data-landing-zone.ReportResource"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.ReportResource.Initializer"></a>
 
 ```typescript
-import { ReportResource } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { ReportResource } from 'recipes_data-landing-zone_data-landing-zone'
 
 const reportResource: ReportResource = { ... }
 ```
@@ -10794,14 +10794,14 @@ const reportResource: ReportResource = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.type">type</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource.property.description">description</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource.property.type">type</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a></code> | *No description.* |
 
 ---
 
-##### `description`<sup>Required</sup> <a name="description" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.description"></a>
+##### `description`<sup>Required</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.ReportResource.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -10811,7 +10811,7 @@ public readonly description: string;
 
 ---
 
-##### `externalLink`<sup>Required</sup> <a name="externalLink" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.externalLink"></a>
+##### `externalLink`<sup>Required</sup> <a name="externalLink" id="recipes_data-landing-zone_data-landing-zone.ReportResource.property.externalLink"></a>
 
 ```typescript
 public readonly externalLink: string;
@@ -10821,7 +10821,7 @@ public readonly externalLink: string;
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="recipes_data-landing-zone_data-landing-zone.ReportResource.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -10831,22 +10831,22 @@ public readonly name: string;
 
 ---
 
-##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource.property.type"></a>
+##### `type`<sup>Required</sup> <a name="type" id="recipes_data-landing-zone_data-landing-zone.ReportResource.property.type"></a>
 
 ```typescript
 public readonly type: ReportType;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportType">ReportType</a>
 
 ---
 
-### RootOptions <a name="RootOptions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions"></a>
+### RootOptions <a name="RootOptions" id="recipes_data-landing-zone_data-landing-zone.RootOptions"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.RootOptions.Initializer"></a>
 
 ```typescript
-import { RootOptions } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { RootOptions } from 'recipes_data-landing-zone_data-landing-zone'
 
 const rootOptions: RootOptions = { ... }
 ```
@@ -10855,39 +10855,39 @@ const rootOptions: RootOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions.property.accounts">accounts</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgRootAccounts">OrgRootAccounts</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions.property.controls">controls</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a>[]</code> | Control Tower Controls applied to all the OUs in the organization. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.RootOptions.property.accounts">accounts</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.OrgRootAccounts">OrgRootAccounts</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.RootOptions.property.controls">controls</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a>[]</code> | Control Tower Controls applied to all the OUs in the organization. |
 
 ---
 
-##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions.property.accounts"></a>
+##### `accounts`<sup>Required</sup> <a name="accounts" id="recipes_data-landing-zone_data-landing-zone.RootOptions.property.accounts"></a>
 
 ```typescript
 public readonly accounts: OrgRootAccounts;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgRootAccounts">OrgRootAccounts</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgRootAccounts">OrgRootAccounts</a>
 
 ---
 
-##### `controls`<sup>Optional</sup> <a name="controls" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.RootOptions.property.controls"></a>
+##### `controls`<sup>Optional</sup> <a name="controls" id="recipes_data-landing-zone_data-landing-zone.RootOptions.property.controls"></a>
 
 ```typescript
 public readonly controls: DlzControlTowerStandardControls[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a>[]
 
 Control Tower Controls applied to all the OUs in the organization.
 
 ---
 
-### SecurityHubNotification <a name="SecurityHubNotification" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification"></a>
+### SecurityHubNotification <a name="SecurityHubNotification" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.Initializer"></a>
 
 ```typescript
-import { SecurityHubNotification } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { SecurityHubNotification } from 'recipes_data-landing-zone_data-landing-zone'
 
 const securityHubNotification: SecurityHubNotification = { ... }
 ```
@@ -10896,14 +10896,14 @@ const securityHubNotification: SecurityHubNotification = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.notification">notification</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.severity">severity</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity">SecurityHubNotificationSeverity</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.workflowStatus">workflowStatus</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus">SecurityHubNotificationSWorkflowStatus</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.notification">notification</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.severity">severity</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity">SecurityHubNotificationSeverity</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.workflowStatus">workflowStatus</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus">SecurityHubNotificationSWorkflowStatus</a>[]</code> | *No description.* |
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -10913,42 +10913,42 @@ public readonly id: string;
 
 ---
 
-##### `notification`<sup>Required</sup> <a name="notification" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.notification"></a>
+##### `notification`<sup>Required</sup> <a name="notification" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.notification"></a>
 
 ```typescript
 public readonly notification: SecurityHubNotificationProps;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a>
 
 ---
 
-##### `severity`<sup>Optional</sup> <a name="severity" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.severity"></a>
+##### `severity`<sup>Optional</sup> <a name="severity" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.severity"></a>
 
 ```typescript
 public readonly severity: SecurityHubNotificationSeverity[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity">SecurityHubNotificationSeverity</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity">SecurityHubNotificationSeverity</a>[]
 
 ---
 
-##### `workflowStatus`<sup>Optional</sup> <a name="workflowStatus" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.workflowStatus"></a>
+##### `workflowStatus`<sup>Optional</sup> <a name="workflowStatus" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotification.property.workflowStatus"></a>
 
 ```typescript
 public readonly workflowStatus: SecurityHubNotificationSWorkflowStatus[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus">SecurityHubNotificationSWorkflowStatus</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus">SecurityHubNotificationSWorkflowStatus</a>[]
 
 ---
 
-### SecurityHubNotificationProps <a name="SecurityHubNotificationProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps"></a>
+### SecurityHubNotificationProps <a name="SecurityHubNotificationProps" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.Initializer"></a>
 
 ```typescript
-import { SecurityHubNotificationProps } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { SecurityHubNotificationProps } from 'recipes_data-landing-zone_data-landing-zone'
 
 const securityHubNotificationProps: SecurityHubNotificationProps = { ... }
 ```
@@ -10957,12 +10957,12 @@ const securityHubNotificationProps: SecurityHubNotificationProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.slack">slack</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.slack">slack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
 
 ---
 
-##### `emails`<sup>Optional</sup> <a name="emails" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.emails"></a>
+##### `emails`<sup>Optional</sup> <a name="emails" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.emails"></a>
 
 ```typescript
 public readonly emails: string[];
@@ -10972,22 +10972,22 @@ public readonly emails: string[];
 
 ---
 
-##### `slack`<sup>Optional</sup> <a name="slack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.slack"></a>
+##### `slack`<sup>Optional</sup> <a name="slack" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationProps.property.slack"></a>
 
 ```typescript
 public readonly slack: SlackChannel;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
 
 ---
 
-### SlackChannel <a name="SlackChannel" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel"></a>
+### SlackChannel <a name="SlackChannel" id="recipes_data-landing-zone_data-landing-zone.SlackChannel"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.Initializer"></a>
+#### Initializer <a name="Initializer" id="recipes_data-landing-zone_data-landing-zone.SlackChannel.Initializer"></a>
 
 ```typescript
-import { SlackChannel } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { SlackChannel } from 'recipes_data-landing-zone_data-landing-zone'
 
 const slackChannel: SlackChannel = { ... }
 ```
@@ -10996,13 +10996,13 @@ const slackChannel: SlackChannel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelConfigurationName">slackChannelConfigurationName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelId">slackChannelId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackWorkspaceId">slackWorkspaceId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelConfigurationName">slackChannelConfigurationName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelId">slackChannelId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackWorkspaceId">slackWorkspaceId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `slackChannelConfigurationName`<sup>Required</sup> <a name="slackChannelConfigurationName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelConfigurationName"></a>
+##### `slackChannelConfigurationName`<sup>Required</sup> <a name="slackChannelConfigurationName" id="recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelConfigurationName"></a>
 
 ```typescript
 public readonly slackChannelConfigurationName: string;
@@ -11012,7 +11012,7 @@ public readonly slackChannelConfigurationName: string;
 
 ---
 
-##### `slackChannelId`<sup>Required</sup> <a name="slackChannelId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelId"></a>
+##### `slackChannelId`<sup>Required</sup> <a name="slackChannelId" id="recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackChannelId"></a>
 
 ```typescript
 public readonly slackChannelId: string;
@@ -11022,7 +11022,7 @@ public readonly slackChannelId: string;
 
 ---
 
-##### `slackWorkspaceId`<sup>Required</sup> <a name="slackWorkspaceId" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackWorkspaceId"></a>
+##### `slackWorkspaceId`<sup>Required</sup> <a name="slackWorkspaceId" id="recipes_data-landing-zone_data-landing-zone.SlackChannel.property.slackWorkspaceId"></a>
 
 ```typescript
 public readonly slackWorkspaceId: string;
@@ -11034,12 +11034,12 @@ public readonly slackWorkspaceId: string;
 
 ## Classes <a name="Classes" id="Classes"></a>
 
-### AccountChatbots <a name="AccountChatbots" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots"></a>
+### AccountChatbots <a name="AccountChatbots" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.Initializer"></a>
 
 ```typescript
-import { AccountChatbots } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
 
 new AccountChatbots()
 ```
@@ -11054,75 +11054,75 @@ new AccountChatbots()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel">addSlackChannel</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel">existsSlackChannel</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel">findSlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel">addSlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel">existsSlackChannel</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel">findSlackChannel</a></code> | *No description.* |
 
 ---
 
-##### `addSlackChannel` <a name="addSlackChannel" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel"></a>
+##### `addSlackChannel` <a name="addSlackChannel" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel"></a>
 
 ```typescript
-import { AccountChatbots } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
 
 AccountChatbots.addSlackChannel(scope: Construct, id: string, chatbotProps: SlackChannelConfigurationProps)
 ```
 
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.scope"></a>
+###### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.id"></a>
+###### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.chatbotProps"></a>
+###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.addSlackChannel.parameter.chatbotProps"></a>
 
 - *Type:* aws-cdk-lib.aws_chatbot.SlackChannelConfigurationProps
 
 ---
 
-##### `existsSlackChannel` <a name="existsSlackChannel" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel"></a>
+##### `existsSlackChannel` <a name="existsSlackChannel" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel"></a>
 
 ```typescript
-import { AccountChatbots } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
 
 AccountChatbots.existsSlackChannel(scope: Construct, chatbotProps: SlackChannel)
 ```
 
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel.parameter.scope"></a>
+###### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel.parameter.chatbotProps"></a>
+###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.existsSlackChannel.parameter.chatbotProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
 
 ---
 
-##### `findSlackChannel` <a name="findSlackChannel" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel"></a>
+##### `findSlackChannel` <a name="findSlackChannel" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel"></a>
 
 ```typescript
-import { AccountChatbots } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { AccountChatbots } from 'recipes_data-landing-zone_data-landing-zone'
 
 AccountChatbots.findSlackChannel(scope: Construct, chatbotProps: SlackChannel)
 ```
 
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel.parameter.scope"></a>
+###### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel.parameter.chatbotProps"></a>
+###### `chatbotProps`<sup>Required</sup> <a name="chatbotProps" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.findSlackChannel.parameter.chatbotProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.SlackChannel">SlackChannel</a>
 
 ---
 
@@ -11130,11 +11130,11 @@ AccountChatbots.findSlackChannel(scope: Construct, chatbotProps: SlackChannel)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.property.slackChatBots">slackChatBots</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_chatbot.SlackChannelConfiguration}</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.AccountChatbots.property.slackChatBots">slackChatBots</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_chatbot.SlackChannelConfiguration}</code> | *No description.* |
 
 ---
 
-##### `slackChatBots`<sup>Required</sup> <a name="slackChatBots" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AccountChatbots.property.slackChatBots"></a>
+##### `slackChatBots`<sup>Required</sup> <a name="slackChatBots" id="recipes_data-landing-zone_data-landing-zone.AccountChatbots.property.slackChatBots"></a>
 
 ```typescript
 public readonly slackChatBots: {[ key: string ]: SlackChannelConfiguration};
@@ -11145,39 +11145,39 @@ public readonly slackChatBots: {[ key: string ]: SlackChannelConfiguration};
 ---
 
 
-### Budget <a name="Budget" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget"></a>
+### Budget <a name="Budget" id="recipes_data-landing-zone_data-landing-zone.Budget"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer"></a>
 
 ```typescript
-import { Budget } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Budget } from 'recipes_data-landing-zone_data-landing-zone'
 
 new Budget(scope: Construct, id: string, props: BudgetProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.Budget.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetProps">BudgetProps</a>
 
 ---
 
@@ -11187,12 +11187,12 @@ new Budget(scope: Construct, id: string, props: BudgetProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.property.cfnBudget">cfnBudget</a></code> | <code>aws-cdk-lib.aws_budgets.CfnBudget</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.property.notificationTopic">notificationTopic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.property.cfnBudget">cfnBudget</a></code> | <code>aws-cdk-lib.aws_budgets.CfnBudget</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Budget.property.notificationTopic">notificationTopic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
 
 ---
 
-##### `cfnBudget`<sup>Required</sup> <a name="cfnBudget" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.property.cfnBudget"></a>
+##### `cfnBudget`<sup>Required</sup> <a name="cfnBudget" id="recipes_data-landing-zone_data-landing-zone.Budget.property.cfnBudget"></a>
 
 ```typescript
 public readonly cfnBudget: CfnBudget;
@@ -11202,7 +11202,7 @@ public readonly cfnBudget: CfnBudget;
 
 ---
 
-##### `notificationTopic`<sup>Required</sup> <a name="notificationTopic" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Budget.property.notificationTopic"></a>
+##### `notificationTopic`<sup>Required</sup> <a name="notificationTopic" id="recipes_data-landing-zone_data-landing-zone.Budget.property.notificationTopic"></a>
 
 ```typescript
 public readonly notificationTopic: Topic;
@@ -11213,32 +11213,32 @@ public readonly notificationTopic: Topic;
 ---
 
 
-### DataLandingZone <a name="DataLandingZone" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone"></a>
+### DataLandingZone <a name="DataLandingZone" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer"></a>
 
 ```typescript
-import { DataLandingZone } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DataLandingZone } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DataLandingZone(app: App, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.app">app</a></code> | <code>aws-cdk-lib.App</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.app">app</a></code> | <code>aws-cdk-lib.App</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `app`<sup>Required</sup> <a name="app" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.app"></a>
+##### `app`<sup>Required</sup> <a name="app" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.app"></a>
 
 - *Type:* aws-cdk-lib.App
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
@@ -11246,39 +11246,39 @@ new DataLandingZone(app: App, props: DataLandingZoneProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageAudit">stageAudit</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageLog">stageLog</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageManagement">stageManagement</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadDevelopType">stageWorkloadDevelopType</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadProductionType">stageWorkloadProductionType</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageAudit">stageAudit</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageLog">stageLog</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageManagement">stageManagement</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadDevelopType">stageWorkloadDevelopType</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadProductionType">stageWorkloadProductionType</a></code> | *No description.* |
 
 ---
 
-##### `stageAudit` <a name="stageAudit" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageAudit"></a>
+##### `stageAudit` <a name="stageAudit" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageAudit"></a>
 
 ```typescript
 public stageAudit(): AuditGlobalStack | AuditRegionalStack[]
 ```
 
-##### `stageLog` <a name="stageLog" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageLog"></a>
+##### `stageLog` <a name="stageLog" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageLog"></a>
 
 ```typescript
 public stageLog(): LogGlobalStack[]
 ```
 
-##### `stageManagement` <a name="stageManagement" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageManagement"></a>
+##### `stageManagement` <a name="stageManagement" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageManagement"></a>
 
 ```typescript
 public stageManagement(): ManagementStack[]
 ```
 
-##### `stageWorkloadDevelopType` <a name="stageWorkloadDevelopType" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadDevelopType"></a>
+##### `stageWorkloadDevelopType` <a name="stageWorkloadDevelopType" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadDevelopType"></a>
 
 ```typescript
 public stageWorkloadDevelopType(): DlzStack[]
 ```
 
-##### `stageWorkloadProductionType` <a name="stageWorkloadProductionType" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadProductionType"></a>
+##### `stageWorkloadProductionType` <a name="stageWorkloadProductionType" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.stageWorkloadProductionType"></a>
 
 ```typescript
 public stageWorkloadProductionType(): DlzStack[]
@@ -11289,71 +11289,71 @@ public stageWorkloadProductionType(): DlzStack[]
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.auditStacks">auditStacks</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks">AuditStacks</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.developAccountStacks">developAccountStacks</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.logStacks">logStacks</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks">LogStacks</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.managementStack">managementStack</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack">ManagementStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.productionAccountStacks">productionAccountStacks</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.auditStacks">auditStacks</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.AuditStacks">AuditStacks</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.developAccountStacks">developAccountStacks</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.logStacks">logStacks</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.LogStacks">LogStacks</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.managementStack">managementStack</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack">ManagementStack</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.productionAccountStacks">productionAccountStacks</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]</code> | *No description.* |
 
 ---
 
-##### `auditStacks`<sup>Required</sup> <a name="auditStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.auditStacks"></a>
+##### `auditStacks`<sup>Required</sup> <a name="auditStacks" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.auditStacks"></a>
 
 ```typescript
 public readonly auditStacks: AuditStacks;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.AuditStacks">AuditStacks</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.AuditStacks">AuditStacks</a>
 
 ---
 
-##### `developAccountStacks`<sup>Required</sup> <a name="developAccountStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.developAccountStacks"></a>
+##### `developAccountStacks`<sup>Required</sup> <a name="developAccountStacks" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.developAccountStacks"></a>
 
 ```typescript
 public readonly developAccountStacks: DevelopAccountStacks[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]
 
 ---
 
-##### `logStacks`<sup>Required</sup> <a name="logStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.logStacks"></a>
+##### `logStacks`<sup>Required</sup> <a name="logStacks" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.logStacks"></a>
 
 ```typescript
 public readonly logStacks: LogStacks;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.LogStacks">LogStacks</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.LogStacks">LogStacks</a>
 
 ---
 
-##### `managementStack`<sup>Required</sup> <a name="managementStack" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.managementStack"></a>
+##### `managementStack`<sup>Required</sup> <a name="managementStack" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.managementStack"></a>
 
 ```typescript
 public readonly managementStack: ManagementStack;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ManagementStack">ManagementStack</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ManagementStack">ManagementStack</a>
 
 ---
 
-##### `productionAccountStacks`<sup>Required</sup> <a name="productionAccountStacks" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.productionAccountStacks"></a>
+##### `productionAccountStacks`<sup>Required</sup> <a name="productionAccountStacks" id="recipes_data-landing-zone_data-landing-zone.DataLandingZone.property.productionAccountStacks"></a>
 
 ```typescript
 public readonly productionAccountStacks: ProductionAccountStacks[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]
 
 ---
 
 
-### Defaults <a name="Defaults" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults"></a>
+### Defaults <a name="Defaults" id="recipes_data-landing-zone_data-landing-zone.Defaults"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.Defaults.Initializer"></a>
 
 ```typescript
-import { Defaults } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
 
 new Defaults()
 ```
@@ -11368,24 +11368,24 @@ new Defaults()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
 
 ---
 
-##### `budgets` <a name="budgets" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.budgets"></a>
+##### `budgets` <a name="budgets" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets"></a>
 
 ```typescript
-import { Defaults } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
 
 Defaults.budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers)
 ```
 
 Budgets for the organization.
 
-###### `orgTotal`<sup>Required</sup> <a name="orgTotal" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.orgTotal"></a>
+###### `orgTotal`<sup>Required</sup> <a name="orgTotal" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.orgTotal"></a>
 
 - *Type:* number
 
@@ -11393,7 +11393,7 @@ Total budget for the organization in USD.
 
 ---
 
-###### `infraDlz`<sup>Required</sup> <a name="infraDlz" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.infraDlz"></a>
+###### `infraDlz`<sup>Required</sup> <a name="infraDlz" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.infraDlz"></a>
 
 - *Type:* number
 
@@ -11401,44 +11401,44 @@ Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD.
 
 ---
 
-###### `subscribers`<sup>Required</sup> <a name="subscribers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.subscribers"></a>
+###### `subscribers`<sup>Required</sup> <a name="subscribers" id="recipes_data-landing-zone_data-landing-zone.Defaults.budgets.parameter.subscribers"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
 
 Subscribers for the budget.
 
 ---
 
-##### `denyServiceList` <a name="denyServiceList" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList"></a>
+##### `denyServiceList` <a name="denyServiceList" id="recipes_data-landing-zone_data-landing-zone.Defaults.denyServiceList"></a>
 
 ```typescript
-import { Defaults } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
 
 Defaults.denyServiceList()
 ```
 
 * List of services that are denied in the organization.
 
-##### `mandatoryTags` <a name="mandatoryTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags"></a>
+##### `mandatoryTags` <a name="mandatoryTags" id="recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags"></a>
 
 ```typescript
-import { Defaults } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
 
 Defaults.mandatoryTags(props: DataLandingZoneProps)
 ```
 
 * Mandatory tags for the organization.
 
-###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags.parameter.props"></a>
+###### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.Defaults.mandatoryTags.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
 
-##### `rootControls` <a name="rootControls" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Defaults.rootControls"></a>
+##### `rootControls` <a name="rootControls" id="recipes_data-landing-zone_data-landing-zone.Defaults.rootControls"></a>
 
 ```typescript
-import { Defaults } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Defaults } from 'recipes_data-landing-zone_data-landing-zone'
 
 Defaults.rootControls()
 ```
@@ -11447,41 +11447,41 @@ Control Tower Controls applied to all the OUs in the organization.
 
 
 
-### DlzControlTowerEnabledControl <a name="DlzControlTowerEnabledControl" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl"></a>
+### DlzControlTowerEnabledControl <a name="DlzControlTowerEnabledControl" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl"></a>
 
-- *Implements:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
+- *Implements:* <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer"></a>
 
 ```typescript
-import { DlzControlTowerEnabledControl } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzControlTowerEnabledControl } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DlzControlTowerEnabledControl(scope: Construct, id: string, props: DlzControlTowerEnabledControlProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps">DlzControlTowerEnabledControlProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps">DlzControlTowerEnabledControlProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps">DlzControlTowerEnabledControlProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControlProps">DlzControlTowerEnabledControlProps</a>
 
 ---
 
@@ -11490,14 +11490,14 @@ new DlzControlTowerEnabledControl(scope: Construct, id: string, props: DlzContro
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.canBeAppliedToSecurityOU">canBeAppliedToSecurityOU</a></code> | Check if the control can be applied to the Security OU. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.canBeAppliedToSecurityOU">canBeAppliedToSecurityOU</a></code> | Check if the control can be applied to the Security OU. |
 
 ---
 
-##### `canBeAppliedToSecurityOU` <a name="canBeAppliedToSecurityOU" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.canBeAppliedToSecurityOU"></a>
+##### `canBeAppliedToSecurityOU` <a name="canBeAppliedToSecurityOU" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.canBeAppliedToSecurityOU"></a>
 
 ```typescript
-import { DlzControlTowerEnabledControl } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzControlTowerEnabledControl } from 'recipes_data-landing-zone_data-landing-zone'
 
 DlzControlTowerEnabledControl.canBeAppliedToSecurityOU(control: IDlzControlTowerControl)
 ```
@@ -11506,9 +11506,9 @@ Check if the control can be applied to the Security OU.
 
 Only LEGACY controls can be applied to the Security OU.
 
-###### `control`<sup>Required</sup> <a name="control" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.canBeAppliedToSecurityOU.parameter.control"></a>
+###### `control`<sup>Required</sup> <a name="control" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.canBeAppliedToSecurityOU.parameter.control"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
 
 ---
 
@@ -11516,12 +11516,12 @@ Only LEGACY controls can be applied to the Security OU.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.control">control</a></code> | <code>aws-cdk-lib.aws_controltower.CfnEnabledControl</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.reportResource">reportResource</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.control">control</a></code> | <code>aws-cdk-lib.aws_controltower.CfnEnabledControl</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.reportResource">reportResource</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
 
 ---
 
-##### `control`<sup>Required</sup> <a name="control" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.control"></a>
+##### `control`<sup>Required</sup> <a name="control" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.control"></a>
 
 ```typescript
 public readonly control: CfnEnabledControl;
@@ -11531,52 +11531,52 @@ public readonly control: CfnEnabledControl;
 
 ---
 
-##### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.reportResource"></a>
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl.property.reportResource"></a>
 
 ```typescript
 public readonly reportResource: ReportResource;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
 
 ---
 
 
-### DlzServiceControlPolicy <a name="DlzServiceControlPolicy" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy"></a>
+### DlzServiceControlPolicy <a name="DlzServiceControlPolicy" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy"></a>
 
-- *Implements:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
+- *Implements:* <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer"></a>
 
 ```typescript
-import { DlzServiceControlPolicy } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzServiceControlPolicy } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DlzServiceControlPolicy(scope: Construct, id: string, props: DlzServiceControlPolicyProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps">DlzServiceControlPolicyProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps">DlzServiceControlPolicyProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps">DlzServiceControlPolicyProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicyProps">DlzServiceControlPolicyProps</a>
 
 ---
 
@@ -11585,34 +11585,34 @@ new DlzServiceControlPolicy(scope: Construct, id: string, props: DlzServiceContr
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags">denyCfnStacksWithoutStandardTags</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements">denyServiceActionStatements</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags">denyCfnStacksWithoutStandardTags</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements">denyServiceActionStatements</a></code> | *No description.* |
 
 ---
 
-##### `denyCfnStacksWithoutStandardTags` <a name="denyCfnStacksWithoutStandardTags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags"></a>
+##### `denyCfnStacksWithoutStandardTags` <a name="denyCfnStacksWithoutStandardTags" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags"></a>
 
 ```typescript
-import { DlzServiceControlPolicy } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzServiceControlPolicy } from 'recipes_data-landing-zone_data-landing-zone'
 
 DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags: DlzTag[])
 ```
 
-###### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags.parameter.tags"></a>
+###### `tags`<sup>Required</sup> <a name="tags" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags.parameter.tags"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzTag">DlzTag</a>[]
 
 ---
 
-##### `denyServiceActionStatements` <a name="denyServiceActionStatements" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements"></a>
+##### `denyServiceActionStatements` <a name="denyServiceActionStatements" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements"></a>
 
 ```typescript
-import { DlzServiceControlPolicy } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzServiceControlPolicy } from 'recipes_data-landing-zone_data-landing-zone'
 
 DlzServiceControlPolicy.denyServiceActionStatements(serviceActions: string[])
 ```
 
-###### `serviceActions`<sup>Required</sup> <a name="serviceActions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements.parameter.serviceActions"></a>
+###### `serviceActions`<sup>Required</sup> <a name="serviceActions" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements.parameter.serviceActions"></a>
 
 - *Type:* string[]
 
@@ -11622,12 +11622,12 @@ DlzServiceControlPolicy.denyServiceActionStatements(serviceActions: string[])
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.policy">policy</a></code> | <code>aws-cdk-lib.aws_organizations.CfnPolicy</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.reportResource">reportResource</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.policy">policy</a></code> | <code>aws-cdk-lib.aws_organizations.CfnPolicy</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.reportResource">reportResource</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
 
 ---
 
-##### `policy`<sup>Required</sup> <a name="policy" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.policy"></a>
+##### `policy`<sup>Required</sup> <a name="policy" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.policy"></a>
 
 ```typescript
 public readonly policy: CfnPolicy;
@@ -11637,52 +11637,52 @@ public readonly policy: CfnPolicy;
 
 ---
 
-##### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.reportResource"></a>
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy.property.reportResource"></a>
 
 ```typescript
 public readonly reportResource: ReportResource;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
 
 ---
 
 
-### DlzTagPolicy <a name="DlzTagPolicy" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy"></a>
+### DlzTagPolicy <a name="DlzTagPolicy" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy"></a>
 
-- *Implements:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
+- *Implements:* <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer"></a>
 
 ```typescript
-import { DlzTagPolicy } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { DlzTagPolicy } from 'recipes_data-landing-zone_data-landing-zone'
 
 new DlzTagPolicy(scope: Construct, id: string, props: DlzTagPolicyProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps">DlzTagPolicyProps</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps">DlzTagPolicyProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps">DlzTagPolicyProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicyProps">DlzTagPolicyProps</a>
 
 ---
 
@@ -11692,12 +11692,12 @@ new DlzTagPolicy(scope: Construct, id: string, props: DlzTagPolicyProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.policy">policy</a></code> | <code>aws-cdk-lib.aws_organizations.CfnPolicy</code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.reportResource">reportResource</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.policy">policy</a></code> | <code>aws-cdk-lib.aws_organizations.CfnPolicy</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.reportResource">reportResource</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
 
 ---
 
-##### `policy`<sup>Required</sup> <a name="policy" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.policy"></a>
+##### `policy`<sup>Required</sup> <a name="policy" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.policy"></a>
 
 ```typescript
 public readonly policy: CfnPolicy;
@@ -11707,23 +11707,23 @@ public readonly policy: CfnPolicy;
 
 ---
 
-##### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.reportResource"></a>
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.DlzTagPolicy.property.reportResource"></a>
 
 ```typescript
 public readonly reportResource: ReportResource;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
 
 ---
 
 
-### Report <a name="Report" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report"></a>
+### Report <a name="Report" id="recipes_data-landing-zone_data-landing-zone.Report"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.Initializer"></a>
+#### Initializers <a name="Initializers" id="recipes_data-landing-zone_data-landing-zone.Report.Initializer"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 new Report()
 ```
@@ -11738,131 +11738,131 @@ new Report()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion">addReportForAccountRegion</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions">addReportForAccountRegions</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions">addReportForOuAccountRegions</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions">addReportForSecurityOuAccountRegions</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.printConsoleReport">printConsoleReport</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.saveConsoleReport">saveConsoleReport</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion">addReportForAccountRegion</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions">addReportForAccountRegions</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions">addReportForOuAccountRegions</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions">addReportForSecurityOuAccountRegions</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.printConsoleReport">printConsoleReport</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.saveConsoleReport">saveConsoleReport</a></code> | *No description.* |
 
 ---
 
-##### `addReportForAccountRegion` <a name="addReportForAccountRegion" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion"></a>
+##### `addReportForAccountRegion` <a name="addReportForAccountRegion" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 Report.addReportForAccountRegion(accountName: string, region: string, reportResource: ReportResource)
 ```
 
-###### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion.parameter.accountName"></a>
+###### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion.parameter.accountName"></a>
 
 - *Type:* string
 
 ---
 
-###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion.parameter.region"></a>
+###### `region`<sup>Required</sup> <a name="region" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion.parameter.region"></a>
 
 - *Type:* string
 
 ---
 
-###### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion.parameter.reportResource"></a>
+###### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegion.parameter.reportResource"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
 
 ---
 
-##### `addReportForAccountRegions` <a name="addReportForAccountRegions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions"></a>
+##### `addReportForAccountRegions` <a name="addReportForAccountRegions" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 Report.addReportForAccountRegions(accountName: string, regions: DlzRegions, reportResource: ReportResource)
 ```
 
-###### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions.parameter.accountName"></a>
+###### `accountName`<sup>Required</sup> <a name="accountName" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions.parameter.accountName"></a>
 
 - *Type:* string
 
 ---
 
-###### `regions`<sup>Required</sup> <a name="regions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions.parameter.regions"></a>
+###### `regions`<sup>Required</sup> <a name="regions" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions.parameter.regions"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
-
----
-
-###### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions.parameter.reportResource"></a>
-
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
 
 ---
 
-##### `addReportForOuAccountRegions` <a name="addReportForOuAccountRegions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions"></a>
+###### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForAccountRegions.parameter.reportResource"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+##### `addReportForOuAccountRegions` <a name="addReportForOuAccountRegions" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 Report.addReportForOuAccountRegions(partialOu: PartialOu, regions: DlzRegions, reportResource: ReportResource)
 ```
 
-###### `partialOu`<sup>Required</sup> <a name="partialOu" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions.parameter.partialOu"></a>
+###### `partialOu`<sup>Required</sup> <a name="partialOu" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions.parameter.partialOu"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.PartialOu">PartialOu</a>
-
----
-
-###### `regions`<sup>Required</sup> <a name="regions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions.parameter.regions"></a>
-
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.PartialOu">PartialOu</a>
 
 ---
 
-###### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions.parameter.reportResource"></a>
+###### `regions`<sup>Required</sup> <a name="regions" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions.parameter.regions"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
 
 ---
 
-##### `addReportForSecurityOuAccountRegions` <a name="addReportForSecurityOuAccountRegions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions"></a>
+###### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForOuAccountRegions.parameter.reportResource"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+##### `addReportForSecurityOuAccountRegions` <a name="addReportForSecurityOuAccountRegions" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 Report.addReportForSecurityOuAccountRegions(securityOu: OrgOuSecurity, regions: DlzRegions, reportResource: ReportResource)
 ```
 
-###### `securityOu`<sup>Required</sup> <a name="securityOu" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions.parameter.securityOu"></a>
+###### `securityOu`<sup>Required</sup> <a name="securityOu" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions.parameter.securityOu"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.OrgOuSecurity">OrgOuSecurity</a>
-
----
-
-###### `regions`<sup>Required</sup> <a name="regions" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions.parameter.regions"></a>
-
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.OrgOuSecurity">OrgOuSecurity</a>
 
 ---
 
-###### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions.parameter.reportResource"></a>
+###### `regions`<sup>Required</sup> <a name="regions" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions.parameter.regions"></a>
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzRegions">DlzRegions</a>
 
 ---
 
-##### `printConsoleReport` <a name="printConsoleReport" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.printConsoleReport"></a>
+###### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.Report.addReportForSecurityOuAccountRegions.parameter.reportResource"></a>
+
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+##### `printConsoleReport` <a name="printConsoleReport" id="recipes_data-landing-zone_data-landing-zone.Report.printConsoleReport"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 Report.printConsoleReport()
 ```
 
-##### `saveConsoleReport` <a name="saveConsoleReport" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.saveConsoleReport"></a>
+##### `saveConsoleReport` <a name="saveConsoleReport" id="recipes_data-landing-zone_data-landing-zone.Report.saveConsoleReport"></a>
 
 ```typescript
-import { Report } from '@DataChefHQ/recipes_data-landing-zone_data-landing-zone'
+import { Report } from 'recipes_data-landing-zone_data-landing-zone'
 
 Report.saveConsoleReport()
 ```
@@ -11871,66 +11871,66 @@ Report.saveConsoleReport()
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.property.reports">reports</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem">ReportItem</a>[]</code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Report.property.reports">reports</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportItem">ReportItem</a>[]</code> | *No description.* |
 
 ---
 
-##### `reports`<sup>Required</sup> <a name="reports" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Report.property.reports"></a>
+##### `reports`<sup>Required</sup> <a name="reports" id="recipes_data-landing-zone_data-landing-zone.Report.property.reports"></a>
 
 ```typescript
 public readonly reports: ReportItem[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportItem">ReportItem</a>[]
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportItem">ReportItem</a>[]
 
 ---
 
 
 ## Protocols <a name="Protocols" id="Protocols"></a>
 
-### IDlzControlTowerControl <a name="IDlzControlTowerControl" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl"></a>
+### IDlzControlTowerControl <a name="IDlzControlTowerControl" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl"></a>
 
-- *Implemented By:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
+- *Implemented By:* <a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl">IDlzControlTowerControl</a>
 
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlFriendlyName">controlFriendlyName</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a> \| <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls">DlzControlTowerSpecializedControls</a></code> | The short name of the control, example: AWS-GR_ENCRYPTED_VOLUMES. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlIdName">controlIdName</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps">DlzControlTowerControlIdNameProps</a></code> | The control ID name used to construct the controlIdentifier, example: AWS-GR_ENCRYPTED_VOLUMES This can differ from the controlFriendlyName for newer controls. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.description">description</a></code> | <code>string</code> | Description of the control. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.externalLink">externalLink</a></code> | <code>string</code> | External link to the control documentation. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.format">format</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat">DlzControlTowerControlFormat</a></code> | The format of the control, LEGACY or STANDARD LEGACY controls include the control name in the controlIdentifier STANDARD controls do not include the control name in the controlIdentifier and can not be applied to the Security OU. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.parameters">parameters</a></code> | <code>{[ key: string ]: any}</code> | Optional parameters for the control. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlFriendlyName">controlFriendlyName</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a> \| <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls">DlzControlTowerSpecializedControls</a></code> | The short name of the control, example: AWS-GR_ENCRYPTED_VOLUMES. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlIdName">controlIdName</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps">DlzControlTowerControlIdNameProps</a></code> | The control ID name used to construct the controlIdentifier, example: AWS-GR_ENCRYPTED_VOLUMES This can differ from the controlFriendlyName for newer controls. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.description">description</a></code> | <code>string</code> | Description of the control. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.externalLink">externalLink</a></code> | <code>string</code> | External link to the control documentation. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.format">format</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat">DlzControlTowerControlFormat</a></code> | The format of the control, LEGACY or STANDARD LEGACY controls include the control name in the controlIdentifier STANDARD controls do not include the control name in the controlIdentifier and can not be applied to the Security OU. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.parameters">parameters</a></code> | <code>{[ key: string ]: any}</code> | Optional parameters for the control. |
 
 ---
 
-##### `controlFriendlyName`<sup>Required</sup> <a name="controlFriendlyName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlFriendlyName"></a>
+##### `controlFriendlyName`<sup>Required</sup> <a name="controlFriendlyName" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlFriendlyName"></a>
 
 ```typescript
 public readonly controlFriendlyName: DlzControlTowerStandardControls | DlzControlTowerSpecializedControls;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a> | <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls">DlzControlTowerSpecializedControls</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a> | <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls">DlzControlTowerSpecializedControls</a>
 
 The short name of the control, example: AWS-GR_ENCRYPTED_VOLUMES.
 
 ---
 
-##### `controlIdName`<sup>Required</sup> <a name="controlIdName" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlIdName"></a>
+##### `controlIdName`<sup>Required</sup> <a name="controlIdName" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.controlIdName"></a>
 
 ```typescript
 public readonly controlIdName: DlzControlTowerControlIdNameProps;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps">DlzControlTowerControlIdNameProps</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlIdNameProps">DlzControlTowerControlIdNameProps</a>
 
 The control ID name used to construct the controlIdentifier, example: AWS-GR_ENCRYPTED_VOLUMES This can differ from the controlFriendlyName for newer controls.
 
 ---
 
-##### `description`<sup>Required</sup> <a name="description" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.description"></a>
+##### `description`<sup>Required</sup> <a name="description" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -11942,7 +11942,7 @@ Description of the control.
 
 ---
 
-##### `externalLink`<sup>Required</sup> <a name="externalLink" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.externalLink"></a>
+##### `externalLink`<sup>Required</sup> <a name="externalLink" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.externalLink"></a>
 
 ```typescript
 public readonly externalLink: string;
@@ -11954,19 +11954,19 @@ External link to the control documentation.
 
 ---
 
-##### `format`<sup>Required</sup> <a name="format" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.format"></a>
+##### `format`<sup>Required</sup> <a name="format" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.format"></a>
 
 ```typescript
 public readonly format: DlzControlTowerControlFormat;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat">DlzControlTowerControlFormat</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat">DlzControlTowerControlFormat</a>
 
 The format of the control, LEGACY or STANDARD LEGACY controls include the control name in the controlIdentifier STANDARD controls do not include the control name in the controlIdentifier and can not be applied to the Security OU.
 
 ---
 
-##### `parameters`<sup>Optional</sup> <a name="parameters" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.parameters"></a>
+##### `parameters`<sup>Optional</sup> <a name="parameters" id="recipes_data-landing-zone_data-landing-zone.IDlzControlTowerControl.property.parameters"></a>
 
 ```typescript
 public readonly parameters: {[ key: string ]: any};
@@ -11978,9 +11978,9 @@ Optional parameters for the control.
 
 ---
 
-### IReportResource <a name="IReportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource"></a>
+### IReportResource <a name="IReportResource" id="recipes_data-landing-zone_data-landing-zone.IReportResource"></a>
 
-- *Implemented By:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
+- *Implemented By:* <a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#recipes_data-landing-zone_data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#recipes_data-landing-zone_data-landing-zone.IReportResource">IReportResource</a>
 
 Behavioral, used with Inheritance.
 
@@ -11989,65 +11989,65 @@ Behavioral, used with Inheritance.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource.property.reportResource">reportResource</a></code> | <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.IReportResource.property.reportResource">reportResource</a></code> | <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
 
 ---
 
-##### `reportResource`<sup>Required</sup> <a name="reportResource" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.IReportResource.property.reportResource"></a>
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="recipes_data-landing-zone_data-landing-zone.IReportResource.property.reportResource"></a>
 
 ```typescript
 public readonly reportResource: ReportResource;
 ```
 
-- *Type:* <a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
+- *Type:* <a href="#recipes_data-landing-zone_data-landing-zone.ReportResource">ReportResource</a>
 
 ---
 
 ## Enums <a name="Enums" id="Enums"></a>
 
-### DlzAccountType <a name="DlzAccountType" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType"></a>
+### DlzAccountType <a name="DlzAccountType" id="recipes_data-landing-zone_data-landing-zone.DlzAccountType"></a>
 
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType.DEVELOP">DEVELOP</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType.PRODUCTION">PRODUCTION</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzAccountType.DEVELOP">DEVELOP</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzAccountType.PRODUCTION">PRODUCTION</a></code> | *No description.* |
 
 ---
 
-##### `DEVELOP` <a name="DEVELOP" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType.DEVELOP"></a>
-
----
-
-
-##### `PRODUCTION` <a name="PRODUCTION" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzAccountType.PRODUCTION"></a>
+##### `DEVELOP` <a name="DEVELOP" id="recipes_data-landing-zone_data-landing-zone.DlzAccountType.DEVELOP"></a>
 
 ---
 
 
-### DlzControlTowerControlFormat <a name="DlzControlTowerControlFormat" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat"></a>
+##### `PRODUCTION` <a name="PRODUCTION" id="recipes_data-landing-zone_data-landing-zone.DlzAccountType.PRODUCTION"></a>
+
+---
+
+
+### DlzControlTowerControlFormat <a name="DlzControlTowerControlFormat" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat"></a>
 
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.LEGACY">LEGACY</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.STANDARD">STANDARD</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.LEGACY">LEGACY</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.STANDARD">STANDARD</a></code> | *No description.* |
 
 ---
 
-##### `LEGACY` <a name="LEGACY" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.LEGACY"></a>
-
----
-
-
-##### `STANDARD` <a name="STANDARD" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.STANDARD"></a>
+##### `LEGACY` <a name="LEGACY" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.LEGACY"></a>
 
 ---
 
 
-### DlzControlTowerSpecializedControls <a name="DlzControlTowerSpecializedControls" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls"></a>
+##### `STANDARD` <a name="STANDARD" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerControlFormat.STANDARD"></a>
+
+---
+
+
+### DlzControlTowerSpecializedControls <a name="DlzControlTowerSpecializedControls" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls"></a>
 
 Controls that take parameters.
 
@@ -12055,16 +12055,16 @@ Controls that take parameters.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls.CT_MULTISERVICE_PV_1">CT_MULTISERVICE_PV_1</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls.CT_MULTISERVICE_PV_1">CT_MULTISERVICE_PV_1</a></code> | *No description.* |
 
 ---
 
-##### `CT_MULTISERVICE_PV_1` <a name="CT_MULTISERVICE_PV_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls.CT_MULTISERVICE_PV_1"></a>
+##### `CT_MULTISERVICE_PV_1` <a name="CT_MULTISERVICE_PV_1" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerSpecializedControls.CT_MULTISERVICE_PV_1"></a>
 
 ---
 
 
-### DlzControlTowerStandardControls <a name="DlzControlTowerStandardControls" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls"></a>
+### DlzControlTowerStandardControls <a name="DlzControlTowerStandardControls" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls"></a>
 
 Controls that do not take parameters.
 
@@ -12072,109 +12072,109 @@ Controls that do not take parameters.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS">AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ENCRYPTED_VOLUMES">AWS_GR_ENCRYPTED_VOLUMES</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK">AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED">AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_STORAGE_ENCRYPTED">AWS_GR_RDS_STORAGE_ENCRYPTED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICTED_SSH">AWS_GR_RESTRICTED_SSH</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER">AWS_GR_RESTRICT_ROOT_USER</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS">AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED">AWS_GR_ROOT_ACCOUNT_MFA_ENABLED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED">AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED">AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3">SH_SECRETS_MANAGER_3</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS">AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ENCRYPTED_VOLUMES">AWS_GR_ENCRYPTED_VOLUMES</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK">AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED">AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_STORAGE_ENCRYPTED">AWS_GR_RDS_STORAGE_ENCRYPTED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICTED_SSH">AWS_GR_RESTRICTED_SSH</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER">AWS_GR_RESTRICT_ROOT_USER</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS">AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED">AWS_GR_ROOT_ACCOUNT_MFA_ENABLED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED">AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED">AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3">SH_SECRETS_MANAGER_3</a></code> | *No description.* |
 
 ---
 
-##### `AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS` <a name="AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS"></a>
-
----
-
-
-##### `AWS_GR_ENCRYPTED_VOLUMES` <a name="AWS_GR_ENCRYPTED_VOLUMES" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ENCRYPTED_VOLUMES"></a>
+##### `AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS` <a name="AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS"></a>
 
 ---
 
 
-##### `AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK` <a name="AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK"></a>
+##### `AWS_GR_ENCRYPTED_VOLUMES` <a name="AWS_GR_ENCRYPTED_VOLUMES" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ENCRYPTED_VOLUMES"></a>
 
 ---
 
 
-##### `AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED` <a name="AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED"></a>
+##### `AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK` <a name="AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK"></a>
 
 ---
 
 
-##### `AWS_GR_RDS_STORAGE_ENCRYPTED` <a name="AWS_GR_RDS_STORAGE_ENCRYPTED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_STORAGE_ENCRYPTED"></a>
+##### `AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED` <a name="AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED"></a>
 
 ---
 
 
-##### `AWS_GR_RESTRICTED_SSH` <a name="AWS_GR_RESTRICTED_SSH" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICTED_SSH"></a>
+##### `AWS_GR_RDS_STORAGE_ENCRYPTED` <a name="AWS_GR_RDS_STORAGE_ENCRYPTED" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RDS_STORAGE_ENCRYPTED"></a>
 
 ---
 
 
-##### `AWS_GR_RESTRICT_ROOT_USER` <a name="AWS_GR_RESTRICT_ROOT_USER" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER"></a>
+##### `AWS_GR_RESTRICTED_SSH` <a name="AWS_GR_RESTRICTED_SSH" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICTED_SSH"></a>
 
 ---
 
 
-##### `AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS` <a name="AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS"></a>
+##### `AWS_GR_RESTRICT_ROOT_USER` <a name="AWS_GR_RESTRICT_ROOT_USER" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER"></a>
 
 ---
 
 
-##### `AWS_GR_ROOT_ACCOUNT_MFA_ENABLED` <a name="AWS_GR_ROOT_ACCOUNT_MFA_ENABLED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED"></a>
+##### `AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS` <a name="AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_RESTRICT_ROOT_USER_ACCESS_KEYS"></a>
 
 ---
 
 
-##### `AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED` <a name="AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED"></a>
+##### `AWS_GR_ROOT_ACCOUNT_MFA_ENABLED` <a name="AWS_GR_ROOT_ACCOUNT_MFA_ENABLED" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_ROOT_ACCOUNT_MFA_ENABLED"></a>
 
 ---
 
 
-##### `AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED` <a name="AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED"></a>
+##### `AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED` <a name="AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_READ_PROHIBITED"></a>
 
 ---
 
 
-##### `SH_SECRETS_MANAGER_3` <a name="SH_SECRETS_MANAGER_3" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3"></a>
+##### `AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED` <a name="AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.AWS_GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED"></a>
 
 ---
 
 
-### Ou <a name="Ou" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou"></a>
+##### `SH_SECRETS_MANAGER_3` <a name="SH_SECRETS_MANAGER_3" id="recipes_data-landing-zone_data-landing-zone.DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3"></a>
+
+---
+
+
+### Ou <a name="Ou" id="recipes_data-landing-zone_data-landing-zone.Ou"></a>
 
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou.SECURITY">SECURITY</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou.WORKLOADS">WORKLOADS</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou.SUSPENDED">SUSPENDED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Ou.SECURITY">SECURITY</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Ou.WORKLOADS">WORKLOADS</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Ou.SUSPENDED">SUSPENDED</a></code> | *No description.* |
 
 ---
 
-##### `SECURITY` <a name="SECURITY" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou.SECURITY"></a>
-
----
-
-
-##### `WORKLOADS` <a name="WORKLOADS" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou.WORKLOADS"></a>
+##### `SECURITY` <a name="SECURITY" id="recipes_data-landing-zone_data-landing-zone.Ou.SECURITY"></a>
 
 ---
 
 
-##### `SUSPENDED` <a name="SUSPENDED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Ou.SUSPENDED"></a>
+##### `WORKLOADS` <a name="WORKLOADS" id="recipes_data-landing-zone_data-landing-zone.Ou.WORKLOADS"></a>
 
 ---
 
 
-### Region <a name="Region" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region"></a>
+##### `SUSPENDED` <a name="SUSPENDED" id="recipes_data-landing-zone_data-landing-zone.Ou.SUSPENDED"></a>
+
+---
+
+
+### Region <a name="Region" id="recipes_data-landing-zone_data-landing-zone.Region"></a>
 
 Control Tower Supported Regions as listed here https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html with the regions that might have partial or no support for SecurityHub Standard mentioned in the comment https://docs.aws.amazon.com/controltower/latest/userguide/security-hub-controls.html#sh-unsupported-regions Last updated: 22 Mar 2024.
 
@@ -12182,37 +12182,37 @@ Control Tower Supported Regions as listed here https://docs.aws.amazon.com/contr
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_EAST_1">US_EAST_1</a></code> | N. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_EAST_2">US_EAST_2</a></code> | Ohio. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_WEST_1">US_WEST_1</a></code> | N. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_WEST_2">US_WEST_2</a></code> | Oregon. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.CA_CENTRAL_1">CA_CENTRAL_1</a></code> | Canada (Central). |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_1">EU_WEST_1</a></code> | Ireland. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_2">EU_WEST_2</a></code> | London. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_3">EU_WEST_3</a></code> | Paris. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_1">EU_CENTRAL_1</a></code> | Frankfurt. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_2">EU_CENTRAL_2</a></code> | Zurich. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_NORTH_1">EU_NORTH_1</a></code> | Stockholm. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_1">EU_SOUTH_1</a></code> | Milan. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_2">EU_SOUTH_2</a></code> | Spain. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_1">AP_NORTHEAST_1</a></code> | Tokyo. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_2">AP_NORTHEAST_2</a></code> | Seoul. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_3">AP_NORTHEAST_3</a></code> | Osaka. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_1">AP_SOUTHEAST_1</a></code> | Singapore. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_2">AP_SOUTHEAST_2</a></code> | Sydney, Melbourne. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_3">AP_SOUTHEAST_3</a></code> | Jakarta No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_4">AP_SOUTHEAST_4</a></code> | Melbourne No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_EAST_1">AP_EAST_1</a></code> | Hong Kong No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.SA_EAST_1">SA_EAST_1</a></code> | Sao Paulo. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AF_SOUTH_1">AF_SOUTH_1</a></code> | Cape Town No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.ME_SOUTH_1">ME_SOUTH_1</a></code> | Bahrain, UAE, Tel Aviv No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.ME_CENTRAL_1">ME_CENTRAL_1</a></code> | UAE No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.IL_CENTRAL_1">IL_CENTRAL_1</a></code> | Israel No Control Tower SecurityHub Standard support. |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTH_2">AP_SOUTH_2</a></code> | Hyderabad No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.US_EAST_1">US_EAST_1</a></code> | N. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.US_EAST_2">US_EAST_2</a></code> | Ohio. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.US_WEST_1">US_WEST_1</a></code> | N. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.US_WEST_2">US_WEST_2</a></code> | Oregon. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.CA_CENTRAL_1">CA_CENTRAL_1</a></code> | Canada (Central). |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_1">EU_WEST_1</a></code> | Ireland. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_2">EU_WEST_2</a></code> | London. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_3">EU_WEST_3</a></code> | Paris. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_1">EU_CENTRAL_1</a></code> | Frankfurt. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_2">EU_CENTRAL_2</a></code> | Zurich. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_NORTH_1">EU_NORTH_1</a></code> | Stockholm. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_1">EU_SOUTH_1</a></code> | Milan. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_2">EU_SOUTH_2</a></code> | Spain. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_1">AP_NORTHEAST_1</a></code> | Tokyo. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_2">AP_NORTHEAST_2</a></code> | Seoul. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_3">AP_NORTHEAST_3</a></code> | Osaka. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_1">AP_SOUTHEAST_1</a></code> | Singapore. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_2">AP_SOUTHEAST_2</a></code> | Sydney, Melbourne. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_3">AP_SOUTHEAST_3</a></code> | Jakarta No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_4">AP_SOUTHEAST_4</a></code> | Melbourne No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_EAST_1">AP_EAST_1</a></code> | Hong Kong No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.SA_EAST_1">SA_EAST_1</a></code> | Sao Paulo. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AF_SOUTH_1">AF_SOUTH_1</a></code> | Cape Town No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.ME_SOUTH_1">ME_SOUTH_1</a></code> | Bahrain, UAE, Tel Aviv No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.ME_CENTRAL_1">ME_CENTRAL_1</a></code> | UAE No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.IL_CENTRAL_1">IL_CENTRAL_1</a></code> | Israel No Control Tower SecurityHub Standard support. |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTH_2">AP_SOUTH_2</a></code> | Hyderabad No Control Tower SecurityHub Standard support. |
 
 ---
 
-##### `US_EAST_1` <a name="US_EAST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_EAST_1"></a>
+##### `US_EAST_1` <a name="US_EAST_1" id="recipes_data-landing-zone_data-landing-zone.Region.US_EAST_1"></a>
 
 N.
 
@@ -12221,14 +12221,14 @@ Virginia
 ---
 
 
-##### `US_EAST_2` <a name="US_EAST_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_EAST_2"></a>
+##### `US_EAST_2` <a name="US_EAST_2" id="recipes_data-landing-zone_data-landing-zone.Region.US_EAST_2"></a>
 
 Ohio.
 
 ---
 
 
-##### `US_WEST_1` <a name="US_WEST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_WEST_1"></a>
+##### `US_WEST_1` <a name="US_WEST_1" id="recipes_data-landing-zone_data-landing-zone.Region.US_WEST_1"></a>
 
 N.
 
@@ -12237,214 +12237,214 @@ California
 ---
 
 
-##### `US_WEST_2` <a name="US_WEST_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.US_WEST_2"></a>
+##### `US_WEST_2` <a name="US_WEST_2" id="recipes_data-landing-zone_data-landing-zone.Region.US_WEST_2"></a>
 
 Oregon.
 
 ---
 
 
-##### `CA_CENTRAL_1` <a name="CA_CENTRAL_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.CA_CENTRAL_1"></a>
+##### `CA_CENTRAL_1` <a name="CA_CENTRAL_1" id="recipes_data-landing-zone_data-landing-zone.Region.CA_CENTRAL_1"></a>
 
 Canada (Central).
 
 ---
 
 
-##### `EU_WEST_1` <a name="EU_WEST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_1"></a>
+##### `EU_WEST_1` <a name="EU_WEST_1" id="recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_1"></a>
 
 Ireland.
 
 ---
 
 
-##### `EU_WEST_2` <a name="EU_WEST_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_2"></a>
+##### `EU_WEST_2` <a name="EU_WEST_2" id="recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_2"></a>
 
 London.
 
 ---
 
 
-##### `EU_WEST_3` <a name="EU_WEST_3" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_3"></a>
+##### `EU_WEST_3` <a name="EU_WEST_3" id="recipes_data-landing-zone_data-landing-zone.Region.EU_WEST_3"></a>
 
 Paris.
 
 ---
 
 
-##### `EU_CENTRAL_1` <a name="EU_CENTRAL_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_1"></a>
+##### `EU_CENTRAL_1` <a name="EU_CENTRAL_1" id="recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_1"></a>
 
 Frankfurt.
 
 ---
 
 
-##### `EU_CENTRAL_2` <a name="EU_CENTRAL_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_2"></a>
+##### `EU_CENTRAL_2` <a name="EU_CENTRAL_2" id="recipes_data-landing-zone_data-landing-zone.Region.EU_CENTRAL_2"></a>
 
 Zurich.
 
 ---
 
 
-##### `EU_NORTH_1` <a name="EU_NORTH_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_NORTH_1"></a>
+##### `EU_NORTH_1` <a name="EU_NORTH_1" id="recipes_data-landing-zone_data-landing-zone.Region.EU_NORTH_1"></a>
 
 Stockholm.
 
 ---
 
 
-##### `EU_SOUTH_1` <a name="EU_SOUTH_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_1"></a>
+##### `EU_SOUTH_1` <a name="EU_SOUTH_1" id="recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_1"></a>
 
 Milan.
 
 ---
 
 
-##### `EU_SOUTH_2` <a name="EU_SOUTH_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_2"></a>
+##### `EU_SOUTH_2` <a name="EU_SOUTH_2" id="recipes_data-landing-zone_data-landing-zone.Region.EU_SOUTH_2"></a>
 
 Spain.
 
 ---
 
 
-##### `AP_NORTHEAST_1` <a name="AP_NORTHEAST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_1"></a>
+##### `AP_NORTHEAST_1` <a name="AP_NORTHEAST_1" id="recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_1"></a>
 
 Tokyo.
 
 ---
 
 
-##### `AP_NORTHEAST_2` <a name="AP_NORTHEAST_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_2"></a>
+##### `AP_NORTHEAST_2` <a name="AP_NORTHEAST_2" id="recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_2"></a>
 
 Seoul.
 
 ---
 
 
-##### `AP_NORTHEAST_3` <a name="AP_NORTHEAST_3" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_3"></a>
+##### `AP_NORTHEAST_3` <a name="AP_NORTHEAST_3" id="recipes_data-landing-zone_data-landing-zone.Region.AP_NORTHEAST_3"></a>
 
 Osaka.
 
 ---
 
 
-##### `AP_SOUTHEAST_1` <a name="AP_SOUTHEAST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_1"></a>
+##### `AP_SOUTHEAST_1` <a name="AP_SOUTHEAST_1" id="recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_1"></a>
 
 Singapore.
 
 ---
 
 
-##### `AP_SOUTHEAST_2` <a name="AP_SOUTHEAST_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_2"></a>
+##### `AP_SOUTHEAST_2` <a name="AP_SOUTHEAST_2" id="recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_2"></a>
 
 Sydney, Melbourne.
 
 ---
 
 
-##### `AP_SOUTHEAST_3` <a name="AP_SOUTHEAST_3" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_3"></a>
+##### `AP_SOUTHEAST_3` <a name="AP_SOUTHEAST_3" id="recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_3"></a>
 
 Jakarta No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `AP_SOUTHEAST_4` <a name="AP_SOUTHEAST_4" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_4"></a>
+##### `AP_SOUTHEAST_4` <a name="AP_SOUTHEAST_4" id="recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTHEAST_4"></a>
 
 Melbourne No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `AP_EAST_1` <a name="AP_EAST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_EAST_1"></a>
+##### `AP_EAST_1` <a name="AP_EAST_1" id="recipes_data-landing-zone_data-landing-zone.Region.AP_EAST_1"></a>
 
 Hong Kong No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `SA_EAST_1` <a name="SA_EAST_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.SA_EAST_1"></a>
+##### `SA_EAST_1` <a name="SA_EAST_1" id="recipes_data-landing-zone_data-landing-zone.Region.SA_EAST_1"></a>
 
 Sao Paulo.
 
 ---
 
 
-##### `AF_SOUTH_1` <a name="AF_SOUTH_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AF_SOUTH_1"></a>
+##### `AF_SOUTH_1` <a name="AF_SOUTH_1" id="recipes_data-landing-zone_data-landing-zone.Region.AF_SOUTH_1"></a>
 
 Cape Town No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `ME_SOUTH_1` <a name="ME_SOUTH_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.ME_SOUTH_1"></a>
+##### `ME_SOUTH_1` <a name="ME_SOUTH_1" id="recipes_data-landing-zone_data-landing-zone.Region.ME_SOUTH_1"></a>
 
 Bahrain, UAE, Tel Aviv No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `ME_CENTRAL_1` <a name="ME_CENTRAL_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.ME_CENTRAL_1"></a>
+##### `ME_CENTRAL_1` <a name="ME_CENTRAL_1" id="recipes_data-landing-zone_data-landing-zone.Region.ME_CENTRAL_1"></a>
 
 UAE No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `IL_CENTRAL_1` <a name="IL_CENTRAL_1" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.IL_CENTRAL_1"></a>
+##### `IL_CENTRAL_1` <a name="IL_CENTRAL_1" id="recipes_data-landing-zone_data-landing-zone.Region.IL_CENTRAL_1"></a>
 
 Israel No Control Tower SecurityHub Standard support.
 
 ---
 
 
-##### `AP_SOUTH_2` <a name="AP_SOUTH_2" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTH_2"></a>
+##### `AP_SOUTH_2` <a name="AP_SOUTH_2" id="recipes_data-landing-zone_data-landing-zone.Region.AP_SOUTH_2"></a>
 
 Hyderabad No Control Tower SecurityHub Standard support.
 
 ---
 
 
-### ReportType <a name="ReportType" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType"></a>
+### ReportType <a name="ReportType" id="recipes_data-landing-zone_data-landing-zone.ReportType"></a>
 
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.CONTROL_TOWER_CONTROL">CONTROL_TOWER_CONTROL</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.CONFIG_RULE">CONFIG_RULE</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.SECURITY_HUB_STANDARD">SECURITY_HUB_STANDARD</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.TAG_POLICY">TAG_POLICY</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.SERVICE_CONTROL_POLICY">SERVICE_CONTROL_POLICY</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType.CONTROL_TOWER_CONTROL">CONTROL_TOWER_CONTROL</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType.CONFIG_RULE">CONFIG_RULE</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType.SECURITY_HUB_STANDARD">SECURITY_HUB_STANDARD</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType.TAG_POLICY">TAG_POLICY</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.ReportType.SERVICE_CONTROL_POLICY">SERVICE_CONTROL_POLICY</a></code> | *No description.* |
 
 ---
 
-##### `CONTROL_TOWER_CONTROL` <a name="CONTROL_TOWER_CONTROL" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.CONTROL_TOWER_CONTROL"></a>
-
----
-
-
-##### `CONFIG_RULE` <a name="CONFIG_RULE" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.CONFIG_RULE"></a>
+##### `CONTROL_TOWER_CONTROL` <a name="CONTROL_TOWER_CONTROL" id="recipes_data-landing-zone_data-landing-zone.ReportType.CONTROL_TOWER_CONTROL"></a>
 
 ---
 
 
-##### `SECURITY_HUB_STANDARD` <a name="SECURITY_HUB_STANDARD" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.SECURITY_HUB_STANDARD"></a>
+##### `CONFIG_RULE` <a name="CONFIG_RULE" id="recipes_data-landing-zone_data-landing-zone.ReportType.CONFIG_RULE"></a>
 
 ---
 
 
-##### `TAG_POLICY` <a name="TAG_POLICY" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.TAG_POLICY"></a>
+##### `SECURITY_HUB_STANDARD` <a name="SECURITY_HUB_STANDARD" id="recipes_data-landing-zone_data-landing-zone.ReportType.SECURITY_HUB_STANDARD"></a>
 
 ---
 
 
-##### `SERVICE_CONTROL_POLICY` <a name="SERVICE_CONTROL_POLICY" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.ReportType.SERVICE_CONTROL_POLICY"></a>
+##### `TAG_POLICY` <a name="TAG_POLICY" id="recipes_data-landing-zone_data-landing-zone.ReportType.TAG_POLICY"></a>
 
 ---
 
 
-### SecurityHubNotificationSeverity <a name="SecurityHubNotificationSeverity" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity"></a>
+##### `SERVICE_CONTROL_POLICY` <a name="SERVICE_CONTROL_POLICY" id="recipes_data-landing-zone_data-landing-zone.ReportType.SERVICE_CONTROL_POLICY"></a>
+
+---
+
+
+### SecurityHubNotificationSeverity <a name="SecurityHubNotificationSeverity" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity"></a>
 
 https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html.
 
@@ -12452,40 +12452,40 @@ https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.INFORMATIONAL">INFORMATIONAL</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.LOW">LOW</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.MEDIUM">MEDIUM</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.HIGH">HIGH</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.CRITICAL">CRITICAL</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.INFORMATIONAL">INFORMATIONAL</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.LOW">LOW</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.MEDIUM">MEDIUM</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.HIGH">HIGH</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.CRITICAL">CRITICAL</a></code> | *No description.* |
 
 ---
 
-##### `INFORMATIONAL` <a name="INFORMATIONAL" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.INFORMATIONAL"></a>
-
----
-
-
-##### `LOW` <a name="LOW" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.LOW"></a>
+##### `INFORMATIONAL` <a name="INFORMATIONAL" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.INFORMATIONAL"></a>
 
 ---
 
 
-##### `MEDIUM` <a name="MEDIUM" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.MEDIUM"></a>
+##### `LOW` <a name="LOW" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.LOW"></a>
 
 ---
 
 
-##### `HIGH` <a name="HIGH" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.HIGH"></a>
+##### `MEDIUM` <a name="MEDIUM" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.MEDIUM"></a>
 
 ---
 
 
-##### `CRITICAL` <a name="CRITICAL" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.CRITICAL"></a>
+##### `HIGH` <a name="HIGH" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.HIGH"></a>
 
 ---
 
 
-### SecurityHubNotificationSWorkflowStatus <a name="SecurityHubNotificationSWorkflowStatus" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus"></a>
+##### `CRITICAL` <a name="CRITICAL" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSeverity.CRITICAL"></a>
+
+---
+
+
+### SecurityHubNotificationSWorkflowStatus <a name="SecurityHubNotificationSWorkflowStatus" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus"></a>
 
 https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Workflow.html.
 
@@ -12493,29 +12493,29 @@ https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Workflow.html.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NEW">NEW</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NOTIFIED">NOTIFIED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.SUPPRESSED">SUPPRESSED</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED">RESOLVED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NEW">NEW</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NOTIFIED">NOTIFIED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.SUPPRESSED">SUPPRESSED</a></code> | *No description.* |
+| <code><a href="#recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED">RESOLVED</a></code> | *No description.* |
 
 ---
 
-##### `NEW` <a name="NEW" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NEW"></a>
-
----
-
-
-##### `NOTIFIED` <a name="NOTIFIED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NOTIFIED"></a>
+##### `NEW` <a name="NEW" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NEW"></a>
 
 ---
 
 
-##### `SUPPRESSED` <a name="SUPPRESSED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.SUPPRESSED"></a>
+##### `NOTIFIED` <a name="NOTIFIED" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.NOTIFIED"></a>
 
 ---
 
 
-##### `RESOLVED` <a name="RESOLVED" id="@DataChefHQ/recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED"></a>
+##### `SUPPRESSED` <a name="SUPPRESSED" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.SUPPRESSED"></a>
+
+---
+
+
+##### `RESOLVED` <a name="RESOLVED" id="recipes_data-landing-zone_data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED"></a>
 
 ---
 
