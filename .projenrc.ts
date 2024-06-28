@@ -32,7 +32,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
       },
     },
   },
-  workflowNodeVersion: '18',
+  workflowNodeVersion: '20',
   publishToPypi: {
     distName: 'recipes_dlz',
     module: 'recipes_dlz',
@@ -54,8 +54,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   npmRegistryUrl: 'https://npm.pkg.github.com',
 });
 
-project.package.addEngine('node', '~18.*');
-project.package.addEngine('npm', '~9.*');
+project.package.addEngine('node', '~20.*');
+project.package.addEngine('npm', '~10.*');
 
 // Need to clear before compiling and packaging. Have to remove these because they are not cleared for some reason,
 // only new files are added and it causes issues especially because when changing the folder structure the whole time.
