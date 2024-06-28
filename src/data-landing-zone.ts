@@ -280,6 +280,19 @@ export interface SecurityHubNotification {
   readonly notification: SecurityHubNotificationProps;
 }
 
+export interface GitHubReference {
+  readonly owner: string;
+  readonly repo: string;
+  readonly filter?: string;
+}
+
+export interface DeploymentPlatformGitHub {
+  readonly references: GitHubReference[];
+}
+export interface DeploymentPlatform {
+  readonly gitHub?: DeploymentPlatformGitHub;
+}
+
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
@@ -347,6 +360,8 @@ export interface DataLandingZoneProps {
   readonly budgets: BudgetProps[];
 
   readonly securityHubNotifications: SecurityHubNotification[];
+
+  readonly deploymentPlatform?: DeploymentPlatform;
 }
 
 type DeploymentOrder = {

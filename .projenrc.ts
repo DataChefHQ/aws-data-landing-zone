@@ -8,7 +8,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // https://github.com/projen/projen/pull/3459/files Not yet in the latest projen template started
   jsiiVersion: '~5.3.0',
   typescriptVersion: '~5.3.0',
-  name: 'recipes_data-landing-zone_data-landing-zone',
+  name: '@DataChefHQ/recipes_data-landing-zone_data-landing-zone', //TODO: Change back when using NPM
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
   repositoryUrl: 'https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git',
@@ -41,14 +41,17 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // deps: [ ],
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
   bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table'],
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: ['husky'], /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  // description: undefined,
+  /* Build dependencies for this repo/module. */
+  devDeps: ['husky'],
+  /* The "name" in package.json. */
+  // packageName: undefined,
   jestOptions: {
     jestConfig: {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
     },
   },
+  npmRegistryUrl: 'https://npm.pkg.github.com',
 });
 
 project.package.addEngine('node', '~18.*');
