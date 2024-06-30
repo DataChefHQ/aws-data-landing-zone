@@ -1,5 +1,5 @@
 {
-  "name": "recipes_data-landing-zone_data-landing-zone",
+  "name": "data-landing-zone",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git"
@@ -27,8 +27,7 @@
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
-    "projen": "npx projen",
-    "prepare": "husky"
+    "projen": "npx projen"
   },
   "author": {
     "name": "DataChefHQ",
@@ -45,7 +44,6 @@
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-junit": "^15",
     "jsii": "~5.3.0",

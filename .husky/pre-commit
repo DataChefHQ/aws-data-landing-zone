@@ -1,8 +1,8 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-npm run eslint
-npm run default
-npm run build
-npm run docgen
-git add .
+##!/usr/bin/env sh
+#. "$(dirname -- "$0")/_/husky.sh"
+#
+#npm run eslint
+#npm run default
+#npm run build
+#npm run docgen
+#git add .
