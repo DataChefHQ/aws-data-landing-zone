@@ -173,6 +173,7 @@ test('Local build and debug', () => {
           ouId: 'ou-vh4d-rhcmhzsy',
         },
       },
+
     },
     deploymentPlatform: {
       gitHub: {
@@ -182,6 +183,10 @@ test('Local build and debug', () => {
         ],
       },
     },
+
+    printDeploymentOrder: false,
+    saveReport: false,
+    printReport: false,
   });
 
   // assert.ok(managementStack);
