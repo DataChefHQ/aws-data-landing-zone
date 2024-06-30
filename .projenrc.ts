@@ -60,8 +60,8 @@ project.package.addEngine('npm', '~10.*');
 
 // Need to clear before compiling and packaging. Have to remove these because they are not cleared for some reason,
 // only new files are added and it causes issues especially because when changing the folder structure the whole time.
-const clear = project.addTask('clear-lib-and-dist');
-clear.exec('rm -rf lib/ dist/');
+// const clear = project.addTask('clear-lib-and-dist');
+// clear.exec('rm -rf lib/ dist/');
 
 project.package.setScript('prepare', 'husky');
 project.gitignore.addPatterns('.dlz-reports');

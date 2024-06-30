@@ -41,14 +41,6 @@
       ],
       "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
     },
-    "clear-lib-and-dist": {
-      "name": "clear-lib-and-dist",
-      "steps": [
-        {
-          "exec": "rm -rf lib/ dist/"
-        }
-      ]
-    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",

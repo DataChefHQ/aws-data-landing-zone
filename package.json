@@ -7,7 +7,6 @@
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
-    "clear-lib-and-dist": "npx projen clear-lib-and-dist",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",
