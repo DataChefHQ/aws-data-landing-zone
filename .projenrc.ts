@@ -8,8 +8,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // https://github.com/projen/projen/pull/3459/files Not yet in the latest projen template started
   jsiiVersion: '~5.3.0',
   typescriptVersion: '~5.3.0',
-  // name: '@DataChefHQ/data-landing-zone', //TODO: Change back when using NPM
-  name: 'data-landing-zone', //TODO: Change back when using NPM
+  name: '@DataChefHQ/data-landing-zone', //TODO: Change back when using NPM
+  // name: 'data-landing-zone', //TODO: Change back when using NPM
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
   repositoryUrl: 'https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git',
