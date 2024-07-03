@@ -33,6 +33,10 @@
       "type": "build"
     },
     {
+      "name": "husky",
+      "type": "build"
+    },
+    {
       "name": "jest",
       "type": "build"
     },

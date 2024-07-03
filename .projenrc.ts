@@ -44,7 +44,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table'],
   // description: undefined,
   /* Build dependencies for this repo/module. */
-  // devDeps: ['husky'],
+  devDeps: ['husky'],
   /* The "name" in package.json. */
   // packageName: undefined,
   jestOptions: {
@@ -63,7 +63,7 @@ project.package.addEngine('npm', '~10.*');
 // const clear = project.addTask('clear-lib-and-dist');
 // clear.exec('rm -rf lib/ dist/');
 
-// project.package.setScript('prepare', 'husky');
+project.package.setScript('prepare', 'husky');
 
 project.gitignore.addPatterns('.dlz-reports');
 project.gitignore.addPatterns('.idea');
