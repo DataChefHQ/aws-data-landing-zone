@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+[ "$CI" = "true" ] && exit 0
+
 npm run eslint
 npm run default
 npm run build
