@@ -41,10 +41,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   /* Runtime dependencies of this module that are jsii-enabled. */
   // deps: [ ],
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
-  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table'],
+  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table', 'husky'],
   // description: undefined,
   /* Build dependencies for this repo/module. */
-  devDeps: ['husky'],
+  // devDeps: ['husky'], //TODO: Just test
   /* The "name" in package.json. */
   // packageName: undefined,
   jestOptions: {
@@ -64,6 +64,7 @@ project.package.addEngine('npm', '~10.*');
 // clear.exec('rm -rf lib/ dist/');
 
 project.package.setScript('prepare', 'husky');
+
 
 project.gitignore.addPatterns('.dlz-reports');
 project.gitignore.addPatterns('.idea');
