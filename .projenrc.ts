@@ -63,7 +63,7 @@ project.package.addEngine('npm', '~10.*');
 // const clear = project.addTask('clear-lib-and-dist');
 // clear.exec('rm -rf lib/ dist/');
 
-project.package.setScript('prepare', 'husky');
+project.package.setScript('prepare', 'if [ "$CI" != "1" ]; then husky; fi');
 
 
 project.gitignore.addPatterns('.dlz-reports');

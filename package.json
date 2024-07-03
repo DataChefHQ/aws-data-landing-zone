@@ -28,7 +28,7 @@
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen",
-    "prepare": "husky"
+    "prepare": "if [ \"$CI\" != \"1\" ]; then husky; fi"
   },
   "author": {
     "name": "DataChefHQ",
