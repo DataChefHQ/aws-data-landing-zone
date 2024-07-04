@@ -34,6 +34,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   workflowNodeVersion: '20',
+  // Need to specify for the `package:python` command to be available to be used locally. The `release.yml` GH Workflow
+  // will fail to publish as these secrets have not been set.
+  // TODO: Change the workflow to not publish to PyPi
   publishToPypi: {
     distName: 'recipes_dlz',
     module: 'recipes_dlz',

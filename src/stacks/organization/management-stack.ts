@@ -254,7 +254,7 @@ export class ManagementStack extends DlzStack {
     const role = new iam.Role(this, this.resourceName('git-hub-deploy-role'), {
       roleName: this.resourceName('git-hub-deploy-role'),
       assumedBy: new iam.WebIdentityPrincipal(githubProvider.openIdConnectProviderArn, conditions),
-      // managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
+      managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
       inlinePolicies: {
         'cdk-assume': new iam.PolicyDocument({
           statements: [
