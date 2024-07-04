@@ -34,9 +34,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   workflowNodeVersion: '20',
-  // Need to specify for the `package:python` command to be available to be used locally. The `release.yml` GH Workflow
-  // will fail to publish as these secrets have not been set.
-  // TODO: Change the workflow to not publish to PyPi
+  // Publishing disabled as no secrets are set yet.
   publishToPypi: {
     distName: 'recipes_dlz',
     module: 'recipes_dlz',
@@ -60,6 +58,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
 project.package.addEngine('node', '~20.*');
 project.package.addEngine('npm', '~10.*');
+
+// `publishToPypi` needs to be specified above for the `package:python` command to be available to be used locally.
+// The `release.yml` GH Workflow will fail to publish a new GH release as teh secrets have not been set to publish to
+// PyPi in the `release_python` job. The GitHub release depends on both of these jobs. For now we need to remove the
+// `release_python` dependency so that the GH release is created. This is needed for Projen to know what the next
+// version is when it publishes.
+const releaseWorkflow = project.tryFindObjectFile('.github/workflows/release.yml');
+releaseWorkflow?.addOverride('jobs.release_github.needs', ['release', 'release_npm']);
 
 // Need to clear before compiling and packaging. Have to remove these because they are not cleared for some reason,
 // only new files are added and it causes issues especially because when changing the folder structure the whole time.
