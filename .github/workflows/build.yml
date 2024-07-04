@@ -111,8 +111,6 @@ jobs:
         run: cd .repo && npx projen package:js
       - name: Collect js Artifact
         run: mv .repo/dist dist
-    env:
-      CI: "true"
   package-python:
     needs: build
     runs-on: ubuntu-latest
