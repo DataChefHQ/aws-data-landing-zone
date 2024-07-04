@@ -1,4 +1,6 @@
+import * as assert from 'assert';
 import { Annotations } from 'aws-cdk-lib';
+import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
@@ -31,6 +33,10 @@ export class ManagementStack extends DlzStack {
     this.suspendedOuPolicies();
 
     this.budgets();
+
+    if (this.props.deploymentPlatform?.gitHub) {
+      this.deploymentPlatformGitHub();
+    }
   }
 
   /**
@@ -227,5 +233,50 @@ export class ManagementStack extends DlzStack {
     for (const budget of this.props.budgets ) {
       new Budget(this, this.resourceName(`budget-${budget.name}`), budget);
     }
+  }
+
+  deploymentPlatformGitHub() {
+    const githubProvider = new iam.OpenIdConnectProvider(this, this.resourceName('git-hub-provider'), {
+      url: 'https://token.actions.githubusercontent.com',
+      clientIds: ['sts.amazonaws.com'],
+    });
+
+    assert.ok(this.props.deploymentPlatform?.gitHub?.references);
+    const gitReferences = this.props.deploymentPlatform?.gitHub?.references.map(r => `repo:${r.owner}/${r.repo}:${r.filter ?? '*'}`);
+
+    const conditions: iam.Conditions = {
+      StringEquals: { 'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com' },
+      StringLike: {
+        ['token.actions.githubusercontent.com:sub']: gitReferences,
+      },
+    };
+
+    const role = new iam.Role(this, this.resourceName('git-hub-deploy-role'), {
+      roleName: this.resourceName('git-hub-deploy-role'),
+      assumedBy: new iam.WebIdentityPrincipal(githubProvider.openIdConnectProviderArn, conditions),
+      // managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
+      inlinePolicies: {
+        'cdk-assume': new iam.PolicyDocument({
+          statements: [
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: [
+                'sts:AssumeRole',
+                'iam:PassRole',
+              ],
+              resources: ['arn:aws:iam::*:role/cdk-hnb659fds-'],
+            }),
+          ],
+        }),
+      },
+      description: 'This role is used via GitHub Actions to deploy with AWS CDK target AWS account',
+      maxSessionDuration: cdk.Duration.hours(12),
+    });
+
+    new cdk.CfnOutput(this, this.resourceName('git-hub-deploy-role-out'), {
+      value: role.roleArn,
+      description: 'Arn for AWS IAM role with Github oidc auth',
+      exportName: this.resourceName('git-hub-deploy-role'),
+    });
   }
 }

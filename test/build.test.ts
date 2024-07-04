@@ -28,6 +28,10 @@ test('Local build and debug', () => {
       global: Region.EU_WEST_1,
       regional: [Region.US_EAST_1],
     },
+    denyServiceList: [
+      ...Defaults.denyServiceList(),
+      'ecs:*',
+    ],
     mandatoryTags: {
       owner: ['backend'],
       project: ['accounting-internal'],
@@ -113,8 +117,6 @@ test('Local build and debug', () => {
           DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3,
         ],
       },
-
-
       ous: {
         security: {
           ouId: 'ou-vh4d-lpyovlyp',
@@ -130,54 +132,40 @@ test('Local build and debug', () => {
         workloads: {
           ouId: 'ou-vh4d-nc2zzf9z',
 
-          // Small Org, all workloads/projects in the same accounts
+          // Big Org, all workloads/projects per account
           accounts: [
             {
-              name: 'development',
+              name: 'project-1-develop',
               accountId: '381491899779',
               type: DlzAccountType.DEVELOP,
             },
             {
-              name: 'production',
-              accountId: '891377027267',
+              name: 'project-1-production',
+              accountId: '234567890123',
+              type: DlzAccountType.PRODUCTION,
+            },
+
+            {
+              name: 'project-2-develop',
+              accountId: '1111',
+              type: DlzAccountType.DEVELOP,
+            },
+            {
+              name: 'project-2-test',
+              accountId: '22222',
+              type: DlzAccountType.DEVELOP,
+            },
+            {
+              name: 'project-2-stage',
+              accountId: '333333',
+              type: DlzAccountType.DEVELOP,
+            },
+            {
+              name: 'project-2-production',
+              accountId: '4444444',
               type: DlzAccountType.PRODUCTION,
             },
           ],
-
-          // // Big Org, all workloads/projects per account
-          // accounts: [
-          //   {
-          //     name: 'project-1-develop',
-          //     accountId: '381491899779',
-          //     type: DlzAccountType.DEVELOP,
-          //   },
-          //   {
-          //     name: 'project-1-production',
-          //     accountId: '234567890123',
-          //     type: DlzAccountType.PRODUCTION,
-          //   },
-          //
-          //   {
-          //     name: 'project-2-develop',
-          //     accountId: '1111',
-          //     type: DlzAccountType.DEVELOP,
-          //   },
-          //   {
-          //     name: 'project-2-test',
-          //     accountId: '22222',
-          //     type: DlzAccountType.DEVELOP,
-          //   },
-          //   {
-          //     name: 'project-3-stage',
-          //     accountId: '333333',
-          //     type: DlzAccountType.DEVELOP,
-          //   },
-          //   {
-          //     name: 'project-2-production',
-          //     accountId: '4444444',
-          //     type: DlzAccountType.PRODUCTION,
-          //   },
-          // ]
 
           // controls: [ ] //This will be possible but has not been done...
         },
@@ -185,7 +173,20 @@ test('Local build and debug', () => {
           ouId: 'ou-vh4d-rhcmhzsy',
         },
       },
+
     },
+    deploymentPlatform: {
+      gitHub: {
+        references: [
+          { owner: 'DataChefHQ', repo: 'recipes_data-landing-zone_data-landing-zone-sandbox' },
+          // { owner: "DataChefHQ", repo: 'recipes_data-landing-zone_data-landing-zone-sandbox', filter: "main"}
+        ],
+      },
+    },
+
+    printDeploymentOrder: false,
+    saveReport: false,
+    printReport: false,
   });
 
   // assert.ok(managementStack);

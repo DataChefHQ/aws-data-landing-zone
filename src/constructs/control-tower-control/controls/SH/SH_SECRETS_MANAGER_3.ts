@@ -1,5 +1,4 @@
-import { DlzControlTowerStandardControls } from '../';
-import { DlzControlTowerControlFormat, IDlzControlTowerControl } from '../index';
+import { DlzControlTowerStandardControls, DlzControlTowerControlFormat, IDlzControlTowerControl } from '../';
 
 /**
  * This control checks whether your secrets have been accessed within a specified number of days. The default value

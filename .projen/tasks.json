@@ -283,7 +283,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-docgen,jsii-pacmak,jsii-rosetta,jsii,projen,ts-jest,ts-node,typescript,@aws-sdk/client-cost-explorer,@aws-sdk/client-sts,@aws-sdk/credential-providers,execa,table"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-docgen,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-sts,@aws-sdk/credential-providers,table"
         },
         {
           "exec": "npm install"

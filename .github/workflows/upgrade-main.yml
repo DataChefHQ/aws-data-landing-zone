@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
       - name: Install dependencies
         run: npm ci
       - name: Upgrade dependencies
@@ -31,6 +31,7 @@ jobs:
         run: |-
           git add .
           git diff --staged --patch --exit-code > .repo.patch || echo "patch_created=true" >> $GITHUB_OUTPUT
+        working-directory: ./
       - name: Upload patch
         if: steps.create_patch.outputs.patch_created
         uses: actions/upload-artifact@v4
