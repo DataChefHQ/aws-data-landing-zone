@@ -63,7 +63,7 @@ project.package.addEngine('npm', '~10.*');
 // const clear = project.addTask('clear-lib-and-dist');
 // clear.exec('rm -rf lib/ dist/');
 
-project.package.setScript('prepare', 'if [ "$CI" == "true" ]; then echo "CI detected, not running husky"; else husky; fi');
+project.package.setScript('prepare', 'if [ "$CI" = "true" ]; then echo "CI detected, not running husky"; else husky; fi');
 const buildWorkflow = project.tryFindObjectFile('.github/workflows/build.yml');
 buildWorkflow?.addOverride('jobs.package-js.env.CI', 'true');
 // buildWorkflow?.addOverride('jobs.package-js.steps.5.run', 'cd .repo && npm install');

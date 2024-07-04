@@ -28,7 +28,7 @@
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen",
-    "prepare": "if [ \"$CI\" == \"true\" ]; then echo \"CI detected, not running husky\"; else husky; fi"
+    "prepare": "if [ \"$CI\" = \"true\" ]; then echo \"CI detected, not running husky\"; else husky; fi"
   },
   "author": {
     "name": "DataChefHQ",
