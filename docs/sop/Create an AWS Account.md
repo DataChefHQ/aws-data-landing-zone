@@ -6,6 +6,9 @@
 
 ### Create Account in the AWS Console
 
+> [!CAUTION]
+> Ensure that the [Account Factory Settings](Account%20Factory%20Settings.md) are correct before creating the account.
+
 1. Log in to the Management Account and navigate to Control Tower (CT), ensure you are in the correct region.
 1. Click on the `Account Factory` in the left-hand menu. Then on `Create Account`.
 1. Fill all the details in. 
