@@ -10,7 +10,6 @@ export class Defaults {
   public static denyServiceList() {
     return [
       'eks:*',
-      'ec2:*',
     ];
   }
 
