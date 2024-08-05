@@ -5,16 +5,46 @@ import { groupByField } from '../../lib';
 import { DlzStack } from '../dlz-stack/index';
 
 export interface DlzSubnetProps {
+  /**
+   * A Segment name is a grouping of subnets and is the route table the subnets will be long to.
+   */
   readonly segment: string;
+
+  /**
+   * The name of the subnet, must be unique within the segment
+   */
   readonly name: string;
+
+  /**
+   * The CIDR block of the subnet
+   */
   readonly cidr: string;
-  readonly az: string;
+
+  /**
+   * Optional. The Availability Zone of the subnet, if not specified a random AZ will be selected
+   */
+  readonly az?: string;
 }
 
 export interface DlzVpcProps {
+  /**
+   * The region where the VPC will be created
+   */
   readonly region: Region;
+
+  /**
+   * The name of the VPC, must be unique within the region
+   */
   readonly name: string;
+
+  /**
+   * The CIDR block of the VPC
+   */
   readonly cidr: string;
+
+  /**
+   * The subnets to be created in the VPC
+   */
   readonly subnets: DlzSubnetProps[];
 }
 

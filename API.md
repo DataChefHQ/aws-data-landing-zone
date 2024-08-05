@@ -10110,20 +10110,10 @@ const dlzSubnetProps: DlzSubnetProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az">az</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.cidr">cidr</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment">segment</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `az`<sup>Required</sup> <a name="az" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az"></a>
-
-```typescript
-public readonly az: string;
-```
-
-- *Type:* string
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block of the subnet. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name">name</a></code> | <code>string</code> | The name of the subnet, must be unique within the segment. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment">segment</a></code> | <code>string</code> | A Segment name is a grouping of subnets and is the route table the subnets will be long to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az">az</a></code> | <code>string</code> | Optional. |
 
 ---
 
@@ -10135,6 +10125,8 @@ public readonly cidr: string;
 
 - *Type:* string
 
+The CIDR block of the subnet.
+
 ---
 
 ##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name"></a>
@@ -10145,6 +10137,8 @@ public readonly name: string;
 
 - *Type:* string
 
+The name of the subnet, must be unique within the segment.
+
 ---
 
 ##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment"></a>
@@ -10154,6 +10148,22 @@ public readonly segment: string;
 ```
 
 - *Type:* string
+
+A Segment name is a grouping of subnets and is the route table the subnets will be long to.
+
+---
+
+##### `az`<sup>Optional</sup> <a name="az" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az"></a>
+
+```typescript
+public readonly az: string;
+```
+
+- *Type:* string
+
+Optional.
+
+The Availability Zone of the subnet, if not specified a random AZ will be selected
 
 ---
 
@@ -10282,10 +10292,10 @@ const dlzVpcProps: DlzVpcProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.cidr">cidr</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.region">region</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Region">Region</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block of the VPC. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.name">name</a></code> | <code>string</code> | The name of the VPC, must be unique within the region. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.region">region</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Region">Region</a></code> | The region where the VPC will be created. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]</code> | The subnets to be created in the VPC. |
 
 ---
 
@@ -10297,6 +10307,8 @@ public readonly cidr: string;
 
 - *Type:* string
 
+The CIDR block of the VPC.
+
 ---
 
 ##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.name"></a>
@@ -10306,6 +10318,8 @@ public readonly name: string;
 ```
 
 - *Type:* string
+
+The name of the VPC, must be unique within the region.
 
 ---
 
@@ -10317,6 +10331,8 @@ public readonly region: Region;
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
 
+The region where the VPC will be created.
+
 ---
 
 ##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets"></a>
@@ -10326,6 +10342,8 @@ public readonly subnets: DlzSubnetProps[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]
+
+The subnets to be created in the VPC.
 
 ---
 
