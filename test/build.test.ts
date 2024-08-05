@@ -138,33 +138,131 @@ test('Local build and debug', () => {
               name: 'project-1-develop',
               accountId: '381491899779',
               type: DlzAccountType.DEVELOP,
+              vpcs: [
+                {
+                  name: 'default',
+                  region: Region.US_EAST_1,
+                  cidr: '10.0.0.0/16',
+                  subnets: [
+                    /* Evenly divide, each /19 = 8k hosts */
+                    {
+                      segment: 'private',
+                      name: 'private-1',
+                      cidr: '10.0.0.0/19',
+                      az: 'us-east-1a',
+                    },
+                    {
+                      segment: 'private',
+                      name: 'private-2',
+                      cidr: '10.0.32.0/19',
+                      az: 'us-east-1b',
+                    },
+                    {
+                      segment: 'private',
+                      name: 'private-3',
+                      cidr: '10.0.64.0/19',
+                      az: 'us-east-1c',
+                    },
+                    {
+                      segment: 'public',
+                      name: 'public-1',
+                      cidr: '10.0.96.0/19',
+                      az: 'us-east-1a',
+                    },
+                    {
+                      segment: 'public',
+                      name: 'public-2',
+                      cidr: '10.0.128.0/19',
+                      az: 'us-east-1a',
+                    },
+                    {
+                      segment: 'public',
+                      name: 'public-3',
+                      cidr: '10.0.160.0/19',
+                      az: 'us-east-1a',
+                    },
+                    /* Remaining:
+                    *  - 10.0.192.0/19
+                    *  - 10.0.224.0/19
+                    * */
+                  ],
+                },
+                {
+                  name: 'default',
+                  region: Region.EU_WEST_1,
+                  cidr: '10.1.0.0/16',
+                  subnets: [
+                    /* Evenly divide, each /19 = 8k hosts */
+                    {
+                      segment: 'private',
+                      name: 'private-1',
+                      cidr: '10.1.0.1/19',
+                      az: 'us-east-1a',
+                    },
+                    {
+                      segment: 'private',
+                      name: 'private-2',
+                      cidr: '10.1.32.0/19',
+                      az: 'us-east-1b',
+                    },
+                    {
+                      segment: 'private',
+                      name: 'private-3',
+                      cidr: '10.1.64.0/19',
+                      az: 'us-east-1c',
+                    },
+                    {
+                      segment: 'public',
+                      name: 'public-1',
+                      cidr: '10.1.96.0/19',
+                      az: 'us-east-1a',
+                    },
+                    {
+                      segment: 'public',
+                      name: 'public-2',
+                      cidr: '10.1.128.0/19',
+                      az: 'us-east-1a',
+                    },
+                    {
+                      segment: 'public',
+                      name: 'public-3',
+                      cidr: '10.1.160.0/19',
+                      az: 'us-east-1a',
+                    },
+                    /* Remaining:
+                    *  - 10.1.192.0/19
+                    *  - 10.1.224.0/19
+                    * */
+                  ],
+                },
+              ],
             },
-            {
-              name: 'project-1-production',
-              accountId: '234567890123',
-              type: DlzAccountType.PRODUCTION,
-            },
-
-            {
-              name: 'project-2-develop',
-              accountId: '1111',
-              type: DlzAccountType.DEVELOP,
-            },
-            {
-              name: 'project-2-test',
-              accountId: '22222',
-              type: DlzAccountType.DEVELOP,
-            },
-            {
-              name: 'project-2-stage',
-              accountId: '333333',
-              type: DlzAccountType.DEVELOP,
-            },
-            {
-              name: 'project-2-production',
-              accountId: '4444444',
-              type: DlzAccountType.PRODUCTION,
-            },
+          //   {
+          //     name: 'project-1-production',
+          //     accountId: '234567890123',
+          //     type: DlzAccountType.PRODUCTION,
+          //   },
+          //
+          //   {
+          //     name: 'project-2-develop',
+          //     accountId: '1111',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-2-test',
+          //     accountId: '22222',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-2-stage',
+          //     accountId: '333333',
+          //     type: DlzAccountType.DEVELOP,
+          //   },
+          //   {
+          //     name: 'project-2-production',
+          //     accountId: '4444444',
+          //     type: DlzAccountType.PRODUCTION,
+          //   },
           ],
 
           // controls: [ ] //This will be possible but has not been done...

@@ -56,6 +56,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   npmRegistryUrl: 'https://npm.pkg.github.com',
 });
 
+project.eslint!.addRules({
+  'no-bitwise': 'off',
+});
+
 project.package.addEngine('node', '~20.*');
 project.package.addEngine('npm', '~10.*');
 

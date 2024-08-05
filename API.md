@@ -1833,13 +1833,13 @@ public readonly id: string;
 ```typescript
 import { DevelopGlobalStack } from '@DataChefHQ/data-landing-zone'
 
-new DevelopGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new DevelopGlobalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
@@ -1852,7 +1852,7 @@ new DevelopGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataL
 
 ##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
 
 ---
 
@@ -2745,13 +2745,13 @@ public readonly id: string;
 ```typescript
 import { DevelopRegionalStack } from '@DataChefHQ/data-landing-zone'
 
-new DevelopRegionalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new DevelopRegionalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
@@ -2764,7 +2764,7 @@ new DevelopRegionalStack(scope: Construct, stackProps: DlzStackProps, props: Dat
 
 ##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
 
 ---
 
@@ -7327,13 +7327,13 @@ public readonly topic: Topic;
 ```typescript
 import { ProductionGlobalStack } from '@DataChefHQ/data-landing-zone'
 
-new ProductionGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new ProductionGlobalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
@@ -7346,7 +7346,7 @@ new ProductionGlobalStack(scope: Construct, stackProps: DlzStackProps, props: Da
 
 ##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
 
 ---
 
@@ -8239,13 +8239,13 @@ public readonly id: string;
 ```typescript
 import { ProductionRegionalStack } from '@DataChefHQ/data-landing-zone'
 
-new ProductionRegionalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new ProductionRegionalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
@@ -8258,7 +8258,7 @@ new ProductionRegionalStack(scope: Construct, stackProps: DlzStackProps, props: 
 
 ##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
 
 ---
 
@@ -9635,6 +9635,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
 
@@ -9665,6 +9666,16 @@ public readonly type: DlzAccountType;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzAccountType">DlzAccountType</a>
+
+---
+
+##### `vpcs`<sup>Required</sup> <a name="vpcs" id="@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs"></a>
+
+```typescript
+public readonly vpcs: DlzVpcProps[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]
 
 ---
 
@@ -10085,6 +10096,67 @@ public readonly name: DlzStackNameProps;
 
 ---
 
+### DlzSubnetProps <a name="DlzSubnetProps" id="@DataChefHQ/data-landing-zone.DlzSubnetProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.Initializer"></a>
+
+```typescript
+import { DlzSubnetProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzSubnetProps: DlzSubnetProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az">az</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.cidr">cidr</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `az`<sup>Required</sup> <a name="az" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az"></a>
+
+```typescript
+public readonly az: string;
+```
+
+- *Type:* string
+
+---
+
+##### `cidr`<sup>Required</sup> <a name="cidr" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.cidr"></a>
+
+```typescript
+public readonly cidr: string;
+```
+
+- *Type:* string
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment"></a>
+
+```typescript
+public readonly segment: string;
+```
+
+- *Type:* string
+
+---
+
 ### DlzTag <a name="DlzTag" id="@DataChefHQ/data-landing-zone.DlzTag"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzTag.Initializer"></a>
@@ -10193,6 +10265,67 @@ public readonly targetIds: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+### DlzVpcProps <a name="DlzVpcProps" id="@DataChefHQ/data-landing-zone.DlzVpcProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzVpcProps.Initializer"></a>
+
+```typescript
+import { DlzVpcProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzVpcProps: DlzVpcProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.cidr">cidr</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.region">region</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Region">Region</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]</code> | *No description.* |
+
+---
+
+##### `cidr`<sup>Required</sup> <a name="cidr" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.cidr"></a>
+
+```typescript
+public readonly cidr: string;
+```
+
+- *Type:* string
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.region"></a>
+
+```typescript
+public readonly region: Region;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
+
+---
+
+##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets"></a>
+
+```typescript
+public readonly subnets: DlzSubnetProps[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]
 
 ---
 
@@ -10332,6 +10465,184 @@ public readonly project: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+### NetworkEntity <a name="NetworkEntity" id="@DataChefHQ/data-landing-zone.NetworkEntity"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkEntity.Initializer"></a>
+
+```typescript
+import { NetworkEntity } from '@DataChefHQ/data-landing-zone'
+
+const networkEntity: NetworkEntity = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.routeTables">routeTables</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable">NetworkEntityRouteTable</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet">NetworkEntitySubnet</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.vpc">vpc</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a></code> | *No description.* |
+
+---
+
+##### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.dlzAccount"></a>
+
+```typescript
+public readonly dlzAccount: DLzAccount;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
+##### `routeTables`<sup>Required</sup> <a name="routeTables" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.routeTables"></a>
+
+```typescript
+public readonly routeTables: NetworkEntityRouteTable[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable">NetworkEntityRouteTable</a>[]
+
+---
+
+##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.subnets"></a>
+
+```typescript
+public readonly subnets: NetworkEntitySubnet[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet">NetworkEntitySubnet</a>[]
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.vpc"></a>
+
+```typescript
+public readonly vpc: NetworkEntityVpc;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>
+
+---
+
+### NetworkEntityRouteTable <a name="NetworkEntityRouteTable" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.Initializer"></a>
+
+```typescript
+import { NetworkEntityRouteTable } from '@DataChefHQ/data-landing-zone'
+
+const networkEntityRouteTable: NetworkEntityRouteTable = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.routeTable">routeTable</a></code> | <code>aws-cdk-lib.aws_ec2.CfnRouteTable</code> | *No description.* |
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+##### `routeTable`<sup>Required</sup> <a name="routeTable" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.routeTable"></a>
+
+```typescript
+public readonly routeTable: CfnRouteTable;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.CfnRouteTable
+
+---
+
+### NetworkEntitySubnet <a name="NetworkEntitySubnet" id="@DataChefHQ/data-landing-zone.NetworkEntitySubnet"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkEntitySubnet.Initializer"></a>
+
+```typescript
+import { NetworkEntitySubnet } from '@DataChefHQ/data-landing-zone'
+
+const networkEntitySubnet: NetworkEntitySubnet = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.subnet">subnet</a></code> | <code>aws-cdk-lib.aws_ec2.CfnSubnet</code> | *No description.* |
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+##### `subnet`<sup>Required</sup> <a name="subnet" id="@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.subnet"></a>
+
+```typescript
+public readonly subnet: CfnSubnet;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.CfnSubnet
+
+---
+
+### NetworkEntityVpc <a name="NetworkEntityVpc" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc.Initializer"></a>
+
+```typescript
+import { NetworkEntityVpc } from '@DataChefHQ/data-landing-zone'
+
+const networkEntityVpc: NetworkEntityVpc = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.CfnVPC</code> | *No description.* |
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.vpc"></a>
+
+```typescript
+public readonly vpc: CfnVPC;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.CfnVPC
 
 ---
 
@@ -11032,6 +11343,56 @@ public readonly slackWorkspaceId: string;
 
 ---
 
+### WorkloadAccountProps <a name="WorkloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps.Initializer"></a>
+
+```typescript
+import { WorkloadAccountProps } from '@DataChefHQ/data-landing-zone'
+
+const workloadAccountProps: WorkloadAccountProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
+
+---
+
+##### `env`<sup>Required</sup> <a name="env" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.env"></a>
+
+```typescript
+public readonly env: Environment;
+```
+
+- *Type:* aws-cdk-lib.Environment
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.name"></a>
+
+```typescript
+public readonly name: DlzStackNameProps;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a>
+
+---
+
+##### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.dlzAccount"></a>
+
+```typescript
+public readonly dlzAccount: DLzAccount;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
 ## Classes <a name="Classes" id="Classes"></a>
 
 ### AccountChatbots <a name="AccountChatbots" id="@DataChefHQ/data-landing-zone.AccountChatbots"></a>
@@ -11716,6 +12077,114 @@ public readonly reportResource: ReportResource;
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.ReportResource">ReportResource</a>
 
 ---
+
+
+### DlzVpc <a name="DlzVpc" id="@DataChefHQ/data-landing-zone.DlzVpc"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzVpc.Initializer"></a>
+
+```typescript
+import { DlzVpc } from '@DataChefHQ/data-landing-zone'
+
+new DlzVpc(dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzStack">dlzStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzVpc">dlzVpc</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a></code> | *No description.* |
+
+---
+
+##### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzAccount"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
+##### `dlzStack`<sup>Required</sup> <a name="dlzStack" id="@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzStack"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a>
+
+---
+
+##### `dlzVpc`<sup>Required</sup> <a name="dlzVpc" id="@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzVpc"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>
+
+---
+
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.property.networkEntity">networkEntity</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity">NetworkEntity</a></code> | *No description.* |
+
+---
+
+##### `networkEntity`<sup>Required</sup> <a name="networkEntity" id="@DataChefHQ/data-landing-zone.DlzVpc.property.networkEntity"></a>
+
+```typescript
+public readonly networkEntity: NetworkEntity;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntity">NetworkEntity</a>
+
+---
+
+
+### NetworkEntities <a name="NetworkEntities" id="@DataChefHQ/data-landing-zone.NetworkEntities"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.NetworkEntities.Initializer"></a>
+
+```typescript
+import { NetworkEntities } from '@DataChefHQ/data-landing-zone'
+
+new NetworkEntities()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntities.add">add</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntities.vpcExists">vpcExists</a></code> | *No description.* |
+
+---
+
+##### `add` <a name="add" id="@DataChefHQ/data-landing-zone.NetworkEntities.add"></a>
+
+```typescript
+public add(networkEntity: NetworkEntity): void
+```
+
+###### `networkEntity`<sup>Required</sup> <a name="networkEntity" id="@DataChefHQ/data-landing-zone.NetworkEntities.add.parameter.networkEntity"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntity">NetworkEntity</a>
+
+---
+
+##### `vpcExists` <a name="vpcExists" id="@DataChefHQ/data-landing-zone.NetworkEntities.vpcExists"></a>
+
+```typescript
+public vpcExists(vpcId: string): boolean
+```
+
+###### `vpcId`<sup>Required</sup> <a name="vpcId" id="@DataChefHQ/data-landing-zone.NetworkEntities.vpcExists.parameter.vpcId"></a>
+
+- *Type:* string
+
+---
+
+
 
 
 ### Report <a name="Report" id="@DataChefHQ/data-landing-zone.Report"></a>
