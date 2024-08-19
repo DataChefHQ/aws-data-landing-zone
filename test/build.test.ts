@@ -10,6 +10,7 @@ import {
   Region, SecurityHubNotificationSeverity, SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
 } from '../src';
+import {NetworkAddress} from "../src/constructs/dlz-vpc/network-address";
 // import * as sns from 'aws-cdk-lib/aws-sns';
 
 test('Local build and debug', () => {
@@ -280,6 +281,24 @@ test('Local build and debug', () => {
           // { owner: "DataChefHQ", repo: 'recipes_data-landing-zone_data-landing-zone-sandbox', filter: "main"}
         ],
       },
+    },
+    network: {
+      connections: {
+        vpcPeering: [
+          {
+            name: 'p1-dev--ue1-default-priv--ew1-default-priv',
+            source: new NetworkAddress('project-1-develop', Region.US_EAST_1, 'default', 'private'),
+            destination: NetworkAddress.fromString('project-1-develop.eu-west-1.default.private'),
+            direction: 'source-to-destination',
+          },
+          {
+            name: 'p1-dev--ue1-default-pub--ew1-default-pub',
+            source: new NetworkAddress('project-1-develop', Region.US_EAST_1, 'default', 'private'),
+            destination: NetworkAddress.fromString('project-1-develop.eu-west-1.default.private'),
+            direction: 'source-to-destination',
+          }
+        ]
+      }
     },
 
     printDeploymentOrder: false,
