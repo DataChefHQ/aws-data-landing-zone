@@ -2,14 +2,16 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { DlzStack } from '../../../../constructs';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
-import { SharedWorkloads } from '../shared-workloads';
+import { Shared } from './shared';
 
-export class DevelopGlobalStack extends DlzStack {
+export class WorkloadGlobalStack extends DlzStack {
 
   constructor(scope: Construct, stackProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
     super(scope, stackProps);
 
-    new SharedWorkloads(this, this.props, stackProps.dlzAccount);
+    const shared = new Shared(this, this.props, stackProps.dlzAccount);
+    shared.configRuleRequiredTags();
+    shared.createVpcs();
 
     new sns.Topic(this, this.resourceName('test-topic'), {
       displayName: this.resourceName('test-topic'),
