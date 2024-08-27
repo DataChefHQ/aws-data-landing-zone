@@ -79,94 +79,79 @@ export class NetworkEntities {
   }
 
 
-  public getVpcEntitiesForAddress(networkAddress: NetworkAddress): NetworkEntity[] | undefined {
-    return this.networkEntities.filter(ne => {
-      const isVpcAddress = ne.vpc.address.isVpcAddress();
-      const isSameAccount = ne.vpc.address.account === networkAddress.account;
-      const isSameRegion = ne.vpc.address.region === networkAddress.region;
-      const isSameVpc = ne.vpc.address.vpc === networkAddress.vpc;
+  /**
+   * Get NetworkEntities for the given `networkAddress` and match on the given `matchOnAddress`. For example, if the
+   * `networkAddress` is a segment address and `matchOnAddress` has a value of `vpc` then it will return all
+   * NetworkEntities that have the same VPC as the `networkAddress`. Or, if the `matchOnAddress` has a value of
+   * `region` then it will return all NetworkEntities that have the same VPC region as the `networkAddress`.
+   *
+   * If the `matchOnAddress` is `account`, `region`, or `vpc` then the complete NetworkEntity will be returned.
+   * Else, if `matchOnAddress` is `segment` or `subnet` then a partial NetworkEntity will be returned. The
+   * `routeTables` and `subnets` will be filtered to only include those that match the `networkAddress`.
+   *
+   * Example:
+   *
+   * Given we have these NetworkEntity[]:
+   * 1. project-1-develop.us-east-1.default.private
+   * 2. project-1-develop.eu-west-1.default.private
+   * 3. project-1-production.eu-west-1.default.private
+   *
+   * - If the `networkAddress` has a `segment` address of: `project-1-develop.us-east-1.default.private` and the
+   *   `matchOnAddress` value is **`segment`**. Then it will only match the **first** entry of
+   *   `project-1-develop.us-east-1.default.private` and return a partial NetworkEntity with the VPC, and only
+   *   the routeTables and subnets that have the same segment address.
+   *
+   * - If the `networkAddress` has the same `segment` address of: `project-1-develop.us-east-1.default.private` and the
+   *   `matchOnAddress` value is changed to **`vpc`**. Then it will match the **first** and **second** entries
+   *    and return the complete NetworkEntity for each.
+   *
+   * @param networkAddress
+   * @param matchOnAddress
+   */
+  public getEntitiesForAddress(networkAddress: NetworkAddress,
+                               matchOnAddress: "account" | "region" | "vpc" | "segment" | "subnet"
+  ): NetworkEntity[] | undefined {
 
-      if (networkAddress.isAccountAddress()) {
-        return isVpcAddress && isSameAccount;
-      } else if (networkAddress.isRegionAddress()) {
-        return isVpcAddress && isSameAccount && isSameRegion;
-      } else if (networkAddress.isVpcAddress() || networkAddress.isSegmentAddress() || networkAddress.isSubnetAddress()) {
-        return isVpcAddress && isSameAccount && isSameRegion && isSameVpc;
+    const networkEntitiesMatch: NetworkEntity[] = [];
+    for(const ne of this.networkEntities) {
+      const isAccountMatch = ne.vpc.address.account === networkAddress.account;
+      const isRegionMatch = ne.vpc.address.region === networkAddress.region || networkAddress.region === undefined;
+      const isVpcMatch = ne.vpc.address.vpc === networkAddress.vpc || networkAddress.vpc === undefined;
+
+      if (matchOnAddress === "account" && isAccountMatch) {
+        networkEntitiesMatch.push(ne);
+      } else if (matchOnAddress === "region" && isAccountMatch && isRegionMatch) {
+        networkEntitiesMatch.push(ne);
       }
+      else if (matchOnAddress === "vpc" && isAccountMatch && isRegionMatch && isVpcMatch) {
+        networkEntitiesMatch.push(ne);
+      }
+      else if (matchOnAddress === "segment" && isAccountMatch && isRegionMatch && isVpcMatch) {
+        let partialNe = ne;
+          partialNe = {
+            ...partialNe,
+            routeTables: ne.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment),
+            subnets: ne.subnets.filter(subnet => subnet.address.segment === networkAddress.segment),
+          };
 
-      return false;
-    });
+          if(partialNe.routeTables.length !== 0) {
+            networkEntitiesMatch.push(partialNe);
+          }
+      }
+      else if (matchOnAddress === "subnet" && isAccountMatch && isRegionMatch && isVpcMatch ) {
+        let partialNe = ne;
+        partialNe = {
+          ...partialNe,
+          routeTables: ne.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment),
+          subnets: ne.subnets.filter(subnet => subnet.address.subnet === networkAddress.subnet),
+        }
+
+        if(partialNe.subnets.length !== 0) {
+          networkEntitiesMatch.push(partialNe);
+        }
+      }
+    }
+
+    return networkEntitiesMatch;
   }
-//   public getVpcEntitiesForAddress(networkAddress: NetworkAddress): NetworkEntity[] | undefined {
-//     if (networkAddress.isAccountAddress()) {
-//       return this.networkEntities.filter(ne =>
-//         ne.vpc.address.isVpcAddress() &&
-//         ne.vpc.address.account === networkAddress.account
-//       );
-//     } else if (networkAddress.isRegionAddress()) {
-//       return this.networkEntities.filter(ne =>
-//         ne.vpc.address.isVpcAddress() &&
-//         ne.vpc.address.account === networkAddress.account &&
-//         ne.vpc.address.region === networkAddress.region
-//       );
-//     } else if (networkAddress.isVpcAddress() || networkAddress.isSegmentAddress() || networkAddress.isSubnetAddress())
-//     {
-//
-//       return this.networkEntities.filter(ne =>
-//         ne.vpc.address.isVpcAddress() &&
-//         ne.vpc.address.account === networkAddress.account &&
-//         ne.vpc.address.region === networkAddress.region &&
-//         ne.vpc.address.vpc === networkAddress.vpc
-//       );
-//     }
-//
-//     return;
-//
-//
-//
-//
-//     /* Can always return a direct address for subnet, segment, vpc addresses */
-//     // const directVpcAddress = networkAddress.getVpcAddress(networkAddress);
-//     // if(!directVpcAddress) {
-//     //   return this.networkEntities.filter(ne => ne.vpc.address == directVpcAddress);
-//     // }
-//     // else {
-//     //   /* Need to find the VPCs for the given regional, and account address, there can be many */
-//     //
-//     //     if (networkAddress.isRegionAddress()) {
-//     //       const accountRegionVpcs = this.networkEntities.filter(ne =>
-//     //         ne.vpc.address.isVpcAddress() &&
-//     //         ne.vpc.address.account === networkAddress.region &&
-//     //         ne.vpc.address.region === networkAddress.account
-//     //       );
-//     //       return accountRegionVpcs;
-//     //       // const accountRegionVpcsUnique = uniqueValueByFunction(accountRegionVpcs, ne => (
-//     //       //   ne.vpc.address.account + ne.vpc.address.region
-//     //       // ));
-//     //       // return accountRegionVpcsUnique.map(ne => new NetworkEntity(ne.dlzAccount, ne.vpc, )
-//     //
-//     //     }
-//     //     else if (networkAddress.isAccountAddress()) {
-//     //       return this.networkEntities.filter(ne => ne.dlzAccount.name === networkAddress.account);
-//     //     }
-//     //
-//     // }
-// // -----
-//     // if(networkAddress.isSegmentAddress()) {
-//     //   const segmentVpcAddress = networkAddress.getVpcAddress(networkAddress);
-//     //   this.networkEntities.filter()
-//     // }
-//     // else if (networkAddress.isVpcAddress()) {
-//     //   easy just take vpc part in the address
-//     // }
-//     // else if (networkAddress.isRegionAddress()) {
-//     //   not easy - loop over all the network entities, for this account's' region and find all the VPCs
-//     // }
-//     // else if (networkAddress.isAccountAddress()) {
-//     //   not easy - loop over all the network entities, for this account in all regions and find all the VPCs
-//     // }
-//     // else {
-//     //   throw new Error('Invalid Network Address');
-//     // }
-//   }
 }

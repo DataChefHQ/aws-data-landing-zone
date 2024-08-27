@@ -15,63 +15,62 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
 
     for (const connection of this.props.network?.connections.vpcPeering || [])
     {
-      const sourceVpcs = networkEntities.getVpcEntitiesForAddress(connection.source);
-      if (!sourceVpcs?.length) {
+      // -4 because of stack name prefix of 'dlz-'
+      // -4 because all resources will have a short prefix for that resource like 'vpr-'
+      if (connection.name.length > 54) {
+        throw new Error(`VPC Peering Connection name" '${connection.name}' is too long, the maximum length is 54 characters.`);
+      }
+
+      const vpcSourceNetworkEntities = networkEntities.getEntitiesForAddress(connection.source, "vpc");
+      if (!vpcSourceNetworkEntities?.length) {
         throw new Error(`No VPCs found for VPC Peering source ${connection.source}`);
       }
-      if (sourceVpcs.length > 1) {
-        throw new Error(`Multiple VPCs found for VPC Peering source ${connection.source}`);
-      }
-      const sourceVpc = sourceVpcs[0];
 
-      const destinationtVpcs = networkEntities.getVpcEntitiesForAddress(connection.destination);
-      if (!destinationtVpcs?.length) {
-        throw new Error(`No VPCs found for VPC Peering destination ${connection.destination}`);
-      }
-
-      for(const destinationtVpc of destinationtVpcs) {
-
-        console.log(`Creating VPC Peering connection role '${connection.name}' between '${sourceVpc.vpc.address}' and '${destinationtVpc.vpc.address}'`)
-
-        /* Abbreviate vpc-peer-rule as vpr- */
-        const peeringRoleName = this.resourceName(`vpr-${sourceVpc.vpc.address}-${destinationtVpc.vpc.address}`);
-        if (peeringRoleName.length > 64) {
-          throw new Error(`VPC Peering Role name ${peeringRoleName} is too long`);
+      for (const vpcSourceNetworkEntity of vpcSourceNetworkEntities) {
+        const vpcDestinationNetworkEntities = networkEntities.getEntitiesForAddress(connection.destination, "vpc");
+        if (!vpcDestinationNetworkEntities?.length) {
+          throw new Error(`No VPCs found for VPC Peering destination ${connection.destination}`);
         }
 
-        const vpcPeeringRolesKey = `${sourceVpc.dlzAccount.accountId}-${destinationtVpc.dlzAccount.accountId}`;
-        /* Do not create a role if one already exists between accounts */
-        if (vpcPeeringRoles[vpcPeeringRolesKey]) {
-          continue;
-        }
+        for (const vpcDestinationNetworkEntity of vpcDestinationNetworkEntities) {
 
-        /* Only create on the destination VPC */
-        if(destinationtVpc.dlzAccount.accountId !== this.accountId) {      //TODO: Can not target the other stacks... Hmmm think about it...
-          continue;
-        }
-        vpcPeeringRoles[vpcPeeringRolesKey] = new iam.Role(this, peeringRoleName, {
-          roleName: peeringRoleName,
-          description: `VPC Peering Role for ${sourceVpc.vpc.address} to ${destinationtVpc.vpc.address}`,
-          assumedBy: new iam.AccountPrincipal(sourceVpc.dlzAccount.accountId),
-          inlinePolicies: {
-            "vpc-peering": new iam.PolicyDocument({
-              statements: [
-                new iam.PolicyStatement({
-                  actions: [
-                    "ec2:AcceptVpcPeeringConnection"
-                  ],
-                  resources: ["*"]
-                })
-              ]
-            })
+          console.log(`Creating VPC Peering connection role '${connection.name}' between '${vpcSourceNetworkEntity.vpc.address}' and '${vpcDestinationNetworkEntity.vpc.address}'`)
+
+          const peeringRoleName = this.resourceName(`vpc-peering-role-for-${vpcSourceNetworkEntity.vpc.address.account}`);
+          const vpcPeeringRolesKey = `${vpcSourceNetworkEntity.dlzAccount.accountId}-${vpcDestinationNetworkEntity.dlzAccount.accountId}`;
+
+          /* Do not create a role if one already exists between accounts */
+          if (vpcPeeringRoles[vpcPeeringRolesKey]) {
+            continue;
           }
-        })
+
+          /* Only create on the destination account */
+          if (vpcDestinationNetworkEntity.dlzAccount.accountId !== this.accountId) {
+            console.log(`Skipping VPC Peering connection role '${connection.name}' between '${vpcSourceNetworkEntity.vpc.address}' and '${vpcDestinationNetworkEntity.vpc.address}'`)
+            console.log(`Destination account id ${vpcDestinationNetworkEntity.dlzAccount.accountId} does not match this account id ${this.accountId}`)
+            continue;
+          }
+          console.log(`Creating VPC Peering role '${peeringRoleName}' between '${vpcSourceNetworkEntity.vpc.address}' and '${vpcDestinationNetworkEntity.vpc.address}'`)
+          vpcPeeringRoles[vpcPeeringRolesKey] = new iam.Role(this, peeringRoleName, {
+            roleName: peeringRoleName,
+            description: `VPC Peering Role for ${vpcSourceNetworkEntity.vpc.address} to ${vpcDestinationNetworkEntity.vpc.address}`,
+            assumedBy: new iam.AccountPrincipal(vpcSourceNetworkEntity.dlzAccount.accountId),
+            inlinePolicies: {
+              "vpc-peering": new iam.PolicyDocument({
+                statements: [
+                  new iam.PolicyStatement({
+                    actions: [
+                      "ec2:AcceptVpcPeeringConnection"
+                    ],
+                    resources: ["*"]
+                  })
+                ]
+              })
+            }
+          })
+        }
       }
-
-
-      // continue here ffs
     }
-
 
     new sns.Topic(this, this.resourceName('test-topic'), {
       displayName: this.resourceName('test-topic'),
