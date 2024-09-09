@@ -3,6 +3,10 @@ import { Construct } from 'constructs';
 import { DlzStack } from '../../../../constructs';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { Shared } from './shared';
+import * as iam from "aws-cdk-lib/aws-iam";
+import {SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX} from "../../constants";
+
+
 
 export class WorkloadGlobalStack extends DlzStack {
 
@@ -13,9 +17,32 @@ export class WorkloadGlobalStack extends DlzStack {
     shared.configRuleRequiredTags();
     shared.createVpcs();
 
+    this.ssmAssumeCrossAccountRole();
+
     new sns.Topic(this, this.resourceName('test-topic'), {
       displayName: this.resourceName('test-topic'),
       topicName: this.resourceName('test-topic'),
     });
   }
+
+  ssmAssumeCrossAccountRole() {
+    new iam.Role(this, SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, {
+      roleName: SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME,
+      description: `Role to be assumed by other accounts to read SSM parameters im this account`,
+      assumedBy: new iam.OrganizationPrincipal(this.props.organization.organizationId),
+      inlinePolicies: {
+        "ssmRead": new iam.PolicyDocument({
+          statements: [
+            new iam.PolicyStatement({
+              actions: [
+                "ssm:GetParameter"
+              ],
+              resources: [`arn:aws:ssm:${this.region}:${this.accountId}:parameter${SSM_PARAMETER_DLZ_PREFIX}*`]
+            })
+          ]
+        })
+      }
+    })
+  }
+
 }

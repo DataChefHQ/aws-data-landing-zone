@@ -31,4 +31,4 @@ channel is already defined and the permissions are different.
   - Make sure the correct number of network connections are created and only 1 role.
 - VPC Peering Connection Name
   - Length is within bounds
-  
+- Bidirectional VPC Peering and Routes

@@ -397,14 +397,14 @@ describe('CdkExpressPipelineLegacy', () => {
         connections: {
           vpcPeering: [
 
-            //  Only 1 role in the same account
-            // {
-            //   // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
-            //   name: 'p1d-ew1-def-priv--p1d-ue1-def-priv',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
-            //   destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.private'),
-            //   direction: 'source-to-destination',
-            // },
+             // Only 1 role in the same account
+            {
+              // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
+              name: 'p1d-ew1-def-priv--p1d-ue1-def-priv',
+              source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
+              destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.private'),
+              direction: 'source-to-destination',
+            },
             // {
             //   name: 'p1d-ew1-def-pub--p1d-ue1-def-pub',
             //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'public'),
@@ -427,14 +427,14 @@ describe('CdkExpressPipelineLegacy', () => {
             //   direction: 'source-to-destination',
             // },
 
-            // nope does not work???
-            // ALL VPCs in all regions of Dev routed to ALL in all regions of VPCs in prod.
-            {
-              name: 'p1d-all--p1p-all',
-              source: new NetworkAddress('project-1-develop'),
-              destination: NetworkAddress.fromString('project-1-production'),
-              direction: 'source-to-destination',
-            },
+            // // does this work?
+            // // ALL VPCs in all regions of Dev routed to ALL in all regions of VPCs in prod.
+            // {
+            //   name: 'p1d-all--p1p-all',
+            //   source: new NetworkAddress('project-1-develop'),
+            //   destination: NetworkAddress.fromString('project-1-production'),
+            //   direction: 'source-to-destination',
+            // },
 
           ]
         }
