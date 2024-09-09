@@ -90,20 +90,4 @@ export class NetworkAddress {
     return this.region !== undefined && this.vpc !== undefined && this.segment !== undefined && this.subnet !== undefined;
   }
 
-  /**
-   * Get the direct VPC Address from the given Network Address
-   * - If the Network Address is for a Subnet, this will return the VPC Network Address
-   * - If the Network Address is for a Segment, this will return the VPC Network Address
-   * - If the Network Address is for a VPC, this will return the VPC Network Address
-   * - Otherwise it returns undefined
-   * @param address
-   */
-  public getVpcAddress(address: NetworkAddress): NetworkAddress | undefined {
-    if(!address.isVpcAddress() || !address.isSegmentAddress() || !address.isSubnetAddress()) {
-      return;
-    }
-
-    return new NetworkAddress(this.account, this.region, this.vpc);
-  }
-
 }

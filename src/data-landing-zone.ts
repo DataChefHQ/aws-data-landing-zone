@@ -17,6 +17,9 @@ import { LogRegionalStack } from './stacks/organization/security/log/regional-st
 import {NetworkAddress} from "./constructs/dlz-vpc/network-address";
 import {WorkloadGlobalStack} from "./stacks/organization/workloads/base/global-stack";
 import {WorkloadRegionalStack} from "./stacks/organization/workloads/base/regional-stack";
+import {
+  WorkloadGlobalNetworkConnectionsPhase2Stack
+} from "./stacks/organization/workloads/network-connections-phase-2-stack/global-stack";
 
 
 /**
@@ -442,6 +445,7 @@ export class DataLandingZone {
   public workloadGlobalStacks: WorkloadGlobalStack[] = [];
   public workloadRegionalStacks: WorkloadRegionalStack[] = [];
   public workloadGlobalNetworkConnectionsPhase1Stacks: WorkloadGlobalNetworkConnectionsPhase1Stack[] = [];
+  public workloadGlobalNetworkConnectionsPhase2Stacks: WorkloadGlobalNetworkConnectionsPhase2Stack[] = [];
 
   constructor(private app: App, private props: DataLandingZoneProps) {
 
@@ -451,6 +455,7 @@ export class DataLandingZone {
     this.workloadGlobalStacks = this.stageWorkloadGlobalStacks();
     this.workloadRegionalStacks = this.stageWorkloadRegionalStacks();
     this.workloadGlobalNetworkConnectionsPhase1Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase1Stacks();
+    this.workloadGlobalNetworkConnectionsPhase2Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase2Stack();
 
     const deploymentOrder: DeploymentOrder =
     {
@@ -480,6 +485,9 @@ export class DataLandingZone {
 
       WorkloadsGlobalNetworkConnectionsPhase1Wave: {
         GlobalStage: this.workloadGlobalNetworkConnectionsPhase1Stacks
+      },
+      WorkloadRegionalNetworkConnectionsPhase2Stack: {
+        RegionalStage: this.workloadGlobalNetworkConnectionsPhase2Stacks
       },
 
 
@@ -652,6 +660,26 @@ export class DataLandingZone {
       }, this.props);
 
       workloadGlobalStacks.push(networkConnectionsPhase1Stack);
+    }
+    return workloadGlobalStacks;
+  }
+
+  private stageWorkloadGlobalNetworkConnectionsPhase2Stack() {
+    const ou = 'workloads';
+
+    const workloadGlobalStacks: WorkloadGlobalNetworkConnectionsPhase2Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const networkConnectionsPhase2Stack = new WorkloadGlobalNetworkConnectionsPhase2Stack(this.app, {
+        /* ncp2 abbreviation for NetworkConnectionsPhase2Stack */
+        name: {ou, account: dlzAccount.name, stack: 'ncp2-regional', region: this.props.regions.global},
+        env: {
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
+        },
+        dlzAccount,
+      }, this.props);
+
+      workloadGlobalStacks.push(networkConnectionsPhase2Stack);
     }
     return workloadGlobalStacks;
   }

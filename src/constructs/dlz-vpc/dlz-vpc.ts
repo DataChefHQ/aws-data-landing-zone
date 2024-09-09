@@ -1,9 +1,11 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import { NetworkEntity } from './network-entity';
+import {NetworkEntity, networkEntityToSsmString} from './network-entity';
 import { DLzAccount, Region } from '../../data-landing-zone';
 import { groupByField } from '../../lib';
 import { DlzStack } from '../dlz-stack/index';
 import {NetworkAddress} from "./network-address";
+import * as ssm from "aws-cdk-lib/aws-ssm";
+import {SSM_PARAMETERS_DLZ} from "../../stacks/organization/constants";
 
 export interface DlzSubnetProps {
   /**
@@ -120,6 +122,12 @@ export class DlzVpc {
         // });
       }
     }
+
+
+    new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${this.networkEntity.vpc.address}`), {
+      parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}${this.networkEntity.vpc.address}`,
+      stringValue: networkEntityToSsmString(this.networkEntity),
+    });
   }
 
   private vpcResourceName(name: string): string {
