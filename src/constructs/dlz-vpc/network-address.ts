@@ -28,6 +28,16 @@
 export const NETWORK_ADDRESS_SEPARATOR = '.';
 
 export class NetworkAddress {
+
+  public static fromString(props: string): NetworkAddress {
+    const parts = props.split(NETWORK_ADDRESS_SEPARATOR);
+    if (parts.length < 1 || parts.length > 5) {
+      throw new Error(`Invalid Network Address: ${props}`);
+    }
+
+    return new NetworkAddress(parts[0], parts[1], parts[2], parts[3], parts[4]);
+  }
+
   public readonly account: string;
   public readonly region?: string;
   public readonly vpc?: string;
@@ -43,7 +53,7 @@ export class NetworkAddress {
    * @param subnet
    */
   constructor(account: string, region?: string, vpc?: string, segment?: string, subnet?: string) {
-    if(vpc && !region) {
+    if (vpc && !region) {
       throw new Error('VPC must have a Region');
     }
     if (segment && (!vpc || !region)) {
@@ -60,14 +70,6 @@ export class NetworkAddress {
     this.subnet = subnet;
   }
 
-  public static fromString(props: string): NetworkAddress {
-    const parts = props.split(NETWORK_ADDRESS_SEPARATOR);
-    if (parts.length < 1 || parts.length > 5) {
-      throw new Error(`Invalid Network Address: ${props}`);
-    }
-
-    return new NetworkAddress(parts[0], parts[1], parts[2], parts[3], parts[4]);
-  }
   public toString(): string {
     return [this.account, this.region, this.vpc, this.segment]
       .filter(part => part !== undefined)

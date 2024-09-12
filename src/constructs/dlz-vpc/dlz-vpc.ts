@@ -1,11 +1,11 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import {NetworkEntity, networkEntityToSsmString} from './network-entity';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
+import { NetworkAddress } from './network-address';
+import { NetworkEntity } from './network-entity';
 import { DLzAccount, Region } from '../../data-landing-zone';
 import { groupByField } from '../../lib';
+import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 import { DlzStack } from '../dlz-stack/index';
-import {NetworkAddress} from "./network-address";
-import * as ssm from "aws-cdk-lib/aws-ssm";
-import {SSM_PARAMETERS_DLZ} from "../../stacks/organization/constants";
 
 export interface DlzSubnetProps {
   /**
@@ -73,6 +73,12 @@ export class DlzVpc {
       routeTables: [],
     };
 
+    new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${this.networkEntity.vpc.address}-id`), {
+      parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${this.networkEntity.vpc.address}/id`,
+      stringValue: vpc.attrVpcId,
+      // stringValue: networkEntityToSsmString(this.networkEntity),
+    });
+
     const segmentsSubnets = groupByField(dlzVpc.subnets, 'segment');
     for (const segment in segmentsSubnets) {
       const segmentSubnets = segmentsSubnets[segment];
@@ -123,11 +129,6 @@ export class DlzVpc {
       }
     }
 
-
-    new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${this.networkEntity.vpc.address}`), {
-      parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}${this.networkEntity.vpc.address}`,
-      stringValue: networkEntityToSsmString(this.networkEntity),
-    });
   }
 
   private vpcResourceName(name: string): string {
