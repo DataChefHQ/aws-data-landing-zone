@@ -10,7 +10,7 @@ import {
   Region, SecurityHubNotificationSeverity, SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
 } from '../src';
-import {NetworkAddress} from "../src/constructs/dlz-vpc/network-address";
+import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 // import * as sns from 'aws-cdk-lib/aws-sns';
 const jestConsole = console;
 
@@ -388,7 +388,7 @@ describe('CdkExpressPipelineLegacy', () => {
       deploymentPlatform: {
         gitHub: {
           references: [
-            {owner: 'DataChefHQ', repo: 'recipes_data-landing-zone_data-landing-zone-sandbox'},
+            { owner: 'DataChefHQ', repo: 'recipes_data-landing-zone_data-landing-zone-sandbox' },
             // { owner: "DataChefHQ", repo: 'recipes_data-landing-zone_data-landing-zone-sandbox', filter: "main"}
           ],
         },
@@ -397,14 +397,21 @@ describe('CdkExpressPipelineLegacy', () => {
         connections: {
           vpcPeering: [
 
-             // Only 1 role in the same account
             {
-              // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
-              name: 'p1d-ew1-def-priv--p1d-ue1-def-priv',
-              source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
-              destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.private'),
+              name: 'development-ew1--production-ue1-source',
+              source: new NetworkAddress('project-1-develop'), // TODO Change description above ^ Is that "name" even needed???
+              destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
               direction: 'source-to-destination',
             },
+
+            // Only 1 role in the same account
+            // {
+            //   // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
+            //   name: 'p1d-ew1-def-priv--p1d-ue1-def-priv',
+            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
+            //   destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.private'),
+            //   direction: 'source-to-destination',
+            // },
             // {
             //   name: 'p1d-ew1-def-pub--p1d-ue1-def-pub',
             //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'public'),
@@ -436,8 +443,8 @@ describe('CdkExpressPipelineLegacy', () => {
             //   direction: 'source-to-destination',
             // },
 
-          ]
-        }
+          ],
+        },
       },
 
       printDeploymentOrder: false,

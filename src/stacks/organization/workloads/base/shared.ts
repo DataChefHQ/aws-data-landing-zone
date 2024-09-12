@@ -1,11 +1,11 @@
 import * as config from 'aws-cdk-lib/aws-config';
-import {DlzStack, DlzVpc} from '../../../../constructs/index';
 import { DlzConfigRule } from '../../../../constructs/config/index';
-import {DataLandingZoneProps, DLzAccount} from '../../../../data-landing-zone';
+import { DlzStack, DlzVpc } from '../../../../constructs/index';
+import { DataLandingZoneProps, DLzAccount } from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
 
-import {networkEntities} from "../network-entities";
+import { networkEntities } from '../network-entities';
 
 export class Shared {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount) {

@@ -1,8 +1,8 @@
 /* Use `undefined` to automatically detect level */
-import {NetworkAddress} from "./network-address";
-import {NetworkEntity} from "./network-entity";
+import { NetworkAddress } from './network-address';
+import { NetworkEntity } from './network-entity';
 
-type MatchOnAddress = "account" | "region" | "vpc" | "segment" | "subnet" | undefined;
+type MatchOnAddress = 'account' | 'region' | 'vpc' | 'segment' | 'subnet' | undefined;
 
 /**
  * Convert CIDR to number range
@@ -92,7 +92,7 @@ export class NetworkEntities {
    * @param matchOnAddress
    */
   public getEntitiesForAddress(networkAddress: NetworkAddress,
-                               matchOnAddress?: MatchOnAddress
+    matchOnAddress?: MatchOnAddress,
   ): NetworkEntity[] | undefined {
 
     const networkEntitiesMatch: NetworkEntity[] = [];
@@ -101,13 +101,13 @@ export class NetworkEntities {
       const isRegionMatch = ne.vpc.address.region === networkAddress.region || networkAddress.region === undefined;
       const isVpcMatch = ne.vpc.address.vpc === networkAddress.vpc || networkAddress.vpc === undefined;
 
-      if (matchOnAddress === "account" && isAccountMatch) {
+      if (matchOnAddress === 'account' && isAccountMatch) {
         networkEntitiesMatch.push(ne);
-      } else if (matchOnAddress === "region" && isAccountMatch && isRegionMatch) {
+      } else if (matchOnAddress === 'region' && isAccountMatch && isRegionMatch) {
         networkEntitiesMatch.push(ne);
-      } else if (matchOnAddress === "vpc" && isAccountMatch && isRegionMatch && isVpcMatch) {
+      } else if (matchOnAddress === 'vpc' && isAccountMatch && isRegionMatch && isVpcMatch) {
         networkEntitiesMatch.push(ne);
-      } else if (matchOnAddress === "segment" && isAccountMatch && isRegionMatch && isVpcMatch) {
+      } else if (matchOnAddress === 'segment' && isAccountMatch && isRegionMatch && isVpcMatch) {
         const partialNe = {
           ...ne,
           routeTables: ne.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment),
@@ -117,12 +117,12 @@ export class NetworkEntities {
         if (partialNe.routeTables.length !== 0) {
           networkEntitiesMatch.push(partialNe);
         }
-      } else if (matchOnAddress === "subnet" && isAccountMatch && isRegionMatch && isVpcMatch) {
+      } else if (matchOnAddress === 'subnet' && isAccountMatch && isRegionMatch && isVpcMatch) {
         const partialNe = {
           ...ne,
           routeTables: ne.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment),
           subnets: ne.subnets.filter(subnet => subnet.address.subnet === networkAddress.subnet),
-        }
+        };
 
         if (partialNe.subnets.length !== 0) {
           networkEntitiesMatch.push(partialNe);
@@ -132,15 +132,15 @@ export class NetworkEntities {
         /* Use the same level as the `networkAddress` */
         let matchOn: MatchOnAddress;
         if (networkAddress.isAccountAddress()) {
-          matchOn = "account";
+          matchOn = 'account';
         } else if (networkAddress.isRegionAddress()) {
-          matchOn = "region";
+          matchOn = 'region';
         } else if (networkAddress.isVpcAddress()) {
-          matchOn = "vpc";
+          matchOn = 'vpc';
         } else if (networkAddress.isSegmentAddress()) {
-          matchOn = "segment";
+          matchOn = 'segment';
         } else if (networkAddress.isSubnetAddress()) {
-          matchOn = "subnet";
+          matchOn = 'subnet';
         } else {
           throw new Error(`Invalid Network Address: ${networkAddress}`);
         }

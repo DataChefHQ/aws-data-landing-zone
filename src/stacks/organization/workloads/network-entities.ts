@@ -1,5 +1,5 @@
-import * as ec2 from "aws-cdk-lib/aws-ec2";
-import {NetworkEntities} from "../../../constructs/dlz-vpc/network-entities";
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { NetworkEntities } from '../../../constructs/dlz-vpc/network-entities';
 export const networkEntities = new NetworkEntities();
 
 /* The key is the combination of the account ids */

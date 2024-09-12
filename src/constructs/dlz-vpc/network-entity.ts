@@ -1,6 +1,6 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import {DLzAccount} from '../../data-landing-zone';
-import {NetworkAddress} from "./network-address";
+import { NetworkAddress } from './network-address';
+import { DLzAccount } from '../../data-landing-zone';
 
 export interface NetworkEntityVpc {
   readonly address: NetworkAddress;
@@ -42,34 +42,4 @@ export interface NetworkEntitySsm {
   readonly vpc: NetworkEntityVpcSsm;
   readonly subnets: NetworkEntitySubnetSsm[];
   readonly routeTables: NetworkEntityRouteTableSsm[];
-}
-
-
-
-export function networkEntityToSsmString(ne: NetworkEntity): string {
-  const neSsm: NetworkEntitySsm = {
-    dlzAccount: ne.dlzAccount,
-    vpc: {
-      address: ne.vpc.address,
-      vpcId: ne.vpc.vpc.ref,
-    },
-    subnets: ne.subnets.map(subnet => {
-      return {
-        address: subnet.address,
-        subnetId: subnet.subnet.ref,
-      };
-    }),
-    routeTables: ne.routeTables.map(routeTable => {
-      return {
-        address: routeTable.address,
-        routeTableId: routeTable.routeTable.ref,
-      };
-    }),
-  };
-
-  return JSON.stringify(neSsm);
-}
-
-export function networkEntitySsmFromString(ssmString: string): NetworkEntitySsm {
-  return JSON.parse(ssmString);
 }
