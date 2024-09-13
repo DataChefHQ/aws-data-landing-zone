@@ -184,7 +184,7 @@ This needs to be run everytime a change is made and it is needed to test in Pyth
 On the data-landing-zone project root run the run the following command:
 
 ```bash
-./run-local-test.sh
+./run-local-repo.sh
 ```
 
 This will run the watch command and do an npm link setting up your project to use as a local package.
