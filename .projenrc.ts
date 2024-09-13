@@ -1,5 +1,6 @@
 import { awscdk, javascript } from 'projen';
 import { ArrowParens, TrailingComma } from 'projen/lib/javascript';
+
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'DataChefHQ',
   authorAddress: 'hi@datachef.co',
@@ -13,6 +14,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
   repositoryUrl: 'https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git',
+  tsconfig: {
+    compilerOptions: {
+      sourceMap: true,
+      inlineSourceMap: true,
+    },
+  },
   prettierOptions: {
     settings: {
       printWidth: 120,
