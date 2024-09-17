@@ -176,3 +176,25 @@ python3 -m pip install -e recipes_dlz-0.0.0
 Note that `recipes_dlz` ia thE name we specified in the `projenrc.ts` file.
 
 This needs to be run everytime a change is made and it is needed to test in Python.
+
+## Alternative Testing the package locally
+
+### Data Landing Zone
+
+On the data-landing-zone project root run the run the following command:
+
+```bash
+./run-local-repo.sh
+```
+
+This will run the watch command and do an npm link setting up your project to use as a local package.
+
+### TypeScript
+
+In the typescript project at the root of the project run the following command:
+
+```bash
+npm run npm-link-manual
+```
+
+This will link the local package to the typescript project pointing to your data-landing-zone project.
