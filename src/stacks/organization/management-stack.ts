@@ -3,12 +3,14 @@ import { Annotations } from 'aws-cdk-lib';
 import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
+import * as sso from 'aws-cdk-lib/aws-sso';
 import { Construct } from 'constructs';
 import { AccountChatbots, Budget, ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
+import { SecurityAccess } from '../../constructs/iam-identity-center';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
@@ -28,6 +30,7 @@ export class ManagementStack extends DlzStack {
     });
 
     this.rootControls();
+    this.iamIdentityCenter();
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
@@ -176,6 +179,87 @@ export class ManagementStack extends DlzStack {
   }
 
   /**
+   * IAM Identity Center
+   */
+  iamIdentityCenter() {
+    if (this.props.iamIdentityCenter === undefined) return;
+
+    const iamIdentityCenterId = this.props.iamIdentityCenter.iamIdentityCenterId;
+    let iamIdentityCenterArn = this.props.iamIdentityCenter.iamIdentityCenterArn;
+
+    if (!iamIdentityCenterArn) {
+      iamIdentityCenterArn = `arn:aws:sso:::instance/${iamIdentityCenterId}`;
+    }
+
+    const accounts = new Map<string, string>();
+    accounts.set('dlz:root', this.props.organization.root.accounts.management.accountId);
+    accounts.set('dlz:security:log', this.props.organization.ous.security.accounts.log.accountId);
+    accounts.set('dlz:security:audit', this.props.organization.ous.security.accounts.audit.accountId);
+
+    for (const account of this.props.organization.ous.workloads.accounts) {
+      accounts.set(account.name, account.accountId);
+    }
+    const accountNames = [...accounts.keys()];
+
+    const users = new Map<string, string>();
+    for (const user of this.props.iamIdentityCenter.users ?? []) {
+      users.set(user.name, user.userId);
+    }
+
+    const permissionSets = new Map<string, sso.CfnPermissionSet>();
+    permissionSets.set('dlz:adminaccess', SecurityAccess.adminPermissionSet(this, iamIdentityCenterArn));
+    permissionSets.set('dlz:readonlyaccess', SecurityAccess.readOnlyPermissionSet(this, iamIdentityCenterArn));
+    permissionSets.set('dlz:catalogaccess', SecurityAccess.catalogPermissionSet(this, iamIdentityCenterArn));
+
+    for (const permissionSetConf of this.props.iamIdentityCenter.permissionSets ?? []) {
+      const permissionSet = SecurityAccess.createPermissionSet(
+        this,
+        iamIdentityCenterArn,
+        permissionSetConf.name,
+        permissionSetConf.description,
+        permissionSetConf.inlinePolicy,
+        permissionSetConf.managedPolicyArns,
+      );
+      permissionSets.set(permissionSetConf.name, permissionSet);
+    }
+
+    for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
+      const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];
+      const resolvedAccounts: string[] = [];
+
+      for (const account of group.accounts) {
+        if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\:]+\*?$/.test(account)) {
+          Annotations.of(this).addError(`Invalid account name: ${account} in group ${group.name}`);
+          continue;
+        }
+        for (const accountName of accountNames) {
+          if (account.slice(-1) === '*' && account.slice(0, accountName.length) !== accountName) continue;
+          if (account.slice(-1) !== '*' && account !== accountName) continue;
+
+          resolvedAccounts.push(accounts.get(accountName) ?? accountName);
+          break;
+        }
+      }
+
+      if (!permissionSets.has(group.permissionSet)) {
+        Annotations.of(this).addError(`Permission set ${group.permissionSet} in group ${group.name} was not found`);
+        continue;
+      }
+      const permissionSet = permissionSets.get(group.permissionSet)!;
+
+      const groupConstruct = SecurityAccess.createGroup(
+        this,
+        group.name,
+        iamIdentityCenterArn,
+        resolvedUsers,
+        permissionSet,
+        resolvedAccounts,
+        group.description);
+      groupConstruct.node.addDependency(permissionSet);
+    }
+  }
+
+  /**
    * Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account
    */
   suspendedOuPolicies() {
@@ -230,7 +314,7 @@ export class ManagementStack extends DlzStack {
       }
     }
 
-    for (const budget of this.props.budgets ) {
+    for (const budget of this.props.budgets) {
       new Budget(this, this.resourceName(`budget-${budget.name}`), budget);
     }
   }

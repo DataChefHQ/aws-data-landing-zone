@@ -1,7 +1,5 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
-import * as sso from 'aws-cdk-lib/aws-sso';
 import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
-import { IamIdentityCenterStack } from './constructs/iam-identity-center';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -302,21 +300,22 @@ export interface User {
 
 export interface PermissionSetProps {
   readonly name: string;
+  readonly description?: string;
   readonly inlinePolicy?: any;
   readonly managedPolicyArns?: string[];
 }
 
 export interface AccessGroup {
   readonly name: string;
-  readonly users?: User[];
-  readonly permissionSets?: sso.CfnPermissionSet[];
-  readonly permissionSetsNames: string[];
+  readonly users?: string[];
+  readonly permissionSet: string;
   readonly accounts: string[];
+  readonly description?: string;
 }
 
 export interface IamIdentityCenter {
-  readonly iamIdentityCenterArn: string;
-  readonly iamIdentityCenterId?: string;
+  readonly iamIdentityCenterArn?: string;
+  readonly iamIdentityCenterId: string;
   readonly users?: User[];
   readonly permissionSets?: PermissionSetProps[];
   readonly accessGroups?: AccessGroup[];
@@ -326,6 +325,11 @@ export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
+
+  /**
+   * IAM Identity Center configuration
+   */
+  readonly iamIdentityCenter?: IamIdentityCenter;
 
   /**
    * List of services to deny in the organization SCP. If not specified, the default defined by
@@ -454,7 +458,6 @@ function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
 
 export class DataLandingZone {
   public managementStack!: ManagementStack;
-  public iamIdentityCenterStack!: IamIdentityCenterStack;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
   public developAccountStacks: DevelopAccountStacks[] = [];
@@ -508,29 +511,6 @@ export class DataLandingZone {
     }
     if (this.props.saveReport !== false) { Report.saveConsoleReport(); }
   }
-
-  stageIamIdentityCenter() {
-
-    const accounts = new Map<string, string>();
-    accounts.set('dlz:management', this.props.organization.root.accounts.management.accountId);
-    accounts.set('dlz:log', this.props.organization.ous.security.accounts.log.accountId);
-    accounts.set('dlz:audit', this.props.organization.ous.security.accounts.audit.accountId);
-
-    for (const account of this.props.organization.ous.workloads.accounts) {
-      accounts.set(account.name, account.accountId);
-    }
-    this.iamIdentityCenterStack = new IamIdentityCenterStack(this.app, {
-      name: { ou: 'root', account: 'iam-identity-center', stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.root.accounts.management.accountId,
-        region: this.props.regions.global,
-      },
-    });
-    return [
-      this.iamIdentityCenterStack as DlzStack,
-    ];
-  }
-
 
   stageManagement() {
     const management = new ManagementStack(this.app, {

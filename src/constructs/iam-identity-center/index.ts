@@ -1,7 +1,7 @@
+import * as iam from 'aws-cdk-lib/aws-iam';
 import * as identitystore from 'aws-cdk-lib/aws-identitystore';
 import * as sso from 'aws-cdk-lib/aws-sso';
 import { Construct } from 'constructs';
-import { DlzStack, DlzStackProps } from '../dlz-stack';
 
 export class SecurityPolicy {
   public static readonly defaultServices = [
@@ -24,28 +24,25 @@ export class SecurityPolicy {
 
   public static readonly adminPolicy = this.createPolicy();
   public static readonly readOnlyPolicy = this.createPolicy(this.defaultServices, 'List*,Describe*,Get*');
-  public static readonly readWritePolicy = this.createPolicy(this.defaultServices, 'List*,Describe*,Get*,Create*,Update*,Delete*');
-  public static readonly servicePolicy = this.createPolicy(this.defaultServices);
 
-  public static createPolicy(services: string[] = [], wildCard: string = '*'): any {
+  public static createPolicy(services: string[] = [], wildCard: string = '*'): iam.PolicyDocument {
     let actions: string[] = [];
     let wildCards = wildCard ? wildCard.split(',') : ['*'];
     if (services.length > 0) {
-      for (const card of wildCards) {
-        actions = [...actions, ...services.map(service => `${service}:${card}`)];
+      for (const action of wildCards) {
+        actions = [...actions, ...services.map(service => `${service}:${action}`)];
       }
     }
 
-    return {
-      Version: '2012-10-17',
-      Statement: [
-        {
-          Effect: 'Allow',
-          Action: actions.length > 0 ? actions : '*',
-          Resource: '*',
-        },
+    return new iam.PolicyDocument({
+      statements: [
+        new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: actions.length > 0 ? actions : ['*'],
+          resources: ['*'],
+        }),
       ],
-    };
+    });
   }
 }
 
@@ -54,16 +51,12 @@ export class SecurityAccess {
     return this.createPermissionSet(scope, ssoArn, 'AdminAccess', 'Use this permission set/role to grant full access', SecurityPolicy.adminPolicy);
   }
 
-  public static engineeringPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'EngineeringAccess', 'Use this permission set/role to grant only interal-tech-ops people', SecurityPolicy.servicePolicy);
-  }
-
   public static readOnlyPermissionSet(scope: Construct, ssoArn: string) {
     return this.createPermissionSet(scope, ssoArn, 'ReadOnlyAccess', 'Use this permission set/role to grant read only access', SecurityPolicy.readOnlyPolicy);
   }
 
   public static catalogPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'CatalogAccess', 'Use this permission set/role to grants PeopleOps role', null, [
+    return this.createPermissionSet(scope, ssoArn, 'CatalogAccess', 'Use this permission set/role to grants PeopleOps role', undefined, [
       'arn:aws:iam::aws:policy/AWSServiceCatalogAdminFullAccess',
       'arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess',
     ]);
@@ -74,22 +67,17 @@ export class SecurityAccess {
     ssoArn: string,
     name: string,
     description: string = '',
-    policy: any = null,
+    policy: iam.PolicyDocument | undefined = undefined,
     managedPolicies: string[] = []): sso.CfnPermissionSet {
 
     const id = `${name}PermissionSet`;
-    if (this.permissionSets.has(id)) return this.permissionSets.get(id) || {} as sso.CfnPermissionSet;
-
-    const permissionSet = new sso.CfnPermissionSet(scope, id, {
+    return new sso.CfnPermissionSet(scope, id, {
       name,
       description,
       inlinePolicy: policy,
       managedPolicies,
       instanceArn: ssoArn,
     });
-
-    this.permissionSets.set(id, permissionSet);
-    return permissionSet;
   }
 
   public static createGroup(
@@ -140,13 +128,5 @@ export class SecurityAccess {
     }
 
     return group;
-  }
-
-  private static readonly permissionSets = new Map<string, sso.CfnPermissionSet>();
-}
-
-export class IamIdentityCenterStack extends DlzStack {
-  constructor(scope: Construct, props: DlzStackProps) {
-    super(scope, props);
   }
 }
