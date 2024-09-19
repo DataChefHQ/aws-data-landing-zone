@@ -1,6 +1,8 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import * as identitystore from 'aws-cdk-lib/aws-identitystore';
 import * as sso from 'aws-cdk-lib/aws-sso';
+import { AwsCustomResource, AwsCustomResourcePolicy, PhysicalResourceId } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 
 export class SecurityPolicy {
@@ -128,5 +130,81 @@ export class SecurityAccess {
     }
 
     return group;
+  }
+}
+
+export interface IdentityStoreUserEmail {
+  readonly value: string;
+  readonly type: string;
+  readonly primary?: boolean;
+}
+
+export interface IdentityStoreUserProps {
+  readonly identityStoreId: string;
+  readonly userName: string;
+  readonly displayName: string;
+  readonly emails?: IdentityStoreUserEmail[];
+}
+
+export class IdentityStoreUser extends Construct {
+  public readonly userId: string;
+
+  constructor(scope: Construct, id: string, props: IdentityStoreUserProps) {
+    super(scope, id);
+
+    const createUserResource = new AwsCustomResource(this, 'IdentityStoreUser', {
+      onCreate: {
+        service: 'IdentityStore',
+        action: 'createUser',
+        parameters: {
+          IdentityStoreId: props.identityStoreId,
+          UserName: props.userName,
+          DisplayName: props.displayName,
+          Emails: props.emails?.map(email => ({
+            Value: email.value,
+            Type: email.type,
+            Primary: email.primary,
+          })),
+        },
+        physicalResourceId: PhysicalResourceId.fromResponse('UserId'),
+      },
+      onUpdate: {
+        service: 'IdentityStore',
+        action: 'updateUser',
+        parameters: {
+          IdentityStoreId: props.identityStoreId,
+          UserId: PhysicalResourceId.fromResponse('UserId').toString(),
+          DisplayName: props.displayName,
+          Emails: props.emails?.map(email => ({
+            Value: email.value,
+            Type: email.type,
+            Primary: email.primary,
+          })),
+        },
+        physicalResourceId: PhysicalResourceId.fromResponse('UserId'),
+      },
+      onDelete: {
+        service: 'IdentityStore',
+        action: 'deleteUser',
+        parameters: {
+          IdentityStoreId: props.identityStoreId,
+          UserId: PhysicalResourceId.fromResponse('UserId').toString(),
+        },
+        physicalResourceId: PhysicalResourceId.of(props.userName),
+      },
+      policy: AwsCustomResourcePolicy.fromStatements([
+        new PolicyStatement({
+          actions: [
+            'identitystore:CreateUser',
+            'identitystore:DescribeUser',
+            'identitystore:UpdateUser',
+            'identitystore:DeleteUser',
+          ],
+          resources: ['*'],
+        }),
+      ]),
+    });
+
+    this.userId = createUserResource.getResponseField('UserId');
   }
 }

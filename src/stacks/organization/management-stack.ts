@@ -10,7 +10,7 @@ import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
-import { SecurityAccess } from '../../constructs/iam-identity-center';
+import { SecurityAccess, IdentityStoreUser } from '../../constructs/iam-identity-center';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
@@ -202,7 +202,7 @@ export class ManagementStack extends DlzStack {
     const accountNames = [...accounts.keys()];
 
     const users = new Map<string, string>();
-    for (const user of this.props.iamIdentityCenter.users ?? []) {
+    for (const user of this.props.iamIdentityCenter.idpUsers ?? []) {
       users.set(user.name, user.userId);
     }
 
@@ -223,18 +223,26 @@ export class ManagementStack extends DlzStack {
       permissionSets.set(permissionSetConf.name, permissionSet);
     }
 
+    const awsSsoUsers = new Map<string, IdentityStoreUser>();
+    for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
+      const userConstruct = new IdentityStoreUser(this, this.resourceName(`aws-sso-user-${user.userName}`), user);
+      awsSsoUsers.set(user.userName, userConstruct);
+      users.set(user.userName, userConstruct.userId);
+    }
+
     for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
       const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];
-      const resolvedAccounts: string[] = [];
+      const dependencyUsers = [...awsSsoUsers.values()].filter(user => resolvedUsers.includes(user.userId));
 
-      for (const account of group.accounts) {
-        if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\:]+\*?$/.test(account)) {
-          Annotations.of(this).addError(`Invalid account name: ${account} in group ${group.name}`);
+      const resolvedAccounts: string[] = [];
+      for (const accountWithWildCard of group.accounts) {
+        if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\:]+\*?$/.test(accountWithWildCard)) {
+          Annotations.of(this).addError(`Invalid account name: ${accountWithWildCard} in group ${group.name}`);
           continue;
         }
         for (const accountName of accountNames) {
-          if (account.slice(-1) === '*' && account.slice(0, accountName.length) !== accountName) continue;
-          if (account.slice(-1) !== '*' && account !== accountName) continue;
+          if (accountWithWildCard.slice(-1) === '*' && accountWithWildCard.slice(0, accountName.length) !== accountName) continue;
+          if (accountWithWildCard.slice(-1) !== '*' && accountWithWildCard !== accountName) continue;
 
           resolvedAccounts.push(accounts.get(accountName) ?? accountName);
           break;
@@ -242,7 +250,7 @@ export class ManagementStack extends DlzStack {
       }
 
       if (!permissionSets.has(group.permissionSet)) {
-        Annotations.of(this).addError(`Permission set ${group.permissionSet} in group ${group.name} was not found`);
+        Annotations.of(this).addError(`PermissionSet ${group.permissionSet} in group ${group.name} was not found`);
         continue;
       }
       const permissionSet = permissionSets.get(group.permissionSet)!;
@@ -255,7 +263,11 @@ export class ManagementStack extends DlzStack {
         permissionSet,
         resolvedAccounts,
         group.description);
+
       groupConstruct.node.addDependency(permissionSet);
+      for (const user of dependencyUsers) {
+        groupConstruct.node.addDependency(user);
+      }
     }
   }
 

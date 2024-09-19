@@ -1,5 +1,6 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
 import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
+import { IdentityStoreUserProps } from './constructs/iam-identity-center';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -293,7 +294,7 @@ export interface DeploymentPlatform {
   readonly gitHub?: DeploymentPlatformGitHub;
 }
 
-export interface User {
+export interface IdpUser {
   readonly name: string;
   readonly userId: string;
 }
@@ -316,7 +317,8 @@ export interface AccessGroup {
 export interface IamIdentityCenter {
   readonly iamIdentityCenterArn?: string;
   readonly iamIdentityCenterId: string;
-  readonly users?: User[];
+  readonly awsSsoUsers?: IdentityStoreUserProps[];
+  readonly idpUsers?: IdpUser[];
   readonly permissionSets?: PermissionSetProps[];
   readonly accessGroups?: AccessGroup[];
 }

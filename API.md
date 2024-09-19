@@ -4555,6 +4555,116 @@ public readonly id: string;
 ---
 
 
+### IdentityStoreUser <a name="IdentityStoreUser" id="@DataChefHQ/data-landing-zone.IdentityStoreUser"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer"></a>
+
+```typescript
+import { IdentityStoreUser } from '@DataChefHQ/data-landing-zone'
+
+new IdentityStoreUser(scope: Construct, id: string, props: IdentityStoreUserProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.isConstruct"></a>
+
+```typescript
+import { IdentityStoreUser } from '@DataChefHQ/data-landing-zone'
+
+IdentityStoreUser.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.property.userId">userId</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `userId`<sup>Required</sup> <a name="userId" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.property.userId"></a>
+
+```typescript
+public readonly userId: string;
+```
+
+- *Type:* string
+
+---
+
+
 ### LogGlobalStack <a name="LogGlobalStack" id="@DataChefHQ/data-landing-zone.LogGlobalStack"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.LogGlobalStack.Initializer"></a>
@@ -10356,9 +10466,10 @@ const iamIdentityCenter: IamIdentityCenter = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterId">iamIdentityCenterId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.accessGroups">accessGroups</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup">AccessGroup</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.awsSsoUsers">awsSsoUsers</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterArn">iamIdentityCenterArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.idpUsers">idpUsers</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdpUser">IdpUser</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.permissionSets">permissionSets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.PermissionSetProps">PermissionSetProps</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.users">users</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.User">User</a>[]</code> | *No description.* |
 
 ---
 
@@ -10382,6 +10493,16 @@ public readonly accessGroups: AccessGroup[];
 
 ---
 
+##### `awsSsoUsers`<sup>Optional</sup> <a name="awsSsoUsers" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.awsSsoUsers"></a>
+
+```typescript
+public readonly awsSsoUsers: IdentityStoreUserProps[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]
+
+---
+
 ##### `iamIdentityCenterArn`<sup>Optional</sup> <a name="iamIdentityCenterArn" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterArn"></a>
 
 ```typescript
@@ -10389,6 +10510,16 @@ public readonly iamIdentityCenterArn: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `idpUsers`<sup>Optional</sup> <a name="idpUsers" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.idpUsers"></a>
+
+```typescript
+public readonly idpUsers: IdpUser[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdpUser">IdpUser</a>[]
 
 ---
 
@@ -10402,13 +10533,153 @@ public readonly permissionSets: PermissionSetProps[];
 
 ---
 
-##### `users`<sup>Optional</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.users"></a>
+### IdentityStoreUserEmail <a name="IdentityStoreUserEmail" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.Initializer"></a>
 
 ```typescript
-public readonly users: User[];
+import { IdentityStoreUserEmail } from '@DataChefHQ/data-landing-zone'
+
+const identityStoreUserEmail: IdentityStoreUserEmail = { ... }
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.User">User</a>[]
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.type">type</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.value">value</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.primary">primary</a></code> | <code>boolean</code> | *No description.* |
+
+---
+
+##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.type"></a>
+
+```typescript
+public readonly type: string;
+```
+
+- *Type:* string
+
+---
+
+##### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.value"></a>
+
+```typescript
+public readonly value: string;
+```
+
+- *Type:* string
+
+---
+
+##### `primary`<sup>Optional</sup> <a name="primary" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.primary"></a>
+
+```typescript
+public readonly primary: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+### IdentityStoreUserProps <a name="IdentityStoreUserProps" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.Initializer"></a>
+
+```typescript
+import { IdentityStoreUserProps } from '@DataChefHQ/data-landing-zone'
+
+const identityStoreUserProps: IdentityStoreUserProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.displayName">displayName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.identityStoreId">identityStoreId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.userName">userName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.emails">emails</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail">IdentityStoreUserEmail</a>[]</code> | *No description.* |
+
+---
+
+##### `displayName`<sup>Required</sup> <a name="displayName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.displayName"></a>
+
+```typescript
+public readonly displayName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `identityStoreId`<sup>Required</sup> <a name="identityStoreId" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.identityStoreId"></a>
+
+```typescript
+public readonly identityStoreId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `userName`<sup>Required</sup> <a name="userName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.userName"></a>
+
+```typescript
+public readonly userName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.emails"></a>
+
+```typescript
+public readonly emails: IdentityStoreUserEmail[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail">IdentityStoreUserEmail</a>[]
+
+---
+
+### IdpUser <a name="IdpUser" id="@DataChefHQ/data-landing-zone.IdpUser"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdpUser.Initializer"></a>
+
+```typescript
+import { IdpUser } from '@DataChefHQ/data-landing-zone'
+
+const idpUser: IdpUser = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdpUser.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdpUser.property.userId">userId</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IdpUser.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `userId`<sup>Required</sup> <a name="userId" id="@DataChefHQ/data-landing-zone.IdpUser.property.userId"></a>
+
+```typescript
+public readonly userId: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -11253,45 +11524,6 @@ public readonly slackChannelId: string;
 
 ```typescript
 public readonly slackWorkspaceId: string;
-```
-
-- *Type:* string
-
----
-
-### User <a name="User" id="@DataChefHQ/data-landing-zone.User"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.User.Initializer"></a>
-
-```typescript
-import { User } from '@DataChefHQ/data-landing-zone'
-
-const user: User = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.User.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.User.property.userId">userId</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.User.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
----
-
-##### `userId`<sup>Required</sup> <a name="userId" id="@DataChefHQ/data-landing-zone.User.property.userId"></a>
-
-```typescript
-public readonly userId: string;
 ```
 
 - *Type:* string
