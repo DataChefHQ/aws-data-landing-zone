@@ -1,5 +1,7 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
+import * as sso from 'aws-cdk-lib/aws-sso';
 import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
+import { IamIdentityCenterStack } from './constructs/iam-identity-center';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';
@@ -293,6 +295,33 @@ export interface DeploymentPlatform {
   readonly gitHub?: DeploymentPlatformGitHub;
 }
 
+export interface User {
+  readonly name: string;
+  readonly userId: string;
+}
+
+export interface PermissionSetProps {
+  readonly name: string;
+  readonly inlinePolicy?: any;
+  readonly managedPolicyArns?: string[];
+}
+
+export interface AccessGroup {
+  readonly name: string;
+  readonly users?: User[];
+  readonly permissionSets?: sso.CfnPermissionSet[];
+  readonly permissionSetsNames: string[];
+  readonly accounts: string[];
+}
+
+export interface IamIdentityCenter {
+  readonly iamIdentityCenterArn: string;
+  readonly iamIdentityCenterId?: string;
+  readonly users?: User[];
+  readonly permissionSets?: PermissionSetProps[];
+  readonly accessGroups?: AccessGroup[];
+}
+
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
@@ -380,11 +409,11 @@ export interface AuditStacks {
   readonly regional: AuditRegionalStack[];
 }
 
-
 export interface DevelopStacks {
   readonly global: DevelopGlobalStack;
   readonly regional: DevelopRegionalStack[];
 }
+
 export interface DevelopAccountStacks {
   readonly accountId: string;
   readonly name: string;
@@ -395,6 +424,7 @@ export interface ProductionStacks {
   readonly global: ProductionGlobalStack;
   readonly regional: ProductionRegionalStack[];
 }
+
 export interface ProductionAccountStacks {
   readonly accountId: string;
   readonly name: string;
@@ -424,6 +454,7 @@ function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
 
 export class DataLandingZone {
   public managementStack!: ManagementStack;
+  public iamIdentityCenterStack!: IamIdentityCenterStack;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
   public developAccountStacks: DevelopAccountStacks[] = [];
@@ -471,11 +502,33 @@ export class DataLandingZone {
     Tags.of(app).add('Project', 'dlz');
     Tags.of(app).add('Environment', 'dlz');
 
-    if (this.props.printDeploymentOrder !== false) {printConsoleDeploymentOrder(deploymentOrder);}
+    if (this.props.printDeploymentOrder !== false) { printConsoleDeploymentOrder(deploymentOrder); }
     if (this.props.printReport !== false) {
       Report.printConsoleReport();
     }
-    if (this.props.saveReport !== false) {Report.saveConsoleReport();}
+    if (this.props.saveReport !== false) { Report.saveConsoleReport(); }
+  }
+
+  stageIamIdentityCenter() {
+
+    const accounts = new Map<string, string>();
+    accounts.set('dlz:management', this.props.organization.root.accounts.management.accountId);
+    accounts.set('dlz:log', this.props.organization.ous.security.accounts.log.accountId);
+    accounts.set('dlz:audit', this.props.organization.ous.security.accounts.audit.accountId);
+
+    for (const account of this.props.organization.ous.workloads.accounts) {
+      accounts.set(account.name, account.accountId);
+    }
+    this.iamIdentityCenterStack = new IamIdentityCenterStack(this.app, {
+      name: { ou: 'root', account: 'iam-identity-center', stack: 'global', region: this.props.regions.global },
+      env: {
+        account: this.props.organization.root.accounts.management.accountId,
+        region: this.props.regions.global,
+      },
+    });
+    return [
+      this.iamIdentityCenterStack as DlzStack,
+    ];
   }
 
 

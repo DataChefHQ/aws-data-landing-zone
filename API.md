@@ -4555,6 +4555,911 @@ public readonly id: string;
 ---
 
 
+### IamIdentityCenterStack <a name="IamIdentityCenterStack" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.Initializer"></a>
+
+```typescript
+import { IamIdentityCenterStack } from '@DataChefHQ/data-landing-zone'
+
+new IamIdentityCenterStack(scope: Construct, props: DlzStackProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackProps">DlzStackProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding `Fn.importValue()`
+expression for this Export. You can control the name for the export by
+passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+## Example
+
+Here is how the process works. Let's say there are two stacks,
+`producerStack` and `consumerStack`, and `producerStack` has a bucket
+called `bucket`, which is referenced by `consumerStack` (perhaps because
+an AWS Lambda Function writes into it, or something like that).
+
+It is not safe to remove `producerStack.bucket` because as the bucket is being
+deleted, `consumerStack` might still be using it.
+
+Instead, the process takes two deployments:
+
+### Deployment 1: break the relationship
+
+- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
+  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
+  remove the Lambda Function altogether).
+- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
+  will make sure the CloudFormation Export continues to exist while the relationship
+  between the two stacks is being broken.
+- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
+
+### Deployment 2: remove the bucket resource
+
+- You are now free to remove the `bucket` resource from `producerStack`.
+- Don't forget to remove the `exportValue()` call as well.
+- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.isConstruct"></a>
+
+```typescript
+import { IamIdentityCenterStack } from '@DataChefHQ/data-landing-zone'
+
+IamIdentityCenterStack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.isStack"></a>
+
+```typescript
+import { IamIdentityCenterStack } from '@DataChefHQ/data-landing-zone'
+
+IamIdentityCenterStack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.of"></a>
+
+```typescript
+import { IamIdentityCenterStack } from '@DataChefHQ/data-landing-zone'
+
+IamIdentityCenterStack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.IamIdentityCenterStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+
 ### LogGlobalStack <a name="LogGlobalStack" id="@DataChefHQ/data-landing-zone.LogGlobalStack"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.LogGlobalStack.Initializer"></a>
@@ -9146,6 +10051,78 @@ public readonly id: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
+### AccessGroup <a name="AccessGroup" id="@DataChefHQ/data-landing-zone.AccessGroup"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.AccessGroup.Initializer"></a>
+
+```typescript
+import { AccessGroup } from '@DataChefHQ/data-landing-zone'
+
+const accessGroup: AccessGroup = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup.property.accounts">accounts</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup.property.permissionSetsNames">permissionSetsNames</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup.property.permissionSets">permissionSets</a></code> | <code>aws-cdk-lib.aws_sso.CfnPermissionSet[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup.property.users">users</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.User">User</a>[]</code> | *No description.* |
+
+---
+
+##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/data-landing-zone.AccessGroup.property.accounts"></a>
+
+```typescript
+public readonly accounts: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.AccessGroup.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `permissionSetsNames`<sup>Required</sup> <a name="permissionSetsNames" id="@DataChefHQ/data-landing-zone.AccessGroup.property.permissionSetsNames"></a>
+
+```typescript
+public readonly permissionSetsNames: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `permissionSets`<sup>Optional</sup> <a name="permissionSets" id="@DataChefHQ/data-landing-zone.AccessGroup.property.permissionSets"></a>
+
+```typescript
+public readonly permissionSets: CfnPermissionSet[];
+```
+
+- *Type:* aws-cdk-lib.aws_sso.CfnPermissionSet[]
+
+---
+
+##### `users`<sup>Optional</sup> <a name="users" id="@DataChefHQ/data-landing-zone.AccessGroup.property.users"></a>
+
+```typescript
+public readonly users: User[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.User">User</a>[]
+
+---
+
 ### AuditStacks <a name="AuditStacks" id="@DataChefHQ/data-landing-zone.AuditStacks"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.AuditStacks.Initializer"></a>
@@ -10246,6 +11223,78 @@ public readonly filter: string;
 
 ---
 
+### IamIdentityCenter <a name="IamIdentityCenter" id="@DataChefHQ/data-landing-zone.IamIdentityCenter"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.Initializer"></a>
+
+```typescript
+import { IamIdentityCenter } from '@DataChefHQ/data-landing-zone'
+
+const iamIdentityCenter: IamIdentityCenter = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterArn">iamIdentityCenterArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.accessGroups">accessGroups</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.AccessGroup">AccessGroup</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterId">iamIdentityCenterId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.permissionSets">permissionSets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.PermissionSetProps">PermissionSetProps</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.users">users</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.User">User</a>[]</code> | *No description.* |
+
+---
+
+##### `iamIdentityCenterArn`<sup>Required</sup> <a name="iamIdentityCenterArn" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterArn"></a>
+
+```typescript
+public readonly iamIdentityCenterArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accessGroups`<sup>Optional</sup> <a name="accessGroups" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.accessGroups"></a>
+
+```typescript
+public readonly accessGroups: AccessGroup[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.AccessGroup">AccessGroup</a>[]
+
+---
+
+##### `iamIdentityCenterId`<sup>Optional</sup> <a name="iamIdentityCenterId" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterId"></a>
+
+```typescript
+public readonly iamIdentityCenterId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `permissionSets`<sup>Optional</sup> <a name="permissionSets" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.permissionSets"></a>
+
+```typescript
+public readonly permissionSets: PermissionSetProps[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.PermissionSetProps">PermissionSetProps</a>[]
+
+---
+
+##### `users`<sup>Optional</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.users"></a>
+
+```typescript
+public readonly users: User[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.User">User</a>[]
+
+---
+
 ### LogStacks <a name="LogStacks" id="@DataChefHQ/data-landing-zone.LogStacks"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.LogStacks.Initializer"></a>
@@ -10594,6 +11643,56 @@ public readonly accounts: DLzAccount[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>[]
+
+---
+
+### PermissionSetProps <a name="PermissionSetProps" id="@DataChefHQ/data-landing-zone.PermissionSetProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.PermissionSetProps.Initializer"></a>
+
+```typescript
+import { PermissionSetProps } from '@DataChefHQ/data-landing-zone'
+
+const permissionSetProps: PermissionSetProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.PermissionSetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.PermissionSetProps.property.inlinePolicy">inlinePolicy</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.PermissionSetProps.property.managedPolicyArns">managedPolicyArns</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.PermissionSetProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `inlinePolicy`<sup>Optional</sup> <a name="inlinePolicy" id="@DataChefHQ/data-landing-zone.PermissionSetProps.property.inlinePolicy"></a>
+
+```typescript
+public readonly inlinePolicy: any;
+```
+
+- *Type:* any
+
+---
+
+##### `managedPolicyArns`<sup>Optional</sup> <a name="managedPolicyArns" id="@DataChefHQ/data-landing-zone.PermissionSetProps.property.managedPolicyArns"></a>
+
+```typescript
+public readonly managedPolicyArns: string[];
+```
+
+- *Type:* string[]
 
 ---
 
@@ -11032,6 +12131,45 @@ public readonly slackWorkspaceId: string;
 
 ---
 
+### User <a name="User" id="@DataChefHQ/data-landing-zone.User"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.User.Initializer"></a>
+
+```typescript
+import { User } from '@DataChefHQ/data-landing-zone'
+
+const user: User = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.User.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.User.property.userId">userId</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.User.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `userId`<sup>Required</sup> <a name="userId" id="@DataChefHQ/data-landing-zone.User.property.userId"></a>
+
+```typescript
+public readonly userId: string;
+```
+
+- *Type:* string
+
+---
+
 ## Classes <a name="Classes" id="Classes"></a>
 
 ### AccountChatbots <a name="AccountChatbots" id="@DataChefHQ/data-landing-zone.AccountChatbots"></a>
@@ -11247,6 +12385,7 @@ new DataLandingZone(app: App, props: DataLandingZoneProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageAudit">stageAudit</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageIamIdentityCenter">stageIamIdentityCenter</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageLog">stageLog</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageManagement">stageManagement</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageWorkloadDevelopType">stageWorkloadDevelopType</a></code> | *No description.* |
@@ -11258,6 +12397,12 @@ new DataLandingZone(app: App, props: DataLandingZoneProps)
 
 ```typescript
 public stageAudit(): AuditGlobalStack | AuditRegionalStack[]
+```
+
+##### `stageIamIdentityCenter` <a name="stageIamIdentityCenter" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageIamIdentityCenter"></a>
+
+```typescript
+public stageIamIdentityCenter(): DlzStack[]
 ```
 
 ##### `stageLog` <a name="stageLog" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageLog"></a>
@@ -11291,6 +12436,7 @@ public stageWorkloadProductionType(): DlzStack[]
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.auditStacks">auditStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.AuditStacks">AuditStacks</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.developAccountStacks">developAccountStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.iamIdentityCenterStack">iamIdentityCenterStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack">IamIdentityCenterStack</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.logStacks">logStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LogStacks">LogStacks</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.managementStack">managementStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack">ManagementStack</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.productionAccountStacks">productionAccountStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]</code> | *No description.* |
@@ -11314,6 +12460,16 @@ public readonly developAccountStacks: DevelopAccountStacks[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]
+
+---
+
+##### `iamIdentityCenterStack`<sup>Required</sup> <a name="iamIdentityCenterStack" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.iamIdentityCenterStack"></a>
+
+```typescript
+public readonly iamIdentityCenterStack: IamIdentityCenterStack;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterStack">IamIdentityCenterStack</a>
 
 ---
 
@@ -11885,6 +13041,318 @@ public readonly reports: ReportItem[];
 
 ---
 
+
+### SecurityAccess <a name="SecurityAccess" id="@DataChefHQ/data-landing-zone.SecurityAccess"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.SecurityAccess.Initializer"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+new SecurityAccess()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet">adminPermissionSet</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet">catalogPermissionSet</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.createGroup">createGroup</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet">createPermissionSet</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.engineeringPermissionSet">engineeringPermissionSet</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet">readOnlyPermissionSet</a></code> | *No description.* |
+
+---
+
+##### `adminPermissionSet` <a name="adminPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+SecurityAccess.adminPermissionSet(scope: Construct, ssoArn: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet.parameter.ssoArn"></a>
+
+- *Type:* string
+
+---
+
+##### `catalogPermissionSet` <a name="catalogPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+SecurityAccess.catalogPermissionSet(scope: Construct, ssoArn: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet.parameter.ssoArn"></a>
+
+- *Type:* string
+
+---
+
+##### `createGroup` <a name="createGroup" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+SecurityAccess.createGroup(scope: Construct, name: string, ssoArn: string, users: string[], permissionSet: CfnPermissionSet, accounts?: string[], description?: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.name"></a>
+
+- *Type:* string
+
+---
+
+###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.ssoArn"></a>
+
+- *Type:* string
+
+---
+
+###### `users`<sup>Required</sup> <a name="users" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.users"></a>
+
+- *Type:* string[]
+
+---
+
+###### `permissionSet`<sup>Required</sup> <a name="permissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.permissionSet"></a>
+
+- *Type:* aws-cdk-lib.aws_sso.CfnPermissionSet
+
+---
+
+###### `accounts`<sup>Optional</sup> <a name="accounts" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.accounts"></a>
+
+- *Type:* string[]
+
+---
+
+###### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.description"></a>
+
+- *Type:* string
+
+---
+
+##### `createPermissionSet` <a name="createPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+SecurityAccess.createPermissionSet(scope: Construct, ssoArn: string, name: string, description?: string, policy?: any, managedPolicies?: string[])
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.ssoArn"></a>
+
+- *Type:* string
+
+---
+
+###### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.name"></a>
+
+- *Type:* string
+
+---
+
+###### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.description"></a>
+
+- *Type:* string
+
+---
+
+###### `policy`<sup>Optional</sup> <a name="policy" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.policy"></a>
+
+- *Type:* any
+
+---
+
+###### `managedPolicies`<sup>Optional</sup> <a name="managedPolicies" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.managedPolicies"></a>
+
+- *Type:* string[]
+
+---
+
+##### `engineeringPermissionSet` <a name="engineeringPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.engineeringPermissionSet"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+SecurityAccess.engineeringPermissionSet(scope: Construct, ssoArn: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.engineeringPermissionSet.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.engineeringPermissionSet.parameter.ssoArn"></a>
+
+- *Type:* string
+
+---
+
+##### `readOnlyPermissionSet` <a name="readOnlyPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet"></a>
+
+```typescript
+import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
+
+SecurityAccess.readOnlyPermissionSet(scope: Construct, ssoArn: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet.parameter.ssoArn"></a>
+
+- *Type:* string
+
+---
+
+
+
+### SecurityPolicy <a name="SecurityPolicy" id="@DataChefHQ/data-landing-zone.SecurityPolicy"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.SecurityPolicy.Initializer"></a>
+
+```typescript
+import { SecurityPolicy } from '@DataChefHQ/data-landing-zone'
+
+new SecurityPolicy()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityPolicy.createPolicy">createPolicy</a></code> | *No description.* |
+
+---
+
+##### `createPolicy` <a name="createPolicy" id="@DataChefHQ/data-landing-zone.SecurityPolicy.createPolicy"></a>
+
+```typescript
+import { SecurityPolicy } from '@DataChefHQ/data-landing-zone'
+
+SecurityPolicy.createPolicy(services?: string[], wildCard?: string)
+```
+
+###### `services`<sup>Optional</sup> <a name="services" id="@DataChefHQ/data-landing-zone.SecurityPolicy.createPolicy.parameter.services"></a>
+
+- *Type:* string[]
+
+---
+
+###### `wildCard`<sup>Optional</sup> <a name="wildCard" id="@DataChefHQ/data-landing-zone.SecurityPolicy.createPolicy.parameter.wildCard"></a>
+
+- *Type:* string
+
+---
+
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityPolicy.property.adminPolicy">adminPolicy</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityPolicy.property.defaultServices">defaultServices</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityPolicy.property.readOnlyPolicy">readOnlyPolicy</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityPolicy.property.readWritePolicy">readWritePolicy</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.SecurityPolicy.property.servicePolicy">servicePolicy</a></code> | <code>any</code> | *No description.* |
+
+---
+
+##### `adminPolicy`<sup>Required</sup> <a name="adminPolicy" id="@DataChefHQ/data-landing-zone.SecurityPolicy.property.adminPolicy"></a>
+
+```typescript
+public readonly adminPolicy: any;
+```
+
+- *Type:* any
+
+---
+
+##### `defaultServices`<sup>Required</sup> <a name="defaultServices" id="@DataChefHQ/data-landing-zone.SecurityPolicy.property.defaultServices"></a>
+
+```typescript
+public readonly defaultServices: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `readOnlyPolicy`<sup>Required</sup> <a name="readOnlyPolicy" id="@DataChefHQ/data-landing-zone.SecurityPolicy.property.readOnlyPolicy"></a>
+
+```typescript
+public readonly readOnlyPolicy: any;
+```
+
+- *Type:* any
+
+---
+
+##### `readWritePolicy`<sup>Required</sup> <a name="readWritePolicy" id="@DataChefHQ/data-landing-zone.SecurityPolicy.property.readWritePolicy"></a>
+
+```typescript
+public readonly readWritePolicy: any;
+```
+
+- *Type:* any
+
+---
+
+##### `servicePolicy`<sup>Required</sup> <a name="servicePolicy" id="@DataChefHQ/data-landing-zone.SecurityPolicy.property.servicePolicy"></a>
+
+```typescript
+public readonly servicePolicy: any;
+```
+
+- *Type:* any
+
+---
 
 ## Protocols <a name="Protocols" id="Protocols"></a>
 
