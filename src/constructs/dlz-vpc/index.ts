@@ -1,4 +1,4 @@
 export * from './dlz-vpc';
-export * from './network-entity';
+export * from './dlz-account-network';
 export * from './network-address';
-export { NetworkEntities } from './network-entities';
+export { DlzAccountNetworks } from './dlz-account-networks';

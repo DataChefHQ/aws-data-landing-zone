@@ -36,7 +36,7 @@ describe('CdkExpressPipelineLegacy', () => {
       slackChannelId: 'C2',
     };
 
-    const dlz = new DataLandingZone(app, {
+    new DataLandingZone(app, {
       localProfile: 'ct-sandbox-exported',
       regions: {
         global: Region.EU_WEST_1,
@@ -397,12 +397,29 @@ describe('CdkExpressPipelineLegacy', () => {
         connections: {
           vpcPeering: [
 
-            {
-              name: 'development-ew1--production-ue1-source',
-              source: new NetworkAddress('project-1-develop'), // TODO Change description above ^ Is that "name" even needed???
-              destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
-              direction: 'source-to-destination',
-            },
+            // {
+            //   // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
+            //   name: 'dev-ew1-def-priv--dev-ue1-def-priv',
+            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
+            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.private'),
+            //   direction: 'source-to-destination',
+            // },
+            // {
+            //   name: 'dev-ew1-def-pub--dev-ue1-def-pub',
+            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'public'),
+            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
+            //   direction: 'source-to-destination',
+            // },
+
+            // {
+            //   name: 'development-ew1--production-ue1-source',
+            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
+            //   // source: new NetworkAddress('project-1-develop'), // TODO Change description above ^ Is that "name" even needed???
+            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
+            //   direction: 'source-to-destination',
+            // },
+
+
 
             // Only 1 role in the same account
             // {
@@ -435,13 +452,13 @@ describe('CdkExpressPipelineLegacy', () => {
             // },
 
             // // does this work?
-            // // ALL VPCs in all regions of Dev routed to ALL in all regions of VPCs in prod.
-            // {
-            //   name: 'p1d-all--p1p-all',
-            //   source: new NetworkAddress('project-1-develop'),
-            //   destination: NetworkAddress.fromString('project-1-production'),
-            //   direction: 'source-to-destination',
-            // },
+            // ALL VPCs in all regions of Dev routed to ALL in all regions of VPCs in prod.
+            {
+              name: 'p1d-all--p1p-all',
+              source: new NetworkAddress('project-1-develop'),
+              destination: NetworkAddress.fromString('project-1-production'),
+              direction: 'source-to-destination',
+            },
 
           ],
         },
@@ -452,8 +469,8 @@ describe('CdkExpressPipelineLegacy', () => {
       printReport: false,
     });
 
-    const networkP1Stacks = dlz.workloadGlobalNetworkConnectionsPhase1Stacks;
-    console.log(networkP1Stacks);
+    // dlz.workloadGlobalNetworkConnectionsPhase1Stacks;
+    // console.log(networkP1Stacks);
     // hmmm does not print inspect
 
     // assert.ok(managementStack);

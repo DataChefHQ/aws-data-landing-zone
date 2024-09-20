@@ -32,3 +32,9 @@ channel is already defined and the permissions are different.
 - VPC Peering Connection Name
   - Length is within bounds
 - Bidirectional VPC Peering and Routes
+- Only 1 AWS Custom resource created when using the `DlzSsmReaderStackCache` class
+- No duplicate and conflicting routes in a route table
+
+## Docs
+- When talking about networking, say that it is a 1 way door, once subnets etc have been created. Can not change.
+  If want to, then need to 

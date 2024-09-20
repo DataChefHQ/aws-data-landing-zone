@@ -71,7 +71,7 @@ export class NetworkAddress {
   }
 
   public toString(): string {
-    return [this.account, this.region, this.vpc, this.segment]
+    return [this.account, this.region, this.vpc, this.segment, this.subnet]
       .filter(part => part !== undefined)
       .join(NETWORK_ADDRESS_SEPARATOR);
   }

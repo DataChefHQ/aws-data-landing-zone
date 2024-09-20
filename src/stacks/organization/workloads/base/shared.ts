@@ -1,11 +1,11 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import { DlzConfigRule } from '../../../../constructs/config/index';
-import { DlzStack, DlzVpc } from '../../../../constructs/index';
+import {DlzStack, DlzVpc} from '../../../../constructs/index';
 import { DataLandingZoneProps, DLzAccount } from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
 
-import { networkEntities } from '../network-entities';
+import { dlzAccountNetworks } from '../network-entities';
 
 export class Shared {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount) {
@@ -41,7 +41,7 @@ export class Shared {
     const vpcsForRegion = this.dlzAccount.vpcs?.filter(vpc => vpc.region === this.stack.region) || [];
     for (const dlzVpcProp of vpcsForRegion) {
       const dlzVpc = new DlzVpc(this.dlzAccount, this.stack, dlzVpcProp);
-      networkEntities.add(dlzVpc.networkEntity);
+      dlzAccountNetworks.add(this.dlzAccount, dlzVpc.networkEntityVpc);
     }
   }
 
