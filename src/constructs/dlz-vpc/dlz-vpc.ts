@@ -1,7 +1,7 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { NetworkAddress } from './network-address';
-import { NetworkEntity } from './network-entity';
+import {NetworkEntityRouteTable, NetworkEntityVpc} from './dlz-account-network';
 import { DLzAccount, Region } from '../../data-landing-zone';
 import { groupByField } from '../../lib';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
@@ -53,7 +53,7 @@ export interface DlzVpcProps {
 
 export class DlzVpc {
 
-  public readonly networkEntity: NetworkEntity;
+  public readonly networkEntityVpc: NetworkEntityVpc;
 
   constructor(private dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps) {
 
@@ -63,18 +63,15 @@ export class DlzVpc {
       tags: [{ key: 'Name', value: vpcName }],
     });
 
-    this.networkEntity = {
-      dlzAccount: this.dlzAccount,
-      vpc: {
-        address: new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name),
-        vpc,
-      },
-      subnets: [],
+    const vpcAddress = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name);
+    this.networkEntityVpc = {
+      address: vpcAddress,
+      vpc,
       routeTables: [],
     };
 
-    new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${this.networkEntity.vpc.address}-id`), {
-      parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${this.networkEntity.vpc.address}/id`,
+    new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${vpcAddress}-id`), {
+      parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${vpcAddress}/id`,
       stringValue: vpc.attrVpcId,
       // stringValue: networkEntityToSsmString(this.networkEntity),
     });
@@ -83,33 +80,44 @@ export class DlzVpc {
     for (const segment in segmentsSubnets) {
       const segmentSubnets = segmentsSubnets[segment];
 
+      /* Create Route table */
       const routeTableName = this.vpcResourceName(segment);
       const routeTableAddress = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name, segment);
-      if (this.networkEntity.routeTables.map(rt => rt.address).includes(routeTableAddress)) {
+      if (this.networkEntityVpc.routeTables.map(rt => rt.address).includes(routeTableAddress)) {
         throw new Error(`RouteTable with address '${routeTableAddress}' already exists`);
       }
       const routeTable = new ec2.CfnRouteTable(dlzStack, routeTableName, {
         vpcId: vpc.ref,
-        tags: [{ key: 'Name', value: routeTableName }],
-      });
-      this.networkEntity.routeTables.push({
-        address: routeTableAddress,
-        routeTable,
+        tags: [{key: 'Name', value: routeTableName}],
       });
 
+      new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${routeTableAddress}`), {
+        parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${routeTableAddress}/id`,
+        stringValue: routeTable.attrRouteTableId,
+        // stringValue: networkEntityToSsmString(this.networkEntity),
+      });
+
+      const subnetEntity: NetworkEntityRouteTable = {
+        address: routeTableAddress,
+        routeTable,
+        subnets: [],
+      }
+
+      /* Create Subnets and associations, then add to Route Table */
       for (const segmentSubnet of segmentSubnets) {
         const subnetName = this.vpcResourceName(segmentSubnet.name);
         const subnetId = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name, segment, segmentSubnet.name);
-        if (this.networkEntity.subnets.map(s => s.address).includes(subnetId)) {
+        if (subnetEntity.subnets.map(s => s.address).includes(subnetId)) {
           throw new Error(`Subnet with id ${subnetId} already exists`);
         }
         const subnet = new ec2.CfnSubnet(dlzStack, subnetName, {
           vpcId: vpc.ref,
           cidrBlock: segmentSubnet.cidr,
           availabilityZone: segmentSubnet.az,
-          tags: [{ key: 'Name', value: subnetName }],
+          tags: [{key: 'Name', value: subnetName}],
         });
-        this.networkEntity.subnets.push({
+
+        subnetEntity.subnets.push({
           address: subnetId,
           subnet,
         });
@@ -119,6 +127,16 @@ export class DlzVpc {
           routeTableId: routeTable.ref,
           subnetId: subnet.ref,
         });
+      }
+
+      this.networkEntityVpc.routeTables.push(
+        {
+          address: routeTableAddress,
+          routeTable,
+          subnets: subnetEntity.subnets,
+        }
+      );
+
 
         // //TODO: Next ticket
         // new ec2.CfnRoute(dlzStack, 'Route', {
@@ -126,7 +144,7 @@ export class DlzVpc {
         //   destinationCidrBlock: '0.0.0.0/0',
         //   gatewayId: 'igw-xxxxxxxx',
         // });
-      }
+
     }
 
   }

@@ -4,7 +4,7 @@ import {DataLandingZoneProps, WorkloadAccountProps} from "../../../../data-landi
 import {Construct} from "constructs";
 import {Shared} from "./shared";
 
-export class WorkloadGlobalNetworkConnectionsPhase2Stack extends DlzStack {
+export class WorkloadRegionalNetworkConnectionsPhase2Stack extends DlzStack {
 
   constructor(scope: Construct, stackProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
     super(scope, stackProps);
