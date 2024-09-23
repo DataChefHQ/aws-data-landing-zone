@@ -48,6 +48,7 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+/assets/
 .dlz-reports
 .idea
 *.js

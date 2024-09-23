@@ -10,7 +10,7 @@ import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
-import { SecurityAccess, IdentityStoreUser } from '../../constructs/iam-identity-center';
+import { SecurityAccess } from '../../constructs/iam-identity-center';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
@@ -223,16 +223,16 @@ export class ManagementStack extends DlzStack {
       permissionSets.set(permissionSetConf.name, permissionSet);
     }
 
-    const awsSsoUsers = new Map<string, IdentityStoreUser>();
-    for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
-      const userConstruct = new IdentityStoreUser(this, this.resourceName(`aws-sso-user-${user.userName}`), user);
-      awsSsoUsers.set(user.userName, userConstruct);
-      users.set(user.userName, userConstruct.userId);
-    }
+    // const awsSsoUsers = new Map<string, IdentityStoreUser>();
+    // for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
+    //   const userConstruct = new IdentityStoreUser(this, this.resourceName(`aws-sso-user-${user.userName}`), user);
+    //   awsSsoUsers.set(user.userName, userConstruct);
+    //   users.set(user.userName, userConstruct.userId);
+    // }
 
     for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
       const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];
-      const dependencyUsers = [...awsSsoUsers.values()].filter(user => resolvedUsers.includes(user.userId));
+      const dependencyUsers: Construct[] = [];//...awsSsoUsers.values()].filter(user => resolvedUsers.includes(user.userId));
 
       const resolvedAccounts: string[] = [];
       for (const accountWithWildCard of group.accounts) {

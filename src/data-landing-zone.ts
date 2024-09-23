@@ -1,6 +1,6 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
 import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
-import { IdentityStoreUserProps } from './constructs/iam-identity-center';
+import { IdentityStoreUserProps } from './constructs/identity-store-user';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack } from './stacks';

@@ -42,6 +42,33 @@
       ],
       "condition": "git log --oneline -1 | grep -qv \"chore(release):\""
     },
+    "bundle": {
+      "name": "bundle",
+      "description": "Prepare assets",
+      "steps": [
+        {
+          "spawn": "bundle:constructs/identity-store-user/lambda"
+        }
+      ]
+    },
+    "bundle:constructs/identity-store-user/lambda": {
+      "name": "bundle:constructs/identity-store-user/lambda",
+      "description": "Create a JavaScript bundle from ./src/constructs/identity-store-user/lambda/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/identity-store-user/lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/identity-store-user/lambda/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/identity-store-user/lambda:watch": {
+      "name": "bundle:constructs/identity-store-user/lambda:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/identity-store-user/lambda/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/identity-store-user/lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/identity-store-user/lambda/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
     "clear-lib-and-dist": {
       "name": "clear-lib-and-dist",
       "steps": [
@@ -217,7 +244,12 @@
     },
     "pre-compile": {
       "name": "pre-compile",
-      "description": "Prepare the project for compilation"
+      "description": "Prepare the project for compilation",
+      "steps": [
+        {
+          "spawn": "bundle"
+        }
+      ]
     },
     "release": {
       "name": "release",
@@ -290,13 +322,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-sts,@aws-sdk/credential-providers,table"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-identitystore,@aws-sdk/client-sso-admin,@aws-sdk/client-sts,@aws-sdk/credential-providers,aws-lambda,table"
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cost-explorer @aws-sdk/client-sts @aws-sdk/credential-providers execa table aws-cdk-lib constructs"
+          "exec": "npm update @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cost-explorer @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers aws-lambda execa table aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"

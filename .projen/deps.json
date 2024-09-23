@@ -1,6 +1,14 @@
 {
   "dependencies": [
     {
+      "name": "@types/aws-lambda",
+      "type": "build"
+    },
+    {
+      "name": "@types/aws-sdk",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },
@@ -22,6 +30,10 @@
     {
       "name": "commit-and-tag-version",
       "version": "^12",
+      "type": "build"
+    },
+    {
+      "name": "esbuild",
       "type": "build"
     },
     {
@@ -95,11 +107,23 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/client-identitystore",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/client-sso-admin",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-sts",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/credential-providers",
+      "type": "bundled"
+    },
+    {
+      "name": "aws-lambda",
       "type": "bundled"
     },
     {

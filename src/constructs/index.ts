@@ -4,3 +4,4 @@ export * from './organization-policies';
 export * from './budget';
 export * from './account-chatbots';
 export * from './iam-identity-center';
+export * from './identity-store-user';

@@ -10533,27 +10533,27 @@ public readonly permissionSets: PermissionSetProps[];
 
 ---
 
-### IdentityStoreUserEmail <a name="IdentityStoreUserEmail" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail"></a>
+### IdentityStoreUserEmailsProps <a name="IdentityStoreUserEmailsProps" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.Initializer"></a>
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.Initializer"></a>
 
 ```typescript
-import { IdentityStoreUserEmail } from '@DataChefHQ/data-landing-zone'
+import { IdentityStoreUserEmailsProps } from '@DataChefHQ/data-landing-zone'
 
-const identityStoreUserEmail: IdentityStoreUserEmail = { ... }
+const identityStoreUserEmailsProps: IdentityStoreUserEmailsProps = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.type">type</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.value">value</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.primary">primary</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.property.type">type</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.property.value">value</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.property.primary">primary</a></code> | <code>boolean</code> | *No description.* |
 
 ---
 
-##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.type"></a>
+##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.property.type"></a>
 
 ```typescript
 public readonly type: string;
@@ -10563,7 +10563,7 @@ public readonly type: string;
 
 ---
 
-##### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.value"></a>
+##### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.property.value"></a>
 
 ```typescript
 public readonly value: string;
@@ -10573,13 +10573,96 @@ public readonly value: string;
 
 ---
 
-##### `primary`<sup>Optional</sup> <a name="primary" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmail.property.primary"></a>
+##### `primary`<sup>Optional</sup> <a name="primary" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.property.primary"></a>
 
 ```typescript
 public readonly primary: boolean;
 ```
 
 - *Type:* boolean
+
+---
+
+### IdentityStoreUserNameProps <a name="IdentityStoreUserNameProps" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.Initializer"></a>
+
+```typescript
+import { IdentityStoreUserNameProps } from '@DataChefHQ/data-landing-zone'
+
+const identityStoreUserNameProps: IdentityStoreUserNameProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.familyName">familyName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.formatted">formatted</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.givenName">givenName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.honorificPrefix">honorificPrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.honorificSuffix">honorificSuffix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.middleName">middleName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `familyName`<sup>Required</sup> <a name="familyName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.familyName"></a>
+
+```typescript
+public readonly familyName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `formatted`<sup>Required</sup> <a name="formatted" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.formatted"></a>
+
+```typescript
+public readonly formatted: string;
+```
+
+- *Type:* string
+
+---
+
+##### `givenName`<sup>Required</sup> <a name="givenName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.givenName"></a>
+
+```typescript
+public readonly givenName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `honorificPrefix`<sup>Optional</sup> <a name="honorificPrefix" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.honorificPrefix"></a>
+
+```typescript
+public readonly honorificPrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `honorificSuffix`<sup>Optional</sup> <a name="honorificSuffix" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.honorificSuffix"></a>
+
+```typescript
+public readonly honorificSuffix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `middleName`<sup>Optional</sup> <a name="middleName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.property.middleName"></a>
+
+```typescript
+public readonly middleName: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -10599,8 +10682,8 @@ const identityStoreUserProps: IdentityStoreUserProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.displayName">displayName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.identityStoreId">identityStoreId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.userName">userName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.emails">emails</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail">IdentityStoreUserEmail</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps">IdentityStoreUserNameProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.emails">emails</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps">IdentityStoreUserEmailsProps</a>[]</code> | *No description.* |
 
 ---
 
@@ -10624,23 +10707,23 @@ public readonly identityStoreId: string;
 
 ---
 
-##### `userName`<sup>Required</sup> <a name="userName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.userName"></a>
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.name"></a>
 
 ```typescript
-public readonly userName: string;
+public readonly name: IdentityStoreUserNameProps;
 ```
 
-- *Type:* string
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps">IdentityStoreUserNameProps</a>
 
 ---
 
 ##### `emails`<sup>Optional</sup> <a name="emails" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.emails"></a>
 
 ```typescript
-public readonly emails: IdentityStoreUserEmail[];
+public readonly emails: IdentityStoreUserEmailsProps[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmail">IdentityStoreUserEmail</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps">IdentityStoreUserEmailsProps</a>[]
 
 ---
 
