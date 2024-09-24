@@ -9,10 +9,10 @@ import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '..
 
 export class WorkloadGlobalStack extends DlzStack {
 
-  constructor(scope: Construct, stackProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
-    super(scope, stackProps);
+  constructor(scope: Construct, workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
+    super(scope, workloadAccountProps);
 
-    const shared = new Shared(this, this.props, stackProps.dlzAccount);
+    const shared = new Shared(this, this.props, workloadAccountProps.dlzAccount, workloadAccountProps.globalVariables);
     shared.configRuleRequiredTags();
     shared.createVpcs();
 

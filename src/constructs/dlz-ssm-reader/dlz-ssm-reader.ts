@@ -36,6 +36,7 @@ export class DlzSsmReader {
     }
 
     const getParameter = new cr.AwsCustomResource(scope, id, {
+      resourceType: 'Custom::DlzSsmReader',
       onUpdate: {
         region: region,
         assumedRoleArn: assumeRoleArn,

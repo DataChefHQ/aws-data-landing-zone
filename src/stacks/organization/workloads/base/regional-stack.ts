@@ -6,10 +6,10 @@ import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-lan
 
 export class WorkloadRegionalStack extends DlzStack {
 
-  constructor(scope: Construct, stackProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
-    super(scope, stackProps);
+  constructor(scope: Construct, workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
+    super(scope, workloadAccountProps);
 
-    const shared = new Shared(this, this.props, stackProps.dlzAccount);
+    const shared = new Shared(this, this.props, workloadAccountProps.dlzAccount, workloadAccountProps.globalVariables);
     shared.configRuleRequiredTags();
     shared.createVpcs();
 

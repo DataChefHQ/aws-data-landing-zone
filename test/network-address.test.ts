@@ -178,7 +178,6 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
   });
 
 
-
   function expectAccount(result: DlzAccountNetwork[] | undefined) {
     expect(result).toHaveLength(1);
     expect(result![0].dlzAccount.accountId).toBe(dlzAccountDev.accountId);
@@ -300,6 +299,5 @@ describe('NetworkEntities - add', () => {
     global.console = jestConsole;
   });
 
-  //TODO
 });
 
