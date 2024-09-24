@@ -454,7 +454,7 @@ describe('CdkExpressPipelineLegacy', () => {
             // // does this work?
             // ALL VPCs in all regions of Dev routed to ALL in all regions of VPCs in prod.
             {
-              name: 'p1d-all--p1p-all',
+              // name: 'p1d-all--p1p-all',
               source: new NetworkAddress('project-1-develop'),
               destination: NetworkAddress.fromString('project-1-production'),
               direction: 'source-to-destination',

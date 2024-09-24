@@ -6,10 +6,10 @@ import {Shared} from "./shared";
 
 export class WorkloadRegionalNetworkConnectionsPhase2Stack extends DlzStack {
 
-  constructor(scope: Construct, stackProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
-    super(scope, stackProps);
-    const shared = new Shared(this, this.props);
-    shared.createVpcPeeringConnectionsAndRoutes();
+  constructor(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps) {
+    super(scope, workloadAccountProps);
+    const shared = new Shared(this, props, workloadAccountProps.globalVariables);
+    shared.createVpcPeeringConnections();
 
     new sns.Topic(this, this.resourceName('test-topic'), {
       displayName: this.resourceName('test-topic'),

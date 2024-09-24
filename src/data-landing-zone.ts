@@ -1,6 +1,6 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
 import {
-  BudgetProps,
+  BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
   DlzStack,
   DlzStackProps, DlzVpcProps,
@@ -22,6 +22,14 @@ import {
 import {
   WorkloadRegionalNetworkConnectionsPhase2Stack
 } from "./stacks/organization/workloads/network-connections-phase-2-stack/regional-stack";
+import {
+  WorkloadRegionalNetworkConnectionsPhase3Stack
+} from "./stacks/organization/workloads/network-connections-phase-3-stack/regional-stack";
+import {
+  WorkloadGlobalNetworkConnectionsPhase3Stack
+} from "./stacks/organization/workloads/network-connections-phase-3-stack/global-stack";
+import {DlzSsmReaderStackCache} from "./constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 // import {
 //   WorkloadRegionalNetworkConnectionsPhase1Stack
 // } from "./stacks/organization/workloads/network-connections-phase-1-stack/regional-stack";
@@ -310,10 +318,6 @@ export interface DeploymentPlatform {
 }
 
 export interface NetworkConnectionVpcPeering {
-  /**
-   * The name of the connection. Maximum length of 50 characters.
-   */
-  readonly name: string;
   readonly source: NetworkAddress;
   readonly destination: NetworkAddress;
   readonly direction: 'source-to-destination' | 'bidirectional';
@@ -416,8 +420,32 @@ export interface AuditStacks {
   readonly regional: AuditRegionalStack[];
 }
 
+/* Global variables need to be reset between Construct usage */
+export type GlobalVariables = {
+  dlzAccountNetworks: DlzAccountNetworks;
+  ncp1: {
+    // /* The key is the combination of the account ids */
+    vpcPeeringRoleKeys: string[];
+  },
+  ncp2: {
+    /* To not create duplicate peering connections */
+    peeringConnections:  {[key: string]: ec2.CfnVPCPeeringConnection};
+    /* Reduce the number of SSM readers, only create them if they do not exist for that key
+     * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+    ownerVpcIds: DlzSsmReaderStackCache;
+    peeringRoleArns: DlzSsmReaderStackCache;
+  },
+  ncp3: {
+    /* Reduce the number of SSM readers, only create them if they do not exist for that key
+     * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+    vpcPeeringConnectionIds: DlzSsmReaderStackCache;
+    routeTablesSsmCache: DlzSsmReaderStackCache;
+  }
+}
+
 export interface WorkloadAccountProps extends DlzStackProps {
   readonly dlzAccount: DLzAccount;
+  readonly globalVariables: GlobalVariables;
 }
 
 
@@ -456,6 +484,25 @@ export class DataLandingZone {
   public workloadGlobalNetworkConnectionsPhase2Stacks: WorkloadGlobalNetworkConnectionsPhase2Stack[] = [];
   public workloadRegionalNetworkConnectionsPhase2Stacks: WorkloadRegionalNetworkConnectionsPhase2Stack[] = [];
 
+  public workloadGlobalNetworkConnectionsPhase3Stacks: WorkloadGlobalNetworkConnectionsPhase3Stack[] = [];
+  public workloadRegionalNetworkConnectionsPhase3Stacks: WorkloadRegionalNetworkConnectionsPhase3Stack[] = [];
+
+  private globalVariables: GlobalVariables = {
+    dlzAccountNetworks: new DlzAccountNetworks(),
+    ncp1: {
+      vpcPeeringRoleKeys: []
+    },
+    ncp2: {
+      peeringConnections: {},
+      ownerVpcIds: new DlzSsmReaderStackCache(),
+      peeringRoleArns: new DlzSsmReaderStackCache(),
+    },
+    ncp3: {
+      vpcPeeringConnectionIds: new DlzSsmReaderStackCache(),
+      routeTablesSsmCache: new DlzSsmReaderStackCache(),
+    },
+  }
+
   constructor(private app: App, private props: DataLandingZoneProps) {
 
     this.managementStack = this.stageManagement();
@@ -469,6 +516,9 @@ export class DataLandingZone {
 
     this.workloadGlobalNetworkConnectionsPhase2Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase2Stack();
     this.workloadRegionalNetworkConnectionsPhase2Stacks = this.stageWorkloadRegionalNetworkConnectionsPhase2Stack();
+
+    this.workloadGlobalNetworkConnectionsPhase3Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase3Stack();
+    this.workloadRegionalNetworkConnectionsPhase3Stacks = this.stageWorkloadRegionalNetworkConnectionsPhase3Stack();
 
     // this.workloadGlobalNetworkConnectionsPhase2Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase2Stack();
 
@@ -504,6 +554,10 @@ export class DataLandingZone {
       WorkloadRegionalNetworkConnectionsPhase2Stack: {
         GlobalStage: this.workloadGlobalNetworkConnectionsPhase2Stacks,
         RegionalStage: this.workloadRegionalNetworkConnectionsPhase2Stacks,
+      },
+      WorkloadRegionalNetworkConnectionsPhase3Stack: {
+        GlobalStage: this.workloadGlobalNetworkConnectionsPhase3Stacks,
+        RegionalStage: this.workloadRegionalNetworkConnectionsPhase3Stacks,
       },
     };
 
@@ -628,6 +682,7 @@ export class DataLandingZone {
           region: this.props.regions.global,
         },
         dlzAccount,
+        globalVariables: this.globalVariables,
       }, this.props);
 
       workloadGlobalStacks.push(developGlobalStack);
@@ -647,6 +702,7 @@ export class DataLandingZone {
             region,
           },
           dlzAccount,
+          globalVariables: this.globalVariables,
         }, this.props);
         workloadRegionalStacks.push(developGlobalStack);
       }
@@ -667,34 +723,13 @@ export class DataLandingZone {
           region: this.props.regions.global,
         },
         dlzAccount,
+        globalVariables: this.globalVariables
       }, this.props);
 
       workloadGlobalStacks.push(networkConnectionsPhase1Stack);
     }
     return workloadGlobalStacks;
   }
-  // private stageWorkloadRegionalNetworkConnectionsPhase1Stacks() {
-  //   const ou = 'workloads';
-  //
-  //   const workloadRegionalStacks: WorkloadRegionalNetworkConnectionsPhase1Stack[] = [];
-  //   for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
-  //     for (const region of this.props.regions.regional) {
-  //       const networkConnectionsPhase1Stack = new WorkloadRegionalNetworkConnectionsPhase1Stack(this.app, {
-  //         /* ncp1 abbreviation for NetworkConnectionsPhase1Stack */
-  //         name: {ou, account: dlzAccount.name, stack: 'ncp1-regional', region: region},
-  //         env: {
-  //           account: dlzAccount.accountId,
-  //           region: region,
-  //         },
-  //         dlzAccount,
-  //       }, this.props);
-  //
-  //       workloadRegionalStacks.push(networkConnectionsPhase1Stack);
-  //     }
-  //   }
-  //   return workloadRegionalStacks;
-  // }
-
 
   private stageWorkloadGlobalNetworkConnectionsPhase2Stack() {
     const ou = 'workloads';
@@ -709,13 +744,13 @@ export class DataLandingZone {
           region: this.props.regions.global,
         },
         dlzAccount,
+        globalVariables: this.globalVariables
       }, this.props);
 
       workloadGlobalStacks.push(networkConnectionsPhase2Stack);
     }
     return workloadGlobalStacks;
   }
-
   private stageWorkloadRegionalNetworkConnectionsPhase2Stack() {
     const ou = 'workloads';
 
@@ -728,9 +763,53 @@ export class DataLandingZone {
           name: { ou, account: dlzAccount.name, stack: 'ncp2-regional', region },
           env: {
             account: dlzAccount.accountId,
-            region: this.props.regions.global,
+            region: region,
           },
           dlzAccount,
+          globalVariables: this.globalVariables,
+        }, this.props);
+        workloadRegionalStacks.push(workloadRegionalStack);
+      }
+    }
+    return workloadRegionalStacks;
+  }
+
+  private stageWorkloadGlobalNetworkConnectionsPhase3Stack() {
+    const ou = 'workloads';
+
+    const workloadGlobalStacks: WorkloadGlobalNetworkConnectionsPhase3Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const networkConnectionsPhase3Stack = new WorkloadGlobalNetworkConnectionsPhase3Stack(this.app, {
+        /* ncp3 abbreviation for NetworkConnectionsPhase3Stack */
+        name: { ou, account: dlzAccount.name, stack: 'ncp3-global', region: this.props.regions.global },
+        env: {
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
+        },
+        dlzAccount,
+        globalVariables: this.globalVariables,
+      }, this.props);
+
+      workloadGlobalStacks.push(networkConnectionsPhase3Stack);
+    }
+    return workloadGlobalStacks;
+  }
+  private stageWorkloadRegionalNetworkConnectionsPhase3Stack() {
+    const ou = 'workloads';
+
+    const workloadRegionalStacks: WorkloadRegionalNetworkConnectionsPhase3Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      for (const region of this.props.regions.regional) {
+
+        const workloadRegionalStack = new WorkloadRegionalNetworkConnectionsPhase3Stack(this.app, {
+          /* ncp3 abbreviation for NetworkConnectionsPhase3Stack */
+          name: { ou, account: dlzAccount.name, stack: 'ncp3-regional', region },
+          env: {
+            account: dlzAccount.accountId,
+            region: region,
+          },
+          dlzAccount,
+          globalVariables: this.globalVariables,
         }, this.props);
         workloadRegionalStacks.push(workloadRegionalStack);
       }

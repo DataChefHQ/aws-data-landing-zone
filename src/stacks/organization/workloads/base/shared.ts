@@ -1,14 +1,14 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import { DlzConfigRule } from '../../../../constructs/config/index';
 import {DlzStack, DlzVpc} from '../../../../constructs/index';
-import { DataLandingZoneProps, DLzAccount } from '../../../../data-landing-zone';
+import {DataLandingZoneProps, DLzAccount, GlobalVariables} from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
 
-import { dlzAccountNetworks } from '../network-entities';
+
 
 export class Shared {
-  constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount) {
+  constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount, private globals: GlobalVariables) {
   }
 
   public configRuleRequiredTags() {
@@ -41,7 +41,7 @@ export class Shared {
     const vpcsForRegion = this.dlzAccount.vpcs?.filter(vpc => vpc.region === this.stack.region) || [];
     for (const dlzVpcProp of vpcsForRegion) {
       const dlzVpc = new DlzVpc(this.dlzAccount, this.stack, dlzVpcProp);
-      dlzAccountNetworks.add(this.dlzAccount, dlzVpc.networkEntityVpc);
+      this.globals.dlzAccountNetworks.add(this.dlzAccount, dlzVpc.networkEntityVpc);
     }
   }
 

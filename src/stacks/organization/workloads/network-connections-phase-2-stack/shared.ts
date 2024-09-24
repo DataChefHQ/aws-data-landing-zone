@@ -1,33 +1,32 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import {DlzAccountNetwork, DlzSsmReader, DlzStack, NetworkEntityVpc} from '../../../../constructs/index';
-import {DataLandingZoneProps} from "../../../../data-landing-zone";
-import {dlzAccountNetworks} from "../network-entities";
+import {DataLandingZoneProps, GlobalVariables} from "../../../../data-landing-zone";
 import {SSM_PARAMETERS_DLZ} from "../../constants";
-import {DlzSsmReaderStackCache} from "../../../../constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache";
+// import {DlzSsmReaderStackCache} from "../../../../constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache";
+import * as ssm from "aws-cdk-lib/aws-ssm";
 
-/* To not create duplicate peering connections */
-let peeringConnections: {[key: string]: ec2.CfnVPCPeeringConnection} = {};
-
-/* Reduce the number of SSM readers, only create them if they do not exist for that key
- * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
-let ownerVpcIds: DlzSsmReaderStackCache = new DlzSsmReaderStackCache();
-let peeringRoleArns: DlzSsmReaderStackCache = new DlzSsmReaderStackCache();
-let routeTablesSsmCache: DlzSsmReaderStackCache = new DlzSsmReaderStackCache();
+// /* To not create duplicate peering connections */
+// let peeringConnections: {[key: string]: ec2.CfnVPCPeeringConnection} = {};
+//
+// /* Reduce the number of SSM readers, only create them if they do not exist for that key
+//  * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+// let ownerVpcIds: DlzSsmReaderStackCache = new DlzSsmReaderStackCache();
+// let peeringRoleArns: DlzSsmReaderStackCache = new DlzSsmReaderStackCache();
 
 export class Shared {
 
-  constructor(private stack: DlzStack ,private props: DataLandingZoneProps) {
+  constructor(private stack: DlzStack ,private props: DataLandingZoneProps, private globals: GlobalVariables) {
   }
 
-  createVpcPeeringConnectionsAndRoutes() {
+  createVpcPeeringConnections() {
 
     for (const connection of this.props.network?.connections.vpcPeering || []) {
-      const sourceAccountNetworks = dlzAccountNetworks.getEntitiesForAddress(connection.source); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
+      const sourceAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.source); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
       if (!sourceAccountNetworks?.length) {
         throw new Error(`No DlzAccountNetworks found for VPC Peering source ${connection.source}`);
       }
 
-      const destinationAccountNetworks = dlzAccountNetworks.getEntitiesForAddress(connection.destination); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
+      const destinationAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.destination); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
       if (!destinationAccountNetworks?.length) {
         throw new Error(`No DlzAccountNetworks found for VPC Peering destination ${connection.destination}`);
       }
@@ -41,13 +40,10 @@ export class Shared {
 
         for (const vpcDestinationNetworkEntity of destinationAccountNetworks) {
           if (connection.direction === 'source-to-destination') {
-            this.connectVpcs(sourceAccountNetwork, vpcDestinationNetworkEntity);
+            this.connectVpcs(this.stack, sourceAccountNetwork, vpcDestinationNetworkEntity);
           } else {
-            // const sourceToDestPeeringConnectionId = this.createPeeringConnection(ssmGlobalReader, vpcSourceNetworkEntity, vpcDestinationNetworkEntity);
-            // this.createRoute(connection, vpcSourceNetworkEntity, vpcDestinationNetworkEntity, sourceToDestPeeringConnectionId);
-            //
-            // const destToSourcePeeringConnectionId = this.createPeeringConnection(ssmGlobalReader, vpcSourceNetworkEntity, vpcDestinationNetworkEntity);
-            // this.createRoute(connection, vpcDestinationNetworkEntity, vpcSourceNetworkEntity, destToSourcePeeringConnectionId);
+            this.connectVpcs(this.stack, sourceAccountNetwork, vpcDestinationNetworkEntity);
+            this.connectVpcs(this.stack, vpcDestinationNetworkEntity, sourceAccountNetwork);
           }
         }
 
@@ -57,36 +53,54 @@ export class Shared {
   }
 
 
-  private connectVpcs(from: DlzAccountNetwork, to: DlzAccountNetwork) {
-    /* Only create/retrieve a peeringConnection if it is for a different account (aka the source/requester)  */
-    if (this.stack.account === to.dlzAccount.accountId) {return;}
+  private connectVpcs(stack: DlzStack, from: DlzAccountNetwork, to: DlzAccountNetwork) {
+    ///* Only create/retrieve a peeringConnection if it is for a different account (aka the source/requester)  */
+    // if (this.stack.account === to.dlzAccount.accountId) {
+    //   return;
+    // } //TODO: Also check region like for routes?
     for (const fromVpc of from.vpcs) {
+      /* Only create routes for the source account and region */
+      if (this.stack.account !== from.dlzAccount.accountId || this.stack.region !== fromVpc.address.region) {
+        return;
+      }
       for (const toVpc of to.vpcs) {
-        //@ts-ignore
-        const peeringConnectionId = this.getOrCreatePeeringConnection(
+        const peeringConnection = this.createPeeringConnection(
           from.dlzAccount.accountId,
           fromVpc,
           to.dlzAccount.accountId,
           toVpc
         );
-        this.createRoutes(fromVpc, toVpc, peeringConnectionId);
+
+        if(peeringConnection) {
+          new ssm.StringParameter(stack, this.stack.resourceName(`network-entity--${fromVpc.address}-${toVpc.address}-id`), {
+            parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${fromVpc.address}/peer/${toVpc.address}/id`,
+            stringValue: peeringConnection.attrId,
+          });
+        }
       }
     }
   }
 
-  private getOrCreatePeeringConnection(fromAccountId: string, fromVpc: NetworkEntityVpc, toAccountId: string, toVpc: NetworkEntityVpc) {
+  /**
+   * Returns undefined if the Peering Connection has been created between the accounts
+   * @param fromAccountId
+   * @param fromVpc
+   * @param toAccountId
+   * @param toVpc
+   * @private
+   */
+  private createPeeringConnection(fromAccountId: string, fromVpc: NetworkEntityVpc, toAccountId: string, toVpc: NetworkEntityVpc) {
     /* Only create a peeringConnection if it has not been created before  */
     const vpcPeeringConnectionKey = `${fromVpc.address}-to-${toVpc.address}`;
-    let peeringConnection: ec2.CfnVPCPeeringConnection | undefined = peeringConnections[vpcPeeringConnectionKey];
+    let peeringConnection: ec2.CfnVPCPeeringConnection | undefined = this.globals.ncp2.peeringConnections[vpcPeeringConnectionKey];
     if (peeringConnection) {
-      return peeringConnection.attrId;
+      return undefined;
     }
 
-    console.log(`Creating VPC Peering between VPC '${fromVpc.address}' and '${toVpc.address}'`);
-
+    console.log(`${this.stack.id} Creating VPC Peering between VPC '${fromVpc.address}' and '${toVpc.address}'`);
     const peerRoleArn = this.getPeerRoleArn(fromAccountId, toAccountId);
 
-    const vpcId = ownerVpcIds.getValue(
+    const vpcId = this.globals.ncp2.ownerVpcIds.getValue(
       this.stack,
       `VpcId--${vpcPeeringConnectionKey}`,
       this.stack.accountId, //Same account
@@ -103,7 +117,7 @@ export class Shared {
       `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${toVpc.address}/id`,
     );
 
-    peeringConnections[vpcPeeringConnectionKey] = new ec2.CfnVPCPeeringConnection(
+    this.globals.ncp2.peeringConnections[vpcPeeringConnectionKey] = new ec2.CfnVPCPeeringConnection(
       this.stack,
       this.stack.resourceName(`vpc-peering-connection--${vpcPeeringConnectionKey}`),
       {
@@ -121,7 +135,7 @@ export class Shared {
       },
     );
 
-    return peeringConnections[vpcPeeringConnectionKey].attrId;
+    return this.globals.ncp2.peeringConnections[vpcPeeringConnectionKey];
   }
 
 
@@ -138,7 +152,7 @@ export class Shared {
     }
 
     const vpcPeeringRolesKey = `${fromAccountId}-${toAccountId}`;
-    return peeringRoleArns.getValue(
+    return this.globals.ncp2.peeringRoleArns.getValue(
       this.stack,
       'PeerRoleArn--'+vpcPeeringRolesKey,
       toAccountId,
@@ -146,37 +160,4 @@ export class Shared {
       `${SSM_PARAMETERS_DLZ.NETWORKING_VPC_PEERING_ROLE_PREFIX}${vpcPeeringRolesKey}`,
     );
   }
-
-  private createRoutes(fromVpc: NetworkEntityVpc, toVpc: NetworkEntityVpc, peeringConnectionId: string) {
-
-    // TODO: Only in acceptor?
-
-    console.log(`Creating VPC Peering routes between '${fromVpc.address}' and '${toVpc.address}'`);
-
-    for (const fromRouteTable of fromVpc.routeTables) {
-      for (const toRouteTable of toVpc.routeTables) {
-        for (const toSubnet of toRouteTable.subnets!) {
-          const routeLogicalId = `vpc-peering-route-from--${fromRouteTable.address}--to--${toRouteTable.address}-${toSubnet.subnet.cidrBlock}`;
-          console.log(routeLogicalId);
-
-
-          const routeTableId = routeTablesSsmCache.getValue(
-            this.stack,
-            `RouteTableId--${routeLogicalId}`,
-            this.stack.accountId, //Same account
-            this.stack.region, //Same account
-            `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${fromRouteTable.address}/id`,
-          );
-
-          new ec2.CfnRoute(this.stack, this.stack.resourceName(routeLogicalId),
-            {
-              routeTableId: routeTableId,
-              destinationCidrBlock: toSubnet.subnet.cidrBlock,
-              vpcPeeringConnectionId: peeringConnectionId
-            });
-        }
-      }
-    }
-  }
-
 }
