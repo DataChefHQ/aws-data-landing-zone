@@ -11,3 +11,15 @@ export async function all(props: DataLandingZoneProps) {
     process.env.CI ? '' : `--profile ${props.localProfile}`,
   ].join(' '));
 }
+
+export async function select(props: DataLandingZoneProps, id: string) {
+  await runCommand('cdk', [
+    'deploy',
+    '"'+id+'"',
+    '--require-approval never',
+    '--progress events',
+    '--concurrency 10',
+    '--exclusively',
+    process.env.CI ? '' : `--profile ${props.localProfile}`,
+  ].join(' '));
+}

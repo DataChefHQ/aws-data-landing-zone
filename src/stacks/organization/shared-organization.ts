@@ -1,16 +1,18 @@
 import * as config from 'aws-cdk-lib/aws-config';
-import { DlzStack } from '../../constructs';
+import { DlzStack, DlzVpc, DlzVpcProps } from '../../constructs';
 import { DlzConfigRule } from '../../constructs/config';
-import { DataLandingZoneProps } from '../../data-landing-zone';
+import { NetworkEntities } from '../../constructs/dlz-vpc/network-entity';
+import { DataLandingZoneProps, DLzAccount } from '../../data-landing-zone';
 import { PropsOrDefaults } from '../../defaults';
 import { Report } from '../../lib/report';
 
+const networkEntities = new NetworkEntities();
+
 export class SharedOrganization {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps) {
-    this.configRules();
   }
 
-  private configRules() {
+  public configRules() {
     this.configRuleRequiredTags();
     //TODO: More
   }
@@ -38,6 +40,13 @@ export class SharedOrganization {
         },
       });
     Report.addReportForAccountRegion(this.stack.accountName, this.stack.region, rule.reportResource);
+  }
+
+  public createVpcs(dlzAccount: DLzAccount, dlzVpcProps: DlzVpcProps[]) {
+    for (const dlzVpcProp of dlzVpcProps) {
+      const dlzVpc = new DlzVpc(dlzAccount, this.stack, dlzVpcProp);
+      networkEntities.add(dlzVpc.networkEntity);
+    }
   }
 
 }
