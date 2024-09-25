@@ -201,9 +201,7 @@
     "dot-notation": [
       "error"
     ],
-    "no-bitwise": [
-      "error"
-    ],
+    "no-bitwise": "off",
     "@typescript-eslint/member-ordering": [
       "error",
       {

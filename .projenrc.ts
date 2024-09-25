@@ -70,6 +70,10 @@ project.bundler.addBundle('./src/constructs/identity-store-user/lambda/', {
   externals: ['aws-sdk'],
 });
 
+project.eslint!.addRules({
+  'no-bitwise': 'off',
+});
+
 project.package.addEngine('node', '~20.*');
 project.package.addEngine('npm', '~10.*');
 

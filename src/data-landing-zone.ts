@@ -1,5 +1,12 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
-import { BudgetProps, DlzControlTowerStandardControls, DlzStack, SlackChannel } from './constructs';
+import {
+  BudgetProps,
+  DlzControlTowerStandardControls,
+  DlzStack,
+  DlzStackProps,
+  DlzVpcProps,
+  SlackChannel,
+} from './constructs';
 import { IdentityStoreUserProps } from './constructs/identity-store-user';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
@@ -193,6 +200,7 @@ export interface DLzAccount {
   readonly accountId: string;
   readonly name: string;
   readonly type: DlzAccountType;
+  readonly vpcs: DlzVpcProps[];
 }
 
 export enum Ou {
@@ -438,6 +446,10 @@ export interface ProductionAccountStacks {
   readonly stacks: ProductionStacks;
 }
 
+export interface WorkloadAccountProps extends DlzStackProps {
+  readonly dlzAccount: DLzAccount;
+}
+
 
 function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
   console.log('');
@@ -618,6 +630,7 @@ export class DataLandingZone {
           account: dlzAccount.accountId,
           region: this.props.regions.global,
         },
+        dlzAccount,
       },
       this.props);
 
@@ -629,6 +642,7 @@ export class DataLandingZone {
             account: dlzAccount.accountId,
             region: region,
           },
+          dlzAccount,
         },
         this.props);
         developRegional.addDependency(developGlobalStack);
@@ -665,6 +679,7 @@ export class DataLandingZone {
           account: dlzAccount.accountId,
           region: this.props.regions.global,
         },
+        dlzAccount,
       },
       this.props);
 
@@ -676,6 +691,7 @@ export class DataLandingZone {
             account: dlzAccount.accountId,
             region: region,
           },
+          dlzAccount,
         },
         this.props);
         productionRegional.addDependency(productionGlobalStack);
