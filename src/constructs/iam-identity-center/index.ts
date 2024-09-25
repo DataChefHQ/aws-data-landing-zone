@@ -9,21 +9,19 @@ export class SecurityPolicy {
     'lambda',
     'glue',
     'athena',
-    'dynmodb',
+    'dynamodb',
     'ec2',
-    'api-gateway',
     'cloudwatch',
     'logs',
     'cloudformation',
     'cloudfront',
     'sagemaker',
-    'rds',
     'sns',
     'sqs',
   ];
 
   public static readonly adminPolicy = this.createPolicy();
-  public static readonly readOnlyPolicy = this.createPolicy(this.defaultServices, 'List*,Describe*,Get*');
+  public static readonly readOnlyPolicy = this.createPolicy(this.defaultServices, 'List*,Get*');
 
   public static createPolicy(services: string[] = [], wildCard: string = '*'): iam.PolicyDocument {
     let actions: string[] = [];
@@ -48,15 +46,15 @@ export class SecurityPolicy {
 
 export class SecurityAccess {
   public static adminPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'AdminAccess', 'Use this permission set/role to grant full access', SecurityPolicy.adminPolicy);
+    return this.createPermissionSet(scope, ssoArn, 'DLZ-AdminAccess', 'Use this permission set/role to grant full access', SecurityPolicy.adminPolicy);
   }
 
   public static readOnlyPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'ReadOnlyAccess', 'Use this permission set/role to grant read only access', SecurityPolicy.readOnlyPolicy);
+    return this.createPermissionSet(scope, ssoArn, 'DLZ-ReadOnlyAccess', 'Use this permission set/role to grant read only access', SecurityPolicy.readOnlyPolicy);
   }
 
   public static catalogPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'CatalogAccess', 'Use this permission set/role to grants PeopleOps role', undefined, [
+    return this.createPermissionSet(scope, ssoArn, 'DLZ-CatalogAccess', 'Use this permission set/role to grant Service Catalog access', undefined, [
       'arn:aws:iam::aws:policy/AWSServiceCatalogAdminFullAccess',
       'arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess',
     ]);
@@ -84,6 +82,7 @@ export class SecurityAccess {
     scope: Construct,
     name: string,
     ssoArn: string,
+    identityStoreId: string,
     users: string[],
     permissionSet: sso.CfnPermissionSet,
     accounts: string[] = [],
@@ -96,26 +95,31 @@ export class SecurityAccess {
       {
         displayName: name,
         description: description,
-        identityStoreId: ssoArn,
+        identityStoreId,
       });
 
+    let i = 0;
     for (const user of users) {
-      new identitystore.CfnGroupMembership(
+      i++;
+      const id = `${name}-membership-${i}`;
+      const membership = new identitystore.CfnGroupMembership(
         scope,
-        `${name}-${user}`,
+        id,
         {
           groupId: group.attrGroupId,
-          identityStoreId: group.identityStoreId,
+          identityStoreId,
           memberId: {
             userId: user,
           },
         });
+
+      membership.node.addDependency(group);
     }
 
     for (const account of accounts) {
-      new sso.CfnAssignment(
+      const assignment = new sso.CfnAssignment(
         scope,
-        `${name}-${account}`,
+        `${name}-${account}-assignment`,
         {
           instanceArn: ssoArn,
           permissionSetArn: permissionSet.attrPermissionSetArn,
@@ -125,6 +129,8 @@ export class SecurityAccess {
           targetType: 'AWS_ACCOUNT',
         },
       );
+      assignment.node.addDependency(group);
+      assignment.node.addDependency(permissionSet);
     }
 
     return group;

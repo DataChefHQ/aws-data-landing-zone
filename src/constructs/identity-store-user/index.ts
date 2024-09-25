@@ -3,11 +3,14 @@ import { CustomResource, CustomResourceProvider, CustomResourceProviderRuntime, 
 import { Construct } from 'constructs';
 
 export interface IdentityStoreUserProps {
-  readonly identityStoreId: string;
   readonly userName: string;
   readonly name: IdentityStoreUserNameProps;
   readonly displayName: string;
   readonly emails?: IdentityStoreUserEmailsProps[];
+}
+
+export interface IdentityStoreUserPropsExt extends IdentityStoreUserProps {
+  readonly identityStoreId: string;
 }
 
 export interface IdentityStoreUserNameProps {
@@ -28,7 +31,7 @@ export interface IdentityStoreUserEmailsProps {
 export class IdentityStoreUser extends Construct {
   public readonly userId: string;
 
-  constructor(scope: Construct, id: string, props: IdentityStoreUserProps) {
+  constructor(scope: Construct, id: string, props: IdentityStoreUserPropsExt) {
     super(scope, id);
     const customResourceProvider = CustomResourceProvider.getOrCreateProvider(
       this,
