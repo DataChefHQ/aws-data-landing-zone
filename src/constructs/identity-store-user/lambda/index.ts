@@ -124,7 +124,6 @@ export const handler = async (
       compareAndAdd('name.honorificPrefix', current.Name?.HonorificPrefix, name.honorificPrefix);
       compareAndAdd('name.honorificSuffix', current.Name?.HonorificSuffix, name.honorificSuffix);
 
-
       if (emails && emails.length > 0) {
         operations.push({
           AttributePath: 'emails',
