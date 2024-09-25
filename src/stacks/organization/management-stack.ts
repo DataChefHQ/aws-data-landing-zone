@@ -1,6 +1,6 @@
 import * as assert from 'assert';
-import { Annotations } from 'aws-cdk-lib';
 import * as cdk from 'aws-cdk-lib';
+import { Annotations } from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as sso from 'aws-cdk-lib/aws-sso';
@@ -11,6 +11,7 @@ import {
   IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
 import { SecurityAccess } from '../../constructs/iam-identity-center';
+import { IdentityStoreUser } from '../../constructs/identity-store-user';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
@@ -223,12 +224,12 @@ export class ManagementStack extends DlzStack {
       permissionSets.set(permissionSetConf.name, permissionSet);
     }
 
-    // const awsSsoUsers = new Map<string, IdentityStoreUser>();
-    // for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
-    //   const userConstruct = new IdentityStoreUser(this, this.resourceName(`aws-sso-user-${user.userName}`), user);
-    //   awsSsoUsers.set(user.userName, userConstruct);
-    //   users.set(user.userName, userConstruct.userId);
-    // }
+    const awsSsoUsers = new Map<string, IdentityStoreUser>();
+    for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
+      const userConstruct = new IdentityStoreUser(this, this.resourceName(`aws-sso-user-${user.userName}`), user);
+      awsSsoUsers.set(user.userName, userConstruct);
+      users.set(user.userName, userConstruct.userId);
+    }
 
     for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
       const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];

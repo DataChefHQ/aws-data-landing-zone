@@ -4,6 +4,7 @@ import { Construct } from 'constructs';
 
 export interface IdentityStoreUserProps {
   readonly identityStoreId: string;
+  readonly userName: string;
   readonly name: IdentityStoreUserNameProps;
   readonly displayName: string;
   readonly emails?: IdentityStoreUserEmailsProps[];
@@ -57,7 +58,7 @@ export class IdentityStoreUser extends Construct {
       'customResourceResult',
       {
         serviceToken: customResourceProvider.serviceToken,
-        properties: { ...props, userName: id },
+        properties: { ...props },
       },
     );
 

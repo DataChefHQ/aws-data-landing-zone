@@ -317,6 +317,7 @@ export interface AccessGroup {
 export interface IamIdentityCenter {
   readonly iamIdentityCenterArn?: string;
   readonly iamIdentityCenterId: string;
+  readonly identityStoreId: string;
   readonly awsSsoUsers?: IdentityStoreUserProps[];
   readonly idpUsers?: IdpUser[];
   readonly permissionSets?: PermissionSetProps[];
