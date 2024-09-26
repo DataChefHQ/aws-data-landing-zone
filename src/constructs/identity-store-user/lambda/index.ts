@@ -133,7 +133,7 @@ export const handler = async (
           AttributeValue: emails.map((email: { value: string; type: string; primary: string }) => ({
             value: email.value,
             type: email.type,
-            primary: (typeof email.primary === 'string' && email.primary === 'true') ? true : (typeof email.primary === 'boolean' && email.primary === true) ? true : false,
+            primary: (email.primary === 'true') ? true : email.primary,
           })),
         });
       }
