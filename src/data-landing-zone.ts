@@ -320,7 +320,6 @@ export interface DeploymentPlatform {
 export interface NetworkConnectionVpcPeering {
   readonly source: NetworkAddress;
   readonly destination: NetworkAddress;
-  readonly direction: 'source-to-destination' | 'bidirectional';
 }
 
 export interface NetworkConnection {
