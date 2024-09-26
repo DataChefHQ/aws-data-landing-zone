@@ -128,14 +128,17 @@ export const handler = async (
       compareAndAdd('name.honorificSuffix', current.Name?.HonorificSuffix, name.honorificSuffix);
 
       if (emails && emails.length > 0) {
-        operations.push({
-          AttributePath: 'emails',
-          AttributeValue: emails.map((email: { value: string; type: string; primary: string }) => ({
-            value: email.value,
-            type: email.type,
-            primary: (email.primary === 'true') ? true : !!email.primary,
-          })),
-        });
+        const primaryEmail = emails.filter((email: { value: string; type: string; primary: string }) => email.primary === 'true' || !!email.primary)[0];
+        if (primaryEmail) {
+          operations.push({
+            AttributePath: 'emails',
+            AttributeValue: {
+              value: primaryEmail.value,
+              type: primaryEmail.type,
+              primary: true,
+            },
+          });
+        }
       }
 
       const updateUserCommand = new UpdateUserCommand({
