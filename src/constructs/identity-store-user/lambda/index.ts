@@ -33,11 +33,7 @@ export const handler = async (
   };
 
   try {
-    const userName = event.ResourceProperties.userName;
-    const identityStoreId = event.ResourceProperties.identityStoreId;
-    const name = event.ResourceProperties.name;
-    const displayName = event.ResourceProperties.displayName;
-    const email = event.ResourceProperties.email;
+    const { userName, identityStoreId, name, displayName, email } = event.ResourceProperties;
 
     if (event.RequestType === 'Create') {
       const input: CreateUserCommandInput = {
