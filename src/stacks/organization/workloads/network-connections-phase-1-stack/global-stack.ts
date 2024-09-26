@@ -5,35 +5,10 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { DlzStack, DlzAccountNetwork } from '../../../../constructs/index';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
-
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 
-// /* The key is the combination of the account ids */
-// let vpcPeeringRoleKeys: string[] = [];
-
 export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
-
-  /*
-  * Only create the peering role in the destination Account.
-  * 1. Loop over all accounts, no matter the region.
-  *   2. Loop over all VPC Peering connections
-  *   3. Get the SourceNetworkEntity, matching on Account, there can be more than 1 Network entitiy but all of these
-  *      NetworkEntities will have the same account information. That is all we are interested in, so always take the first.
-  *   3. Get the DestinationNetworkEntity, same as above, can take the first.
-  *   4. We should only create the peering role in the destination account. If the current stack ID does match the destination account ID, create the role.
-  *
-  *  */
-
-  // TODO: Not needed anymore, think maybe add as tag, can also have longer string, actuallly just use the two addresses then? Or put as tags sepreatly then no issue of length
-  // function verifyConnectionName(name: string)
-  // {
-  //   // -4 because of stack name prefix of 'dlz-'
-  //   // -4 because all resources will have a short prefix for that resource like 'vpr-'
-  //   if (connection.name.length > 54) {
-  //     throw new Error(`VPC Peering Connection name" '${connection.name}' is too long, the maximum length is 54 characters.`);
-  //   }
-  // }
 
   constructor(scope: Construct, private workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
     super(scope, workloadAccountProps);
@@ -50,17 +25,7 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
       assert.ok(destinationAccountNetworks && destinationAccountNetworks.length !== 0, `No Network Entities found for ${connection.destination}`);
       const destinationAccountNetwork = destinationAccountNetworks[0];
 
-      // /* Only create the peering role in the destination account. */
-      // if (this.accountId !== destinationAccountNetwork.dlzAccount.accountId) {
-      //   continue;
-      // }
-
-      if (connection.direction === 'source-to-destination') {
-        this.createPeeringRole(sourceAccountNetwork, destinationAccountNetwork);
-      } else {
-        this.createPeeringRole(sourceAccountNetwork, destinationAccountNetwork);
-        this.createPeeringRole(destinationAccountNetwork, sourceAccountNetwork);
-      }
+      this.createPeeringRole(sourceAccountNetwork, destinationAccountNetwork);
     }
 
     new sns.Topic(this, this.resourceName('test-topic'), {
@@ -85,7 +50,6 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
     }
 
     console.log(`${this.id} Creating VPC Peering role '${peeringRoleName}' between account '${from.dlzAccount.name}' and '${to.dlzAccount.name}'`);
-
     const role = new iam.Role(this, peeringRoleName, {
       roleName: peeringRoleName,
       description: `VPC Peering Role for '${from.dlzAccount.name}' to '${to.dlzAccount.name}'`,
