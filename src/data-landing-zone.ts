@@ -1,4 +1,5 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
@@ -6,6 +7,7 @@ import {
   DlzStackProps, DlzVpcProps,
   SlackChannel,
 } from './constructs';
+import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
@@ -20,16 +22,14 @@ import {
   WorkloadGlobalNetworkConnectionsPhase2Stack,
 } from './stacks/organization/workloads/network-connections-phase-2-stack/global-stack';
 import {
-  WorkloadRegionalNetworkConnectionsPhase2Stack
-} from "./stacks/organization/workloads/network-connections-phase-2-stack/regional-stack";
+  WorkloadRegionalNetworkConnectionsPhase2Stack,
+} from './stacks/organization/workloads/network-connections-phase-2-stack/regional-stack';
 import {
-  WorkloadRegionalNetworkConnectionsPhase3Stack
-} from "./stacks/organization/workloads/network-connections-phase-3-stack/regional-stack";
+  WorkloadGlobalNetworkConnectionsPhase3Stack,
+} from './stacks/organization/workloads/network-connections-phase-3-stack/global-stack';
 import {
-  WorkloadGlobalNetworkConnectionsPhase3Stack
-} from "./stacks/organization/workloads/network-connections-phase-3-stack/global-stack";
-import {DlzSsmReaderStackCache} from "./constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache";
-import * as ec2 from "aws-cdk-lib/aws-ec2";
+  WorkloadRegionalNetworkConnectionsPhase3Stack,
+} from './stacks/organization/workloads/network-connections-phase-3-stack/regional-stack';
 // import {
 //   WorkloadRegionalNetworkConnectionsPhase1Stack
 // } from "./stacks/organization/workloads/network-connections-phase-1-stack/regional-stack";
@@ -425,21 +425,21 @@ export type GlobalVariables = {
   ncp1: {
     // /* The key is the combination of the account ids */
     vpcPeeringRoleKeys: string[];
-  },
+  };
   ncp2: {
     /* To not create duplicate peering connections */
-    peeringConnections:  {[key: string]: ec2.CfnVPCPeeringConnection};
+    peeringConnections: {[key: string]: ec2.CfnVPCPeeringConnection};
     /* Reduce the number of SSM readers, only create them if they do not exist for that key
      * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
     ownerVpcIds: DlzSsmReaderStackCache;
     peeringRoleArns: DlzSsmReaderStackCache;
-  },
+  };
   ncp3: {
     /* Reduce the number of SSM readers, only create them if they do not exist for that key
      * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
     vpcPeeringConnectionIds: DlzSsmReaderStackCache;
     routeTablesSsmCache: DlzSsmReaderStackCache;
-  }
+  };
 }
 
 export interface WorkloadAccountProps extends DlzStackProps {
@@ -489,7 +489,7 @@ export class DataLandingZone {
   private globalVariables: GlobalVariables = {
     dlzAccountNetworks: new DlzAccountNetworks(),
     ncp1: {
-      vpcPeeringRoleKeys: []
+      vpcPeeringRoleKeys: [],
     },
     ncp2: {
       peeringConnections: {},
@@ -500,7 +500,7 @@ export class DataLandingZone {
       vpcPeeringConnectionIds: new DlzSsmReaderStackCache(),
       routeTablesSsmCache: new DlzSsmReaderStackCache(),
     },
-  }
+  };
 
   constructor(private app: App, private props: DataLandingZoneProps) {
 
@@ -722,7 +722,7 @@ export class DataLandingZone {
           region: this.props.regions.global,
         },
         dlzAccount,
-        globalVariables: this.globalVariables
+        globalVariables: this.globalVariables,
       }, this.props);
 
       workloadGlobalStacks.push(networkConnectionsPhase1Stack);
@@ -743,7 +743,7 @@ export class DataLandingZone {
           region: this.props.regions.global,
         },
         dlzAccount,
-        globalVariables: this.globalVariables
+        globalVariables: this.globalVariables,
       }, this.props);
 
       workloadGlobalStacks.push(networkConnectionsPhase2Stack);

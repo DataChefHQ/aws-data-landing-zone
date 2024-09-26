@@ -1,7 +1,7 @@
-import { DlzStack} from '../../../../constructs/index';
-import {DataLandingZoneProps, WorkloadAccountProps} from "../../../../data-landing-zone";
-import {Construct} from "constructs";
-import {Shared} from "./shared";
+import { Construct } from 'constructs';
+import { Shared } from './shared';
+import { DlzStack } from '../../../../constructs/index';
+import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 
 export class WorkloadRegionalNetworkConnectionsPhase3Stack extends DlzStack {
 

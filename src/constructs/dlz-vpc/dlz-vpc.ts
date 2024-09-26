@@ -1,7 +1,7 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
+import { NetworkEntityRouteTable, NetworkEntityVpc } from './dlz-account-network';
 import { NetworkAddress } from './network-address';
-import {NetworkEntityRouteTable, NetworkEntityVpc} from './dlz-account-network';
 import { DLzAccount, Region } from '../../data-landing-zone';
 import { groupByField } from '../../lib';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
@@ -88,7 +88,7 @@ export class DlzVpc {
       }
       const routeTable = new ec2.CfnRouteTable(dlzStack, routeTableName, {
         vpcId: vpc.ref,
-        tags: [{key: 'Name', value: routeTableName}],
+        tags: [{ key: 'Name', value: routeTableName }],
       });
 
       new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${routeTableAddress}`), {
@@ -101,7 +101,7 @@ export class DlzVpc {
         address: routeTableAddress,
         routeTable,
         subnets: [],
-      }
+      };
 
       /* Create Subnets and associations, then add to Route Table */
       for (const segmentSubnet of segmentSubnets) {
@@ -114,7 +114,7 @@ export class DlzVpc {
           vpcId: vpc.ref,
           cidrBlock: segmentSubnet.cidr,
           availabilityZone: segmentSubnet.az,
-          tags: [{key: 'Name', value: subnetName}],
+          tags: [{ key: 'Name', value: subnetName }],
         });
 
         subnetEntity.subnets.push({
@@ -134,16 +134,16 @@ export class DlzVpc {
           address: routeTableAddress,
           routeTable,
           subnets: subnetEntity.subnets,
-        }
+        },
       );
 
 
-        // //TODO: Next ticket
-        // new ec2.CfnRoute(dlzStack, 'Route', {
-        //   routeTableId: routeTable.ref,
-        //   destinationCidrBlock: '0.0.0.0/0',
-        //   gatewayId: 'igw-xxxxxxxx',
-        // });
+      // //TODO: Next ticket
+      // new ec2.CfnRoute(dlzStack, 'Route', {
+      //   routeTableId: routeTable.ref,
+      //   destinationCidrBlock: '0.0.0.0/0',
+      //   gatewayId: 'igw-xxxxxxxx',
+      // });
 
     }
 

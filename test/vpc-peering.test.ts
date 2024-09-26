@@ -1,5 +1,10 @@
 import { App } from 'aws-cdk-lib';
 import {
+  DlzResources,
+  findDlzSsmReaderLogicalId,
+  getDlzResources,
+} from './helpers.test';
+import {
   DataLandingZone, DataLandingZoneProps,
   DlzAccountType,
   Region,
@@ -7,15 +12,7 @@ import {
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 
 //@ts-ignore
-import {
-  DlzResources,
-  findDlzSsmReaderLogicalId,
-  getDlzResources,
-} from "./helpers.test";
-import {SSM_PARAMETERS_DLZ} from "../src/stacks/organization/constants";
-
-
-
+import { SSM_PARAMETERS_DLZ } from '../src/stacks/organization/constants';
 
 
 /**
@@ -66,13 +63,13 @@ function defaultVpcClasB3Private3Public(thirdOctetMask: number, region: Region) 
         name: 'public-3',
         cidr: '10.'+thirdOctetMask+'.160.0/19',
         az: region+'c',
-      }
+      },
       /* Remaining:
       *  - 10.0.192.0/19
       *  - 10.0.224.0/19
       * */
-    ]
-  }
+    ],
+  };
 }
 
 const configBase: DataLandingZoneProps = {
@@ -149,7 +146,7 @@ const configBase: DataLandingZoneProps = {
   printDeploymentOrder: false,
   saveReport: false,
   printReport: false,
-}
+};
 
 /* Disable Jest's console.log that adds the location of log lines. Only applies when debugging/stops within a test.
 * Not a full run of all tests. */
@@ -308,42 +305,42 @@ global.console = require('console');
 
 
 function ncp1CheckVpcPeeringRoleCreation(dlzResources: DlzResources,
-                                         definedInAccountType: 'prod' | 'dev',
-                                         roleNameSuffix: string,
-                                     roleDescriptionSuffix: string, toBeAssumedByAccountType: 'prod' | 'dev') {
+  definedInAccountType: 'prod' | 'dev',
+  roleNameSuffix: string,
+  roleDescriptionSuffix: string, toBeAssumedByAccountType: 'prod' | 'dev') {
   dlzResources[definedInAccountType].workload.ncp1.global.template.hasResourceProperties('AWS::IAM::Role', {
     RoleName: `dlz-ncp1-global-vpc-peering-role-for-${roleNameSuffix}`,
     Description: `VPC Peering Role for ${roleDescriptionSuffix}`,
     AssumeRolePolicyDocument: {
       Statement: [
         {
-          "Action": "sts:AssumeRole",
-          "Effect": "Allow",
-          "Principal": {
-            "AWS": {
-              "Fn::Join": [
-                "",
+          Action: 'sts:AssumeRole',
+          Effect: 'Allow',
+          Principal: {
+            AWS: {
+              'Fn::Join': [
+                '',
                 [
-                  "arn:",
+                  'arn:',
                   {
-                    "Ref": "AWS::Partition"
+                    Ref: 'AWS::Partition',
                   },
-                  `:iam::${dlzResources[toBeAssumedByAccountType].workload.ncp1.global.stack.accountId}:root`
-                ]
-              ]
-            }
-          }
-        }
+                  `:iam::${dlzResources[toBeAssumedByAccountType].workload.ncp1.global.stack.accountId}:root`,
+                ],
+              ],
+            },
+          },
+        },
       ],
     },
   });
 }
 
 function ncp2CheckVpcPeeringConnection(dlzResources: DlzResources,
-                                   fromAccount: 'prod' | 'dev', fromRegion: "global" | "regional",
-                                   toAccount: 'prod' | 'dev', toRegion: "global" | "regional",
-                                   fromVpcAddress: string, toVpcAddress: string
-                                   ) {
+  fromAccount: 'prod' | 'dev', fromRegion: 'global' | 'regional',
+  toAccount: 'prod' | 'dev', toRegion: 'global' | 'regional',
+  fromVpcAddress: string, toVpcAddress: string,
+) {
 
   /* Get the logical ID of the peering role defined in NCP1 above within the destination account */
   const vpcPeeringRolesKey = `${dlzResources[fromAccount].workload.ncp2.global.stack.accountId}-${dlzResources[toAccount].workload.ncp2.global.stack.accountId}`;
@@ -375,24 +372,24 @@ function ncp2CheckVpcPeeringConnection(dlzResources: DlzResources,
   dlzResources[fromAccount].workload.ncp2[fromRegion].template.hasResourceProperties(
     'AWS::EC2::VPCPeeringConnection', {
       VpcId: {
-        "Fn::GetAtt": [
+        'Fn::GetAtt': [
           ownerVpcLogicalId,
-          "Parameter.Value"
-        ]
+          'Parameter.Value',
+        ],
       },
       PeerVpcId: {
-        "Fn::GetAtt": [
+        'Fn::GetAtt': [
           peeringVpcLogicalId,
-          "Parameter.Value"
-        ]
+          'Parameter.Value',
+        ],
       },
       PeerOwnerId: dlzResources[toAccount].workload.ncp2[fromRegion].stack.accountId,
-      PeerRegion: toRegion === 'global' ? "eu-west-1" : "us-east-1",
+      PeerRegion: toRegion === 'global' ? 'eu-west-1' : 'us-east-1',
       PeerRoleArn: {
-        "Fn::GetAtt": [
+        'Fn::GetAtt': [
           peeringRoleLogicalId,
-          "Parameter.Value"
-        ]
+          'Parameter.Value',
+        ],
       },
     });
 }
@@ -401,18 +398,17 @@ function ncp2CheckVpcPeeringConnection(dlzResources: DlzResources,
 //   peeringConnectionFromVpcAdress: string, peeringConnectionToVpcAdress: string,
 
 type RoutesPeeringConnectionProps = {
-  account: 'prod' | 'dev',
-  region: "global" | "regional",
-  fromVpcAddress: string,
-  toVpcAddress: string
+  account: 'prod' | 'dev';
+  region: 'global' | 'regional';
+  fromVpcAddress: string;
+  toVpcAddress: string;
 }
 function ncp3CheckRoutes(dlzResources: DlzResources,
-                         routesAccount: 'prod' | 'dev', routesRegion: "global" | "regional",
-                         routeTablePartialAddress: string,
-                         peering: RoutesPeeringConnectionProps,
-                         destinationSubnetCidrs: string[],
-                         )
-{
+  routesAccount: 'prod' | 'dev', routesRegion: 'global' | 'regional',
+  routeTablePartialAddress: string,
+  peering: RoutesPeeringConnectionProps,
+  destinationSubnetCidrs: string[],
+) {
   /* Find the logical ID of the route table defined in GLOBAL of the source account */
   const routeTableLogicalId = findDlzSsmReaderLogicalId(
     dlzResources[routesAccount].workload.ncp3[routesRegion].template,
@@ -426,7 +422,7 @@ function ncp3CheckRoutes(dlzResources: DlzResources,
     dlzResources[peering.account].workload.ncp3[peering.region].template,
     dlzResources[peering.account].workload.ncp2[peering.region].stack.accountId,
     dlzResources[peering.account].workload.ncp2[peering.region].stack.region,
-    `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${peering.fromVpcAddress}/peer/${peering.toVpcAddress}/id`,);
+    `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${peering.fromVpcAddress}/peer/${peering.toVpcAddress}/id`);
 
   expect(vpcPeeringConnectionLogicalId).toBeDefined();
 
@@ -436,20 +432,20 @@ function ncp3CheckRoutes(dlzResources: DlzResources,
   //   '10.2.32.0/19',
   //   '10.2.64.0/19'
   // ];
-  for(const subnet of destinationSubnetCidrs) {
+  for (const subnet of destinationSubnetCidrs) {
     dlzResources[routesAccount].workload.ncp3[routesRegion].template.hasResourceProperties('AWS::EC2::Route', {
       DestinationCidrBlock: subnet,
       RouteTableId: {
-        "Fn::GetAtt": [
+        'Fn::GetAtt': [
           routeTableLogicalId,
-          "Parameter.Value"
-        ]
+          'Parameter.Value',
+        ],
       },
       VpcPeeringConnectionId: {
-        "Fn::GetAtt": [
+        'Fn::GetAtt': [
           vpcPeeringConnectionLogicalId,
-          "Parameter.Value"
-        ]
+          'Parameter.Value',
+        ],
       },
     });
   }
@@ -469,26 +465,26 @@ describe('vpt.2 Single Dev Subnet eu-west-1 to Single Prod Subnet us-east-1 - Di
             {
               source: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private'),
               destination: NetworkAddress.fromString('production.us-east-1.default.private'),
-            }
+            },
           ],
-        }
-      }
-    }
+        },
+      },
+    };
 
     const dataLandingZone = new DataLandingZone(app, config);
     dlzResources = getDlzResources(dataLandingZone);
-  })
+  });
 
   test('Peering Role', () => {
-    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', "dev");
+    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', 'dev');
   });
 
   test('VPC Peering Connection', () => {
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'global',
       'prod', 'regional',
-      'development.eu-west-1.default', 'production.us-east-1.default'
-      );
+      'development.eu-west-1.default', 'production.us-east-1.default',
+    );
   });
 
   test('Routes', () => {
@@ -497,7 +493,7 @@ describe('vpt.2 Single Dev Subnet eu-west-1 to Single Prod Subnet us-east-1 - Di
       account: 'dev',
       region: 'global',
       fromVpcAddress: 'development.eu-west-1.default',
-      toVpcAddress: 'production.us-east-1.default'
+      toVpcAddress: 'production.us-east-1.default',
     };
     ncp3CheckRoutes(dlzResources,
       'dev', 'global',
@@ -506,7 +502,7 @@ describe('vpt.2 Single Dev Subnet eu-west-1 to Single Prod Subnet us-east-1 - Di
       [
         '10.2.0.0/19',
         '10.2.32.0/19',
-        '10.2.64.0/19'
+        '10.2.64.0/19',
       ]);
     ncp3CheckRoutes(dlzResources,
       'prod', 'regional',
@@ -515,7 +511,7 @@ describe('vpt.2 Single Dev Subnet eu-west-1 to Single Prod Subnet us-east-1 - Di
       [
         '10.1.0.0/19',
         '10.1.32.0/19',
-        '10.1.64.0/19'
+        '10.1.64.0/19',
       ]);
   });
 
@@ -534,18 +530,18 @@ describe('vpt.3 All Dev VPCs subnets to Single Prod Subnet us-east-1', () => {
             {
               source: new NetworkAddress('development'),
               destination: NetworkAddress.fromString('production.us-east-1.default.private'),
-            }
+            },
           ],
-        }
-      }
-    }
+        },
+      },
+    };
 
     const dataLandingZone = new DataLandingZone(app, config);
     dlzResources = getDlzResources(dataLandingZone);
-  })
+  });
 
   test('Peering Role', () => {
-    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', "dev");
+    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', 'dev');
 
   });
 
@@ -553,12 +549,12 @@ describe('vpt.3 All Dev VPCs subnets to Single Prod Subnet us-east-1', () => {
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'global',
       'prod', 'regional',
-      'development.eu-west-1.default', 'production.us-east-1.default'
+      'development.eu-west-1.default', 'production.us-east-1.default',
     );
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'regional',
       'prod', 'regional',
-      'development.us-east-1.default', 'production.us-east-1.default'
+      'development.us-east-1.default', 'production.us-east-1.default',
     );
   });
 
@@ -567,13 +563,13 @@ describe('vpt.3 All Dev VPCs subnets to Single Prod Subnet us-east-1', () => {
       account: 'dev',
       region: 'global',
       fromVpcAddress: 'development.eu-west-1.default',
-      toVpcAddress: 'production.us-east-1.default'
+      toVpcAddress: 'production.us-east-1.default',
     };
     const peeringConnectionDevRegional: RoutesPeeringConnectionProps = {
       account: 'dev',
       region: 'regional',
       fromVpcAddress: 'development.us-east-1.default',
-      toVpcAddress: 'production.us-east-1.default'
+      toVpcAddress: 'production.us-east-1.default',
     };
 
     /* From Dev to Prod */
@@ -583,7 +579,7 @@ describe('vpt.3 All Dev VPCs subnets to Single Prod Subnet us-east-1', () => {
       [
         '10.2.0.0/19',
         '10.2.32.0/19',
-        '10.2.64.0/19'
+        '10.2.64.0/19',
       ]);
     ncp3CheckRoutes(dlzResources, 'dev', 'global',
       'development.eu-west-1.default.public',
@@ -591,17 +587,17 @@ describe('vpt.3 All Dev VPCs subnets to Single Prod Subnet us-east-1', () => {
       [
         '10.2.0.0/19',
         '10.2.32.0/19',
-        '10.2.64.0/19'
+        '10.2.64.0/19',
       ]);
     dlzResources.dev.workload.ncp3.global.template.resourceCountIs('AWS::EC2::Route', 6);
 
     ncp3CheckRoutes(dlzResources, 'dev', 'regional',
       'development.us-east-1.default.private',
-       peeringConnectionDevRegional,
+      peeringConnectionDevRegional,
       [
         '10.2.0.0/19',
         '10.2.32.0/19',
-        '10.2.64.0/19'
+        '10.2.64.0/19',
       ]);
     ncp3CheckRoutes(dlzResources, 'dev', 'regional',
       'development.us-east-1.default.public',
@@ -609,10 +605,9 @@ describe('vpt.3 All Dev VPCs subnets to Single Prod Subnet us-east-1', () => {
       [
         '10.2.0.0/19',
         '10.2.32.0/19',
-        '10.2.64.0/19'
+        '10.2.64.0/19',
       ]);
     dlzResources.dev.workload.ncp3.regional.template.resourceCountIs('AWS::EC2::Route', 6);
-
 
 
     /* From Prod back to Dev */
@@ -659,18 +654,18 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
             {
               source: new NetworkAddress('development'),
               destination: NetworkAddress.fromString('production'),
-            }
+            },
           ],
-        }
-      }
-    }
+        },
+      },
+    };
 
     const dataLandingZone = new DataLandingZone(app, config);
     dlzResources = getDlzResources(dataLandingZone);
-  })
+  });
 
   test('Peering Role', () => {
-    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', "dev");
+    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', 'dev');
   });
 
   test('VPC Peering Connection', () => {
@@ -678,12 +673,12 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'global',
       'prod', 'global',
-      'development.eu-west-1.default', 'production.eu-west-1.default'
+      'development.eu-west-1.default', 'production.eu-west-1.default',
     );
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'global',
       'prod', 'regional',
-      'development.eu-west-1.default', 'production.us-east-1.default'
+      'development.eu-west-1.default', 'production.us-east-1.default',
     );
     dlzResources.dev.workload.ncp2.global.template.resourceCountIs('AWS::EC2::VPCPeeringConnection', 2);
 
@@ -691,12 +686,12 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'regional',
       'prod', 'regional',
-      'development.us-east-1.default', 'production.us-east-1.default'
+      'development.us-east-1.default', 'production.us-east-1.default',
     );
     ncp2CheckVpcPeeringConnection(dlzResources,
       'dev', 'regional',
       'prod', 'global',
-      'development.us-east-1.default', 'production.eu-west-1.default'
+      'development.us-east-1.default', 'production.eu-west-1.default',
     );
   });
 
@@ -710,7 +705,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'global',
         fromVpcAddress: 'development.eu-west-1.default',
-        toVpcAddress: 'production.us-east-1.default'
+        toVpcAddress: 'production.us-east-1.default',
       },
       [
         '10.2.0.0/19',
@@ -726,7 +721,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'global',
         fromVpcAddress: 'development.eu-west-1.default',
-        toVpcAddress: 'production.eu-west-1.default'
+        toVpcAddress: 'production.eu-west-1.default',
       },
       [
         '10.3.0.0/19',
@@ -743,7 +738,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'global',
         fromVpcAddress: 'development.eu-west-1.default',
-        toVpcAddress: 'production.us-east-1.default'
+        toVpcAddress: 'production.us-east-1.default',
       },
       [
         '10.2.0.0/19',
@@ -759,7 +754,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'global',
         fromVpcAddress: 'development.eu-west-1.default',
-        toVpcAddress: 'production.eu-west-1.default'
+        toVpcAddress: 'production.eu-west-1.default',
       },
       [
         '10.3.0.0/19',
@@ -778,7 +773,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'regional',
         fromVpcAddress: 'development.us-east-1.default',
-        toVpcAddress: 'production.us-east-1.default'
+        toVpcAddress: 'production.us-east-1.default',
       },
       [
         '10.2.0.0/19',
@@ -794,7 +789,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'regional',
         fromVpcAddress: 'development.us-east-1.default',
-        toVpcAddress: 'production.eu-west-1.default'
+        toVpcAddress: 'production.eu-west-1.default',
       },
       [
         '10.3.0.0/19',
@@ -811,7 +806,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'regional',
         fromVpcAddress: 'development.us-east-1.default',
-        toVpcAddress: 'production.us-east-1.default'
+        toVpcAddress: 'production.us-east-1.default',
       },
       [
         '10.2.0.0/19',
@@ -827,7 +822,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'regional',
         fromVpcAddress: 'development.us-east-1.default',
-        toVpcAddress: 'production.eu-west-1.default'
+        toVpcAddress: 'production.eu-west-1.default',
       },
       [
         '10.3.0.0/19',
@@ -850,7 +845,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'global',
         fromVpcAddress: 'development.eu-west-1.default',
-        toVpcAddress: 'production.eu-west-1.default'
+        toVpcAddress: 'production.eu-west-1.default',
       },
       [
         '10.1.0.0/19',
@@ -866,7 +861,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'regional',
         fromVpcAddress: 'development.us-east-1.default',
-        toVpcAddress: 'production.eu-west-1.default'
+        toVpcAddress: 'production.eu-west-1.default',
       },
       [
         '10.0.0.0/19',
@@ -884,7 +879,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'global',
         fromVpcAddress: 'development.eu-west-1.default',
-        toVpcAddress: 'production.us-east-1.default'
+        toVpcAddress: 'production.us-east-1.default',
       },
       [
         '10.1.0.0/19',
@@ -900,7 +895,7 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
         account: 'dev',
         region: 'regional',
         fromVpcAddress: 'development.us-east-1.default',
-        toVpcAddress: 'production.us-east-1.default'
+        toVpcAddress: 'production.us-east-1.default',
       },
       [
         '10.0.0.0/19',
@@ -919,8 +914,8 @@ describe('vpt.4 All Dev VPCs Subnets to all Prod VPCs Subnets', () => {
 
 describe('vpt.5 Negative - Specific Subnet specified as address', () => {
 
-  let dlzResources: DlzResources;
-  beforeAll(() => {
+  test('Negative - Specific Subnet specified as address', () => {
+
     const app = new App();
     const config: DataLandingZoneProps = {
       ...configBase,
@@ -928,56 +923,22 @@ describe('vpt.5 Negative - Specific Subnet specified as address', () => {
         connections: {
           vpcPeering: [
             {
-              source: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private.private-1'),
+              source: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private','private-1'),
               destination: NetworkAddress.fromString('production.us-east-1.default.private'),
-            }
+            },
           ],
-        }
-      }
-    }
-
-    const dataLandingZone = new DataLandingZone(app, config);
-    dlzResources = getDlzResources(dataLandingZone);
-  })
-
-  test('Peering Role', () => {
-    ncp1CheckVpcPeeringRoleCreation(dlzResources, 'prod', 'development', '\'development\' to \'production\'', "dev");
-  });
-
-  test('VPC Peering Connection', () => {
-    ncp2CheckVpcPeeringConnection(dlzResources,
-      'dev', 'global',
-      'prod', 'regional',
-      'development.eu-west-1.default', 'production.us-east-1.default'
-    );
-  });
-
-  test('Routes', () => {
-
-    const peeringConnection: RoutesPeeringConnectionProps = {
-      account: 'dev',
-      region: 'global',
-      fromVpcAddress: 'development.eu-west-1.default',
-      toVpcAddress: 'production.us-east-1.default'
+        },
+      },
     };
-    ncp3CheckRoutes(dlzResources,
-      'dev', 'global',
-      'development.eu-west-1.default.private',
-      peeringConnection,
-      [
-        '10.2.0.0/19',
-        '10.2.32.0/19',
-        '10.2.64.0/19'
-      ]);
-    ncp3CheckRoutes(dlzResources,
-      'prod', 'regional',
-      'production.us-east-1.default.private',
-      peeringConnection,
-      [
-        '10.1.0.0/19',
-        '10.1.32.0/19',
-        '10.1.64.0/19'
-      ]);
+
+    expect(() => new DataLandingZone(app, config)).toThrow('VPC Peering addresses ' +
+      '(source: development.eu-west-1.default.private.private-1, destination: production.us-east-1.default.private) ' +
+      'can not be specified on a subnet level, segment is the lowest');
+
   });
+
 
 });
+
+
+// TODO: Test within same account...

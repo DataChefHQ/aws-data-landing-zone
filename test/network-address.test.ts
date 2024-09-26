@@ -1,11 +1,11 @@
 // import * as assert from 'assert';
-import {DLzAccount, NetworkAddress, NetworkEntityVpc, DlzAccountNetworks, DlzAccountNetwork} from "../src";
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { DLzAccount, NetworkAddress, NetworkEntityVpc, DlzAccountNetworks, DlzAccountNetwork } from '../src';
 const jestConsole = console;
 
 
 /* AccountA */
-const dlzAccountDev = { accountId: '111', name: "dev" } as DLzAccount;
+const dlzAccountDev = { accountId: '111', name: 'dev' } as DLzAccount;
 const devVpcUsEast1Default: NetworkEntityVpc = {
   address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default'),
   vpc: { cidrBlock: '10.0.0.0/16' } as ec2.CfnVPC,
@@ -16,13 +16,13 @@ const devVpcUsEast1Default: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
     },
     {
       address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'public'),
@@ -30,15 +30,15 @@ const devVpcUsEast1Default: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'public', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'public', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
-    }
-  ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
+    },
+  ],
 };
 const devVpcUsEast1Second: NetworkEntityVpc = {
   address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'second'),
@@ -50,13 +50,13 @@ const devVpcUsEast1Second: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'second', 'private', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'second', 'private', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
     },
     {
       address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'second', 'public'),
@@ -64,24 +64,24 @@ const devVpcUsEast1Second: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'second', 'public', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'second', 'public', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
-    }
-  ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
+    },
+  ],
 };
 const devVpcEuWest1: NetworkEntityVpc = {
-  address: new NetworkAddress(dlzAccountDev.name,  'eu-west-1', 'default'),
+  address: new NetworkAddress(dlzAccountDev.name, 'eu-west-1', 'default'),
   vpc: { cidrBlock: '10.0.0.2/16' } as ec2.CfnVPC,
-  routeTables: []
+  routeTables: [],
 };
 
 /* AccountProd */
-const accountProd = { accountId: '111', name: "prod" } as DLzAccount;
+const accountProd = { accountId: '111', name: 'prod' } as DLzAccount;
 const prodVpcUsEast1: NetworkEntityVpc = {
   address: new NetworkAddress(accountProd.name, 'us-east-1', 'default'),
   vpc: { cidrBlock: '10.0.0.3/16' } as ec2.CfnVPC,
@@ -92,13 +92,13 @@ const prodVpcUsEast1: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(accountProd.name, 'us-east-1', 'default', 'private', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(accountProd.name, 'us-east-1', 'default', 'private', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
     },
     {
       address: new NetworkAddress(accountProd.name, 'us-east-1', 'default', 'public'),
@@ -106,18 +106,18 @@ const prodVpcUsEast1: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(accountProd.name, 'us-east-1', 'default', 'public', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(accountProd.name, 'us-east-1', 'default', 'public', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
-    }
-  ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
+    },
+  ],
 };
 const prodVpcEuWest1: NetworkEntityVpc = {
-  address: new NetworkAddress(accountProd.name,  'eu-west-1', 'default'),
+  address: new NetworkAddress(accountProd.name, 'eu-west-1', 'default'),
   vpc: { cidrBlock: '10.0.0.4/16' } as ec2.CfnVPC,
   routeTables: [
     {
@@ -126,13 +126,13 @@ const prodVpcEuWest1: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(accountProd.name, 'eu-west-1', 'default', 'private', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(accountProd.name, 'eu-west-1', 'default', 'private', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
     },
     {
       address: new NetworkAddress(accountProd.name, 'eu-west-1', 'default', 'public'),
@@ -140,15 +140,15 @@ const prodVpcEuWest1: NetworkEntityVpc = {
       subnets: [
         {
           address: new NetworkAddress(accountProd.name, 'eu-west-1', 'default', 'public', 'subnet1'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
         },
         {
           address: new NetworkAddress(accountProd.name, 'eu-west-1', 'default', 'public', 'subnet2'),
-          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet
-        }
-      ]
-    }
-  ]
+          subnet: { attrCidrBlock: '' } as ec2.CfnSubnet,
+        },
+      ],
+    },
+  ],
 };
 
 
@@ -159,12 +159,12 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
   networkEntities["dlzAccountNetworks"] = [
     {
       dlzAccount: dlzAccountDev,
-      vpcs: [devVpcUsEast1Default, devVpcUsEast1Second, devVpcEuWest1]
+      vpcs: [devVpcUsEast1Default, devVpcUsEast1Second, devVpcEuWest1],
     },
     {
       dlzAccount: accountProd,
-      vpcs: [prodVpcUsEast1, prodVpcEuWest1]
-    }
+      vpcs: [prodVpcUsEast1, prodVpcEuWest1],
+    },
   ];
 
   beforeEach(() => {
@@ -202,7 +202,7 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
   }
   test('matchOn - region', () => {
     /* Full network Address, we want to find the NetworkEntities for the address's region */
-    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default", "private", "subnet1");
+    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1');
     const result = networkEntities.getEntitiesForAddress(networkAddress, 'region');
     expectRegion(result);
   });
@@ -216,7 +216,7 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
   }
   test('matchOn - vpc', () => {
     /* Full network Address, we want to find the NetworkEntities for the address's vpc */
-    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default", "private", "subnet1");
+    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1');
     const result = networkEntities.getEntitiesForAddress(networkAddress, 'vpc');
     expectVpc(result);
   });
@@ -232,7 +232,7 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
   }
   test('matchOn - segment', () => {
     /* Full network Address, we want to find the NetworkEntities for the address's segment */
-    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default", "private", "subnet1");
+    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1');
     const result = networkEntities.getEntitiesForAddress(networkAddress, 'segment');
     expectSegment(result);
   });
@@ -249,7 +249,7 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
   }
   test('matchOn - subnet', () => {
     /* Full network Address, we want to find the NetworkEntities for the address's subnet */
-    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default", "private", "subnet1");
+    const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1');
     const result = networkEntities.getEntitiesForAddress(networkAddress, 'subnet');
     expectSubnet(result);
   });
@@ -259,24 +259,24 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
     const testCases = [
       {
         address: new NetworkAddress(dlzAccountDev.name),
-        expected: expectAccount
+        expected: expectAccount,
       },
       {
         address: new NetworkAddress(dlzAccountDev.name, 'us-east-1'),
-        expected: expectRegion
+        expected: expectRegion,
       },
       {
-        address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default"),
-        expected: expectVpc
+        address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default'),
+        expected: expectVpc,
       },
       {
-        address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default", "private"),
-        expected: expectSegment
+        address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private'),
+        expected: expectSegment,
       },
       {
-        address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', "default", "private", "subnet1"),
-        expected: expectSubnet
-      }
+        address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1'),
+        expected: expectSubnet,
+      },
     ];
 
     for (const testCase of testCases) {
