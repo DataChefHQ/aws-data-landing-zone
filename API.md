@@ -13525,6 +13525,60 @@ Controls that do not take parameters.
 ---
 
 
+### IamIdentityAccounts <a name="IamIdentityAccounts" id="@DataChefHQ/data-landing-zone.IamIdentityAccounts"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityAccounts.ROOT">ROOT</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityAccounts.SECURITY_LOG">SECURITY_LOG</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityAccounts.SECURITY_AUDIT">SECURITY_AUDIT</a></code> | *No description.* |
+
+---
+
+##### `ROOT` <a name="ROOT" id="@DataChefHQ/data-landing-zone.IamIdentityAccounts.ROOT"></a>
+
+---
+
+
+##### `SECURITY_LOG` <a name="SECURITY_LOG" id="@DataChefHQ/data-landing-zone.IamIdentityAccounts.SECURITY_LOG"></a>
+
+---
+
+
+##### `SECURITY_AUDIT` <a name="SECURITY_AUDIT" id="@DataChefHQ/data-landing-zone.IamIdentityAccounts.SECURITY_AUDIT"></a>
+
+---
+
+
+### IamIdentityPermissionSets <a name="IamIdentityPermissionSets" id="@DataChefHQ/data-landing-zone.IamIdentityPermissionSets"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.ADMIN">ADMIN</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.READ_ONLY">READ_ONLY</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.CATALOG">CATALOG</a></code> | *No description.* |
+
+---
+
+##### `ADMIN` <a name="ADMIN" id="@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.ADMIN"></a>
+
+---
+
+
+##### `READ_ONLY` <a name="READ_ONLY" id="@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.READ_ONLY"></a>
+
+---
+
+
+##### `CATALOG` <a name="CATALOG" id="@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.CATALOG"></a>
+
+---
+
+
 ### Ou <a name="Ou" id="@DataChefHQ/data-landing-zone.Ou"></a>
 
 #### Members <a name="Members" id="Members"></a>

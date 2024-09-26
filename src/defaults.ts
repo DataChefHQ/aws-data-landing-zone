@@ -3,6 +3,18 @@ import { BudgetProps } from './constructs/budget';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, IamIdentityCenterPermissionSetProps } from './data-landing-zone';
 
+export enum IamIdentityAccounts {
+  ROOT = 'dlz:root',
+  SECURITY_LOG = 'dlz:security:log',
+  SECURITY_AUDIT = 'dlz:security:audit'
+}
+
+export enum IamIdentityPermissionSets {
+  ADMIN = 'dlz:adminaccess',
+  READ_ONLY = 'dlz:readonlyaccess',
+  CATALOG = 'dlz:catalogaccess',
+}
+
 export class Defaults {
   /** *
    * List of services that are denied in the organization
