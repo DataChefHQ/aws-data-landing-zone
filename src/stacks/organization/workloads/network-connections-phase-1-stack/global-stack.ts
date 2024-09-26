@@ -17,7 +17,7 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
 
       /* A connection can return more than 1 NetworkEntities, but all of these NetworkEntities will have the same
        * account information. That is all we are interested in, so always take the first. */
-      const sourceAccountNetworks =  workloadAccountProps.globalVariables.dlzAccountNetworks.getEntitiesForAddress(connection.source, 'account');
+      const sourceAccountNetworks = workloadAccountProps.globalVariables.dlzAccountNetworks.getEntitiesForAddress(connection.source, 'account');
       assert.ok(sourceAccountNetworks && sourceAccountNetworks.length !== 0, `No Network Entities found for ${connection.source}`);
       const sourceAccountNetwork = sourceAccountNetworks[0];
 

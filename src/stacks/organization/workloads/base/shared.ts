@@ -1,10 +1,9 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import { DlzConfigRule } from '../../../../constructs/config/index';
-import {DlzStack, DlzVpc} from '../../../../constructs/index';
-import {DataLandingZoneProps, DLzAccount, GlobalVariables} from '../../../../data-landing-zone';
+import { DlzStack, DlzVpc } from '../../../../constructs/index';
+import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
-
 
 
 export class Shared {

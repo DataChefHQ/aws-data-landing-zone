@@ -1,7 +1,7 @@
 /* Use `undefined` to automatically detect level */
+import { DlzAccountNetwork, NetworkEntityVpc } from './dlz-account-network';
 import { NetworkAddress } from './network-address';
-import {DlzAccountNetwork, NetworkEntityVpc} from './dlz-account-network';
-import {DLzAccount} from "../../data-landing-zone";
+import { DLzAccount } from '../../data-landing-zone';
 
 type MatchOnAddress = 'account' | 'region' | 'vpc' | 'segment' | 'subnet' | undefined;
 
@@ -65,15 +65,13 @@ export class DlzAccountNetworks {
     }
 
     /* Add the new VPC an Existing NetworkEntity OR create a new one */
-    if(this.dlzAccountNetworks.filter(ne => ne.dlzAccount.accountId === dlzAccount.accountId)?.length === 0)
-    {
+    if (this.dlzAccountNetworks.filter(ne => ne.dlzAccount.accountId === dlzAccount.accountId)?.length === 0) {
       const networkEntity: DlzAccountNetwork = {
         dlzAccount: dlzAccount,
         vpcs: [networkEntityVpc],
       };
       this.dlzAccountNetworks.push(networkEntity);
-    }
-    else {
+    } else {
       for (let i = 0; i < this.dlzAccountNetworks.length; i++) {
         if (this.dlzAccountNetworks[i].dlzAccount.accountId === dlzAccount.accountId) {
           this.dlzAccountNetworks[i].vpcs.push(networkEntityVpc);
@@ -127,7 +125,7 @@ export class DlzAccountNetworks {
     for (const ne of this.dlzAccountNetworks) {
 
       if (matchOnAddress === 'account') {
-        if(ne.dlzAccount.name === networkAddress.account) {
+        if (ne.dlzAccount.name === networkAddress.account) {
           networkEntitiesMatch.push(ne);
         }
       } else if (matchOnAddress === 'region') {
@@ -140,8 +138,7 @@ export class DlzAccountNetworks {
         if (partialNe.vpcs.length !== 0) {
           networkEntitiesMatch.push(partialNe);
         }
-      }
-      else if (matchOnAddress === 'vpc') {
+      } else if (matchOnAddress === 'vpc') {
 
         const partialNe = {
           ...ne,
@@ -155,14 +152,12 @@ export class DlzAccountNetworks {
 
       } else if (matchOnAddress === 'segment') {
         let vpcs = ne.vpcs.filter(vpc =>
-            new NetworkAddress(vpc.address.account, vpc.address.region, vpc.address.vpc).toString() ===
+          new NetworkAddress(vpc.address.account, vpc.address.region, vpc.address.vpc).toString() ===
             new NetworkAddress(networkAddress.account, networkAddress.region, networkAddress.vpc).toString());
 
-        for(let vpc of vpcs)
-        {
+        for (let vpc of vpcs) {
           const routeTables = vpc.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment);
-          if(routeTables.length !== 0)
-          {
+          if (routeTables.length !== 0) {
             const partialNe = {
               ...ne,
               vpcs: [{
@@ -178,13 +173,11 @@ export class DlzAccountNetworks {
           new NetworkAddress(vpc.address.account, vpc.address.region, vpc.address.vpc).toString() ===
           new NetworkAddress(networkAddress.account, networkAddress.region, networkAddress.vpc).toString());
 
-        for(let vpc of vpcs)
-        {
+        for (let vpc of vpcs) {
           const routeTables = vpc.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment);
-          for(let routeTable of routeTables) {
+          for (let routeTable of routeTables) {
             const subnets = routeTable.subnets.filter(subnet => subnet.address.subnet === networkAddress.subnet);
-            if(subnets.length !== 0)
-            {
+            if (subnets.length !== 0) {
               const partialNe = {
                 ...ne,
                 vpcs: [{

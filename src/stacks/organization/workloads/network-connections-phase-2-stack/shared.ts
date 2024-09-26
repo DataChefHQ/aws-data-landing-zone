@@ -1,8 +1,8 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import {DlzSsmReader, DlzStack, NetworkEntityVpc} from '../../../../constructs/index';
-import {DataLandingZoneProps, GlobalVariables} from "../../../../data-landing-zone";
-import {SSM_PARAMETERS_DLZ} from "../../constants";
-import * as ssm from "aws-cdk-lib/aws-ssm";
+import * as ssm from 'aws-cdk-lib/aws-ssm';
+import { DlzSsmReader, DlzStack, NetworkEntityVpc } from '../../../../constructs/index';
+import { DataLandingZoneProps, GlobalVariables } from '../../../../data-landing-zone';
+import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 export class Shared {
 
@@ -30,7 +30,7 @@ export class Shared {
                 sourceAccountNetwork.dlzAccount.accountId,
                 sourceVpc,
                 destinationNetwork.dlzAccount.accountId,
-                destinationVpc
+                destinationVpc,
               );
             }
           }

@@ -420,7 +420,6 @@ describe('CdkExpressPipelineLegacy', () => {
             // },
 
 
-
             // Only 1 role in the same account
             // {
             //   // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
@@ -457,7 +456,6 @@ describe('CdkExpressPipelineLegacy', () => {
               // name: 'p1d-all--p1p-all',
               source: new NetworkAddress('project-1-develop'),
               destination: NetworkAddress.fromString('project-1-production'),
-              direction: 'source-to-destination',
             },
 
           ],
