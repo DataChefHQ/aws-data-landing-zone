@@ -46,31 +46,32 @@ export class ManagementStack extends DlzStack {
       users.set(user.name, user.userId);
     }
 
-    const permissionSets = new Map<string, sso.CfnPermissionSet>();
-    permissionSets.set('dlz:adminaccess', SecurityAccess.adminPermissionSet(scope, iamIdentityCenterArn));
-    permissionSets.set('dlz:readonlyaccess', SecurityAccess.readOnlyPermissionSet(scope, iamIdentityCenterArn));
-    permissionSets.set('dlz:catalogaccess', SecurityAccess.catalogPermissionSet(scope, iamIdentityCenterArn));
+    const permissionSets = new Map<string, () => sso.CfnPermissionSet>();
+    permissionSets.set('dlz:adminaccess', () => SecurityAccess.adminPermissionSet(scope, iamIdentityCenterArn!));
+    permissionSets.set('dlz:readonlyaccess', () => SecurityAccess.readOnlyPermissionSet(scope, iamIdentityCenterArn!));
+    permissionSets.set('dlz:catalogaccess', () => SecurityAccess.catalogPermissionSet(scope, iamIdentityCenterArn!));
 
     for (const permissionSetConf of props.iamIdentityCenter.permissionSets ?? []) {
-      const permissionSet = SecurityAccess.createPermissionSet(
+      permissionSets.set(permissionSetConf.name, () => SecurityAccess.createPermissionSet(
         scope,
-        iamIdentityCenterArn,
+        iamIdentityCenterArn!,
         permissionSetConf.name,
         permissionSetConf.description,
         permissionSetConf.inlinePolicy,
         permissionSetConf.managedPolicyArns,
-      );
-      permissionSets.set(permissionSetConf.name, permissionSet);
+      ));
     }
 
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
     props.iamIdentityCenter.identityStoreId;
     for (const user of props.iamIdentityCenter.awsSsoUsers ?? []) {
-      const id = cdk.Stack.of(scope).stackName + '-' + `aws-sso-user-${user.userName}`;
+      const id = cdk.Stack.of(scope).stackName + `-aws-sso-user-${user.userName}`;
       const userConstruct = new IdentityStoreUser(scope, id, { ...user, identityStoreId });
       awsSsoUsers.set(user.userName, userConstruct);
       users.set(user.userName, userConstruct.userId);
     }
+
+    const resolvedPermissionSets = new Map<string, sso.CfnPermissionSet>();
 
     for (const group of props.iamIdentityCenter.accessGroups ?? []) {
       const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];
@@ -106,10 +107,13 @@ export class ManagementStack extends DlzStack {
         continue;
       }
 
-      const permissionSet = permissionSets.get(group.permissionSet);
-      if (!permissionSet) {
-        cdk.Annotations.of(scope).addError(`PermissionSet ${group.permissionSet} in group ${group.name} was not found`);
-        continue;
+      let permissionSet: sso.CfnPermissionSet;
+
+      if (resolvedPermissionSets.has(group.permissionSet)) {
+        permissionSet = resolvedPermissionSets.get(group.permissionSet)!;
+      } else {
+        permissionSet = permissionSets.get(group.permissionSet)!();
+        resolvedPermissionSets.set(group.permissionSet, permissionSet);
       }
 
       const groupConstruct = SecurityAccess.createGroup(

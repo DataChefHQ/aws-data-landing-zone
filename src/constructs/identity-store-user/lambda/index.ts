@@ -86,7 +86,9 @@ export const handler = async (
       });
       const deleteResponse = await client.send(deleteUserCommand);
       console.log('DeleteUserCommand response:', deleteResponse);
+
       response.PhysicalResourceId = userId;
+      response.Data = { UserId: userId };
 
       return { ...response, Status: 'SUCCESS' } as CloudFormationCustomResourceSuccessResponse;
     }
@@ -117,6 +119,7 @@ export const handler = async (
       };
 
       compareAndAdd('displayName', current.DisplayName, displayName);
+      compareAndAdd('userName', current.UserName, userName);
       compareAndAdd('name.givenName', current.Name?.GivenName, name.givenName);
       compareAndAdd('name.familyName', current.Name?.FamilyName, name.familyName);
       compareAndAdd('name.middleName', current.Name?.MiddleName, name.middleName);
@@ -145,6 +148,7 @@ export const handler = async (
       console.log('UpdateUserCommand response:', updateResponse);
 
       response.PhysicalResourceId = userId;
+      response.Data = { UserId: userId };
       return { ...response, Status: 'SUCCESS' } as CloudFormationCustomResourceSuccessResponse;
     }
   } catch (error: any) {

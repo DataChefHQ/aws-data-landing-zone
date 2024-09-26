@@ -3,54 +3,17 @@ import * as identitystore from 'aws-cdk-lib/aws-identitystore';
 import * as sso from 'aws-cdk-lib/aws-sso';
 import { Construct } from 'constructs';
 
-export class SecurityPolicy {
-  public static readonly defaultServices = [
-    's3',
-    'lambda',
-    'glue',
-    'athena',
-    'dynamodb',
-    'ec2',
-    'cloudwatch',
-    'logs',
-    'cloudformation',
-    'cloudfront',
-    'sagemaker',
-    'sns',
-    'sqs',
-  ];
-
-  public static readonly adminPolicy = this.createPolicy();
-  public static readonly readOnlyPolicy = this.createPolicy(this.defaultServices, 'List*,Get*');
-
-  public static createPolicy(services: string[] = [], wildCard: string = '*'): iam.PolicyDocument {
-    let actions: string[] = [];
-    let wildCards = wildCard ? wildCard.split(',') : ['*'];
-    if (services.length > 0) {
-      for (const action of wildCards) {
-        actions = [...actions, ...services.map(service => `${service}:${action}`)];
-      }
-    }
-
-    return new iam.PolicyDocument({
-      statements: [
-        new iam.PolicyStatement({
-          effect: iam.Effect.ALLOW,
-          actions: actions.length > 0 ? actions : ['*'],
-          resources: ['*'],
-        }),
-      ],
-    });
-  }
-}
-
 export class SecurityAccess {
   public static adminPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'DLZ-AdminAccess', 'Use this permission set/role to grant full access', SecurityPolicy.adminPolicy);
+    return this.createPermissionSet(scope, ssoArn, 'DLZ-AdminAccess', 'Use this permission set/role to grant full access', undefined, [
+      'arn:aws:iam::aws:policy/AdministratorAccess',
+    ]);
   }
 
   public static readOnlyPermissionSet(scope: Construct, ssoArn: string) {
-    return this.createPermissionSet(scope, ssoArn, 'DLZ-ReadOnlyAccess', 'Use this permission set/role to grant read only access', SecurityPolicy.readOnlyPolicy);
+    return this.createPermissionSet(scope, ssoArn, 'DLZ-ReadOnlyAccess', 'Use this permission set/role to grant read only access', undefined, [
+      'arn:aws:iam::aws:policy/ReadOnlyAccess',
+    ]);
   }
 
   public static catalogPermissionSet(scope: Construct, ssoArn: string) {
@@ -101,7 +64,7 @@ export class SecurityAccess {
     let i = 0;
     for (const user of users) {
       i++;
-      const id = `${name}-membership-${i}`;
+      const id = `${name}-membership-` + i;
       const membership = new identitystore.CfnGroupMembership(
         scope,
         id,

@@ -66,5 +66,6 @@ export class IdentityStoreUser extends Construct {
     );
 
     this.userId = customResourceResult.getAttString('UserId');
+
   }
 }
