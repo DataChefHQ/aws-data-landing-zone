@@ -37,7 +37,7 @@ export const handler = async (
     const identityStoreId = event.ResourceProperties.identityStoreId;
     const name = event.ResourceProperties.name;
     const displayName = event.ResourceProperties.displayName;
-    const emails = event.ResourceProperties.emails;
+    const email = event.ResourceProperties.email;
 
     if (event.RequestType === 'Create') {
       const input: CreateUserCommandInput = {
@@ -53,11 +53,11 @@ export const handler = async (
           HonorificPrefix: name.honorificPrefix,
           HonorificSuffix: name.honorificSuffix,
         },
-        Emails: emails.map((email: { value: string; type: string; primary?: boolean }) => ({
+        Emails: [{
           Value: email.value,
           Type: email.type,
-          Primary: email.primary,
-        })),
+          Primary: true,
+        }],
       };
 
       const command = new CreateUserCommand(input);
@@ -127,18 +127,15 @@ export const handler = async (
       compareAndAdd('name.honorificPrefix', current.Name?.HonorificPrefix, name.honorificPrefix);
       compareAndAdd('name.honorificSuffix', current.Name?.HonorificSuffix, name.honorificSuffix);
 
-      if (emails && emails.length > 0) {
-        const primaryEmail = emails.filter((email: { value: string; type: string; primary: string }) => email.primary === 'true' || !!email.primary)[0];
-        if (primaryEmail) {
-          operations.push({
-            AttributePath: 'emails',
-            AttributeValue: {
-              value: primaryEmail.value,
-              type: primaryEmail.type,
-              primary: true,
-            },
-          });
-        }
+      if (email) {
+        operations.push({
+          AttributePath: 'emails',
+          AttributeValue: [{
+            value: email.value,
+            type: email.type,
+            primary: true,
+          }],
+        });
       }
 
       const updateUserCommand = new UpdateUserCommand({

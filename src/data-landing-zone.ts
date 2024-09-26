@@ -302,19 +302,19 @@ export interface DeploymentPlatform {
   readonly gitHub?: DeploymentPlatformGitHub;
 }
 
-export interface IdpUser {
+export interface IamIdentityCenterIdpUser {
   readonly name: string;
   readonly userId: string;
 }
 
-export interface PermissionSetProps {
+export interface IamIdentityCenterPermissionSetProps {
   readonly name: string;
   readonly description?: string;
   readonly inlinePolicy?: any;
   readonly managedPolicyArns?: string[];
 }
 
-export interface AccessGroup {
+export interface IamIdentityCenterAccessGroup {
   readonly name: string;
   readonly users?: string[];
   readonly permissionSet: string;
@@ -327,9 +327,9 @@ export interface IamIdentityCenter {
   readonly iamIdentityCenterId: string;
   readonly identityStoreId: string;
   readonly awsSsoUsers?: IdentityStoreUserProps[];
-  readonly idpUsers?: IdpUser[];
-  readonly permissionSets?: PermissionSetProps[];
-  readonly accessGroups?: AccessGroup[];
+  readonly idpUsers?: IamIdentityCenterIdpUser[];
+  readonly permissionSets?: IamIdentityCenterPermissionSetProps[];
+  readonly accessGroups?: IamIdentityCenterAccessGroup[];
 }
 
 export interface DataLandingZoneProps {

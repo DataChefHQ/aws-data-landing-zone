@@ -20,40 +20,70 @@ import { Report } from '../../lib/report';
 
 export class ManagementStack extends DlzStack {
 
-  public static iamIdentityCenter(scope: Construct, props: DataLandingZoneProps) {
-    if (props.iamIdentityCenter === undefined) return;
+  public readonly topic: sns.Topic;
 
-    const iamIdentityCenterId = props.iamIdentityCenter.iamIdentityCenterId;
-    const identityStoreId = props.iamIdentityCenter.identityStoreId;
-    let iamIdentityCenterArn = props.iamIdentityCenter.iamIdentityCenterArn;
+  constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
+    super(scope, stackProps);
+
+    this.topic = new sns.Topic(this, this.resourceName('test-topic'), {
+      displayName: this.resourceName('test-topic'),
+      topicName: this.resourceName('test-topic'),
+    });
+
+    this.ctor();
+  }
+
+  ctor() {
+    this.rootControls();
+    this.iamIdentityCenter();
+
+    this.workloadAccountsOrgPolicies();
+    this.suspendedOuPolicies();
+
+    this.budgets();
+
+    if (this.props.deploymentPlatform?.gitHub) {
+      this.deploymentPlatformGitHub();
+    }
+  }
+
+  /**
+   * IAM Identity Center
+   */
+  iamIdentityCenter() {
+    if (this.props.iamIdentityCenter === undefined) return;
+
+    const iamIdentityCenterId = this.props.iamIdentityCenter.iamIdentityCenterId;
+    const identityStoreId = this.props.iamIdentityCenter.identityStoreId;
+    let iamIdentityCenterArn = this.props.iamIdentityCenter.iamIdentityCenterArn;
 
     if (!iamIdentityCenterArn) {
       iamIdentityCenterArn = `arn:aws:sso:::instance/${iamIdentityCenterId}`;
     }
 
     const accounts = new Map<string, string>();
-    accounts.set('dlz:root', props.organization.root.accounts.management.accountId);
-    accounts.set('dlz:security:log', props.organization.ous.security.accounts.log.accountId);
-    accounts.set('dlz:security:audit', props.organization.ous.security.accounts.audit.accountId);
+    accounts.set('dlz:root', this.props.organization.root.accounts.management.accountId);
+    accounts.set('dlz:security:log', this.props.organization.ous.security.accounts.log.accountId);
+    accounts.set('dlz:security:audit', this.props.organization.ous.security.accounts.audit.accountId);
 
-    for (const account of props.organization.ous.workloads.accounts) {
+    for (const account of this.props.organization.ous.workloads.accounts) {
       accounts.set(account.name, account.accountId);
     }
     const accountNames = [...accounts.keys()];
 
     const users = new Map<string, string>();
-    for (const user of props.iamIdentityCenter.idpUsers ?? []) {
+    for (const user of this.props.iamIdentityCenter.idpUsers ?? []) {
       users.set(user.name, user.userId);
     }
 
     const permissionSets = new Map<string, () => sso.CfnPermissionSet>();
-    permissionSets.set('dlz:adminaccess', () => SecurityAccess.adminPermissionSet(scope, iamIdentityCenterArn!));
-    permissionSets.set('dlz:readonlyaccess', () => SecurityAccess.readOnlyPermissionSet(scope, iamIdentityCenterArn!));
-    permissionSets.set('dlz:catalogaccess', () => SecurityAccess.catalogPermissionSet(scope, iamIdentityCenterArn!));
+    permissionSets.set('dlz:adminaccess', () => SecurityAccess.adminPermissionSet(this, iamIdentityCenterArn!));
+    permissionSets.set('dlz:readonlyaccess', () => SecurityAccess.readOnlyPermissionSet(this, iamIdentityCenterArn!));
+    permissionSets.set('dlz:catalogaccess', () => SecurityAccess.catalogPermissionSet(this, iamIdentityCenterArn!));
 
-    for (const permissionSetConf of props.iamIdentityCenter.permissionSets ?? []) {
+    for (const permissionSetConf of this.props.iamIdentityCenter.permissionSets ?? []) {
       permissionSets.set(permissionSetConf.name, () => SecurityAccess.createPermissionSet(
-        scope,
+        this,
         iamIdentityCenterArn!,
         permissionSetConf.name,
         permissionSetConf.description,
@@ -63,20 +93,19 @@ export class ManagementStack extends DlzStack {
     }
 
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
-    props.iamIdentityCenter.identityStoreId;
-    for (const user of props.iamIdentityCenter.awsSsoUsers ?? []) {
-      const id = cdk.Stack.of(scope).stackName + `-aws-sso-user-${user.userName}`;
-      const userConstruct = new IdentityStoreUser(scope, id, { ...user, identityStoreId });
+    for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
+      const id = cdk.Stack.of(this).stackName + `-aws-sso-user-${user.userName}`;
+      const userConstruct = new IdentityStoreUser(this, id, { ...user, identityStoreId });
       awsSsoUsers.set(user.userName, userConstruct);
       users.set(user.userName, userConstruct.userId);
     }
 
     const resolvedPermissionSets = new Map<string, sso.CfnPermissionSet>();
 
-    for (const group of props.iamIdentityCenter.accessGroups ?? []) {
+    for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
       const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];
       if (resolvedUsers.length === 0) {
-        cdk.Annotations.of(scope).addError(`No users found for group ${group.name}`);
+        cdk.Annotations.of(this).addError(`No users found for group ${group.name}`);
         continue;
       }
 
@@ -85,7 +114,7 @@ export class ManagementStack extends DlzStack {
       const resolvedAccounts: string[] = [];
       for (const accountWithWildCard of group.accounts) {
         if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\:]+\*?$/.test(accountWithWildCard)) {
-          cdk.Annotations.of(scope).addError(`Invalid account name: ${accountWithWildCard} in group ${group.name}`);
+          cdk.Annotations.of(this).addError(`Invalid account name: ${accountWithWildCard} in group ${group.name}`);
           continue;
         }
         for (const accountName of accountNames) {
@@ -98,12 +127,12 @@ export class ManagementStack extends DlzStack {
       }
 
       if (resolvedAccounts.length === 0) {
-        cdk.Annotations.of(scope).addError(`No accounts found for group ${group.name}`);
+        cdk.Annotations.of(this).addError(`No accounts found for group ${group.name}`);
         continue;
       }
 
       if (!permissionSets.has(group.permissionSet)) {
-        cdk.Annotations.of(scope).addError(`PermissionSet ${group.permissionSet} in group ${group.name} was not found`);
+        cdk.Annotations.of(this).addError(`PermissionSet ${group.permissionSet} in group ${group.name} was not found`);
         continue;
       }
 
@@ -117,7 +146,7 @@ export class ManagementStack extends DlzStack {
       }
 
       const groupConstruct = SecurityAccess.createGroup(
-        scope,
+        this,
         group.name,
         iamIdentityCenterArn,
         identityStoreId,
@@ -130,29 +159,6 @@ export class ManagementStack extends DlzStack {
       for (const user of dependencyUsers) {
         groupConstruct.node.addDependency(user);
       }
-    }
-  }
-
-  public readonly topic: sns.Topic;
-
-  constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
-    super(scope, stackProps);
-
-    this.topic = new sns.Topic(this, this.resourceName('test-topic'), {
-      displayName: this.resourceName('test-topic'),
-      topicName: this.resourceName('test-topic'),
-    });
-
-    this.rootControls();
-    ManagementStack.iamIdentityCenter(this, this.props);
-
-    this.workloadAccountsOrgPolicies();
-    this.suspendedOuPolicies();
-
-    this.budgets();
-
-    if (this.props.deploymentPlatform?.gitHub) {
-      this.deploymentPlatformGitHub();
     }
   }
 
@@ -291,11 +297,6 @@ export class ManagementStack extends DlzStack {
       );
     }
   }
-
-  /**
-   * IAM Identity Center
-   */
-
 
   /**
    * Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account
