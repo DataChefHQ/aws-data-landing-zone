@@ -1,7 +1,7 @@
 import { BudgetSubscribers, DlzControlTowerStandardControls } from './constructs/';
 import { BudgetProps } from './constructs/budget';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps } from './data-landing-zone';
+import { DataLandingZoneProps, IamIdentityCenterPermissionSetProps } from './data-landing-zone';
 
 export class Defaults {
   /** *
@@ -11,6 +11,38 @@ export class Defaults {
     return [
       'eks:*',
     ];
+  }
+
+  public static catalogPermissionSet(): IamIdentityCenterPermissionSetProps {
+    return {
+      name: 'DLZ-CatalogAccess',
+      description: 'Use this permission set/role to grant Service Catalog access',
+      managedPolicyArns: [
+        'arn:aws:iam::aws:policy/AWSServiceCatalogAdminFullAccess',
+        'arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess',
+      ],
+    };
+  }
+
+  public static adminPermissionSet(): IamIdentityCenterPermissionSetProps {
+    return {
+      name: 'DLZ-AdminAccess',
+      description: 'Use this permission set/role to grant full access',
+      managedPolicyArns: [
+        'arn:aws:iam::aws:policy/AdministratorAccess',
+      ],
+    };
+  }
+
+
+  public static readOnlyPermissionSet(): IamIdentityCenterPermissionSetProps {
+    return {
+      name: 'DLZ-ReadOnlyAccess',
+      description: 'Use this permission set/role to grant read only access',
+      managedPolicyArns: [
+        'arn:aws:iam::aws:policy/ReadOnlyAccess',
+      ],
+    };
   }
 
   /** *

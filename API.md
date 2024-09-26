@@ -4555,6 +4555,105 @@ public readonly id: string;
 ---
 
 
+### IamIdentityCenterGroup <a name="IamIdentityCenterGroup" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer"></a>
+
+```typescript
+import { IamIdentityCenterGroup } from '@DataChefHQ/data-landing-zone'
+
+new IamIdentityCenterGroup(scope: Construct, id: string, props: IamIdentityCenterGroupProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps">IamIdentityCenterGroupProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps">IamIdentityCenterGroupProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.isConstruct"></a>
+
+```typescript
+import { IamIdentityCenterGroup } from '@DataChefHQ/data-landing-zone'
+
+IamIdentityCenterGroup.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+
 ### IdentityStoreUser <a name="IdentityStoreUser" id="@DataChefHQ/data-landing-zone.IdentityStoreUser"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer"></a>
@@ -10552,7 +10651,7 @@ const iamIdentityCenter: IamIdentityCenter = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterId">iamIdentityCenterId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.identityStoreId">identityStoreId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.accessGroups">accessGroups</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup">IamIdentityCenterAccessGroup</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.accessGroups">accessGroups</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps">IamIdentityCenterAccessGroupProps</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.awsSsoUsers">awsSsoUsers</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.iamIdentityCenterArn">iamIdentityCenterArn</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenter.property.idpUsers">idpUsers</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser">IamIdentityCenterIdpUser</a>[]</code> | *No description.* |
@@ -10583,10 +10682,10 @@ public readonly identityStoreId: string;
 ##### `accessGroups`<sup>Optional</sup> <a name="accessGroups" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.property.accessGroups"></a>
 
 ```typescript
-public readonly accessGroups: IamIdentityCenterAccessGroup[];
+public readonly accessGroups: IamIdentityCenterAccessGroupProps[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup">IamIdentityCenterAccessGroup</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps">IamIdentityCenterAccessGroupProps</a>[]
 
 ---
 
@@ -10630,29 +10729,29 @@ public readonly permissionSets: IamIdentityCenterPermissionSetProps[];
 
 ---
 
-### IamIdentityCenterAccessGroup <a name="IamIdentityCenterAccessGroup" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup"></a>
+### IamIdentityCenterAccessGroupProps <a name="IamIdentityCenterAccessGroupProps" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.Initializer"></a>
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.Initializer"></a>
 
 ```typescript
-import { IamIdentityCenterAccessGroup } from '@DataChefHQ/data-landing-zone'
+import { IamIdentityCenterAccessGroupProps } from '@DataChefHQ/data-landing-zone'
 
-const iamIdentityCenterAccessGroup: IamIdentityCenterAccessGroup = { ... }
+const iamIdentityCenterAccessGroupProps: IamIdentityCenterAccessGroupProps = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.accounts">accounts</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.permissionSet">permissionSet</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.users">users</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.accounts">accounts</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.permissionSet">permissionSet</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.description">description</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.users">users</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
-##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.accounts"></a>
+##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.accounts"></a>
 
 ```typescript
 public readonly accounts: string[];
@@ -10662,7 +10761,7 @@ public readonly accounts: string[];
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -10672,7 +10771,7 @@ public readonly name: string;
 
 ---
 
-##### `permissionSet`<sup>Required</sup> <a name="permissionSet" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.permissionSet"></a>
+##### `permissionSet`<sup>Required</sup> <a name="permissionSet" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.permissionSet"></a>
 
 ```typescript
 public readonly permissionSet: string;
@@ -10682,7 +10781,7 @@ public readonly permissionSet: string;
 
 ---
 
-##### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -10692,13 +10791,107 @@ public readonly description: string;
 
 ---
 
-##### `users`<sup>Optional</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroup.property.users"></a>
+##### `users`<sup>Optional</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.property.users"></a>
 
 ```typescript
 public readonly users: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+### IamIdentityCenterGroupProps <a name="IamIdentityCenterGroupProps" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.Initializer"></a>
+
+```typescript
+import { IamIdentityCenterGroupProps } from '@DataChefHQ/data-landing-zone'
+
+const iamIdentityCenterGroupProps: IamIdentityCenterGroupProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.accounts">accounts</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.identityStoreId">identityStoreId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.permissionSet">permissionSet</a></code> | <code>aws-cdk-lib.aws_sso.CfnPermissionSet</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.ssoArn">ssoArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.users">users</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.description">description</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accounts`<sup>Required</sup> <a name="accounts" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.accounts"></a>
+
+```typescript
+public readonly accounts: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `identityStoreId`<sup>Required</sup> <a name="identityStoreId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.identityStoreId"></a>
+
+```typescript
+public readonly identityStoreId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `permissionSet`<sup>Required</sup> <a name="permissionSet" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.permissionSet"></a>
+
+```typescript
+public readonly permissionSet: CfnPermissionSet;
+```
+
+- *Type:* aws-cdk-lib.aws_sso.CfnPermissionSet
+
+---
+
+##### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.ssoArn"></a>
+
+```typescript
+public readonly ssoArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `users`<sup>Required</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.users"></a>
+
+```typescript
+public readonly users: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -12418,12 +12611,23 @@ new Defaults()
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.adminPermissionSet">adminPermissionSet</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.catalogPermissionSet">catalogPermissionSet</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.readOnlyPermissionSet">readOnlyPermissionSet</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
 
 ---
+
+##### `adminPermissionSet` <a name="adminPermissionSet" id="@DataChefHQ/data-landing-zone.Defaults.adminPermissionSet"></a>
+
+```typescript
+import { Defaults } from '@DataChefHQ/data-landing-zone'
+
+Defaults.adminPermissionSet()
+```
 
 ##### `budgets` <a name="budgets" id="@DataChefHQ/data-landing-zone.Defaults.budgets"></a>
 
@@ -12459,6 +12663,14 @@ Subscribers for the budget.
 
 ---
 
+##### `catalogPermissionSet` <a name="catalogPermissionSet" id="@DataChefHQ/data-landing-zone.Defaults.catalogPermissionSet"></a>
+
+```typescript
+import { Defaults } from '@DataChefHQ/data-landing-zone'
+
+Defaults.catalogPermissionSet()
+```
+
 ##### `denyServiceList` <a name="denyServiceList" id="@DataChefHQ/data-landing-zone.Defaults.denyServiceList"></a>
 
 ```typescript
@@ -12484,6 +12696,14 @@ Defaults.mandatoryTags(props: DataLandingZoneProps)
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
 ---
+
+##### `readOnlyPermissionSet` <a name="readOnlyPermissionSet" id="@DataChefHQ/data-landing-zone.Defaults.readOnlyPermissionSet"></a>
+
+```typescript
+import { Defaults } from '@DataChefHQ/data-landing-zone'
+
+Defaults.readOnlyPermissionSet()
+```
 
 ##### `rootControls` <a name="rootControls" id="@DataChefHQ/data-landing-zone.Defaults.rootControls"></a>
 
@@ -13042,196 +13262,6 @@ public readonly reports: ReportItem[];
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.ReportItem">ReportItem</a>[]
 
 ---
-
-
-### SecurityAccess <a name="SecurityAccess" id="@DataChefHQ/data-landing-zone.SecurityAccess"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.SecurityAccess.Initializer"></a>
-
-```typescript
-import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
-
-new SecurityAccess()
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-
----
-
-
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet">adminPermissionSet</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet">catalogPermissionSet</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.createGroup">createGroup</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet">createPermissionSet</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet">readOnlyPermissionSet</a></code> | *No description.* |
-
----
-
-##### `adminPermissionSet` <a name="adminPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet"></a>
-
-```typescript
-import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
-
-SecurityAccess.adminPermissionSet(scope: Construct, ssoArn: string)
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.adminPermissionSet.parameter.ssoArn"></a>
-
-- *Type:* string
-
----
-
-##### `catalogPermissionSet` <a name="catalogPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet"></a>
-
-```typescript
-import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
-
-SecurityAccess.catalogPermissionSet(scope: Construct, ssoArn: string)
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.catalogPermissionSet.parameter.ssoArn"></a>
-
-- *Type:* string
-
----
-
-##### `createGroup` <a name="createGroup" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup"></a>
-
-```typescript
-import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
-
-SecurityAccess.createGroup(scope: Construct, name: string, ssoArn: string, identityStoreId: string, users: string[], permissionSet: CfnPermissionSet, accounts?: string[], description?: string)
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.name"></a>
-
-- *Type:* string
-
----
-
-###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.ssoArn"></a>
-
-- *Type:* string
-
----
-
-###### `identityStoreId`<sup>Required</sup> <a name="identityStoreId" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.identityStoreId"></a>
-
-- *Type:* string
-
----
-
-###### `users`<sup>Required</sup> <a name="users" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.users"></a>
-
-- *Type:* string[]
-
----
-
-###### `permissionSet`<sup>Required</sup> <a name="permissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.permissionSet"></a>
-
-- *Type:* aws-cdk-lib.aws_sso.CfnPermissionSet
-
----
-
-###### `accounts`<sup>Optional</sup> <a name="accounts" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.accounts"></a>
-
-- *Type:* string[]
-
----
-
-###### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.SecurityAccess.createGroup.parameter.description"></a>
-
-- *Type:* string
-
----
-
-##### `createPermissionSet` <a name="createPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet"></a>
-
-```typescript
-import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
-
-SecurityAccess.createPermissionSet(scope: Construct, ssoArn: string, name: string, description?: string, policy?: PolicyDocument, managedPolicies?: string[])
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.ssoArn"></a>
-
-- *Type:* string
-
----
-
-###### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.name"></a>
-
-- *Type:* string
-
----
-
-###### `description`<sup>Optional</sup> <a name="description" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.description"></a>
-
-- *Type:* string
-
----
-
-###### `policy`<sup>Optional</sup> <a name="policy" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.policy"></a>
-
-- *Type:* aws-cdk-lib.aws_iam.PolicyDocument
-
----
-
-###### `managedPolicies`<sup>Optional</sup> <a name="managedPolicies" id="@DataChefHQ/data-landing-zone.SecurityAccess.createPermissionSet.parameter.managedPolicies"></a>
-
-- *Type:* string[]
-
----
-
-##### `readOnlyPermissionSet` <a name="readOnlyPermissionSet" id="@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet"></a>
-
-```typescript
-import { SecurityAccess } from '@DataChefHQ/data-landing-zone'
-
-SecurityAccess.readOnlyPermissionSet(scope: Construct, ssoArn: string)
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `ssoArn`<sup>Required</sup> <a name="ssoArn" id="@DataChefHQ/data-landing-zone.SecurityAccess.readOnlyPermissionSet.parameter.ssoArn"></a>
-
-- *Type:* string
-
----
-
 
 
 ## Protocols <a name="Protocols" id="Protocols"></a>

@@ -9,12 +9,12 @@ import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
-import { SecurityAccess } from '../../constructs/iam-identity-center';
+import { IamIdentityCenterGroup } from '../../constructs/iam-identity-center';
 import { IdentityStoreUser } from '../../constructs/identity-store-user';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
-import { PropsOrDefaults } from '../../defaults';
+import { PropsOrDefaults, Defaults } from '../../defaults';
 import { limitCfnExecutions } from '../../lib/cfn-utils';
 import { Report } from '../../lib/report';
 
@@ -77,24 +77,39 @@ export class ManagementStack extends DlzStack {
     }
 
     const permissionSets = new Map<string, () => sso.CfnPermissionSet>();
-    permissionSets.set('dlz:adminaccess', () => SecurityAccess.adminPermissionSet(this, iamIdentityCenterArn!));
-    permissionSets.set('dlz:readonlyaccess', () => SecurityAccess.readOnlyPermissionSet(this, iamIdentityCenterArn!));
-    permissionSets.set('dlz:catalogaccess', () => SecurityAccess.catalogPermissionSet(this, iamIdentityCenterArn!));
+
+    permissionSets.set('dlz:adminaccess', () => new sso.CfnPermissionSet(this, this.resourceName('adminaccess'),
+      {
+        instanceArn: iamIdentityCenterArn!,
+        ...Defaults.adminPermissionSet(),
+      }));
+
+    permissionSets.set('dlz:readonlyaccess', () => new sso.CfnPermissionSet(this, this.resourceName('readonlyaccess'),
+      {
+        instanceArn: iamIdentityCenterArn!,
+        ...Defaults.readOnlyPermissionSet(),
+      }));
+
+    permissionSets.set('dlz:catalogaccess', () => new sso.CfnPermissionSet(this, this.resourceName('catalogaccess'),
+      {
+        instanceArn: iamIdentityCenterArn!,
+        ...Defaults.catalogPermissionSet(),
+      }));
 
     for (const permissionSetConf of this.props.iamIdentityCenter.permissionSets ?? []) {
-      permissionSets.set(permissionSetConf.name, () => SecurityAccess.createPermissionSet(
-        this,
-        iamIdentityCenterArn!,
-        permissionSetConf.name,
-        permissionSetConf.description,
-        permissionSetConf.inlinePolicy,
-        permissionSetConf.managedPolicyArns,
-      ));
+      permissionSets.set(permissionSetConf.name, () => new sso.CfnPermissionSet(this, this.resourceName(permissionSetConf.name),
+        {
+          instanceArn: iamIdentityCenterArn!,
+          name: permissionSetConf.name,
+          description: permissionSetConf.description,
+          inlinePolicy: permissionSetConf.inlinePolicy,
+          managedPolicies: permissionSetConf.managedPolicyArns,
+        }));
     }
 
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
     for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
-      const id = cdk.Stack.of(this).stackName + `-aws-sso-user-${user.userName}`;
+      const id = this.resourceName(`aws-sso-user-${user.userName}`);
       const userConstruct = new IdentityStoreUser(this, id, { ...user, identityStoreId });
       awsSsoUsers.set(user.userName, userConstruct);
       users.set(user.userName, userConstruct.userId);
@@ -145,15 +160,18 @@ export class ManagementStack extends DlzStack {
         resolvedPermissionSets.set(group.permissionSet, permissionSet);
       }
 
-      const groupConstruct = SecurityAccess.createGroup(
+      const groupConstruct = new IamIdentityCenterGroup(
         this,
-        group.name,
-        iamIdentityCenterArn,
-        identityStoreId,
-        resolvedUsers,
-        permissionSet,
-        resolvedAccounts,
-        group.description);
+        this.resourceName(group.name),
+        {
+          ssoArn: iamIdentityCenterArn,
+          identityStoreId,
+          users: resolvedUsers,
+          permissionSet,
+          accounts: resolvedAccounts,
+          description: group.description,
+          name: group.name,
+        });
 
       groupConstruct.node.addDependency(permissionSet);
       for (const user of dependencyUsers) {

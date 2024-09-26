@@ -314,7 +314,7 @@ export interface IamIdentityCenterPermissionSetProps {
   readonly managedPolicyArns?: string[];
 }
 
-export interface IamIdentityCenterAccessGroup {
+export interface IamIdentityCenterAccessGroupProps {
   readonly name: string;
   readonly users?: string[];
   readonly permissionSet: string;
@@ -329,7 +329,7 @@ export interface IamIdentityCenter {
   readonly awsSsoUsers?: IdentityStoreUserProps[];
   readonly idpUsers?: IamIdentityCenterIdpUser[];
   readonly permissionSets?: IamIdentityCenterPermissionSetProps[];
-  readonly accessGroups?: IamIdentityCenterAccessGroup[];
+  readonly accessGroups?: IamIdentityCenterAccessGroupProps[];
 }
 
 export interface DataLandingZoneProps {
