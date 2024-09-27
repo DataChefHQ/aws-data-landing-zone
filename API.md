@@ -6631,7 +6631,6 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.ctor">ctor</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamIdentityCenter">iamIdentityCenter</a></code> | IAM Identity Center. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
@@ -7049,12 +7048,6 @@ Create unique ResourceNames.
 
 ```typescript
 public budgets(): void
-```
-
-##### `ctor` <a name="ctor" id="@DataChefHQ/data-landing-zone.ManagementStack.ctor"></a>
-
-```typescript
-public ctor(): void
 ```
 
 ##### `deploymentPlatformGitHub` <a name="deploymentPlatformGitHub" id="@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub"></a>

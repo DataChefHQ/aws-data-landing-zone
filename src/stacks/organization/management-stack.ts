@@ -30,10 +30,6 @@ export class ManagementStack extends DlzStack {
       topicName: this.resourceName('test-topic'),
     });
 
-    this.ctor();
-  }
-
-  ctor() {
     this.rootControls();
     this.iamIdentityCenter();
 
