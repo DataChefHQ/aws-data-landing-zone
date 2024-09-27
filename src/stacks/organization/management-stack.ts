@@ -105,6 +105,10 @@ export class ManagementStack extends DlzStack {
 
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
     for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
+      if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\_]+\*?$/.test(user.userName)) {
+        cdk.Annotations.of(this).addError(`Invalid user name: ${user.userName} - only letters, numbers, - and _ are allowed`);
+        continue;
+      }
       const id = this.resourceName(`aws-sso-user-${user.userName}`);
       const userConstruct = new IdentityStoreUser(this, id, { ...user, identityStoreId });
       awsSsoUsers.set(user.userName, userConstruct);
@@ -114,7 +118,7 @@ export class ManagementStack extends DlzStack {
     const resolvedPermissionSets = new Map<string, sso.CfnPermissionSet>();
 
     for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
-      const resolvedUsers = group.users?.map(user => users.get(user) ?? user) ?? [];
+      const resolvedUsers = group.users?.map(user => users.has(user) ? `${users.get(user)}|${user}` : user) ?? [];
       if (resolvedUsers.length === 0) {
         cdk.Annotations.of(this).addError(`No users found for group ${group.name}`);
         continue;

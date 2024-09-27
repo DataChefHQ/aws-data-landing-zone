@@ -31,14 +31,23 @@ export class IamIdentityCenterGroup extends Construct {
     let i = 0;
     for (const user of users) {
       i++;
+      const userSplit = user.split('|');
+      let userRef = `user${i}`;
+      let userId = user;
+
+      if (userSplit.length > 1) {
+        userRef = userSplit[1];
+        userId = userSplit[0];
+      }
+
       const membership = new identitystore.CfnGroupMembership(
         scope,
-        `${name}-membership-${i}`,
+        `${name}-membership-${userRef}`,
         {
           groupId: group.attrGroupId,
           identityStoreId,
           memberId: {
-            userId: user,
+            userId: userId,
           },
         });
 
