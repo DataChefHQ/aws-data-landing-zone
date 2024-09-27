@@ -61,7 +61,5 @@ export class IamIdentityCenterGroup extends Construct {
       assignment.node.addDependency(group);
       assignment.node.addDependency(permissionSet);
     }
-
-    return group;
   }
 }
