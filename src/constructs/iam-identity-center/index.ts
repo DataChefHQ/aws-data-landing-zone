@@ -33,7 +33,7 @@ export class IamIdentityCenterGroup extends Construct {
       i++;
       const membership = new identitystore.CfnGroupMembership(
         scope,
-        `${name}-membership-` + i,
+        `${name}-membership-${i}`,
         {
           groupId: group.attrGroupId,
           identityStoreId,
