@@ -42,7 +42,6 @@ function findCidrOverlap(newCidr: string, existingCidrs: string[]): string | und
 export class DlzAccountNetworks {
   private dlzAccountNetworks: DlzAccountNetwork[] = [];
 
-  //region: string,
   public add(dlzAccount: DLzAccount, networkEntityVpc: NetworkEntityVpc) {
     // Here find an existing NE, by account name, if exists add VPC to that.
 
