@@ -419,34 +419,38 @@ export interface AuditStacks {
   readonly regional: AuditRegionalStack[];
 }
 
+
+export interface GlobalVariablesNcp1
+{
+  /* The key is the combination of the account ids */
+  readonly vpcPeeringRoleKeys: string[];
+}
+export interface GlobalVariablesNcp2 {
+  /* To not create duplicate peering connections */
+  readonly peeringConnections: Record<string, ec2.CfnVPCPeeringConnection>;
+  /* Reduce the number of SSM readers, only create them if they do not exist for that key
+   * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+  readonly ownerVpcIds: DlzSsmReaderStackCache;
+  readonly peeringRoleArns: DlzSsmReaderStackCache;
+}
+export interface GlobalVariablesNcp3 {
+  /* Reduce the number of SSM readers, only create them if they do not exist for that key
+   * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+  readonly vpcPeeringConnectionIds: DlzSsmReaderStackCache;
+  readonly routeTablesSsmCache: DlzSsmReaderStackCache;
+}
 /* Global variables need to be reset between Construct usage */
-export type GlobalVariables = {
-  dlzAccountNetworks: DlzAccountNetworks;
-  ncp1: {
-    // /* The key is the combination of the account ids */
-    vpcPeeringRoleKeys: string[];
-  };
-  ncp2: {
-    /* To not create duplicate peering connections */
-    peeringConnections: {[key: string]: ec2.CfnVPCPeeringConnection};
-    /* Reduce the number of SSM readers, only create them if they do not exist for that key
-     * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
-    ownerVpcIds: DlzSsmReaderStackCache;
-    peeringRoleArns: DlzSsmReaderStackCache;
-  };
-  ncp3: {
-    /* Reduce the number of SSM readers, only create them if they do not exist for that key
-     * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
-    vpcPeeringConnectionIds: DlzSsmReaderStackCache;
-    routeTablesSsmCache: DlzSsmReaderStackCache;
-  };
+export interface GlobalVariables {
+  readonly dlzAccountNetworks: DlzAccountNetworks;
+  readonly ncp1: GlobalVariablesNcp1;
+  readonly ncp2: GlobalVariablesNcp2;
+  readonly ncp3: GlobalVariablesNcp3;
 }
 
 export interface WorkloadAccountProps extends DlzStackProps {
   readonly dlzAccount: DLzAccount;
   readonly globalVariables: GlobalVariables;
 }
-
 
 function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
   console.log('');

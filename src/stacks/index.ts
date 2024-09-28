@@ -7,3 +7,6 @@ export * from './organization/workloads/base/regional-stack';
 export * from './organization/workloads/base/global-stack';
 export * from './organization/workloads/network-connections-phase-1-stack/global-stack';
 export * from './organization/workloads/network-connections-phase-2-stack/global-stack';
+export * from './organization/workloads/network-connections-phase-2-stack/regional-stack';
+export * from './organization/workloads/network-connections-phase-3-stack/global-stack';
+export * from './organization/workloads/network-connections-phase-3-stack/regional-stack';
