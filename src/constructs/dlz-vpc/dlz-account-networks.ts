@@ -46,11 +46,6 @@ export class DlzAccountNetworks {
   public add(dlzAccount: DLzAccount, networkEntityVpc: NetworkEntityVpc) {
     // Here find an existing NE, by account name, if exists add VPC to that.
 
-    // TODO: Huh was here before?
-    // const accountRegionAddress = new NetworkAddress(dlzAccount.accountId, region);
-    // const accountRegionEntities = this.getEntitiesForAddress(accountRegionAddress, 'region');
-    // assert.ok(accountRegionEntities && accountRegionEntities.length !== 0, `No account region entities found for
-    //   address ${accountRegionAddress}`);
 
 
     /* Only need to check VPC overlaps */
