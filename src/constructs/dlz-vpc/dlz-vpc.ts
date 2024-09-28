@@ -136,12 +136,6 @@ export class DlzVpc {
       );
 
 
-      // //TODO: Next ticket
-      // new ec2.CfnRoute(dlzStack, 'Route', {
-      //   routeTableId: routeTable.ref,
-      //   destinationCidrBlock: '0.0.0.0/0',
-      //   gatewayId: 'igw-xxxxxxxx',
-      // });
 
     }
 
