@@ -46,7 +46,6 @@ export class DlzAccountNetworks {
     // Here find an existing NE, by account name, if exists add VPC to that.
 
 
-
     /* Only need to check VPC overlaps */
     if (this.vpcExists(networkEntityVpc)) {
       throw new Error(`VPC with address ${networkEntityVpc.address} already exists`);
