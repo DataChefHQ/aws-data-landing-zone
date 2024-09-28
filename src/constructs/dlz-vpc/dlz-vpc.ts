@@ -73,7 +73,6 @@ export class DlzVpc {
     new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${vpcAddress}-id`), {
       parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${vpcAddress}/id`,
       stringValue: vpc.attrVpcId,
-      // stringValue: networkEntityToSsmString(this.networkEntity),
     });
 
     const segmentsSubnets = groupByField(dlzVpc.subnets, 'segment');
