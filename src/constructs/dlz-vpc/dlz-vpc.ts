@@ -93,7 +93,6 @@ export class DlzVpc {
       new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${routeTableAddress}`), {
         parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${routeTableAddress}/id`,
         stringValue: routeTable.attrRouteTableId,
-        // stringValue: networkEntityToSsmString(this.networkEntity),
       });
 
       const subnetEntity: NetworkEntityRouteTable = {
