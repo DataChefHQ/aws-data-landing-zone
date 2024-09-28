@@ -1,29 +1,3 @@
-// interface NetworkAddressProps {
-//   /**
-//    * Account Name
-//    */
-//   readonly account: string;
-//
-//   /**
-//    * Region Name
-//    */
-//   readonly region?: string;
-//
-//   /**
-//    * VPC Name
-//    */
-//   readonly vpc?: string;
-//
-//   /**
-//    * Segment Name
-//    */
-//   readonly segment?: string;
-//
-//   /**
-//    * Subnet Name
-//    */
-//   readonly subnet?: string;
-// }
 
 export const NETWORK_ADDRESS_SEPARATOR = '.';
 
