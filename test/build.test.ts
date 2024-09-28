@@ -1,7 +1,4 @@
-// import * as assert from 'assert';
 import { App } from 'aws-cdk-lib';
-// import { Template } from 'aws-cdk-lib/assertions';
-// import {DataLandingZone, DlzControlTowerStandardControls, Region} from '../src';
 import {
   DataLandingZone,
   Defaults,
@@ -11,7 +8,6 @@ import {
   SlackChannel,
 } from '../src';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
-// import * as sns from 'aws-cdk-lib/aws-sns';
 const jestConsole = console;
 
 describe('CdkExpressPipelineLegacy', () => {
@@ -28,7 +24,6 @@ describe('CdkExpressPipelineLegacy', () => {
 
   test('Local build and debug', () => {
     const app = new App();
-    // const dlz = new DataLandingZone(app, {
 
     const slackBudgetNotifications: SlackChannel = {
       slackChannelConfigurationName: 'budget-alerts',
@@ -149,7 +144,7 @@ describe('CdkExpressPipelineLegacy', () => {
             // Big Org, all workloads/projects per account
             accounts: [
               {
-                name: 'project-1-develop',
+                name: 'project-1-development',
                 accountId: '381491899779',
                 type: DlzAccountType.DEVELOP,
                 vpcs: [
@@ -396,68 +391,39 @@ describe('CdkExpressPipelineLegacy', () => {
       network: {
         connections: {
           vpcPeering: [
-
-            // {
-            //   // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
-            //   name: 'dev-ew1-def-priv--dev-ue1-def-priv',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
-            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.private'),
-            //   direction: 'source-to-destination',
-            // },
-            // {
-            //   name: 'dev-ew1-def-pub--dev-ue1-def-pub',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'public'),
-            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
-            //   direction: 'source-to-destination',
-            // },
-
-            // {
-            //   name: 'development-ew1--production-ue1-source',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
-            //   // source: new NetworkAddress('project-1-develop'), // TODO Change description above ^ Is that "name" even needed???
-            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
-            //   direction: 'source-to-destination',
-            // },
-
-
-            // Only 1 role in the same account
-            // {
-            //   // name: 'p1-dev--ue1-default-priv--ew1-default-priv',
-            //   name: 'p1d-ew1-def-priv--p1d-ue1-def-priv',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private'),
-            //   destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.private'),
-            //   direction: 'source-to-destination',
-            // },
-            // {
-            //   name: 'p1d-ew1-def-pub--p1d-ue1-def-pub',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'public'),
-            //   destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.public'),
-            //   direction: 'source-to-destination',
-            // },
-            //
-
-            // // Only 1 role in the destination project account
-            // {
-            //   name: 'p1d-ew1-def-priv--p1d-ue1-def-priv',
-            //   source: new NetworkAddress('project-1-develop', Region.EU_WEST_1, 'default', 'private', 'private-1'),
-            //   destination: NetworkAddress.fromString('project-1-develop.us-east-1.default.private'),
-            //   direction: 'source-to-destination',
-            // },
-            // {
-            //   name: 'p1p-ew1-def-pub--p1p-ue1-def-pub',
-            //   source: new NetworkAddress('project-1-production', Region.EU_WEST_1, 'default', 'public'),
-            //   destination: NetworkAddress.fromString('project-1-production.us-east-1.default.public'),
-            //   direction: 'source-to-destination',
-            // },
-
-            // // does this work?
-            // ALL VPCs in all regions of Dev routed to ALL in all regions of VPCs in prod.
+            // Single Dev global subnet to Single Prod Subnet regional subnet
             {
-              // name: 'p1d-all--p1p-all',
-              source: new NetworkAddress('project-1-develop'),
-              destination: NetworkAddress.fromString('project-1-production'),
+              source: new NetworkAddress('project-1-development', Region.EU_WEST_1, 'default', 'private'),
+              destination: NetworkAddress.fromString('project-1-production.us-east-1.default.private'),
             },
 
+            // // All Dev VPCs subnets to Single Prod regional subnet
+            // {
+            //   source: new NetworkAddress('development'),
+            //   destination: NetworkAddress.fromString('production.us-east-1.default.private'),
+            // },
+            //
+            // // All Dev VPCs Subnets to all Prod VPCs Subnets
+            // {
+            //   source: new NetworkAddress('development'),
+            //   destination: NetworkAddress.fromString('production'),
+            // },
+            //
+            // //Private subnets of Dev Account global VPC to Dev Account regional VPC
+            // {
+            //   source: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private'),
+            //   destination: new NetworkAddress('development', Region.US_EAST_1, 'default', 'private'),
+            // },
+            //
+            // // All Dev VPCs private subnets to Single Prod regional Subnet - Represented as two connections
+            // {
+            //   source: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private'),
+            //   destination: NetworkAddress.fromString('production.us-east-1.default.private'),
+            // },
+            // {
+            //   source: new NetworkAddress('development', Region.US_EAST_1, 'default', 'private'),
+            //   destination: NetworkAddress.fromString('production.us-east-1.default.private'),
+            // },
           ],
         },
       },
@@ -466,13 +432,5 @@ describe('CdkExpressPipelineLegacy', () => {
       saveReport: false,
       printReport: false,
     });
-
-    // dlz.workloadGlobalNetworkConnectionsPhase1Stacks;
-    // console.log(networkP1Stacks);
-    // hmmm does not print inspect
-
-    // assert.ok(managementStack);
-    // const template = Template.fromStack(dlz.managementStack);
-    // template.hasResource('AWS::SNS::Topic', { });
   });
 });

@@ -120,6 +120,7 @@ export class Shared {
    * @private
    */
   private getPeerRoleArn(fromAccountId: string, toAccountId: string) {
+    /* Do not create a Peering connection if in the same account */
     if (fromAccountId === toAccountId) {
       return undefined;
     }

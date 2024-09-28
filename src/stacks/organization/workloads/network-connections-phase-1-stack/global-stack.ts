@@ -41,6 +41,11 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
       return;
     }
 
+    /* Do not create a Role if in the same account */
+    if (from.dlzAccount.accountId === to.dlzAccount.accountId) {
+      return;
+    }
+
     const peeringRoleName = this.resourceName(`vpc-peering-role-for-${from.dlzAccount.name}`);
     const vpcPeeringRolesKey = `${from.dlzAccount.accountId}-${to.dlzAccount.accountId}`;
 

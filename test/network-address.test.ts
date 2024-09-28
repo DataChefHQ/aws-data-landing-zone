@@ -156,7 +156,9 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
 
   const networkEntities = new DlzAccountNetworks();
   /* Do not use the .add methods as it depends on this method, prepare as it should be after .add */
-  networkEntities["dlzAccountNetworks"] = [
+
+  // eslint-disable-next-line dot-notation
+  networkEntities['dlzAccountNetworks'] = [
     {
       dlzAccount: dlzAccountDev,
       vpcs: [devVpcUsEast1Default, devVpcUsEast1Second, devVpcEuWest1],
@@ -285,19 +287,3 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
     }
   });
 });
-
-
-describe('NetworkEntities - add', () => {
-
-  beforeEach(() => {
-    /* Disable Jest's console.log that adds the location of log lines */
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    global.console = require('console');
-  });
-  afterEach(() => {
-    /* Restore Jest's console */
-    global.console = jestConsole;
-  });
-
-});
-
