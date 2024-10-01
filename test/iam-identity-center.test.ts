@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { App } from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
+import { Match, Template } from 'aws-cdk-lib/assertions';
 import { IdentityStoreUser } from '../src/constructs/identity-store-user';
 import { DataLandingZoneProps, Region } from '../src/data-landing-zone';
 import { ManagementStack } from '../src/stacks/organization/management-stack';
@@ -53,8 +53,30 @@ const configBase: DataLandingZoneProps = {
   printReport: false,
 };
 
+// Mock sns.Topic to prevent actual AWS resource creation
+jest.mock('aws-cdk-lib/aws-sns', () => {
+  return {
+    Topic: jest.fn().mockImplementation(() => {
+      return {
+        // Mock methods or properties if needed
+      };
+    }),
+  };
+});
+
 describe('ManagementStack', () => {
   beforeEach(() => {
+    // Spy on and mock the methods
+    jest.spyOn(ManagementStack.prototype as any, 'rootControls').mockImplementation(() => { });
+
+    jest.spyOn(ManagementStack.prototype, 'workloadAccountsOrgPolicies').mockImplementation(() => { });
+
+    jest.spyOn(ManagementStack.prototype, 'suspendedOuPolicies').mockImplementation(() => { });
+
+    jest.spyOn(ManagementStack.prototype, 'budgets').mockImplementation(() => { });
+
+    jest.spyOn(ManagementStack.prototype, 'deploymentPlatformGitHub').mockImplementation(() => { });
+
     jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
       return path.join(__dirname, '../assets/constructs/identity-store-user/lambda');
     });
@@ -106,7 +128,7 @@ describe('ManagementStack', () => {
         accessGroups: [
           {
             name: 'test-group',
-            users: ['testuser'],
+            users: ['testuser', 'idpuser'],
             permissionSet: 'custom-permission-set',
             accounts: ['dlz:root'],
             description: 'Test Group',
@@ -116,7 +138,83 @@ describe('ManagementStack', () => {
     });
 
     const template = Template.fromStack(stack);
-    console.log(template.toJSON());
 
+    template.hasResourceProperties('AWS::SSO::PermissionSet', {
+      Name: 'custom-permission-set',
+      Description: 'Custom Permission Set',
+      ManagedPolicies: ['arn:aws:iam::aws:policy/ReadOnlyAccess'],
+      InstanceArn: 'arn:aws:sso:::instance/sso-instance-id',
+    });
+
+    template.hasResourceProperties('AWS::CloudFormation::CustomResource', {
+      userName: 'testuser',
+      name: {
+        formatted: 'Test User',
+        familyName: 'User',
+        givenName: 'Test',
+      },
+      displayName: 'Test User',
+      email: {
+        value: 'testuser@example.com',
+        type: 'work',
+      },
+      identityStoreId: 'identity-store-id',
+    });
+
+    template.hasResourceProperties('AWS::IdentityStore::Group', {
+      IdentityStoreId: 'identity-store-id',
+      DisplayName: 'test-group',
+      Description: 'Test Group',
+    });
+
+    template.hasResourceProperties('AWS::SSO::Assignment', {
+      InstanceArn: 'arn:aws:sso:::instance/sso-instance-id',
+      PermissionSetArn: {
+        'Fn::GetAtt': [
+          'dlztestcustompermissionset',
+          'PermissionSetArn',
+        ],
+      },
+      PrincipalId: {
+        'Fn::GetAtt': [
+          'testgroup',
+          'GroupId',
+        ],
+      },
+      PrincipalType: 'GROUP',
+      TargetId: '882070149987',
+      TargetType: 'AWS_ACCOUNT',
+    });
+
+    template.hasResourceProperties('AWS::IdentityStore::GroupMembership', {
+      GroupId: {
+        'Fn::GetAtt': [
+          'testgroup',
+          'GroupId',
+        ],
+      },
+      IdentityStoreId: 'identity-store-id',
+      MemberId: {
+        UserId: {
+          'Fn::GetAtt': [
+            Match.stringLikeRegexp('^dlztestawsssousertestusercustomResourceResult([0-9]+)$'),
+            'UserId',
+          ],
+        },
+      },
+    });
+
+    template.hasResourceProperties('AWS::IdentityStore::GroupMembership', {
+      GroupId: {
+        'Fn::GetAtt': [
+          'testgroup',
+          'GroupId',
+        ],
+      },
+      IdentityStoreId: 'identity-store-id',
+      MemberId: {
+        UserId: 'idp-user-id',
+      },
+    });
   });
 });
