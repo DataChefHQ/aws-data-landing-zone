@@ -29,6 +29,10 @@ export interface IdentityStoreUserEmailsProps {
 }
 
 export class IdentityStoreUser extends Construct {
+  public static fetchCodeDirectory(): string {
+    return path.join(__dirname, 'lambda');
+  }
+
   public readonly userId: string;
 
   constructor(scope: Construct, id: string, props: IdentityStoreUserPropsExt) {
@@ -37,7 +41,7 @@ export class IdentityStoreUser extends Construct {
       this,
       'Custom::Resource',
       {
-        codeDirectory: path.join(__dirname, 'lambda'),
+        codeDirectory: IdentityStoreUser.fetchCodeDirectory(),
         runtime: CustomResourceProviderRuntime.NODEJS_18_X,
         timeout: Duration.seconds(60),
         policyStatements: [
@@ -66,6 +70,5 @@ export class IdentityStoreUser extends Construct {
     );
 
     this.userId = customResourceResult.getAttString('UserId');
-
   }
 }

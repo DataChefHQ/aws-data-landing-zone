@@ -4711,6 +4711,7 @@ Returns a string representation of this construct.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUser.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
 
 ---
 
@@ -4731,6 +4732,14 @@ Checks if `x` is a construct.
 Any object.
 
 ---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.fetchCodeDirectory"></a>
+
+```typescript
+import { IdentityStoreUser } from '@DataChefHQ/data-landing-zone'
+
+IdentityStoreUser.fetchCodeDirectory()
+```
 
 #### Properties <a name="Properties" id="Properties"></a>
 

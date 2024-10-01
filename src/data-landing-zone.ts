@@ -172,7 +172,6 @@ export enum Region {
   AP_SOUTH_2 = 'ap-south-2',
 }
 
-
 export interface DlzRegions {
   /**
    * Also known as the Home region for Control Tower
@@ -184,6 +183,37 @@ export interface DlzRegions {
    */
   readonly regional: Region[];
 }
+
+export interface IamIdentityCenterIdpUser {
+  readonly name: string;
+  readonly userId: string;
+}
+
+export interface IamIdentityCenterPermissionSetProps {
+  readonly name: string;
+  readonly description?: string;
+  readonly inlinePolicy?: any;
+  readonly managedPolicyArns?: string[];
+}
+
+export interface IamIdentityCenterAccessGroupProps {
+  readonly name: string;
+  readonly users?: string[];
+  readonly permissionSet: string;
+  readonly accounts: string[];
+  readonly description?: string;
+}
+
+export interface IamIdentityCenter {
+  readonly iamIdentityCenterArn?: string;
+  readonly iamIdentityCenterId: string;
+  readonly identityStoreId: string;
+  readonly awsSsoUsers?: IdentityStoreUserProps[];
+  readonly idpUsers?: IamIdentityCenterIdpUser[];
+  readonly permissionSets?: IamIdentityCenterPermissionSetProps[];
+  readonly accessGroups?: IamIdentityCenterAccessGroupProps[];
+}
+
 export function DlzAllRegions(regions: DlzRegions): Region[] {
   return [regions.global, ...regions.regional];
 }
@@ -244,6 +274,7 @@ export interface RootOptions {
    */
   readonly controls?: DlzControlTowerStandardControls[];
 }
+
 export interface DLzOrganization {
   readonly organizationId: string;
   readonly root: RootOptions;
@@ -521,9 +552,11 @@ export class DataLandingZone {
     Tags.of(app).add('Environment', 'dlz');
 
     if (this.props.printDeploymentOrder !== false) { printConsoleDeploymentOrder(deploymentOrder); }
+    if (this.props.printDeploymentOrder !== false) { printConsoleDeploymentOrder(deploymentOrder); }
     if (this.props.printReport !== false) {
       Report.printConsoleReport();
     }
+    if (this.props.saveReport !== false) { Report.saveConsoleReport(); }
     if (this.props.saveReport !== false) { Report.saveConsoleReport(); }
   }
 
