@@ -43,8 +43,6 @@ export class DlzAccountNetworks {
   private dlzAccountNetworks: DlzAccountNetwork[] = [];
 
   public add(dlzAccount: DLzAccount, networkEntityVpc: NetworkEntityVpc) {
-    // Here find an existing NE, by account name, if exists add VPC to that.
-
 
     /* Only need to check VPC overlaps */
     if (this.vpcExists(networkEntityVpc)) {
