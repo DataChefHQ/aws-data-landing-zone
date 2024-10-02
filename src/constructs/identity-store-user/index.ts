@@ -39,7 +39,7 @@ export class IdentityStoreUser extends Construct {
     super(scope, id);
     const customResourceProvider = CustomResourceProvider.getOrCreateProvider(
       this,
-      'Custom::Resource',
+      'Custom::DlzIdentityStoreUser',
       {
         codeDirectory: IdentityStoreUser.fetchCodeDirectory(),
         runtime: CustomResourceProviderRuntime.NODEJS_18_X,

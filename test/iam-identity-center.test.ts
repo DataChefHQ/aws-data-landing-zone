@@ -248,7 +248,7 @@ describe('Lambda Function Tests', () => {
     const event: CloudFormationCustomResourceCreateEvent = {
       RequestType: 'Create',
       ServiceToken: 'testServiceToken',
-      ResourceType: 'Custom::IdentityStoreUser',
+      ResourceType: 'Custom::DlzIdentityStoreUser',
       ResourceProperties: {
         userName: 'testUser',
         identityStoreId: 'testStoreId',
@@ -286,7 +286,7 @@ describe('Lambda Function Tests', () => {
     const event: CloudFormationCustomResourceUpdateEvent = {
       RequestType: 'Update',
       ServiceToken: 'testServiceToken',
-      ResourceType: 'Custom::IdentityStoreUser',
+      ResourceType: 'Custom::DlzIdentityStoreUser',
       ResourceProperties: {
 
         userName: 'updatedUser',
@@ -360,7 +360,7 @@ describe('Lambda Function Tests', () => {
     const event: CloudFormationCustomResourceDeleteEvent = {
       RequestType: 'Delete',
       ServiceToken: 'testServiceToken',
-      ResourceType: 'Custom::IdentityStoreUser',
+      ResourceType: 'Custom::DlzIdentityStoreUser',
       ResourceProperties: {
         ServiceToken: 'testServiceToken',
         identityStoreId: 'testStoreId',
