@@ -23,23 +23,3 @@ export interface DlzAccountNetwork {
   readonly dlzAccount: DLzAccount;
   readonly vpcs: NetworkEntityVpc[];
 }
-
-
-// export interface NetworkEntityVpcSsm {
-//   readonly address: NetworkAddress;
-//   readonly vpcId: string;
-// }
-// export interface NetworkEntitySubnetSsm {
-//   readonly address: NetworkAddress;
-//   readonly subnetId: string;
-// }
-// export interface NetworkEntityRouteTableSsm {
-//   readonly address: NetworkAddress;
-//   readonly routeTableId: string;
-// }
-// export interface NetworkEntitySsm {
-//   readonly dlzAccount: DLzAccount;
-//   readonly vpcs: NetworkEntityVpcSsm[];
-//   readonly subnets: NetworkEntitySubnetSsm[];
-//   readonly routeTables: NetworkEntityRouteTableSsm[];
-// }
