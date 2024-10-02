@@ -1,9 +1,28 @@
 import * as path from 'path';
+import {
+  IdentitystoreClient,
+  CreateUserCommand,
+  DeleteUserCommand,
+  UpdateUserCommand,
+  DescribeUserCommand,
+} from '@aws-sdk/client-identitystore';
 import { App } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
+import {
+  CloudFormationCustomResourceCreateEvent,
+  CloudFormationCustomResourceUpdateEvent,
+  CloudFormationCustomResourceDeleteEvent,
+} from 'aws-lambda';
 import { IdentityStoreUser } from '../src/constructs/identity-store-user';
+import { handler } from '../src/constructs/identity-store-user/lambda';
 import { DataLandingZoneProps, Region } from '../src/data-landing-zone';
 import { ManagementStack } from '../src/stacks/organization/management-stack';
+
+
+jest.mock('@aws-sdk/client-identitystore');
+
+const mockSend = jest.fn();
+IdentitystoreClient.prototype.send = mockSend;
 
 const configBase: DataLandingZoneProps = {
   localProfile: 'ct-sandbox-exported',
@@ -152,6 +171,7 @@ describe('ManagementStack', () => {
         formatted: 'Test User',
         familyName: 'User',
         givenName: 'Test',
+
       },
       displayName: 'Test User',
       email: {
@@ -216,5 +236,148 @@ describe('ManagementStack', () => {
         UserId: 'idp-user-id',
       },
     });
+  });
+});
+
+describe('Lambda Function Tests', () => {
+  beforeEach(() => {
+    mockSend.mockReset();
+  });
+
+  test('Create User', async () => {
+    const event: CloudFormationCustomResourceCreateEvent = {
+      RequestType: 'Create',
+      ServiceToken: 'testServiceToken',
+      ResourceType: 'Custom::IdentityStoreUser',
+      ResourceProperties: {
+        userName: 'testUser',
+        identityStoreId: 'testStoreId',
+        name: {
+          formatted: 'Test User',
+          givenName: 'Test',
+          familyName: 'User',
+          middleName: '',
+          honorificPrefix: '',
+          honorificSuffix: '',
+        },
+        displayName: 'Test User',
+        email: {
+          value: 'test@example.com',
+          type: 'work',
+        },
+        ServiceToken: 'testServiceToken',
+      },
+      StackId: 'testStackId',
+      RequestId: 'testRequestId',
+      LogicalResourceId: 'testLogicalResourceId',
+      ResponseURL: '',
+    };
+
+    mockSend.mockResolvedValue({ UserId: 'testUserId' });
+
+    const response = await handler(event);
+
+    expect(mockSend).toHaveBeenCalledWith(expect.any(CreateUserCommand));
+    expect(response.Status).toBe('SUCCESS');
+    expect(response.PhysicalResourceId).toBe('testUserId');
+  });
+
+  test('Update User', async () => {
+    const event: CloudFormationCustomResourceUpdateEvent = {
+      RequestType: 'Update',
+      ServiceToken: 'testServiceToken',
+      ResourceType: 'Custom::IdentityStoreUser',
+      ResourceProperties: {
+
+        userName: 'updatedUser',
+        identityStoreId: 'testStoreId',
+        name: {
+          formatted: 'Updated User',
+          givenName: 'Updated',
+          familyName: 'User',
+          middleName: '',
+          honorificPrefix: '',
+          honorificSuffix: '',
+        },
+        displayName: 'Updated User',
+        email: {
+          value: 'updated@example.com',
+          type: 'work',
+        },
+        ServiceToken: 'testServiceToken',
+      },
+      OldResourceProperties: {
+        userName: 'oldUser',
+        identityStoreId: 'testStoreId',
+        ServiceToken: 'testServiceToken',
+        name: {
+          formatted: 'Old User',
+          givenName: 'Old',
+          familyName: 'User',
+          middleName: '',
+          honorificPrefix: '',
+          honorificSuffix: '',
+        },
+        displayName: 'Old User',
+        email: {
+          value: 'old@example.com',
+          type: 'work',
+        },
+      },
+      PhysicalResourceId: 'testUserId',
+      StackId: 'testStackId',
+      RequestId: 'testRequestId',
+      LogicalResourceId: 'testLogicalResourceId',
+      ResponseURL: '',
+    };
+
+    mockSend
+      .mockResolvedValueOnce({
+        UserId: 'testUserId',
+        DisplayName: 'Old User',
+        UserName: 'oldUser',
+        Name: {
+          GivenName: 'Old',
+          FamilyName: 'User',
+          MiddleName: '',
+          Formatted: 'Old User',
+          HonorificPrefix: '',
+          HonorificSuffix: '',
+        },
+        Emails: [{ Value: 'old@example.com', Type: 'work', Primary: true }],
+      })
+      .mockResolvedValueOnce({});
+
+    const response = await handler(event);
+
+    expect(mockSend).toHaveBeenCalledWith(expect.any(DescribeUserCommand));
+    expect(mockSend).toHaveBeenCalledWith(expect.any(UpdateUserCommand));
+    expect(response.Status).toBe('SUCCESS');
+    expect(response.PhysicalResourceId).toBe('testUserId');
+  });
+
+  test('Delete User', async () => {
+    const event: CloudFormationCustomResourceDeleteEvent = {
+      RequestType: 'Delete',
+      ServiceToken: 'testServiceToken',
+      ResourceType: 'Custom::IdentityStoreUser',
+      ResourceProperties: {
+        ServiceToken: 'testServiceToken',
+        identityStoreId: 'testStoreId',
+      },
+      PhysicalResourceId: 'testUserId',
+      StackId: 'testStackId',
+      RequestId: 'testRequestId',
+      LogicalResourceId: 'testLogicalResourceId',
+      ResponseURL: '',
+    };
+
+    mockSend.mockResolvedValue({});
+
+    const response = await handler(event);
+
+    expect(mockSend).toHaveBeenCalledWith(expect.any(DeleteUserCommand));
+    expect(response.Status).toBe('SUCCESS');
+    expect(response.PhysicalResourceId).toBe('testUserId');
   });
 });
