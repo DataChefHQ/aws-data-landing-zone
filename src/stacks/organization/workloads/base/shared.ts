@@ -1,23 +1,16 @@
 import * as config from 'aws-cdk-lib/aws-config';
-import { DlzStack, DlzVpc, DlzVpcProps } from '../../constructs';
-import { DlzConfigRule } from '../../constructs/config';
-import { NetworkEntities } from '../../constructs/dlz-vpc/network-entity';
-import { DataLandingZoneProps, DLzAccount } from '../../data-landing-zone';
-import { PropsOrDefaults } from '../../defaults';
-import { Report } from '../../lib/report';
+import { DlzConfigRule } from '../../../../constructs/config/index';
+import { DlzStack, DlzVpc } from '../../../../constructs/index';
+import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone';
+import { PropsOrDefaults } from '../../../../defaults';
+import { Report } from '../../../../lib/report';
 
-const networkEntities = new NetworkEntities();
 
-export class SharedOrganization {
-  constructor(private stack: DlzStack, private props: DataLandingZoneProps) {
+export class Shared {
+  constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount, private globals: GlobalVariables) {
   }
 
-  public configRules() {
-    this.configRuleRequiredTags();
-    //TODO: More
-  }
-
-  private configRuleRequiredTags() {
+  public configRuleRequiredTags() {
     const tags = PropsOrDefaults.getOrganizationTags(this.props);
     const inputParameters: Record<string, string> = {};
     let tagIndex = 1;
@@ -42,10 +35,12 @@ export class SharedOrganization {
     Report.addReportForAccountRegion(this.stack.accountName, this.stack.region, rule.reportResource);
   }
 
-  public createVpcs(dlzAccount: DLzAccount, dlzVpcProps: DlzVpcProps[]) {
-    for (const dlzVpcProp of dlzVpcProps) {
-      const dlzVpc = new DlzVpc(dlzAccount, this.stack, dlzVpcProp);
-      networkEntities.add(dlzVpc.networkEntity);
+
+  public createVpcs() {
+    const vpcsForRegion = this.dlzAccount.vpcs?.filter(vpc => vpc.region === this.stack.region) || [];
+    for (const dlzVpcProp of vpcsForRegion) {
+      const dlzVpc = new DlzVpc(this.dlzAccount, this.stack, dlzVpcProp);
+      this.globals.dlzAccountNetworks.add(this.dlzAccount, dlzVpc.networkEntityVpc);
     }
   }
 

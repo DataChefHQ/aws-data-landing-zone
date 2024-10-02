@@ -17,6 +17,7 @@ const DlzStackNamePrefix = 'dlz-';
 export class DlzStack extends cdk.Stack {
   public readonly id: string;
   public readonly accountName: string;
+  public readonly accountId: string;
 
   constructor(scope: Construct, props: DlzStackProps) {
     const stackId = [
@@ -33,6 +34,7 @@ export class DlzStack extends cdk.Stack {
 
     this.id = stackId;
     this.accountName = props.name.account!;
+    this.accountId = props.env.account!;
   }
 
   /**

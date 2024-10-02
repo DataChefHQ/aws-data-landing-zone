@@ -1,24 +1,36 @@
 import { App, Stack, Tags } from 'aws-cdk-lib';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import {
-  BudgetProps,
+  BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
   DlzStack,
-  DlzStackProps,
-  DlzVpcProps,
+  DlzStackProps, DlzVpcProps,
   SlackChannel,
 } from './constructs';
+import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
+import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import { IdentityStoreUserProps } from './constructs/identity-store-user';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
-import { ManagementStack } from './stacks';
+import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
 import { AuditRegionalStack } from './stacks/organization/security/audit/regional-stack';
 import { LogGlobalStack } from './stacks/organization/security/log/global-stack';
 import { LogRegionalStack } from './stacks/organization/security/log/regional-stack';
-import { DevelopGlobalStack } from './stacks/organization/workloads/develop/global-stack';
-import { DevelopRegionalStack } from './stacks/organization/workloads/develop/regional-stack';
-import { ProductionGlobalStack } from './stacks/organization/workloads/production/global-stack';
-import { ProductionRegionalStack } from './stacks/organization/workloads/production/regional-stack';
+import { WorkloadGlobalStack } from './stacks/organization/workloads/base/global-stack';
+import { WorkloadRegionalStack } from './stacks/organization/workloads/base/regional-stack';
+import {
+  WorkloadGlobalNetworkConnectionsPhase2Stack,
+} from './stacks/organization/workloads/network-connections-phase-2-stack/global-stack';
+import {
+  WorkloadRegionalNetworkConnectionsPhase2Stack,
+} from './stacks/organization/workloads/network-connections-phase-2-stack/regional-stack';
+import {
+  WorkloadGlobalNetworkConnectionsPhase3Stack,
+} from './stacks/organization/workloads/network-connections-phase-3-stack/global-stack';
+import {
+  WorkloadRegionalNetworkConnectionsPhase3Stack,
+} from './stacks/organization/workloads/network-connections-phase-3-stack/regional-stack';
 
 /**
  * Control Tower Supported Regions as listed here
@@ -230,7 +242,7 @@ export interface DLzAccount {
   readonly accountId: string;
   readonly name: string;
   readonly type: DlzAccountType;
-  readonly vpcs: DlzVpcProps[];
+  readonly vpcs?: DlzVpcProps[];
 }
 
 export enum Ou {
@@ -331,6 +343,19 @@ export interface DeploymentPlatformGitHub {
 }
 export interface DeploymentPlatform {
   readonly gitHub?: DeploymentPlatformGitHub;
+}
+
+export interface NetworkConnectionVpcPeering {
+  readonly source: NetworkAddress;
+  readonly destination: NetworkAddress;
+}
+
+export interface NetworkConnection {
+  readonly vpcPeering: NetworkConnectionVpcPeering[];
+}
+
+export interface Network {
+  readonly connections: NetworkConnection;
 }
 
 export interface IamIdentityCenterIdpUser {
@@ -437,6 +462,8 @@ export interface DataLandingZoneProps {
   readonly securityHubNotifications: SecurityHubNotification[];
 
   readonly deploymentPlatform?: DeploymentPlatform;
+
+  readonly network?: Network;
 }
 
 type DeploymentOrder = {
@@ -455,32 +482,39 @@ export interface AuditStacks {
   readonly regional: AuditRegionalStack[];
 }
 
-export interface DevelopStacks {
-  readonly global: DevelopGlobalStack;
-  readonly regional: DevelopRegionalStack[];
+
+export interface GlobalVariablesNcp1
+{
+  /* The key is the combination of the account ids */
+  readonly vpcPeeringRoleKeys: string[];
+}
+export interface GlobalVariablesNcp2 {
+  /* To not create duplicate peering connections */
+  readonly peeringConnections: Record<string, ec2.CfnVPCPeeringConnection>;
+  /* Reduce the number of SSM readers, only create them if they do not exist for that key
+   * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+  readonly ownerVpcIds: DlzSsmReaderStackCache;
+  readonly peeringRoleArns: DlzSsmReaderStackCache;
 }
 
-export interface DevelopAccountStacks {
-  readonly accountId: string;
-  readonly name: string;
-  readonly stacks: DevelopStacks;
+export interface GlobalVariablesNcp3 {
+  /* Reduce the number of SSM readers, only create them if they do not exist for that key
+   * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
+  readonly vpcPeeringConnectionIds: DlzSsmReaderStackCache;
+  readonly routeTablesSsmCache: DlzSsmReaderStackCache;
 }
-
-export interface ProductionStacks {
-  readonly global: ProductionGlobalStack;
-  readonly regional: ProductionRegionalStack[];
-}
-
-export interface ProductionAccountStacks {
-  readonly accountId: string;
-  readonly name: string;
-  readonly stacks: ProductionStacks;
+/* Global variables need to be reset between Construct usage */
+export interface GlobalVariables {
+  readonly dlzAccountNetworks: DlzAccountNetworks;
+  readonly ncp1: GlobalVariablesNcp1;
+  readonly ncp2: GlobalVariablesNcp2;
+  readonly ncp3: GlobalVariablesNcp3;
 }
 
 export interface WorkloadAccountProps extends DlzStackProps {
   readonly dlzAccount: DLzAccount;
+  readonly globalVariables: GlobalVariables;
 }
-
 
 function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
   console.log('');
@@ -503,27 +537,97 @@ function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
 }
 
 export class DataLandingZone {
+
+  /* For direct access to stacks */
   public managementStack!: ManagementStack;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
-  public developAccountStacks: DevelopAccountStacks[] = [];
-  public productionAccountStacks: ProductionAccountStacks[] = [];
+
+  public workloadGlobalStacks: WorkloadGlobalStack[] = [];
+  public workloadRegionalStacks: WorkloadRegionalStack[] = [];
+
+  public workloadGlobalNetworkConnectionsPhase1Stacks: WorkloadGlobalNetworkConnectionsPhase1Stack[] = [];
+
+  public workloadGlobalNetworkConnectionsPhase2Stacks: WorkloadGlobalNetworkConnectionsPhase2Stack[] = [];
+  public workloadRegionalNetworkConnectionsPhase2Stacks: WorkloadRegionalNetworkConnectionsPhase2Stack[] = [];
+
+  public workloadGlobalNetworkConnectionsPhase3Stacks: WorkloadGlobalNetworkConnectionsPhase3Stack[] = [];
+  public workloadRegionalNetworkConnectionsPhase3Stacks: WorkloadRegionalNetworkConnectionsPhase3Stack[] = [];
+
+  private globalVariables: GlobalVariables = {
+    dlzAccountNetworks: new DlzAccountNetworks(),
+    ncp1: {
+      vpcPeeringRoleKeys: [],
+    },
+    ncp2: {
+      peeringConnections: {},
+      ownerVpcIds: new DlzSsmReaderStackCache(),
+      peeringRoleArns: new DlzSsmReaderStackCache(),
+    },
+    ncp3: {
+      vpcPeeringConnectionIds: new DlzSsmReaderStackCache(),
+      routeTablesSsmCache: new DlzSsmReaderStackCache(),
+    },
+  };
 
   constructor(private app: App, private props: DataLandingZoneProps) {
 
-    const deploymentOrder: DeploymentOrder = {
-      Management: {
-        Management: this.stageManagement(),
+    this.managementStack = this.stageManagement();
+    this.auditStacks = this.stageAudit();
+    this.logStacks = this.stageLog();
+
+    this.workloadGlobalStacks = this.stageWorkloadGlobalStacks();
+    this.workloadRegionalStacks = this.stageWorkloadRegionalStacks();
+
+    this.workloadGlobalNetworkConnectionsPhase1Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase1Stacks();
+
+    this.workloadGlobalNetworkConnectionsPhase2Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase2Stack();
+    this.workloadRegionalNetworkConnectionsPhase2Stacks = this.stageWorkloadRegionalNetworkConnectionsPhase2Stack();
+
+    this.workloadGlobalNetworkConnectionsPhase3Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase3Stack();
+    this.workloadRegionalNetworkConnectionsPhase3Stacks = this.stageWorkloadRegionalNetworkConnectionsPhase3Stack();
+
+    // this.workloadGlobalNetworkConnectionsPhase2Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase2Stack();
+
+    const deploymentOrder: DeploymentOrder =
+    {
+      ManagementWave: {
+        ManagementStage: [this.managementStack],
       },
-      Security: {
-        Log: this.stageLog(),
-        Audit: this.stageAudit(),
+
+      LogGlobalWave: {
+        GlobalStage: [this.logStacks.global],
       },
-      WorkloadsSandBoxesSuspended: {
-        Develop: this.stageWorkloadDevelopType(),
-        Production: this.stageWorkloadProductionType(),
+      LogRegionalWave: {
+        RegionalStage: this.logStacks.regional,
+      },
+      AuditGlobalWave: {
+        GlobalStage: [this.auditStacks.global],
+      },
+      AuditRegionalWave: {
+        RegionalStage: this.auditStacks.regional,
+      },
+
+      WorkloadsGlobalWave: {
+        GlobalStage: this.workloadGlobalStacks,
+      },
+      WorkloadsRegionalWave: {
+        RegionalStage: this.workloadRegionalStacks,
+      },
+
+      WorkloadsGlobalNetworkConnectionsPhase1Wave: {
+        GlobalStage: this.workloadGlobalNetworkConnectionsPhase1Stacks,
+      },
+      WorkloadRegionalNetworkConnectionsPhase2Stack: {
+        GlobalStage: this.workloadGlobalNetworkConnectionsPhase2Stacks,
+        RegionalStage: this.workloadRegionalNetworkConnectionsPhase2Stacks,
+      },
+      WorkloadRegionalNetworkConnectionsPhase3Stack: {
+        GlobalStage: this.workloadGlobalNetworkConnectionsPhase3Stacks,
+        RegionalStage: this.workloadRegionalNetworkConnectionsPhase3Stacks,
       },
     };
+
 
     const waves = Object.keys(deploymentOrder).map(waveName => {
       const wave = deploymentOrder[waveName];
@@ -570,14 +674,11 @@ export class DataLandingZone {
     },
     this.props);
 
-    this.managementStack = management;
-
-    return [
-      this.managementStack,
-    ];
+    return management;
   };
 
-  stageLog() {
+
+  private stageLog() {
     const ou = 'security';
     const account = 'log';
 
@@ -598,22 +699,16 @@ export class DataLandingZone {
           region: region,
         },
       });
-      logRegional.addDependency(logGlobal);
       logRegionalStacks.push(logRegional);
     }
 
-    this.logStacks = {
+    return {
       global: logGlobal,
       regional: logRegionalStacks,
     };
-
-    return [
-      this.logStacks.global,
-      ...this.logStacks.regional,
-    ];
   };
 
-  stageAudit() {
+  private stageAudit() {
     const ou = 'security';
     const account = 'audit';
     const auditGlobalStack = new AuditGlobalStack(this.app, {
@@ -634,118 +729,161 @@ export class DataLandingZone {
           region: region,
         },
       });
-      auditRegional.addDependency(auditGlobalStack);
       auditRegionalStacks.push(auditRegional);
     }
 
-    this.auditStacks = {
+    return {
       global: auditGlobalStack,
       regional: auditRegionalStacks,
     };
-
-    return [
-      this.auditStacks.global,
-      ...this.auditStacks.regional,
-    ];
   };
 
-  stageWorkloadDevelopType() {
+  private stageWorkloadGlobalStacks() {
     const ou = 'workloads';
 
-    const developAccounts = this.props.organization.ous.workloads.accounts
-      .filter(account => account.type === DlzAccountType.DEVELOP);
-
-    const developStacks: DlzStack[] = [];
-    for (const dlzAccount of developAccounts) {
-      const developGlobalStack = new DevelopGlobalStack(this.app, {
+    const workloadGlobalStacks: WorkloadGlobalStack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const developGlobalStack = new WorkloadGlobalStack(this.app, {
         name: { ou, account: dlzAccount.name, stack: 'global', region: this.props.regions.global },
         env: {
           account: dlzAccount.accountId,
           region: this.props.regions.global,
         },
         dlzAccount,
-      },
-      this.props);
+        globalVariables: this.globalVariables,
+      }, this.props);
 
-      const developRegionalStacks: DevelopRegionalStack[] = [];
-      for (const region of this.props.regions.regional) {
-        const developRegional = new DevelopRegionalStack(this.app, {
-          name: { ou, account: dlzAccount.name, stack: 'regional', region: region },
-          env: {
-            account: dlzAccount.accountId,
-            region: region,
-          },
-          dlzAccount,
-        },
-        this.props);
-        developRegional.addDependency(developGlobalStack);
-        developRegionalStacks.push(developRegional);
-      }
-
-      this.developAccountStacks.push({
-        accountId: dlzAccount.accountId,
-        name: dlzAccount.name,
-        stacks: {
-          global: developGlobalStack,
-          regional: developRegionalStacks,
-        },
-      });
-
-      developStacks.push(developGlobalStack);
-      developStacks.push(...developRegionalStacks);
+      workloadGlobalStacks.push(developGlobalStack);
     }
-
-    return developStacks;
-  };
-
-  stageWorkloadProductionType() {
+    return workloadGlobalStacks;
+  }
+  private stageWorkloadRegionalStacks() {
     const ou = 'workloads';
 
-    const productionAccounts = this.props.organization.ous.workloads.accounts
-      .filter(account => account.type === DlzAccountType.PRODUCTION);
+    const workloadRegionalStacks: WorkloadRegionalStack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      for (const region of this.props.regions.regional) {
+        const developGlobalStack = new WorkloadRegionalStack(this.app, {
+          name: { ou, account: dlzAccount.name, stack: 'regional', region },
+          env: {
+            account: dlzAccount.accountId,
+            region,
+          },
+          dlzAccount,
+          globalVariables: this.globalVariables,
+        }, this.props);
+        workloadRegionalStacks.push(developGlobalStack);
+      }
+    }
+    return workloadRegionalStacks;
+  }
 
-    const productionStacks: DlzStack[] = [];
-    for (const dlzAccount of productionAccounts) {
-      const productionGlobalStack = new ProductionGlobalStack(this.app, {
-        name: { ou, account: dlzAccount.name, stack: 'global', region: this.props.regions.global },
+  private stageWorkloadGlobalNetworkConnectionsPhase1Stacks() {
+    const ou = 'workloads';
+
+    const workloadGlobalStacks: WorkloadGlobalNetworkConnectionsPhase1Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const networkConnectionsPhase1Stack = new WorkloadGlobalNetworkConnectionsPhase1Stack(this.app, {
+        /* ncp1 abbreviation for NetworkConnectionsPhase1Stack */
+        name: { ou, account: dlzAccount.name, stack: 'ncp1-global', region: this.props.regions.global },
         env: {
           account: dlzAccount.accountId,
           region: this.props.regions.global,
         },
         dlzAccount,
-      },
-      this.props);
+        globalVariables: this.globalVariables,
+      }, this.props);
 
-      const productionRegionalStacks: ProductionRegionalStack[] = [];
+      workloadGlobalStacks.push(networkConnectionsPhase1Stack);
+    }
+    return workloadGlobalStacks;
+  }
+
+  private stageWorkloadGlobalNetworkConnectionsPhase2Stack() {
+    const ou = 'workloads';
+
+    const workloadGlobalStacks: WorkloadGlobalNetworkConnectionsPhase2Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const networkConnectionsPhase2Stack = new WorkloadGlobalNetworkConnectionsPhase2Stack(this.app, {
+        /* ncp2 abbreviation for NetworkConnectionsPhase2Stack */
+        name: { ou, account: dlzAccount.name, stack: 'ncp2-global', region: this.props.regions.global },
+        env: {
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
+        },
+        dlzAccount,
+        globalVariables: this.globalVariables,
+      }, this.props);
+
+      workloadGlobalStacks.push(networkConnectionsPhase2Stack);
+    }
+    return workloadGlobalStacks;
+  }
+  private stageWorkloadRegionalNetworkConnectionsPhase2Stack() {
+    const ou = 'workloads';
+
+    const workloadRegionalStacks: WorkloadRegionalNetworkConnectionsPhase2Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
       for (const region of this.props.regions.regional) {
-        const productionRegional = new ProductionRegionalStack(this.app, {
-          name: { ou, account: dlzAccount.name, stack: 'regional', region: region },
+
+        const workloadRegionalStack = new WorkloadRegionalNetworkConnectionsPhase2Stack(this.app, {
+          /* ncp2 abbreviation for NetworkConnectionsPhase2Stack */
+          name: { ou, account: dlzAccount.name, stack: 'ncp2-regional', region },
           env: {
             account: dlzAccount.accountId,
             region: region,
           },
           dlzAccount,
-        },
-        this.props);
-        productionRegional.addDependency(productionGlobalStack);
-        productionRegionalStacks.push(productionRegional);
+          globalVariables: this.globalVariables,
+        }, this.props);
+        workloadRegionalStacks.push(workloadRegionalStack);
       }
-
-      this.productionAccountStacks.push({
-        accountId: dlzAccount.accountId,
-        name: dlzAccount.name,
-        stacks: {
-          global: productionGlobalStack,
-          regional: productionRegionalStacks,
-        },
-      });
-
-      productionStacks.push(productionGlobalStack);
-      productionStacks.push(...productionRegionalStacks);
     }
+    return workloadRegionalStacks;
+  }
 
-    return productionStacks;
-  };
+  private stageWorkloadGlobalNetworkConnectionsPhase3Stack() {
+    const ou = 'workloads';
+
+    const workloadGlobalStacks: WorkloadGlobalNetworkConnectionsPhase3Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const networkConnectionsPhase3Stack = new WorkloadGlobalNetworkConnectionsPhase3Stack(this.app, {
+        /* ncp3 abbreviation for NetworkConnectionsPhase3Stack */
+        name: { ou, account: dlzAccount.name, stack: 'ncp3-global', region: this.props.regions.global },
+        env: {
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
+        },
+        dlzAccount,
+        globalVariables: this.globalVariables,
+      }, this.props);
+
+      workloadGlobalStacks.push(networkConnectionsPhase3Stack);
+    }
+    return workloadGlobalStacks;
+  }
+  private stageWorkloadRegionalNetworkConnectionsPhase3Stack() {
+    const ou = 'workloads';
+
+    const workloadRegionalStacks: WorkloadRegionalNetworkConnectionsPhase3Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      for (const region of this.props.regions.regional) {
+
+        const workloadRegionalStack = new WorkloadRegionalNetworkConnectionsPhase3Stack(this.app, {
+          /* ncp3 abbreviation for NetworkConnectionsPhase3Stack */
+          name: { ou, account: dlzAccount.name, stack: 'ncp3-regional', region },
+          env: {
+            account: dlzAccount.accountId,
+            region: region,
+          },
+          dlzAccount,
+          globalVariables: this.globalVariables,
+        }, this.props);
+        workloadRegionalStacks.push(workloadRegionalStack);
+      }
+    }
+    return workloadRegionalStacks;
+  }
 }
 
 export default DataLandingZone;
