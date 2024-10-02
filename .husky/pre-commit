@@ -4,5 +4,4 @@
 npm run eslint
 npm run default
 npm run build
-npm run docgen
 git add .

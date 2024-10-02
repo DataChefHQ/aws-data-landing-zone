@@ -565,6 +565,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
@@ -897,6 +898,16 @@ public readonly terminationProtection: boolean;
 - *Type:* boolean
 
 Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -1470,6 +1481,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
@@ -1805,6 +1817,16 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
 ##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountName"></a>
 
 ```typescript
@@ -1816,1830 +1838,6 @@ public readonly accountName: string;
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
-```
-
-- *Type:* string
-
----
-
-
-### DevelopGlobalStack <a name="DevelopGlobalStack" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer"></a>
-
-```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/data-landing-zone'
-
-new DevelopGlobalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
-
----
-
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.stackProps"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
-
----
-
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.Initializer.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
-
----
-
-#### Methods <a name="Methods" id="Methods"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-
----
-
-##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.toString"></a>
-
-```typescript
-public toString(): string
-```
-
-Returns a string representation of this construct.
-
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addDependency"></a>
-
-```typescript
-public addDependency(target: Stack, reason?: string): void
-```
-
-Add a dependency between this stack and another stack.
-
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
-
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addDependency.parameter.target"></a>
-
-- *Type:* aws-cdk-lib.Stack
-
----
-
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addDependency.parameter.reason"></a>
-
-- *Type:* string
-
----
-
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addMetadata"></a>
-
-```typescript
-public addMetadata(key: string, value: any): void
-```
-
-Adds an arbitary key-value pair, with information you want to record about the stack.
-
-These get translated to the Metadata section of the generated template.
-
-> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
-
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addMetadata.parameter.key"></a>
-
-- *Type:* string
-
----
-
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addMetadata.parameter.value"></a>
-
-- *Type:* any
-
----
-
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addTransform"></a>
-
-```typescript
-public addTransform(transform: string): void
-```
-
-Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
-
-Duplicate values are removed when stack is synthesized.
-
-> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
-
-*Example*
-
-```typescript
-declare const stack: Stack;
-
-stack.addTransform('AWS::Serverless-2016-10-31')
-```
-
-
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.addTransform.parameter.transform"></a>
-
-- *Type:* string
-
-The transform to add.
-
----
-
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportStringListValue"></a>
-
-```typescript
-public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
-```
-
-Create a CloudFormation Export for a string list value.
-
-Returns a string list representing the corresponding `Fn.importValue()`
-expression for this Export. The export expression is automatically wrapped with an
-`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
-export strings. You can control the name for the export by passing the `name` option.
-
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
-
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-See `exportValue` for an example of this process.
-
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportStringListValue.parameter.exportedValue"></a>
-
-- *Type:* any
-
----
-
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportStringListValue.parameter.options"></a>
-
-- *Type:* aws-cdk-lib.ExportValueOptions
-
----
-
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportValue"></a>
-
-```typescript
-public exportValue(exportedValue: any, options?: ExportValueOptions): string
-```
-
-Create a CloudFormation Export for a string value.
-
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
-
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
-
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
-
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportValue.parameter.exportedValue"></a>
-
-- *Type:* any
-
----
-
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.exportValue.parameter.options"></a>
-
-- *Type:* aws-cdk-lib.ExportValueOptions
-
----
-
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.formatArn"></a>
-
-```typescript
-public formatArn(components: ArnComponents): string
-```
-
-Creates an ARN from components.
-
-If `partition`, `region` or `account` are not specified, the stack's
-partition, region and account will be used.
-
-If any component is the empty string, an empty string will be inserted
-into the generated ARN at the location that component corresponds to.
-
-The ARN will be formatted as follows:
-
-  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
-
-The required ARN pieces that are omitted will be taken from the stack that
-the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
-can be 'undefined'.
-
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.formatArn.parameter.components"></a>
-
-- *Type:* aws-cdk-lib.ArnComponents
-
----
-
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.getLogicalId"></a>
-
-```typescript
-public getLogicalId(element: CfnElement): string
-```
-
-Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
-
-This method is called when a `CfnElement` is created and used to render the
-initial logical identity of resources. Logical ID renames are applied at
-this stage.
-
-This method uses the protected method `allocateLogicalId` to render the
-logical ID for an element. To modify the naming scheme, extend the `Stack`
-class and override this method.
-
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.getLogicalId.parameter.element"></a>
-
-- *Type:* aws-cdk-lib.CfnElement
-
-The CloudFormation element for which a logical identity is needed.
-
----
-
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.regionalFact"></a>
-
-```typescript
-public regionalFact(factName: string, defaultValue?: string): string
-```
-
-Look up a fact value for the given fact for the region of this stack.
-
-Will return a definite value only if the region of the current stack is resolved.
-If not, a lookup map will be added to the stack and the lookup will be done at
-CDK deployment time.
-
-What regions will be included in the lookup map is controlled by the
-`@aws-cdk/core:target-partitions` context value: it must be set to a list
-of partitions, and only regions from the given partitions will be included.
-If no such context key is set, all regions will be included.
-
-This function is intended to be used by construct library authors. Application
-builders can rely on the abstractions offered by construct libraries and do
-not have to worry about regional facts.
-
-If `defaultValue` is not given, it is an error if the fact is unknown for
-the given region.
-
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.regionalFact.parameter.factName"></a>
-
-- *Type:* string
-
----
-
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.regionalFact.parameter.defaultValue"></a>
-
-- *Type:* string
-
----
-
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.renameLogicalId"></a>
-
-```typescript
-public renameLogicalId(oldId: string, newId: string): void
-```
-
-Rename a generated logical identities.
-
-To modify the naming scheme strategy, extend the `Stack` class and
-override the `allocateLogicalId` method.
-
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.renameLogicalId.parameter.oldId"></a>
-
-- *Type:* string
-
----
-
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.renameLogicalId.parameter.newId"></a>
-
-- *Type:* string
-
----
-
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.reportMissingContextKey"></a>
-
-```typescript
-public reportMissingContextKey(report: MissingContext): void
-```
-
-Indicate that a context key was expected.
-
-Contains instructions which will be emitted into the cloud assembly on how
-the key should be supplied.
-
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.reportMissingContextKey.parameter.report"></a>
-
-- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
-
-The set of parameters needed to obtain the context.
-
----
-
-##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.resolve"></a>
-
-```typescript
-public resolve(obj: any): any
-```
-
-Resolve a tokenized value in the context of the current stack.
-
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.resolve.parameter.obj"></a>
-
-- *Type:* any
-
----
-
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.splitArn"></a>
-
-```typescript
-public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
-```
-
-Splits the provided ARN into its components.
-
-Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
-and a Token representing a dynamic CloudFormation expression
-(in which case the returned components will also be dynamic CloudFormation expressions,
-encoded as Tokens).
-
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.splitArn.parameter.arn"></a>
-
-- *Type:* string
-
-the ARN to split into its components.
-
----
-
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.splitArn.parameter.arnFormat"></a>
-
-- *Type:* aws-cdk-lib.ArnFormat
-
-the expected format of 'arn' - depends on what format the service 'arn' represents uses.
-
----
-
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.toJsonString"></a>
-
-```typescript
-public toJsonString(obj: any, space?: number): string
-```
-
-Convert an object, potentially containing tokens, to a JSON string.
-
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.toJsonString.parameter.obj"></a>
-
-- *Type:* any
-
----
-
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.toJsonString.parameter.space"></a>
-
-- *Type:* number
-
----
-
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.toYamlString"></a>
-
-```typescript
-public toYamlString(obj: any): string
-```
-
-Convert an object, potentially containing tokens, to a YAML string.
-
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.toYamlString.parameter.obj"></a>
-
-- *Type:* any
-
----
-
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.resourceName"></a>
-
-```typescript
-public resourceName(resourceId: string): string
-```
-
-Create unique ResourceNames.
-
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.resourceName.parameter.resourceId"></a>
-
-- *Type:* string
-
----
-
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
-
----
-
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.isConstruct"></a>
-
-```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/data-landing-zone'
-
-DevelopGlobalStack.isConstruct(x: any)
-```
-
-Checks if `x` is a construct.
-
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.isConstruct.parameter.x"></a>
-
-- *Type:* any
-
-Any object.
-
----
-
-##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.isStack"></a>
-
-```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/data-landing-zone'
-
-DevelopGlobalStack.isStack(x: any)
-```
-
-Return whether the given object is a Stack.
-
-We do attribute detection since we can't reliably use 'instanceof'.
-
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.isStack.parameter.x"></a>
-
-- *Type:* any
-
----
-
-##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.of"></a>
-
-```typescript
-import { DevelopGlobalStack } from '@DataChefHQ/data-landing-zone'
-
-DevelopGlobalStack.of(construct: IConstruct)
-```
-
-Looks up the first stack scope in which `construct` is defined.
-
-Fails if there is no stack up the tree.
-
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.of.parameter.construct"></a>
-
-- *Type:* constructs.IConstruct
-
-The construct to start the search from.
-
----
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.node"></a>
-
-```typescript
-public readonly node: Node;
-```
-
-- *Type:* constructs.Node
-
-The tree node.
-
----
-
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.account"></a>
-
-```typescript
-public readonly account: string;
-```
-
-- *Type:* string
-
-The AWS account into which this stack will be deployed.
-
-This value is resolved according to the following rules:
-
-1. The value provided to `env.account` when the stack is defined. This can
-   either be a concrete account (e.g. `585695031111`) or the
-   `Aws.ACCOUNT_ID` token.
-3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
-   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
-
-Preferably, you should use the return value as an opaque string and not
-attempt to parse it to implement your logic. If you do, you must first
-check that it is a concrete value an not an unresolved token. If this
-value is an unresolved token (`Token.isUnresolved(stack.account)` returns
-`true`), this implies that the user wishes that this stack will synthesize
-into a **account-agnostic template**. In this case, your code should either
-fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
-implement some other region-agnostic behavior.
-
----
-
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.artifactId"></a>
-
-```typescript
-public readonly artifactId: string;
-```
-
-- *Type:* string
-
-The ID of the cloud assembly artifact for this stack.
-
----
-
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.availabilityZones"></a>
-
-```typescript
-public readonly availabilityZones: string[];
-```
-
-- *Type:* string[]
-
-Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
-
-If the stack is environment-agnostic (either account and/or region are
-tokens), this property will return an array with 2 tokens that will resolve
-at deploy-time to the first two availability zones returned from CloudFormation's
-`Fn::GetAZs` intrinsic function.
-
-If they are not available in the context, returns a set of dummy values and
-reports them as missing, and let the CLI resolve them by calling EC2
-`DescribeAvailabilityZones` on the target environment.
-
-To specify a different strategy for selecting availability zones override this method.
-
----
-
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.bundlingRequired"></a>
-
-```typescript
-public readonly bundlingRequired: boolean;
-```
-
-- *Type:* boolean
-
-Indicates whether the stack requires bundling or not.
-
----
-
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.dependencies"></a>
-
-```typescript
-public readonly dependencies: Stack[];
-```
-
-- *Type:* aws-cdk-lib.Stack[]
-
-Return the stacks this stack depends on.
-
----
-
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.environment"></a>
-
-```typescript
-public readonly environment: string;
-```
-
-- *Type:* string
-
-The environment coordinates in which this stack is deployed.
-
-In the form
-`aws://account/region`. Use `stack.account` and `stack.region` to obtain
-the specific values, no need to parse.
-
-You can use this value to determine if two stacks are targeting the same
-environment.
-
-If either `stack.account` or `stack.region` are not concrete values (e.g.
-`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
-`unknown-region` will be used respectively to indicate this stack is
-region/account-agnostic.
-
----
-
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.nested"></a>
-
-```typescript
-public readonly nested: boolean;
-```
-
-- *Type:* boolean
-
-Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
-
----
-
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.notificationArns"></a>
-
-```typescript
-public readonly notificationArns: string[];
-```
-
-- *Type:* string[]
-
-Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
-
----
-
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.partition"></a>
-
-```typescript
-public readonly partition: string;
-```
-
-- *Type:* string
-
-The partition in which this stack is defined.
-
----
-
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.region"></a>
-
-```typescript
-public readonly region: string;
-```
-
-- *Type:* string
-
-The AWS region into which this stack will be deployed (e.g. `us-west-2`).
-
-This value is resolved according to the following rules:
-
-1. The value provided to `env.region` when the stack is defined. This can
-   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
-   token.
-3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
-   `{ "Ref": "AWS::Region" }` encoded as a string token.
-
-Preferably, you should use the return value as an opaque string and not
-attempt to parse it to implement your logic. If you do, you must first
-check that it is a concrete value an not an unresolved token. If this
-value is an unresolved token (`Token.isUnresolved(stack.region)` returns
-`true`), this implies that the user wishes that this stack will synthesize
-into a **region-agnostic template**. In this case, your code should either
-fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
-implement some other region-agnostic behavior.
-
----
-
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.stackId"></a>
-
-```typescript
-public readonly stackId: string;
-```
-
-- *Type:* string
-
-The ID of the stack.
-
----
-
-*Example*
-
-```typescript
-// After resolving, looks like
-'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
-```
-
-
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.stackName"></a>
-
-```typescript
-public readonly stackName: string;
-```
-
-- *Type:* string
-
-The concrete CloudFormation physical stack name.
-
-This is either the name defined explicitly in the `stackName` prop or
-allocated based on the stack's location in the construct tree. Stacks that
-are directly defined under the app use their construct `id` as their stack
-name. Stacks that are defined deeper within the tree will use a hashed naming
-scheme based on the construct path to ensure uniqueness.
-
-If you wish to obtain the deploy-time AWS::StackName intrinsic,
-you can use `Aws.STACK_NAME` directly.
-
----
-
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.synthesizer"></a>
-
-```typescript
-public readonly synthesizer: IStackSynthesizer;
-```
-
-- *Type:* aws-cdk-lib.IStackSynthesizer
-
-Synthesis method for this stack.
-
----
-
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.tags"></a>
-
-```typescript
-public readonly tags: TagManager;
-```
-
-- *Type:* aws-cdk-lib.TagManager
-
-Tags to be applied to the stack.
-
----
-
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.templateFile"></a>
-
-```typescript
-public readonly templateFile: string;
-```
-
-- *Type:* string
-
-The name of the CloudFormation template file emitted to the output directory during synthesis.
-
-Example value: `MyStack.template.json`
-
----
-
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.templateOptions"></a>
-
-```typescript
-public readonly templateOptions: ITemplateOptions;
-```
-
-- *Type:* aws-cdk-lib.ITemplateOptions
-
-Options for CloudFormation template (like version, transform, description).
-
----
-
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.urlSuffix"></a>
-
-```typescript
-public readonly urlSuffix: string;
-```
-
-- *Type:* string
-
-The Amazon domain suffix for the region in which this stack is defined.
-
----
-
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.nestedStackParent"></a>
-
-```typescript
-public readonly nestedStackParent: Stack;
-```
-
-- *Type:* aws-cdk-lib.Stack
-
-If this is a nested stack, returns it's parent stack.
-
----
-
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.nestedStackResource"></a>
-
-```typescript
-public readonly nestedStackResource: CfnResource;
-```
-
-- *Type:* aws-cdk-lib.CfnResource
-
-If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
-
-`undefined` for top-level (non-nested) stacks.
-
----
-
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.terminationProtection"></a>
-
-```typescript
-public readonly terminationProtection: boolean;
-```
-
-- *Type:* boolean
-
-Whether termination protection is enabled for this stack.
-
----
-
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.accountName"></a>
-
-```typescript
-public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DevelopGlobalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
-```
-
-- *Type:* string
-
----
-
-
-### DevelopRegionalStack <a name="DevelopRegionalStack" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer"></a>
-
-```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/data-landing-zone'
-
-new DevelopRegionalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
-
----
-
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.stackProps"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
-
----
-
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.Initializer.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
-
----
-
-#### Methods <a name="Methods" id="Methods"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-
----
-
-##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.toString"></a>
-
-```typescript
-public toString(): string
-```
-
-Returns a string representation of this construct.
-
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addDependency"></a>
-
-```typescript
-public addDependency(target: Stack, reason?: string): void
-```
-
-Add a dependency between this stack and another stack.
-
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
-
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addDependency.parameter.target"></a>
-
-- *Type:* aws-cdk-lib.Stack
-
----
-
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addDependency.parameter.reason"></a>
-
-- *Type:* string
-
----
-
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addMetadata"></a>
-
-```typescript
-public addMetadata(key: string, value: any): void
-```
-
-Adds an arbitary key-value pair, with information you want to record about the stack.
-
-These get translated to the Metadata section of the generated template.
-
-> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
-
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addMetadata.parameter.key"></a>
-
-- *Type:* string
-
----
-
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addMetadata.parameter.value"></a>
-
-- *Type:* any
-
----
-
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addTransform"></a>
-
-```typescript
-public addTransform(transform: string): void
-```
-
-Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
-
-Duplicate values are removed when stack is synthesized.
-
-> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
-
-*Example*
-
-```typescript
-declare const stack: Stack;
-
-stack.addTransform('AWS::Serverless-2016-10-31')
-```
-
-
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.addTransform.parameter.transform"></a>
-
-- *Type:* string
-
-The transform to add.
-
----
-
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportStringListValue"></a>
-
-```typescript
-public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
-```
-
-Create a CloudFormation Export for a string list value.
-
-Returns a string list representing the corresponding `Fn.importValue()`
-expression for this Export. The export expression is automatically wrapped with an
-`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
-export strings. You can control the name for the export by passing the `name` option.
-
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
-
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-See `exportValue` for an example of this process.
-
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportStringListValue.parameter.exportedValue"></a>
-
-- *Type:* any
-
----
-
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportStringListValue.parameter.options"></a>
-
-- *Type:* aws-cdk-lib.ExportValueOptions
-
----
-
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportValue"></a>
-
-```typescript
-public exportValue(exportedValue: any, options?: ExportValueOptions): string
-```
-
-Create a CloudFormation Export for a string value.
-
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
-
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
-
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
-
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportValue.parameter.exportedValue"></a>
-
-- *Type:* any
-
----
-
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.exportValue.parameter.options"></a>
-
-- *Type:* aws-cdk-lib.ExportValueOptions
-
----
-
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.formatArn"></a>
-
-```typescript
-public formatArn(components: ArnComponents): string
-```
-
-Creates an ARN from components.
-
-If `partition`, `region` or `account` are not specified, the stack's
-partition, region and account will be used.
-
-If any component is the empty string, an empty string will be inserted
-into the generated ARN at the location that component corresponds to.
-
-The ARN will be formatted as follows:
-
-  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
-
-The required ARN pieces that are omitted will be taken from the stack that
-the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
-can be 'undefined'.
-
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.formatArn.parameter.components"></a>
-
-- *Type:* aws-cdk-lib.ArnComponents
-
----
-
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.getLogicalId"></a>
-
-```typescript
-public getLogicalId(element: CfnElement): string
-```
-
-Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
-
-This method is called when a `CfnElement` is created and used to render the
-initial logical identity of resources. Logical ID renames are applied at
-this stage.
-
-This method uses the protected method `allocateLogicalId` to render the
-logical ID for an element. To modify the naming scheme, extend the `Stack`
-class and override this method.
-
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.getLogicalId.parameter.element"></a>
-
-- *Type:* aws-cdk-lib.CfnElement
-
-The CloudFormation element for which a logical identity is needed.
-
----
-
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.regionalFact"></a>
-
-```typescript
-public regionalFact(factName: string, defaultValue?: string): string
-```
-
-Look up a fact value for the given fact for the region of this stack.
-
-Will return a definite value only if the region of the current stack is resolved.
-If not, a lookup map will be added to the stack and the lookup will be done at
-CDK deployment time.
-
-What regions will be included in the lookup map is controlled by the
-`@aws-cdk/core:target-partitions` context value: it must be set to a list
-of partitions, and only regions from the given partitions will be included.
-If no such context key is set, all regions will be included.
-
-This function is intended to be used by construct library authors. Application
-builders can rely on the abstractions offered by construct libraries and do
-not have to worry about regional facts.
-
-If `defaultValue` is not given, it is an error if the fact is unknown for
-the given region.
-
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.regionalFact.parameter.factName"></a>
-
-- *Type:* string
-
----
-
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.regionalFact.parameter.defaultValue"></a>
-
-- *Type:* string
-
----
-
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.renameLogicalId"></a>
-
-```typescript
-public renameLogicalId(oldId: string, newId: string): void
-```
-
-Rename a generated logical identities.
-
-To modify the naming scheme strategy, extend the `Stack` class and
-override the `allocateLogicalId` method.
-
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.renameLogicalId.parameter.oldId"></a>
-
-- *Type:* string
-
----
-
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.renameLogicalId.parameter.newId"></a>
-
-- *Type:* string
-
----
-
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.reportMissingContextKey"></a>
-
-```typescript
-public reportMissingContextKey(report: MissingContext): void
-```
-
-Indicate that a context key was expected.
-
-Contains instructions which will be emitted into the cloud assembly on how
-the key should be supplied.
-
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.reportMissingContextKey.parameter.report"></a>
-
-- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
-
-The set of parameters needed to obtain the context.
-
----
-
-##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.resolve"></a>
-
-```typescript
-public resolve(obj: any): any
-```
-
-Resolve a tokenized value in the context of the current stack.
-
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.resolve.parameter.obj"></a>
-
-- *Type:* any
-
----
-
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.splitArn"></a>
-
-```typescript
-public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
-```
-
-Splits the provided ARN into its components.
-
-Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
-and a Token representing a dynamic CloudFormation expression
-(in which case the returned components will also be dynamic CloudFormation expressions,
-encoded as Tokens).
-
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.splitArn.parameter.arn"></a>
-
-- *Type:* string
-
-the ARN to split into its components.
-
----
-
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.splitArn.parameter.arnFormat"></a>
-
-- *Type:* aws-cdk-lib.ArnFormat
-
-the expected format of 'arn' - depends on what format the service 'arn' represents uses.
-
----
-
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.toJsonString"></a>
-
-```typescript
-public toJsonString(obj: any, space?: number): string
-```
-
-Convert an object, potentially containing tokens, to a JSON string.
-
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.toJsonString.parameter.obj"></a>
-
-- *Type:* any
-
----
-
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.toJsonString.parameter.space"></a>
-
-- *Type:* number
-
----
-
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.toYamlString"></a>
-
-```typescript
-public toYamlString(obj: any): string
-```
-
-Convert an object, potentially containing tokens, to a YAML string.
-
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.toYamlString.parameter.obj"></a>
-
-- *Type:* any
-
----
-
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.resourceName"></a>
-
-```typescript
-public resourceName(resourceId: string): string
-```
-
-Create unique ResourceNames.
-
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.resourceName.parameter.resourceId"></a>
-
-- *Type:* string
-
----
-
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
-
----
-
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.isConstruct"></a>
-
-```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/data-landing-zone'
-
-DevelopRegionalStack.isConstruct(x: any)
-```
-
-Checks if `x` is a construct.
-
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.isConstruct.parameter.x"></a>
-
-- *Type:* any
-
-Any object.
-
----
-
-##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.isStack"></a>
-
-```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/data-landing-zone'
-
-DevelopRegionalStack.isStack(x: any)
-```
-
-Return whether the given object is a Stack.
-
-We do attribute detection since we can't reliably use 'instanceof'.
-
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.isStack.parameter.x"></a>
-
-- *Type:* any
-
----
-
-##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.of"></a>
-
-```typescript
-import { DevelopRegionalStack } from '@DataChefHQ/data-landing-zone'
-
-DevelopRegionalStack.of(construct: IConstruct)
-```
-
-Looks up the first stack scope in which `construct` is defined.
-
-Fails if there is no stack up the tree.
-
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.of.parameter.construct"></a>
-
-- *Type:* constructs.IConstruct
-
-The construct to start the search from.
-
----
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.node"></a>
-
-```typescript
-public readonly node: Node;
-```
-
-- *Type:* constructs.Node
-
-The tree node.
-
----
-
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.account"></a>
-
-```typescript
-public readonly account: string;
-```
-
-- *Type:* string
-
-The AWS account into which this stack will be deployed.
-
-This value is resolved according to the following rules:
-
-1. The value provided to `env.account` when the stack is defined. This can
-   either be a concrete account (e.g. `585695031111`) or the
-   `Aws.ACCOUNT_ID` token.
-3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
-   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
-
-Preferably, you should use the return value as an opaque string and not
-attempt to parse it to implement your logic. If you do, you must first
-check that it is a concrete value an not an unresolved token. If this
-value is an unresolved token (`Token.isUnresolved(stack.account)` returns
-`true`), this implies that the user wishes that this stack will synthesize
-into a **account-agnostic template**. In this case, your code should either
-fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
-implement some other region-agnostic behavior.
-
----
-
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.artifactId"></a>
-
-```typescript
-public readonly artifactId: string;
-```
-
-- *Type:* string
-
-The ID of the cloud assembly artifact for this stack.
-
----
-
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.availabilityZones"></a>
-
-```typescript
-public readonly availabilityZones: string[];
-```
-
-- *Type:* string[]
-
-Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
-
-If the stack is environment-agnostic (either account and/or region are
-tokens), this property will return an array with 2 tokens that will resolve
-at deploy-time to the first two availability zones returned from CloudFormation's
-`Fn::GetAZs` intrinsic function.
-
-If they are not available in the context, returns a set of dummy values and
-reports them as missing, and let the CLI resolve them by calling EC2
-`DescribeAvailabilityZones` on the target environment.
-
-To specify a different strategy for selecting availability zones override this method.
-
----
-
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.bundlingRequired"></a>
-
-```typescript
-public readonly bundlingRequired: boolean;
-```
-
-- *Type:* boolean
-
-Indicates whether the stack requires bundling or not.
-
----
-
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.dependencies"></a>
-
-```typescript
-public readonly dependencies: Stack[];
-```
-
-- *Type:* aws-cdk-lib.Stack[]
-
-Return the stacks this stack depends on.
-
----
-
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.environment"></a>
-
-```typescript
-public readonly environment: string;
-```
-
-- *Type:* string
-
-The environment coordinates in which this stack is deployed.
-
-In the form
-`aws://account/region`. Use `stack.account` and `stack.region` to obtain
-the specific values, no need to parse.
-
-You can use this value to determine if two stacks are targeting the same
-environment.
-
-If either `stack.account` or `stack.region` are not concrete values (e.g.
-`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
-`unknown-region` will be used respectively to indicate this stack is
-region/account-agnostic.
-
----
-
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.nested"></a>
-
-```typescript
-public readonly nested: boolean;
-```
-
-- *Type:* boolean
-
-Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
-
----
-
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.notificationArns"></a>
-
-```typescript
-public readonly notificationArns: string[];
-```
-
-- *Type:* string[]
-
-Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
-
----
-
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.partition"></a>
-
-```typescript
-public readonly partition: string;
-```
-
-- *Type:* string
-
-The partition in which this stack is defined.
-
----
-
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.region"></a>
-
-```typescript
-public readonly region: string;
-```
-
-- *Type:* string
-
-The AWS region into which this stack will be deployed (e.g. `us-west-2`).
-
-This value is resolved according to the following rules:
-
-1. The value provided to `env.region` when the stack is defined. This can
-   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
-   token.
-3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
-   `{ "Ref": "AWS::Region" }` encoded as a string token.
-
-Preferably, you should use the return value as an opaque string and not
-attempt to parse it to implement your logic. If you do, you must first
-check that it is a concrete value an not an unresolved token. If this
-value is an unresolved token (`Token.isUnresolved(stack.region)` returns
-`true`), this implies that the user wishes that this stack will synthesize
-into a **region-agnostic template**. In this case, your code should either
-fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
-implement some other region-agnostic behavior.
-
----
-
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.stackId"></a>
-
-```typescript
-public readonly stackId: string;
-```
-
-- *Type:* string
-
-The ID of the stack.
-
----
-
-*Example*
-
-```typescript
-// After resolving, looks like
-'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
-```
-
-
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.stackName"></a>
-
-```typescript
-public readonly stackName: string;
-```
-
-- *Type:* string
-
-The concrete CloudFormation physical stack name.
-
-This is either the name defined explicitly in the `stackName` prop or
-allocated based on the stack's location in the construct tree. Stacks that
-are directly defined under the app use their construct `id` as their stack
-name. Stacks that are defined deeper within the tree will use a hashed naming
-scheme based on the construct path to ensure uniqueness.
-
-If you wish to obtain the deploy-time AWS::StackName intrinsic,
-you can use `Aws.STACK_NAME` directly.
-
----
-
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.synthesizer"></a>
-
-```typescript
-public readonly synthesizer: IStackSynthesizer;
-```
-
-- *Type:* aws-cdk-lib.IStackSynthesizer
-
-Synthesis method for this stack.
-
----
-
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.tags"></a>
-
-```typescript
-public readonly tags: TagManager;
-```
-
-- *Type:* aws-cdk-lib.TagManager
-
-Tags to be applied to the stack.
-
----
-
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.templateFile"></a>
-
-```typescript
-public readonly templateFile: string;
-```
-
-- *Type:* string
-
-The name of the CloudFormation template file emitted to the output directory during synthesis.
-
-Example value: `MyStack.template.json`
-
----
-
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.templateOptions"></a>
-
-```typescript
-public readonly templateOptions: ITemplateOptions;
-```
-
-- *Type:* aws-cdk-lib.ITemplateOptions
-
-Options for CloudFormation template (like version, transform, description).
-
----
-
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.urlSuffix"></a>
-
-```typescript
-public readonly urlSuffix: string;
-```
-
-- *Type:* string
-
-The Amazon domain suffix for the region in which this stack is defined.
-
----
-
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.nestedStackParent"></a>
-
-```typescript
-public readonly nestedStackParent: Stack;
-```
-
-- *Type:* aws-cdk-lib.Stack
-
-If this is a nested stack, returns it's parent stack.
-
----
-
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.nestedStackResource"></a>
-
-```typescript
-public readonly nestedStackResource: CfnResource;
-```
-
-- *Type:* aws-cdk-lib.CfnResource
-
-If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
-
-`undefined` for top-level (non-nested) stacks.
-
----
-
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.terminationProtection"></a>
-
-```typescript
-public readonly terminationProtection: boolean;
-```
-
-- *Type:* boolean
-
-Whether termination protection is enabled for this stack.
-
----
-
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.accountName"></a>
-
-```typescript
-public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DevelopRegionalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -4199,6 +2397,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
@@ -4531,6 +2730,16 @@ public readonly terminationProtection: boolean;
 - *Type:* boolean
 
 Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DlzStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -5104,6 +3313,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
@@ -5436,6 +3646,16 @@ public readonly terminationProtection: boolean;
 - *Type:* boolean
 
 Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -6009,6 +4229,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
@@ -6341,6 +4562,16 @@ public readonly terminationProtection: boolean;
 - *Type:* boolean
 
 Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -6953,6 +5184,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
@@ -7289,6 +5521,16 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.ManagementStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
 ##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.ManagementStack.property.accountName"></a>
 
 ```typescript
@@ -7320,37 +5562,37 @@ public readonly topic: Topic;
 ---
 
 
-### ProductionGlobalStack <a name="ProductionGlobalStack" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack"></a>
+### WorkloadGlobalNetworkConnectionsPhase1Stack <a name="WorkloadGlobalNetworkConnectionsPhase1Stack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase1Stack } from '@DataChefHQ/data-landing-zone'
 
-new ProductionGlobalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
+new WorkloadGlobalNetworkConnectionsPhase1Stack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.stackProps"></a>
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer.parameter.workloadAccountProps"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
@@ -7360,26 +5602,27 @@ new ProductionGlobalStack(scope: Construct, stackProps: WorkloadAccountProps, pr
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.createPeeringRole">createPeeringRole</a></code> | *No description.* |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.toString"></a>
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -7387,7 +5630,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -7398,19 +5641,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -7422,19 +5665,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -7455,7 +5698,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -7463,7 +5706,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -7489,19 +5732,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -7552,19 +5795,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -7586,13 +5829,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -7608,7 +5851,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -7616,7 +5859,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -7640,19 +5883,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -7663,19 +5906,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -7686,7 +5929,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -7694,7 +5937,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -7702,13 +5945,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -7721,7 +5964,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -7729,7 +5972,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -7737,7 +5980,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -7745,19 +5988,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -7765,13 +6008,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -7779,9 +6022,27 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
+
+---
+
+##### `createPeeringRole` <a name="createPeeringRole" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.createPeeringRole"></a>
+
+```typescript
+public createPeeringRole(from: DlzAccountNetwork, to: DlzAccountNetwork): void
+```
+
+###### `from`<sup>Required</sup> <a name="from" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.createPeeringRole.parameter.from"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzAccountNetwork">DlzAccountNetwork</a>
+
+---
+
+###### `to`<sup>Required</sup> <a name="to" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.createPeeringRole.parameter.to"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzAccountNetwork">DlzAccountNetwork</a>
 
 ---
 
@@ -7789,23 +6050,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase1Stack } from '@DataChefHQ/data-landing-zone'
 
-ProductionGlobalStack.isConstruct(x: any)
+WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -7813,37 +6074,37 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isStack"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase1Stack } from '@DataChefHQ/data-landing-zone'
 
-ProductionGlobalStack.isStack(x: any)
+WorkloadGlobalNetworkConnectionsPhase1Stack.isStack(x: any)
 ```
 
 Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.of"></a>
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.of"></a>
 
 ```typescript
-import { ProductionGlobalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase1Stack } from '@DataChefHQ/data-landing-zone'
 
-ProductionGlobalStack.of(construct: IConstruct)
+WorkloadGlobalNetworkConnectionsPhase1Stack.of(construct: IConstruct)
 ```
 
 Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -7855,33 +6116,34 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -7893,7 +6155,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -7922,7 +6184,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -7934,7 +6196,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -7957,7 +6219,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -7969,7 +6231,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -7981,7 +6243,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -8005,7 +6267,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -8017,7 +6279,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -8029,7 +6291,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -8041,7 +6303,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -8070,7 +6332,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -8090,7 +6352,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -8111,7 +6373,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -8123,7 +6385,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -8135,7 +6397,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -8149,7 +6411,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -8161,7 +6423,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -8173,7 +6435,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -8185,7 +6447,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -8199,7 +6461,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -8211,7 +6473,17 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.accountName"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -8221,7 +6493,7 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.ProductionGlobalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -8232,37 +6504,37 @@ public readonly id: string;
 ---
 
 
-### ProductionRegionalStack <a name="ProductionRegionalStack" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack"></a>
+### WorkloadGlobalNetworkConnectionsPhase2Stack <a name="WorkloadGlobalNetworkConnectionsPhase2Stack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
 
-new ProductionRegionalStack(scope: Construct, stackProps: WorkloadAccountProps, props: DataLandingZoneProps)
+new WorkloadGlobalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.stackProps"></a>
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer.parameter.workloadAccountProps"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
@@ -8272,26 +6544,26 @@ new ProductionRegionalStack(scope: Construct, stackProps: WorkloadAccountProps, 
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.toString"></a>
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -8299,7 +6571,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -8310,19 +6582,19 @@ Add a dependency between this stack and another stack.
 This can be used to define dependencies between any two stacks within an
 app, and also supports nested stacks.
 
-###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -8334,19 +6606,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -8367,7 +6639,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -8375,7 +6647,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -8401,19 +6673,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -8464,19 +6736,19 @@ Instead, the process takes two deployments:
 - Don't forget to remove the `exportValue()` call as well.
 - Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -8498,13 +6770,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -8520,7 +6792,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -8528,7 +6800,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -8552,19 +6824,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -8575,19 +6847,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -8598,7 +6870,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -8606,7 +6878,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.resolve"></a>
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -8614,13 +6886,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -8633,7 +6905,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -8641,7 +6913,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -8649,7 +6921,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -8657,19 +6929,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -8677,13 +6949,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -8691,7 +6963,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -8701,23 +6973,23 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
 
-ProductionRegionalStack.isConstruct(x: any)
+WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -8725,37 +6997,37 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.isStack"></a>
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isStack"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
 
-ProductionRegionalStack.isStack(x: any)
+WorkloadGlobalNetworkConnectionsPhase2Stack.isStack(x: any)
 ```
 
 Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.of"></a>
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.of"></a>
 
 ```typescript
-import { ProductionRegionalStack } from '@DataChefHQ/data-landing-zone'
+import { WorkloadGlobalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
 
-ProductionRegionalStack.of(construct: IConstruct)
+WorkloadGlobalNetworkConnectionsPhase2Stack.of(construct: IConstruct)
 ```
 
 Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -8767,33 +7039,34 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -8805,7 +7078,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -8834,7 +7107,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -8846,7 +7119,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -8869,7 +7142,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -8881,7 +7154,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -8893,7 +7166,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -8917,7 +7190,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -8929,7 +7202,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -8941,7 +7214,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -8953,7 +7226,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -8982,7 +7255,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -9002,7 +7275,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -9023,7 +7296,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -9035,7 +7308,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -9047,7 +7320,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -9061,7 +7334,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -9073,7 +7346,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -9085,7 +7358,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -9097,7 +7370,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -9111,7 +7384,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -9123,7 +7396,17 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.accountName"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -9133,7 +7416,4629 @@ public readonly accountName: string;
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.ProductionRegionalStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+
+### WorkloadGlobalNetworkConnectionsPhase3Stack <a name="WorkloadGlobalNetworkConnectionsPhase3Stack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+new WorkloadGlobalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer.parameter.workloadAccountProps"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding `Fn.importValue()`
+expression for this Export. You can control the name for the export by
+passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+## Example
+
+Here is how the process works. Let's say there are two stacks,
+`producerStack` and `consumerStack`, and `producerStack` has a bucket
+called `bucket`, which is referenced by `consumerStack` (perhaps because
+an AWS Lambda Function writes into it, or something like that).
+
+It is not safe to remove `producerStack.bucket` because as the bucket is being
+deleted, `consumerStack` might still be using it.
+
+Instead, the process takes two deployments:
+
+### Deployment 1: break the relationship
+
+- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
+  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
+  remove the Lambda Function altogether).
+- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
+  will make sure the CloudFormation Export continues to exist while the relationship
+  between the two stacks is being broken.
+- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
+
+### Deployment 2: remove the bucket resource
+
+- You are now free to remove the `bucket` resource from `producerStack`.
+- Don't forget to remove the `exportValue()` call as well.
+- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isStack"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase3Stack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.of"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase3Stack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+
+### WorkloadGlobalStack <a name="WorkloadGlobalStack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer"></a>
+
+```typescript
+import { WorkloadGlobalStack } from '@DataChefHQ/data-landing-zone'
+
+new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer.parameter.workloadAccountProps"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole">ssmAssumeCrossAccountRole</a></code> | *No description.* |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding `Fn.importValue()`
+expression for this Export. You can control the name for the export by
+passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+## Example
+
+Here is how the process works. Let's say there are two stacks,
+`producerStack` and `consumerStack`, and `producerStack` has a bucket
+called `bucket`, which is referenced by `consumerStack` (perhaps because
+an AWS Lambda Function writes into it, or something like that).
+
+It is not safe to remove `producerStack.bucket` because as the bucket is being
+deleted, `consumerStack` might still be using it.
+
+Instead, the process takes two deployments:
+
+### Deployment 1: break the relationship
+
+- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
+  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
+  remove the Lambda Function altogether).
+- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
+  will make sure the CloudFormation Export continues to exist while the relationship
+  between the two stacks is being broken.
+- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
+
+### Deployment 2: remove the bucket resource
+
+- You are now free to remove the `bucket` resource from `producerStack`.
+- Don't forget to remove the `exportValue()` call as well.
+- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+##### `ssmAssumeCrossAccountRole` <a name="ssmAssumeCrossAccountRole" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole"></a>
+
+```typescript
+public ssmAssumeCrossAccountRole(): void
+```
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.isConstruct"></a>
+
+```typescript
+import { WorkloadGlobalStack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadGlobalStack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.isStack"></a>
+
+```typescript
+import { WorkloadGlobalStack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadGlobalStack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.of"></a>
+
+```typescript
+import { WorkloadGlobalStack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadGlobalStack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+
+### WorkloadRegionalNetworkConnectionsPhase2Stack <a name="WorkloadRegionalNetworkConnectionsPhase2Stack" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
+
+new WorkloadRegionalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer.parameter.workloadAccountProps"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding `Fn.importValue()`
+expression for this Export. You can control the name for the export by
+passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+## Example
+
+Here is how the process works. Let's say there are two stacks,
+`producerStack` and `consumerStack`, and `producerStack` has a bucket
+called `bucket`, which is referenced by `consumerStack` (perhaps because
+an AWS Lambda Function writes into it, or something like that).
+
+It is not safe to remove `producerStack.bucket` because as the bucket is being
+deleted, `consumerStack` might still be using it.
+
+Instead, the process takes two deployments:
+
+### Deployment 1: break the relationship
+
+- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
+  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
+  remove the Lambda Function altogether).
+- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
+  will make sure the CloudFormation Export continues to exist while the relationship
+  between the two stacks is being broken.
+- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
+
+### Deployment 2: remove the bucket resource
+
+- You are now free to remove the `bucket` resource from `producerStack`.
+- Don't forget to remove the `exportValue()` call as well.
+- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isStack"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase2Stack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.of"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase2Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase2Stack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+
+### WorkloadRegionalNetworkConnectionsPhase3Stack <a name="WorkloadRegionalNetworkConnectionsPhase3Stack" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+new WorkloadRegionalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer.parameter.workloadAccountProps"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding `Fn.importValue()`
+expression for this Export. You can control the name for the export by
+passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+## Example
+
+Here is how the process works. Let's say there are two stacks,
+`producerStack` and `consumerStack`, and `producerStack` has a bucket
+called `bucket`, which is referenced by `consumerStack` (perhaps because
+an AWS Lambda Function writes into it, or something like that).
+
+It is not safe to remove `producerStack.bucket` because as the bucket is being
+deleted, `consumerStack` might still be using it.
+
+Instead, the process takes two deployments:
+
+### Deployment 1: break the relationship
+
+- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
+  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
+  remove the Lambda Function altogether).
+- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
+  will make sure the CloudFormation Export continues to exist while the relationship
+  between the two stacks is being broken.
+- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
+
+### Deployment 2: remove the bucket resource
+
+- You are now free to remove the `bucket` resource from `producerStack`.
+- Don't forget to remove the `exportValue()` call as well.
+- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isStack"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase3Stack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.of"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase3Stack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase3Stack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+---
+
+
+### WorkloadRegionalStack <a name="WorkloadRegionalStack" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer"></a>
+
+```typescript
+import { WorkloadRegionalStack } from '@DataChefHQ/data-landing-zone'
+
+new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccountProps, props: DataLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer.parameter.workloadAccountProps">workloadAccountProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `workloadAccountProps`<sup>Required</sup> <a name="workloadAccountProps" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer.parameter.workloadAccountProps"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps">WorkloadAccountProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding `Fn.importValue()`
+expression for this Export. You can control the name for the export by
+passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+## Example
+
+Here is how the process works. Let's say there are two stacks,
+`producerStack` and `consumerStack`, and `producerStack` has a bucket
+called `bucket`, which is referenced by `consumerStack` (perhaps because
+an AWS Lambda Function writes into it, or something like that).
+
+It is not safe to remove `producerStack.bucket` because as the bucket is being
+deleted, `consumerStack` might still be using it.
+
+Instead, the process takes two deployments:
+
+### Deployment 1: break the relationship
+
+- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
+  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
+  remove the Lambda Function altogether).
+- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
+  will make sure the CloudFormation Export continues to exist while the relationship
+  between the two stacks is being broken.
+- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
+
+### Deployment 2: remove the bucket resource
+
+- You are now free to remove the `bucket` resource from `producerStack`.
+- Don't forget to remove the `exportValue()` call as well.
+- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.isConstruct"></a>
+
+```typescript
+import { WorkloadRegionalStack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalStack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.isStack"></a>
+
+```typescript
+import { WorkloadRegionalStack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalStack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.of"></a>
+
+```typescript
+import { WorkloadRegionalStack } from '@DataChefHQ/data-landing-zone'
+
+WorkloadRegionalStack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -9308,6 +12213,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.network">network</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Network">Network</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
@@ -9434,6 +12340,16 @@ public readonly deploymentPlatform: DeploymentPlatform;
 
 ---
 
+##### `network`<sup>Optional</sup> <a name="network" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.network"></a>
+
+```typescript
+public readonly network: Network;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.Network">Network</a>
+
+---
+
 ##### `printDeploymentOrder`<sup>Optional</sup> <a name="printDeploymentOrder" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder"></a>
 
 ```typescript
@@ -9529,95 +12445,6 @@ public readonly references: GitHubReference[];
 
 ---
 
-### DevelopAccountStacks <a name="DevelopAccountStacks" id="@DataChefHQ/data-landing-zone.DevelopAccountStacks"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DevelopAccountStacks.Initializer"></a>
-
-```typescript
-import { DevelopAccountStacks } from '@DataChefHQ/data-landing-zone'
-
-const developAccountStacks: DevelopAccountStacks = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks.property.stacks">stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DevelopStacks">DevelopStacks</a></code> | *No description.* |
-
----
-
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DevelopAccountStacks.property.accountId"></a>
-
-```typescript
-public readonly accountId: string;
-```
-
-- *Type:* string
-
----
-
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DevelopAccountStacks.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
----
-
-##### `stacks`<sup>Required</sup> <a name="stacks" id="@DataChefHQ/data-landing-zone.DevelopAccountStacks.property.stacks"></a>
-
-```typescript
-public readonly stacks: DevelopStacks;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DevelopStacks">DevelopStacks</a>
-
----
-
-### DevelopStacks <a name="DevelopStacks" id="@DataChefHQ/data-landing-zone.DevelopStacks"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DevelopStacks.Initializer"></a>
-
-```typescript
-import { DevelopStacks } from '@DataChefHQ/data-landing-zone'
-
-const developStacks: DevelopStacks = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack">DevelopGlobalStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DevelopStacks.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack">DevelopRegionalStack</a>[]</code> | *No description.* |
-
----
-
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/data-landing-zone.DevelopStacks.property.global"></a>
-
-```typescript
-public readonly global: DevelopGlobalStack;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DevelopGlobalStack">DevelopGlobalStack</a>
-
----
-
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/data-landing-zone.DevelopStacks.property.regional"></a>
-
-```typescript
-public readonly regional: DevelopRegionalStack[];
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DevelopRegionalStack">DevelopRegionalStack</a>[]
-
----
-
 ### DLzAccount <a name="DLzAccount" id="@DataChefHQ/data-landing-zone.DLzAccount"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DLzAccount.Initializer"></a>
@@ -9669,13 +12496,52 @@ public readonly type: DlzAccountType;
 
 ---
 
-##### `vpcs`<sup>Required</sup> <a name="vpcs" id="@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs"></a>
+##### `vpcs`<sup>Optional</sup> <a name="vpcs" id="@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs"></a>
 
 ```typescript
 public readonly vpcs: DlzVpcProps[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]
+
+---
+
+### DlzAccountNetwork <a name="DlzAccountNetwork" id="@DataChefHQ/data-landing-zone.DlzAccountNetwork"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzAccountNetwork.Initializer"></a>
+
+```typescript
+import { DlzAccountNetwork } from '@DataChefHQ/data-landing-zone'
+
+const dlzAccountNetwork: DlzAccountNetwork = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountNetwork.property.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountNetwork.property.vpcs">vpcs</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>[]</code> | *No description.* |
+
+---
+
+##### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.DlzAccountNetwork.property.dlzAccount"></a>
+
+```typescript
+public readonly dlzAccount: DLzAccount;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
+##### `vpcs`<sup>Required</sup> <a name="vpcs" id="@DataChefHQ/data-landing-zone.DlzAccountNetwork.property.vpcs"></a>
+
+```typescript
+public readonly vpcs: NetworkEntityVpc[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>[]
 
 ---
 
@@ -10397,6 +13263,184 @@ public readonly filter: string;
 
 ---
 
+### GlobalVariables <a name="GlobalVariables" id="@DataChefHQ/data-landing-zone.GlobalVariables"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.GlobalVariables.Initializer"></a>
+
+```typescript
+import { GlobalVariables } from '@DataChefHQ/data-landing-zone'
+
+const globalVariables: GlobalVariables = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables.property.dlzAccountNetworks">dlzAccountNetworks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountNetworks">DlzAccountNetworks</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables.property.ncp1">ncp1</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp1">GlobalVariablesNcp1</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables.property.ncp2">ncp2</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp2">GlobalVariablesNcp2</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables.property.ncp3">ncp3</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp3">GlobalVariablesNcp3</a></code> | *No description.* |
+
+---
+
+##### `dlzAccountNetworks`<sup>Required</sup> <a name="dlzAccountNetworks" id="@DataChefHQ/data-landing-zone.GlobalVariables.property.dlzAccountNetworks"></a>
+
+```typescript
+public readonly dlzAccountNetworks: DlzAccountNetworks;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzAccountNetworks">DlzAccountNetworks</a>
+
+---
+
+##### `ncp1`<sup>Required</sup> <a name="ncp1" id="@DataChefHQ/data-landing-zone.GlobalVariables.property.ncp1"></a>
+
+```typescript
+public readonly ncp1: GlobalVariablesNcp1;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp1">GlobalVariablesNcp1</a>
+
+---
+
+##### `ncp2`<sup>Required</sup> <a name="ncp2" id="@DataChefHQ/data-landing-zone.GlobalVariables.property.ncp2"></a>
+
+```typescript
+public readonly ncp2: GlobalVariablesNcp2;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp2">GlobalVariablesNcp2</a>
+
+---
+
+##### `ncp3`<sup>Required</sup> <a name="ncp3" id="@DataChefHQ/data-landing-zone.GlobalVariables.property.ncp3"></a>
+
+```typescript
+public readonly ncp3: GlobalVariablesNcp3;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp3">GlobalVariablesNcp3</a>
+
+---
+
+### GlobalVariablesNcp1 <a name="GlobalVariablesNcp1" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp1"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp1.Initializer"></a>
+
+```typescript
+import { GlobalVariablesNcp1 } from '@DataChefHQ/data-landing-zone'
+
+const globalVariablesNcp1: GlobalVariablesNcp1 = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp1.property.vpcPeeringRoleKeys">vpcPeeringRoleKeys</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `vpcPeeringRoleKeys`<sup>Required</sup> <a name="vpcPeeringRoleKeys" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp1.property.vpcPeeringRoleKeys"></a>
+
+```typescript
+public readonly vpcPeeringRoleKeys: string[];
+```
+
+- *Type:* string[]
+
+---
+
+### GlobalVariablesNcp2 <a name="GlobalVariablesNcp2" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp2"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.Initializer"></a>
+
+```typescript
+import { GlobalVariablesNcp2 } from '@DataChefHQ/data-landing-zone'
+
+const globalVariablesNcp2: GlobalVariablesNcp2 = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.property.ownerVpcIds">ownerVpcIds</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.property.peeringConnections">peeringConnections</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_ec2.CfnVPCPeeringConnection}</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.property.peeringRoleArns">peeringRoleArns</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a></code> | *No description.* |
+
+---
+
+##### `ownerVpcIds`<sup>Required</sup> <a name="ownerVpcIds" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.property.ownerVpcIds"></a>
+
+```typescript
+public readonly ownerVpcIds: DlzSsmReaderStackCache;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a>
+
+---
+
+##### `peeringConnections`<sup>Required</sup> <a name="peeringConnections" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.property.peeringConnections"></a>
+
+```typescript
+public readonly peeringConnections: {[ key: string ]: CfnVPCPeeringConnection};
+```
+
+- *Type:* {[ key: string ]: aws-cdk-lib.aws_ec2.CfnVPCPeeringConnection}
+
+---
+
+##### `peeringRoleArns`<sup>Required</sup> <a name="peeringRoleArns" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp2.property.peeringRoleArns"></a>
+
+```typescript
+public readonly peeringRoleArns: DlzSsmReaderStackCache;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a>
+
+---
+
+### GlobalVariablesNcp3 <a name="GlobalVariablesNcp3" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp3"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp3.Initializer"></a>
+
+```typescript
+import { GlobalVariablesNcp3 } from '@DataChefHQ/data-landing-zone'
+
+const globalVariablesNcp3: GlobalVariablesNcp3 = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp3.property.routeTablesSsmCache">routeTablesSsmCache</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariablesNcp3.property.vpcPeeringConnectionIds">vpcPeeringConnectionIds</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a></code> | *No description.* |
+
+---
+
+##### `routeTablesSsmCache`<sup>Required</sup> <a name="routeTablesSsmCache" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp3.property.routeTablesSsmCache"></a>
+
+```typescript
+public readonly routeTablesSsmCache: DlzSsmReaderStackCache;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a>
+
+---
+
+##### `vpcPeeringConnectionIds`<sup>Required</sup> <a name="vpcPeeringConnectionIds" id="@DataChefHQ/data-landing-zone.GlobalVariablesNcp3.property.vpcPeeringConnectionIds"></a>
+
+```typescript
+public readonly vpcPeeringConnectionIds: DlzSsmReaderStackCache;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a>
+
+---
+
 ### LogStacks <a name="LogStacks" id="@DataChefHQ/data-landing-zone.LogStacks"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.LogStacks.Initializer"></a>
@@ -10486,64 +13530,98 @@ public readonly project: string[];
 
 ---
 
-### NetworkEntity <a name="NetworkEntity" id="@DataChefHQ/data-landing-zone.NetworkEntity"></a>
+### Network <a name="Network" id="@DataChefHQ/data-landing-zone.Network"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkEntity.Initializer"></a>
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.Network.Initializer"></a>
 
 ```typescript
-import { NetworkEntity } from '@DataChefHQ/data-landing-zone'
+import { Network } from '@DataChefHQ/data-landing-zone'
 
-const networkEntity: NetworkEntity = { ... }
+const network: Network = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.routeTables">routeTables</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable">NetworkEntityRouteTable</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet">NetworkEntitySubnet</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity.property.vpc">vpc</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Network.property.connections">connections</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnection">NetworkConnection</a></code> | *No description.* |
 
 ---
 
-##### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.dlzAccount"></a>
+##### `connections`<sup>Required</sup> <a name="connections" id="@DataChefHQ/data-landing-zone.Network.property.connections"></a>
 
 ```typescript
-public readonly dlzAccount: DLzAccount;
+public readonly connections: NetworkConnection;
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkConnection">NetworkConnection</a>
 
 ---
 
-##### `routeTables`<sup>Required</sup> <a name="routeTables" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.routeTables"></a>
+### NetworkConnection <a name="NetworkConnection" id="@DataChefHQ/data-landing-zone.NetworkConnection"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkConnection.Initializer"></a>
 
 ```typescript
-public readonly routeTables: NetworkEntityRouteTable[];
+import { NetworkConnection } from '@DataChefHQ/data-landing-zone'
+
+const networkConnection: NetworkConnection = { ... }
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable">NetworkEntityRouteTable</a>[]
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnection.property.vpcPeering">vpcPeering</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering">NetworkConnectionVpcPeering</a>[]</code> | *No description.* |
 
 ---
 
-##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.subnets"></a>
+##### `vpcPeering`<sup>Required</sup> <a name="vpcPeering" id="@DataChefHQ/data-landing-zone.NetworkConnection.property.vpcPeering"></a>
 
 ```typescript
-public readonly subnets: NetworkEntitySubnet[];
+public readonly vpcPeering: NetworkConnectionVpcPeering[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet">NetworkEntitySubnet</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering">NetworkConnectionVpcPeering</a>[]
 
 ---
 
-##### `vpc`<sup>Required</sup> <a name="vpc" id="@DataChefHQ/data-landing-zone.NetworkEntity.property.vpc"></a>
+### NetworkConnectionVpcPeering <a name="NetworkConnectionVpcPeering" id="@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering.Initializer"></a>
 
 ```typescript
-public readonly vpc: NetworkEntityVpc;
+import { NetworkConnectionVpcPeering } from '@DataChefHQ/data-landing-zone'
+
+const networkConnectionVpcPeering: NetworkConnectionVpcPeering = { ... }
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering.property.destination">destination</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering.property.source">source</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | *No description.* |
+
+---
+
+##### `destination`<sup>Required</sup> <a name="destination" id="@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering.property.destination"></a>
+
+```typescript
+public readonly destination: NetworkAddress;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
+
+---
+
+##### `source`<sup>Required</sup> <a name="source" id="@DataChefHQ/data-landing-zone.NetworkConnectionVpcPeering.property.source"></a>
+
+```typescript
+public readonly source: NetworkAddress;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
 
 ---
 
@@ -10561,18 +13639,19 @@ const networkEntityRouteTable: NetworkEntityRouteTable = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.address">address</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.routeTable">routeTable</a></code> | <code>aws-cdk-lib.aws_ec2.CfnRouteTable</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet">NetworkEntitySubnet</a>[]</code> | *No description.* |
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.id"></a>
+##### `address`<sup>Required</sup> <a name="address" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.address"></a>
 
 ```typescript
-public readonly id: string;
+public readonly address: NetworkAddress;
 ```
 
-- *Type:* string
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
 
 ---
 
@@ -10583,6 +13662,16 @@ public readonly routeTable: CfnRouteTable;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.CfnRouteTable
+
+---
+
+##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.NetworkEntityRouteTable.property.subnets"></a>
+
+```typescript
+public readonly subnets: NetworkEntitySubnet[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet">NetworkEntitySubnet</a>[]
 
 ---
 
@@ -10600,18 +13689,18 @@ const networkEntitySubnet: NetworkEntitySubnet = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.address">address</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.subnet">subnet</a></code> | <code>aws-cdk-lib.aws_ec2.CfnSubnet</code> | *No description.* |
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.id"></a>
+##### `address`<sup>Required</sup> <a name="address" id="@DataChefHQ/data-landing-zone.NetworkEntitySubnet.property.address"></a>
 
 ```typescript
-public readonly id: string;
+public readonly address: NetworkAddress;
 ```
 
-- *Type:* string
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
 
 ---
 
@@ -10639,18 +13728,29 @@ const networkEntityVpc: NetworkEntityVpc = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.address">address</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.routeTables">routeTables</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable">NetworkEntityRouteTable</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.CfnVPC</code> | *No description.* |
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.id"></a>
+##### `address`<sup>Required</sup> <a name="address" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.address"></a>
 
 ```typescript
-public readonly id: string;
+public readonly address: NetworkAddress;
 ```
 
-- *Type:* string
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
+
+---
+
+##### `routeTables`<sup>Required</sup> <a name="routeTables" id="@DataChefHQ/data-landing-zone.NetworkEntityVpc.property.routeTables"></a>
+
+```typescript
+public readonly routeTables: NetworkEntityRouteTable[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityRouteTable">NetworkEntityRouteTable</a>[]
 
 ---
 
@@ -10923,95 +14023,6 @@ public readonly accounts: DLzAccount[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>[]
-
----
-
-### ProductionAccountStacks <a name="ProductionAccountStacks" id="@DataChefHQ/data-landing-zone.ProductionAccountStacks"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.ProductionAccountStacks.Initializer"></a>
-
-```typescript
-import { ProductionAccountStacks } from '@DataChefHQ/data-landing-zone'
-
-const productionAccountStacks: ProductionAccountStacks = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionAccountStacks.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionAccountStacks.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionAccountStacks.property.stacks">stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ProductionStacks">ProductionStacks</a></code> | *No description.* |
-
----
-
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.ProductionAccountStacks.property.accountId"></a>
-
-```typescript
-public readonly accountId: string;
-```
-
-- *Type:* string
-
----
-
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.ProductionAccountStacks.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
----
-
-##### `stacks`<sup>Required</sup> <a name="stacks" id="@DataChefHQ/data-landing-zone.ProductionAccountStacks.property.stacks"></a>
-
-```typescript
-public readonly stacks: ProductionStacks;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.ProductionStacks">ProductionStacks</a>
-
----
-
-### ProductionStacks <a name="ProductionStacks" id="@DataChefHQ/data-landing-zone.ProductionStacks"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.ProductionStacks.Initializer"></a>
-
-```typescript
-import { ProductionStacks } from '@DataChefHQ/data-landing-zone'
-
-const productionStacks: ProductionStacks = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack">ProductionGlobalStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ProductionStacks.property.regional">regional</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack">ProductionRegionalStack</a>[]</code> | *No description.* |
-
----
-
-##### `global`<sup>Required</sup> <a name="global" id="@DataChefHQ/data-landing-zone.ProductionStacks.property.global"></a>
-
-```typescript
-public readonly global: ProductionGlobalStack;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.ProductionGlobalStack">ProductionGlobalStack</a>
-
----
-
-##### `regional`<sup>Required</sup> <a name="regional" id="@DataChefHQ/data-landing-zone.ProductionStacks.property.regional"></a>
-
-```typescript
-public readonly regional: ProductionRegionalStack[];
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.ProductionRegionalStack">ProductionRegionalStack</a>[]
 
 ---
 
@@ -11378,6 +14389,7 @@ const workloadAccountProps: WorkloadAccountProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.globalVariables">globalVariables</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables">GlobalVariables</a></code> | *No description.* |
 
 ---
 
@@ -11408,6 +14420,16 @@ public readonly dlzAccount: DLzAccount;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
+##### `globalVariables`<sup>Required</sup> <a name="globalVariables" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.globalVariables"></a>
+
+```typescript
+public readonly globalVariables: GlobalVariables;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.GlobalVariables">GlobalVariables</a>
 
 ---
 
@@ -11625,42 +14647,14 @@ new DataLandingZone(app: App, props: DataLandingZoneProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageAudit">stageAudit</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageLog">stageLog</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageManagement">stageManagement</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageWorkloadDevelopType">stageWorkloadDevelopType</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageWorkloadProductionType">stageWorkloadProductionType</a></code> | *No description.* |
 
 ---
-
-##### `stageAudit` <a name="stageAudit" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageAudit"></a>
-
-```typescript
-public stageAudit(): AuditGlobalStack | AuditRegionalStack[]
-```
-
-##### `stageLog` <a name="stageLog" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageLog"></a>
-
-```typescript
-public stageLog(): LogGlobalStack[]
-```
 
 ##### `stageManagement` <a name="stageManagement" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageManagement"></a>
 
 ```typescript
-public stageManagement(): ManagementStack[]
-```
-
-##### `stageWorkloadDevelopType` <a name="stageWorkloadDevelopType" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageWorkloadDevelopType"></a>
-
-```typescript
-public stageWorkloadDevelopType(): DlzStack[]
-```
-
-##### `stageWorkloadProductionType` <a name="stageWorkloadProductionType" id="@DataChefHQ/data-landing-zone.DataLandingZone.stageWorkloadProductionType"></a>
-
-```typescript
-public stageWorkloadProductionType(): DlzStack[]
+public stageManagement(): ManagementStack
 ```
 
 
@@ -11669,10 +14663,15 @@ public stageWorkloadProductionType(): DlzStack[]
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.auditStacks">auditStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.AuditStacks">AuditStacks</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.developAccountStacks">developAccountStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.logStacks">logStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LogStacks">LogStacks</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.managementStack">managementStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack">ManagementStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.productionAccountStacks">productionAccountStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase1Stacks">workloadGlobalNetworkConnectionsPhase1Stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack">WorkloadGlobalNetworkConnectionsPhase1Stack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase2Stacks">workloadGlobalNetworkConnectionsPhase2Stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack">WorkloadGlobalNetworkConnectionsPhase2Stack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase3Stacks">workloadGlobalNetworkConnectionsPhase3Stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack">WorkloadGlobalNetworkConnectionsPhase3Stack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalStacks">workloadGlobalStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack">WorkloadGlobalStack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadRegionalNetworkConnectionsPhase2Stacks">workloadRegionalNetworkConnectionsPhase2Stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack">WorkloadRegionalNetworkConnectionsPhase2Stack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadRegionalNetworkConnectionsPhase3Stacks">workloadRegionalNetworkConnectionsPhase3Stacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack">WorkloadRegionalNetworkConnectionsPhase3Stack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadRegionalStacks">workloadRegionalStacks</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack">WorkloadRegionalStack</a>[]</code> | *No description.* |
 
 ---
 
@@ -11683,16 +14682,6 @@ public readonly auditStacks: AuditStacks;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.AuditStacks">AuditStacks</a>
-
----
-
-##### `developAccountStacks`<sup>Required</sup> <a name="developAccountStacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.developAccountStacks"></a>
-
-```typescript
-public readonly developAccountStacks: DevelopAccountStacks[];
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DevelopAccountStacks">DevelopAccountStacks</a>[]
 
 ---
 
@@ -11716,13 +14705,73 @@ public readonly managementStack: ManagementStack;
 
 ---
 
-##### `productionAccountStacks`<sup>Required</sup> <a name="productionAccountStacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.productionAccountStacks"></a>
+##### `workloadGlobalNetworkConnectionsPhase1Stacks`<sup>Required</sup> <a name="workloadGlobalNetworkConnectionsPhase1Stacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase1Stacks"></a>
 
 ```typescript
-public readonly productionAccountStacks: ProductionAccountStacks[];
+public readonly workloadGlobalNetworkConnectionsPhase1Stacks: WorkloadGlobalNetworkConnectionsPhase1Stack[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.ProductionAccountStacks">ProductionAccountStacks</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack">WorkloadGlobalNetworkConnectionsPhase1Stack</a>[]
+
+---
+
+##### `workloadGlobalNetworkConnectionsPhase2Stacks`<sup>Required</sup> <a name="workloadGlobalNetworkConnectionsPhase2Stacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase2Stacks"></a>
+
+```typescript
+public readonly workloadGlobalNetworkConnectionsPhase2Stacks: WorkloadGlobalNetworkConnectionsPhase2Stack[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack">WorkloadGlobalNetworkConnectionsPhase2Stack</a>[]
+
+---
+
+##### `workloadGlobalNetworkConnectionsPhase3Stacks`<sup>Required</sup> <a name="workloadGlobalNetworkConnectionsPhase3Stacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase3Stacks"></a>
+
+```typescript
+public readonly workloadGlobalNetworkConnectionsPhase3Stacks: WorkloadGlobalNetworkConnectionsPhase3Stack[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack">WorkloadGlobalNetworkConnectionsPhase3Stack</a>[]
+
+---
+
+##### `workloadGlobalStacks`<sup>Required</sup> <a name="workloadGlobalStacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadGlobalStacks"></a>
+
+```typescript
+public readonly workloadGlobalStacks: WorkloadGlobalStack[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack">WorkloadGlobalStack</a>[]
+
+---
+
+##### `workloadRegionalNetworkConnectionsPhase2Stacks`<sup>Required</sup> <a name="workloadRegionalNetworkConnectionsPhase2Stacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadRegionalNetworkConnectionsPhase2Stacks"></a>
+
+```typescript
+public readonly workloadRegionalNetworkConnectionsPhase2Stacks: WorkloadRegionalNetworkConnectionsPhase2Stack[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack">WorkloadRegionalNetworkConnectionsPhase2Stack</a>[]
+
+---
+
+##### `workloadRegionalNetworkConnectionsPhase3Stacks`<sup>Required</sup> <a name="workloadRegionalNetworkConnectionsPhase3Stacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadRegionalNetworkConnectionsPhase3Stacks"></a>
+
+```typescript
+public readonly workloadRegionalNetworkConnectionsPhase3Stacks: WorkloadRegionalNetworkConnectionsPhase3Stack[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack">WorkloadRegionalNetworkConnectionsPhase3Stack</a>[]
+
+---
+
+##### `workloadRegionalStacks`<sup>Required</sup> <a name="workloadRegionalStacks" id="@DataChefHQ/data-landing-zone.DataLandingZone.property.workloadRegionalStacks"></a>
+
+```typescript
+public readonly workloadRegionalStacks: WorkloadRegionalStack[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack">WorkloadRegionalStack</a>[]
 
 ---
 
@@ -11823,6 +14872,97 @@ Defaults.rootControls()
 ```
 
 Control Tower Controls applied to all the OUs in the organization.
+
+
+
+### DlzAccountNetworks <a name="DlzAccountNetworks" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.Initializer"></a>
+
+```typescript
+import { DlzAccountNetworks } from '@DataChefHQ/data-landing-zone'
+
+new DlzAccountNetworks()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountNetworks.add">add</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountNetworks.getEntitiesForAddress">getEntitiesForAddress</a></code> | Get NetworkEntities for the given `networkAddress` and match on the given `matchOnAddress`. |
+
+---
+
+##### `add` <a name="add" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.add"></a>
+
+```typescript
+public add(dlzAccount: DLzAccount, networkEntityVpc: NetworkEntityVpc): void
+```
+
+###### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.add.parameter.dlzAccount"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
+###### `networkEntityVpc`<sup>Required</sup> <a name="networkEntityVpc" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.add.parameter.networkEntityVpc"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>
+
+---
+
+##### `getEntitiesForAddress` <a name="getEntitiesForAddress" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.getEntitiesForAddress"></a>
+
+```typescript
+public getEntitiesForAddress(networkAddress: NetworkAddress, matchOnAddress?: string): DlzAccountNetwork[]
+```
+
+Get NetworkEntities for the given `networkAddress` and match on the given `matchOnAddress`.
+
+For example, if the
+`networkAddress` is a segment address and `matchOnAddress` has a value of `vpc` then it will return all
+NetworkEntities that have the same VPC as the `networkAddress`. Or, if the `matchOnAddress` has a value of
+`region` then it will return all NetworkEntities that have the same VPC region as the `networkAddress`.
+
+If the `matchOnAddress` is `account` then the complete NetworkEntity will be returned.
+Else, if `matchOnAddress` is `region`, `vpc`, `segment` or `subnet` then a partial NetworkEntity will be returned.
+The `vpcs` `routeTables` and `subnets` will be filtered to only include those that match the `networkAddress`. A value of
+`undefined` will automatically detect the level of the `networkAddress` and use that as the `matchOnAddress`.
+
+Example:
+
+Given we have these NetworkEntity[]:
+1. project-1-develop.us-east-1.default.private
+2. project-1-develop.eu-west-1.default.private
+3. project-1-production.eu-west-1.default.private
+
+- If the `networkAddress` has a `segment` address of: `project-1-develop.us-east-1.default.private` and the
+  `matchOnAddress` value is **`segment`**. Then it will only match the **first** entry of
+  `project-1-develop.us-east-1.default.private` and return a partial NetworkEntity with the VPC, and only
+  the routeTables and subnets that have the same segment address.
+
+- If the `networkAddress` has the same `segment` address of: `project-1-develop.us-east-1.default.private` and the
+  `matchOnAddress` value is changed to **`vpc`**. Then it will match the **first** and **second** entries
+   and return the complete NetworkEntity for each.
+
+###### `networkAddress`<sup>Required</sup> <a name="networkAddress" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.getEntitiesForAddress.parameter.networkAddress"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
+
+---
+
+###### `matchOnAddress`<sup>Optional</sup> <a name="matchOnAddress" id="@DataChefHQ/data-landing-zone.DlzAccountNetworks.getEntitiesForAddress.parameter.matchOnAddress"></a>
+
+- *Type:* string
+
+---
+
 
 
 
@@ -12027,6 +15167,172 @@ public readonly reportResource: ReportResource;
 ---
 
 
+### DlzSsmReader <a name="DlzSsmReader" id="@DataChefHQ/data-landing-zone.DlzSsmReader"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzSsmReader.Initializer"></a>
+
+```typescript
+import { DlzSsmReader } from '@DataChefHQ/data-landing-zone'
+
+new DlzSsmReader()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSsmReader.getValue">getValue</a></code> | Get the value of an SSM Parameter Store value. |
+
+---
+
+##### `getValue` <a name="getValue" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue"></a>
+
+```typescript
+import { DlzSsmReader } from '@DataChefHQ/data-landing-zone'
+
+DlzSsmReader.getValue(scope: Construct, id: string, accountId: string, region: string, name: string, fetchType?: string, withDecryption?: boolean)
+```
+
+Get the value of an SSM Parameter Store value.
+
+Fetch type `always` will always fetch the value from SSM Parameter Store, this will produce a CDK diff every time.
+Fetch type `value-change` will fetch the value from SSM Parameter Store only when the value changes, this will not
+produce a CDK diff every time.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.accountId"></a>
+
+- *Type:* string
+
+---
+
+###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.region"></a>
+
+- *Type:* string
+
+---
+
+###### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.name"></a>
+
+- *Type:* string
+
+---
+
+###### `fetchType`<sup>Optional</sup> <a name="fetchType" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.fetchType"></a>
+
+- *Type:* string
+
+---
+
+###### `withDecryption`<sup>Optional</sup> <a name="withDecryption" id="@DataChefHQ/data-landing-zone.DlzSsmReader.getValue.parameter.withDecryption"></a>
+
+- *Type:* boolean
+
+---
+
+
+
+### DlzSsmReaderStackCache <a name="DlzSsmReaderStackCache" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache"></a>
+
+Get the value of an SSM Parameter Store value.
+
+This method will reuse the same CustomResource, reducing the number
+of lookups to the same resource within a stack.
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.Initializer"></a>
+
+```typescript
+import { DlzSsmReaderStackCache } from '@DataChefHQ/data-landing-zone'
+
+new DlzSsmReaderStackCache()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue">getValue</a></code> | Fetch type `always` will always fetch the value from SSM Parameter Store, this will produce a CDK diff every time. |
+
+---
+
+##### `getValue` <a name="getValue" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue"></a>
+
+```typescript
+public getValue(scope: Construct, id: string, accountId: string, region: string, name: string, fetchType?: string, withDecryption?: boolean): string
+```
+
+Fetch type `always` will always fetch the value from SSM Parameter Store, this will produce a CDK diff every time.
+
+Fetch type `value-change` will fetch the value from SSM Parameter Store only when the value changes, this will not
+produce a CDK diff every time.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.accountId"></a>
+
+- *Type:* string
+
+---
+
+###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.region"></a>
+
+- *Type:* string
+
+---
+
+###### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.name"></a>
+
+- *Type:* string
+
+---
+
+###### `fetchType`<sup>Optional</sup> <a name="fetchType" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.fetchType"></a>
+
+- *Type:* string
+
+---
+
+###### `withDecryption`<sup>Optional</sup> <a name="withDecryption" id="@DataChefHQ/data-landing-zone.DlzSsmReaderStackCache.getValue.parameter.withDecryption"></a>
+
+- *Type:* boolean
+
+---
+
+
+
+
 ### DlzTagPolicy <a name="DlzTagPolicy" id="@DataChefHQ/data-landing-zone.DlzTagPolicy"></a>
 
 - *Implements:* <a href="#@DataChefHQ/data-landing-zone.IReportResource">IReportResource</a>
@@ -12139,33 +15445,68 @@ new DlzVpc(dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.property.networkEntity">networkEntity</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntity">NetworkEntity</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.property.networkEntityVpc">networkEntityVpc</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a></code> | *No description.* |
 
 ---
 
-##### `networkEntity`<sup>Required</sup> <a name="networkEntity" id="@DataChefHQ/data-landing-zone.DlzVpc.property.networkEntity"></a>
+##### `networkEntityVpc`<sup>Required</sup> <a name="networkEntityVpc" id="@DataChefHQ/data-landing-zone.DlzVpc.property.networkEntityVpc"></a>
 
 ```typescript
-public readonly networkEntity: NetworkEntity;
+public readonly networkEntityVpc: NetworkEntityVpc;
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntity">NetworkEntity</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>
 
 ---
 
 
-### NetworkEntities <a name="NetworkEntities" id="@DataChefHQ/data-landing-zone.NetworkEntities"></a>
+### NetworkAddress <a name="NetworkAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress"></a>
 
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.NetworkEntities.Initializer"></a>
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer"></a>
 
 ```typescript
-import { NetworkEntities } from '@DataChefHQ/data-landing-zone'
+import { NetworkAddress } from '@DataChefHQ/data-landing-zone'
 
-new NetworkEntities()
+new NetworkAddress(account: string, region?: string, vpc?: string, segment?: string, subnet?: string)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.account">account</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.vpc">vpc</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.subnet">subnet</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.account"></a>
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Optional</sup> <a name="region" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.region"></a>
+
+- *Type:* string
+
+---
+
+##### `vpc`<sup>Optional</sup> <a name="vpc" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.vpc"></a>
+
+- *Type:* string
+
+---
+
+##### `segment`<sup>Optional</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.segment"></a>
+
+- *Type:* string
+
+---
+
+##### `subnet`<sup>Optional</sup> <a name="subnet" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.subnet"></a>
+
+- *Type:* string
 
 ---
 
@@ -12173,36 +15514,134 @@ new NetworkEntities()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntities.add">add</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkEntities.vpcExists">vpcExists</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isAccountAddress">isAccountAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isRegionAddress">isRegionAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isSegmentAddress">isSegmentAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isSubnetAddress">isSubnetAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isVpcAddress">isVpcAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.toString">toString</a></code> | *No description.* |
 
 ---
 
-##### `add` <a name="add" id="@DataChefHQ/data-landing-zone.NetworkEntities.add"></a>
+##### `isAccountAddress` <a name="isAccountAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isAccountAddress"></a>
 
 ```typescript
-public add(networkEntity: NetworkEntity): void
+public isAccountAddress(): boolean
 ```
 
-###### `networkEntity`<sup>Required</sup> <a name="networkEntity" id="@DataChefHQ/data-landing-zone.NetworkEntities.add.parameter.networkEntity"></a>
+##### `isRegionAddress` <a name="isRegionAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isRegionAddress"></a>
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntity">NetworkEntity</a>
+```typescript
+public isRegionAddress(): boolean
+```
+
+##### `isSegmentAddress` <a name="isSegmentAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isSegmentAddress"></a>
+
+```typescript
+public isSegmentAddress(): boolean
+```
+
+##### `isSubnetAddress` <a name="isSubnetAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isSubnetAddress"></a>
+
+```typescript
+public isSubnetAddress(): boolean
+```
+
+##### `isVpcAddress` <a name="isVpcAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isVpcAddress"></a>
+
+```typescript
+public isVpcAddress(): boolean
+```
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.NetworkAddress.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.fromString">fromString</a></code> | *No description.* |
 
 ---
 
-##### `vpcExists` <a name="vpcExists" id="@DataChefHQ/data-landing-zone.NetworkEntities.vpcExists"></a>
+##### `fromString` <a name="fromString" id="@DataChefHQ/data-landing-zone.NetworkAddress.fromString"></a>
 
 ```typescript
-public vpcExists(vpcId: string): boolean
+import { NetworkAddress } from '@DataChefHQ/data-landing-zone'
+
+NetworkAddress.fromString(props: string)
 ```
 
-###### `vpcId`<sup>Required</sup> <a name="vpcId" id="@DataChefHQ/data-landing-zone.NetworkEntities.vpcExists.parameter.vpcId"></a>
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.NetworkAddress.fromString.parameter.props"></a>
 
 - *Type:* string
 
 ---
 
+#### Properties <a name="Properties" id="Properties"></a>
 
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.account">account</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.subnet">subnet</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.vpc">vpc</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Optional</sup> <a name="region" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+##### `segment`<sup>Optional</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.segment"></a>
+
+```typescript
+public readonly segment: string;
+```
+
+- *Type:* string
+
+---
+
+##### `subnet`<sup>Optional</sup> <a name="subnet" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.subnet"></a>
+
+```typescript
+public readonly subnet: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vpc`<sup>Optional</sup> <a name="vpc" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.vpc"></a>
+
+```typescript
+public readonly vpc: string;
+```
+
+- *Type:* string
+
+---
 
 
 ### Report <a name="Report" id="@DataChefHQ/data-landing-zone.Report"></a>

@@ -29,6 +29,22 @@ JSII allows this because there is nothing that directly exposes the class to the
 An example is the `AWS_GR_ENCRYPTED_VOLUMES` class. Its not exposed in the upper level `index.ts` files and ignored by
 JSII.
 
+## Why use SSM Parameters if both stacks are in the same account?
+We don't want CloudFormation Exports used downstream to be dynamically created. If an export value is no longer needed
+by a downstream stack then it will be removed. But the downstream stack still depends on the exported value, it has not
+been deployed. 
+
+For example, the VPC is created in StackA. StackB depends on StackA and it uses the VPC ID. The VPC ID is then 
+automatically/dynamically exported by StackA to be used in StackB. If StackB decided to no longer use the VPC ID in
+StackA, then the export value will be removed. But StackB still depends on the VPC ID when StackA is deployed. So
+CloudFormation will error that the export value is still in use. 
+
+The workaround is to first deploy StackB and only StackB, to break the dependency that it has on StackA's exported 
+value. Then only can you deploy StackA.
+
+To prevent users from running into this "1 way door" issue, we decided to use SSM Parameters even if the stacks are 
+in the same account.
+
 
 ## CloudFormation Errors
 
