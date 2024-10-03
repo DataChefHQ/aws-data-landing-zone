@@ -222,7 +222,6 @@ describe('Access groups', () => {
   });
 
   const template = Template.fromStack(stack);
-  console.log(JSON.stringify(template.toJSON(), null, 2));
 
   test('Creates the access groups', () => {
     template.resourceCountIs('AWS::IdentityStore::Group', 2);
