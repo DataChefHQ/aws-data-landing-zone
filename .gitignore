@@ -52,6 +52,7 @@ tsconfig.json
 .dlz-reports
 .idea
 *.js
+*.js.map
 *.d.ts
 *.DS_Store
 !/.projenrc.ts

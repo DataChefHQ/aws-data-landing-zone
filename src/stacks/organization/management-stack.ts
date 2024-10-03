@@ -2,20 +2,24 @@ import * as assert from 'assert';
 import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
-import * as sso from 'aws-cdk-lib/aws-sso';
 import { Construct } from 'constructs';
-import { AccountChatbots, Budget, ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
+import {
+  AccountChatbots,
+  Budget,
+  ControlTowerControlMappings,
+  DlzStack,
+  DlzStackProps,
+  IamIdentityCenter,
+} from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../constructs/control-tower-control';
-import { IamIdentityCenterGroup } from '../../constructs/iam-identity-center';
-import { IdentityStoreUser } from '../../constructs/identity-store-user';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
-import { PropsOrDefaults, Defaults } from '../../defaults';
-import { limitCfnExecutions } from '../../lib/cfn-utils';
+import { PropsOrDefaults } from '../../defaults';
+import { limitCfnExecutions } from '../../lib/cdk-utils';
 import { Report } from '../../lib/report';
 
 export class ManagementStack extends DlzStack {
@@ -47,137 +51,7 @@ export class ManagementStack extends DlzStack {
    * IAM Identity Center
    */
   iamIdentityCenter() {
-    if (this.props.iamIdentityCenter === undefined) return;
-
-    const iamIdentityCenterId = this.props.iamIdentityCenter.iamIdentityCenterId;
-    const identityStoreId = this.props.iamIdentityCenter.identityStoreId;
-    let iamIdentityCenterArn = this.props.iamIdentityCenter.iamIdentityCenterArn;
-
-    if (!iamIdentityCenterArn) {
-      iamIdentityCenterArn = `arn:aws:sso:::instance/${iamIdentityCenterId}`;
-    }
-
-    const accounts = new Map<string, string>();
-    accounts.set('dlz:root', this.props.organization.root.accounts.management.accountId);
-    accounts.set('dlz:security:log', this.props.organization.ous.security.accounts.log.accountId);
-    accounts.set('dlz:security:audit', this.props.organization.ous.security.accounts.audit.accountId);
-
-    for (const account of this.props.organization.ous.workloads.accounts) {
-      accounts.set(account.name, account.accountId);
-    }
-    const accountNames = [...accounts.keys()];
-
-    const users = new Map<string, string>();
-    for (const user of this.props.iamIdentityCenter.idpUsers ?? []) {
-      users.set(user.name, user.userId);
-    }
-
-    const permissionSets = new Map<string, () => sso.CfnPermissionSet>();
-
-    permissionSets.set('dlz:adminaccess', () => new sso.CfnPermissionSet(this, this.resourceName('adminaccess'),
-      {
-        instanceArn: iamIdentityCenterArn!,
-        ...Defaults.adminPermissionSet(),
-      }));
-
-    permissionSets.set('dlz:readonlyaccess', () => new sso.CfnPermissionSet(this, this.resourceName('readonlyaccess'),
-      {
-        instanceArn: iamIdentityCenterArn!,
-        ...Defaults.readOnlyPermissionSet(),
-      }));
-
-    permissionSets.set('dlz:catalogaccess', () => new sso.CfnPermissionSet(this, this.resourceName('catalogaccess'),
-      {
-        instanceArn: iamIdentityCenterArn!,
-        ...Defaults.catalogPermissionSet(),
-      }));
-
-    for (const permissionSetConf of this.props.iamIdentityCenter.permissionSets ?? []) {
-      permissionSets.set(permissionSetConf.name, () => new sso.CfnPermissionSet(this, this.resourceName(permissionSetConf.name),
-        {
-          instanceArn: iamIdentityCenterArn!,
-          name: permissionSetConf.name,
-          description: permissionSetConf.description,
-          inlinePolicy: permissionSetConf.inlinePolicy,
-          managedPolicies: permissionSetConf.managedPolicyArns,
-        }));
-    }
-
-    const awsSsoUsers = new Map<string, IdentityStoreUser>();
-    for (const user of this.props.iamIdentityCenter.awsSsoUsers ?? []) {
-      if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\_]+\*?$/.test(user.userName)) {
-        cdk.Annotations.of(this).addError(`Invalid user name: ${user.userName} - only letters, numbers, - and _ are allowed`);
-        continue;
-      }
-      const id = this.resourceName(`aws-sso-user-${user.userName}`);
-      const userConstruct = new IdentityStoreUser(this, id, { ...user, identityStoreId });
-      awsSsoUsers.set(user.userName, userConstruct);
-      users.set(user.userName, userConstruct.userId);
-    }
-
-    const resolvedPermissionSets = new Map<string, sso.CfnPermissionSet>();
-
-    for (const group of this.props.iamIdentityCenter.accessGroups ?? []) {
-      const resolvedUsers = group.users?.map(user => users.has(user) ? `${users.get(user)}|${user}` : user) ?? [];
-      if (resolvedUsers.length === 0) {
-        cdk.Annotations.of(this).addError(`No users found for group ${group.name}`);
-        continue;
-      }
-
-      const dependencyUsers: Construct[] = resolvedUsers.filter(user => awsSsoUsers.has(user)).map(user => awsSsoUsers.get(user)!);
-
-      const resolvedAccounts: string[] = [];
-      for (const accountWithWildCard of group.accounts) {
-        if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\:]+\*?$/.test(accountWithWildCard)) {
-          cdk.Annotations.of(this).addError(`Invalid account name: ${accountWithWildCard} in group ${group.name}`);
-          continue;
-        }
-        for (const accountName of accountNames) {
-          if (accountWithWildCard.slice(-1) === '*' && accountWithWildCard.slice(0, accountName.length) !== accountName) continue;
-          if (accountWithWildCard.slice(-1) !== '*' && accountWithWildCard !== accountName) continue;
-
-          resolvedAccounts.push(accounts.get(accountName) ?? accountName);
-          break;
-        }
-      }
-
-      if (resolvedAccounts.length === 0) {
-        cdk.Annotations.of(this).addError(`No accounts found for group ${group.name}`);
-        continue;
-      }
-
-      if (!permissionSets.has(group.permissionSet)) {
-        cdk.Annotations.of(this).addError(`PermissionSet ${group.permissionSet} in group ${group.name} was not found`);
-        continue;
-      }
-
-      let permissionSet: sso.CfnPermissionSet;
-
-      if (resolvedPermissionSets.has(group.permissionSet)) {
-        permissionSet = resolvedPermissionSets.get(group.permissionSet)!;
-      } else {
-        permissionSet = permissionSets.get(group.permissionSet)!();
-        resolvedPermissionSets.set(group.permissionSet, permissionSet);
-      }
-
-      const groupConstruct = new IamIdentityCenterGroup(
-        this,
-        this.resourceName(group.name),
-        {
-          ssoArn: iamIdentityCenterArn,
-          identityStoreId,
-          users: resolvedUsers,
-          permissionSet,
-          accounts: resolvedAccounts,
-          description: group.description,
-          name: group.name,
-        });
-
-      groupConstruct.node.addDependency(permissionSet);
-      for (const user of dependencyUsers) {
-        groupConstruct.node.addDependency(user);
-      }
-    }
+    if (this.props.iamIdentityCenter) {new IamIdentityCenter(this, this.props.organization, this.props.iamIdentityCenter);}
   }
 
   /**

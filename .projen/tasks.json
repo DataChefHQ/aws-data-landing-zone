@@ -47,25 +47,25 @@
       "description": "Prepare assets",
       "steps": [
         {
-          "spawn": "bundle:constructs/identity-store-user/lambda"
+          "spawn": "bundle:constructs/iam-identity-center/identity-store-user-lambda"
         }
       ]
     },
-    "bundle:constructs/identity-store-user/lambda": {
-      "name": "bundle:constructs/identity-store-user/lambda",
-      "description": "Create a JavaScript bundle from ./src/constructs/identity-store-user/lambda/",
+    "bundle:constructs/iam-identity-center/identity-store-user-lambda": {
+      "name": "bundle:constructs/iam-identity-center/identity-store-user-lambda",
+      "description": "Create a JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/identity-store-user/lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/identity-store-user/lambda/index.js\" --external:aws-sdk --sourcemap"
+          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap"
         }
       ]
     },
-    "bundle:constructs/identity-store-user/lambda:watch": {
-      "name": "bundle:constructs/identity-store-user/lambda:watch",
-      "description": "Continuously update the JavaScript bundle from ./src/constructs/identity-store-user/lambda/",
+    "bundle:constructs/iam-identity-center/identity-store-user-lambda:watch": {
+      "name": "bundle:constructs/iam-identity-center/identity-store-user-lambda:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/identity-store-user/lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/identity-store-user/lambda/index.js\" --external:aws-sdk --sourcemap --watch"
+          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
