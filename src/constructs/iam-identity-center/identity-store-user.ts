@@ -2,6 +2,9 @@ import * as path from 'path';
 import { CustomResource, CustomResourceProvider, CustomResourceProviderRuntime, Duration } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
+/**
+ * A user in the IAM Identity Center
+ */
 export interface IdentityStoreUserProps {
   readonly userName: string;
   readonly name: IdentityStoreUserNameProps;
@@ -9,10 +12,16 @@ export interface IdentityStoreUserProps {
   readonly email: IdentityStoreUserEmailsProps;
 }
 
+/**
+ * A user in the IAM Identity Center
+ */
 export interface IdentityStoreUserPropsExt extends IdentityStoreUserProps {
   readonly identityStoreId: string;
 }
 
+/**
+ * The name of a user in the IAM Identity Center
+ */
 export interface IdentityStoreUserNameProps {
   readonly formatted: string;
   readonly familyName: string;
@@ -22,12 +31,18 @@ export interface IdentityStoreUserNameProps {
   readonly honorificSuffix?: string;
 }
 
+/**
+ * The email of a user in the IAM Identity Center
+ */
 export interface IdentityStoreUserEmailsProps {
   readonly value: string;
   readonly type: string;
   readonly primary?: boolean;
 }
 
+/**
+ * A user in the IAM Identity Center
+ */
 export class IdentityStoreUser extends Construct {
   public static fetchCodeDirectory(): string {
     return path.join(__dirname, 'identity-store-user-lambda');

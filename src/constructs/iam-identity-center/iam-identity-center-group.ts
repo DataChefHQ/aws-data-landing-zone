@@ -2,17 +2,30 @@ import * as identitystore from 'aws-cdk-lib/aws-identitystore';
 import * as sso from 'aws-cdk-lib/aws-sso';
 import { Construct } from 'constructs';
 
+/**
+ * A group of users in the IAM Identity Center
+ */
 export interface IamIdentityCenterGroupProps {
   readonly name: string;
   readonly ssoArn: string;
   readonly identityStoreId: string;
   readonly description?: string;
-  readonly users: string[];
+  readonly users: IamIdentityCenterGroupUser[];
   readonly permissionSet: sso.CfnPermissionSet;
   readonly accounts: string[];
 }
 
+/**
+ * A user in the IAM Identity Center
+ */
+export interface IamIdentityCenterGroupUser {
+  readonly userId: string;
+  readonly userName: string;
+}
 
+/**
+ * A group of users in the IAM Identity Center
+ */
 export class IamIdentityCenterGroup extends Construct {
 
   constructor(scope: Construct, id: string, props: IamIdentityCenterGroupProps) {
@@ -29,26 +42,15 @@ export class IamIdentityCenterGroup extends Construct {
         identityStoreId,
       });
 
-    let i = 0;
     for (const user of users) {
-      i++;
-      const userSplit = user.split('|');
-      let userRef = `user${i}`;
-      let userId = user;
-
-      if (userSplit.length > 1) {
-        userRef = userSplit[1];
-        userId = userSplit[0];
-      }
-
       const membership = new identitystore.CfnGroupMembership(
         scope,
-        `${name}-membership-${userRef}`,
+        `${name}-membership-${user.userName}`,
         {
           groupId: group.attrGroupId,
           identityStoreId,
           memberId: {
-            userId: userId,
+            userId: user.userId,
           },
         });
 

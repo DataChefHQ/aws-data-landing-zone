@@ -1,9 +1,9 @@
 import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sso from 'aws-cdk-lib/aws-sso';
-
 import { CfnPermissionSet } from 'aws-cdk-lib/aws-sso/lib/sso.generated';
-import { IamIdentityCenterGroup } from './iam-identity-center-group';
+import { Construct } from 'constructs';
+import { IamIdentityCenterGroup, IamIdentityCenterGroupUser } from './iam-identity-center-group';
 import { IdentityStoreUser, IdentityStoreUserProps } from './identity-store-user';
 import {
   DLzOrganization,
@@ -11,11 +11,17 @@ import {
 import { durationToIso8601 } from '../../lib/cdk-utils';
 import { DlzStack } from '../dlz-stack/index';
 
+/**
+ * A user in the IAM Identity Center
+ */
 export interface IamIdentityCenterIdpUser {
   readonly name: string;
   readonly userId: string;
 }
 
+/**
+ * A permission set in the IAM Identity Center
+ */
 export interface IamIdentityCenterPermissionSetProps {
   readonly name: string;
   readonly description?: string;
@@ -25,6 +31,9 @@ export interface IamIdentityCenterPermissionSetProps {
   readonly sessionDuration?: cdk.Duration;
 }
 
+/**
+ * An access group in the IAM Identity Center
+ */
 export interface IamIdentityCenterAccessGroupProps {
   readonly name: string;
   readonly description?: string;
@@ -34,6 +43,9 @@ export interface IamIdentityCenterAccessGroupProps {
 
 }
 
+/**
+ * The users and groups in the IAM Identity Center
+ */
 export interface IamIdentityCenterUsers {
   readonly identityStore?: IdentityStoreUserProps[];
   readonly idp?: IamIdentityCenterIdpUser[];
@@ -48,6 +60,9 @@ export interface IamIdentityCenterProps {
   readonly accessGroups?: IamIdentityCenterAccessGroupProps[];
 }
 
+/**
+ * The IAM Identity Center
+ */
 export class IamIdentityCenter {
 
   constructor(dlzStack: DlzStack, organization: DLzOrganization, iamIdentityCenter: IamIdentityCenterProps) {
@@ -69,7 +84,7 @@ export class IamIdentityCenter {
     }
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
     for (const user of iamIdentityCenter.users?.identityStore ?? []) {
-      if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\_]+\*?$/.test(user.userName)) {
+      if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\_]+$/.test(user.userName)) {
         cdk.Annotations.of(dlzStack).addError(`Invalid user name: ${user.userName} - only letters, numbers, - and _ are allowed`);
         continue;
       }
@@ -108,25 +123,44 @@ export class IamIdentityCenter {
           cdk.Annotations.of(dlzStack).addError(`The user ${groupUserName} in group ${group.name} does not exist`);
         }
       }
-      const groupUserIds = group.userNames?.map(userName => allUsersIds.get(userName)!);
+      const groupUserIds = group.userNames
+        ?.filter(userName => allUsersIds.has(userName))
+        .map(userName => <IamIdentityCenterGroupUser>{ userId: allUsersIds.get(userName)!, userName }) || [];
+
+      if (groupUserIds.length === 0) {
+        cdk.Annotations.of(dlzStack).addError(`No users found for group ${group.name}`);
+        continue;
+      }
 
       /* Check that group accounts exist and get IDs */
       const groupAccountIds: string[] = [];
       for (const groupAccountName of group.accountNames) {
+        if (groupAccountName === '*') {
+          groupAccountIds.push(...allAccountIds.values());
+          continue;
+        }
+
+        if (groupAccountName.endsWith('*')) {
+          const accountPrefix = groupAccountName.slice(0, -1);
+          const groupAccountIdsForWildcard: string[] = [];
+          for (const accountName of allAccountNames) {
+            if (accountName.startsWith(accountPrefix)) {
+              groupAccountIdsForWildcard.push(allAccountIds.get(accountName)!);
+            }
+          }
+          if (groupAccountIdsForWildcard.length === 0) {
+            cdk.Annotations.of(dlzStack).addError(`No accounts found for group ${group.name} with wildcard ${groupAccountName}`);
+            continue;
+          }
+          groupAccountIds.push(...groupAccountIdsForWildcard);
+          continue;
+        }
+
         if (!allAccountIds.has(groupAccountName)) {
           cdk.Annotations.of(dlzStack).addError(`The account ${groupAccountName} in group ${group.name} does not exist`);
           continue;
         }
-        if (groupAccountName.endsWith('*')) {
-          const accountPrefix = groupAccountName.slice(0, -1);
-          for (const accountName of allAccountNames) {
-            if (accountName.startsWith(accountPrefix)) {
-              groupAccountIds.push(allAccountIds.get(accountName)!);
-            }
-          }
-        } else {
-          groupAccountIds.push(allAccountIds.get(groupAccountName)!);
-        }
+        groupAccountIds.push(allAccountIds.get(groupAccountName)!);
       }
 
       /* Check that group permission sets exist */
@@ -134,6 +168,9 @@ export class IamIdentityCenter {
         cdk.Annotations.of(dlzStack).addError(`PermissionSet ${group.permissionSetName} in group ${group.name} does not exist`);
       }
       const groupPermissionSet = allPermissionSets.get(group.permissionSetName)!;
+      const depenencyUsers: Construct[] = (groupUserIds || [])
+        .filter(user => awsSsoUsers.has(user.userName))
+        .map(user => awsSsoUsers.get(user.userName)!);
 
       const groupConstruct = new IamIdentityCenterGroup(
         dlzStack,
@@ -141,7 +178,7 @@ export class IamIdentityCenter {
         {
           ssoArn: iamIdentityCenter.arn,
           identityStoreId: iamIdentityCenter.storeId,
-          users: groupUserIds ?? [],
+          users: groupUserIds,
           permissionSet: groupPermissionSet,
           accounts: groupAccountIds,
           description: group.description,
@@ -149,7 +186,7 @@ export class IamIdentityCenter {
         });
 
       groupConstruct.node.addDependency(groupPermissionSet);
-      for (const awsSsoUser of awsSsoUsers) {
+      for (const awsSsoUser of depenencyUsers) {
         groupConstruct.node.addDependency(awsSsoUser);
       }
     }

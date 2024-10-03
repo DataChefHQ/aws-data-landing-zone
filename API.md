@@ -2766,6 +2766,8 @@ public readonly id: string;
 
 ### IamIdentityCenterGroup <a name="IamIdentityCenterGroup" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup"></a>
 
+A group of users in the IAM Identity Center.
+
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroup.Initializer"></a>
 
 ```typescript
@@ -2864,6 +2866,8 @@ The tree node.
 
 
 ### IdentityStoreUser <a name="IdentityStoreUser" id="@DataChefHQ/data-landing-zone.IdentityStoreUser"></a>
+
+A user in the IAM Identity Center.
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IdentityStoreUser.Initializer"></a>
 
@@ -13683,6 +13687,8 @@ public readonly vpcPeeringConnectionIds: DlzSsmReaderStackCache;
 
 ### IamIdentityCenterAccessGroupProps <a name="IamIdentityCenterAccessGroupProps" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps"></a>
 
+An access group in the IAM Identity Center.
+
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps.Initializer"></a>
 
 ```typescript
@@ -13755,6 +13761,8 @@ public readonly userNames: string[];
 
 ### IamIdentityCenterGroupProps <a name="IamIdentityCenterGroupProps" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps"></a>
 
+A group of users in the IAM Identity Center.
+
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.Initializer"></a>
 
 ```typescript
@@ -13772,7 +13780,7 @@ const iamIdentityCenterGroupProps: IamIdentityCenterGroupProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.permissionSet">permissionSet</a></code> | <code>aws-cdk-lib.aws_sso.CfnPermissionSet</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.ssoArn">ssoArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.users">users</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.users">users</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser">IamIdentityCenterGroupUser</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.description">description</a></code> | <code>string</code> | *No description.* |
 
 ---
@@ -13830,10 +13838,10 @@ public readonly ssoArn: string;
 ##### `users`<sup>Required</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupProps.property.users"></a>
 
 ```typescript
-public readonly users: string[];
+public readonly users: IamIdentityCenterGroupUser[];
 ```
 
-- *Type:* string[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser">IamIdentityCenterGroupUser</a>[]
 
 ---
 
@@ -13847,7 +13855,50 @@ public readonly description: string;
 
 ---
 
+### IamIdentityCenterGroupUser <a name="IamIdentityCenterGroupUser" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser"></a>
+
+A user in the IAM Identity Center.
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser.Initializer"></a>
+
+```typescript
+import { IamIdentityCenterGroupUser } from '@DataChefHQ/data-landing-zone'
+
+const iamIdentityCenterGroupUser: IamIdentityCenterGroupUser = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser.property.userId">userId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser.property.userName">userName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `userId`<sup>Required</sup> <a name="userId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser.property.userId"></a>
+
+```typescript
+public readonly userId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `userName`<sup>Required</sup> <a name="userName" id="@DataChefHQ/data-landing-zone.IamIdentityCenterGroupUser.property.userName"></a>
+
+```typescript
+public readonly userName: string;
+```
+
+- *Type:* string
+
+---
+
 ### IamIdentityCenterIdpUser <a name="IamIdentityCenterIdpUser" id="@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser"></a>
+
+A user in the IAM Identity Center.
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser.Initializer"></a>
 
@@ -13887,6 +13938,8 @@ public readonly userId: string;
 ---
 
 ### IamIdentityCenterPermissionSetProps <a name="IamIdentityCenterPermissionSetProps" id="@DataChefHQ/data-landing-zone.IamIdentityCenterPermissionSetProps"></a>
+
+A permission set in the IAM Identity Center.
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterPermissionSetProps.Initializer"></a>
 
@@ -14054,6 +14107,8 @@ public readonly users: IamIdentityCenterUsers;
 
 ### IamIdentityCenterUsers <a name="IamIdentityCenterUsers" id="@DataChefHQ/data-landing-zone.IamIdentityCenterUsers"></a>
 
+The users and groups in the IAM Identity Center.
+
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterUsers.Initializer"></a>
 
 ```typescript
@@ -14092,6 +14147,8 @@ public readonly idp: IamIdentityCenterIdpUser[];
 ---
 
 ### IdentityStoreUserEmailsProps <a name="IdentityStoreUserEmailsProps" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps"></a>
+
+The email of a user in the IAM Identity Center.
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps.Initializer"></a>
 
@@ -14142,6 +14199,8 @@ public readonly primary: boolean;
 ---
 
 ### IdentityStoreUserNameProps <a name="IdentityStoreUserNameProps" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps"></a>
+
+The name of a user in the IAM Identity Center.
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps.Initializer"></a>
 
@@ -14226,6 +14285,8 @@ public readonly middleName: string;
 
 ### IdentityStoreUserProps <a name="IdentityStoreUserProps" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps"></a>
 
+A user in the IAM Identity Center.
+
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.Initializer"></a>
 
 ```typescript
@@ -14286,6 +14347,8 @@ public readonly userName: string;
 ---
 
 ### IdentityStoreUserPropsExt <a name="IdentityStoreUserPropsExt" id="@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt"></a>
+
+A user in the IAM Identity Center.
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.Initializer"></a>
 
@@ -16388,6 +16451,8 @@ public readonly networkEntityVpc: NetworkEntityVpc;
 
 
 ### IamIdentityCenter <a name="IamIdentityCenter" id="@DataChefHQ/data-landing-zone.IamIdentityCenter"></a>
+
+The IAM Identity Center.
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamIdentityCenter.Initializer"></a>
 
