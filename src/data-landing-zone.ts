@@ -4,12 +4,11 @@ import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
   DlzStack,
-  DlzStackProps, DlzVpcProps,
+  DlzStackProps, DlzVpcProps, IamIdentityCenterProps,
   SlackChannel,
 } from './constructs';
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
-import { IdentityStoreUserProps } from './constructs/identity-store-user';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
 import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
@@ -195,37 +194,6 @@ export interface DlzRegions {
    */
   readonly regional: Region[];
 }
-
-export interface IamIdentityCenterIdpUser {
-  readonly name: string;
-  readonly userId: string;
-}
-
-export interface IamIdentityCenterPermissionSetProps {
-  readonly name: string;
-  readonly description?: string;
-  readonly inlinePolicy?: any;
-  readonly managedPolicyArns?: string[];
-}
-
-export interface IamIdentityCenterAccessGroupProps {
-  readonly name: string;
-  readonly users?: string[];
-  readonly permissionSet: string;
-  readonly accounts: string[];
-  readonly description?: string;
-}
-
-export interface IamIdentityCenter {
-  readonly iamIdentityCenterArn?: string;
-  readonly iamIdentityCenterId: string;
-  readonly identityStoreId: string;
-  readonly awsSsoUsers?: IdentityStoreUserProps[];
-  readonly idpUsers?: IamIdentityCenterIdpUser[];
-  readonly permissionSets?: IamIdentityCenterPermissionSetProps[];
-  readonly accessGroups?: IamIdentityCenterAccessGroupProps[];
-}
-
 export function DlzAllRegions(regions: DlzRegions): Region[] {
   return [regions.global, ...regions.regional];
 }
@@ -358,35 +326,6 @@ export interface Network {
   readonly connections: NetworkConnection;
 }
 
-export interface IamIdentityCenterIdpUser {
-  readonly name: string;
-  readonly userId: string;
-}
-
-export interface IamIdentityCenterPermissionSetProps {
-  readonly name: string;
-  readonly description?: string;
-  readonly inlinePolicy?: any;
-  readonly managedPolicyArns?: string[];
-}
-
-export interface IamIdentityCenterAccessGroupProps {
-  readonly name: string;
-  readonly users?: string[];
-  readonly permissionSet: string;
-  readonly accounts: string[];
-  readonly description?: string;
-}
-
-export interface IamIdentityCenter {
-  readonly iamIdentityCenterArn?: string;
-  readonly iamIdentityCenterId: string;
-  readonly identityStoreId: string;
-  readonly awsSsoUsers?: IdentityStoreUserProps[];
-  readonly idpUsers?: IamIdentityCenterIdpUser[];
-  readonly permissionSets?: IamIdentityCenterPermissionSetProps[];
-  readonly accessGroups?: IamIdentityCenterAccessGroupProps[];
-}
 
 export interface DataLandingZoneProps {
   readonly localProfile: string;
@@ -396,7 +335,7 @@ export interface DataLandingZoneProps {
   /**
    * IAM Identity Center configuration
    */
-  readonly iamIdentityCenter?: IamIdentityCenter;
+  readonly iamIdentityCenter?: IamIdentityCenterProps;
 
   /**
    * List of services to deny in the organization SCP. If not specified, the default defined by

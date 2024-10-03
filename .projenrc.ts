@@ -63,7 +63,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   npmRegistryUrl: 'https://npm.pkg.github.com',
 });
 
-project.bundler.addBundle('./src/constructs/identity-store-user/lambda/', {
+
+project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',
   target: 'node20',
   sourcemap: true,
@@ -96,6 +97,7 @@ project.package.setScript('prepare', 'if [ "$CI" = "true" ]; then echo "CI detec
 project.gitignore.addPatterns('.dlz-reports');
 project.gitignore.addPatterns('.idea');
 project.gitignore.addPatterns('*.js');
+project.gitignore.addPatterns('*.js.map');
 project.gitignore.addPatterns('*.d.ts');
 project.gitignore.addPatterns('*.DS_Store');
 

@@ -1,4 +1,3 @@
-
 export function kebabToCamelCase(input: string): string {
   return input.split('-').map((word, index) => {
     if (index === 0) {

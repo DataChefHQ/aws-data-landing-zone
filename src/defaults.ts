@@ -1,7 +1,7 @@
-import { BudgetSubscribers, DlzControlTowerStandardControls } from './constructs/';
+import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { BudgetProps } from './constructs/budget';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps, IamIdentityCenterPermissionSetProps } from './data-landing-zone';
+import { DataLandingZoneProps } from './data-landing-zone';
 
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',
@@ -25,36 +25,26 @@ export class Defaults {
     ];
   }
 
-  public static catalogPermissionSet(): IamIdentityCenterPermissionSetProps {
-    return {
-      name: 'DLZ-CatalogAccess',
-      description: 'Use this permission set/role to grant Service Catalog access',
-      managedPolicyArns: [
-        'arn:aws:iam::aws:policy/AWSServiceCatalogAdminFullAccess',
-        'arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess',
-      ],
-    };
-  }
-
-  public static adminPermissionSet(): IamIdentityCenterPermissionSetProps {
-    return {
-      name: 'DLZ-AdminAccess',
-      description: 'Use this permission set/role to grant full access',
-      managedPolicyArns: [
-        'arn:aws:iam::aws:policy/AdministratorAccess',
-      ],
-    };
-  }
-
-
-  public static readOnlyPermissionSet(): IamIdentityCenterPermissionSetProps {
-    return {
-      name: 'DLZ-ReadOnlyAccess',
-      description: 'Use this permission set/role to grant read only access',
-      managedPolicyArns: [
-        'arn:aws:iam::aws:policy/ReadOnlyAccess',
-      ],
-    };
+  /**
+   * Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets
+   */
+  public static iamIdentityCenterPermissionSets(): IamIdentityCenterPermissionSetProps[] {
+    return [
+      {
+        name: 'AdministratorAccess',
+        description: 'Provides the AWS managed policy AdministratorAccess as permission set',
+        managedPolicyArns: [
+          'arn:aws:iam::aws:policy/AdministratorAccess',
+        ],
+      },
+      {
+        name: 'ReadOnlyAccess',
+        description: 'Provides the AWS  managed policy ReadOnlyAccess as permission set',
+        managedPolicyArns: [
+          'arn:aws:iam::aws:policy/ReadOnlyAccess',
+        ],
+      },
+    ];
   }
 
   /** *

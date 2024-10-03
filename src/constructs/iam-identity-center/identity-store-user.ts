@@ -30,7 +30,7 @@ export interface IdentityStoreUserEmailsProps {
 
 export class IdentityStoreUser extends Construct {
   public static fetchCodeDirectory(): string {
-    return path.join(__dirname, 'lambda');
+    return path.join(__dirname, 'identity-store-user-lambda');
   }
 
   public readonly userId: string;
