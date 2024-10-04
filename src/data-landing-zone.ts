@@ -1,4 +1,4 @@
-import { App, Stack, Tags } from 'aws-cdk-lib';
+import { App, Stack, Tags, Annotations } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import {
   BudgetProps, DlzAccountNetworks,
@@ -422,8 +422,7 @@ export interface AuditStacks {
 }
 
 
-export interface GlobalVariablesNcp1
-{
+export interface GlobalVariablesNcp1 {
   /* The key is the combination of the account ids */
   readonly vpcPeeringRoleKeys: string[];
 }
@@ -681,7 +680,13 @@ export class DataLandingZone {
     const ou = 'workloads';
 
     const workloadGlobalStacks: WorkloadGlobalStack[] = [];
+    const dlzAccountsMap = new Map<string, DLzAccount>();
     for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      if (dlzAccountsMap.has(dlzAccount.name)) {
+        Annotations.of(this.app).addError(`Duplicate account name ${dlzAccount.name} in OU ${ou}`);
+        continue;
+      }
+      dlzAccountsMap.set(dlzAccount.name, dlzAccount);
       const developGlobalStack = new WorkloadGlobalStack(this.app, {
         name: { ou, account: dlzAccount.name, stack: 'global', region: this.props.regions.global },
         env: {

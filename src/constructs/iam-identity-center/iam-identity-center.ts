@@ -73,6 +73,10 @@ export class IamIdentityCenter {
     allAccountIds.set('log', organization.ous.security.accounts.log.accountId);
     allAccountIds.set('audit', organization.ous.security.accounts.audit.accountId);
     for (const account of organization.ous.workloads.accounts) {
+      if (allAccountIds.has(account.name)) {
+        cdk.Annotations.of(dlzStack).addError(`Duplicate account ${account.name} found ignoring account id ${account.accountId}`);
+        continue;
+      }
       allAccountIds.set(account.name, account.accountId);
     }
     const allAccountNames = allAccountIds.keys();
