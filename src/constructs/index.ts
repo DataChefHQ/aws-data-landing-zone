@@ -5,3 +5,4 @@ export * from './organization-policies';
 export * from './budget';
 export * from './account-chatbots';
 export * from './dlz-ssm-reader';
+export * from './iam-identity-center';

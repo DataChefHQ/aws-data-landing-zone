@@ -49,10 +49,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   /* Runtime dependencies of this module that are jsii-enabled. */
   // deps: [ ],
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
-  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table'],
+  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table', 'aws-lambda', '@aws-sdk/client-identitystore', '@aws-sdk/client-sso-admin'],
   // description: undefined,
   /* Build dependencies for this repo/module. */
-  devDeps: ['husky'],
+  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node'],
   /* The "name" in package.json. */
   // packageName: undefined,
   jestOptions: {
@@ -61,6 +61,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   npmRegistryUrl: 'https://npm.pkg.github.com',
+});
+
+
+project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
+  platform: 'node',
+  target: 'node20',
+  sourcemap: true,
+  externals: ['aws-sdk'],
 });
 
 project.eslint!.addRules({
@@ -89,6 +97,7 @@ project.package.setScript('prepare', 'if [ "$CI" = "true" ]; then echo "CI detec
 project.gitignore.addPatterns('.dlz-reports');
 project.gitignore.addPatterns('.idea');
 project.gitignore.addPatterns('*.js');
+project.gitignore.addPatterns('*.js.map');
 project.gitignore.addPatterns('*.d.ts');
 project.gitignore.addPatterns('*.DS_Store');
 

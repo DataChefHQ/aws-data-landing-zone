@@ -1,3 +1,4 @@
+import { Duration } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 /**
@@ -30,4 +31,26 @@ function setDependencies(currentChunk: Construct[], previousChunk: Construct[]):
       resource.node.addDependency(previousChunkResource);
     }
   }
+}
+
+
+/**
+ * Changes a CDK Duration to an ISO8601 string in the format of PTxHxM
+ * For example, 1 hour and 30 minutes would be PT1H30M
+ * @param duration
+ */
+export function durationToIso8601(duration: Duration): string {
+  const totalMinutes = duration.toMinutes();
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  let isoString = 'PT';
+  if (hours > 0) {
+    isoString += `${hours}H`;
+  }
+  if (minutes > 0) {
+    isoString += `${minutes}M`;
+  }
+
+  return isoString;
 }

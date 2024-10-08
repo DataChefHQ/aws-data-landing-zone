@@ -1,10 +1,10 @@
-import { App, Stack, Tags } from 'aws-cdk-lib';
+import { App, Stack, Tags, Annotations } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
   DlzStack,
-  DlzStackProps, DlzVpcProps,
+  DlzStackProps, DlzVpcProps, IamIdentityCenterProps,
   SlackChannel,
 } from './constructs';
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
@@ -183,7 +183,6 @@ export enum Region {
   AP_SOUTH_2 = 'ap-south-2',
 }
 
-
 export interface DlzRegions {
   /**
    * Also known as the Home region for Control Tower
@@ -255,6 +254,7 @@ export interface RootOptions {
    */
   readonly controls?: DlzControlTowerStandardControls[];
 }
+
 export interface DLzOrganization {
   readonly organizationId: string;
   readonly root: RootOptions;
@@ -326,10 +326,16 @@ export interface Network {
   readonly connections: NetworkConnection;
 }
 
+
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
+
+  /**
+   * IAM Identity Center configuration
+   */
+  readonly iamIdentityCenter?: IamIdentityCenterProps;
 
   /**
    * List of services to deny in the organization SCP. If not specified, the default defined by
@@ -416,8 +422,7 @@ export interface AuditStacks {
 }
 
 
-export interface GlobalVariablesNcp1
-{
+export interface GlobalVariablesNcp1 {
   /* The key is the combination of the account ids */
   readonly vpcPeeringRoleKeys: string[];
 }
@@ -429,6 +434,7 @@ export interface GlobalVariablesNcp2 {
   readonly ownerVpcIds: DlzSsmReaderStackCache;
   readonly peeringRoleArns: DlzSsmReaderStackCache;
 }
+
 export interface GlobalVariablesNcp3 {
   /* Reduce the number of SSM readers, only create them if they do not exist for that key
    * This applies only if multiple SSM readers are used with the same key in the same stack, which we are */
@@ -587,13 +593,14 @@ export class DataLandingZone {
     Tags.of(app).add('Project', 'dlz');
     Tags.of(app).add('Environment', 'dlz');
 
-    if (this.props.printDeploymentOrder !== false) {printConsoleDeploymentOrder(deploymentOrder);}
+    if (this.props.printDeploymentOrder !== false) { printConsoleDeploymentOrder(deploymentOrder); }
+    if (this.props.printDeploymentOrder !== false) { printConsoleDeploymentOrder(deploymentOrder); }
     if (this.props.printReport !== false) {
       Report.printConsoleReport();
     }
-    if (this.props.saveReport !== false) {Report.saveConsoleReport();}
+    if (this.props.saveReport !== false) { Report.saveConsoleReport(); }
+    if (this.props.saveReport !== false) { Report.saveConsoleReport(); }
   }
-
 
   stageManagement() {
     const management = new ManagementStack(this.app, {
@@ -673,7 +680,13 @@ export class DataLandingZone {
     const ou = 'workloads';
 
     const workloadGlobalStacks: WorkloadGlobalStack[] = [];
+    const dlzAccountsMap = new Map<string, DLzAccount>();
     for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      if (dlzAccountsMap.has(dlzAccount.name)) {
+        Annotations.of(this.app).addError(`Duplicate account name ${dlzAccount.name} in OU ${ou}`);
+        continue;
+      }
+      dlzAccountsMap.set(dlzAccount.name, dlzAccount);
       const developGlobalStack = new WorkloadGlobalStack(this.app, {
         name: { ou, account: dlzAccount.name, stack: 'global', region: this.props.regions.global },
         env: {

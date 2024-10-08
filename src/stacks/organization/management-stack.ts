@@ -1,10 +1,16 @@
 import * as assert from 'assert';
-import { Annotations } from 'aws-cdk-lib';
 import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
-import { AccountChatbots, Budget, ControlTowerControlMappings, DlzStack, DlzStackProps } from '../../constructs';
+import {
+  AccountChatbots,
+  Budget,
+  ControlTowerControlMappings,
+  DlzStack,
+  DlzStackProps,
+  IamIdentityCenter,
+} from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
@@ -13,10 +19,11 @@ import { DlzServiceControlPolicy } from '../../constructs/organization-policies'
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
 import { PropsOrDefaults } from '../../defaults';
-import { limitCfnExecutions } from '../../lib/cfn-utils';
+import { limitCfnExecutions } from '../../lib/cdk-utils';
 import { Report } from '../../lib/report';
 
 export class ManagementStack extends DlzStack {
+
   public readonly topic: sns.Topic;
 
   constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
@@ -28,6 +35,7 @@ export class ManagementStack extends DlzStack {
     });
 
     this.rootControls();
+    this.iamIdentityCenter();
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
@@ -37,6 +45,13 @@ export class ManagementStack extends DlzStack {
     if (this.props.deploymentPlatform?.gitHub) {
       this.deploymentPlatformGitHub();
     }
+  }
+
+  /**
+   * IAM Identity Center
+   */
+  iamIdentityCenter() {
+    if (this.props.iamIdentityCenter) {new IamIdentityCenter(this, this.props.organization, this.props.iamIdentityCenter);}
   }
 
   /**
@@ -57,7 +72,7 @@ export class ManagementStack extends DlzStack {
     for (const control of selectedControls) {
       for (const ou of allOus) {
         if (ou === Ou.SECURITY && !DlzControlTowerEnabledControl.canBeAppliedToSecurityOU(control)) {
-          Annotations.of(this).addInfo(`Skipping control ${control.controlFriendlyName} for the Security OU, not supported.`);
+          cdk.Annotations.of(this).addInfo(`Skipping control ${control.controlFriendlyName} for the Security OU, not supported.`);
           continue;
         }
 
@@ -230,7 +245,7 @@ export class ManagementStack extends DlzStack {
       }
     }
 
-    for (const budget of this.props.budgets ) {
+    for (const budget of this.props.budgets) {
       new Budget(this, this.resourceName(`budget-${budget.name}`), budget);
     }
   }
@@ -279,4 +294,5 @@ export class ManagementStack extends DlzStack {
       exportName: this.resourceName('git-hub-deploy-role'),
     });
   }
+
 }

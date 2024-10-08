@@ -1,7 +1,19 @@
-import { BudgetSubscribers, DlzControlTowerStandardControls } from './constructs/';
+import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { BudgetProps } from './constructs/budget';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps } from './data-landing-zone';
+
+export enum IamIdentityAccounts {
+  ROOT = 'dlz:root',
+  SECURITY_LOG = 'dlz:security:log',
+  SECURITY_AUDIT = 'dlz:security:audit'
+}
+
+export enum IamIdentityPermissionSets {
+  ADMIN = 'dlz:adminaccess',
+  READ_ONLY = 'dlz:readonlyaccess',
+  CATALOG = 'dlz:catalogaccess',
+}
 
 export class Defaults {
   /** *
@@ -10,6 +22,28 @@ export class Defaults {
   public static denyServiceList() {
     return [
       'eks:*',
+    ];
+  }
+
+  /**
+   * Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets
+   */
+  public static iamIdentityCenterPermissionSets(): IamIdentityCenterPermissionSetProps[] {
+    return [
+      {
+        name: 'AdministratorAccess',
+        description: 'Provides the AWS managed policy AdministratorAccess as permission set',
+        managedPolicyArns: [
+          'arn:aws:iam::aws:policy/AdministratorAccess',
+        ],
+      },
+      {
+        name: 'ReadOnlyAccess',
+        description: 'Provides the AWS  managed policy ReadOnlyAccess as permission set',
+        managedPolicyArns: [
+          'arn:aws:iam::aws:policy/ReadOnlyAccess',
+        ],
+      },
     ];
   }
 
