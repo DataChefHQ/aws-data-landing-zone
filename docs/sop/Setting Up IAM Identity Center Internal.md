@@ -1,11 +1,11 @@
 
-# Setting Up AWS IAM Identity Center
+# Setting Up AWS IAM Identity Center Internal Provider
 
 *AWS IAM Identity Center* (formerly known as AWS Single Sign-On) allows you to centrally manage access to multiple AWS accounts and applications. This guide provides a detailed, step-by-step process to set up IAM Identity Center in your AWS environment.
 
 ## Table of Contents
 
-- [Setting Up AWS IAM Identity Center](#setting-up-aws-iam-identity-center)
+- [Setting Up AWS IAM Identity Center Internal Provider](#setting-up-aws-iam-identity-center-internal-provider)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
   - [Step 1: Sign In to the AWS Management Console](#step-1-sign-in-to-the-aws-management-console)
