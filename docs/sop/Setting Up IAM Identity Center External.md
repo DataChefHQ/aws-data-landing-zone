@@ -67,7 +67,6 @@ IAM Identity Center allows you to choose where your user identities are managed.
 - Select **External Identity Provider**.
 - Follow the prompts to integrate with your chosen IdP (e.g., AWS Managed Microsoft AD, Okta).
 ![select external identity so](external_identity_select.png)
-*For simplicity, we'll proceed with **Option A** in this guide.*
 
 ---
 
@@ -114,7 +113,7 @@ If the provider requires a metadata file, you can download it from the **Metadat
 
 ![manual provisioning](image-11.png)
 
-- To disable automatic provisioning, select **Manage provisioning** from the dropdown menu.
+- To disable automatic provisioning, select **Manage provisioning** from the **Actions** dropdown menu.
 ![manage provisioning](image-12.png)
 - In the **Automatic provisioning** section, select **Disable** button.
 ![disable automatic provisioning](image-13.png)
