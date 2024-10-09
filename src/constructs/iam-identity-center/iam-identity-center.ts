@@ -12,14 +12,6 @@ import { durationToIso8601 } from '../../lib/cdk-utils';
 import { DlzStack } from '../dlz-stack/index';
 
 /**
- * A user in the IAM Identity Center
- */
-export interface IamIdentityCenterIdpUser {
-  readonly name: string;
-  readonly userId: string;
-}
-
-/**
  * A permission set in the IAM Identity Center
  */
 export interface IamIdentityCenterPermissionSetProps {
@@ -43,19 +35,11 @@ export interface IamIdentityCenterAccessGroupProps {
 
 }
 
-/**
- * The users and groups in the IAM Identity Center
- */
-export interface IamIdentityCenterUsers {
-  readonly identityStore?: IdentityStoreUserProps[];
-  readonly idp?: IamIdentityCenterIdpUser[];
-}
-
 export interface IamIdentityCenterProps {
   readonly arn: string;
   readonly id: string;
   readonly storeId: string;
-  readonly users?: IamIdentityCenterUsers;
+  readonly users?: IdentityStoreUserProps[];
   readonly permissionSets?: IamIdentityCenterPermissionSetProps[];
   readonly accessGroups?: IamIdentityCenterAccessGroupProps[];
 }
@@ -83,15 +67,8 @@ export class IamIdentityCenter {
 
     /* Create all users */
     const allUsersIds = new Map<string, string>();
-    for (const user of iamIdentityCenter.users?.idp ?? []) {
-      allUsersIds.set(user.name, user.userId);
-    }
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
-    for (const user of iamIdentityCenter.users?.identityStore ?? []) {
-      if (!/^[a-zA-Z0-9]+[a-zA-Z0-9\-\_]+$/.test(user.userName)) {
-        cdk.Annotations.of(dlzStack).addError(`Invalid user name: ${user.userName} - only letters, numbers, - and _ are allowed`);
-        continue;
-      }
+    for (const user of iamIdentityCenter.users ?? []) {
       const userConstruct = new IdentityStoreUser(dlzStack, dlzStack.resourceName(`aws-sso-user-${user.userName}`),
         {
           ...user,
