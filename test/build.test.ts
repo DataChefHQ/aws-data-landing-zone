@@ -439,55 +439,47 @@ describe('CdkExpressPipelineLegacy', () => {
         arn: 'sso-instance-arn',
         id: 'sso-instance-id',
         storeId: 'identity-store-id',
-        users: {
-          identityStore: [
-            {
-              userName: 'testusera',
-              name: {
-                formatted: 'Test User A',
-                familyName: 'User A',
-                givenName: 'Test A',
-              },
-              displayName: 'Test User A',
-              email: {
-                value: 'testusera@example.com',
-                type: 'work',
-              },
+        users: [
+          {
+            userName: 'testusera',
+            name: {
+              formatted: 'Test User A',
+              familyName: 'User A',
+              givenName: 'Test A',
             },
-            {
-              userName: 'testuserb',
-              name: {
-                formatted: 'Test User B',
-                familyName: 'User B',
-                givenName: 'Test B',
-              },
-              displayName: 'Test User B',
-              email: {
-                value: 'testuserb@example.com',
-                type: 'work',
-              },
+            displayName: 'Test User A',
+            email: {
+              value: 'testusera@example.com',
+              type: 'work',
             },
-            {
-              userName: 'testuserc',
-              name: {
-                formatted: 'Test User C',
-                familyName: 'User C',
-                givenName: 'Test C',
-              },
-              displayName: 'Test User C',
-              email: {
-                value: 'testuserc@example.com',
-                type: 'work',
-              },
+          },
+          {
+            userName: 'idpuser',
+            name: {
+              formatted: 'Test User B',
+              familyName: 'User B',
+              givenName: 'Test B',
             },
-          ],
-          idp: [
-            {
-              name: 'idpuser',
-              userId: 'idp-user-id',
+            displayName: 'Test User B',
+            email: {
+              value: 'testuserb@example.com',
+              type: 'work',
             },
-          ],
-        },
+          },
+          {
+            userName: 'testuserc',
+            name: {
+              formatted: 'Test User C',
+              familyName: 'User C',
+              givenName: 'Test C',
+            },
+            displayName: 'Test User C',
+            email: {
+              value: 'testuserc@example.com',
+              type: 'work',
+            },
+          },
+        ],
         permissionSets: [
           ...Defaults.iamIdentityCenterPermissionSets(),
           {
@@ -529,7 +521,6 @@ describe('CdkExpressPipelineLegacy', () => {
           },
         ],
       },
-
       printDeploymentOrder: false,
       saveReport: false,
       printReport: false,

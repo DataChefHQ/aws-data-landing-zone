@@ -13896,47 +13896,6 @@ public readonly userName: string;
 
 ---
 
-### IamIdentityCenterIdpUser <a name="IamIdentityCenterIdpUser" id="@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser"></a>
-
-A user in the IAM Identity Center.
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser.Initializer"></a>
-
-```typescript
-import { IamIdentityCenterIdpUser } from '@DataChefHQ/data-landing-zone'
-
-const iamIdentityCenterIdpUser: IamIdentityCenterIdpUser = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser.property.userId">userId</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
----
-
-##### `userId`<sup>Required</sup> <a name="userId" id="@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser.property.userId"></a>
-
-```typescript
-public readonly userId: string;
-```
-
-- *Type:* string
-
----
-
 ### IamIdentityCenterPermissionSetProps <a name="IamIdentityCenterPermissionSetProps" id="@DataChefHQ/data-landing-zone.IamIdentityCenterPermissionSetProps"></a>
 
 A permission set in the IAM Identity Center.
@@ -14041,7 +14000,7 @@ const iamIdentityCenterProps: IamIdentityCenterProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps.property.storeId">storeId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps.property.accessGroups">accessGroups</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterAccessGroupProps">IamIdentityCenterAccessGroupProps</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps.property.permissionSets">permissionSets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterPermissionSetProps">IamIdentityCenterPermissionSetProps</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps.property.users">users</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterUsers">IamIdentityCenterUsers</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps.property.users">users</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]</code> | *No description.* |
 
 ---
 
@@ -14098,51 +14057,10 @@ public readonly permissionSets: IamIdentityCenterPermissionSetProps[];
 ##### `users`<sup>Optional</sup> <a name="users" id="@DataChefHQ/data-landing-zone.IamIdentityCenterProps.property.users"></a>
 
 ```typescript
-public readonly users: IamIdentityCenterUsers;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterUsers">IamIdentityCenterUsers</a>
-
----
-
-### IamIdentityCenterUsers <a name="IamIdentityCenterUsers" id="@DataChefHQ/data-landing-zone.IamIdentityCenterUsers"></a>
-
-The users and groups in the IAM Identity Center.
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamIdentityCenterUsers.Initializer"></a>
-
-```typescript
-import { IamIdentityCenterUsers } from '@DataChefHQ/data-landing-zone'
-
-const iamIdentityCenterUsers: IamIdentityCenterUsers = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterUsers.property.identityStore">identityStore</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterUsers.property.idp">idp</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser">IamIdentityCenterIdpUser</a>[]</code> | *No description.* |
-
----
-
-##### `identityStore`<sup>Optional</sup> <a name="identityStore" id="@DataChefHQ/data-landing-zone.IamIdentityCenterUsers.property.identityStore"></a>
-
-```typescript
-public readonly identityStore: IdentityStoreUserProps[];
+public readonly users: IdentityStoreUserProps[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]
-
----
-
-##### `idp`<sup>Optional</sup> <a name="idp" id="@DataChefHQ/data-landing-zone.IamIdentityCenterUsers.property.idp"></a>
-
-```typescript
-public readonly idp: IamIdentityCenterIdpUser[];
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterIdpUser">IamIdentityCenterIdpUser</a>[]
 
 ---
 

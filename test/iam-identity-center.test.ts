@@ -83,12 +83,12 @@ class TestStack extends DlzStack {
   }
 }
 
+jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
+  return path.join(__dirname, '../assets/constructs/iam-identity-center/identity-store-user-lambda');
+});
+
 describe('Permission sets', () => {
-  beforeEach(() => {
-    jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
-      return path.join(__dirname, '../assets/constructs/iam-identity-center/identity-store-user-lambda');
-    });
-  });
+
 
   const app = new App();
   const stack = new TestStack(app, {
@@ -155,11 +155,6 @@ describe('Permission sets', () => {
 });
 
 describe('Access groups', () => {
-  beforeEach(() => {
-    jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
-      return path.join(__dirname, '../assets/constructs/iam-identity-center/identity-store-user-lambda');
-    });
-  });
 
   const app = new App();
   const stack = new TestStack(app, {
@@ -199,21 +194,34 @@ describe('Access groups', () => {
       storeId: 'identity-store-id',
       arn: 'arn:aws:sso:::instance/sso-instance-id',
       permissionSets: [...Defaults.iamIdentityCenterPermissionSets()],
-      users: {
-        idp: [{ name: 'idpuser', userId: 'idp-user-id' }],
-      },
+      users: [{
+        displayName: 'Test User',
+        email: {
+          value: 'testuser@example.com',
+          type: 'work',
+        },
+        name: {
+          formatted: 'Test User',
+          givenName: 'Test',
+          familyName: 'User',
+          middleName: '',
+          honorificPrefix: '',
+          honorificSuffix: '',
+        },
+        userName: 'testuser',
+      }],
       accessGroups: [
         {
           name: 'test-group',
           description: 'Test Group',
-          userNames: ['idpuser'],
+          userNames: ['testuser'],
           permissionSetName: 'AdministratorAccess',
           accountNames: ['*'],
         },
         {
           name: 'project-1-admins',
           description: 'Admin access to only project 1 accounts',
-          userNames: ['idpuser'],
+          userNames: ['testuser'],
           permissionSetName: 'AdministratorAccess',
           accountNames: ['project-1-*'],
         },
@@ -281,11 +289,7 @@ describe('Access groups', () => {
 
 
 describe('IAM Identity Center', () => {
-  beforeEach(() => {
-    jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
-      return path.join(__dirname, '../assets/constructs/iam-identity-center/identity-store-user-lambda');
-    });
-  });
+
   test('iamIdentityCenter function', () => {
     const app = new App();
     const stack = new TestStack(app, {
@@ -303,29 +307,34 @@ describe('IAM Identity Center', () => {
         id: 'sso-instance-id',
         storeId: 'identity-store-id',
         arn: 'arn:aws:sso:::instance/sso-instance-id',
-        users: {
-          identityStore: [
-            {
-              userName: 'testuser',
-              name: {
-                formatted: 'Test User',
-                familyName: 'User',
-                givenName: 'Test',
-              },
-              displayName: 'Test User',
-              email: {
-                value: 'testuser@example.com',
-                type: 'work',
-              },
+        users: [
+          {
+            userName: 'testuser@example.com',
+            name: {
+              formatted: 'Test User',
+              familyName: 'User',
+              givenName: 'Test',
             },
-          ],
-          idp: [
-            {
-              name: 'idpuser',
-              userId: 'idp-user-id',
+            displayName: 'Test User',
+            email: {
+              value: 'testuser@example.com',
+              type: 'work',
             },
-          ],
-        },
+          },
+          {
+            userName: 'idpuser@example.com',
+            name: {
+              formatted: 'Test User2',
+              familyName: 'User2',
+              givenName: 'Test2',
+            },
+            displayName: 'Test User2',
+            email: {
+              value: 'idpuser@example.com',
+              type: 'work',
+            },
+          },
+        ],
         permissionSets: [
           {
             name: 'custom-permission-set',
@@ -336,7 +345,7 @@ describe('IAM Identity Center', () => {
         accessGroups: [
           {
             name: 'test-group',
-            userNames: ['testuser', 'idpuser'],
+            userNames: ['testuser@example.com', 'idpuser@example.com'],
             permissionSetName: 'custom-permission-set',
             accountNames: ['root'],
             description: 'Test Group',
@@ -355,7 +364,7 @@ describe('IAM Identity Center', () => {
     });
 
     template.hasResourceProperties('AWS::CloudFormation::CustomResource', {
-      userName: 'testuser',
+      userName: 'testuser@example.com',
       name: {
         formatted: 'Test User',
         familyName: 'User',
@@ -406,7 +415,7 @@ describe('IAM Identity Center', () => {
       MemberId: {
         UserId: {
           'Fn::GetAtt': [
-            Match.stringLikeRegexp('^dlztestawsssousertestusercustomResourceResult([0-9]+)$'),
+            Match.stringLikeRegexp('^dlztestawsssousertestuserexamplecomcustomResourceResult([0-9A-Z]+)$'),
             'UserId',
           ],
         },
@@ -422,7 +431,12 @@ describe('IAM Identity Center', () => {
       },
       IdentityStoreId: 'identity-store-id',
       MemberId: {
-        UserId: 'idp-user-id',
+        UserId: {
+          'Fn::GetAtt': [
+            Match.stringLikeRegexp('^dlztestawsssouseridpuserexamplecomcustomResourceResult([0-9A-Z]+)$'),
+            'UserId',
+          ],
+        },
       },
     });
   });
