@@ -35,19 +35,14 @@
 
 ---
 
-## Setup External Identity Provider
+## Step 1 - Setup AWS IAM Identity Center
 
-To setup an External Identity Provider you can follow this guide [Setting Up AWS IAM Identity Center External Identity Provider](Setting%20Up%20IAM%20Identity%20Center%20External.md)
+AWS IAM Identity Center needs to be set up to use the internal or external user store. Follow the guides below to set up one or the other. ⚠️ **Choose one, do not do both.** 
 
----
+- [Setting Up AWS IAM Identity Center Internal Provider](Setting%20Up%20IAM%20Identity%20Center%20Internal.md)
+- [Setting Up AWS IAM Identity Center External Identity Provider](Setting%20Up%20IAM%20Identity%20Center%20External.md)
 
-## Setup Internal Directory
-
-To setup an Internal Directory you can follow this guide [Setting Up AWS IAM Identity Center Internal Provider](Setting%20Up%20IAM%20Identity%20Center%20Internal.md)
-
----
-
-## IAM Identity Center Settings
+## Step 2 - Configre DLZ properties to use AWS IAM Identity Center
 
 - In the IAM Identity Center dashboard, click on **Settings** in the sidebar.
 ![select settings](select_settings.png)
