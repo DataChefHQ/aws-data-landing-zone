@@ -102,10 +102,8 @@ If the provider requires a metadata file, you can download it from the **Metadat
 ## Step 6: Review And Confirm Your Changes
 
 - Read the information carefully and confirm that you want to proceed.
-- Type **ACCEPT** in the text box to confirm your changes.
+- Type **ACCEPT** in the text box to confirm your changes and click **Change Identity Source** to proceed.
 ![accept](image-9.png)
-- Click **Change Identity Source** to proceed.
-![change identity source](image-10.png)
 
 ---
 
