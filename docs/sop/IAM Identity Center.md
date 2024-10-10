@@ -37,13 +37,13 @@
 
 ## Setup External Identity Provider
 
-To setup an External Identity Provider you can follow this guide [Setting Up AWS IAM Identity Center External Identity Provider](Setting%20Up%20AWS%20IAM%20Identity%20Center%20External%20Identity%20Provider.md)
+To setup an External Identity Provider you can follow this guide [Setting Up AWS IAM Identity Center External Identity Provider](Setting%20Up%20IAM%20Identity%20Center%20External.md)
 
 ---
 
 ## Setup Internal Directory
 
-To setup an Internal Directory you can follow this guide [Setting Up AWS IAM Identity Center Internal Provider](Setting%20Up%20AWS%20IAM%20Identity%20Center%20Internal%20Provider.md)
+To setup an Internal Directory you can follow this guide [Setting Up AWS IAM Identity Center Internal Provider](Setting%20Up%20IAM%20Identity%20Center%20Internal.md)
 
 ---
 
