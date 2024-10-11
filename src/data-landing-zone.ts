@@ -1,5 +1,6 @@
 import { App, Stack, Tags, Annotations } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
 import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
@@ -322,8 +323,42 @@ export interface NetworkConnection {
   readonly vpcPeering: NetworkConnectionVpcPeering[];
 }
 
+export interface NetworkNatGateway {
+  readonly eip?: ec2. CfnEIPProps;
+}
+export interface NetworkNatInstance {
+  readonly eip?: ec2. CfnEIPProps;
+  readonly instanceType: InstanceType;
+}
+export interface NetworkNatType {
+  readonly gateway?: NetworkNatGateway;
+  readonly instance?: NetworkNatInstance;
+}
+export interface NetworkNat {
+  /**
+   * The name of the NAT Gateway to easily identify it
+   */
+  readonly name: string;
+
+  /**
+   * The location where the NAT will exist. The network address must target a specific subnet
+   */
+  readonly location: NetworkAddress;
+
+  /**
+   * The route tables that should route to the NAT. Must be in the same Account, Region and VPC as the NAT.
+   */
+  readonly allowAccessFrom: NetworkAddress[];
+
+  /**
+   * The type of NAT to create
+   * */
+  readonly type: NetworkNatType;
+}
+
 export interface Network {
-  readonly connections: NetworkConnection;
+  readonly connections?: NetworkConnection;
+  readonly nats?: NetworkNat[];
 }
 
 
@@ -474,6 +509,83 @@ function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
   console.log('');
 }
 
+function validations(props: DataLandingZoneProps) {
+
+  let allNetworkAdressVariants: NetworkAddress[] = [];
+  for (const account of props.organization.ous.workloads.accounts) {
+    allNetworkAdressVariants.push(new NetworkAddress(account.name));
+    for (const vpc of account.vpcs || []) {
+      allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region));
+      allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name));
+      for (const subnet of vpc.subnets) {
+        allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name, subnet.segment));
+        allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name, subnet.segment, subnet.name));
+      }
+    }
+  }
+  function networkAddressExists(networkAddress: NetworkAddress) {
+    return allNetworkAdressVariants.some(address => address.matches(networkAddress));
+  }
+
+  /* VPC Peering */
+  for (const connection of props.network?.connections?.vpcPeering || []) {
+    if (!networkAddressExists(connection.source)) {
+      throw new Error(`The VPC Peering 'source' NetworkAddress ${connection.source} does not exist`);
+    }
+    if (!networkAddressExists(connection.destination)) {
+      throw new Error(`The VPC Peering 'destination' NetworkAddress ${connection.destination} does not exist`);
+    }
+
+    if (connection.source.subnet || connection.destination.subnet) {
+      throw new Error('VPC Peering addresses'+
+        ` (source: ${connection.source}, destination: ${connection.destination})`+
+        ' can not be specified on a subnet level, segment is the lowest');
+    }
+    if (connection.source.account == connection.destination.account &&
+      connection.source.region == connection.destination.region &&
+      connection.source.vpc == connection.destination.vpc) {
+      throw new Error('VPC Peering'+
+        ` (source: ${connection.source}, destination: ${connection.destination})`+
+        ' can not be used within the same VPC');
+    }
+  }
+
+
+  /* NATs */
+  for (const nat of props.network?.nats || []) {
+    if (!networkAddressExists(nat.location)) {
+      throw new Error(`The NAT (${nat.name}) 'location' NetworkAddress ${nat.location} does not exist`);
+    }
+    if (!nat.location.subnet) {
+      throw new Error(`The NAT (${nat.name}) 'location' NetworkAddress must target a specific subnet`);
+    }
+    if (nat.type.gateway && nat.type.instance) {
+      throw new Error(`The NAT (${nat.name}) can not have both 'gateway' and 'instance' properties specified`);
+    }
+    if (!nat.type.gateway && !nat.type.instance) {
+      throw new Error(`The NAT (${nat.name}) must have either 'gateway' or 'instance' property specified`);
+    }
+
+    for (const allowAccessFrom of nat.allowAccessFrom) {
+      if (!networkAddressExists(allowAccessFrom)) {
+        throw new Error(`The NAT (${nat.name}) 'allowAccessFrom' NetworkAddress ${allowAccessFrom} does not exist`);
+      }
+      if (!allowAccessFrom.segment) {
+        throw new Error(`NAT (${nat.name}) 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must target ` +
+         'a specific segment');
+      }
+
+      if (nat.location.account !== allowAccessFrom.account ||
+        nat.location.region !== allowAccessFrom.region ||
+        nat.location.vpc !== allowAccessFrom.vpc
+      ) {
+        throw new Error(`NAT ${nat.name} 'location' and 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must `+
+         'be in the same account, region and VPC');
+      }
+    }
+  }
+}
+
 export class DataLandingZone {
 
   /* For direct access to stacks */
@@ -510,6 +622,8 @@ export class DataLandingZone {
 
   constructor(private app: App, private props: DataLandingZoneProps) {
 
+    validations(props);
+
     this.managementStack = this.stageManagement();
     this.auditStacks = this.stageAudit();
     this.logStacks = this.stageLog();
@@ -524,8 +638,6 @@ export class DataLandingZone {
 
     this.workloadGlobalNetworkConnectionsPhase3Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase3Stack();
     this.workloadRegionalNetworkConnectionsPhase3Stacks = this.stageWorkloadRegionalNetworkConnectionsPhase3Stack();
-
-    // this.workloadGlobalNetworkConnectionsPhase2Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase2Stack();
 
     const deploymentOrder: DeploymentOrder =
     {

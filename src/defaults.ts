@@ -1,3 +1,4 @@
+import * as cdk from 'aws-cdk-lib';
 import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { BudgetProps } from './constructs/budget';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
@@ -36,6 +37,7 @@ export class Defaults {
         managedPolicyArns: [
           'arn:aws:iam::aws:policy/AdministratorAccess',
         ],
+        sessionDuration: cdk.Duration.hours(12),
       },
       {
         name: 'ReadOnlyAccess',
@@ -43,6 +45,7 @@ export class Defaults {
         managedPolicyArns: [
           'arn:aws:iam::aws:policy/ReadOnlyAccess',
         ],
+        sessionDuration: cdk.Duration.hours(12),
       },
     ];
   }
