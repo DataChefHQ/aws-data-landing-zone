@@ -69,9 +69,20 @@ export class IamIdentityCenter {
     const allUsersIds = new Map<string, string>();
     const awsSsoUsers = new Map<string, IdentityStoreUser>();
     for (const user of iamIdentityCenter.users ?? []) {
+      const displayName = `${user.name} ${user.surname}`;
       const userConstruct = new IdentityStoreUser(dlzStack, dlzStack.resourceName(`aws-sso-user-${user.userName}`),
         {
-          ...user,
+          userName: user.userName,
+          name: {
+            formatted: displayName,
+            familyName: user.surname,
+            givenName: user.name,
+          },
+          email: {
+            value: user.userName,
+            type: 'work',
+          },
+          displayName,
           identityStoreId: iamIdentityCenter.storeId,
         });
       awsSsoUsers.set(user.userName, userConstruct);
@@ -137,6 +148,11 @@ export class IamIdentityCenter {
           continue;
         }
 
+        const isAccountNumber = groupAccountName.match(/^\d{12}$/);
+        if (!isAccountNumber) {
+          groupAccountIds.push(allAccountIds.get(groupAccountName)!);
+          continue;
+        }
         if (!allAccountIds.has(groupAccountName)) {
           cdk.Annotations.of(dlzStack).addError(`The account ${groupAccountName} in group ${group.name} does not exist`);
           continue;
