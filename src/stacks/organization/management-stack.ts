@@ -1,7 +1,6 @@
 import * as assert from 'assert';
 import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import {
   AccountChatbots,
@@ -24,15 +23,8 @@ import { Report } from '../../lib/report';
 
 export class ManagementStack extends DlzStack {
 
-  public readonly topic: sns.Topic;
-
   constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
     super(scope, stackProps);
-
-    this.topic = new sns.Topic(this, this.resourceName('test-topic'), {
-      displayName: this.resourceName('test-topic'),
-      topicName: this.resourceName('test-topic'),
-    });
 
     this.rootControls();
     this.iamIdentityCenter();
