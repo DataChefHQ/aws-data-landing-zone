@@ -1,6 +1,5 @@
 import * as assert from 'assert';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as sns from 'aws-cdk-lib/aws-sns';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { DlzStack, DlzAccountNetwork } from '../../../../constructs/index';
@@ -27,11 +26,6 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
 
       this.createPeeringRole(sourceAccountNetwork, destinationAccountNetwork);
     }
-
-    new sns.Topic(this, this.resourceName('test-topic'), {
-      displayName: this.resourceName('test-topic'),
-      topicName: this.resourceName('test-topic'),
-    });
   }
 
   createPeeringRole (from: DlzAccountNetwork, to: DlzAccountNetwork) {

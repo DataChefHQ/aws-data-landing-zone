@@ -1,5 +1,4 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { DlzStack } from '../../../../constructs';
@@ -17,11 +16,6 @@ export class WorkloadGlobalStack extends DlzStack {
     shared.createVpcs();
 
     this.ssmAssumeCrossAccountRole();
-
-    new sns.Topic(this, this.resourceName('test-topic'), {
-      displayName: this.resourceName('test-topic'),
-      topicName: this.resourceName('test-topic'),
-    });
   }
 
   ssmAssumeCrossAccountRole() {
