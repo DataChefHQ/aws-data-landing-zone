@@ -195,33 +195,22 @@ describe('Access groups', () => {
       arn: 'arn:aws:sso:::instance/sso-instance-id',
       permissionSets: [...Defaults.iamIdentityCenterPermissionSets()],
       users: [{
-        displayName: 'Test User',
-        email: {
-          value: 'testuser@example.com',
-          type: 'work',
-        },
-        name: {
-          formatted: 'Test User',
-          givenName: 'Test',
-          familyName: 'User',
-          middleName: '',
-          honorificPrefix: '',
-          honorificSuffix: '',
-        },
-        userName: 'testuser',
+        userName: 'testuser@example.com',
+        name: 'Test',
+        surname: 'User',
       }],
       accessGroups: [
         {
           name: 'test-group',
           description: 'Test Group',
-          userNames: ['testuser'],
+          userNames: ['testuser@example.com'],
           permissionSetName: 'AdministratorAccess',
           accountNames: ['*'],
         },
         {
           name: 'project-1-admins',
           description: 'Admin access to only project 1 accounts',
-          userNames: ['testuser'],
+          userNames: ['testuser@example.com'],
           permissionSetName: 'AdministratorAccess',
           accountNames: ['project-1-*'],
         },
@@ -310,29 +299,13 @@ describe('IAM Identity Center', () => {
         users: [
           {
             userName: 'testuser@example.com',
-            name: {
-              formatted: 'Test User',
-              familyName: 'User',
-              givenName: 'Test',
-            },
-            displayName: 'Test User',
-            email: {
-              value: 'testuser@example.com',
-              type: 'work',
-            },
+            name: 'Test',
+            surname: 'User',
           },
           {
             userName: 'idpuser@example.com',
-            name: {
-              formatted: 'Test User2',
-              familyName: 'User2',
-              givenName: 'Test2',
-            },
-            displayName: 'Test User2',
-            email: {
-              value: 'idpuser@example.com',
-              type: 'work',
-            },
+            name: 'Test2',
+            surname: 'User2',
           },
         ],
         permissionSets: [
