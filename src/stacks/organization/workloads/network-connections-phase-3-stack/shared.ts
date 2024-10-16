@@ -17,21 +17,7 @@ export class Shared {
 
   createVpcPeeringRoutes() {
 
-    for (const connection of this.props.network?.connections.vpcPeering || []) {
-
-      /* Validation */
-      if (connection.source.subnet || connection.destination.subnet) {
-        throw new Error('VPC Peering addresses'+
-        ` (source: ${connection.source}, destination: ${connection.destination})`+
-        ' can not be specified on a subnet level, segment is the lowest');
-      }
-      if (connection.source.account == connection.destination.account &&
-         connection.source.region == connection.destination.region &&
-         connection.source.vpc == connection.destination.vpc) {
-        throw new Error('VPC Peering'+
-          ` (source: ${connection.source}, destination: ${connection.destination})`+
-          ' can not be used within the same VPC');
-      }
+    for (const connection of this.props.network?.connections?.vpcPeering || []) {
 
       const sourceAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.source); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
       if (!sourceAccountNetworks?.length) {

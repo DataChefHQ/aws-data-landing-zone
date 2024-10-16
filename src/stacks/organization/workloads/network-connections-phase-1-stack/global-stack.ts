@@ -13,7 +13,7 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
   constructor(scope: Construct, private workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
     super(scope, workloadAccountProps);
 
-    for (const connection of this.props.network?.connections.vpcPeering || []) {
+    for (const connection of this.props.network?.connections?.vpcPeering || []) {
 
       /* A connection can return more than 1 NetworkEntities, but all of these NetworkEntities will have the same
        * account information. That is all we are interested in, so always take the first. */
