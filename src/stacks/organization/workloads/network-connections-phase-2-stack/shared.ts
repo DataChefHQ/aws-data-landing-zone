@@ -10,7 +10,7 @@ export class Shared {
   }
 
   createVpcPeeringConnections() {
-    for (const connection of this.props.network?.connections.vpcPeering || []) {
+    for (const connection of this.props.network?.connections?.vpcPeering || []) {
       const sourceAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.source); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
       if (!sourceAccountNetworks?.length) {
         throw new Error(`No DlzAccountNetworks found for VPC Peering source ${connection.source}`);
