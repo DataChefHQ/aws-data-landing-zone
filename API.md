@@ -14431,16 +14431,27 @@ const network: Network = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.Network.property.connections">connections</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnection">NetworkConnection</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Network.property.nats">nats</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat">NetworkNat</a>[]</code> | *No description.* |
 
 ---
 
-##### `connections`<sup>Required</sup> <a name="connections" id="@DataChefHQ/data-landing-zone.Network.property.connections"></a>
+##### `connections`<sup>Optional</sup> <a name="connections" id="@DataChefHQ/data-landing-zone.Network.property.connections"></a>
 
 ```typescript
 public readonly connections: NetworkConnection;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkConnection">NetworkConnection</a>
+
+---
+
+##### `nats`<sup>Optional</sup> <a name="nats" id="@DataChefHQ/data-landing-zone.Network.property.nats"></a>
+
+```typescript
+public readonly nats: NetworkNat[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkNat">NetworkNat</a>[]
 
 ---
 
@@ -14647,6 +14658,185 @@ public readonly vpc: CfnVPC;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.CfnVPC
+
+---
+
+### NetworkNat <a name="NetworkNat" id="@DataChefHQ/data-landing-zone.NetworkNat"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkNat.Initializer"></a>
+
+```typescript
+import { NetworkNat } from '@DataChefHQ/data-landing-zone'
+
+const networkNat: NetworkNat = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat.property.allowAccessFrom">allowAccessFrom</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>[]</code> | The route tables that should route to the NAT. |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat.property.location">location</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | The location where the NAT will exist. |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat.property.name">name</a></code> | <code>string</code> | The name of the NAT Gateway to easily identify it. |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat.property.type">type</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatType">NetworkNatType</a></code> | The type of NAT to create. |
+
+---
+
+##### `allowAccessFrom`<sup>Required</sup> <a name="allowAccessFrom" id="@DataChefHQ/data-landing-zone.NetworkNat.property.allowAccessFrom"></a>
+
+```typescript
+public readonly allowAccessFrom: NetworkAddress[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>[]
+
+The route tables that should route to the NAT.
+
+Must be in the same Account, Region and VPC as the NAT.
+
+---
+
+##### `location`<sup>Required</sup> <a name="location" id="@DataChefHQ/data-landing-zone.NetworkNat.property.location"></a>
+
+```typescript
+public readonly location: NetworkAddress;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
+
+The location where the NAT will exist.
+
+The network address must target a specific subnet
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.NetworkNat.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+The name of the NAT Gateway to easily identify it.
+
+---
+
+##### `type`<sup>Required</sup> <a name="type" id="@DataChefHQ/data-landing-zone.NetworkNat.property.type"></a>
+
+```typescript
+public readonly type: NetworkNatType;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkNatType">NetworkNatType</a>
+
+The type of NAT to create.
+
+---
+
+### NetworkNatGateway <a name="NetworkNatGateway" id="@DataChefHQ/data-landing-zone.NetworkNatGateway"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkNatGateway.Initializer"></a>
+
+```typescript
+import { NetworkNatGateway } from '@DataChefHQ/data-landing-zone'
+
+const networkNatGateway: NetworkNatGateway = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatGateway.property.eip">eip</a></code> | <code>aws-cdk-lib.aws_ec2.CfnEIPProps</code> | *No description.* |
+
+---
+
+##### `eip`<sup>Optional</sup> <a name="eip" id="@DataChefHQ/data-landing-zone.NetworkNatGateway.property.eip"></a>
+
+```typescript
+public readonly eip: CfnEIPProps;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.CfnEIPProps
+
+---
+
+### NetworkNatInstance <a name="NetworkNatInstance" id="@DataChefHQ/data-landing-zone.NetworkNatInstance"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkNatInstance.Initializer"></a>
+
+```typescript
+import { NetworkNatInstance } from '@DataChefHQ/data-landing-zone'
+
+const networkNatInstance: NetworkNatInstance = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatInstance.property.instanceType">instanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatInstance.property.eip">eip</a></code> | <code>aws-cdk-lib.aws_ec2.CfnEIPProps</code> | *No description.* |
+
+---
+
+##### `instanceType`<sup>Required</sup> <a name="instanceType" id="@DataChefHQ/data-landing-zone.NetworkNatInstance.property.instanceType"></a>
+
+```typescript
+public readonly instanceType: InstanceType;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.InstanceType
+
+---
+
+##### `eip`<sup>Optional</sup> <a name="eip" id="@DataChefHQ/data-landing-zone.NetworkNatInstance.property.eip"></a>
+
+```typescript
+public readonly eip: CfnEIPProps;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.CfnEIPProps
+
+---
+
+### NetworkNatType <a name="NetworkNatType" id="@DataChefHQ/data-landing-zone.NetworkNatType"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.NetworkNatType.Initializer"></a>
+
+```typescript
+import { NetworkNatType } from '@DataChefHQ/data-landing-zone'
+
+const networkNatType: NetworkNatType = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatType.property.gateway">gateway</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatGateway">NetworkNatGateway</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatType.property.instance">instance</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkNatInstance">NetworkNatInstance</a></code> | *No description.* |
+
+---
+
+##### `gateway`<sup>Optional</sup> <a name="gateway" id="@DataChefHQ/data-landing-zone.NetworkNatType.property.gateway"></a>
+
+```typescript
+public readonly gateway: NetworkNatGateway;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkNatGateway">NetworkNatGateway</a>
+
+---
+
+##### `instance`<sup>Optional</sup> <a name="instance" id="@DataChefHQ/data-landing-zone.NetworkNatType.property.instance"></a>
+
+```typescript
+public readonly instance: NetworkNatInstance;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkNatInstance">NetworkNatInstance</a>
 
 ---
 
@@ -16307,7 +16497,7 @@ public readonly reportResource: ReportResource;
 ```typescript
 import { DlzVpc } from '@DataChefHQ/data-landing-zone'
 
-new DlzVpc(dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps)
+new DlzVpc(dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps, networkNats?: NetworkNat[])
 ```
 
 | **Name** | **Type** | **Description** |
@@ -16315,6 +16505,7 @@ new DlzVpc(dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps)
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzStack">dlzStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzVpc">dlzVpc</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.networkNats">networkNats</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat">NetworkNat</a>[]</code> | *No description.* |
 
 ---
 
@@ -16333,6 +16524,12 @@ new DlzVpc(dlzAccount: DLzAccount, dlzStack: DlzStack, dlzVpc: DlzVpcProps)
 ##### `dlzVpc`<sup>Required</sup> <a name="dlzVpc" id="@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.dlzVpc"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>
+
+---
+
+##### `networkNats`<sup>Optional</sup> <a name="networkNats" id="@DataChefHQ/data-landing-zone.DlzVpc.Initializer.parameter.networkNats"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkNat">NetworkNat</a>[]
 
 ---
 
@@ -16458,6 +16655,7 @@ new NetworkAddress(account: string, region?: string, vpc?: string, segment?: str
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isSegmentAddress">isSegmentAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isSubnetAddress">isSubnetAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isVpcAddress">isVpcAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.matches">matches</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.toString">toString</a></code> | *No description.* |
 
 ---
@@ -16491,6 +16689,18 @@ public isSubnetAddress(): boolean
 ```typescript
 public isVpcAddress(): boolean
 ```
+
+##### `matches` <a name="matches" id="@DataChefHQ/data-landing-zone.NetworkAddress.matches"></a>
+
+```typescript
+public matches(other: NetworkAddress): boolean
+```
+
+###### `other`<sup>Required</sup> <a name="other" id="@DataChefHQ/data-landing-zone.NetworkAddress.matches.parameter.other"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
+
+---
 
 ##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.NetworkAddress.toString"></a>
 

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { App } from 'aws-cdk-lib';
 import * as cdk from 'aws-cdk-lib';
+import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import {
   DataLandingZone,
@@ -13,7 +14,7 @@ import {
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 const jestConsole = console;
 
-describe('CdkExpressPipelineLegacy', () => {
+describe('Build', () => {
 
   beforeEach(() => {
     /* Disable Jest's console.log that adds the location of log lines */
@@ -434,6 +435,37 @@ describe('CdkExpressPipelineLegacy', () => {
             // },
           ],
         },
+        nats: [
+          /* One NAT Instance that routes all traffic from the private route table and it's subnets  */
+          {
+            name: 'project-1-development-eu-west-1-internet-access',
+            location: new NetworkAddress('project-1-development', Region.EU_WEST_1, 'default', 'public', 'public-1'),
+            allowAccessFrom: [
+              new NetworkAddress('project-1-development', Region.EU_WEST_1, 'default', 'private'),
+            ],
+            type: {
+              instance: {
+                instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
+              },
+            },
+          },
+
+          /* The same as above but for the production account that uses a NAT GW */
+          {
+            name: 'project-1-production-eu-west-1-internet-access',
+            location: new NetworkAddress('project-1-production', Region.EU_WEST_1, 'default', 'public', 'public-1'),
+            allowAccessFrom: [
+              new NetworkAddress('project-1-production', Region.EU_WEST_1, 'default', 'private'),
+            ],
+            type: {
+              gateway: {
+                // eip: {
+                //   tags: [{key: 'Extra', value: "cool"}],
+                // }
+              },
+            },
+          },
+        ],
       },
       iamIdentityCenter: {
         arn: 'sso-instance-arn',

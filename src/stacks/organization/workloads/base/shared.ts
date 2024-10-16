@@ -7,7 +7,8 @@ import { Report } from '../../../../lib/report';
 
 
 export class Shared {
-  constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount, private globals: GlobalVariables) {
+  constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount,
+    private globals: GlobalVariables) {
   }
 
   public configRuleRequiredTags() {
@@ -39,7 +40,7 @@ export class Shared {
   public createVpcs() {
     const vpcsForRegion = this.dlzAccount.vpcs?.filter(vpc => vpc.region === this.stack.region) || [];
     for (const dlzVpcProp of vpcsForRegion) {
-      const dlzVpc = new DlzVpc(this.dlzAccount, this.stack, dlzVpcProp);
+      const dlzVpc = new DlzVpc(this.dlzAccount, this.stack, dlzVpcProp, this.props.network?.nats);
       this.globals.dlzAccountNetworks.add(this.dlzAccount, dlzVpc.networkEntityVpc);
     }
   }
