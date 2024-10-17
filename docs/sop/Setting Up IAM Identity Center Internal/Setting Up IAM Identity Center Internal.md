@@ -45,8 +45,8 @@ Before you begin setting up AWS IAM Identity Center, ensure you have the followi
 
 ## Step 3: Enable IAM Identity Center
 
- - If this is your first time accessing IAM Identity Center, you will be prompted to enable it.
- - Click on the **Enable IAM Identity Center** button.
+- If this is your first time accessing IAM Identity Center, you will be prompted to enable it.
+- Click on the **Enable IAM Identity Center** button.
 ![enable iam identity center](enable_iam_identity_center.png)
 
 ---
@@ -57,8 +57,8 @@ IAM Identity Center allows you to choose where your user identities are managed.
 
 ### Use IAM Identity Center as Your Identity Source
 
- - Select **IAM Identity Center** as your identity source.
- - Click **Save changes** if prompted.
+- Select **IAM Identity Center** as your identity source.
+- Click **Save changes** if prompted.
 ![select identity source](select_identity_source.png)
 
 ---
