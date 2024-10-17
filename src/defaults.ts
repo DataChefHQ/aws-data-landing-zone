@@ -1,8 +1,10 @@
 import * as cdk from 'aws-cdk-lib';
 import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { BudgetProps } from './constructs/budget';
+import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps } from './data-landing-zone';
+import { DataLandingZoneProps, Region } from './data-landing-zone';
+import { splitCIDR } from './lib/cidr-utils';
 
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',
@@ -24,6 +26,60 @@ export class Defaults {
     return [
       'eks:*',
     ];
+  }
+
+  /**
+   * Creates a VPC configuration from a CIDR notation string
+   *
+   * @param region the region where the VPC will be created
+   * @param cidr cidr notation of the VPC
+   * @returns a VPC configuration
+   */
+  public static vpc(region: Region, cidr: string): DlzVpcProps {
+    const cidrs = splitCIDR(cidr, 6);
+    return {
+      name: 'default',
+      region: region,
+      cidr: cidr,
+      subnets: [
+        {
+          segment: 'private',
+          name: 'private-1',
+          cidr: cidrs[0],
+          az: region + 'a',
+        },
+        {
+          segment: 'private',
+          name: 'private-2',
+          cidr: cidrs[1],
+          az: region + 'b',
+        },
+        {
+          segment: 'private',
+          name: 'private-3',
+          cidr: cidrs[2],
+          az: region + 'c',
+        },
+        {
+          segment: 'public',
+          name: 'public-1',
+          cidr: cidrs[3],
+          az: region + 'a',
+        },
+        {
+          segment: 'public',
+          name: 'public-2',
+          cidr: cidrs[4],
+          az: region + 'b',
+        },
+        {
+          segment: 'public',
+          name: 'public-3',
+          cidr: cidrs[5],
+          az: region + 'c',
+        },
+      ],
+    };
   }
 
   /**

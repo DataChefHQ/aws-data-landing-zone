@@ -15877,6 +15877,7 @@ new Defaults()
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.vpc">vpc</a></code> | Creates a VPC configuration from a CIDR notation string. |
 
 ---
 
@@ -15959,6 +15960,32 @@ Defaults.rootControls()
 ```
 
 Control Tower Controls applied to all the OUs in the organization.
+
+##### `vpc` <a name="vpc" id="@DataChefHQ/data-landing-zone.Defaults.vpc"></a>
+
+```typescript
+import { Defaults } from '@DataChefHQ/data-landing-zone'
+
+Defaults.vpc(region: Region, cidr: string)
+```
+
+Creates a VPC configuration from a CIDR notation string.
+
+###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.Defaults.vpc.parameter.region"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
+
+the region where the VPC will be created.
+
+---
+
+###### `cidr`<sup>Required</sup> <a name="cidr" id="@DataChefHQ/data-landing-zone.Defaults.vpc.parameter.cidr"></a>
+
+- *Type:* string
+
+cidr notation of the VPC.
+
+---
 
 
 
