@@ -50,6 +50,10 @@ export class NetworkAddress {
       .join(NETWORK_ADDRESS_SEPARATOR);
   }
 
+  public matches(other: NetworkAddress): boolean {
+    return this.toString() === other.toString();
+  }
+
   public isAccountAddress(): boolean {
     return this.region === undefined && this.vpc === undefined && this.segment === undefined && this.subnet === undefined;
   }

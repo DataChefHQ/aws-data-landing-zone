@@ -996,4 +996,25 @@ describe('vpt.7 Negative Tests', () => {
       '(source: development.eu-west-1.default.private, destination: development.eu-west-1.default.public) ' +
       'can not be used within the same VPC');
   });
+
+  test('Negative - Address does not exist', () => {
+
+    const app = new App();
+    const config: DataLandingZoneProps = {
+      ...configBase,
+      network: {
+        connections: {
+          vpcPeering: [
+            {
+              source: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private-XXXX'),
+              destination: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'public'),
+            },
+          ],
+        },
+      },
+    };
+
+    expect(() => new DataLandingZone(app, config)).toThrow('The VPC Peering \'source\' NetworkAddress ' +
+      'development.eu-west-1.default.private-XXXX does not exist');
+  });
 });
