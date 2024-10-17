@@ -96,7 +96,7 @@ exports[`Build Local snapshot testing 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "126c60bcf1848dc802af554c84082e990557b2aee55c96893fb3096813afec03.zip",
+          "S3Key": "71a9e3e3823d5561f789457818c3528724716e1f1ffd9c0ea663b6167788f869.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
