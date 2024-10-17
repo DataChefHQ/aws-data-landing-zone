@@ -5418,7 +5418,6 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
 
 ---
 
@@ -5779,16 +5778,6 @@ public readonly id: string;
 ```
 
 - *Type:* string
-
----
-
-##### `topic`<sup>Required</sup> <a name="topic" id="@DataChefHQ/data-landing-zone.ManagementStack.property.topic"></a>
-
-```typescript
-public readonly topic: Topic;
-```
-
-- *Type:* aws-cdk-lib.aws_sns.Topic
 
 ---
 
