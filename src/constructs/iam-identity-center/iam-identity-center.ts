@@ -148,11 +148,6 @@ export class IamIdentityCenter {
           continue;
         }
 
-        const isAccountNumber = groupAccountName.match(/^\d{12}$/);
-        if (!isAccountNumber) {
-          groupAccountIds.push(allAccountIds.get(groupAccountName)!);
-          continue;
-        }
         if (!allAccountIds.has(groupAccountName)) {
           cdk.Annotations.of(dlzStack).addError(`The account ${groupAccountName} in group ${group.name} does not exist`);
           continue;
