@@ -33,21 +33,4 @@ enlarge th web page ans use 1Password to capture the screen and read the QR code
 ![img_4.png](img_4.png)
 1. Make note of the account ID as we will need it for the next steps.
 
-### Add the Account to the SecurityHub Main Account
-
-1. Login to the Audit Account and navigate to SecurityHub.
-1. Go the Accounts section under Settings > Configuration and Enable the new account
-
-![img_6.png](img_6.png)
-
-### Add the Account to the CDK Project
-
-1. Add the new account details to the `DataLandingZoneProps` properties being passed to the DataLandingZone component.
-1. Run the bootstrap TS script:
-
-```ts
-import { scripts } from 'data-landing-zone';
-...
-await scripts.bootstrap.all(config);
-...
-```
+---
