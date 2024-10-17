@@ -75,7 +75,7 @@ Amazon Macie is a security service that uses machine learning to automatically d
 3. If Macie is not already enabled:
    - On the Macie Dashboard, click **Get Started**.
     ![macie get statrted](image-23.png)
-   - If you are ready to designate a Macie administrator account, enter the AWS account ID of the account you want to designate as the Macie administrator in the **Delegated administrator account** text box, and click **Delegate**.
+   - If you are ready to designate a Macie administrator account, enter the AWS account ID of the Audit Account to designate as the Macie administrator in the **Delegated administrator account** text box, and click **Delegate**.
     ![macie delegate](image-25.png)
    - Review the information, then click **Enable Macie**.
     ![enable macie](image-24.png)
