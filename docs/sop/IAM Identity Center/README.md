@@ -1,7 +1,6 @@
-
 # AWS IAM Identity Center
 
-*AWS IAM Identity Center* (formerly known as AWS Single Sign-On) is a service that simplifies access management by allowing users to sign in to multiple AWS accounts and applications with a single set of credentials. It integrates with external identity providers (IdPs) or can use an internal directory.
+_AWS IAM Identity Center_ (formerly known as AWS Single Sign-On) is a service that simplifies access management by allowing users to sign in to multiple AWS accounts and applications with a single set of credentials. It integrates with external identity providers (IdPs) or can use an internal directory.
 
 ## Table of Contents
 
@@ -24,7 +23,7 @@
    - Supports standards like SAML 2.0 or OIDC for authentication.
 
 1. Internal Directory (AWS IAM Identity Center Directory):
-  
+
    - Manages users natively within AWS IAM Identity Center without external dependencies.
    - Users are created, managed, and authenticated within the AWS environment.
    - Suitable for simpler setups or where no external IdP is in place.
@@ -36,15 +35,15 @@
 
 ## Step 1 - Setup AWS IAM Identity Center
 
-AWS IAM Identity Center needs to be set up to use the internal or external user store. Follow the guides below to set up one or the other. ⚠️ **Choose one, do not do both.** 
+AWS IAM Identity Center needs to be set up to use the internal or external user store. Follow the guides below to set up one or the other. ⚠️ **Choose one, do not do both.**
 
-- [Setting Up AWS IAM Identity Center Internal Provider](../Setting%20Up%20IAM%20Identity%20Center%20Internal/Setting%20Up%20IAM%20Identity%20Center%20Internal.md)
-- [Setting Up AWS IAM Identity Center External Identity Provider](../Setting%20Up%20IAM%20Identity%20Center%20External/Setting%20Up%20IAM%20Identity%20Center%20External.md)
+- [Setting Up AWS IAM Identity Center Internal Provider](../Setting%20Up%20IAM%20Identity%20Center%20Internal/README.md)
+- [Setting Up AWS IAM Identity Center External Identity Provider](../Setting%20Up%20IAM%20Identity%20Center%20External/README.md)
 
 ## Step 2 - Configre DLZ properties to use AWS IAM Identity Center
 
 - In the IAM Identity Center dashboard, click on **Settings** in the sidebar.
-![select settings](select_settings.png)
+  ![select settings](select_settings.png)
 
 ### Key Settings for IAM Identity Center
 

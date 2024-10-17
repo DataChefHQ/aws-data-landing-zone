@@ -7,7 +7,7 @@
 ### Create Account in the AWS Console
 
 > [!CAUTION]
-> Ensure that the [Account Factory Settings](../Account%20Factory%20Settings/Account%20Factory%20Settings.md) are correct before creating the account.
+> Ensure that the [Account Factory Settings](../Account%20Factory%20Settings/README.md) are correct before creating the account.
 
 1. Log in to the Management Account and navigate to Control Tower (CT), ensure you are in the correct region.
 1. Click on the `Account Factory` in the left-hand menu. Then on `Create Account`.
@@ -20,7 +20,7 @@
         - `Develop` account
 
        If you hae not created the OUs yet, you can do so now by following the steps in
-       [Create Organization OUs](../Create%20Organization%20OUs/Create%20Organization%20OUs.md).
+       [Create Organization OUs](../Create%20Organization%20OUs/README.md).
 ![img.png](img.png)
 1. Check your email address, you will recieve 2 emails, the one has the invitation link for the SSO user we specified.
 ![img_2.png](img_2.png)
