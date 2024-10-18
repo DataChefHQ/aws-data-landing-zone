@@ -1,6 +1,354 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Build Local snapshot testing 1`] = `
+exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "dlzglobalshnotificationnotifyhighdenyallguardrailpoliciesC1D5E535": {
+      "Properties": {
+        "Description": "Deny all guardrail policies",
+        "ManagedPolicyName": "dlz-global-sh-notification-notify-high-deny-all-guardrail-policies",
+        "Path": "/",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "*",
+              "Effect": "Deny",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "dlzglobalshnotificationnotifyhighruleAEE0ECF2": {
+      "Properties": {
+        "EventPattern": {
+          "detail": {
+            "findings": {
+              "RecordState": [
+                "ACTIVE",
+              ],
+              "Severity": {
+                "Label": [
+                  "MEDIUM",
+                  "HIGH",
+                  "CRITICAL",
+                ],
+              },
+              "Workflow": {
+                "Status": [
+                  "NEW",
+                ],
+              },
+            },
+          },
+          "detail-type": [
+            "Security Hub Findings - Imported",
+          ],
+          "source": [
+            "aws.securityhub",
+          ],
+        },
+        "Name": "dlz-global-sh-notification-notify-high-rule",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Ref": "dlzglobalshnotificationnotifyhightopicA3A6CC12",
+            },
+            "Id": "Target0",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "dlzglobalshnotificationnotifyhightopicA3A6CC12": {
+      "Properties": {
+        "DisplayName": "dlz-global-sh-notification-notify-high-topic",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "dlz-global-sh-notification-notify-high-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "dlzglobalshnotificationnotifyhightopicPolicy768DF58C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Ref": "dlzglobalshnotificationnotifyhightopicA3A6CC12",
+              },
+              "Sid": "0",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Topics": [
+          {
+            "Ref": "dlzglobalshnotificationnotifyhightopicA3A6CC12",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::TopicPolicy",
+    },
+    "dlzglobalshnotificationnotifyresolvedruleBA6FF41A": {
+      "Properties": {
+        "EventPattern": {
+          "detail": {
+            "findings": {
+              "RecordState": [
+                "ACTIVE",
+              ],
+              "Workflow": {
+                "Status": [
+                  "RESOLVED",
+                  "SUPPRESSED",
+                ],
+              },
+            },
+          },
+          "detail-type": [
+            "Security Hub Findings - Imported",
+          ],
+          "source": [
+            "aws.securityhub",
+          ],
+        },
+        "Name": "dlz-global-sh-notification-notify-resolved-rule",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Ref": "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB",
+            },
+            "Id": "Target0",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB": {
+      "Properties": {
+        "DisplayName": "dlz-global-sh-notification-notify-resolved-topic",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "dlz-global-sh-notification-notify-resolved-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "dlzglobalshnotificationnotifyresolvedtopicPolicy4F99A21C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Ref": "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB",
+              },
+              "Sid": "0",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Topics": [
+          {
+            "Ref": "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::TopicPolicy",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: auditStacksRegionalTemplates snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: logStacksGlobalTemplate snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: logStacksRegionalTemplates snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
 {
   "Outputs": {
     "dlzglobalgithubdeployroleout": {
@@ -96,7 +444,7 @@ exports[`Build Local snapshot testing 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "71a9e3e3823d5561f789457818c3528724716e1f1ffd9c0ea663b6167788f869.zip",
+          "S3Key": "126c60bcf1848dc802af554c84082e990557b2aee55c96893fb3096813afec03.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -153,85 +501,6 @@ exports[`Build Local snapshot testing 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
-    },
-    "admins": {
-      "Properties": {
-        "Description": "Root account admin access",
-        "DisplayName": "admins",
-        "IdentityStoreId": "identity-store-id",
-      },
-      "Type": "AWS::IdentityStore::Group",
-    },
-    "admins882070149987assignment": {
-      "DependsOn": [
-        "admins",
-        "dlzglobalAdministratorAccess",
-      ],
-      "Properties": {
-        "InstanceArn": "sso-instance-arn",
-        "PermissionSetArn": {
-          "Fn::GetAtt": [
-            "dlzglobalAdministratorAccess",
-            "PermissionSetArn",
-          ],
-        },
-        "PrincipalId": {
-          "Fn::GetAtt": [
-            "admins",
-            "GroupId",
-          ],
-        },
-        "PrincipalType": "GROUP",
-        "TargetId": "882070149987",
-        "TargetType": "AWS_ACCOUNT",
-      },
-      "Type": "AWS::SSO::Assignment",
-    },
-    "adminsmembershipidpuser": {
-      "DependsOn": [
-        "admins",
-      ],
-      "Properties": {
-        "GroupId": {
-          "Fn::GetAtt": [
-            "admins",
-            "GroupId",
-          ],
-        },
-        "IdentityStoreId": "identity-store-id",
-        "MemberId": {
-          "UserId": {
-            "Fn::GetAtt": [
-              "dlzglobalawsssouseridpusercustomResourceResult26CFFE1B",
-              "UserId",
-            ],
-          },
-        },
-      },
-      "Type": "AWS::IdentityStore::GroupMembership",
-    },
-    "adminsmembershiptestusera": {
-      "DependsOn": [
-        "admins",
-      ],
-      "Properties": {
-        "GroupId": {
-          "Fn::GetAtt": [
-            "admins",
-            "GroupId",
-          ],
-        },
-        "IdentityStoreId": "identity-store-id",
-        "MemberId": {
-          "UserId": {
-            "Fn::GetAtt": [
-              "dlzglobalawsssousertestuseracustomResourceResultE89FF3B3",
-              "UserId",
-            ],
-          },
-        },
-      },
-      "Type": "AWS::IdentityStore::GroupMembership",
     },
     "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity": {
       "Properties": {
@@ -1320,7 +1589,7 @@ exports[`Build Local snapshot testing 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalawsssouseridpusercustomResourceResult26CFFE1B": {
+    "dlzglobalawsssousertestuseraexamplecomcustomResourceResult6016ED08": {
       "DeletionPolicy": "Delete",
       "Properties": {
         "ServiceToken": {
@@ -1329,32 +1598,7 @@ exports[`Build Local snapshot testing 1`] = `
             "Arn",
           ],
         },
-        "displayName": "Test User B",
-        "email": {
-          "type": "work",
-          "value": "testuserb@example.com",
-        },
-        "identityStoreId": "identity-store-id",
-        "name": {
-          "familyName": "User B",
-          "formatted": "Test User B",
-          "givenName": "Test B",
-        },
-        "userName": "idpuser",
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "dlzglobalawsssousertestuseracustomResourceResultE89FF3B3": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
-            "Arn",
-          ],
-        },
-        "displayName": "Test User A",
+        "displayName": "Test A User A",
         "email": {
           "type": "work",
           "value": "testusera@example.com",
@@ -1362,15 +1606,15 @@ exports[`Build Local snapshot testing 1`] = `
         "identityStoreId": "identity-store-id",
         "name": {
           "familyName": "User A",
-          "formatted": "Test User A",
+          "formatted": "Test A User A",
           "givenName": "Test A",
         },
-        "userName": "testusera",
+        "userName": "testusera@example.com",
       },
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "dlzglobalawsssousertestuserccustomResourceResultA1D7E5E8": {
+    "dlzglobalawsssousertestuserbexamplecomcustomResourceResultA57B7B24": {
       "DeletionPolicy": "Delete",
       "Properties": {
         "ServiceToken": {
@@ -1379,7 +1623,32 @@ exports[`Build Local snapshot testing 1`] = `
             "Arn",
           ],
         },
-        "displayName": "Test User C",
+        "displayName": "Test B User B",
+        "email": {
+          "type": "work",
+          "value": "testuserb@example.com",
+        },
+        "identityStoreId": "identity-store-id",
+        "name": {
+          "familyName": "User B",
+          "formatted": "Test B User B",
+          "givenName": "Test B",
+        },
+        "userName": "testuserb@example.com",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobalawsssousertestusercexamplecomcustomResourceResult69F9E8E1": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
+            "Arn",
+          ],
+        },
+        "displayName": "Test C User C",
         "email": {
           "type": "work",
           "value": "testuserc@example.com",
@@ -1387,10 +1656,10 @@ exports[`Build Local snapshot testing 1`] = `
         "identityStoreId": "identity-store-id",
         "name": {
           "familyName": "User C",
-          "formatted": "Test User C",
+          "formatted": "Test C User C",
           "givenName": "Test C",
         },
-        "userName": "testuserc",
+        "userName": "testuserc@example.com",
       },
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
@@ -2383,166 +2652,6 @@ exports[`Build Local snapshot testing 1`] = `
       },
       "Type": "AWS::Organizations::Policy",
     },
-    "limiteds3read": {
-      "Properties": {
-        "Description": "Limited S3 read access",
-        "DisplayName": "limited-s3-read",
-        "IdentityStoreId": "identity-store-id",
-      },
-      "Type": "AWS::IdentityStore::Group",
-    },
-    "limiteds3read882070149987assignment": {
-      "DependsOn": [
-        "dlzglobalinlinepermissionsetreadonlys3",
-        "limiteds3read",
-      ],
-      "Properties": {
-        "InstanceArn": "sso-instance-arn",
-        "PermissionSetArn": {
-          "Fn::GetAtt": [
-            "dlzglobalinlinepermissionsetreadonlys3",
-            "PermissionSetArn",
-          ],
-        },
-        "PrincipalId": {
-          "Fn::GetAtt": [
-            "limiteds3read",
-            "GroupId",
-          ],
-        },
-        "PrincipalType": "GROUP",
-        "TargetId": "882070149987",
-        "TargetType": "AWS_ACCOUNT",
-      },
-      "Type": "AWS::SSO::Assignment",
-    },
-    "limiteds3readmembershiptestuserc": {
-      "DependsOn": [
-        "limiteds3read",
-      ],
-      "Properties": {
-        "GroupId": {
-          "Fn::GetAtt": [
-            "limiteds3read",
-            "GroupId",
-          ],
-        },
-        "IdentityStoreId": "identity-store-id",
-        "MemberId": {
-          "UserId": {
-            "Fn::GetAtt": [
-              "dlzglobalawsssousertestuserccustomResourceResultA1D7E5E8",
-              "UserId",
-            ],
-          },
-        },
-      },
-      "Type": "AWS::IdentityStore::GroupMembership",
-    },
-    "project1admins": {
-      "Properties": {
-        "Description": "Admin access to only project 1 accounts",
-        "DisplayName": "project-1-admins",
-        "IdentityStoreId": "identity-store-id",
-      },
-      "Type": "AWS::IdentityStore::Group",
-    },
-    "project1admins234567890123assignment": {
-      "DependsOn": [
-        "dlzglobalAdministratorAccess",
-        "project1admins",
-      ],
-      "Properties": {
-        "InstanceArn": "sso-instance-arn",
-        "PermissionSetArn": {
-          "Fn::GetAtt": [
-            "dlzglobalAdministratorAccess",
-            "PermissionSetArn",
-          ],
-        },
-        "PrincipalId": {
-          "Fn::GetAtt": [
-            "project1admins",
-            "GroupId",
-          ],
-        },
-        "PrincipalType": "GROUP",
-        "TargetId": "234567890123",
-        "TargetType": "AWS_ACCOUNT",
-      },
-      "Type": "AWS::SSO::Assignment",
-    },
-    "project1admins381491899779assignment": {
-      "DependsOn": [
-        "dlzglobalAdministratorAccess",
-        "project1admins",
-      ],
-      "Properties": {
-        "InstanceArn": "sso-instance-arn",
-        "PermissionSetArn": {
-          "Fn::GetAtt": [
-            "dlzglobalAdministratorAccess",
-            "PermissionSetArn",
-          ],
-        },
-        "PrincipalId": {
-          "Fn::GetAtt": [
-            "project1admins",
-            "GroupId",
-          ],
-        },
-        "PrincipalType": "GROUP",
-        "TargetId": "381491899779",
-        "TargetType": "AWS_ACCOUNT",
-      },
-      "Type": "AWS::SSO::Assignment",
-    },
-    "project1adminsmembershipidpuser": {
-      "DependsOn": [
-        "project1admins",
-      ],
-      "Properties": {
-        "GroupId": {
-          "Fn::GetAtt": [
-            "project1admins",
-            "GroupId",
-          ],
-        },
-        "IdentityStoreId": "identity-store-id",
-        "MemberId": {
-          "UserId": {
-            "Fn::GetAtt": [
-              "dlzglobalawsssouseridpusercustomResourceResult26CFFE1B",
-              "UserId",
-            ],
-          },
-        },
-      },
-      "Type": "AWS::IdentityStore::GroupMembership",
-    },
-    "project1adminsmembershiptestusera": {
-      "DependsOn": [
-        "project1admins",
-      ],
-      "Properties": {
-        "GroupId": {
-          "Fn::GetAtt": [
-            "project1admins",
-            "GroupId",
-          ],
-        },
-        "IdentityStoreId": "identity-store-id",
-        "MemberId": {
-          "UserId": {
-            "Fn::GetAtt": [
-              "dlzglobalawsssousertestuseracustomResourceResultE89FF3B3",
-              "UserId",
-            ],
-          },
-        },
-      },
-      "Type": "AWS::IdentityStore::GroupMembership",
-    },
   },
   "Rules": {
     "CheckBootstrapVersion": {
@@ -2574,7 +2683,7 @@ exports[`Build Local snapshot testing 1`] = `
 }
 `;
 
-exports[`Build Local snapshot testing 2`] = `
+exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase1StacksTemplates snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -2613,46 +2722,7 @@ exports[`Build Local snapshot testing 2`] = `
 }
 `;
 
-exports[`Build Local snapshot testing 3`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 4`] = `
+exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase1StacksTemplates snapshot 2`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -2662,69 +2732,66 @@ exports[`Build Local snapshot testing 4`] = `
     },
   },
   "Resources": {
-    "dlzglobalshnotificationnotifyhighdenyallguardrailpoliciesC1D5E535": {
+    "dlzncp1globalvpcpeeringrolearn3814918997792345678901237D3EBD52": {
       "Properties": {
-        "Description": "Deny all guardrail policies",
-        "ManagedPolicyName": "dlz-global-sh-notification-notify-high-deny-all-guardrail-policies",
-        "Path": "/",
-        "PolicyDocument": {
+        "Name": "/dlz/networking/vpc-peering-role-arn--381491899779-234567890123",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "dlzncp1globalvpcpeeringroleforproject1development4ED81A3A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "dlzncp1globalvpcpeeringroleforproject1development4ED81A3A": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
           "Statement": [
             {
-              "Action": "*",
-              "Effect": "Deny",
-              "Resource": "*",
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::381491899779:root",
+                    ],
+                  ],
+                },
+              },
             },
           ],
           "Version": "2012-10-17",
         },
-      },
-      "Type": "AWS::IAM::ManagedPolicy",
-    },
-    "dlzglobalshnotificationnotifyhighruleAEE0ECF2": {
-      "Properties": {
-        "EventPattern": {
-          "detail": {
-            "findings": {
-              "RecordState": [
-                "ACTIVE",
-              ],
-              "Severity": {
-                "Label": [
-                  "MEDIUM",
-                  "HIGH",
-                  "CRITICAL",
-                ],
-              },
-              "Workflow": {
-                "Status": [
-                  "NEW",
-                ],
-              },
-            },
-          },
-          "detail-type": [
-            "Security Hub Findings - Imported",
-          ],
-          "source": [
-            "aws.securityhub",
-          ],
-        },
-        "Name": "dlz-global-sh-notification-notify-high-rule",
-        "State": "ENABLED",
-        "Targets": [
+        "Description": "VPC Peering Role for 'project-1-development' to 'project-1-production'",
+        "Policies": [
           {
-            "Arn": {
-              "Ref": "dlzglobalshnotificationnotifyhightopicA3A6CC12",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "ec2:AcceptVpcPeeringConnection",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
             },
-            "Id": "Target0",
+            "PolicyName": "vpc-peering",
           },
         ],
-      },
-      "Type": "AWS::Events::Rule",
-    },
-    "dlzglobalshnotificationnotifyhightopicA3A6CC12": {
-      "Properties": {
-        "DisplayName": "dlz-global-sh-notification-notify-high-topic",
+        "RoleName": "dlz-ncp1-global-vpc-peering-role-for-project-1-development",
         "Tags": [
           {
             "Key": "Environment",
@@ -2739,118 +2806,8 @@ exports[`Build Local snapshot testing 4`] = `
             "Value": "dlz",
           },
         ],
-        "TopicName": "dlz-global-sh-notification-notify-high-topic",
       },
-      "Type": "AWS::SNS::Topic",
-    },
-    "dlzglobalshnotificationnotifyhightopicPolicy768DF58C": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sns:Publish",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "events.amazonaws.com",
-              },
-              "Resource": {
-                "Ref": "dlzglobalshnotificationnotifyhightopicA3A6CC12",
-              },
-              "Sid": "0",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Topics": [
-          {
-            "Ref": "dlzglobalshnotificationnotifyhightopicA3A6CC12",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::TopicPolicy",
-    },
-    "dlzglobalshnotificationnotifyresolvedruleBA6FF41A": {
-      "Properties": {
-        "EventPattern": {
-          "detail": {
-            "findings": {
-              "RecordState": [
-                "ACTIVE",
-              ],
-              "Workflow": {
-                "Status": [
-                  "RESOLVED",
-                  "SUPPRESSED",
-                ],
-              },
-            },
-          },
-          "detail-type": [
-            "Security Hub Findings - Imported",
-          ],
-          "source": [
-            "aws.securityhub",
-          ],
-        },
-        "Name": "dlz-global-sh-notification-notify-resolved-rule",
-        "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Ref": "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB",
-            },
-            "Id": "Target0",
-          },
-        ],
-      },
-      "Type": "AWS::Events::Rule",
-    },
-    "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB": {
-      "Properties": {
-        "DisplayName": "dlz-global-sh-notification-notify-resolved-topic",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-sh-notification-notify-resolved-topic",
-      },
-      "Type": "AWS::SNS::Topic",
-    },
-    "dlzglobalshnotificationnotifyresolvedtopicPolicy4F99A21C": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sns:Publish",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "events.amazonaws.com",
-              },
-              "Resource": {
-                "Ref": "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB",
-              },
-              "Sid": "0",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Topics": [
-          {
-            "Ref": "dlzglobalshnotificationnotifyresolvedtopicA2EFD6BB",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::TopicPolicy",
+      "Type": "AWS::IAM::Role",
     },
   },
   "Rules": {
@@ -2883,7 +2840,309 @@ exports[`Build Local snapshot testing 4`] = `
 }
 `;
 
-exports[`Build Local snapshot testing 5`] = `
+exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2StacksTemplates snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
+        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
+          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "PeerRoleArn3814918997792345678901235DE30C0F": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "PeerRoleArn381491899779234567890123CustomResourcePolicy235FB800",
+      ],
+      "Properties": {
+        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking/vpc-peering-role-arn--381491899779-234567890123","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking/vpc-peering-role-arn--381491899779-234567890123","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "PeerRoleArn381491899779234567890123CustomResourcePolicy235FB800": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "PeerRoleArn381491899779234567890123CustomResourcePolicy235FB800",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default5B985D2B": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicyC2B24E81",
+      ],
+      "Properties": {
+        "Create": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicyC2B24E81": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicyC2B24E81",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default2FD2DCA3": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicy6BC9964D",
+      ],
+      "Properties": {
+        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicy6BC9964D": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicy6BC9964D",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "dlzncp2globalnetworkentityproject1developmenteuwest1defaultproject1productionuseast1defaultidCB09A218": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "dlzncp2globalvpcpeeringconnectionproject1developmenteuwest1defaulttoproject1productionuseast1default",
+            "Id",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "dlzncp2globalvpcpeeringconnectionproject1developmenteuwest1defaulttoproject1productionuseast1default": {
+      "Properties": {
+        "PeerOwnerId": "234567890123",
+        "PeerRegion": "us-east-1",
+        "PeerRoleArn": {
+          "Fn::GetAtt": [
+            "PeerRoleArn3814918997792345678901235DE30C0F",
+            "Parameter.Value",
+          ],
+        },
+        "PeerVpcId": {
+          "Fn::GetAtt": [
+            "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default5B985D2B",
+            "Parameter.Value",
+          ],
+        },
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
+            "Value": "project-1-development.eu-west-1.default-to-project-1-production.us-east-1.default",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "VpcId": {
+          "Fn::GetAtt": [
+            "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default2FD2DCA3",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::VPCPeeringConnection",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2StacksTemplates snapshot 2`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -2922,7 +3181,301 @@ exports[`Build Local snapshot testing 5`] = `
 }
 `;
 
-exports[`Build Local snapshot testing 6`] = `
+exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3StacksTemplates snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
+        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
+          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019CustomResourcePolicy6F285034",
+      ],
+      "Properties": {
+        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019CustomResourcePolicy6F285034": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ingroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019CustomResourcePolicy6F285034",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
+      ],
+      "Properties": {
+        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzncp3globalvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019": {
+      "Properties": {
+        "DestinationCidrBlock": "10.2.0.0/19",
+        "RouteTableId": {
+          "Fn::GetAtt": [
+            "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1",
+            "Parameter.Value",
+          ],
+        },
+        "VpcPeeringConnectionId": {
+          "Fn::GetAtt": [
+            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "dlzncp3globalvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate10232019": {
+      "Properties": {
+        "DestinationCidrBlock": "10.2.32.0/19",
+        "RouteTableId": {
+          "Fn::GetAtt": [
+            "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1",
+            "Parameter.Value",
+          ],
+        },
+        "VpcPeeringConnectionId": {
+          "Fn::GetAtt": [
+            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "dlzncp3globalvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate10264019": {
+      "Properties": {
+        "DestinationCidrBlock": "10.2.64.0/19",
+        "RouteTableId": {
+          "Fn::GetAtt": [
+            "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1",
+            "Parameter.Value",
+          ],
+        },
+        "VpcPeeringConnectionId": {
+          "Fn::GetAtt": [
+            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3StacksTemplates snapshot 2`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -3609,7 +4162,7 @@ sudo service iptables save",
 }
 `;
 
-exports[`Build Local snapshot testing 7`] = `
+exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -4217,7 +4770,379 @@ exports[`Build Local snapshot testing 7`] = `
 }
 `;
 
-exports[`Build Local snapshot testing 8`] = `
+exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase2StacksTemplates snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase2StacksTemplates snapshot 2`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3StacksTemplates snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3StacksTemplates snapshot 2`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
+        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-234567890123-us-east-1",
+          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839",
+      ],
+      "Properties": {
+        "Create": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ingroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
+      ],
+      "Properties": {
+        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
+      },
+      "Type": "Custom::DlzSsmReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119": {
+      "Properties": {
+        "DestinationCidrBlock": "10.1.0.1/19",
+        "RouteTableId": {
+          "Fn::GetAtt": [
+            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
+            "Parameter.Value",
+          ],
+        },
+        "VpcPeeringConnectionId": {
+          "Fn::GetAtt": [
+            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10132019": {
+      "Properties": {
+        "DestinationCidrBlock": "10.1.32.0/19",
+        "RouteTableId": {
+          "Fn::GetAtt": [
+            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
+            "Parameter.Value",
+          ],
+        },
+        "VpcPeeringConnectionId": {
+          "Fn::GetAtt": [
+            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10164019": {
+      "Properties": {
+        "DestinationCidrBlock": "10.1.64.0/19",
+        "RouteTableId": {
+          "Fn::GetAtt": [
+            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
+            "Parameter.Value",
+          ],
+        },
+        "VpcPeeringConnectionId": {
+          "Fn::GetAtt": [
+            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
+            "Parameter.Value",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -4640,7 +5565,7 @@ exports[`Build Local snapshot testing 8`] = `
 }
 `;
 
-exports[`Build Local snapshot testing 9`] = `
+exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 2`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -5031,1170 +5956,6 @@ exports[`Build Local snapshot testing 9`] = `
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 10`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 11`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Resources": {
-    "dlzncp1globalvpcpeeringrolearn3814918997792345678901237D3EBD52": {
-      "Properties": {
-        "Name": "/dlz/networking/vpc-peering-role-arn--381491899779-234567890123",
-        "Tags": {
-          "Environment": "dlz",
-          "Owner": "infra",
-          "Project": "dlz",
-        },
-        "Type": "String",
-        "Value": {
-          "Fn::GetAtt": [
-            "dlzncp1globalvpcpeeringroleforproject1development4ED81A3A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "dlzncp1globalvpcpeeringroleforproject1development4ED81A3A": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition",
-                      },
-                      ":iam::381491899779:root",
-                    ],
-                  ],
-                },
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Description": "VPC Peering Role for 'project-1-development' to 'project-1-production'",
-        "Policies": [
-          {
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Action": "ec2:AcceptVpcPeeringConnection",
-                  "Effect": "Allow",
-                  "Resource": "*",
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "vpc-peering",
-          },
-        ],
-        "RoleName": "dlz-ncp1-global-vpc-peering-role-for-project-1-development",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 12`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Resources": {
-    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
-      "DependsOn": [
-        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs18.x",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "Timeout": 120,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "PeerRoleArn3814918997792345678901235DE30C0F": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "PeerRoleArn381491899779234567890123CustomResourcePolicy235FB800",
-      ],
-      "Properties": {
-        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking/vpc-peering-role-arn--381491899779-234567890123","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking/vpc-peering-role-arn--381491899779-234567890123","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "PeerRoleArn381491899779234567890123CustomResourcePolicy235FB800": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "PeerRoleArn381491899779234567890123CustomResourcePolicy235FB800",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default5B985D2B": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicyC2B24E81",
-      ],
-      "Properties": {
-        "Create": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicyC2B24E81": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicyC2B24E81",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default2FD2DCA3": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicy6BC9964D",
-      ],
-      "Properties": {
-        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicy6BC9964D": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1defaultCustomResourcePolicy6BC9964D",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "dlzncp2globalnetworkentityproject1developmenteuwest1defaultproject1productionuseast1defaultidCB09A218": {
-      "Properties": {
-        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id",
-        "Tags": {
-          "Environment": "dlz",
-          "Owner": "infra",
-          "Project": "dlz",
-        },
-        "Type": "String",
-        "Value": {
-          "Fn::GetAtt": [
-            "dlzncp2globalvpcpeeringconnectionproject1developmenteuwest1defaulttoproject1productionuseast1default",
-            "Id",
-          ],
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "dlzncp2globalvpcpeeringconnectionproject1developmenteuwest1defaulttoproject1productionuseast1default": {
-      "Properties": {
-        "PeerOwnerId": "234567890123",
-        "PeerRegion": "us-east-1",
-        "PeerRoleArn": {
-          "Fn::GetAtt": [
-            "PeerRoleArn3814918997792345678901235DE30C0F",
-            "Parameter.Value",
-          ],
-        },
-        "PeerVpcId": {
-          "Fn::GetAtt": [
-            "PeerVpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default5B985D2B",
-            "Parameter.Value",
-          ],
-        },
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Name",
-            "Value": "project-1-development.eu-west-1.default-to-project-1-production.us-east-1.default",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "VpcId": {
-          "Fn::GetAtt": [
-            "VpcIdproject1developmenteuwest1defaulttoproject1productionuseast1default2FD2DCA3",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::VPCPeeringConnection",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 13`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 14`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 15`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 16`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Resources": {
-    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
-      "DependsOn": [
-        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs18.x",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "Timeout": 120,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019CustomResourcePolicy6F285034",
-      ],
-      "Properties": {
-        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019CustomResourcePolicy6F285034": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "ingroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019CustomResourcePolicy6F285034",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
-      ],
-      "Properties": {
-        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "dlzncp3globalvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019": {
-      "Properties": {
-        "DestinationCidrBlock": "10.2.0.0/19",
-        "RouteTableId": {
-          "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1",
-            "Parameter.Value",
-          ],
-        },
-        "VpcPeeringConnectionId": {
-          "Fn::GetAtt": [
-            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-    "dlzncp3globalvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate10232019": {
-      "Properties": {
-        "DestinationCidrBlock": "10.2.32.0/19",
-        "RouteTableId": {
-          "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1",
-            "Parameter.Value",
-          ],
-        },
-        "VpcPeeringConnectionId": {
-          "Fn::GetAtt": [
-            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-    "dlzncp3globalvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate10264019": {
-      "Properties": {
-        "DestinationCidrBlock": "10.2.64.0/19",
-        "RouteTableId": {
-          "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1developmenteuwest1defaultprivatetoproject1productionuseast1defaultprivate1020019C7D166C1",
-            "Parameter.Value",
-          ],
-        },
-        "VpcPeeringConnectionId": {
-          "Fn::GetAtt": [
-            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 17`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 18`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Build Local snapshot testing 19`] = `
-{
-  "Parameters": {
-    "BootstrapVersion": {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-  },
-  "Resources": {
-    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
-      "DependsOn": [
-        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-234567890123-us-east-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs18.x",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "Timeout": 120,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839",
-      ],
-      "Properties": {
-        "Create": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "ingroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": "arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultCustomResourcePolicyE66D1765",
-      ],
-      "Properties": {
-        "Create": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-        "InstallLatestAwsSdk": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn",
-          ],
-        },
-        "Update": "{"region":"eu-west-1","assumedRoleArn":"arn:aws:iam::381491899779:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
-      },
-      "Type": "Custom::DlzSsmReader",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119": {
-      "Properties": {
-        "DestinationCidrBlock": "10.1.0.1/19",
-        "RouteTableId": {
-          "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
-            "Parameter.Value",
-          ],
-        },
-        "VpcPeeringConnectionId": {
-          "Fn::GetAtt": [
-            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10132019": {
-      "Properties": {
-        "DestinationCidrBlock": "10.1.32.0/19",
-        "RouteTableId": {
-          "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
-            "Parameter.Value",
-          ],
-        },
-        "VpcPeeringConnectionId": {
-          "Fn::GetAtt": [
-            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10164019": {
-      "Properties": {
-        "DestinationCidrBlock": "10.1.64.0/19",
-        "RouteTableId": {
-          "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
-            "Parameter.Value",
-          ],
-        },
-        "VpcPeeringConnectionId": {
-          "Fn::GetAtt": [
-            "VpcPeeringConnectionIdproject1developmenteuwest1defaultproject1productionuseast1defaultD15D6514",
-            "Parameter.Value",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::Route",
     },
   },
   "Rules": {
