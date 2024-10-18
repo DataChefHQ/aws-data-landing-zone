@@ -4,7 +4,6 @@ import { BudgetProps } from './constructs/budget';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, Region } from './data-landing-zone';
-import { splitCIDR } from './lib/cidr-utils';
 
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',
@@ -29,55 +28,59 @@ export class Defaults {
   }
 
   /**
-   * Creates a Default VPC configuration from a CIDR notation string with 3 private and 3 public subnets.
+   * Creates a Default VPC configuration with 3 private and 3 public subnets.
+   * Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
    *
+   * @param thirdOctetMask the third octet of the VPC CIDR
    * @param region the region where the VPC will be created
-   * @param cidr cidr notation of the VPC
    * @returns a VPC configuration
    */
-  public static defaultVpcClassB3Private3Public(region: Region, cidr: string): DlzVpcProps {
-    const cidrs = splitCIDR(cidr, 6);
+  public static defaultVpcClassB3Private3Public(thirdOctetMask: number, region: Region): DlzVpcProps {
     return {
       name: 'default',
       region: region,
-      cidr: cidr,
+      cidr: '10.' + thirdOctetMask + '.0.0/16',
       subnets: [
         {
           segment: 'private',
           name: 'private-1',
-          cidr: cidrs[0],
+          cidr: '10.' + thirdOctetMask + '.0.0/19',
           az: region + 'a',
         },
         {
           segment: 'private',
           name: 'private-2',
-          cidr: cidrs[1],
+          cidr: '10.' + thirdOctetMask + '.32.0/19',
           az: region + 'b',
         },
         {
           segment: 'private',
           name: 'private-3',
-          cidr: cidrs[2],
+          cidr: '10.' + thirdOctetMask + '.64.0/19',
           az: region + 'c',
         },
         {
           segment: 'public',
           name: 'public-1',
-          cidr: cidrs[3],
+          cidr: '10.' + thirdOctetMask + '.96.0/19',
           az: region + 'a',
         },
         {
           segment: 'public',
           name: 'public-2',
-          cidr: cidrs[4],
+          cidr: '10.' + thirdOctetMask + '.128.0/19',
           az: region + 'b',
         },
         {
           segment: 'public',
           name: 'public-3',
-          cidr: cidrs[5],
+          cidr: '10.' + thirdOctetMask + '.160.0/19',
           az: region + 'c',
         },
+        /* Remaining:
+        *  - 10.0.192.0/19
+        *  - 10.0.224.0/19
+        * */
       ],
     };
   }

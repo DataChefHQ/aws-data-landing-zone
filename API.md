@@ -15862,7 +15862,7 @@ new Defaults()
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
-| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public">defaultVpcClassB3Private3Public</a></code> | Creates a Default VPC configuration from a CIDR notation string with 3 private and 3 public subnets. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public">defaultVpcClassB3Private3Public</a></code> | Creates a Default VPC configuration with 3 private and 3 public subnets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
@@ -15909,24 +15909,26 @@ Subscribers for the budget.
 ```typescript
 import { Defaults } from '@DataChefHQ/data-landing-zone'
 
-Defaults.defaultVpcClassB3Private3Public(region: Region, cidr: string)
+Defaults.defaultVpcClassB3Private3Public(thirdOctetMask: number, region: Region)
 ```
 
-Creates a Default VPC configuration from a CIDR notation string with 3 private and 3 public subnets.
+Creates a Default VPC configuration with 3 private and 3 public subnets.
+
+Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
+
+###### `thirdOctetMask`<sup>Required</sup> <a name="thirdOctetMask" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.thirdOctetMask"></a>
+
+- *Type:* number
+
+the third octet of the VPC CIDR.
+
+---
 
 ###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.region"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
 
 the region where the VPC will be created.
-
----
-
-###### `cidr`<sup>Required</sup> <a name="cidr" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.cidr"></a>
-
-- *Type:* string
-
-cidr notation of the VPC.
 
 ---
 

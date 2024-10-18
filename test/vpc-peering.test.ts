@@ -11,67 +11,10 @@ import {
   Region,
 } from '../src';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
-
+import { Defaults } from '../src/defaults';
 //@ts-ignore
 import { SSM_PARAMETERS_DLZ } from '../src/stacks/organization/constants';
 
-
-/**
- * Default VPC with 3 private and 3 public subnets. Each subnet has a /19 CIDR block.
- * The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
- * @param thirdOctetMask T
- * @param region
- */
-function defaultVpcClasB3Private3Public(thirdOctetMask: number, region: Region) {
-  return {
-    name: 'default',
-    region: region,
-    cidr: '10.'+thirdOctetMask+'.0.0/16',
-    subnets: [
-      /* Evenly divide, each /19 = 8k hosts */
-      {
-        segment: 'private',
-        name: 'private-1',
-        cidr: '10.'+thirdOctetMask+'.0.0/19',
-        az: region+'a',
-      },
-      {
-        segment: 'private',
-        name: 'private-2',
-        cidr: '10.'+thirdOctetMask+'.32.0/19',
-        az: region+'b',
-      },
-      {
-        segment: 'private',
-        name: 'private-3',
-        cidr: '10.'+thirdOctetMask+'.64.0/19',
-        az: region+'c',
-      },
-      {
-        segment: 'public',
-        name: 'public-1',
-        cidr: '10.'+thirdOctetMask+'.96.0/19',
-        az: region+'a',
-      },
-      {
-        segment: 'public',
-        name: 'public-2',
-        cidr: '10.'+thirdOctetMask+'.128.0/19',
-        az: region+'b',
-      },
-      {
-        segment: 'public',
-        name: 'public-3',
-        cidr: '10.'+thirdOctetMask+'.160.0/19',
-        az: region+'c',
-      },
-      /* Remaining:
-      *  - 10.0.192.0/19
-      *  - 10.0.224.0/19
-      * */
-    ],
-  };
-}
 
 const configBase: DataLandingZoneProps = {
   localProfile: 'ct-sandbox-exported',
@@ -115,8 +58,8 @@ const configBase: DataLandingZoneProps = {
             accountId: '381491899779',
             type: DlzAccountType.DEVELOP,
             vpcs: [
-              defaultVpcClasB3Private3Public(0, Region.US_EAST_1),
-              defaultVpcClasB3Private3Public(1, Region.EU_WEST_1),
+              Defaults.defaultVpcClassB3Private3Public(0, Region.US_EAST_1),
+              Defaults.defaultVpcClassB3Private3Public(1, Region.EU_WEST_1),
             ],
           },
           {
@@ -124,8 +67,8 @@ const configBase: DataLandingZoneProps = {
             accountId: '234567890123',
             type: DlzAccountType.PRODUCTION,
             vpcs: [
-              defaultVpcClasB3Private3Public(2, Region.US_EAST_1),
-              defaultVpcClasB3Private3Public(3, Region.EU_WEST_1),
+              Defaults.defaultVpcClassB3Private3Public(2, Region.US_EAST_1),
+              Defaults.defaultVpcClassB3Private3Public(3, Region.EU_WEST_1),
             ],
           },
         ],
