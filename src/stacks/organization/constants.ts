@@ -3,6 +3,7 @@ export const SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME = 'dlz-global-dlz-ssm-cross-acco
 export const SSM_PARAMETER_DLZ_PREFIX = '/dlz';
 
 export const SSM_PARAMETERS_DLZ = {
+  SECURITY_ENTITY_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/security-entity/`,
   NETWORKING_ENTITY_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/networking-entity/`,
   NETWORKING_VPC_PEERING_ROLE_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/networking/vpc-peering-role-arn--`,
 };

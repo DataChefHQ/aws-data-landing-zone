@@ -1,7 +1,9 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as organizations from 'aws-cdk-lib/aws-organizations';
 import * as ram from 'aws-cdk-lib/aws-ram';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { DLzOrganization } from '../../data-landing-zone';
+import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 import { DlzStack } from '../dlz-stack/index';
 
 export interface IamPolicyPermissionsBoundaryProps {
@@ -63,5 +65,9 @@ export class IamPolicyPermissionBoundry {
       type: 'SERVICE_CONTROL_POLICY',
     });
 
+    new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-policy-permission-boundary-id'), {
+      parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}permission.boundry/iam.policy.permission.boundary/id`,
+      stringValue: permissionsBoundaryPolicy.managedPolicyArn,
+    });
   }
 }
