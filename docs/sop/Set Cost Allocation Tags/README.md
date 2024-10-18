@@ -5,15 +5,14 @@
 Tags need to be enabled for cost allocation to be used in Cost Explorer and Budgets. After enabling tags it can take
 up to 24 hours for the tags to appear in the Cost Explorer.
 
-## Use the script 
+## Use the script
 
-1. Run the script to set the cost allocation tags. It will set the Owner, Project and Environment as well as anything 
+1. Run the script to set the cost allocation tags. It will set the Owner, Project and Environment as well as anything
 specified in the `props.additionalMandatoryTags` property:
 
-```ts 
+```ts
 await scripts.cost.setCostAllocationTags(config);
 ```
-
 
 ## Manually
 
@@ -23,4 +22,4 @@ await scripts.cost.setCostAllocationTags(config);
    - `Owner`
    - `Project`
    - `Environment`
-   - + any tags specified in the `props.additionalMandatoryTags` property
+   - any tags specified in the `props.additionalMandatoryTags` property

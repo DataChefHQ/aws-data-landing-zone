@@ -7,16 +7,19 @@ import { Construct } from 'constructs';
  */
 export interface IdentityStoreUserProps {
   readonly userName: string;
-  readonly name: IdentityStoreUserNameProps;
-  readonly displayName: string;
-  readonly email: IdentityStoreUserEmailsProps;
+  readonly name: string;
+  readonly surname: string;
 }
 
 /**
  * A user in the IAM Identity Center
  */
-export interface IdentityStoreUserPropsExt extends IdentityStoreUserProps {
+export interface IdentityStoreUserPropsExt {
+  readonly userName: string;
   readonly identityStoreId: string;
+  readonly name: IdentityStoreUserNameProps;
+  readonly displayName: string;
+  readonly email: IdentityStoreUserEmailsProps;
 }
 
 /**

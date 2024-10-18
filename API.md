@@ -14206,40 +14206,29 @@ const identityStoreUserProps: IdentityStoreUserProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.displayName">displayName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.email">email</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps">IdentityStoreUserEmailsProps</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps">IdentityStoreUserNameProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.surname">surname</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.userName">userName</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `displayName`<sup>Required</sup> <a name="displayName" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.displayName"></a>
-
-```typescript
-public readonly displayName: string;
-```
-
-- *Type:* string
-
----
-
-##### `email`<sup>Required</sup> <a name="email" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.email"></a>
-
-```typescript
-public readonly email: IdentityStoreUserEmailsProps;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps">IdentityStoreUserEmailsProps</a>
 
 ---
 
 ##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.name"></a>
 
 ```typescript
-public readonly name: IdentityStoreUserNameProps;
+public readonly name: string;
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps">IdentityStoreUserNameProps</a>
+- *Type:* string
+
+---
+
+##### `surname`<sup>Required</sup> <a name="surname" id="@DataChefHQ/data-landing-zone.IdentityStoreUserProps.property.surname"></a>
+
+```typescript
+public readonly surname: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -14271,9 +14260,9 @@ const identityStoreUserPropsExt: IdentityStoreUserPropsExt = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.displayName">displayName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.email">email</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserEmailsProps">IdentityStoreUserEmailsProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.identityStoreId">identityStoreId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserNameProps">IdentityStoreUserNameProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.userName">userName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.identityStoreId">identityStoreId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -14297,6 +14286,16 @@ public readonly email: IdentityStoreUserEmailsProps;
 
 ---
 
+##### `identityStoreId`<sup>Required</sup> <a name="identityStoreId" id="@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.identityStoreId"></a>
+
+```typescript
+public readonly identityStoreId: string;
+```
+
+- *Type:* string
+
+---
+
 ##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.name"></a>
 
 ```typescript
@@ -14311,16 +14310,6 @@ public readonly name: IdentityStoreUserNameProps;
 
 ```typescript
 public readonly userName: string;
-```
-
-- *Type:* string
-
----
-
-##### `identityStoreId`<sup>Required</sup> <a name="identityStoreId" id="@DataChefHQ/data-landing-zone.IdentityStoreUserPropsExt.property.identityStoreId"></a>
-
-```typescript
-public readonly identityStoreId: string;
 ```
 
 - *Type:* string
