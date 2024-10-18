@@ -15873,11 +15873,11 @@ new Defaults()
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public">defaultVpcClassB3Private3Public</a></code> | Creates a Default VPC configuration from a CIDR notation string with 3 private and 3 public subnets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
-| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.vpc">vpc</a></code> | Creates a VPC configuration from a CIDR notation string. |
 
 ---
 
@@ -15912,6 +15912,32 @@ Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD.
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
 
 Subscribers for the budget.
+
+---
+
+##### `defaultVpcClassB3Private3Public` <a name="defaultVpcClassB3Private3Public" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public"></a>
+
+```typescript
+import { Defaults } from '@DataChefHQ/data-landing-zone'
+
+Defaults.defaultVpcClassB3Private3Public(region: Region, cidr: string)
+```
+
+Creates a Default VPC configuration from a CIDR notation string with 3 private and 3 public subnets.
+
+###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.region"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
+
+the region where the VPC will be created.
+
+---
+
+###### `cidr`<sup>Required</sup> <a name="cidr" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.cidr"></a>
+
+- *Type:* string
+
+cidr notation of the VPC.
 
 ---
 
@@ -15960,32 +15986,6 @@ Defaults.rootControls()
 ```
 
 Control Tower Controls applied to all the OUs in the organization.
-
-##### `vpc` <a name="vpc" id="@DataChefHQ/data-landing-zone.Defaults.vpc"></a>
-
-```typescript
-import { Defaults } from '@DataChefHQ/data-landing-zone'
-
-Defaults.vpc(region: Region, cidr: string)
-```
-
-Creates a VPC configuration from a CIDR notation string.
-
-###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.Defaults.vpc.parameter.region"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
-
-the region where the VPC will be created.
-
----
-
-###### `cidr`<sup>Required</sup> <a name="cidr" id="@DataChefHQ/data-landing-zone.Defaults.vpc.parameter.cidr"></a>
-
-- *Type:* string
-
-cidr notation of the VPC.
-
----
 
 
 

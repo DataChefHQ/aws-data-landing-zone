@@ -29,13 +29,13 @@ export class Defaults {
   }
 
   /**
-   * Creates a VPC configuration from a CIDR notation string
+   * Creates a Default VPC configuration from a CIDR notation string with 3 private and 3 public subnets.
    *
    * @param region the region where the VPC will be created
    * @param cidr cidr notation of the VPC
    * @returns a VPC configuration
    */
-  public static vpc(region: Region, cidr: string): DlzVpcProps {
+  public static defaultVpcClassB3Private3Public(region: Region, cidr: string): DlzVpcProps {
     const cidrs = splitCIDR(cidr, 6);
     return {
       name: 'default',
