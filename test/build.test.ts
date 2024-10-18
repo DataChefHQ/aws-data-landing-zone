@@ -474,43 +474,19 @@ describe('Build', () => {
         storeId: 'identity-store-id',
         users: [
           {
-            userName: 'testusera',
-            name: {
-              formatted: 'Test User A',
-              familyName: 'User A',
-              givenName: 'Test A',
-            },
-            displayName: 'Test User A',
-            email: {
-              value: 'testusera@example.com',
-              type: 'work',
-            },
+            userName: 'testusera@example.com',
+            name: 'Test A',
+            surname: 'User A',
           },
           {
-            userName: 'idpuser',
-            name: {
-              formatted: 'Test User B',
-              familyName: 'User B',
-              givenName: 'Test B',
-            },
-            displayName: 'Test User B',
-            email: {
-              value: 'testuserb@example.com',
-              type: 'work',
-            },
+            userName: 'testuserb@example.com',
+            name: 'Test B',
+            surname: 'User B',
           },
           {
-            userName: 'testuserc',
-            name: {
-              formatted: 'Test User C',
-              familyName: 'User C',
-              givenName: 'Test C',
-            },
-            displayName: 'Test User C',
-            email: {
-              value: 'testuserc@example.com',
-              type: 'work',
-            },
+            userName: 'testuserc@example.com',
+            name: 'Test C',
+            surname: 'User C',
           },
         ],
         permissionSets: [
@@ -530,29 +506,27 @@ describe('Build', () => {
             }),
           },
         ],
-        accessGroups: [
-          {
-            name: 'admins',
-            description: 'Root account admin access',
-            userNames: ['testusera', 'idpuser'],
-            permissionSetName: 'AdministratorAccess',
-            accountNames: ['root'],
-          },
-          {
-            name: 'project-1-admins',
-            description: 'Admin access to only project 1 accounts',
-            userNames: ['testusera', 'idpuser'],
-            permissionSetName: 'AdministratorAccess',
-            accountNames: ['project-1-*'],
-          },
-          {
-            name: 'limited-s3-read',
-            description: 'Limited S3 read access',
-            userNames: ['testuserc'],
-            permissionSetName: 'inline-permission-set-read-only-s3',
-            accountNames: ['root'],
-          },
-        ],
+        accessGroups: [{
+          name: 'admins',
+          description: 'Root account admin access',
+          userNames: ['testusera', 'idpuser'],
+          permissionSetName: 'AdministratorAccess',
+          accountNames: ['root'],
+        },
+        {
+          name: 'project-1-admins',
+          description: 'Admin access to only project 1 accounts',
+          userNames: ['testusera', 'idpuser'],
+          permissionSetName: 'AdministratorAccess',
+          accountNames: ['project-1-*'],
+        },
+        {
+          name: 'limited-s3-read',
+          description: 'Limited S3 read access',
+          userNames: ['testuserc'],
+          permissionSetName: 'inline-permission-set-read-only-s3',
+          accountNames: ['root'],
+        }],
       },
       printDeploymentOrder: false,
       saveReport: false,
