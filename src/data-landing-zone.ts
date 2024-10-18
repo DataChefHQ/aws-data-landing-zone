@@ -11,6 +11,7 @@ import {
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
+import { IamPolicyPermissionsBoundaryProps } from './constructs/permission-boundary/iam-policy-permission-boundary';
 import { Report } from './lib/report';
 import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
@@ -366,6 +367,11 @@ export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
+
+  /**
+   * IAM Policy Permission Boundry
+  */
+  readonly iamPolicyPermissionBoundry?: IamPolicyPermissionsBoundaryProps;
 
   /**
    * IAM Identity Center configuration
