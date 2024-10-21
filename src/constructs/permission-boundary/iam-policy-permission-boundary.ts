@@ -9,9 +9,10 @@ export interface IamPolicyPermissionsBoundaryProps {
 }
 
 export class IamPolicyPermissionBoundry {
-
   public static createParameter(dlzStack: DlzStack) {
-    const parameterValue = (<any>dlzStack.node.tryFindChild(dlzStack.resourceName('security-entity--iam-permission-boundary')))?.stringValue;
+    const accountId: string = dlzStack.accountId;
+    if (!IamPolicyPermissionBoundry.arnCache.has(accountId)) return;
+    const parameterValue = IamPolicyPermissionBoundry.arnCache.get(accountId);
     if (!parameterValue) return;
 
     new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-permission-boundary'), {
@@ -19,6 +20,8 @@ export class IamPolicyPermissionBoundry {
       stringValue: parameterValue,
     });
   }
+
+  private static readonly arnCache: Map<string, string> = new Map();
 
   constructor(dlzStack: DlzStack, props: IamPolicyPermissionsBoundaryProps) {
     const accountId: string = dlzStack.accountId;
@@ -62,5 +65,7 @@ export class IamPolicyPermissionBoundry {
       parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}/iam.permission.boundary`,
       stringValue: permissionsBoundaryPolicy.managedPolicyArn,
     });
+
+    IamPolicyPermissionBoundry.arnCache.set(accountId, permissionsBoundaryPolicy.managedPolicyArn);
   }
 }
