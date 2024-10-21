@@ -1,7 +1,7 @@
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { DlzStack } from '../../../../constructs';
-import { IamPolicyPermissionBoundry } from '../../../../constructs/permission-boundary/iam-policy-permission-boundary';
+import { IamPolicyPermissionBoundryRegion } from '../../../../constructs/permission-boundary/iam-policy-permission-boundary';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 
 export class WorkloadRegionalStack extends DlzStack {
@@ -17,6 +17,6 @@ export class WorkloadRegionalStack extends DlzStack {
   }
 
   permissionBoundaryPolicy() {
-    if (this.props.iamPolicyPermissionBoundry) IamPolicyPermissionBoundry.createParameter(this);
+    if (this.props.iamPolicyPermissionBoundry) new IamPolicyPermissionBoundryRegion(this);
   }
 }

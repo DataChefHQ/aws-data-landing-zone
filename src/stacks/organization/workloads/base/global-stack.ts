@@ -2,7 +2,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { DlzStack } from '../../../../constructs';
-import { IamPolicyPermissionBoundry } from '../../../../constructs/permission-boundary/iam-policy-permission-boundary';
+import { IamPolicyPermissionBoundryGlobal } from '../../../../constructs/permission-boundary/iam-policy-permission-boundary';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
@@ -41,7 +41,7 @@ export class WorkloadGlobalStack extends DlzStack {
 
   permissionBoundaryPolicy() {
     if (this.props.iamPolicyPermissionBoundry) {
-      new IamPolicyPermissionBoundry(this, this.props.iamPolicyPermissionBoundry);
+      new IamPolicyPermissionBoundryGlobal(this, this.props.iamPolicyPermissionBoundry);
     }
   }
 

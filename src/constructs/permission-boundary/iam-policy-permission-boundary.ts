@@ -1,40 +1,57 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as organizations from 'aws-cdk-lib/aws-organizations';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
+import { DLzOrganization } from '../../data-landing-zone';
 import { DlzStack } from '../dlz-stack/index';
 
 export interface IamPolicyPermissionsBoundaryProps {
   readonly policyStatement: iam.PolicyStatementProps;
 }
 
-export class IamPolicyPermissionBoundry {
-  public static createParameter(dlzStack: DlzStack) {
+export class IamPolicyPermissionBoundryRegion {
+  constructor(dlzStack: DlzStack) {
     const accountId: string = dlzStack.accountId;
-    if (!IamPolicyPermissionBoundry.arnCache.has(accountId)) return;
-    const parameterValue = IamPolicyPermissionBoundry.arnCache.get(accountId);
-    if (!parameterValue) return;
-
     new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-permission-boundary'), {
-      parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}/iam.permission.boundary`,
-      stringValue: parameterValue,
+      parameterName: IamPolicyPermissionBoundryManagement.parameterName,
+      stringValue: `arn:aws:iam::${accountId}:policy/IamPolicyPermissionBoundryPolicy`,
     });
   }
+}
 
-  private static readonly arnCache: Map<string, string> = new Map();
-
+export class IamPolicyPermissionBoundryGlobal {
   constructor(dlzStack: DlzStack, props: IamPolicyPermissionsBoundaryProps) {
-    const accountId: string = dlzStack.accountId;
 
-    const permissionsBoundaryPolicy = new iam.ManagedPolicy(dlzStack, 'IamPolicyPermissionBoundryPolicy', {
+    new iam.ManagedPolicy(dlzStack, 'IamPolicyPermissionBoundryPolicy', {
+      managedPolicyName: 'IamPolicyPermissionBoundryPolicy',
+      statements: [new iam.PolicyStatement(props.policyStatement)],
+    });
+  }
+}
+
+export class IamPolicyPermissionBoundryManagement {
+
+  public static readonly parameterName = '/dlz/security-entity/iam.permission.boundary';
+
+  constructor(dlzStack: DlzStack, organization: DLzOrganization, props: IamPolicyPermissionsBoundaryProps) {
+
+    const allAccountIds: string[] = [
+      organization.root.accounts.management.accountId,
+      organization.ous.security.accounts.log.accountId,
+      organization.ous.security.accounts.audit.accountId,
+    ];
+    for (const account of organization.ous.workloads.accounts) {
+      allAccountIds.push(account.accountId);
+    }
+
+    const managedPolicy = new iam.ManagedPolicy(dlzStack, 'IamPolicyPermissionBoundryPolicy', {
       managedPolicyName: 'IamPolicyPermissionBoundryPolicy',
       statements: [new iam.PolicyStatement(props.policyStatement)],
     });
 
     new organizations.CfnPolicy(dlzStack, 'IamPolicyPermissionBoundrySCPPolicy', {
       name: 'IamPolicyPermissionBoundrySCPPolicy',
-      description: `Deny all IAM policy creation/modification unless permissions boundary ${permissionsBoundaryPolicy.managedPolicyArn} is applied`,
-      targetIds: [accountId],
+      description: `Deny all IAM policy creation/modification unless permissions boundary '${managedPolicy.managedPolicyArn}' is applied`,
+      targetIds: allAccountIds,
       content: JSON.stringify({
         Version: '2012-10-17',
         Statement: [
@@ -51,8 +68,11 @@ export class IamPolicyPermissionBoundry {
             ],
             Resource: '*',
             Condition: {
-              StringNotEquals: {
-                'iam:PermissionsBoundary': permissionsBoundaryPolicy.managedPolicyArn,
+              ArnNotLike: {
+                'iam:PermissionsBoundary': [
+                  managedPolicy.managedPolicyArn,
+                  'arn:aws:iam::*:policy/IamPolicyPermissionBoundryPolicy',
+                ],
               },
             },
           },
@@ -60,12 +80,5 @@ export class IamPolicyPermissionBoundry {
       }),
       type: 'SERVICE_CONTROL_POLICY',
     });
-
-    new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-permission-boundary'), {
-      parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}/iam.permission.boundary`,
-      stringValue: permissionsBoundaryPolicy.managedPolicyArn,
-    });
-
-    IamPolicyPermissionBoundry.arnCache.set(accountId, permissionsBoundaryPolicy.managedPolicyArn);
   }
 }
