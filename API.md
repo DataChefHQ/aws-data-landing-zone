@@ -4877,6 +4877,7 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamIdentityCenter">iamIdentityCenter</a></code> | IAM Identity Center. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundry">iamPermissionBoundry</a></code> | IAM Policy Permission Boundry. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
 
@@ -5307,6 +5308,14 @@ public iamIdentityCenter(): void
 ```
 
 IAM Identity Center.
+
+##### `iamPermissionBoundry` <a name="iamPermissionBoundry" id="@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundry"></a>
+
+```typescript
+public iamPermissionBoundry(): void
+```
+
+IAM Policy Permission Boundry.
 
 ##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
 

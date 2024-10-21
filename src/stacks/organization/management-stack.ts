@@ -9,6 +9,7 @@ import {
   DlzStack,
   DlzStackProps,
   IamIdentityCenter,
+  IamPolicyPermissionBoundryManagement,
 } from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
@@ -36,6 +37,15 @@ export class ManagementStack extends DlzStack {
 
     if (this.props.deploymentPlatform?.gitHub) {
       this.deploymentPlatformGitHub();
+    }
+  }
+
+  /**
+  * IAM Policy Permission Boundry
+ */
+  iamPermissionBoundry() {
+    if (this.props.iamPolicyPermissionBoundry) {
+      new IamPolicyPermissionBoundryManagement(this, this.props.organization, this.props.iamPolicyPermissionBoundry);
     }
   }
 
