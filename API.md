@@ -11409,6 +11409,7 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.permissionBoundaryPolicy">permissionBoundaryPolicy</a></code> | *No description.* |
 
 ---
 
@@ -11817,6 +11818,12 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
+
+##### `permissionBoundaryPolicy` <a name="permissionBoundaryPolicy" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.permissionBoundaryPolicy"></a>
+
+```typescript
+public permissionBoundaryPolicy(): void
+```
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
