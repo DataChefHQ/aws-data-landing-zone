@@ -29,6 +29,7 @@ export class ManagementStack extends DlzStack {
 
     this.rootControls();
     this.iamIdentityCenter();
+    this.iamPermissionBoundry();
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
