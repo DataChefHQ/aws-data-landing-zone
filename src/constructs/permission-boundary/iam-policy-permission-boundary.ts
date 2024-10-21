@@ -1,44 +1,37 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as organizations from 'aws-cdk-lib/aws-organizations';
-import * as ram from 'aws-cdk-lib/aws-ram';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { DLzOrganization } from '../../data-landing-zone';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 import { DlzStack } from '../dlz-stack/index';
 
 export interface IamPolicyPermissionsBoundaryProps {
-  readonly policyStatements: iam.PolicyStatement[];
+  readonly policyStatement: iam.PolicyStatementProps;
 }
 
 export class IamPolicyPermissionBoundry {
 
-  constructor(dlzStack: DlzStack, organization: DLzOrganization, props: IamPolicyPermissionsBoundaryProps) {
+  public static createParameter(dlzStack: DlzStack) {
+    const parameterValue = (<any>dlzStack.node.tryFindChild(dlzStack.resourceName('security-entity--iam-permission-boundary')))?.stringValue;
+    if (!parameterValue) return;
 
-    const allAccountIds: string[] = [
-      organization.root.accounts.management.accountId,
-      organization.ous.security.accounts.log.accountId,
-      organization.ous.security.accounts.audit.accountId,
-    ];
-    for (const account of organization.ous.workloads.accounts) {
-      allAccountIds.push(account.accountId);
-    }
+    new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-permission-boundary'), {
+      parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}/iam.permission.boundary`,
+      stringValue: parameterValue,
+    });
+  }
+
+  constructor(dlzStack: DlzStack, props: IamPolicyPermissionsBoundaryProps) {
+    const accountId: string = dlzStack.accountId;
 
     const permissionsBoundaryPolicy = new iam.ManagedPolicy(dlzStack, 'IamPolicyPermissionBoundryPolicy', {
       managedPolicyName: 'IamPolicyPermissionBoundryPolicy',
-      statements: props.policyStatements,
-    });
-
-    new ram.CfnResourceShare(dlzStack, 'IamPolicyPermissionBoundryPolicyShare', {
-      name: 'IamPolicyPermissionBoundryPolicyShare',
-      resourceArns: [permissionsBoundaryPolicy.managedPolicyArn],
-      principals: allAccountIds,
-      allowExternalPrincipals: true,
+      statements: [new iam.PolicyStatement(props.policyStatement)],
     });
 
     new organizations.CfnPolicy(dlzStack, 'IamPolicyPermissionBoundrySCPPolicy', {
       name: 'IamPolicyPermissionBoundrySCPPolicy',
       description: `Deny all IAM policy creation/modification unless permissions boundary ${permissionsBoundaryPolicy.managedPolicyArn} is applied`,
-      targetIds: allAccountIds,
+      targetIds: [accountId],
       content: JSON.stringify({
         Version: '2012-10-17',
         Statement: [
@@ -65,8 +58,8 @@ export class IamPolicyPermissionBoundry {
       type: 'SERVICE_CONTROL_POLICY',
     });
 
-    new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-policy-permission-boundary-id'), {
-      parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}permission.boundry/iam.policy.permission.boundary/id`,
+    new ssm.StringParameter(dlzStack, dlzStack.resourceName('security-entity--iam-permission-boundary'), {
+      parameterName: `${SSM_PARAMETERS_DLZ.SECURITY_ENTITY_PREFIX}/iam.permission.boundary`,
       stringValue: permissionsBoundaryPolicy.managedPolicyArn,
     });
   }

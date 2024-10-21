@@ -16,7 +16,6 @@ import {
 } from '../../constructs/control-tower-control';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
-import { IamPolicyPermissionBoundry } from '../../constructs/permission-boundary/iam-policy-permission-boundary';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
 import { PropsOrDefaults } from '../../defaults';
 import { limitCfnExecutions } from '../../lib/cdk-utils';
@@ -37,12 +36,6 @@ export class ManagementStack extends DlzStack {
 
     if (this.props.deploymentPlatform?.gitHub) {
       this.deploymentPlatformGitHub();
-    }
-  }
-
-  iamPolicyPermissionBoundry() {
-    if (this.props.iamPolicyPermissionBoundry) {
-      new IamPolicyPermissionBoundry(this, this.props.organization, this.props.iamPolicyPermissionBoundry);
     }
   }
 

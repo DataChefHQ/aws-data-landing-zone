@@ -4877,7 +4877,6 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamIdentityCenter">iamIdentityCenter</a></code> | IAM Identity Center. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamPolicyPermissionBoundry">iamPolicyPermissionBoundry</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
 
@@ -5308,12 +5307,6 @@ public iamIdentityCenter(): void
 ```
 
 IAM Identity Center.
-
-##### `iamPolicyPermissionBoundry` <a name="iamPolicyPermissionBoundry" id="@DataChefHQ/data-landing-zone.ManagementStack.iamPolicyPermissionBoundry"></a>
-
-```typescript
-public iamPolicyPermissionBoundry(): void
-```
 
 ##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
 
@@ -8633,6 +8626,7 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.permissionBoundaryPolicy">permissionBoundaryPolicy</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole">ssmAssumeCrossAccountRole</a></code> | *No description.* |
 
 ---
@@ -9042,6 +9036,12 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
+
+##### `permissionBoundaryPolicy` <a name="permissionBoundaryPolicy" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.permissionBoundaryPolicy"></a>
+
+```typescript
+public permissionBoundaryPolicy(): void
+```
 
 ##### `ssmAssumeCrossAccountRole` <a name="ssmAssumeCrossAccountRole" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole"></a>
 
@@ -14087,17 +14087,17 @@ const iamPolicyPermissionsBoundaryProps: IamPolicyPermissionsBoundaryProps = { .
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.property.policyStatements">policyStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.property.policyStatement">policyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
 
 ---
 
-##### `policyStatements`<sup>Required</sup> <a name="policyStatements" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.property.policyStatements"></a>
+##### `policyStatement`<sup>Required</sup> <a name="policyStatement" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.property.policyStatement"></a>
 
 ```typescript
-public readonly policyStatements: PolicyStatement[];
+public readonly policyStatement: PolicyStatementProps;
 ```
 
-- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatementProps
 
 ---
 
@@ -16640,13 +16640,12 @@ new IamIdentityCenter(dlzStack: DlzStack, organization: DLzOrganization, iamIden
 ```typescript
 import { IamPolicyPermissionBoundry } from '@DataChefHQ/data-landing-zone'
 
-new IamPolicyPermissionBoundry(dlzStack: DlzStack, organization: DLzOrganization, props: IamPolicyPermissionsBoundaryProps)
+new IamPolicyPermissionBoundry(dlzStack: DlzStack, props: IamPolicyPermissionsBoundaryProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.Initializer.parameter.dlzStack">dlzStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.Initializer.parameter.organization">organization</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | *No description.* |
 
 ---
@@ -16657,12 +16656,6 @@ new IamPolicyPermissionBoundry(dlzStack: DlzStack, organization: DLzOrganization
 
 ---
 
-##### `organization`<sup>Required</sup> <a name="organization" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.Initializer.parameter.organization"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzOrganization">DLzOrganization</a>
-
----
-
 ##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a>
@@ -16670,6 +16663,27 @@ new IamPolicyPermissionBoundry(dlzStack: DlzStack, organization: DLzOrganization
 ---
 
 
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.createParameter">createParameter</a></code> | *No description.* |
+
+---
+
+##### `createParameter` <a name="createParameter" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.createParameter"></a>
+
+```typescript
+import { IamPolicyPermissionBoundry } from '@DataChefHQ/data-landing-zone'
+
+IamPolicyPermissionBoundry.createParameter(dlzStack: DlzStack)
+```
+
+###### `dlzStack`<sup>Required</sup> <a name="dlzStack" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundry.createParameter.parameter.dlzStack"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a>
+
+---
 
 
 
