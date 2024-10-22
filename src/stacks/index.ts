@@ -5,6 +5,7 @@ export * from './organization/security/audit/global-stack';
 export * from './organization/security/audit/regional-stack';
 export * from './organization/workloads/base/regional-stack';
 export * from './organization/workloads/base/global-stack';
+export * from './organization/workloads/base/shared';
 export * from './organization/workloads/network-connections-phase-1-stack/global-stack';
 export * from './organization/workloads/network-connections-phase-2-stack/global-stack';
 export * from './organization/workloads/network-connections-phase-2-stack/regional-stack';

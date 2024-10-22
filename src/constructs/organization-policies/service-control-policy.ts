@@ -35,6 +35,28 @@ export class DlzServiceControlPolicy implements IReportResource {
     });
   }
 
+  public static denyIamPolicyActionStatements() {
+    return new iam.PolicyStatement({
+      sid: 'DenyIamPolicyPermissionBoundaryPolicy',
+      effect: iam.Effect.DENY,
+      actions: [
+        'iam:CreatePolicy',
+        'iam:CreatePolicyVersion',
+        'iam:PutRolePolicy',
+        'iam:PutUserPolicy',
+        'iam:PutGroupPolicy',
+        'iam:DeletePolicy',
+        'iam:DeletePolicyVersion',
+      ],
+      resources: ['*'],
+      conditions: {
+        ...excludeCtRoles,
+        StringNotLike: {
+          'iam:PermissionsBoundary': ['arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy'],
+        },
+      },
+    });
+  }
   public static denyCfnStacksWithoutStandardTags(tags: DlzTag[]) {
     return new iam.PolicyStatement({
       sid: 'DenyCfnStacksWithoutStandardTags',

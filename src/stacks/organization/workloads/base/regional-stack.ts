@@ -1,7 +1,6 @@
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { DlzStack } from '../../../../constructs';
-import { IamPolicyPermissionBoundryRegion } from '../../../../constructs/permission-boundary/iam-policy-permission-boundary';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 
 export class WorkloadRegionalStack extends DlzStack {
@@ -12,11 +11,7 @@ export class WorkloadRegionalStack extends DlzStack {
     const shared = new Shared(this, this.props, workloadAccountProps.dlzAccount, workloadAccountProps.globalVariables);
     shared.configRuleRequiredTags();
     shared.createVpcs();
-
-    this.permissionBoundaryPolicy();
+    shared.createIamPermissionsBoundaryParameter();
   }
 
-  permissionBoundaryPolicy() {
-    if (this.props.iamPolicyPermissionBoundry) new IamPolicyPermissionBoundryRegion(this);
-  }
 }

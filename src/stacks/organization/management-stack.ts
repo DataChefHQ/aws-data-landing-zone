@@ -9,7 +9,6 @@ import {
   DlzStack,
   DlzStackProps,
   IamIdentityCenter,
-  IamPolicyPermissionBoundryManagement,
 } from '../../constructs';
 import {
   DlzControlTowerEnabledControl,
@@ -29,7 +28,7 @@ export class ManagementStack extends DlzStack {
 
     this.rootControls();
     this.iamIdentityCenter();
-    this.iamPermissionBoundry();
+    this.iamPermissionBoundary();
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
@@ -42,11 +41,18 @@ export class ManagementStack extends DlzStack {
   }
 
   /**
-  * IAM Policy Permission Boundry
+  * IAM Policy Permission Boundary
  */
-  iamPermissionBoundry() {
-    if (this.props.iamPolicyPermissionBoundry) {
-      new IamPolicyPermissionBoundryManagement(this, this.props.organization, this.props.iamPolicyPermissionBoundry);
+  iamPermissionBoundary() {
+    if (this.props.iamPolicyPermissionBoundary) {
+      new DlzServiceControlPolicy(this, 'IamPolicyPermissionBoundaryPolicy', {
+        name: 'IamPolicyPermissionBoundaryPolicy',
+        description: 'Deny all IAM policy creation/modification unless permissions boundary is applied',
+        targetIds: [this.props.organization.ous.workloads.ouId],
+        statements: [
+          DlzServiceControlPolicy.denyIamPolicyActionStatements(),
+        ],
+      });
     }
   }
 

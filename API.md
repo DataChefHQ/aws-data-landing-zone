@@ -4877,7 +4877,7 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamIdentityCenter">iamIdentityCenter</a></code> | IAM Identity Center. |
-| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundry">iamPermissionBoundry</a></code> | IAM Policy Permission Boundry. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
 
@@ -5309,13 +5309,13 @@ public iamIdentityCenter(): void
 
 IAM Identity Center.
 
-##### `iamPermissionBoundry` <a name="iamPermissionBoundry" id="@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundry"></a>
+##### `iamPermissionBoundary` <a name="iamPermissionBoundary" id="@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundary"></a>
 
 ```typescript
-public iamPermissionBoundry(): void
+public iamPermissionBoundary(): void
 ```
 
-IAM Policy Permission Boundry.
+IAM Policy Permission Boundary.
 
 ##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
 
@@ -8635,7 +8635,6 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.permissionBoundaryPolicy">permissionBoundaryPolicy</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole">ssmAssumeCrossAccountRole</a></code> | *No description.* |
 
 ---
@@ -9045,12 +9044,6 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
-
-##### `permissionBoundaryPolicy` <a name="permissionBoundaryPolicy" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.permissionBoundaryPolicy"></a>
-
-```typescript
-public permissionBoundaryPolicy(): void
-```
 
 ##### `ssmAssumeCrossAccountRole` <a name="ssmAssumeCrossAccountRole" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole"></a>
 
@@ -11418,7 +11411,6 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.permissionBoundaryPolicy">permissionBoundaryPolicy</a></code> | *No description.* |
 
 ---
 
@@ -11827,12 +11819,6 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
-
-##### `permissionBoundaryPolicy` <a name="permissionBoundaryPolicy" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.permissionBoundaryPolicy"></a>
-
-```typescript
-public permissionBoundaryPolicy(): void
-```
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -12457,7 +12443,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundry">iamPolicyPermissionBoundry</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | IAM Policy Permission Boundry. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary">iamPolicyPermissionBoundary</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.network">network</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Network">Network</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
@@ -12597,15 +12583,15 @@ IAM Identity Center configuration.
 
 ---
 
-##### `iamPolicyPermissionBoundry`<sup>Optional</sup> <a name="iamPolicyPermissionBoundry" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundry"></a>
+##### `iamPolicyPermissionBoundary`<sup>Optional</sup> <a name="iamPolicyPermissionBoundary" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary"></a>
 
 ```typescript
-public readonly iamPolicyPermissionBoundry: IamPolicyPermissionsBoundaryProps;
+public readonly iamPolicyPermissionBoundary: IamPolicyPermissionsBoundaryProps;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a>
 
-IAM Policy Permission Boundry.
+IAM Policy Permission Boundary.
 
 ---
 
@@ -16245,6 +16231,7 @@ new DlzServiceControlPolicy(scope: Construct, id: string, props: DlzServiceContr
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags">denyCfnStacksWithoutStandardTags</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyIamPolicyActionStatements">denyIamPolicyActionStatements</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements">denyServiceActionStatements</a></code> | *No description.* |
 
 ---
@@ -16262,6 +16249,14 @@ DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags: DlzTag[])
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzTag">DlzTag</a>[]
 
 ---
+
+##### `denyIamPolicyActionStatements` <a name="denyIamPolicyActionStatements" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyIamPolicyActionStatements"></a>
+
+```typescript
+import { DlzServiceControlPolicy } from '@DataChefHQ/data-landing-zone'
+
+DlzServiceControlPolicy.denyIamPolicyActionStatements()
+```
 
 ##### `denyServiceActionStatements` <a name="denyServiceActionStatements" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements"></a>
 
@@ -16649,122 +16644,6 @@ new IamIdentityCenter(dlzStack: DlzStack, organization: DLzOrganization, iamIden
 
 
 
-### IamPolicyPermissionBoundryGlobal <a name="IamPolicyPermissionBoundryGlobal" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryGlobal"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryGlobal.Initializer"></a>
-
-```typescript
-import { IamPolicyPermissionBoundryGlobal } from '@DataChefHQ/data-landing-zone'
-
-new IamPolicyPermissionBoundryGlobal(dlzStack: DlzStack, props: IamPolicyPermissionsBoundaryProps)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryGlobal.Initializer.parameter.dlzStack">dlzStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryGlobal.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | *No description.* |
-
----
-
-##### `dlzStack`<sup>Required</sup> <a name="dlzStack" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryGlobal.Initializer.parameter.dlzStack"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a>
-
----
-
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryGlobal.Initializer.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a>
-
----
-
-
-
-
-
-### IamPolicyPermissionBoundryManagement <a name="IamPolicyPermissionBoundryManagement" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer"></a>
-
-```typescript
-import { IamPolicyPermissionBoundryManagement } from '@DataChefHQ/data-landing-zone'
-
-new IamPolicyPermissionBoundryManagement(dlzStack: DlzStack, organization: DLzOrganization, props: IamPolicyPermissionsBoundaryProps)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer.parameter.dlzStack">dlzStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer.parameter.organization">organization</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | *No description.* |
-
----
-
-##### `dlzStack`<sup>Required</sup> <a name="dlzStack" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer.parameter.dlzStack"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a>
-
----
-
-##### `organization`<sup>Required</sup> <a name="organization" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer.parameter.organization"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzOrganization">DLzOrganization</a>
-
----
-
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.Initializer.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a>
-
----
-
-
-
-
-#### Constants <a name="Constants" id="Constants"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.property.parameterName">parameterName</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `parameterName`<sup>Required</sup> <a name="parameterName" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryManagement.property.parameterName"></a>
-
-```typescript
-public readonly parameterName: string;
-```
-
-- *Type:* string
-
----
-
-### IamPolicyPermissionBoundryRegion <a name="IamPolicyPermissionBoundryRegion" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryRegion"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryRegion.Initializer"></a>
-
-```typescript
-import { IamPolicyPermissionBoundryRegion } from '@DataChefHQ/data-landing-zone'
-
-new IamPolicyPermissionBoundryRegion(dlzStack: DlzStack)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryRegion.Initializer.parameter.dlzStack">dlzStack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
-
----
-
-##### `dlzStack`<sup>Required</sup> <a name="dlzStack" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionBoundryRegion.Initializer.parameter.dlzStack"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a>
-
----
-
-
-
-
-
 ### NetworkAddress <a name="NetworkAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer"></a>
@@ -17128,6 +17007,87 @@ public readonly reports: ReportItem[];
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.ReportItem">ReportItem</a>[]
 
 ---
+
+
+### Shared <a name="Shared" id="@DataChefHQ/data-landing-zone.Shared"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.Shared.Initializer"></a>
+
+```typescript
+import { Shared } from '@DataChefHQ/data-landing-zone'
+
+new Shared(stack: DlzStack, props: DataLandingZoneProps, dlzAccount: DLzAccount, globals: GlobalVariables)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.stack">stack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.globals">globals</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables">GlobalVariables</a></code> | *No description.* |
+
+---
+
+##### `stack`<sup>Required</sup> <a name="stack" id="@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.stack"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStack">DlzStack</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+##### `dlzAccount`<sup>Required</sup> <a name="dlzAccount" id="@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.dlzAccount"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a>
+
+---
+
+##### `globals`<sup>Required</sup> <a name="globals" id="@DataChefHQ/data-landing-zone.Shared.Initializer.parameter.globals"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.GlobalVariables">GlobalVariables</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.configRuleRequiredTags">configRuleRequiredTags</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.createIamPermissionsBoundaryManagedPolicy">createIamPermissionsBoundaryManagedPolicy</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.createIamPermissionsBoundaryParameter">createIamPermissionsBoundaryParameter</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Shared.createVpcs">createVpcs</a></code> | *No description.* |
+
+---
+
+##### `configRuleRequiredTags` <a name="configRuleRequiredTags" id="@DataChefHQ/data-landing-zone.Shared.configRuleRequiredTags"></a>
+
+```typescript
+public configRuleRequiredTags(): void
+```
+
+##### `createIamPermissionsBoundaryManagedPolicy` <a name="createIamPermissionsBoundaryManagedPolicy" id="@DataChefHQ/data-landing-zone.Shared.createIamPermissionsBoundaryManagedPolicy"></a>
+
+```typescript
+public createIamPermissionsBoundaryManagedPolicy(): void
+```
+
+##### `createIamPermissionsBoundaryParameter` <a name="createIamPermissionsBoundaryParameter" id="@DataChefHQ/data-landing-zone.Shared.createIamPermissionsBoundaryParameter"></a>
+
+```typescript
+public createIamPermissionsBoundaryParameter(): void
+```
+
+##### `createVpcs` <a name="createVpcs" id="@DataChefHQ/data-landing-zone.Shared.createVpcs"></a>
+
+```typescript
+public createVpcs(): void
+```
+
+
 
 
 ## Protocols <a name="Protocols" id="Protocols"></a>
