@@ -467,6 +467,13 @@ describe('Build', () => {
           },
         ],
       },
+      iamPolicyPermissionBoundary: {
+        policyStatement: {
+          effect: iam.Effect.ALLOW,
+          actions: ['s3:*'],
+          resources: ['*'],
+        },
+      },
       iamIdentityCenter: {
         arn: 'sso-instance-arn',
         id: 'sso-instance-id',
