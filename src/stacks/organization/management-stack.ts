@@ -45,12 +45,16 @@ export class ManagementStack extends DlzStack {
  */
   iamPermissionBoundary() {
     if (this.props.iamPolicyPermissionBoundary) {
-      new DlzServiceControlPolicy(this, 'IamPolicyPermissionBoundaryPolicy', {
+      const boundaryPolicy = new DlzServiceControlPolicy(this, 'IamPolicyPermissionBoundaryPolicy', {
         name: 'IamPolicyPermissionBoundaryPolicy',
         description: 'Deny all IAM policy creation/modification unless permissions boundary is applied',
         targetIds: [this.props.organization.ous.workloads.ouId],
         statements: DlzServiceControlPolicy.denyIamPolicyActionStatements(),
       });
+      Report.addReportForAccountRegion(
+        this.props.organization.root.accounts.management.accountId,
+        '*',
+        boundaryPolicy.reportResource);
     }
   }
 
