@@ -49,9 +49,7 @@ export class ManagementStack extends DlzStack {
         name: 'IamPolicyPermissionBoundaryPolicy',
         description: 'Deny all IAM policy creation/modification unless permissions boundary is applied',
         targetIds: [this.props.organization.ous.workloads.ouId],
-        statements: [
-          DlzServiceControlPolicy.denyIamPolicyActionStatements(),
-        ],
+        statements: DlzServiceControlPolicy.denyIamPolicyActionStatements(),
       });
     }
   }

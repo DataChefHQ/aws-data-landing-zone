@@ -36,26 +36,78 @@ export class DlzServiceControlPolicy implements IReportResource {
   }
 
   public static denyIamPolicyActionStatements() {
-    return new iam.PolicyStatement({
-      sid: 'DenyIamPolicyPermissionBoundaryPolicy',
-      effect: iam.Effect.DENY,
-      actions: [
-        'iam:CreatePolicy',
-        'iam:CreatePolicyVersion',
-        'iam:PutRolePolicy',
-        'iam:PutUserPolicy',
-        'iam:PutGroupPolicy',
-        'iam:DeletePolicy',
-        'iam:DeletePolicyVersion',
-      ],
-      resources: ['*'],
-      conditions: {
-        ...excludeCtRoles,
-        StringNotLike: {
-          'iam:PermissionsBoundary': ['arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy'],
+    return [
+      new iam.PolicyStatement({
+        sid: 'DenyCreatingUserWithoutPermisionBoundary',
+        effect: iam.Effect.DENY,
+        actions: [
+          'iam:CreateUser',
+          'iam:CreateRole',
+        ],
+        resources: [
+          'arn:aws:iam::*:user/*',
+          'arn:aws:iam::*:role/*',
+        ],
+        conditions: {
+          ...excludeCtRoles,
+          StringNotLike: {
+            'iam:PermissionsBoundary': ['arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy'],
+          },
         },
-      },
-    });
+      }),
+      new iam.PolicyStatement({
+        sid: 'DenyDeletingPolicy',
+        effect: iam.Effect.DENY,
+        actions: [
+          'iam:DeletePolicy',
+          'iam:DeletePolicyVersion',
+          'iam:CreatePolicyVersion',
+          'iam:SetDefaultPolicyVersion',
+        ],
+        resources: [
+          'arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy',
+        ],
+        conditions: {
+          ...excludeCtRoles,
+        },
+      }),
+      new iam.PolicyStatement({
+        sid: 'DenyDeletingPermBoundaryFromAnyUserOrRole',
+        effect: iam.Effect.DENY,
+        actions: [
+          'iam:DeleteUserPermissionsBoundary',
+          'iam:DeleteRolePermissionsBoundary',
+        ],
+        resources: [
+          'arn:aws:iam::*:user/*',
+          'arn:aws:iam::*:role/*',
+        ],
+        conditions: {
+          ...excludeCtRoles,
+          StringLike: {
+            'iam:PermissionsBoundary': ['arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy'],
+          },
+        },
+      }),
+      new iam.PolicyStatement({
+        sid: 'DenyUpdatingPermissionBoundary',
+        effect: iam.Effect.DENY,
+        actions: [
+          'iam:PutUserPermissionsBoundary',
+          'iam:PutRolePermissionsBoundary',
+        ],
+        resources: [
+          'arn:aws:iam::*:user/*',
+          'arn:aws:iam::*:role/*',
+        ],
+        conditions: {
+          ...excludeCtRoles,
+          StringNotLike: {
+            'iam:PermissionsBoundary': ['arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy'],
+          },
+        },
+      }),
+    ];
   }
   public static denyCfnStacksWithoutStandardTags(tags: DlzTag[]) {
     return new iam.PolicyStatement({
