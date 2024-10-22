@@ -9143,7 +9143,7 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultNoficationConfig">defaultNoficationConfig</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultNoficationConfig">defaultNoficationConfig</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultPolicyStatement">defaultPolicyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
 
 ---
@@ -9511,10 +9511,10 @@ public readonly id: string;
 ##### `defaultNoficationConfig`<sup>Required</sup> <a name="defaultNoficationConfig" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultNoficationConfig"></a>
 
 ```typescript
-public readonly defaultNoficationConfig: SecurityHubNotificationProps;
+public readonly defaultNoficationConfig: NotificationDetailsProps;
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.SecurityHubNotificationProps">SecurityHubNotificationProps</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
 
 ---
 

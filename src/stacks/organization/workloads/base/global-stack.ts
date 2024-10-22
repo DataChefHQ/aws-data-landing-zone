@@ -4,14 +4,14 @@ import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { AccountChatbots, DlzStack, SlackChannel } from '../../../../constructs';
-import { DataLandingZoneProps, SecurityHubNotificationProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+import { DataLandingZoneProps, NotificationDetailsProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
 
 export class WorkloadGlobalStack extends DlzStack {
-  public static defaultNoficationConfig: SecurityHubNotificationProps = {
+  public static defaultNoficationConfig: NotificationDetailsProps = {
     slack: {
-      slackChannelConfigurationName: 'default-hub-notifications',
+      slackChannelConfigurationName: 'default-notifications',
       slackWorkspaceId: 'T06UBGRJCAC',
       slackChannelId: 'C06TEKK87E3',
     },
