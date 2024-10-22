@@ -50,7 +50,7 @@ export class Shared {
     if (!this.props.iamPolicyPermissionBoundary) return;
     const accountId: string = this.stack.accountId;
     new ssm.StringParameter(this.stack, this.stack.resourceName('security-entity--iam-permission-boundary'), {
-      parameterName: '/dlz/security-entity/iam.permission.boundary',
+      parameterName: '/dlz/iam/permission-boundary-policy/arn',
       stringValue: `arn:aws:iam::${accountId}:policy/IamPolicyPermissionBoundaryPolicy`,
     });
   }
