@@ -3489,6 +3489,21 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     },
   },
   "Resources": {
+    "dlzglobaldefaultnotification381491899779notificationid4DC830AB": {
+      "Properties": {
+        "Name": "/dlz/default-notification/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Ref": "dlzglobaldefaultnotification381491899779topicC965E76F",
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "dlzglobaldefaultnotification381491899779topicC965E76F": {
       "Properties": {
         "DisplayName": "dlz-global-default-notification-381491899779-topic",
@@ -4301,6 +4316,21 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     },
   },
   "Resources": {
+    "dlzglobaldefaultnotification234567890123notificationid1CF9424B": {
+      "Properties": {
+        "Name": "/dlz/default-notification/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Ref": "dlzglobaldefaultnotification234567890123topicF66A74F3",
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "dlzglobaldefaultnotification234567890123topicF66A74F3": {
       "Properties": {
         "DisplayName": "dlz-global-default-notification-234567890123-topic",

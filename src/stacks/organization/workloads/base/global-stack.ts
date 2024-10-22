@@ -1,6 +1,7 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { AccountChatbots, DlzStack, SlackChannel } from '../../../../constructs';
@@ -44,6 +45,11 @@ export class WorkloadGlobalStack extends DlzStack {
     const topic = new sns.Topic(this, this.resourceName(`${idPrefix}-topic`), {
       displayName: this.resourceName(`${idPrefix}-topic`),
       topicName: this.resourceName(`${idPrefix}-topic`),
+    });
+
+    new ssm.StringParameter(this, this.resourceName(`${idPrefix}}-notification-id`), {
+      parameterName: '/dlz/default-notification/id',
+      stringValue: topic.topicArn,
     });
 
     if (defaultNotification.emails) {
