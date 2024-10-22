@@ -1,12 +1,27 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as sns from 'aws-cdk-lib/aws-sns';
+import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
-import { DlzStack } from '../../../../constructs';
-import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+import { AccountChatbots, DlzStack, SlackChannel } from '../../../../constructs';
+import { DataLandingZoneProps, SecurityHubNotificationProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
 
 export class WorkloadGlobalStack extends DlzStack {
+  public static defaultNoficationConfig: SecurityHubNotificationProps = {
+    slack: {
+      slackChannelConfigurationName: 'default-hub-notifications',
+      slackWorkspaceId: 'T06UBGRJCAC',
+      slackChannelId: 'C06TEKK87E3',
+    },
+  };
+
+  public static defaultPolicyStatement: iam.PolicyStatementProps = {
+    effect: iam.Effect.DENY,
+    actions: ['*'],
+    resources: ['*'],
+  };
 
   constructor(scope: Construct, workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
     super(scope, workloadAccountProps);
@@ -16,6 +31,54 @@ export class WorkloadGlobalStack extends DlzStack {
     shared.createVpcs();
 
     this.ssmAssumeCrossAccountRole();
+    this.defaultNotifications();
+  }
+
+  defaultNotifications() {
+    const accountId = this.accountId;
+    const commonDefault = this.props.defaultNotifications?.commonDefault ?? WorkloadGlobalStack.defaultNoficationConfig;
+    const accountDefault = this.props.defaultNotifications?.accountDefault ?? {};
+    const defaultNotification = accountDefault[accountId] ?? commonDefault;
+    const idPrefix = `default-notification-${accountId}`;
+
+    const topic = new sns.Topic(this, this.resourceName(`${idPrefix}-topic`), {
+      displayName: this.resourceName(`${idPrefix}-topic`),
+      topicName: this.resourceName(`${idPrefix}-topic`),
+    });
+
+    if (defaultNotification.emails) {
+      for (let emailAddress of defaultNotification.emails) {
+        topic.addSubscription(new subscriptions.EmailSubscription(emailAddress));
+      }
+    }
+
+    if (!defaultNotification.slack) return;
+
+    const channel: SlackChannel = {
+      slackChannelConfigurationName: defaultNotification.slack.slackChannelConfigurationName,
+      slackWorkspaceId: defaultNotification.slack.slackWorkspaceId,
+      slackChannelId: defaultNotification.slack.slackChannelId,
+    };
+
+    if (!AccountChatbots.existsSlackChannel(this, channel)) {
+      const policyStatement = defaultNotification.policy ?? WorkloadGlobalStack.defaultPolicyStatement;
+      const policy = new iam.ManagedPolicy(this, this.resourceName(`${idPrefix}-guardrail-policy`), {
+        managedPolicyName: this.resourceName(`${idPrefix}-guardrail-policy`),
+        description: 'guardrail policy',
+        statements: [new iam.PolicyStatement(policyStatement)],
+      });
+
+      const id = this.resourceName(`slack-bot-${channel.slackWorkspaceId}-${channel.slackChannelId}`);
+      AccountChatbots.addSlackChannel(this, id, {
+        ...channel,
+        guardrailPolicies: [
+          policy,
+        ],
+      });
+    }
+
+    const slackChannel = AccountChatbots.findSlackChannel(this, channel);
+    slackChannel.addNotificationTopic(topic);
   }
 
   ssmAssumeCrossAccountRole() {

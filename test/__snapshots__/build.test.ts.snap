@@ -444,7 +444,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "71a9e3e3823d5561f789457818c3528724716e1f1ffd9c0ea663b6167788f869.zip",
+          "S3Key": "126c60bcf1848dc802af554c84082e990557b2aee55c96893fb3096813afec03.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -3489,6 +3489,27 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     },
   },
   "Resources": {
+    "dlzglobaldefaultnotification381491899779topicC965E76F": {
+      "Properties": {
+        "DisplayName": "dlz-global-default-notification-381491899779-topic",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "dlz-global-default-notification-381491899779-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",
@@ -3654,6 +3675,60 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::SSM::Parameter",
     },
+    "vpcnetworkentityproject1developmenteuwest1defaultprivateprivate1idDED9A18C": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private.private-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmenteuwest1defaultprivateprivate2idC629F248": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private.private-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmenteuwest1defaultprivateprivate3id1B569FDF": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private.private-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate3",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "vpcnetworkentityproject1developmenteuwest1defaultpublic3A3F6E7B": {
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public/id",
@@ -3667,6 +3742,60 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "Fn::GetAtt": [
             "vpcpublic",
             "RouteTableId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmenteuwest1defaultpublicpublic1id606088C6": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public.public-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmenteuwest1defaultpublicpublic2idE3F788E5": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public.public-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmenteuwest1defaultpublicpublic3id04EA1902": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public.public-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic3",
+            "SubnetId",
           ],
         },
       },
@@ -4172,6 +4301,27 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     },
   },
   "Resources": {
+    "dlzglobaldefaultnotification234567890123topicF66A74F3": {
+      "Properties": {
+        "DisplayName": "dlz-global-default-notification-234567890123-topic",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "dlz-global-default-notification-234567890123-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",
@@ -4337,6 +4487,60 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       },
       "Type": "AWS::SSM::Parameter",
     },
+    "vpcnetworkentityproject1productioneuwest1defaultprivateprivate1id78020DA0": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private.private-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productioneuwest1defaultprivateprivate2idAFE946BF": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private.private-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productioneuwest1defaultprivateprivate3id1C88FB31": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private.private-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate3",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "vpcnetworkentityproject1productioneuwest1defaultpublic3D9D24EE": {
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public/id",
@@ -4350,6 +4554,60 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "Fn::GetAtt": [
             "vpcpublic",
             "RouteTableId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productioneuwest1defaultpublicpublic1id1D6305BC": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public.public-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productioneuwest1defaultpublicpublic2idC0ADF2BE": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public.public-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productioneuwest1defaultpublicpublic3id31AC3BE9": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public.public-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic3",
+            "SubnetId",
           ],
         },
       },
@@ -5230,6 +5488,60 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::SSM::Parameter",
     },
+    "vpcnetworkentityproject1developmentuseast1defaultprivateprivate1idE246CD4C": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private.private-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmentuseast1defaultprivateprivate2id9E0065EA": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private.private-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmentuseast1defaultprivateprivate3id0641B062": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private.private-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate3",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "vpcnetworkentityproject1developmentuseast1defaultpublic2BE2E76E": {
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public/id",
@@ -5243,6 +5555,60 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "Fn::GetAtt": [
             "vpcpublic",
             "RouteTableId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmentuseast1defaultpublicpublic1id40854E0F": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public.public-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmentuseast1defaultpublicpublic2id6E532405": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public.public-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1developmentuseast1defaultpublicpublic3id9609081F": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public.public-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic3",
+            "SubnetId",
           ],
         },
       },
@@ -5653,6 +6019,60 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::SSM::Parameter",
     },
+    "vpcnetworkentityproject1productionuseast1defaultprivateprivate1id41D4A70E": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private.private-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productionuseast1defaultprivateprivate2idD6CE7065": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private.private-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productionuseast1defaultprivateprivate3idEC8815EF": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private.private-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcprivate3",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "vpcnetworkentityproject1productionuseast1defaultpublic41C66BC9": {
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public/id",
@@ -5666,6 +6086,60 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "Fn::GetAtt": [
             "vpcpublic",
             "RouteTableId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productionuseast1defaultpublicpublic1id1D875C0E": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public.public-1/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic1",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productionuseast1defaultpublicpublic2id5A990D99": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public.public-2/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic2",
+            "SubnetId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "vpcnetworkentityproject1productionuseast1defaultpublicpublic3idEA6D2807": {
+      "Properties": {
+        "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public.public-3/id",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "vpcpublic3",
+            "SubnetId",
           ],
         },
       },
