@@ -3663,6 +3663,16 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::SNS::Topic",
     },
+    "dlzglobaldefaultnotificationtopicrehandcdefaultnotificationdatachefcoE16BF425": {
+      "Properties": {
+        "Endpoint": "rehan+dc-default-notification@datachef.co",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "dlzglobaldefaultnotificationtopicC26ABA1B",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",

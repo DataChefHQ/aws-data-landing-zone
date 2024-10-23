@@ -136,6 +136,9 @@ const configBase = {
           {
             name: 'project-1-development',
             accountId: '381491899779',
+            defaultNotification: {
+              emails: ['rehan+dc-default-notification@datachef.co'],
+            },
             type: DlzAccountType.DEVELOP,
             vpcs: [
               {

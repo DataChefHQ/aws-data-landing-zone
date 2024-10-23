@@ -12458,7 +12458,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications for the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
@@ -12573,7 +12573,12 @@ public readonly defaultNotification: NotificationDetailsProps;
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
 
-Default notifications for the organization.
+Default notification settings for the organization.
+
+Allows you to define the
+email notfication settings or slack channel settings. If the account level defaultNotification
+is defined those will be used for the account instead of this defaultNotification which
+acts as the fallback.
 
 ---
 
@@ -12748,7 +12753,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications for the account. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications settings for the account. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
@@ -12791,7 +12796,10 @@ public readonly defaultNotification: NotificationDetailsProps;
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
 
-Default notifications for the account.
+Default notifications settings for the account.
+
+Defines settings for email notifications or the slack channel details.
+This will override the organization level defaultNotification.
 
 ---
 
