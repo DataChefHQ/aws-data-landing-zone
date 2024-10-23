@@ -216,6 +216,11 @@ export interface DLzAccount {
   readonly name: string;
   readonly type: DlzAccountType;
   readonly vpcs?: DlzVpcProps[];
+  /**
+   * Default notifications settings for the account. Defines settings for email notifications or the slack channel details.
+   * This will override the organization level defaultNotification.
+   */
+  readonly defaultNotification?: NotificationDetailsProps;
 }
 
 export enum Ou {
@@ -277,6 +282,10 @@ export interface SecurityHubNotificationProps {
   readonly slack?: SlackChannel;
 }
 
+export interface NotificationDetailsProps {
+  readonly emails?: string[];
+  readonly slack?: SlackChannel;
+}
 /**
  * https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html
  */
@@ -370,7 +379,13 @@ export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
-
+  /**
+   * Default notification settings for the organization. Allows you to define the
+   * email notfication settings or slack channel settings. If the account level defaultNotification
+   * is defined those will be used for the account instead of this defaultNotification which
+   * acts as the fallback.
+   */
+  readonly defaultNotification?: NotificationDetailsProps;
   /**
    * IAM Policy Permission Boundary
   */

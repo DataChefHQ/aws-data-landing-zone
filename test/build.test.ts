@@ -136,6 +136,9 @@ const configBase = {
           {
             name: 'project-1-development',
             accountId: '381491899779',
+            defaultNotification: {
+              emails: ['rehan+dc-default-notification@datachef.co'],
+            },
             type: DlzAccountType.DEVELOP,
             vpcs: [
               {
@@ -447,6 +450,13 @@ const configBase = {
         },
       },
     ],
+  },
+  defaultNotification: {
+    slack: {
+      slackChannelConfigurationName: 'default-notifications',
+      slackWorkspaceId: 'T06UBGRJCAC',
+      slackChannelId: 'C06TEKK87E3',
+    },
   },
   iamPolicyPermissionBoundary: {
     policyStatement: {
