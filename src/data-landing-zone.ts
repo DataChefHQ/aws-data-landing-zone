@@ -370,7 +370,7 @@ export interface Network {
 
 export interface DefaultNotficationProps {
   readonly commonDefault?: NotificationDetailsProps;
-  readonly accountDefault?: Record<string, NotificationDetailsProps>;
+  readonly accountsDefault?: Record<string, NotificationDetailsProps>;
 }
 
 export interface DataLandingZoneProps {

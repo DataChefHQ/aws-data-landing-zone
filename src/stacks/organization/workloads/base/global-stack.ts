@@ -5,19 +5,11 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { AccountChatbots, DlzStack, SlackChannel } from '../../../../constructs';
-import { DataLandingZoneProps, NotificationDetailsProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
 
 export class WorkloadGlobalStack extends DlzStack {
-  public static defaultNoficationConfig: NotificationDetailsProps = {
-    slack: {
-      slackChannelConfigurationName: 'default-notifications',
-      slackWorkspaceId: 'T06UBGRJCAC',
-      slackChannelId: 'C06TEKK87E3',
-    },
-  };
-
   public static defaultPolicyStatement: iam.PolicyStatementProps = {
     effect: iam.Effect.DENY,
     actions: ['*'],
@@ -37,10 +29,12 @@ export class WorkloadGlobalStack extends DlzStack {
 
   defaultNotifications() {
     const accountId = this.accountId;
-    const commonDefault = this.props.defaultNotifications?.commonDefault ?? WorkloadGlobalStack.defaultNoficationConfig;
-    const accountDefault = this.props.defaultNotifications?.accountDefault ?? {};
-    const defaultNotification = accountDefault[accountId] ?? commonDefault;
+    const commonDefault = this.props.defaultNotifications?.commonDefault;
+    const accountsDefault = this.props.defaultNotifications?.accountsDefault ?? {};
+    const defaultNotification = accountsDefault[accountId] ?? commonDefault;
     const idPrefix = `default-notification-${accountId}`;
+
+    if (!defaultNotification) return;
 
     const topic = new sns.Topic(this, this.resourceName(`${idPrefix}-topic`), {
       displayName: this.resourceName(`${idPrefix}-topic`),
@@ -48,7 +42,7 @@ export class WorkloadGlobalStack extends DlzStack {
     });
 
     new ssm.StringParameter(this, this.resourceName(`${idPrefix}}-notification-id`), {
-      parameterName: '/dlz/default-notification/id',
+      parameterName: `${SSM_PARAMETER_DLZ_PREFIX}default-notification/id`,
       stringValue: topic.topicArn,
     });
 

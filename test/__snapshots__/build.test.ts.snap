@@ -3491,7 +3491,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
   "Resources": {
     "dlzglobaldefaultnotification381491899779notificationid4DC830AB": {
       "Properties": {
-        "Name": "/dlz/default-notification/id",
+        "Name": "/dlzdefault-notification/id",
         "Tags": {
           "Environment": "dlz",
           "Owner": "infra",
@@ -4318,7 +4318,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
   "Resources": {
     "dlzglobaldefaultnotification234567890123notificationid1CF9424B": {
       "Properties": {
-        "Name": "/dlz/default-notification/id",
+        "Name": "/dlzdefault-notification/id",
         "Tags": {
           "Environment": "dlz",
           "Owner": "infra",

@@ -448,6 +448,15 @@ const configBase = {
       },
     ],
   },
+  defaultNotifications: {
+    commonDefault: {
+      slack: {
+        slackChannelConfigurationName: 'default-notifications',
+        slackWorkspaceId: 'T06UBGRJCAC',
+        slackChannelId: 'C06TEKK87E3',
+      },
+    },
+  },
   iamIdentityCenter: {
     arn: 'sso-instance-arn',
     id: 'sso-instance-id',

@@ -9143,7 +9143,6 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultNoficationConfig">defaultNoficationConfig</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultPolicyStatement">defaultPolicyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
 
 ---
@@ -9505,16 +9504,6 @@ public readonly id: string;
 ```
 
 - *Type:* string
-
----
-
-##### `defaultNoficationConfig`<sup>Required</sup> <a name="defaultNoficationConfig" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultNoficationConfig"></a>
-
-```typescript
-public readonly defaultNoficationConfig: NotificationDetailsProps;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
 
 ---
 
@@ -12678,15 +12667,15 @@ const defaultNotficationProps: DefaultNotficationProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.accountDefault">accountDefault</a></code> | <code>{[ key: string ]: <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>}</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.accountsDefault">accountsDefault</a></code> | <code>{[ key: string ]: <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>}</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.commonDefault">commonDefault</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | *No description.* |
 
 ---
 
-##### `accountDefault`<sup>Optional</sup> <a name="accountDefault" id="@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.accountDefault"></a>
+##### `accountsDefault`<sup>Optional</sup> <a name="accountsDefault" id="@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.accountsDefault"></a>
 
 ```typescript
-public readonly accountDefault: {[ key: string ]: NotificationDetailsProps};
+public readonly accountsDefault: {[ key: string ]: NotificationDetailsProps};
 ```
 
 - *Type:* {[ key: string ]: <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>}
