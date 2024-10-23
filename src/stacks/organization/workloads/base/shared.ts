@@ -1,10 +1,11 @@
 import * as config from 'aws-cdk-lib/aws-config';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { DlzConfigRule } from '../../../../constructs/config/index';
 import { DlzStack, DlzVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
-
 
 export class Shared {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount,
@@ -45,4 +46,20 @@ export class Shared {
     }
   }
 
+  public createIamPermissionsBoundaryParameter() {
+    if (!this.props.iamPolicyPermissionBoundary) return;
+    const accountId: string = this.stack.accountId;
+    new ssm.StringParameter(this.stack, this.stack.resourceName('security-entity--iam-permission-boundary'), {
+      parameterName: '/dlz/iam/permission-boundary-policy/arn',
+      stringValue: `arn:aws:iam::${accountId}:policy/IamPolicyPermissionBoundaryPolicy`,
+    });
+  }
+
+  public createIamPermissionsBoundaryManagedPolicy() {
+    if (!this.props.iamPolicyPermissionBoundary) return;
+    new iam.ManagedPolicy(this.stack, 'IamPolicyPermissionBoundaryPolicy', {
+      managedPolicyName: 'IamPolicyPermissionBoundaryPolicy',
+      statements: [new iam.PolicyStatement(this.props.iamPolicyPermissionBoundary.policyStatement)],
+    });
+  }
 }

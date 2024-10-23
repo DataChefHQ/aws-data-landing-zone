@@ -1,6 +1,7 @@
 import { App, Stack, Tags, Annotations } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
@@ -184,6 +185,9 @@ export enum Region {
   AP_SOUTH_2 = 'ap-south-2',
 }
 
+export interface IamPolicyPermissionsBoundaryProps {
+  readonly policyStatement: iam.PolicyStatementProps;
+}
 export interface DlzRegions {
   /**
    * Also known as the Home region for Control Tower
@@ -324,10 +328,10 @@ export interface NetworkConnection {
 }
 
 export interface NetworkNatGateway {
-  readonly eip?: ec2. CfnEIPProps;
+  readonly eip?: ec2.CfnEIPProps;
 }
 export interface NetworkNatInstance {
-  readonly eip?: ec2. CfnEIPProps;
+  readonly eip?: ec2.CfnEIPProps;
   readonly instanceType: InstanceType;
 }
 export interface NetworkNatType {
@@ -366,6 +370,11 @@ export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
+
+  /**
+   * IAM Policy Permission Boundary
+  */
+  readonly iamPolicyPermissionBoundary?: IamPolicyPermissionsBoundaryProps;
 
   /**
    * IAM Identity Center configuration
@@ -537,15 +546,15 @@ function validations(props: DataLandingZoneProps) {
     }
 
     if (connection.source.subnet || connection.destination.subnet) {
-      throw new Error('VPC Peering addresses'+
-        ` (source: ${connection.source}, destination: ${connection.destination})`+
+      throw new Error('VPC Peering addresses' +
+        ` (source: ${connection.source}, destination: ${connection.destination})` +
         ' can not be specified on a subnet level, segment is the lowest');
     }
     if (connection.source.account == connection.destination.account &&
       connection.source.region == connection.destination.region &&
       connection.source.vpc == connection.destination.vpc) {
-      throw new Error('VPC Peering'+
-        ` (source: ${connection.source}, destination: ${connection.destination})`+
+      throw new Error('VPC Peering' +
+        ` (source: ${connection.source}, destination: ${connection.destination})` +
         ' can not be used within the same VPC');
     }
   }
@@ -572,15 +581,15 @@ function validations(props: DataLandingZoneProps) {
       }
       if (!allowAccessFrom.segment) {
         throw new Error(`NAT (${nat.name}) 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must target ` +
-         'a specific segment');
+          'a specific segment');
       }
 
       if (nat.location.account !== allowAccessFrom.account ||
         nat.location.region !== allowAccessFrom.region ||
         nat.location.vpc !== allowAccessFrom.vpc
       ) {
-        throw new Error(`NAT ${nat.name} 'location' and 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must `+
-         'be in the same account, region and VPC');
+        throw new Error(`NAT ${nat.name} 'location' and 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must ` +
+          'be in the same account, region and VPC');
       }
     }
   }

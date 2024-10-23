@@ -11,5 +11,7 @@ export class WorkloadRegionalStack extends DlzStack {
     const shared = new Shared(this, this.props, workloadAccountProps.dlzAccount, workloadAccountProps.globalVariables);
     shared.configRuleRequiredTags();
     shared.createVpcs();
+    shared.createIamPermissionsBoundaryParameter();
   }
+
 }

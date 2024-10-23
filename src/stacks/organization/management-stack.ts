@@ -28,6 +28,7 @@ export class ManagementStack extends DlzStack {
 
     this.rootControls();
     this.iamIdentityCenter();
+    this.iamPermissionBoundary();
 
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
@@ -40,10 +41,29 @@ export class ManagementStack extends DlzStack {
   }
 
   /**
+  * IAM Policy Permission Boundary
+ */
+  iamPermissionBoundary() {
+    if (this.props.iamPolicyPermissionBoundary) {
+      const ouId = this.props.organization.ous.workloads.ouId;
+      const boundaryPolicy = new DlzServiceControlPolicy(this, 'IamPolicyPermissionBoundaryPolicy', {
+        name: 'IamPolicyPermissionBoundaryPolicy',
+        description: 'Deny all IAM policy creation/modification unless permissions boundary is applied',
+        targetIds: [ouId],
+        statements: DlzServiceControlPolicy.denyIamPolicyActionStatements(),
+      });
+      Report.addReportForOuAccountRegions(
+        this.props.organization.ous.workloads,
+        this.props.regions,
+        boundaryPolicy.reportResource);
+    }
+  }
+
+  /**
    * IAM Identity Center
    */
   iamIdentityCenter() {
-    if (this.props.iamIdentityCenter) {new IamIdentityCenter(this, this.props.organization, this.props.iamIdentityCenter);}
+    if (this.props.iamIdentityCenter) { new IamIdentityCenter(this, this.props.organization, this.props.iamIdentityCenter); }
   }
 
   /**

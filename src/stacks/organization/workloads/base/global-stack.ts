@@ -5,7 +5,6 @@ import { DlzStack } from '../../../../constructs';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
-
 export class WorkloadGlobalStack extends DlzStack {
 
   constructor(scope: Construct, workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
@@ -14,6 +13,7 @@ export class WorkloadGlobalStack extends DlzStack {
     const shared = new Shared(this, this.props, workloadAccountProps.dlzAccount, workloadAccountProps.globalVariables);
     shared.configRuleRequiredTags();
     shared.createVpcs();
+    shared.createIamPermissionsBoundaryManagedPolicy();
 
     this.ssmAssumeCrossAccountRole();
   }
@@ -37,5 +37,4 @@ export class WorkloadGlobalStack extends DlzStack {
       },
     });
   }
-
 }
