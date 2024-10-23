@@ -28,8 +28,7 @@ export class WorkloadGlobalStack extends DlzStack {
   }
 
   defaultNotifications() {
-    const accountId = this.accountId;
-    const idPrefix = `default-notification-${accountId}`;
+    const idPrefix = 'default-notification';
     let defaultNotification = this.props.defaultNotification;
 
     for (const account of this.props.organization.ous.workloads.accounts) {
