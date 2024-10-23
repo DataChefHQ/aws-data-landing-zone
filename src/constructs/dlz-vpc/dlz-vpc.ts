@@ -121,6 +121,11 @@ export class DlzVpc {
           subnet,
         });
 
+        new ssm.StringParameter(dlzStack, this.vpcResourceName(`network-entity--${subnetAddress}-id`), {
+          parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${subnetAddress}/id`,
+          stringValue: subnet.attrSubnetId,
+        });
+
         const subnetRouteTableAssociationName = this.vpcResourceName(segmentSubnet.name + '-association');
         new ec2.CfnSubnetRouteTableAssociation(dlzStack, subnetRouteTableAssociationName, {
           routeTableId: routeTable.ref,
@@ -146,7 +151,7 @@ export class DlzVpc {
       const natVpcAddress = new NetworkAddress(nat.location.account, nat.location.region, nat.location.vpc);
       return natVpcAddress.matches(vpcAddress);
     });
-    if (!vpcNats || !vpcNats.length) {return;}
+    if (!vpcNats || !vpcNats.length) { return; }
 
     const igwName = this.vpcResourceName(`igw-${vpcName}`);
     const igw = new ec2.CfnInternetGateway(this.dlzStack, igwName, {
@@ -255,7 +260,7 @@ export class DlzVpc {
       /* Add a route in the route tables that need to route to the NAT */
       for (const from of networkNat.allowAccessFrom) {
         const routeTableFrom = vpcNe.routeTables.find(rt => from.matches(rt.address));
-        if (!routeTableFrom) {continue;}
+        if (!routeTableFrom) { continue; }
 
         const routeNatName = this.vpcResourceName(`${networkNat.name}-nati-route-${routeTableFrom.address.segment}`);
         const routeNat = new ec2.CfnRoute(this.dlzStack, routeNatName, {
@@ -314,7 +319,7 @@ export class DlzVpc {
       /* Add a route in the route tables that need to route to the NAT */
       for (const from of networkNat.allowAccessFrom) {
         const routeTableFrom = vpcNe.routeTables.find(rt => from.matches(rt.address));
-        if (!routeTableFrom) {continue;}
+        if (!routeTableFrom) { continue; }
 
         const routeNatName = this.vpcResourceName(`${networkNat.name}-nat-route-${routeTableFrom.address.segment}`);
         const routeNat = new ec2.CfnRoute(this.dlzStack, routeNatName, {
@@ -331,7 +336,7 @@ export class DlzVpc {
   private createNats(vpcName: string, vpcNe: NetworkEntityVpc) {
 
     const vpcIgw = this.createInternetGateWay(vpcName, vpcNe.address, vpcNe.vpc);
-    if (!vpcIgw) {return;}
+    if (!vpcIgw) { return; }
 
     for (const networkNat of this.networkNats || []) {
       for (const routeTable of vpcNe.routeTables) {
