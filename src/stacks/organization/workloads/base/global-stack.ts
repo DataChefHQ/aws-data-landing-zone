@@ -8,7 +8,6 @@ import { AccountChatbots, DlzStack, SlackChannel } from '../../../../constructs'
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
-
 export class WorkloadGlobalStack extends DlzStack {
   public static defaultPolicyStatement: iam.PolicyStatementProps = {
     effect: iam.Effect.DENY,
@@ -22,6 +21,7 @@ export class WorkloadGlobalStack extends DlzStack {
     const shared = new Shared(this, this.props, workloadAccountProps.dlzAccount, workloadAccountProps.globalVariables);
     shared.configRuleRequiredTags();
     shared.createVpcs();
+    shared.createIamPermissionsBoundaryManagedPolicy();
 
     this.ssmAssumeCrossAccountRole();
     this.defaultNotifications();
@@ -104,5 +104,4 @@ export class WorkloadGlobalStack extends DlzStack {
       },
     });
   }
-
 }

@@ -4877,6 +4877,7 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamIdentityCenter">iamIdentityCenter</a></code> | IAM Identity Center. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
 
@@ -5307,6 +5308,14 @@ public iamIdentityCenter(): void
 ```
 
 IAM Identity Center.
+
+##### `iamPermissionBoundary` <a name="iamPermissionBoundary" id="@DataChefHQ/data-landing-zone.ManagementStack.iamPermissionBoundary"></a>
+
+```typescript
+public iamPermissionBoundary(): void
+```
+
+IAM Policy Permission Boundary.
 
 ##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="@DataChefHQ/data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
 
@@ -12453,6 +12462,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary">iamPolicyPermissionBoundary</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.network">network</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Network">Network</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
@@ -12601,6 +12611,18 @@ public readonly iamIdentityCenter: IamIdentityCenterProps;
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a>
 
 IAM Identity Center configuration.
+
+---
+
+##### `iamPolicyPermissionBoundary`<sup>Optional</sup> <a name="iamPolicyPermissionBoundary" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary"></a>
+
+```typescript
+public readonly iamPolicyPermissionBoundary: IamPolicyPermissionsBoundaryProps;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a>
+
+IAM Policy Permission Boundary.
 
 ---
 
@@ -14094,6 +14116,34 @@ public readonly users: IdentityStoreUserProps[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]
+
+---
+
+### IamPolicyPermissionsBoundaryProps <a name="IamPolicyPermissionsBoundaryProps" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.Initializer"></a>
+
+```typescript
+import { IamPolicyPermissionsBoundaryProps } from '@DataChefHQ/data-landing-zone'
+
+const iamPolicyPermissionsBoundaryProps: IamPolicyPermissionsBoundaryProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.property.policyStatement">policyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
+
+---
+
+##### `policyStatement`<sup>Required</sup> <a name="policyStatement" id="@DataChefHQ/data-landing-zone.IamPolicyPermissionsBoundaryProps.property.policyStatement"></a>
+
+```typescript
+public readonly policyStatement: PolicyStatementProps;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatementProps
 
 ---
 
@@ -16293,6 +16343,7 @@ new DlzServiceControlPolicy(scope: Construct, id: string, props: DlzServiceContr
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags">denyCfnStacksWithoutStandardTags</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyIamPolicyActionStatements">denyIamPolicyActionStatements</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements">denyServiceActionStatements</a></code> | *No description.* |
 
 ---
@@ -16310,6 +16361,14 @@ DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags: DlzTag[])
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzTag">DlzTag</a>[]
 
 ---
+
+##### `denyIamPolicyActionStatements` <a name="denyIamPolicyActionStatements" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyIamPolicyActionStatements"></a>
+
+```typescript
+import { DlzServiceControlPolicy } from '@DataChefHQ/data-landing-zone'
+
+DlzServiceControlPolicy.denyIamPolicyActionStatements()
+```
 
 ##### `denyServiceActionStatements` <a name="denyServiceActionStatements" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements"></a>
 

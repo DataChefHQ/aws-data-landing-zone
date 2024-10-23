@@ -1,6 +1,7 @@
 import { App, Stack, Tags, Annotations } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
@@ -184,6 +185,9 @@ export enum Region {
   AP_SOUTH_2 = 'ap-south-2',
 }
 
+export interface IamPolicyPermissionsBoundaryProps {
+  readonly policyStatement: iam.PolicyStatementProps;
+}
 export interface DlzRegions {
   /**
    * Also known as the Home region for Control Tower
@@ -281,7 +285,6 @@ export interface NotificationDetailsProps {
   readonly emails?: string[];
   readonly slack?: SlackChannel;
 }
-
 /**
  * https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html
  */
@@ -370,15 +373,19 @@ export interface Network {
   readonly nats?: NetworkNat[];
 }
 
+
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
-
   /**
    * Default notifications for the organization
    */
   readonly defaultNotification?: NotificationDetailsProps;
+  /**
+   * IAM Policy Permission Boundary
+  */
+  readonly iamPolicyPermissionBoundary?: IamPolicyPermissionsBoundaryProps;
 
   /**
    * IAM Identity Center configuration

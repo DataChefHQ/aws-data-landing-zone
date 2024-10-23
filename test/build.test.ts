@@ -448,13 +448,18 @@ const configBase = {
       },
     ],
   },
-  defaultNotifications: {
-    commonDefault: {
-      slack: {
-        slackChannelConfigurationName: 'default-notifications',
-        slackWorkspaceId: 'T06UBGRJCAC',
-        slackChannelId: 'C06TEKK87E3',
-      },
+  defaultNotification: {
+    slack: {
+      slackChannelConfigurationName: 'default-notifications',
+      slackWorkspaceId: 'T06UBGRJCAC',
+      slackChannelId: 'C06TEKK87E3',
+    },
+  },
+  iamPolicyPermissionBoundary: {
+    policyStatement: {
+      effect: iam.Effect.ALLOW,
+      actions: ['s3:*'],
+      resources: ['*'],
     },
   },
   iamIdentityCenter: {

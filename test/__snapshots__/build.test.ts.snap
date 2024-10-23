@@ -502,6 +502,126 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
+    "IamPolicyPermissionBoundaryPolicy": {
+      "Properties": {
+        "Content": {
+          "Statement": [
+            {
+              "Action": [
+                "iam:CreateUser",
+                "iam:CreateRole",
+              ],
+              "Condition": {
+                "ArnNotLike": {
+                  "aws:PrincipalARN": [
+                    "arn:aws:iam::*:role/AWSControlTowerExecution",
+                  ],
+                },
+                "StringNotLike": {
+                  "iam:PermissionsBoundary": [
+                    "arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy",
+                  ],
+                },
+              },
+              "Effect": "Deny",
+              "Resource": [
+                "arn:aws:iam::*:user/*",
+                "arn:aws:iam::*:role/*",
+              ],
+              "Sid": "DenyCreatingUserWithoutPermisionBoundary",
+            },
+            {
+              "Action": [
+                "iam:DeletePolicy",
+                "iam:DeletePolicyVersion",
+                "iam:CreatePolicyVersion",
+                "iam:SetDefaultPolicyVersion",
+              ],
+              "Condition": {
+                "ArnNotLike": {
+                  "aws:PrincipalARN": [
+                    "arn:aws:iam::*:role/AWSControlTowerExecution",
+                  ],
+                },
+              },
+              "Effect": "Deny",
+              "Resource": "arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy",
+              "Sid": "DenyDeletingPolicy",
+            },
+            {
+              "Action": [
+                "iam:DeleteUserPermissionsBoundary",
+                "iam:DeleteRolePermissionsBoundary",
+              ],
+              "Condition": {
+                "ArnNotLike": {
+                  "aws:PrincipalARN": [
+                    "arn:aws:iam::*:role/AWSControlTowerExecution",
+                  ],
+                },
+                "StringLike": {
+                  "iam:PermissionsBoundary": [
+                    "arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy",
+                  ],
+                },
+              },
+              "Effect": "Deny",
+              "Resource": [
+                "arn:aws:iam::*:user/*",
+                "arn:aws:iam::*:role/*",
+              ],
+              "Sid": "DenyDeletingPermBoundaryFromAnyUserOrRole",
+            },
+            {
+              "Action": [
+                "iam:PutUserPermissionsBoundary",
+                "iam:PutRolePermissionsBoundary",
+              ],
+              "Condition": {
+                "ArnNotLike": {
+                  "aws:PrincipalARN": [
+                    "arn:aws:iam::*:role/AWSControlTowerExecution",
+                  ],
+                },
+                "StringNotLike": {
+                  "iam:PermissionsBoundary": [
+                    "arn:aws:iam::*:policy/IamPolicyPermissionBoundaryPolicy",
+                  ],
+                },
+              },
+              "Effect": "Deny",
+              "Resource": [
+                "arn:aws:iam::*:user/*",
+                "arn:aws:iam::*:role/*",
+              ],
+              "Sid": "DenyUpdatingPermissionBoundary",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "Deny all IAM policy creation/modification unless permissions boundary is applied",
+        "Name": "IamPolicyPermissionBoundaryPolicy",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TargetIds": [
+          "ou-vh4d-nc2zzf9z",
+        ],
+        "Type": "SERVICE_CONTROL_POLICY",
+      },
+      "Type": "AWS::Organizations::Policy",
+    },
     "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity": {
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ENCRYPTED_VOLUMES",
@@ -3489,6 +3609,60 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     },
   },
   "Resources": {
+    "IamPolicyPermissionBoundaryPolicy3239EA44": {
+      "Properties": {
+        "Description": "",
+        "ManagedPolicyName": "IamPolicyPermissionBoundaryPolicy",
+        "Path": "/",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "dlzglobaldefaultnotificationnotificationidD34E97EE": {
+      "Properties": {
+        "Name": "/dlz/sns/default-notification/arn",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Ref": "dlzglobaldefaultnotificationtopicC26ABA1B",
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "dlzglobaldefaultnotificationtopicC26ABA1B": {
+      "Properties": {
+        "DisplayName": "dlz-global-default-notification-topic",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "dlz-global-default-notification-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",
@@ -4280,6 +4454,60 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     },
   },
   "Resources": {
+    "IamPolicyPermissionBoundaryPolicy3239EA44": {
+      "Properties": {
+        "Description": "",
+        "ManagedPolicyName": "IamPolicyPermissionBoundaryPolicy",
+        "Path": "/",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "dlzglobaldefaultnotificationnotificationidD34E97EE": {
+      "Properties": {
+        "Name": "/dlz/sns/default-notification/arn",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Ref": "dlzglobaldefaultnotificationtopicC26ABA1B",
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "dlzglobaldefaultnotificationtopicC26ABA1B": {
+      "Properties": {
+        "DisplayName": "dlz-global-default-notification-topic",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "dlz-global-default-notification-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",
@@ -5386,6 +5614,19 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::Config::ConfigRule",
     },
+    "dlzregionalsecurityentityiampermissionboundaryACAACA16": {
+      "Properties": {
+        "Name": "/dlz/iam/permission-boundary-policy/arn",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": "arn:aws:iam::381491899779:policy/IamPolicyPermissionBoundaryPolicy",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "vpcdefault": {
       "Properties": {
         "CidrBlock": "10.0.0.0/16",
@@ -5916,6 +6157,19 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         },
       },
       "Type": "AWS::Config::ConfigRule",
+    },
+    "dlzregionalsecurityentityiampermissionboundaryACAACA16": {
+      "Properties": {
+        "Name": "/dlz/iam/permission-boundary-policy/arn",
+        "Tags": {
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": "arn:aws:iam::234567890123:policy/IamPolicyPermissionBoundaryPolicy",
+      },
+      "Type": "AWS::SSM::Parameter",
     },
     "vpcdefault": {
       "Properties": {
