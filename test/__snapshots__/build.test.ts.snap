@@ -3627,42 +3627,6 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::IAM::ManagedPolicy",
     },
-    "dlzglobaldefaultnotificationnotificationidD34E97EE": {
-      "Properties": {
-        "Name": "/dlz/sns/default-notification/arn",
-        "Tags": {
-          "Environment": "dlz",
-          "Owner": "infra",
-          "Project": "dlz",
-        },
-        "Type": "String",
-        "Value": {
-          "Ref": "dlzglobaldefaultnotificationtopicC26ABA1B",
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "dlzglobaldefaultnotificationtopicC26ABA1B": {
-      "Properties": {
-        "DisplayName": "dlz-global-default-notification-topic",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-default-notification-topic",
-      },
-      "Type": "AWS::SNS::Topic",
-    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",
@@ -4471,42 +4435,6 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         },
       },
       "Type": "AWS::IAM::ManagedPolicy",
-    },
-    "dlzglobaldefaultnotificationnotificationidD34E97EE": {
-      "Properties": {
-        "Name": "/dlz/sns/default-notification/arn",
-        "Tags": {
-          "Environment": "dlz",
-          "Owner": "infra",
-          "Project": "dlz",
-        },
-        "Type": "String",
-        "Value": {
-          "Ref": "dlzglobaldefaultnotificationtopicC26ABA1B",
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "dlzglobaldefaultnotificationtopicC26ABA1B": {
-      "Properties": {
-        "DisplayName": "dlz-global-default-notification-topic",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-default-notification-topic",
-      },
-      "Type": "AWS::SNS::Topic",
     },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {

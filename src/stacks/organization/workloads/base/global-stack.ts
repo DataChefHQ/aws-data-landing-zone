@@ -32,7 +32,7 @@ export class WorkloadGlobalStack extends DlzStack {
     let defaultNotification = this.props.defaultNotification;
 
     for (const account of this.props.organization.ous.workloads.accounts) {
-      if (account.defaultNotification) {
+      if (account.accountId === this.accountId) {
         defaultNotification = account.defaultNotification;
         break;
       }
