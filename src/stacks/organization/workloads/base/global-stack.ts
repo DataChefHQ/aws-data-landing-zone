@@ -29,10 +29,15 @@ export class WorkloadGlobalStack extends DlzStack {
 
   defaultNotifications() {
     const accountId = this.accountId;
-    const commonDefault = this.props.defaultNotifications?.commonDefault;
-    const accountsDefault = this.props.defaultNotifications?.accountsDefault ?? {};
-    const defaultNotification = accountsDefault[accountId] ?? commonDefault;
     const idPrefix = `default-notification-${accountId}`;
+    let defaultNotification = this.props.defaultNotification;
+
+    for (const account of this.props.organization.ous.workloads.accounts) {
+      if (account.defaultNotification) {
+        defaultNotification = account.defaultNotification;
+        break;
+      }
+    }
 
     if (!defaultNotification) return;
 
@@ -61,7 +66,7 @@ export class WorkloadGlobalStack extends DlzStack {
     };
 
     if (!AccountChatbots.existsSlackChannel(this, channel)) {
-      const policyStatement = defaultNotification.policy ?? WorkloadGlobalStack.defaultPolicyStatement;
+      const policyStatement = WorkloadGlobalStack.defaultPolicyStatement;
       const policy = new iam.ManagedPolicy(this, this.resourceName(`${idPrefix}-guardrail-policy`), {
         managedPolicyName: this.resourceName(`${idPrefix}-guardrail-policy`),
         description: 'guardrail policy',

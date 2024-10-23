@@ -444,7 +444,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "71a9e3e3823d5561f789457818c3528724716e1f1ffd9c0ea663b6167788f869.zip",
+          "S3Key": "126c60bcf1848dc802af554c84082e990557b2aee55c96893fb3096813afec03.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -3489,42 +3489,6 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     },
   },
   "Resources": {
-    "dlzglobaldefaultnotification381491899779notificationid4DC830AB": {
-      "Properties": {
-        "Name": "/dlzdefault-notification/id",
-        "Tags": {
-          "Environment": "dlz",
-          "Owner": "infra",
-          "Project": "dlz",
-        },
-        "Type": "String",
-        "Value": {
-          "Ref": "dlzglobaldefaultnotification381491899779topicC965E76F",
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "dlzglobaldefaultnotification381491899779topicC965E76F": {
-      "Properties": {
-        "DisplayName": "dlz-global-default-notification-381491899779-topic",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-default-notification-381491899779-topic",
-      },
-      "Type": "AWS::SNS::Topic",
-    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",
@@ -4316,42 +4280,6 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     },
   },
   "Resources": {
-    "dlzglobaldefaultnotification234567890123notificationid1CF9424B": {
-      "Properties": {
-        "Name": "/dlzdefault-notification/id",
-        "Tags": {
-          "Environment": "dlz",
-          "Owner": "infra",
-          "Project": "dlz",
-        },
-        "Type": "String",
-        "Value": {
-          "Ref": "dlzglobaldefaultnotification234567890123topicF66A74F3",
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "dlzglobaldefaultnotification234567890123topicF66A74F3": {
-      "Properties": {
-        "DisplayName": "dlz-global-default-notification-234567890123-topic",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-default-notification-234567890123-topic",
-      },
-      "Type": "AWS::SNS::Topic",
-    },
     "dlzglobaldlzconfigrequiredtags5C8C14DF": {
       "Properties": {
         "ConfigRuleName": "dlz-global-dlz-config-required-tags",

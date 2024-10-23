@@ -12449,7 +12449,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.defaultNotifications">defaultNotifications</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps">DefaultNotficationProps</a></code> | Default notifications for the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications for the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
@@ -12555,13 +12555,13 @@ For all stacks created by DLZ the following tags are applied:
 
 ---
 
-##### `defaultNotifications`<sup>Optional</sup> <a name="defaultNotifications" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.defaultNotifications"></a>
+##### `defaultNotification`<sup>Optional</sup> <a name="defaultNotification" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.defaultNotification"></a>
 
 ```typescript
-public readonly defaultNotifications: DefaultNotficationProps;
+public readonly defaultNotification: NotificationDetailsProps;
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps">DefaultNotficationProps</a>
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
 
 Default notifications for the organization.
 
@@ -12653,45 +12653,6 @@ Save the raw report items and the reports grouped by account to a `./.dlz-report
 
 ---
 
-### DefaultNotficationProps <a name="DefaultNotficationProps" id="@DataChefHQ/data-landing-zone.DefaultNotficationProps"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DefaultNotficationProps.Initializer"></a>
-
-```typescript
-import { DefaultNotficationProps } from '@DataChefHQ/data-landing-zone'
-
-const defaultNotficationProps: DefaultNotficationProps = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.accountsDefault">accountsDefault</a></code> | <code>{[ key: string ]: <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>}</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.commonDefault">commonDefault</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | *No description.* |
-
----
-
-##### `accountsDefault`<sup>Optional</sup> <a name="accountsDefault" id="@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.accountsDefault"></a>
-
-```typescript
-public readonly accountsDefault: {[ key: string ]: NotificationDetailsProps};
-```
-
-- *Type:* {[ key: string ]: <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>}
-
----
-
-##### `commonDefault`<sup>Optional</sup> <a name="commonDefault" id="@DataChefHQ/data-landing-zone.DefaultNotficationProps.property.commonDefault"></a>
-
-```typescript
-public readonly commonDefault: NotificationDetailsProps;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
-
----
-
 ### DeploymentPlatform <a name="DeploymentPlatform" id="@DataChefHQ/data-landing-zone.DeploymentPlatform"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DeploymentPlatform.Initializer"></a>
@@ -12765,6 +12726,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications for the account. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
@@ -12796,6 +12758,18 @@ public readonly type: DlzAccountType;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzAccountType">DlzAccountType</a>
+
+---
+
+##### `defaultNotification`<sup>Optional</sup> <a name="defaultNotification" id="@DataChefHQ/data-landing-zone.DLzAccount.property.defaultNotification"></a>
+
+```typescript
+public readonly defaultNotification: NotificationDetailsProps;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a>
+
+Default notifications for the account.
 
 ---
 
@@ -14914,7 +14888,6 @@ const notificationDetailsProps: NotificationDetailsProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps.property.policy">policy</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps.property.slack">slack</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
 
 ---
@@ -14926,16 +14899,6 @@ public readonly emails: string[];
 ```
 
 - *Type:* string[]
-
----
-
-##### `policy`<sup>Optional</sup> <a name="policy" id="@DataChefHQ/data-landing-zone.NotificationDetailsProps.property.policy"></a>
-
-```typescript
-public readonly policy: PolicyStatementProps;
-```
-
-- *Type:* aws-cdk-lib.aws_iam.PolicyStatementProps
 
 ---
 

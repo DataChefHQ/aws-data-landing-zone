@@ -1,7 +1,6 @@
 import { App, Stack, Tags, Annotations } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
-import { PolicyStatementProps } from 'aws-cdk-lib/aws-iam';
 import {
   BudgetProps, DlzAccountNetworks,
   DlzControlTowerStandardControls,
@@ -213,6 +212,10 @@ export interface DLzAccount {
   readonly name: string;
   readonly type: DlzAccountType;
   readonly vpcs?: DlzVpcProps[];
+  /**
+   * Default notifications for the account
+   */
+  readonly defaultNotification?: NotificationDetailsProps;
 }
 
 export enum Ou {
@@ -277,7 +280,6 @@ export interface SecurityHubNotificationProps {
 export interface NotificationDetailsProps {
   readonly emails?: string[];
   readonly slack?: SlackChannel;
-  readonly policy?: PolicyStatementProps;
 }
 
 /**
@@ -368,11 +370,6 @@ export interface Network {
   readonly nats?: NetworkNat[];
 }
 
-export interface DefaultNotficationProps {
-  readonly commonDefault?: NotificationDetailsProps;
-  readonly accountsDefault?: Record<string, NotificationDetailsProps>;
-}
-
 export interface DataLandingZoneProps {
   readonly localProfile: string;
   readonly organization: DLzOrganization;
@@ -381,7 +378,7 @@ export interface DataLandingZoneProps {
   /**
    * Default notifications for the organization
    */
-  readonly defaultNotifications?: DefaultNotficationProps;
+  readonly defaultNotification?: NotificationDetailsProps;
 
   /**
    * IAM Identity Center configuration
