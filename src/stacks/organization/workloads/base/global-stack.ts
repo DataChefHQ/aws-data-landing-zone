@@ -36,6 +36,7 @@ export class WorkloadGlobalStack extends DlzStack {
         defaultNotification = account.defaultNotification;
         break;
       }
+      if (account.accountId === this.accountId) break;
     }
 
     if (!defaultNotification) return;
