@@ -30,6 +30,7 @@ export class DlzStack extends cdk.Stack {
     super(scope, stackId, {
       ...props,
       stackName: DlzStackNamePrefix + props.name.stack,
+      analyticsReporting: false,
     });
 
     this.id = stackId;

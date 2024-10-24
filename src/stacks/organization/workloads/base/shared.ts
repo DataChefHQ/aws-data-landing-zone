@@ -2,10 +2,12 @@ import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { DlzConfigRule } from '../../../../constructs/config/index';
+import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
 import { DlzStack, DlzVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
+
 
 export class Shared {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount,
@@ -62,4 +64,32 @@ export class Shared {
       statements: [new iam.PolicyStatement(this.props.iamPolicyPermissionBoundary.policyStatement)],
     });
   }
+  public createBastions() {
+    for (const bastion of this.props.network?.bastionHosts || []) {
+
+      /* Find the account and region that is the same as the bastion location, meaning we can use direct references as
+       * the VPC is also defined in this stack */
+      if (this.dlzAccount.name !== bastion.location.account || this.stack.region !== bastion.location.region) {continue;}
+
+      /* Find the CDK resources for VPC and Subnet using the AccountNetworks, we can be assured that we can use direct
+       * references as the VPC is also defined in this stack. The location for a bastion is always at a subnet level,
+       * ensuring it only matches 1 bastionAccountNetworks, 1 vpc, 1 route table, 1 subnet. Therefor we can address
+       * at position 0 for all of these entities  */
+      const bastionAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(bastion.location, 'subnet');
+      if (!bastionAccountNetworks || bastionAccountNetworks.length === 0) {
+        throw new Error(`No VPC Subnet found for bastion location ${bastion.location}`);
+      }
+
+      const bastionName = bastion.name || 'default';
+      const bastionHost = new DlzBastionHost(this.stack, this.stack.resourceName(`bastion-${bastionName}`), {
+        bastion: bastion,
+        vpcId: bastionAccountNetworks[0].vpcs[0].vpc.attrVpcId,
+        subnetId: bastionAccountNetworks[0].vpcs[0].routeTables[0].subnets[0].subnet.attrSubnetId,
+      });
+      bastionHost.ec2.addDependency(bastionAccountNetworks[0].vpcs[0].vpc);
+      bastionHost.ec2.addDependency(bastionAccountNetworks[0].vpcs[0].routeTables[0].subnets[0].subnet);
+
+    }
+  }
+
 }
