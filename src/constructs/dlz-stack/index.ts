@@ -31,9 +31,6 @@ export class DlzStack extends cdk.Stack {
       ...props,
       stackName: DlzStackNamePrefix + props.name.stack,
       analyticsReporting: false,
-      // synthesizer: new cdk.DefaultStackSynthesizer({
-      //   generateBootstrapVersionRule: false,
-      // })
     });
 
     this.id = stackId;
