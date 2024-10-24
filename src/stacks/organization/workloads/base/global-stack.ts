@@ -46,7 +46,7 @@ export class WorkloadGlobalStack extends DlzStack {
       topicName: this.resourceName(`${idPrefix}-topic`),
     });
 
-    new ssm.StringParameter(this, this.resourceName(`${idPrefix}}-notification-id`), {
+    new ssm.StringParameter(this, this.resourceName(`${idPrefix}-notification-id`), {
       parameterName: `${SSM_PARAMETER_DLZ_PREFIX}/sns/default-notification/arn`,
       stringValue: topic.topicArn,
     });
