@@ -3795,7 +3795,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::SSM::Parameter",
     },
-    "dlzglobaldefaultnotificationnotificationidD34E97EE": {
+    "dlzglobaldefaultnotificationnotificationid7DFC637C": {
       "Properties": {
         "Name": "/dlz/sns/default-notification/arn",
         "Tags": {
@@ -4650,7 +4650,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       },
       "Type": "AWS::IAM::ManagedPolicy",
     },
-    "dlzglobaldefaultnotificationnotificationidD34E97EE": {
+    "dlzglobaldefaultnotificationnotificationid7DFC637C": {
       "Properties": {
         "Name": "/dlz/sns/default-notification/arn",
         "Tags": {
