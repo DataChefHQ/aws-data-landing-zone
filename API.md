@@ -12337,6 +12337,64 @@ public readonly regional: AuditRegionalStack[];
 
 ---
 
+### BastionHost <a name="BastionHost" id="@DataChefHQ/data-landing-zone.BastionHost"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.BastionHost.Initializer"></a>
+
+```typescript
+import { BastionHost } from '@DataChefHQ/data-landing-zone'
+
+const bastionHost: BastionHost = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.BastionHost.property.instanceType">instanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | The bastion instance EC2 type. |
+| <code><a href="#@DataChefHQ/data-landing-zone.BastionHost.property.location">location</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a></code> | The location where the Bastion will exist. |
+| <code><a href="#@DataChefHQ/data-landing-zone.BastionHost.property.name">name</a></code> | <code>string</code> | The name of the Bastion, defaults to 'default', specify the name if there are more than one per account. |
+
+---
+
+##### `instanceType`<sup>Required</sup> <a name="instanceType" id="@DataChefHQ/data-landing-zone.BastionHost.property.instanceType"></a>
+
+```typescript
+public readonly instanceType: InstanceType;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.InstanceType
+
+The bastion instance EC2 type.
+
+---
+
+##### `location`<sup>Required</sup> <a name="location" id="@DataChefHQ/data-landing-zone.BastionHost.property.location"></a>
+
+```typescript
+public readonly location: NetworkAddress;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkAddress">NetworkAddress</a>
+
+The location where the Bastion will exist.
+
+The network address must target a specific subnet
+
+---
+
+##### `name`<sup>Optional</sup> <a name="name" id="@DataChefHQ/data-landing-zone.BastionHost.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+The name of the Bastion, defaults to 'default', specify the name if there are more than one per account.
+
+---
+
 ### BudgetProps <a name="BudgetProps" id="@DataChefHQ/data-landing-zone.BudgetProps"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.BudgetProps.Initializer"></a>
@@ -14521,8 +14579,19 @@ const network: Network = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Network.property.bastionHosts">bastionHosts</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.BastionHost">BastionHost</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.Network.property.connections">connections</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkConnection">NetworkConnection</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.Network.property.nats">nats</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NetworkNat">NetworkNat</a>[]</code> | *No description.* |
+
+---
+
+##### `bastionHosts`<sup>Optional</sup> <a name="bastionHosts" id="@DataChefHQ/data-landing-zone.Network.property.bastionHosts"></a>
+
+```typescript
+public readonly bastionHosts: BastionHost[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.BastionHost">BastionHost</a>[]
 
 ---
 

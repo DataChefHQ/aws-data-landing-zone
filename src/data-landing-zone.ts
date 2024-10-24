@@ -368,10 +368,27 @@ export interface NetworkNat {
    * */
   readonly type: NetworkNatType;
 }
+export interface BastionHost {
+  /**
+   * The name of the Bastion, defaults to 'default', specify the name if there are more than one per account
+   */
+  readonly name?: string;
+
+  /**
+   * The location where the Bastion will exist. The network address must target a specific subnet
+   */
+  readonly location: NetworkAddress;
+
+  /**
+   * The bastion instance EC2 type
+   */
+  readonly instanceType: InstanceType;
+}
 
 export interface Network {
   readonly connections?: NetworkConnection;
   readonly nats?: NetworkNat[];
+  readonly bastionHosts?: BastionHost[];
 }
 
 
@@ -606,6 +623,17 @@ function validations(props: DataLandingZoneProps) {
         throw new Error(`NAT ${nat.name} 'location' and 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must ` +
           'be in the same account, region and VPC');
       }
+    }
+  }
+
+  /* Bastions */
+  for (const bastion of props.network?.bastionHosts || []) {
+    if (!networkAddressExists(bastion.location)) {
+      throw new Error(`The BastionHost (${bastion.name}) 'location' NetworkAddress ${bastion.location} does not exist`);
+    }
+
+    if (!bastion.location.subnet) {
+      throw new Error(`The BastionHost (${bastion.name}) 'location' NetworkAddress must target a specific subnet`);
     }
   }
 }
