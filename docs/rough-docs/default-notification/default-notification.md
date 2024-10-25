@@ -1,8 +1,8 @@
-# Configuring Slack for AWS Chatbot
+# Approving the AWS Chatbot App in Slack
 
-AWS Chatbot allows you to receive notifications and execute commands in chat platforms like Slack. Setting up AWS Chatbot with Slack involves integrating Slack with AWS, configuring authorization, and setting up permissions. For the Data Landing Zone, each account will need to be configured with a Slack channel. This [setting up slack guide](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up-slack.html) provides a detailed walkthrough of the setup process.
+AWS Chatbot allows you to receive notifications and execute commands in chat platforms like Slack. Setting up AWS Chatbot with Slack involves integrating Slack with AWS, configuring authorization, and setting up permissions. For the Data Landing Zone, each account will need to be configured with a Slack channel. For an AWS account to be able to send notifications to Slack, it must be approved in the Slack workspace.
 
-Approving the AWS Chatbot App in Slack
+To follow along using AWS guide use this link: [setting up slack](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up-slack.html)
 
 ## 1. Navigate to the AWS Chatbot Console
 
