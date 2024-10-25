@@ -6,7 +6,6 @@ import { DlzStack, DlzAccountNetwork } from '../../../../constructs/index';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
-
 export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
 
   constructor(scope: Construct, private workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
@@ -73,7 +72,6 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
       parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_VPC_PEERING_ROLE_PREFIX}${vpcPeeringRolesKey}`,
       stringValue: role.roleArn,
     });
-
   }
 }
 

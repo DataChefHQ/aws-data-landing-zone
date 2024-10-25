@@ -8,7 +8,6 @@ import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../d
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
 
-
 export class Shared {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount,
     private globals: GlobalVariables) {
