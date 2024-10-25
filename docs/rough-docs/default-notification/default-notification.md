@@ -1,16 +1,16 @@
 # Default notifications in Slack
 
-To facilitate communication regarding the Data Landing Zone there are default "channels" that can send notifications to be delivered to the application's team. The "channels" are configured to use email or Slack notification. For slack messages these are sent to an SNS topic that is delivered to a ChatBot and then it gets sent to Slack Channels. These channels are created and configured by the user first. The notfication settings are then configured in the DLZ using default notification settings at the organization level, or can be set and overridden at the account level.
+To facilitate communication regarding the **Data Landing Zone** there are default "channels" that can send notifications to be delivered to the application's team. The "channels" are configured to use **email** or **Slack notification**. For Slack messages these are sent to an **SNS topic** that is delivered to a **ChatBot** and then it gets sent to **Slack Channels**. These channels are created and configured by the user first. The notfication settings are then configured in the **DLZ** using default notification settings at the organization level, or can be set and overridden at the account level.
 
 ## To use email notifications
 
-If you want to use email notifications, you need to create a configuration in the DLZ that creates these "channels" for teams so that they can get notified by just sending a message to an SNS topic. This will then be delivered to the email subscriptions for the SNS topic. To setup email notfication using AWS guide use this link: [setting up email notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-email-notifications.html). Its important to note that the email address must be verified before it can be used in the DLZ.
+If you want to use email notifications, you need to create a configuration in the **DLZ** that creates these "channels" for teams so that they can get notified by just sending a message to an **SNS topic**. This will then be delivered to the email subscriptions for the **SNS topic**. To setup email notfication using AWS guide use this link: [setting up email notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-email-notifications.html). Its important to note that the email address must be verified before it can be used in the **DLZ**.
 
-## To use slack notifications
+## To use Slack notifications
 
-For the Data Landing Zone, each account will need to be configured with a Slack channel. For an AWS account to be able to send notifications to Slack, it must be approved in the Slack workspace. You must manually connect slack and the aws account(s) before deploying the DLZ.
+For the Data Landing Zone, each account will need to be configured with a Slack channel. For an AWS account to be able to send notifications to Slack, it must be approved in the Slack workspace. You must manually connect Slack and the aws account(s) before deploying the DLZ.
 
-To follow along using AWS guide use this link: [setting up slack](https://docs.aws.amazon.com/chatbot/latest/adminguide/slack-setup.html)
+To follow along using AWS guide use this link: [setting up Slack](https://docs.aws.amazon.com/chatbot/latest/adminguide/Slack-setup.html)
 
 ### 1. Navigate to the AWS Chatbot Console
 
