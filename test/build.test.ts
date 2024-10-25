@@ -5,7 +5,7 @@ import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import {
-  DataLandingZone,
+  DataLandingZone, DataLandingZoneProps,
   Defaults,
   DlzAccountType,
   DlzControlTowerStandardControls, IdentityStoreUser,
@@ -21,7 +21,7 @@ const slackBudgetNotifications: SlackChannel = {
   slackChannelId: 'C2',
 };
 
-const configBase = {
+const configBase: DataLandingZoneProps = {
   localProfile: 'ct-sandbox-exported',
   regions: {
     global: Region.EU_WEST_1,
@@ -448,6 +448,13 @@ const configBase = {
             // }
           },
         },
+      },
+    ],
+    bastionHosts: [
+      {
+        name: 'default', // can this be optional, defaults to 'default', would be unique in stack, but not app.
+        location: new NetworkAddress('project-1-development', Region.EU_WEST_1, 'default', 'private', 'private-1'),
+        instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
       },
     ],
   },
