@@ -4,7 +4,6 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { DlzStack, DlzAccountNetwork } from '../../../../constructs/index';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
-import { ParameterCache } from '../../../../parameter-cache';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
@@ -73,11 +72,6 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
       parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_VPC_PEERING_ROLE_PREFIX}${vpcPeeringRolesKey}`,
       stringValue: role.roleArn,
     });
-
-    ParameterCache.set(
-      `${SSM_PARAMETERS_DLZ.NETWORKING_VPC_PEERING_ROLE_PREFIX}${vpcPeeringRolesKey}`,
-      role.roleArn);
-
   }
 }
 

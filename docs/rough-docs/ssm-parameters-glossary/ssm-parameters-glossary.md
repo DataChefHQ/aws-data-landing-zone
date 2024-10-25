@@ -2,9 +2,9 @@
 
 ## `/dlz/networking-entity/bastion/${bastion.name}/security-group/id`
 
-The security group ID of the bastion host
+The security group ID of the bastion host [link](../bastion-hosts/bastion-hosts.md).
 
-- **bastion.name** - The name of the bastion host.
+- **bastion.name** - The name of the bastion host. Property is optional, but if not provided, it will default to `default`.
 
 ---
 

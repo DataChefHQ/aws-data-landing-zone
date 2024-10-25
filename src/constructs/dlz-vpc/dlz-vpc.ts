@@ -6,7 +6,6 @@ import { NetworkEntityRouteTable, NetworkEntityVpc } from './dlz-account-network
 import { NetworkAddress } from './network-address';
 import { DLzAccount, NetworkNat, Region } from '../../data-landing-zone';
 import { groupByField } from '../../lib';
-import { ParameterCache } from '../../parameter-cache';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 import { DlzStack } from '../dlz-stack/index';
 
@@ -77,10 +76,6 @@ export class DlzVpc {
       stringValue: vpc.attrVpcId,
     });
 
-    ParameterCache.set(
-      `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${vpcAddress}/id`,
-      vpc.attrVpcId);
-
     const segmentsSubnets = groupByField(dlzVpc.subnets, 'segment');
     for (const segment in segmentsSubnets) {
       const segmentSubnets = segmentsSubnets[segment];
@@ -100,9 +95,6 @@ export class DlzVpc {
         parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${routeTableAddress}/id`,
         stringValue: routeTable.attrRouteTableId,
       });
-      ParameterCache.set(
-        `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${routeTableAddress}/id`,
-        routeTable.attrRouteTableId);
 
       const subnetEntity: NetworkEntityRouteTable = {
         address: routeTableAddress,
@@ -133,10 +125,6 @@ export class DlzVpc {
           parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${subnetAddress}/id`,
           stringValue: subnet.attrSubnetId,
         });
-
-        ParameterCache.set(
-          `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${subnetAddress}/id`,
-          subnet.attrSubnetId);
 
         const subnetRouteTableAssociationName = this.vpcResourceName(segmentSubnet.name + '-association');
         new ec2.CfnSubnetRouteTableAssociation(dlzStack, subnetRouteTableAssociationName, {
