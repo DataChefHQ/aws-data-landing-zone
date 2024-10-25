@@ -3,6 +3,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { BastionHost } from '../../data-landing-zone';
+import { ParameterCache } from '../../parameter-cache';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 
 export interface DlzBastionHostProps {
@@ -60,5 +61,9 @@ export class DlzBastionHost {
       parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}bastion/${props.bastion.name}/security-group/id`,
       stringValue: this.securityGroup.attrId,
     });
+
+    ParameterCache.set(
+      `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}bastion/${props.bastion.name}/security-group/id`,
+      this.securityGroup.attrId);
   }
 }
