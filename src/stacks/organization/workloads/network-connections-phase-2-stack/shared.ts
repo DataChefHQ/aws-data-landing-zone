@@ -2,6 +2,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { DlzSsmReader, DlzStack, NetworkEntityVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, GlobalVariables } from '../../../../data-landing-zone';
+import { ParameterCache } from '../../../../parameter-cache';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 export class Shared {
@@ -108,6 +109,9 @@ export class Shared {
         parameterName: `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${fromVpc.address}/peer/${toVpc.address}/id`,
         stringValue: peeringConnection.attrId,
       });
+      ParameterCache.set(
+        `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${fromVpc.address}/peer/${toVpc.address}/id`,
+        peeringConnection.attrId);
     }
   }
 

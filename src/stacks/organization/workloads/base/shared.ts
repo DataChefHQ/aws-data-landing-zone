@@ -7,7 +7,7 @@ import { DlzStack, DlzVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
-
+import { ParameterCache } from '../../../../parameter-cache';
 
 export class Shared {
   constructor(private stack: DlzStack, private props: DataLandingZoneProps, private dlzAccount: DLzAccount,
@@ -55,6 +55,9 @@ export class Shared {
       parameterName: '/dlz/iam/permission-boundary-policy/arn',
       stringValue: `arn:aws:iam::${accountId}:policy/IamPolicyPermissionBoundaryPolicy`,
     });
+    ParameterCache.set(
+      '/dlz/iam/permission-boundary-policy/arn',
+      `arn:aws:iam::${accountId}:policy/IamPolicyPermissionBoundaryPolicy`);
   }
 
   public createIamPermissionsBoundaryManagedPolicy() {
