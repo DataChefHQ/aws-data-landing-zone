@@ -781,21 +781,9 @@ export class DataLandingZone {
   };
 
   importFrom(accountName: string, region: Region): DataLandingZoneClient {
-    const allAccountIds = new Map<string, string>();
-    allAccountIds.set('root', this.props.organization.root.accounts.management.accountId);
-    allAccountIds.set('log', this.props.organization.ous.security.accounts.log.accountId);
-    allAccountIds.set('audit', this.props.organization.ous.security.accounts.audit.accountId);
-    for (const account of this.props.organization.ous.workloads.accounts) {
-      allAccountIds.set(account.name, account.accountId);
-    }
-
-    if (!allAccountIds.has(accountName)) {
-      throw new Error(`Account ${accountName} not found`);
-    }
-    const accountId = allAccountIds.get(accountName)!;
     const regionName = region.toString();
 
-    return new DataLandingZoneClient(this.managementStack, accountId, accountName, regionName);
+    return new DataLandingZoneClient(this.app, accountName, regionName);
   }
 
   private stageLog() {

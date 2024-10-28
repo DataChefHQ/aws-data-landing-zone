@@ -16077,13 +16077,12 @@ public readonly workloadRegionalStacks: WorkloadRegionalStack[];
 ```typescript
 import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 
-new DataLandingZoneClient(scope: Construct, accountId: string, accountName: string, region: string)
+new DataLandingZoneClient(scope: Construct, accountName: string, region: string)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.region">region</a></code> | <code>string</code> | *No description.* |
 
@@ -16092,12 +16091,6 @@ new DataLandingZoneClient(scope: Construct, accountId: string, accountName: stri
 ##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
-
----
-
-##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountId"></a>
-
-- *Type:* string
 
 ---
 
