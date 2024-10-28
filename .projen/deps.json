@@ -111,10 +111,6 @@
       "type": "bundled"
     },
     {
-      "name": "@aws-sdk/client-ssm",
-      "type": "bundled"
-    },
-    {
       "name": "@aws-sdk/client-sso-admin",
       "type": "bundled"
     },

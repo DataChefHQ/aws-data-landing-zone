@@ -795,7 +795,7 @@ export class DataLandingZone {
     const accountId = allAccountIds.get(accountName)!;
     const regionName = region.toString();
 
-    return new DataLandingZoneClient(accountId, accountName, regionName);
+    return new DataLandingZoneClient(this.managementStack, accountId, accountName, regionName);
   }
 
   private stageLog() {
