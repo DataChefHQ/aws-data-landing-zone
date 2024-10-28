@@ -15922,7 +15922,26 @@ new DataLandingZone(app: App, props: DataLandingZoneProps)
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.importFrom">importFrom</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZone.stageManagement">stageManagement</a></code> | *No description.* |
+
+---
+
+##### `importFrom` <a name="importFrom" id="@DataChefHQ/data-landing-zone.DataLandingZone.importFrom"></a>
+
+```typescript
+public importFrom(accountName: string, region: Region): DataLandingZoneClient
+```
+
+###### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZone.importFrom.parameter.accountName"></a>
+
+- *Type:* string
+
+---
+
+###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZone.importFrom.parameter.region"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
 
 ---
 
@@ -16049,6 +16068,111 @@ public readonly workloadRegionalStacks: WorkloadRegionalStack[];
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack">WorkloadRegionalStack</a>[]
 
 ---
+
+
+### DataLandingZoneClient <a name="DataLandingZoneClient" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+new DataLandingZoneClient(accountId: string, accountName: string, region: string)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.region">region</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountId"></a>
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.accountName"></a>
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer.parameter.region"></a>
+
+- *Type:* string
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId">getBastionSecurityGroupId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId">getVpcId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn">notificationTopicArn</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn">permissionsBoundaryArn</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId">routeTableId</a></code> | *No description.* |
+
+---
+
+##### `getBastionSecurityGroupId` <a name="getBastionSecurityGroupId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId"></a>
+
+```typescript
+public getBastionSecurityGroupId(bastionName?: string): string
+```
+
+###### `bastionName`<sup>Optional</sup> <a name="bastionName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId.parameter.bastionName"></a>
+
+- *Type:* string
+
+---
+
+##### `getVpcId` <a name="getVpcId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId"></a>
+
+```typescript
+public getVpcId(vpcName: string): string
+```
+
+###### `vpcName`<sup>Required</sup> <a name="vpcName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId.parameter.vpcName"></a>
+
+- *Type:* string
+
+---
+
+##### `notificationTopicArn` <a name="notificationTopicArn" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn"></a>
+
+```typescript
+public notificationTopicArn(): string
+```
+
+##### `permissionsBoundaryArn` <a name="permissionsBoundaryArn" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn"></a>
+
+```typescript
+public permissionsBoundaryArn(): string
+```
+
+##### `routeTableId` <a name="routeTableId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId"></a>
+
+```typescript
+public routeTableId(vpcName: string, segment: string): string
+```
+
+###### `vpcName`<sup>Required</sup> <a name="vpcName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.vpcName"></a>
+
+- *Type:* string
+
+---
+
+###### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.segment"></a>
+
+- *Type:* string
+
+---
+
+
 
 
 ### Defaults <a name="Defaults" id="@DataChefHQ/data-landing-zone.Defaults"></a>
