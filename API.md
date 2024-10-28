@@ -16115,6 +16115,7 @@ new DataLandingZoneClient(accountId: string, accountName: string, region: string
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn">notificationTopicArn</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn">permissionsBoundaryArn</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId">routeTableId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId">subnetId</a></code> | *No description.* |
 
 ---
 
@@ -16167,6 +16168,30 @@ public routeTableId(vpcName: string, segment: string): string
 ---
 
 ###### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.segment"></a>
+
+- *Type:* string
+
+---
+
+##### `subnetId` <a name="subnetId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId"></a>
+
+```typescript
+public subnetId(vpcName: string, segment: string, subnetName: string): string
+```
+
+###### `vpcName`<sup>Required</sup> <a name="vpcName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.vpcName"></a>
+
+- *Type:* string
+
+---
+
+###### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.segment"></a>
+
+- *Type:* string
+
+---
+
+###### `subnetName`<sup>Required</sup> <a name="subnetName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.subnetName"></a>
 
 - *Type:* string
 
