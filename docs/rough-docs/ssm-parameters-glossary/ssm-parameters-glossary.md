@@ -6,6 +6,8 @@ The security group ID of the bastion host [link](../bastion-hosts/bastion-hosts.
 
 - **bastion.name** - The name of the bastion host. Property is optional, but if not provided, it will default to `default`.
 
+### Scope: Internal
+
 ---
 
 ## `/dlz/networking-entity/vpc/${vpcAddress}/id`
