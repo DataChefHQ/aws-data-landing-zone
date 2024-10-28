@@ -2,7 +2,7 @@
 
 ## `/dlz/networking-entity/bastion/${bastion.name}/security-group/id`
 
-### Scope: External
+**Scope:** External
 
 The security group ID of the bastion host [link](../bastion-hosts/bastion-hosts.md).
 
@@ -12,7 +12,7 @@ The security group ID of the bastion host [link](../bastion-hosts/bastion-hosts.
 
 ## `/dlz/networking-entity/vpc/${vpcAddress}/id`
 
-### Scope: External
+**Scope:** External
 
 The VPC ID of the VPC.
 
@@ -22,7 +22,7 @@ The VPC ID of the VPC.
 
 ## `/dlz/networking-entity/vpc/${routeTableAddress}/id`
 
-### Scope: External
+**Scope:** External
 
 The route table ID of the route table.
 
@@ -32,7 +32,7 @@ The route table ID of the route table.
 
 ## `/dlz/networking-entity/vpc/${subnetAddress}/id`
 
-### Scope: External
+**Scope:** External
 
 The subnet ID of the subnet.
 
@@ -42,7 +42,7 @@ The subnet ID of the subnet.
 
 ## `/dlz/sns/default-notification/arn`
 
-### Scope: External
+**Scope:** External
 
 The ARN of the default notification topic.
 
@@ -50,7 +50,7 @@ The ARN of the default notification topic.
 
 ## `/dlz/iam/permission-boundary-policy/arn`
 
-### Scope: External
+**Scope:** External
 
 The ARN of the permission boundary policy.
 
@@ -58,7 +58,7 @@ The ARN of the permission boundary policy.
 
 ## `/dlz/networking/vpc-peering-role-arn--${vpcPeeringRolesKey}`
 
-### Scope: Internal
+**Scope:** Internal
 
 The ARN of the VPC peering role.
 
@@ -68,7 +68,7 @@ The ARN of the VPC peering role.
 
 ## `/dlz/networking-entity/vpc/${fromVpc.address}/peer/${toVpc.address}/id`
 
-### Scope: Internal
+**Scope:** Internal
 
 The ID of the VPC peering connection.
 
