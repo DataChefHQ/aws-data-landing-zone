@@ -13,25 +13,25 @@ export class DataLandingZoneClient {
 
 
   /*
-        * Fetches the parameter from the SSM Parameter Store and returns the value
-        * @param parameterName - The name of the parameter to fetch
-        * @param errorMessage - The error message to throw if the parameter is not found
-        * @returns - The value of the parameter
-        */
+          * Fetches the parameter from the SSM Parameter Store and returns the value
+          * @param parameterName - The name of the parameter to fetch
+          * @param errorMessage - The error message to throw if the parameter is not found
+          * @returns - The value of the parameter
+          */
   private getParameter(parameterName: string, errorMessage: string): string {
-    const parameter = ssm.StringParameter.fromStringParameterName(this.scope, `data-landing-zone-client-${parameterName}`, parameterName);
-    if (!parameter || !parameter.stringValue) {
+    const value = ssm.StringParameter.valueFromLookup(this.scope, parameterName);
+    if (!value) {
       throw new Error(errorMessage);
     }
-    return parameter.stringValue;
+    return value;
   }
 
   /*
-        * Fetches the bastion security group ID from the SSM Parameter Store
-        * @param bastionName - The name of the bastion to fetch the security group ID for
-        * @returns - The security group ID of the bastion
-        * @throws - An error if the parameter is not found
-        */
+          * Fetches the bastion security group ID from the SSM Parameter Store
+          * @param bastionName - The name of the bastion to fetch the security group ID for
+          * @returns - The security group ID of the bastion
+          * @throws - An error if the parameter is not found
+          */
   public getBastionSecurityGroupId(bastionName?: string): string {
     bastionName = bastionName ?? 'default';
 
@@ -41,11 +41,11 @@ export class DataLandingZoneClient {
   }
 
   /*
-        * Fetches the VPC ID from the SSM Parameter Store
-        * @param vpcName - The name of the VPC to fetch the ID for
-        * @returns - The ID of the VPC
-        * @throws - An error if the parameter is not found
-        */
+          * Fetches the VPC ID from the SSM Parameter Store
+          * @param vpcName - The name of the VPC to fetch the ID for
+          * @returns - The ID of the VPC
+          * @throws - An error if the parameter is not found
+          */
   public getVpcId(vpcName: string): string {
     const vpcAddress = new NetworkAddress(this.accountName, this.region, vpcName);
     return this.getParameter(
@@ -54,12 +54,12 @@ export class DataLandingZoneClient {
   }
 
   /*
-        * Fetches the route table ID from the SSM Parameter Store
-        * @param vpcName - The name of the VPC to fetch the route table ID for
-        * @param segment - The segment of the VPC to fetch the route table ID for
-        * @returns - The ID of the route table
-        * @throws - An error if the parameter is not found
-        */
+          * Fetches the route table ID from the SSM Parameter Store
+          * @param vpcName - The name of the VPC to fetch the route table ID for
+          * @param segment - The segment of the VPC to fetch the route table ID for
+          * @returns - The ID of the route table
+          * @throws - An error if the parameter is not found
+          */
   public routeTableId(vpcName: string, segment: string): string {
     const routeTableAddress = new NetworkAddress(this.accountName, this.region, vpcName, segment);
     return this.getParameter(
@@ -68,13 +68,13 @@ export class DataLandingZoneClient {
   }
 
   /*
-        * Fetches the subnet ID from the SSM Parameter Store
-        * @param vpcName - The name of the VPC to fetch the subnet ID for
-        * @param segment - The segment of the VPC to fetch the subnet ID for
-        * @param subnetName - The name of the subnet to fetch the ID for
-        * @returns - The ID of the subnet
-        * @throws - An error if the parameter is not found
-        */
+          * Fetches the subnet ID from the SSM Parameter Store
+          * @param vpcName - The name of the VPC to fetch the subnet ID for
+          * @param segment - The segment of the VPC to fetch the subnet ID for
+          * @param subnetName - The name of the subnet to fetch the ID for
+          * @returns - The ID of the subnet
+          * @throws - An error if the parameter is not found
+          */
   public getSubnetId(vpcName: string, segment: string, subnetName: string): string {
     const subnetAddress = new NetworkAddress(this.accountName, this.region, vpcName, segment, subnetName);
     return this.getParameter(
@@ -83,10 +83,10 @@ export class DataLandingZoneClient {
   }
 
   /*
-        * Fetches the notification topic ARN from the SSM Parameter Store
-        * @returns - The ARN of the notification topic
-        * @throws - An error if the parameter is not found
-        */
+          * Fetches the notification topic ARN from the SSM Parameter Store
+          * @returns - The ARN of the notification topic
+          * @throws - An error if the parameter is not found
+          */
   public notificationTopicArn(): string {
     return this.getParameter(
       `${SSM_PARAMETER_DLZ_PREFIX}/sns/default-notification/arn`,
@@ -94,10 +94,10 @@ export class DataLandingZoneClient {
   }
 
   /*
-        * Fetches the permissions boundary ARN from the SSM Parameter Store
-        * @returns - The ARN of the permissions boundary
-        * @throws - An error if the parameter is not found
-        */
+          * Fetches the permissions boundary ARN from the SSM Parameter Store
+          * @returns - The ARN of the permissions boundary
+          * @throws - An error if the parameter is not found
+          */
   public permissionsBoundaryArn(): string {
     return this.getParameter(
       `${SSM_PARAMETER_DLZ_PREFIX}/iam/permission-boundary-policy/arn`,
