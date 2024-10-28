@@ -444,7 +444,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "cb1d30950bd51f1b6577e243ce3e4dd01703fdb8aefccc5cdbbc92c3b4bafde1.zip",
+          "S3Key": "2345bfda549311359d2c0007b52beb8c1d874fb148f8564002cca85bf36411d8.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
