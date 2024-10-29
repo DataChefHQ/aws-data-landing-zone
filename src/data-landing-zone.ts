@@ -12,7 +12,6 @@ import {
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
-import { DataLandingZoneClient } from './data-landing-zone-client';
 import { Report } from './lib/report';
 import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
@@ -779,12 +778,6 @@ export class DataLandingZone {
 
     return management;
   };
-
-  importFrom(accountName: string, region: Region): DataLandingZoneClient {
-    const regionName = region.toString();
-
-    return new DataLandingZoneClient(this.app, accountName, regionName);
-  }
 
   private stageLog() {
     const ou = 'security';
