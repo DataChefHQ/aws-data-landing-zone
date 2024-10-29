@@ -779,7 +779,6 @@ export class DataLandingZone {
     return management;
   };
 
-
   private stageLog() {
     const ou = 'security';
     const account = 'log';

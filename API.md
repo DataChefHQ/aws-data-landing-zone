@@ -12495,6 +12495,278 @@ public readonly slack: SlackChannel;
 
 ---
 
+### DataLandingZoneClientBastionProps <a name="DataLandingZoneClientBastionProps" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClientBastionProps } from '@DataChefHQ/data-landing-zone'
+
+const dataLandingZoneClientBastionProps: DataLandingZoneClientBastionProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.property.bastionName">bastionName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+##### `bastionName`<sup>Optional</sup> <a name="bastionName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps.property.bastionName"></a>
+
+```typescript
+public readonly bastionName: string;
+```
+
+- *Type:* string
+
+---
+
+### DataLandingZoneClientProps <a name="DataLandingZoneClientProps" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientProps.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClientProps } from '@DataChefHQ/data-landing-zone'
+
+const dataLandingZoneClientProps: DataLandingZoneClientProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientProps.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientProps.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+### DataLandingZoneClientRouteTableIdProps <a name="DataLandingZoneClientRouteTableIdProps" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClientRouteTableIdProps } from '@DataChefHQ/data-landing-zone'
+
+const dataLandingZoneClientRouteTableIdProps: DataLandingZoneClientRouteTableIdProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.vpcName">vpcName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.segment"></a>
+
+```typescript
+public readonly segment: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vpcName`<sup>Required</sup> <a name="vpcName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.vpcName"></a>
+
+```typescript
+public readonly vpcName: string;
+```
+
+- *Type:* string
+
+---
+
+### DataLandingZoneClientSubnetIdProps <a name="DataLandingZoneClientSubnetIdProps" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClientSubnetIdProps } from '@DataChefHQ/data-landing-zone'
+
+const dataLandingZoneClientSubnetIdProps: DataLandingZoneClientSubnetIdProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.subnetName">subnetName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.vpcName">vpcName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.segment"></a>
+
+```typescript
+public readonly segment: string;
+```
+
+- *Type:* string
+
+---
+
+##### `subnetName`<sup>Required</sup> <a name="subnetName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.subnetName"></a>
+
+```typescript
+public readonly subnetName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vpcName`<sup>Required</sup> <a name="vpcName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.vpcName"></a>
+
+```typescript
+public readonly vpcName: string;
+```
+
+- *Type:* string
+
+---
+
+### DataLandingZoneClientVpcIdProps <a name="DataLandingZoneClientVpcIdProps" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClientVpcIdProps } from '@DataChefHQ/data-landing-zone'
+
+const dataLandingZoneClientVpcIdProps: DataLandingZoneClientVpcIdProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.property.vpcName">vpcName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vpcName`<sup>Required</sup> <a name="vpcName" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps.property.vpcName"></a>
+
+```typescript
+public readonly vpcName: string;
+```
+
+- *Type:* string
+
+---
+
 ### DataLandingZoneProps <a name="DataLandingZoneProps" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.Initializer"></a>
@@ -16049,6 +16321,181 @@ public readonly workloadRegionalStacks: WorkloadRegionalStack[];
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack">WorkloadRegionalStack</a>[]
 
 ---
+
+
+### DataLandingZoneClient <a name="DataLandingZoneClient" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.Initializer"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+new DataLandingZoneClient()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId">bastionSecurityGroupId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn">notificationTopicArn</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn">permissionsBoundaryArn</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId">routeTableId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId">subnetId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId">vpcId</a></code> | *No description.* |
+
+---
+
+##### `bastionSecurityGroupId` <a name="bastionSecurityGroupId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.bastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps">DataLandingZoneClientBastionProps</a>
+
+---
+
+##### `notificationTopicArn` <a name="notificationTopicArn" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.notificationTopicArn(scope: Construct, id: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `permissionsBoundaryArn` <a name="permissionsBoundaryArn" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.permissionsBoundaryArn(scope: Construct, id: string)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `routeTableId` <a name="routeTableId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.routeTableId(scope: Construct, id: string, props: DataLandingZoneClientRouteTableIdProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps">DataLandingZoneClientRouteTableIdProps</a>
+
+---
+
+##### `subnetId` <a name="subnetId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.subnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps">DataLandingZoneClientSubnetIdProps</a>
+
+---
+
+##### `vpcId` <a name="vpcId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.vpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps">DataLandingZoneClientVpcIdProps</a>
+
+---
+
 
 
 ### Defaults <a name="Defaults" id="@DataChefHQ/data-landing-zone.Defaults"></a>
