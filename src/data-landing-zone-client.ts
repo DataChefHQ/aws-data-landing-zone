@@ -32,36 +32,30 @@ export interface DataLandingZoneClientSubnetIdProps extends DataLandingZoneClien
 export class DataLandingZoneClient {
 
   /*
-    * Fetches the bastion security group ID from the SSM Parameter Store
-    *@param scope - The scope of the construct
-    *@param id - The id of the construct
-    *@param props - The props of the construct
-    *@returns - The security group ID of the bastion
-    *@throws - An error if the parameter is not found
-    */
-  public static getBastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps): string {
+      * Fetches the bastion security group ID from the SSM Parameter Store
+      *@param scope - The scope of the construct
+      *@param id - The id of the construct
+      *@param props - The props of the construct
+      *@returns - The security group ID of the bastion
+      */
+  public static bastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps): string {
     const bastionName = props.bastionName ?? 'default';
 
     const parameter = ssm.StringParameter.fromStringParameterName(
       scope,
       id,
       `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}bastion/${bastionName}/security-group/id`);
-
-    if (!parameter) {
-      throw new Error(`Failed to get bastion security group id for ${bastionName}`);
-    }
     return parameter.stringValue;
   }
 
   /*
-    * Fetches the VPC ID from the SSM Parameter Store
-    *@param scope - The scope of the construct
-    *@param id - The id of the construct
-    *@param props - The props of the construct
-    *@returns - The ID of the VPC
-    *@throws - An error if the parameter is not found
-    */
-  public static getVpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps): string {
+      * Fetches the VPC ID from the SSM Parameter Store
+      *@param scope - The scope of the construct
+      *@param id - The id of the construct
+      *@param props - The props of the construct
+      *@returns - The ID of the VPC
+      */
+  public static vpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps): string {
     const accountName = props.accountName;
     const region = props.region;
     const vpcName = props.vpcName;
@@ -71,20 +65,16 @@ export class DataLandingZoneClient {
       scope,
       id,
       parameterName);
-    if (!parameter) {
-      throw new Error(`Failed to get vpc id for ${vpcAddress}`);
-    }
     return parameter.stringValue;
   }
 
   /*
-    * Fetches the route table ID from the SSM Parameter Store
-    *@param scope - The scope of the construct
-    *@param id - The id of the construct
-    *@param props - The props of the construct
-    *@returns - The ID of the route table
-    *@throws - An error if the parameter is not found
-    */
+      * Fetches the route table ID from the SSM Parameter Store
+      *@param scope - The scope of the construct
+      *@param id - The id of the construct
+      *@param props - The props of the construct
+      *@returns - The ID of the route table
+      */
   public static routeTableId(scope: Construct, id: string, props: DataLandingZoneClientRouteTableIdProps): string {
     const accountName = props.accountName;
     const region = props.region;
@@ -96,21 +86,17 @@ export class DataLandingZoneClient {
       scope,
       id,
       parameterName);
-    if (!parameter) {
-      throw new Error(`Failed to get route table id for ${routeTableAddress}`);
-    }
     return parameter.stringValue;
   }
 
   /*
-    * Fetches the subnet ID from the SSM Parameter Store
-    *@param scope - The scope of the construct
-    *@param id - The id of the construct
-    *@param props - The props of the construct
-    *@returns - The ID of the subnet
-    *@throws - An error if the parameter is not found
-    */
-  public static getSubnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps): string {
+      * Fetches the subnet ID from the SSM Parameter Store
+      *@param scope - The scope of the construct
+      *@param id - The id of the construct
+      *@param props - The props of the construct
+      *@returns - The ID of the subnet
+      */
+  public static subnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps): string {
     const accountName = props.accountName;
     const region = props.region;
     const vpcName = props.vpcName;
@@ -122,47 +108,36 @@ export class DataLandingZoneClient {
       scope,
       id,
       parameterName);
-    if (!parameter) {
-      throw new Error(`Failed to get subnet id for ${subnetAddress}`);
-    }
     return parameter.stringValue;
   }
 
   /*
-    * Fetches the notification topic ARN from the SSM Parameter Store
-    *@param scope - The scope of the construct
-    *@param id - The id of the construct
-    *@returns - The ARN of the notification topic
-    *@throws - An error if the parameter is not found
-    */
+      * Fetches the notification topic ARN from the SSM Parameter Store
+      *@param scope - The scope of the construct
+      *@param id - The id of the construct
+      *@returns - The ARN of the notification topic
+      */
   public static notificationTopicArn(scope: Construct, id: string): string {
     const parameterName = `${SSM_PARAMETER_DLZ_PREFIX}/sns/default-notification/arn`;
     const parameter = ssm.StringParameter.fromStringParameterName(
       scope,
       id,
       parameterName);
-    if (!parameter) {
-      throw new Error('Failed to get ARN for default notification topic');
-    }
     return parameter.stringValue;
   }
 
   /*
-    * Fetches the permissions boundary ARN from the SSM Parameter Store
-    *@param scope - The scope of the construct
-    *@param id - The id of the construct
-    *@returns - The ARN of the permissions boundary
-    *@throws - An error if the parameter is not found
-    */
+      * Fetches the permissions boundary ARN from the SSM Parameter Store
+      *@param scope - The scope of the construct
+      *@param id - The id of the construct
+      *@returns - The ARN of the permissions boundary
+      */
   public static permissionsBoundaryArn(scope: Construct, id: string): string {
     const parameterName = `${SSM_PARAMETER_DLZ_PREFIX}/iam/permission-boundary-policy/arn`;
     const parameter = ssm.StringParameter.fromStringParameterName(
       scope,
       id,
       parameterName);
-    if (!parameter) {
-      throw new Error('Failed to get ARN for IAM permission boundary policy');
-    }
     return parameter.stringValue;
   }
 }

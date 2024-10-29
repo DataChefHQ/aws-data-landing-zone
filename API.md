@@ -16343,90 +16343,38 @@ new DataLandingZoneClient()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId">getBastionSecurityGroupId</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.getSubnetId">getSubnetId</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId">getVpcId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId">bastionSecurityGroupId</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn">notificationTopicArn</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn">permissionsBoundaryArn</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId">routeTableId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId">subnetId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId">vpcId</a></code> | *No description.* |
 
 ---
 
-##### `getBastionSecurityGroupId` <a name="getBastionSecurityGroupId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId"></a>
+##### `bastionSecurityGroupId` <a name="bastionSecurityGroupId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId"></a>
 
 ```typescript
 import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 
-DataLandingZoneClient.getBastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps)
+DataLandingZoneClient.bastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps)
 ```
 
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId.parameter.scope"></a>
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId.parameter.id"></a>
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getBastionSecurityGroupId.parameter.props"></a>
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps">DataLandingZoneClientBastionProps</a>
-
----
-
-##### `getSubnetId` <a name="getSubnetId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getSubnetId"></a>
-
-```typescript
-import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
-
-DataLandingZoneClient.getSubnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps)
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getSubnetId.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getSubnetId.parameter.id"></a>
-
-- *Type:* string
-
----
-
-###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getSubnetId.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps">DataLandingZoneClientSubnetIdProps</a>
-
----
-
-##### `getVpcId` <a name="getVpcId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId"></a>
-
-```typescript
-import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
-
-DataLandingZoneClient.getVpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps)
-```
-
-###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId.parameter.id"></a>
-
-- *Type:* string
-
----
-
-###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.getVpcId.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps">DataLandingZoneClientVpcIdProps</a>
 
 ---
 
@@ -16493,6 +16441,58 @@ DataLandingZoneClient.routeTableId(scope: Construct, id: string, props: DataLand
 ###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps">DataLandingZoneClientRouteTableIdProps</a>
+
+---
+
+##### `subnetId` <a name="subnetId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.subnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps">DataLandingZoneClientSubnetIdProps</a>
+
+---
+
+##### `vpcId` <a name="vpcId" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId"></a>
+
+```typescript
+import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
+
+DataLandingZoneClient.vpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps)
+```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps">DataLandingZoneClientVpcIdProps</a>
 
 ---
 
