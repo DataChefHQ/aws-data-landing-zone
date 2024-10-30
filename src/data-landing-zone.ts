@@ -532,24 +532,24 @@ export interface WorkloadAccountProps extends DlzStackProps {
 }
 
 function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
-  const logger = Logger.staticInstance();
-  logger.info('');
-  logger.info('ORDER OF DEPLOYMENT');
-  logger.info('🌊 Waves  - Deployed sequentially');
-  logger.info('🔲 Stages - Deployed in parallel, all stages within a wave are deployed at the same time');
-  logger.info('📄 Stacks - Dependency driven, stacks are deployed in the order of their dependency within the stage ' +
-    '(stack dependency not visualized below');
-  logger.info('');
+  Logger.info('');
+  Logger.info('ORDER OF DEPLOYMENT');
+  Logger.info('🌊 Waves  - Deployed sequentially');
+  Logger.info('🔲 Stages - Deployed in parallel, all stages within a wave are deployed at the same time');
+  Logger.info('📄 Stacks - Dependency driven, stacks are deployed in the order of their dependency within the stage ' +
+  '(stack dependency not visualized below');
+
+  Logger.info('');
   for (const wave of Object.keys(deploymentOrder)) {
-    logger.info(`🌊 ${wave}`);
+    Logger.info(`🌊 ${wave}`);
     for (const stage of Object.keys(deploymentOrder[wave])) {
-      logger.info(`  🔲 ${stage}`);
+      Logger.info(`  🔲 ${stage}`);
       for (const stack of deploymentOrder[wave][stage]) {
-        logger.info(`    📄 ${stack.id}`);
+        Logger.info(`    📄 ${stack.id}`);
       }
     }
   }
-  logger.info('');
+  Logger.info('');
 }
 
 function validations(props: DataLandingZoneProps) {

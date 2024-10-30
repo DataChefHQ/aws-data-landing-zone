@@ -65,8 +65,7 @@ export class Shared {
       return undefined;
     }
 
-    const logger = Logger.staticInstance();
-    logger.info(`${this.stack.id} Creating VPC Peering between VPC '${fromVpc.address}' and '${toVpc.address}'`);
+    Logger.info(`${this.stack.id} Creating VPC Peering between VPC '${fromVpc.address}' and '${toVpc.address}'`);
     const peerRoleArn = this.getPeerRoleArn(fromAccountId, toAccountId);
 
     const vpcId = this.globals.ncp2.ownerVpcIds.getValue(

@@ -48,8 +48,7 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
       return;
     }
 
-    const logger = Logger.staticInstance();
-    logger.info(`${this.id} Creating VPC Peering role '${peeringRoleName}' between account '${from.dlzAccount.name}' and '${to.dlzAccount.name}'`);
+    Logger.info(`${this.id} Creating VPC Peering role '${peeringRoleName}' between account '${from.dlzAccount.name}' and '${to.dlzAccount.name}'`);
     const role = new iam.Role(this, peeringRoleName, {
       roleName: peeringRoleName,
       description: `VPC Peering Role for '${from.dlzAccount.name}' to '${to.dlzAccount.name}'`,

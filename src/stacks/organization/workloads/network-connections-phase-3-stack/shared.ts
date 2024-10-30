@@ -56,8 +56,7 @@ export class Shared {
 
   private createRoutes(fromAccountId: string, sourcePeeringConnection: SourcePeeringConnectionProps,
     fromVpc: NetworkEntityVpc, toVpc: NetworkEntityVpc) {
-    const logger = Logger.staticInstance();
-    /* Only create routes when we are in the source account and region stacks */
+    /* Only create Íroutes when we are in the source account and region stacks */
     if (this.stack.account !== fromAccountId || this.stack.region !== fromVpc.address.region) {
       return;
     }
@@ -71,12 +70,12 @@ export class Shared {
       `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${sourcePeeringConnection.sourceVpc.address}/peer/${sourcePeeringConnection.destinationVpc.address}/id`,
     );
 
-    logger.info(`Creating VPC Peering routes between '${fromVpc.address}' and '${toVpc.address}'`);
+    Logger.info(`Creating VPC Peering routes between '${fromVpc.address}' and '${toVpc.address}'`);
     for (const fromRouteTable of fromVpc.routeTables) {
       for (const toRouteTable of toVpc.routeTables) {
         for (const toSubnet of toRouteTable.subnets!) {
           const routeLogicalId = `vpc-peering-route-from--${fromRouteTable.address}--to--${toRouteTable.address}-${toSubnet.subnet.cidrBlock}`;
-          logger.info(`${this.stack.id} ${routeLogicalId}`);
+          Logger.info(`${this.stack.id} ${routeLogicalId}`);
 
           const routeTableId = this.globals.ncp3.routeTablesSsmCache.getValue(
             this.stack,

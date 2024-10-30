@@ -11,7 +11,6 @@ export interface SetCostAllocationTagsProps {
 }
 
 export async function setCostAllocationTags(props: DataLandingZoneProps) {
-  const logger = Logger.staticInstance();
   const costExplorerClient = new CostExplorerClient({
     region: props.regions.global,
     credentials: fromIni({
@@ -28,8 +27,8 @@ export async function setCostAllocationTags(props: DataLandingZoneProps) {
       }),
     ),
   }));
-  if (response.Errors && response.Errors.length) {throw new Error(response.Errors.toString());}
+  if (response.Errors && response.Errors.length) { throw new Error(response.Errors.toString()); }
 
-  logger.info(`Cost allocation tags (${tags.map(t => t.name).join(',')}) set successfully. It may take up ` +
-  'to 24 hours for tags to show in Cost Explorer.');
+  Logger.info(`Cost allocation tags (${tags.map(t => t.name).join(',')}) set successfully. It may take up ` +
+    'to 24 hours for tags to show in Cost Explorer.');
 }

@@ -81,7 +81,7 @@ export class Report {
   public static addReportForOuAccountRegions(partialOu: PartialOu, regions: DlzRegions, reportResource: ReportResource) {
     const allRegions = [regions.global, ...regions.regional];
 
-    if (!partialOu.accounts) {return;}
+    if (!partialOu.accounts) { return; }
 
     for (const dlzAccount of partialOu.accounts) {
       // const account = ou.accounts[accountName];
@@ -98,21 +98,20 @@ export class Report {
 
   public static printConsoleReport() {
     const grouped = this.groupByAccountTypeNameAggregatedRegions();
-    const logger = Logger.staticInstance();
     for (let accountName in grouped) {
 
-      logger.info('');
-      logger.info('');
-      logger.info('============================================================================================================================================================');
-      logger.info('============================================================================================================================================================');
-      logger.info('============================================================================================================================================================');
-      logger.info('');
-      logger.info('');
+      Logger.info('');
+      Logger.info('');
+      Logger.info('============================================================================================================================================================');
+      Logger.info('============================================================================================================================================================');
+      Logger.info('============================================================================================================================================================');
+      Logger.info('');
+      Logger.info('');
 
       const accountTypes = grouped[accountName];
       for (let type in accountTypes) {
-        logger.info(`ACCOUNT: ${accountName}`);
-        logger.info(`TYPE: ${type}`);
+        Logger.info(`ACCOUNT: ${accountName}`);
+        Logger.info(`TYPE: ${type}`);
 
         const accountItemsByType = accountTypes[type];
 
@@ -157,7 +156,7 @@ export class Report {
 
         });
 
-        logger.info(
+        Logger.info(
           tableOutput.split('\n').map(line => {
             return '   ' + line;
           }).join('\n'),
@@ -167,7 +166,7 @@ export class Report {
   }
 
   public static saveConsoleReport() {
-    if (!fs.existsSync('./.dlz-reports')) {fs.mkdirSync('./.dlz-reports');}
+    if (!fs.existsSync('./.dlz-reports')) { fs.mkdirSync('./.dlz-reports'); }
 
     fs.writeFileSync('./.dlz-reports/raw.json', JSON.stringify(this.reports, null, 2));
 
@@ -191,7 +190,7 @@ export class Report {
           regions: string;
         }[];
       };
-    } = { };
+    } = {};
 
     const groupedByAccount = groupByField(this.reports, 'accountName');
     for (const accountName in groupedByAccount) {
