@@ -56,7 +56,7 @@ export class Shared {
 
   private createRoutes(fromAccountId: string, sourcePeeringConnection: SourcePeeringConnectionProps,
     fromVpc: NetworkEntityVpc, toVpc: NetworkEntityVpc) {
-    /* Only create Íroutes when we are in the source account and region stacks */
+    /* Only create routes when we are in the source account and region stacks */
     if (this.stack.account !== fromAccountId || this.stack.region !== fromVpc.address.region) {
       return;
     }
