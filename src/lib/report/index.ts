@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { table } from 'table';
 import { DLzAccount, DlzRegions, OrgOuSecurity } from '../../data-landing-zone';
+import { Logger } from '../../logger';
 import { groupByField } from '../ts-utils';
 
 export enum ReportType {
@@ -97,20 +98,21 @@ export class Report {
 
   public static printConsoleReport() {
     const grouped = this.groupByAccountTypeNameAggregatedRegions();
+    const logger = Logger.staticInstance();
     for (let accountName in grouped) {
 
-      console.log('');
-      console.log('');
-      console.log('============================================================================================================================================================');
-      console.log('============================================================================================================================================================');
-      console.log('============================================================================================================================================================');
-      console.log('');
-      console.log('');
+      logger.info('');
+      logger.info('');
+      logger.info('============================================================================================================================================================');
+      logger.info('============================================================================================================================================================');
+      logger.info('============================================================================================================================================================');
+      logger.info('');
+      logger.info('');
 
       const accountTypes = grouped[accountName];
       for (let type in accountTypes) {
-        console.log(`ACCOUNT: ${accountName}`);
-        console.log(`TYPE: ${type}`);
+        logger.info(`ACCOUNT: ${accountName}`);
+        logger.info(`TYPE: ${type}`);
 
         const accountItemsByType = accountTypes[type];
 
@@ -155,7 +157,7 @@ export class Report {
 
         });
 
-        console.log(
+        logger.info(
           tableOutput.split('\n').map(line => {
             return '   ' + line;
           }).join('\n'),

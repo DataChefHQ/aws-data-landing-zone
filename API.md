@@ -17280,6 +17280,102 @@ new IamIdentityCenter(dlzStack: DlzStack, organization: DLzOrganization, iamIden
 
 
 
+### Logger <a name="Logger" id="@DataChefHQ/data-landing-zone.Logger"></a>
+
+- *Implements:* <a href="#@DataChefHQ/data-landing-zone.ILogger">ILogger</a>
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Logger.error">error</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Logger.info">info</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Logger.warn">warn</a></code> | *No description.* |
+
+---
+
+##### `error` <a name="error" id="@DataChefHQ/data-landing-zone.Logger.error"></a>
+
+```typescript
+public error(message: string): void
+```
+
+###### `message`<sup>Required</sup> <a name="message" id="@DataChefHQ/data-landing-zone.Logger.error.parameter.message"></a>
+
+- *Type:* string
+
+---
+
+##### `info` <a name="info" id="@DataChefHQ/data-landing-zone.Logger.info"></a>
+
+```typescript
+public info(message: string): void
+```
+
+###### `message`<sup>Required</sup> <a name="message" id="@DataChefHQ/data-landing-zone.Logger.info.parameter.message"></a>
+
+- *Type:* string
+
+---
+
+##### `warn` <a name="warn" id="@DataChefHQ/data-landing-zone.Logger.warn"></a>
+
+```typescript
+public warn(message: string): void
+```
+
+###### `message`<sup>Required</sup> <a name="message" id="@DataChefHQ/data-landing-zone.Logger.warn.parameter.message"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Logger.staticInstance">staticInstance</a></code> | *No description.* |
+
+---
+
+##### `staticInstance` <a name="staticInstance" id="@DataChefHQ/data-landing-zone.Logger.staticInstance"></a>
+
+```typescript
+import { Logger } from '@DataChefHQ/data-landing-zone'
+
+Logger.staticInstance()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.Logger.property.internalLogger">internalLogger</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ILogger">ILogger</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.Logger.property.logLevel">logLevel</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LogLevel">LogLevel</a></code> | *No description.* |
+
+---
+
+##### `internalLogger`<sup>Required</sup> <a name="internalLogger" id="@DataChefHQ/data-landing-zone.Logger.property.internalLogger"></a>
+
+```typescript
+public readonly internalLogger: ILogger;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.ILogger">ILogger</a>
+
+---
+
+##### `logLevel`<sup>Required</sup> <a name="logLevel" id="@DataChefHQ/data-landing-zone.Logger.property.logLevel"></a>
+
+```typescript
+public readonly logLevel: LogLevel;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LogLevel">LogLevel</a>
+
+---
+
+
 ### NetworkAddress <a name="NetworkAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer"></a>
@@ -17737,6 +17833,57 @@ Optional parameters for the control.
 
 ---
 
+### ILogger <a name="ILogger" id="@DataChefHQ/data-landing-zone.ILogger"></a>
+
+- *Implemented By:* <a href="#@DataChefHQ/data-landing-zone.Logger">Logger</a>, <a href="#@DataChefHQ/data-landing-zone.ILogger">ILogger</a>
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.ILogger.error">error</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.ILogger.info">info</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.ILogger.warn">warn</a></code> | *No description.* |
+
+---
+
+##### `error` <a name="error" id="@DataChefHQ/data-landing-zone.ILogger.error"></a>
+
+```typescript
+public error(message: string): void
+```
+
+###### `message`<sup>Required</sup> <a name="message" id="@DataChefHQ/data-landing-zone.ILogger.error.parameter.message"></a>
+
+- *Type:* string
+
+---
+
+##### `info` <a name="info" id="@DataChefHQ/data-landing-zone.ILogger.info"></a>
+
+```typescript
+public info(message: string): void
+```
+
+###### `message`<sup>Required</sup> <a name="message" id="@DataChefHQ/data-landing-zone.ILogger.info.parameter.message"></a>
+
+- *Type:* string
+
+---
+
+##### `warn` <a name="warn" id="@DataChefHQ/data-landing-zone.ILogger.warn"></a>
+
+```typescript
+public warn(message: string): void
+```
+
+###### `message`<sup>Required</sup> <a name="message" id="@DataChefHQ/data-landing-zone.ILogger.warn.parameter.message"></a>
+
+- *Type:* string
+
+---
+
+
 ### IReportResource <a name="IReportResource" id="@DataChefHQ/data-landing-zone.IReportResource"></a>
 
 - *Implemented By:* <a href="#@DataChefHQ/data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#@DataChefHQ/data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#@DataChefHQ/data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#@DataChefHQ/data-landing-zone.IReportResource">IReportResource</a>
@@ -17956,6 +18103,33 @@ Controls that do not take parameters.
 
 
 ##### `CATALOG` <a name="CATALOG" id="@DataChefHQ/data-landing-zone.IamIdentityPermissionSets.CATALOG"></a>
+
+---
+
+
+### LogLevel <a name="LogLevel" id="@DataChefHQ/data-landing-zone.LogLevel"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogLevel.INFO">INFO</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogLevel.WARN">WARN</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogLevel.ERROR">ERROR</a></code> | *No description.* |
+
+---
+
+##### `INFO` <a name="INFO" id="@DataChefHQ/data-landing-zone.LogLevel.INFO"></a>
+
+---
+
+
+##### `WARN` <a name="WARN" id="@DataChefHQ/data-landing-zone.LogLevel.WARN"></a>
+
+---
+
+
+##### `ERROR` <a name="ERROR" id="@DataChefHQ/data-landing-zone.LogLevel.ERROR"></a>
 
 ---
 

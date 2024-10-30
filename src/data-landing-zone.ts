@@ -13,6 +13,7 @@ import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-read
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 import { Report } from './lib/report';
+import { Logger } from './logger';
 import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
 import { AuditRegionalStack } from './stacks/organization/security/audit/regional-stack';
@@ -531,23 +532,24 @@ export interface WorkloadAccountProps extends DlzStackProps {
 }
 
 function printConsoleDeploymentOrder(deploymentOrder: DeploymentOrder) {
-  console.log('');
-  console.log('ORDER OF DEPLOYMENT');
-  console.log('🌊 Waves  - Deployed sequentially');
-  console.log('🔲 Stages - Deployed in parallel, all stages within a wave are deployed at the same time');
-  console.log('📄 Stacks - Dependency driven, stacks are deployed in the order of their dependency within the stage ' +
+  const logger = Logger.staticInstance();
+  logger.info('');
+  logger.info('ORDER OF DEPLOYMENT');
+  logger.info('🌊 Waves  - Deployed sequentially');
+  logger.info('🔲 Stages - Deployed in parallel, all stages within a wave are deployed at the same time');
+  logger.info('📄 Stacks - Dependency driven, stacks are deployed in the order of their dependency within the stage ' +
     '(stack dependency not visualized below');
-  console.log('');
+  logger.info('');
   for (const wave of Object.keys(deploymentOrder)) {
-    console.log(`🌊 ${wave}`);
+    logger.info(`🌊 ${wave}`);
     for (const stage of Object.keys(deploymentOrder[wave])) {
-      console.log(`  🔲 ${stage}`);
+      logger.info(`  🔲 ${stage}`);
       for (const stack of deploymentOrder[wave][stage]) {
-        console.log(`    📄 ${stack.id}`);
+        logger.info(`    📄 ${stack.id}`);
       }
     }
   }
-  console.log('');
+  logger.info('');
 }
 
 function validations(props: DataLandingZoneProps) {
