@@ -4,6 +4,7 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { DlzStack, DlzAccountNetwork } from '../../../../constructs/index';
 import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+import { Logger } from '../../../../lib/logger';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
@@ -47,7 +48,7 @@ export class WorkloadGlobalNetworkConnectionsPhase1Stack extends DlzStack {
       return;
     }
 
-    console.log(`${this.id} Creating VPC Peering role '${peeringRoleName}' between account '${from.dlzAccount.name}' and '${to.dlzAccount.name}'`);
+    Logger.debug(`${this.id} Creating VPC Peering role '${peeringRoleName}' between account '${from.dlzAccount.name}' and '${to.dlzAccount.name}'`);
     const role = new iam.Role(this, peeringRoleName, {
       roleName: peeringRoleName,
       description: `VPC Peering Role for '${from.dlzAccount.name}' to '${to.dlzAccount.name}'`,
