@@ -2,6 +2,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { DlzSsmReader, DlzStack, NetworkEntityVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, GlobalVariables } from '../../../../data-landing-zone';
+import { Logger } from '../../../../lib/logger';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 export class Shared {
@@ -64,7 +65,7 @@ export class Shared {
       return undefined;
     }
 
-    console.log(`${this.stack.id} Creating VPC Peering between VPC '${fromVpc.address}' and '${toVpc.address}'`);
+    Logger.debug(`${this.stack.id} Creating VPC Peering between VPC '${fromVpc.address}' and '${toVpc.address}'`);
     const peerRoleArn = this.getPeerRoleArn(fromAccountId, toAccountId);
 
     const vpcId = this.globals.ncp2.ownerVpcIds.getValue(

@@ -1,6 +1,7 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { DlzStack, NetworkEntityVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, GlobalVariables } from '../../../../data-landing-zone';
+import { Logger } from '../../../../lib/logger';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 
 type SourcePeeringConnectionProps = {
@@ -69,12 +70,12 @@ export class Shared {
       `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${sourcePeeringConnection.sourceVpc.address}/peer/${sourcePeeringConnection.destinationVpc.address}/id`,
     );
 
-    console.log(`Creating VPC Peering routes between '${fromVpc.address}' and '${toVpc.address}'`);
+    Logger.debug(`Creating VPC Peering routes between '${fromVpc.address}' and '${toVpc.address}'`);
     for (const fromRouteTable of fromVpc.routeTables) {
       for (const toRouteTable of toVpc.routeTables) {
         for (const toSubnet of toRouteTable.subnets!) {
           const routeLogicalId = `vpc-peering-route-from--${fromRouteTable.address}--to--${toRouteTable.address}-${toSubnet.subnet.cidrBlock}`;
-          console.log(this.stack.id, routeLogicalId);
+          Logger.debug(this.stack.id, routeLogicalId);
 
           const routeTableId = this.globals.ncp3.routeTablesSsmCache.getValue(
             this.stack,
