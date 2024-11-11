@@ -44,8 +44,8 @@ const configBase: DataLandingZoneProps = {
             accountId: '381491899779',
             type: DlzAccountType.DEVELOP,
             vpcs: [
-              defaultVpcClasB3Private3Public(0, Region.US_EAST_1), // CIDR 10.0.0./19
-              defaultVpcClasB3Private3Public(1, Region.EU_WEST_1), // CIDR 10.1.0./19
+              Defaults.vpcClassB3Private3Public(0, Region.US_EAST_1), // CIDR 10.0.0./19
+              Defaults.vpcClassB3Private3Public(1, Region.EU_WEST_1), // CIDR 10.1.0./19
             ],
           },
           {
@@ -53,8 +53,8 @@ const configBase: DataLandingZoneProps = {
             accountId: '234567890123',
             type: DlzAccountType.PRODUCTION,
             vpcs: [
-              defaultVpcClasB3Private3Public(2, Region.US_EAST_1), // CIDR 10.2.0./19
-              defaultVpcClasB3Private3Public(3, Region.EU_WEST_1), // CIDR 10.3.0./19
+              Defaults.vpcClassB3Private3Public(2, Region.US_EAST_1), // CIDR 10.2.0./19
+              Defaults.vpcClassB3Private3Public(3, Region.EU_WEST_1), // CIDR 10.3.0./19
             ],
           },
         ],

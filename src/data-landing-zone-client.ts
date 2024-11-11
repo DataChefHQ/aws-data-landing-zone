@@ -18,12 +18,12 @@ export interface DataLandingZoneClientVpcIdProps extends DataLandingZoneClientPr
 
 export interface DataLandingZoneClientRouteTableIdProps extends DataLandingZoneClientProps {
   readonly vpcName: string;
-  readonly segment: string;
+  readonly routeTable: string;
 }
 
 export interface DataLandingZoneClientSubnetIdProps extends DataLandingZoneClientProps {
   readonly vpcName: string;
-  readonly segment: string;
+  readonly routeTable: string;
   readonly subnetName: string;
 }
 /*
@@ -79,8 +79,8 @@ export class DataLandingZoneClient {
     const accountName = props.accountName;
     const region = props.region;
     const vpcName = props.vpcName;
-    const segment = props.segment;
-    const routeTableAddress = new NetworkAddress(accountName, region, vpcName, segment);
+    const routeTable = props.routeTable;
+    const routeTableAddress = new NetworkAddress(accountName, region, vpcName, routeTable);
     const parameterName = `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${routeTableAddress}/id`;
     const parameter = ssm.StringParameter.fromStringParameterName(
       scope,
@@ -100,9 +100,9 @@ export class DataLandingZoneClient {
     const accountName = props.accountName;
     const region = props.region;
     const vpcName = props.vpcName;
-    const segment = props.segment;
+    const routeTable = props.routeTable;
     const subnetName = props.subnetName;
-    const subnetAddress = new NetworkAddress(accountName, region, vpcName, segment, subnetName);
+    const subnetAddress = new NetworkAddress(accountName, region, vpcName, routeTable, subnetName);
     const parameterName = `${SSM_PARAMETERS_DLZ.NETWORKING_ENTITY_PREFIX}vpc/${subnetAddress}/id`;
     const parameter = ssm.StringParameter.fromStringParameterName(
       scope,

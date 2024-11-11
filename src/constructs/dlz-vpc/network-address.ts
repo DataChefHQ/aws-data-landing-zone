@@ -15,7 +15,7 @@ export class NetworkAddress {
   public readonly account: string;
   public readonly region?: string;
   public readonly vpc?: string;
-  public readonly segment?: string;
+  public readonly routeTable?: string;
   public readonly subnet?: string;
 
   /**
@@ -23,29 +23,29 @@ export class NetworkAddress {
    * @param account
    * @param region
    * @param vpc
-   * @param segment
+   * @param routeTable
    * @param subnet
    */
-  constructor(account: string, region?: string, vpc?: string, segment?: string, subnet?: string) {
+  constructor(account: string, region?: string, vpc?: string, routeTable?: string, subnet?: string) {
     if (vpc && !region) {
       throw new Error('VPC must have a Region');
     }
-    if (segment && (!vpc || !region)) {
-      throw new Error('Segment must have a VPC and Region');
+    if (routeTable && (!vpc || !region)) {
+      throw new Error('RouteTable must have a VPC and Region');
     }
-    if (subnet && (!segment || !vpc || !region)) {
-      throw new Error('Subnet must have a Segment, VPC and Region');
+    if (subnet && (!routeTable || !vpc || !region)) {
+      throw new Error('Subnet must have a RouteTable, VPC and Region');
     }
 
     this.account = account;
     this.region = region;
     this.vpc = vpc;
-    this.segment = segment;
+    this.routeTable = routeTable;
     this.subnet = subnet;
   }
 
   public toString(): string {
-    return [this.account, this.region, this.vpc, this.segment, this.subnet]
+    return [this.account, this.region, this.vpc, this.routeTable, this.subnet]
       .filter(part => part !== undefined)
       .join(NETWORK_ADDRESS_SEPARATOR);
   }
@@ -55,19 +55,19 @@ export class NetworkAddress {
   }
 
   public isAccountAddress(): boolean {
-    return this.region === undefined && this.vpc === undefined && this.segment === undefined && this.subnet === undefined;
+    return this.region === undefined && this.vpc === undefined && this.routeTable === undefined && this.subnet === undefined;
   }
   public isRegionAddress(): boolean {
-    return this.region !== undefined && this.vpc === undefined && this.segment === undefined && this.subnet === undefined;
+    return this.region !== undefined && this.vpc === undefined && this.routeTable === undefined && this.subnet === undefined;
   }
   public isVpcAddress(): boolean {
-    return this.region !== undefined && this.vpc !== undefined && this.segment === undefined && this.subnet === undefined;
+    return this.region !== undefined && this.vpc !== undefined && this.routeTable === undefined && this.subnet === undefined;
   }
-  public isSegmentAddress(): boolean {
-    return this.region !== undefined && this.vpc !== undefined && this.segment !== undefined && this.subnet === undefined;
+  public isRouteTableAddress(): boolean {
+    return this.region !== undefined && this.vpc !== undefined && this.routeTable !== undefined && this.subnet === undefined;
   }
   public isSubnetAddress(): boolean {
-    return this.region !== undefined && this.vpc !== undefined && this.segment !== undefined && this.subnet !== undefined;
+    return this.region !== undefined && this.vpc !== undefined && this.routeTable !== undefined && this.subnet !== undefined;
   }
 
 }

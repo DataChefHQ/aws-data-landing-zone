@@ -3,7 +3,7 @@ import { DlzAccountNetwork, NetworkEntityVpc } from './dlz-account-network';
 import { NetworkAddress } from './network-address';
 import { DLzAccount } from '../../data-landing-zone';
 
-type MatchOnAddress = 'account' | 'region' | 'vpc' | 'segment' | 'subnet' | undefined;
+type MatchOnAddress = 'account' | 'region' | 'vpc' | 'routeTable' | 'subnet' | undefined;
 
 /**
  * Convert CIDR to number range
@@ -80,12 +80,12 @@ export class DlzAccountNetworks {
 
   /**
    * Get NetworkEntities for the given `networkAddress` and match on the given `matchOnAddress`. For example, if the
-   * `networkAddress` is a segment address and `matchOnAddress` has a value of `vpc` then it will return all
+   * `networkAddress` is a routeTable address and `matchOnAddress` has a value of `vpc` then it will return all
    * NetworkEntities that have the same VPC as the `networkAddress`. Or, if the `matchOnAddress` has a value of
    * `region` then it will return all NetworkEntities that have the same VPC region as the `networkAddress`.
    *
    * If the `matchOnAddress` is `account` then the complete NetworkEntity will be returned.
-   * Else, if `matchOnAddress` is `region`, `vpc`, `segment` or `subnet` then a partial NetworkEntity will be returned.
+   * Else, if `matchOnAddress` is `region`, `vpc`, `routeTable` or `subnet` then a partial NetworkEntity will be returned.
    * The `vpcs` `routeTables` and `subnets` will be filtered to only include those that match the `networkAddress`. A value of
    * `undefined` will automatically detect the level of the `networkAddress` and use that as the `matchOnAddress`.
    *
@@ -96,12 +96,12 @@ export class DlzAccountNetworks {
    * 2. project-1-develop.eu-west-1.default.private
    * 3. project-1-production.eu-west-1.default.private
    *
-   * - If the `networkAddress` has a `segment` address of: `project-1-develop.us-east-1.default.private` and the
-   *   `matchOnAddress` value is **`segment`**. Then it will only match the **first** entry of
+   * - If the `networkAddress` has a `routeTable` address of: `project-1-develop.us-east-1.default.private` and the
+   *   `matchOnAddress` value is **`routeTable`**. Then it will only match the **first** entry of
    *   `project-1-develop.us-east-1.default.private` and return a partial NetworkEntity with the VPC, and only
-   *   the routeTables and subnets that have the same segment address.
+   *   the routeTables and subnets that have the same routeTable address.
    *
-   * - If the `networkAddress` has the same `segment` address of: `project-1-develop.us-east-1.default.private` and the
+   * - If the `networkAddress` has the same `routeTable` address of: `project-1-develop.us-east-1.default.private` and the
    *   `matchOnAddress` value is changed to **`vpc`**. Then it will match the **first** and **second** entries
    *    and return the complete NetworkEntity for each.
    *
@@ -141,13 +141,13 @@ export class DlzAccountNetworks {
           networkEntitiesMatch.push(partialNe);
         }
 
-      } else if (matchOnAddress === 'segment') {
+      } else if (matchOnAddress === 'routeTable') {
         let vpcs = ne.vpcs.filter(vpc =>
           new NetworkAddress(vpc.address.account, vpc.address.region, vpc.address.vpc).toString() ===
             new NetworkAddress(networkAddress.account, networkAddress.region, networkAddress.vpc).toString());
 
         for (let vpc of vpcs) {
-          const routeTables = vpc.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment);
+          const routeTables = vpc.routeTables.filter(routeTable => routeTable.address.routeTable === networkAddress.routeTable);
           if (routeTables.length !== 0) {
             const partialNe = {
               ...ne,
@@ -165,7 +165,7 @@ export class DlzAccountNetworks {
           new NetworkAddress(networkAddress.account, networkAddress.region, networkAddress.vpc).toString());
 
         for (let vpc of vpcs) {
-          const routeTables = vpc.routeTables.filter(routeTable => routeTable.address.segment === networkAddress.segment);
+          const routeTables = vpc.routeTables.filter(routeTable => routeTable.address.routeTable === networkAddress.routeTable);
           for (let routeTable of routeTables) {
             const subnets = routeTable.subnets.filter(subnet => subnet.address.subnet === networkAddress.subnet);
             if (subnets.length !== 0) {
@@ -194,8 +194,8 @@ export class DlzAccountNetworks {
           matchOn = 'region';
         } else if (networkAddress.isVpcAddress()) {
           matchOn = 'vpc';
-        } else if (networkAddress.isSegmentAddress()) {
-          matchOn = 'segment';
+        } else if (networkAddress.isRouteTableAddress()) {
+          matchOn = 'routeTable';
         } else if (networkAddress.isSubnetAddress()) {
           matchOn = 'subnet';
         } else {

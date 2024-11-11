@@ -5,18 +5,12 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { NetworkEntityRouteTable, NetworkEntityVpc } from './dlz-account-network';
 import { NetworkAddress } from './network-address';
 import { DLzAccount, NetworkNat, Region } from '../../data-landing-zone';
-import { groupByField } from '../../lib';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 import { DlzStack } from '../dlz-stack/index';
 
 export interface DlzSubnetProps {
   /**
-   * A Segment name is a grouping of subnets and is the route table the subnets will be long to.
-   */
-  readonly segment: string;
-
-  /**
-   * The name of the subnet, must be unique within the segment
+   * The name of the subnet, must be unique within the routeTable
    */
   readonly name: string;
 
@@ -48,9 +42,21 @@ export interface DlzVpcProps {
   readonly cidr: string;
 
   /**
-   * The subnets to be created in the VPC
+   * The route tables to be created in the VPC
    */
+  readonly routeTables: DlzRouteTableProps[];
+}
+
+
+export interface DlzRouteTableProps {
+  readonly name: string;
   readonly subnets: DlzSubnetProps[];
+}
+
+export interface DlzSubnetProps {
+  readonly name: string;
+  readonly cidr: string;
+  readonly az?: string;
 }
 
 export class DlzVpc {
@@ -76,13 +82,10 @@ export class DlzVpc {
       stringValue: vpc.attrVpcId,
     });
 
-    const segmentsSubnets = groupByField(dlzVpc.subnets, 'segment');
-    for (const segment in segmentsSubnets) {
-      const segmentSubnets = segmentsSubnets[segment];
-
+    for (const vpcRouteTable of dlzVpc.routeTables) {
       /* Create Route table */
-      const routeTableName = this.vpcResourceName(segment);
-      const routeTableAddress = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name, segment);
+      const routeTableName = this.vpcResourceName(vpcRouteTable.name);
+      const routeTableAddress = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name, vpcRouteTable.name);
       if (this.networkEntityVpc.routeTables.map(rt => rt.address).includes(routeTableAddress)) {
         throw new Error(`RouteTable with address '${routeTableAddress}' already exists`);
       }
@@ -103,16 +106,17 @@ export class DlzVpc {
       };
 
       /* Create Subnets and associations, then add to Route Table */
-      for (const segmentSubnet of segmentSubnets) {
-        const subnetName = this.vpcResourceName(segmentSubnet.name);
-        const subnetAddress = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name, segment, segmentSubnet.name);
+      for (const routeTableSubnet of vpcRouteTable.subnets) {
+        const subnetName = this.vpcResourceName(routeTableSubnet.name);
+        const subnetAddress = new NetworkAddress(this.dlzAccount.name, dlzVpc.region, dlzVpc.name,
+          vpcRouteTable.name, routeTableSubnet.name);
         if (subnetEntity.subnets.map(s => s.address).includes(subnetAddress)) {
           throw new Error(`Subnet with address ${subnetAddress} already exists`);
         }
         const subnet = new ec2.CfnSubnet(dlzStack, subnetName, {
           vpcId: vpc.ref,
-          cidrBlock: segmentSubnet.cidr,
-          availabilityZone: segmentSubnet.az,
+          cidrBlock: routeTableSubnet.cidr,
+          availabilityZone: routeTableSubnet.az,
           tags: [{ key: 'Name', value: subnetName }],
         });
 
@@ -126,7 +130,7 @@ export class DlzVpc {
           stringValue: subnet.attrSubnetId,
         });
 
-        const subnetRouteTableAssociationName = this.vpcResourceName(segmentSubnet.name + '-association');
+        const subnetRouteTableAssociationName = this.vpcResourceName(routeTableSubnet.name + '-association');
         new ec2.CfnSubnetRouteTableAssociation(dlzStack, subnetRouteTableAssociationName, {
           routeTableId: routeTable.ref,
           subnetId: subnet.ref,
@@ -262,7 +266,7 @@ export class DlzVpc {
         const routeTableFrom = vpcNe.routeTables.find(rt => from.matches(rt.address));
         if (!routeTableFrom) { continue; }
 
-        const routeNatName = this.vpcResourceName(`${networkNat.name}-nati-route-${routeTableFrom.address.segment}`);
+        const routeNatName = this.vpcResourceName(`${networkNat.name}-nati-route-${routeTableFrom.address.routeTable}`);
         const routeNat = new ec2.CfnRoute(this.dlzStack, routeNatName, {
           routeTableId: routeTableFrom.routeTable.ref,
           destinationCidrBlock: '0.0.0.0/0',
@@ -321,7 +325,7 @@ export class DlzVpc {
         const routeTableFrom = vpcNe.routeTables.find(rt => from.matches(rt.address));
         if (!routeTableFrom) { continue; }
 
-        const routeNatName = this.vpcResourceName(`${networkNat.name}-nat-route-${routeTableFrom.address.segment}`);
+        const routeNatName = this.vpcResourceName(`${networkNat.name}-nat-route-${routeTableFrom.address.routeTable}`);
         const routeNat = new ec2.CfnRoute(this.dlzStack, routeNatName, {
           routeTableId: routeTableFrom.routeTable.ref,
           destinationCidrBlock: '0.0.0.0/0',

@@ -28,21 +28,24 @@ const configBase: DataLandingZoneProps = {
                 name: 'default',
                 region: Region.EU_WEST_1,
                 cidr: '10.0.0.0/16',
-                subnets: [
-                  /* Evenly divide, each /19 = 8k hosts */
+                /* Evenly divide, each /19 = 8k hosts */
+                routeTables: [
                   {
-                    segment: 'private',
-                    name: 'private-1',
-                    cidr: '10.0.0.0/19',
-                    az: 'us-east-1a',
+                    name: 'private',
+                    subnets: [
+                      {
+                        name: 'private-1',
+                        cidr: '10.0.0.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'private-2',
+                        cidr: '10.1.0.0/19',
+                        az: 'us-east-1b',
+                      },
+                      ...more subnets
+                     ],
                   },
-                  {
-                    segment: 'private',
-                    name: 'private-2',
-                    cidr: '10.1.0.0/19',
-                    az: 'us-east-1b',
-                  },
-                  ...more subnets
                 ],
               }
             ]

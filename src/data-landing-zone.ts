@@ -558,9 +558,11 @@ function validations(props: DataLandingZoneProps) {
     for (const vpc of account.vpcs || []) {
       allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region));
       allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name));
-      for (const subnet of vpc.subnets) {
-        allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name, subnet.segment));
-        allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name, subnet.segment, subnet.name));
+      for (const routeTable of vpc.routeTables) {
+        allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name, routeTable.name));
+        for (const subnet of routeTable.subnets) {
+          allNetworkAdressVariants.push(new NetworkAddress(account.name, vpc.region, vpc.name, routeTable.name, subnet.name));
+        }
       }
     }
   }
@@ -580,7 +582,7 @@ function validations(props: DataLandingZoneProps) {
     if (connection.source.subnet || connection.destination.subnet) {
       throw new Error('VPC Peering addresses' +
         ` (source: ${connection.source}, destination: ${connection.destination})` +
-        ' can not be specified on a subnet level, segment is the lowest');
+        ' can not be specified on a subnet level, routeTable is the lowest');
     }
     if (connection.source.account == connection.destination.account &&
       connection.source.region == connection.destination.region &&
@@ -611,9 +613,9 @@ function validations(props: DataLandingZoneProps) {
       if (!networkAddressExists(allowAccessFrom)) {
         throw new Error(`The NAT (${nat.name}) 'allowAccessFrom' NetworkAddress ${allowAccessFrom} does not exist`);
       }
-      if (!allowAccessFrom.segment) {
+      if (!allowAccessFrom.routeTable) {
         throw new Error(`NAT (${nat.name}) 'allowAccessFrom' (${allowAccessFrom}) NetworkAddress must target ` +
-          'a specific segment');
+          'a specific routeTable');
       }
 
       if (nat.location.account !== allowAccessFrom.account ||

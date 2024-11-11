@@ -58,8 +58,8 @@ const configBase: DataLandingZoneProps = {
             accountId: '381491899779',
             type: DlzAccountType.DEVELOP,
             vpcs: [
-              Defaults.defaultVpcClassB3Private3Public(0, Region.US_EAST_1),
-              Defaults.defaultVpcClassB3Private3Public(1, Region.EU_WEST_1),
+              Defaults.vpcClassB3Private3Public(0, Region.US_EAST_1),
+              Defaults.vpcClassB3Private3Public(1, Region.EU_WEST_1),
             ],
           },
           {
@@ -67,8 +67,8 @@ const configBase: DataLandingZoneProps = {
             accountId: '234567890123',
             type: DlzAccountType.PRODUCTION,
             vpcs: [
-              Defaults.defaultVpcClassB3Private3Public(2, Region.US_EAST_1),
-              Defaults.defaultVpcClassB3Private3Public(3, Region.EU_WEST_1),
+              Defaults.vpcClassB3Private3Public(2, Region.US_EAST_1),
+              Defaults.vpcClassB3Private3Public(3, Region.EU_WEST_1),
             ],
           },
         ],
@@ -915,7 +915,7 @@ describe('vpt.7 Negative Tests', () => {
 
     expect(() => new DataLandingZone(app, config)).toThrow('VPC Peering addresses ' +
       '(source: development.eu-west-1.default.private.private-1, destination: production.us-east-1.default.private) ' +
-      'can not be specified on a subnet level, segment is the lowest');
+      'can not be specified on a subnet level, routeTable is the lowest');
   });
 
   test('Negative - Can not use VPC Peering within the same VPC', () => {

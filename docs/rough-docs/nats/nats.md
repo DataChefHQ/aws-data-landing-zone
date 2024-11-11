@@ -35,7 +35,7 @@ const configBase: DataLandingZoneProps = {
             accountId: '381491899779',
             type: DlzAccountType.DEVELOP,
             vpcs: [
-              defaultVpcClasB3Private3Public(0, Region.US_EAST_1), // CIDR 10.0.0./19
+              Defaults.vpcClassB3Private3Public(0, Region.US_EAST_1), // CIDR 10.0.0./19
             ],
           },
         ],
@@ -60,7 +60,7 @@ Architecture diagram to mentally visualize the setup that will and needs to be c
 
 ### nat.1 Private route table to single NAT in public subnet - NAT GW
 
-The default VPC has two RouteTables according to the `defaultVpcClasB3Private3Public` function. A private route table
+The default VPC has two RouteTables according to the `Defaults.vpcClassB3Private3Public` function. A private route table
 and a public route table. 
 
 In the configuration below, the NAT is placed in the `public-1` subnet and the `private` route table is configured to
@@ -125,51 +125,76 @@ and a route table per AZ.
 ```ts
 const region = Region.EU_WEST_1;
 const thirdOctetMask = 0;
-configBase.organization.ous.workloads.accounts[0]["vpcs"] = [
+configBase.organization.ous.workloads.accounts[0]['vpcs'] = [
   {
     name: 'default',
     region: region,
     cidr: '10.'+thirdOctetMask+'.0.0/16',
-    subnets: [
+    routeTables: [
       {
-        segment: 'private-1',
-        name: 'private-1-s', //s stands for subnet, coz complaining about name duplication
-        cidr: '10.'+thirdOctetMask+'.0.0/19',
-        az: region+'a',
+        name: 'private-1',
+        subnets: [
+          {
+            name: 'private-1-s',
+            cidr: '10.'+thirdOctetMask+'.0.0/19',
+            az: region+'a',
+          },
+        ],
       },
       {
-        segment: 'private-2',
-        name: 'private-2-s',
-        cidr: '10.'+thirdOctetMask+'.32.0/19',
-        az: region+'b',
+        name: 'private-2',
+        subnets: [
+          {
+            name: 'private-2-s',
+            cidr: '10.'+thirdOctetMask+'.32.0/19',
+            az: region+'b',
+          },
+        ],
       },
       {
-        segment: 'private-3',
-        name: 'private-3-s',
-        cidr: '10.'+thirdOctetMask+'.64.0/19',
-        az: region+'c',
+        name: 'private-3',
+        subnets: [
+          {
+            name: 'private-3-s',
+            cidr: '10.'+thirdOctetMask+'.64.0/19',
+            az: region+'b',
+          },
+        ],
+      },
+
+      {
+        name: 'public-1',
+        subnets: [
+          {
+            name: 'public-1-s',
+            cidr: '10.'+thirdOctetMask+'.96.0/19',
+            az: region+'a',
+          },
+        ],
       },
       {
-        segment: 'public-1',
-        name: 'public-1-s',
-        cidr: '10.'+thirdOctetMask+'.96.0/19',
-        az: region+'a',
+        name: 'public-2',
+        subnets: [
+          {
+            name: 'public-2-s',
+            cidr: '10.'+thirdOctetMask+'.128.0/19',
+            az: region+'b',
+          },
+        ],
       },
       {
-        segment: 'public-2',
-        name: 'public-2-s',
-        cidr: '10.'+thirdOctetMask+'.128.0/19',
-        az: region+'b',
-      },
-      {
-        segment: 'public-3',
-        name: 'public-3-s',
-        cidr: '10.'+thirdOctetMask+'.160.0/19',
-        az: region+'c',
+        name: 'public-3',
+        subnets: [
+          {
+            name: 'public-3-s',
+            cidr: '10.'+thirdOctetMask+'.160.0/19',
+            az: region+'c',
+          },
+        ],
       },
     ],
-  }
-]
+  },
+];
 ```
 
 Then we configure the traffic to flow from the private route table to the NAT in the public subnet of that AZ. Ensuring

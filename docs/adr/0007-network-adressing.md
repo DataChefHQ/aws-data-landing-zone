@@ -32,38 +32,38 @@ An account and its network are defined in the `DataLandingZoneProps` object as b
                 subnets: [
                   /* Evenly divide, each /19 = 8k hosts */
                   {
-                    segment: 'private',
+                    routeTable: 'private',
                     name: 'private-1',
                     cidr: '10.1.0.0/19',
                     az: 'us-east-1a',
                   },
                   {
-                    segment: 'private',
+                    routeTable: 'private',
                     name: 'private-2',
                     cidr: '10.1.32.0/19',
                     az: 'us-east-1b',
                   },
                   {
-                    segment: 'private',
+                    routeTable: 'private',
                     name: 'private-3',
                     cidr: '10.1.64.0/19',
                     az: 'us-east-1c',
                   },
                   
                   {
-                    segment: 'public',
+                    routeTable: 'public',
                     name: 'public-1',
                     cidr: '10.1.96.0/19',
                     az: 'us-east-1a',
                   },
                   {
-                    segment: 'public',
+                    routeTable: 'public',
                     name: 'public-2',
                     cidr: '10.1.128.0/19',
                     az: 'us-east-1a',
                   },
                   {
-                    segment: 'public',
+                    routeTable: 'public',
                     name: 'public-3',
                     cidr: '10.1.160.0/19',
                     az: 'us-east-1a',
@@ -77,9 +77,9 @@ An account and its network are defined in the `DataLandingZoneProps` object as b
 We decided on a weekly typed string schema that represents a network entity, where an entity here can mean everything in
 an account, vpc, region, subnet or subnet:
 ```typescript
-NetworkAddress.fromString("account.region.vpc.segment.subnet")
+NetworkAddress.fromString("account.region.vpc.routeTable.subnet")
 //OR
-new NetworkAddress('account', 'region', 'vpc', 'segment', 'subnet')
+new NetworkAddress('account', 'region', 'vpc', 'routeTable', 'subnet')
 ```
 
 For example, with this we can make selections like:
