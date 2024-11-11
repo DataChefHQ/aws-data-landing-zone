@@ -16545,11 +16545,11 @@ new Defaults()
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
-| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public">defaultVpcClassB3Private3Public</a></code> | Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.vpcClassB3Private3Public">vpcClassB3Private3Public</a></code> | Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets. |
 
 ---
 
@@ -16584,37 +16584,6 @@ Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD.
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
 
 Subscribers for the budget.
-
----
-
-##### `defaultVpcClassB3Private3Public` <a name="defaultVpcClassB3Private3Public" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public"></a>
-
-```typescript
-import { Defaults } from '@DataChefHQ/data-landing-zone'
-
-Defaults.defaultVpcClassB3Private3Public(thirdOctetMask: number, region: Region)
-```
-
-Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets.
-
-Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
-There will be remaining space:
-  - 10.x.192.0/19
-  - 10.x.224.0/19
-
-###### `thirdOctetMask`<sup>Required</sup> <a name="thirdOctetMask" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.thirdOctetMask"></a>
-
-- *Type:* number
-
-the third octet of the VPC CIDR.
-
----
-
-###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.region"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
-
-the region where the VPC will be created.
 
 ---
 
@@ -16663,6 +16632,37 @@ Defaults.rootControls()
 ```
 
 Control Tower Controls applied to all the OUs in the organization.
+
+##### `vpcClassB3Private3Public` <a name="vpcClassB3Private3Public" id="@DataChefHQ/data-landing-zone.Defaults.vpcClassB3Private3Public"></a>
+
+```typescript
+import { Defaults } from '@DataChefHQ/data-landing-zone'
+
+Defaults.vpcClassB3Private3Public(thirdOctetMask: number, region: Region)
+```
+
+Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets.
+
+Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
+There will be remaining space:
+  - 10.x.192.0/19
+  - 10.x.224.0/19
+
+###### `thirdOctetMask`<sup>Required</sup> <a name="thirdOctetMask" id="@DataChefHQ/data-landing-zone.Defaults.vpcClassB3Private3Public.parameter.thirdOctetMask"></a>
+
+- *Type:* number
+
+the third octet of the VPC CIDR.
+
+---
+
+###### `region`<sup>Required</sup> <a name="region" id="@DataChefHQ/data-landing-zone.Defaults.vpcClassB3Private3Public.parameter.region"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.Region">Region</a>
+
+the region where the VPC will be created.
+
+---
 
 
 

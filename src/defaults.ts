@@ -37,7 +37,7 @@ export class Defaults {
    * @param region the region where the VPC will be created
    * @returns a VPC configuration
    */
-  public static defaultVpcClassB3Private3Public(thirdOctetMask: number, region: Region): DlzVpcProps {
+  public static vpcClassB3Private3Public(thirdOctetMask: number, region: Region): DlzVpcProps {
     return {
       name: 'default',
       region: region,
