@@ -3,7 +3,8 @@ import { Match, Template } from 'aws-cdk-lib/assertions';
 import { DataLandingZone } from '../src';
 
 test('no op', () => {
-  console.log('no op, just want to keep the Test helpers close to the tests and not in the /src directory as tsconfig commands');
+  // no op, just want to keep the Test helpers close to the tests and not in the /src directory as tsconfig commands
+  expect(true).toBe(true);
 });
 
 export type DlzResources = ReturnType<typeof getDlzResources>;
@@ -120,3 +121,14 @@ export function getResourceLogicalIdFromProperties(template: Template, resource:
 }
 
 
+export function cdkTemplateToJson(template: Template, normalizeAssetPaths: boolean = true) {
+  const json = template.toJSON();
+  if (normalizeAssetPaths) {
+    const lambdas = template.findResources('AWS::Lambda::Function');
+    const keys = Object.keys(lambdas);
+    for (const key of keys) {
+      json.Resources[key].Properties.Code.S3Key = 'REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES';
+    }
+  }
+  return json;
+}

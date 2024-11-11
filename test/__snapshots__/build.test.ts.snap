@@ -379,7 +379,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "977fc1649d2dbcce16e23f6332faef6fa0f48aa74a0afe35f4a3467754e20cd8.zip",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -444,7 +444,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "2345bfda549311359d2c0007b52beb8c1d874fb148f8564002cca85bf36411d8.zip",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -4161,7 +4161,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     "vpcprivate1": {
       "Properties": {
         "AvailabilityZone": "us-east-1a",
-        "CidrBlock": "10.1.0.1/19",
+        "CidrBlock": "10.1.0.0/19",
         "Tags": [
           {
             "Key": "Environment",
@@ -5006,7 +5006,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     "vpcprivate1": {
       "Properties": {
         "AvailabilityZone": "us-east-1a",
-        "CidrBlock": "10.3.0.1/19",
+        "CidrBlock": "10.3.0.0/19",
         "Tags": [
           {
             "Key": "Environment",
@@ -5599,10 +5599,10 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
       },
       "Type": "AWS::IAM::Role",
     },
-    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1": {
+    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019C04FE0A4": {
       "DeletionPolicy": "Delete",
       "DependsOn": [
-        "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839",
+        "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019CustomResourcePolicy9E75C73C",
       ],
       "Properties": {
         "Create": "{"region":"us-east-1","assumedRoleArn":"arn:aws:iam::234567890123:role/dlz-global-dlz-ssm-cross-account-assume-role","service":"SSM","action":"GetParameter","parameters":{"Name":"/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private/id","WithDecryption":false},"physicalResourceId":{"responsePath":"Parameter.Value"}}",
@@ -5618,7 +5618,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
       "Type": "Custom::DlzSsmReader",
       "UpdateReplacePolicy": "Delete",
     },
-    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839": {
+    "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019CustomResourcePolicy9E75C73C": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -5630,7 +5630,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "ingroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119CustomResourcePolicyC14DC839",
+        "PolicyName": "ingroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019CustomResourcePolicy9E75C73C",
         "Roles": [
           {
             "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
@@ -5679,12 +5679,12 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
       "Type": "Custom::DlzSsmReader",
       "UpdateReplacePolicy": "Delete",
     },
-    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010119": {
+    "dlzncp3regionalvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019": {
       "Properties": {
-        "DestinationCidrBlock": "10.1.0.1/19",
+        "DestinationCidrBlock": "10.1.0.0/19",
         "RouteTableId": {
           "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
+            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019C04FE0A4",
             "Parameter.Value",
           ],
         },
@@ -5702,7 +5702,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
         "DestinationCidrBlock": "10.1.32.0/19",
         "RouteTableId": {
           "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
+            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019C04FE0A4",
             "Parameter.Value",
           ],
         },
@@ -5720,7 +5720,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
         "DestinationCidrBlock": "10.1.64.0/19",
         "RouteTableId": {
           "Fn::GetAtt": [
-            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate10101197B604DF1",
+            "RouteTableIdvpcpeeringroutefromproject1productionuseast1defaultprivatetoproject1developmenteuwest1defaultprivate1010019C04FE0A4",
             "Parameter.Value",
           ],
         },

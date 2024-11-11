@@ -12600,7 +12600,7 @@ const dataLandingZoneClientRouteTableIdProps: DataLandingZoneClientRouteTableIdP
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.region">region</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.routeTable">routeTable</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.vpcName">vpcName</a></code> | <code>string</code> | *No description.* |
 
 ---
@@ -12625,10 +12625,10 @@ public readonly region: string;
 
 ---
 
-##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.segment"></a>
+##### `routeTable`<sup>Required</sup> <a name="routeTable" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps.property.routeTable"></a>
 
 ```typescript
-public readonly segment: string;
+public readonly routeTable: string;
 ```
 
 - *Type:* string
@@ -12661,7 +12661,7 @@ const dataLandingZoneClientSubnetIdProps: DataLandingZoneClientSubnetIdProps = {
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.region">region</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.routeTable">routeTable</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.subnetName">subnetName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.vpcName">vpcName</a></code> | <code>string</code> | *No description.* |
 
@@ -12687,10 +12687,10 @@ public readonly region: string;
 
 ---
 
-##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.segment"></a>
+##### `routeTable`<sup>Required</sup> <a name="routeTable" id="@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps.property.routeTable"></a>
 
 ```typescript
-public readonly segment: string;
+public readonly routeTable: string;
 ```
 
 - *Type:* string
@@ -13427,6 +13427,45 @@ The other regions to support (do not specify the global region again).
 
 ---
 
+### DlzRouteTableProps <a name="DlzRouteTableProps" id="@DataChefHQ/data-landing-zone.DlzRouteTableProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzRouteTableProps.Initializer"></a>
+
+```typescript
+import { DlzRouteTableProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzRouteTableProps: DlzRouteTableProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzRouteTableProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzRouteTableProps.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]</code> | *No description.* |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzRouteTableProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.DlzRouteTableProps.property.subnets"></a>
+
+```typescript
+public readonly subnets: DlzSubnetProps[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]
+
+---
+
 ### DlzServiceControlPolicyProps <a name="DlzServiceControlPolicyProps" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicyProps"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicyProps.Initializer"></a>
@@ -13614,8 +13653,7 @@ const dlzSubnetProps: DlzSubnetProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block of the subnet. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name">name</a></code> | <code>string</code> | The name of the subnet, must be unique within the segment. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment">segment</a></code> | <code>string</code> | A Segment name is a grouping of subnets and is the route table the subnets will be long to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.name">name</a></code> | <code>string</code> | The name of the subnet, must be unique within the routeTable. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps.property.az">az</a></code> | <code>string</code> | Optional. |
 
 ---
@@ -13640,19 +13678,7 @@ public readonly name: string;
 
 - *Type:* string
 
-The name of the subnet, must be unique within the segment.
-
----
-
-##### `segment`<sup>Required</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.DlzSubnetProps.property.segment"></a>
-
-```typescript
-public readonly segment: string;
-```
-
-- *Type:* string
-
-A Segment name is a grouping of subnets and is the route table the subnets will be long to.
+The name of the subnet, must be unique within the routeTable.
 
 ---
 
@@ -13798,7 +13824,7 @@ const dlzVpcProps: DlzVpcProps = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block of the VPC. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.name">name</a></code> | <code>string</code> | The name of the VPC, must be unique within the region. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.region">region</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.Region">Region</a></code> | The region where the VPC will be created. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets">subnets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]</code> | The subnets to be created in the VPC. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps.property.routeTables">routeTables</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzRouteTableProps">DlzRouteTableProps</a>[]</code> | The route tables to be created in the VPC. |
 
 ---
 
@@ -13838,15 +13864,15 @@ The region where the VPC will be created.
 
 ---
 
-##### `subnets`<sup>Required</sup> <a name="subnets" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.subnets"></a>
+##### `routeTables`<sup>Required</sup> <a name="routeTables" id="@DataChefHQ/data-landing-zone.DlzVpcProps.property.routeTables"></a>
 
 ```typescript
-public readonly subnets: DlzSubnetProps[];
+public readonly routeTables: DlzRouteTableProps[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzSubnetProps">DlzSubnetProps</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzRouteTableProps">DlzRouteTableProps</a>[]
 
-The subnets to be created in the VPC.
+The route tables to be created in the VPC.
 
 ---
 
@@ -16519,7 +16545,7 @@ new Defaults()
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
-| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public">defaultVpcClassB3Private3Public</a></code> | Creates a Default VPC configuration with 3 private and 3 public subnets. |
+| <code><a href="#@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public">defaultVpcClassB3Private3Public</a></code> | Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#@DataChefHQ/data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
@@ -16569,9 +16595,12 @@ import { Defaults } from '@DataChefHQ/data-landing-zone'
 Defaults.defaultVpcClassB3Private3Public(thirdOctetMask: number, region: Region)
 ```
 
-Creates a Default VPC configuration with 3 private and 3 public subnets.
+Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets.
 
 Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
+There will be remaining space:
+  - 10.x.192.0/19
+  - 10.x.224.0/19
 
 ###### `thirdOctetMask`<sup>Required</sup> <a name="thirdOctetMask" id="@DataChefHQ/data-landing-zone.Defaults.defaultVpcClassB3Private3Public.parameter.thirdOctetMask"></a>
 
@@ -16688,12 +16717,12 @@ public getEntitiesForAddress(networkAddress: NetworkAddress, matchOnAddress?: st
 Get NetworkEntities for the given `networkAddress` and match on the given `matchOnAddress`.
 
 For example, if the
-`networkAddress` is a segment address and `matchOnAddress` has a value of `vpc` then it will return all
+`networkAddress` is a routeTable address and `matchOnAddress` has a value of `vpc` then it will return all
 NetworkEntities that have the same VPC as the `networkAddress`. Or, if the `matchOnAddress` has a value of
 `region` then it will return all NetworkEntities that have the same VPC region as the `networkAddress`.
 
 If the `matchOnAddress` is `account` then the complete NetworkEntity will be returned.
-Else, if `matchOnAddress` is `region`, `vpc`, `segment` or `subnet` then a partial NetworkEntity will be returned.
+Else, if `matchOnAddress` is `region`, `vpc`, `routeTable` or `subnet` then a partial NetworkEntity will be returned.
 The `vpcs` `routeTables` and `subnets` will be filtered to only include those that match the `networkAddress`. A value of
 `undefined` will automatically detect the level of the `networkAddress` and use that as the `matchOnAddress`.
 
@@ -16704,12 +16733,12 @@ Given we have these NetworkEntity[]:
 2. project-1-develop.eu-west-1.default.private
 3. project-1-production.eu-west-1.default.private
 
-- If the `networkAddress` has a `segment` address of: `project-1-develop.us-east-1.default.private` and the
-  `matchOnAddress` value is **`segment`**. Then it will only match the **first** entry of
+- If the `networkAddress` has a `routeTable` address of: `project-1-develop.us-east-1.default.private` and the
+  `matchOnAddress` value is **`routeTable`**. Then it will only match the **first** entry of
   `project-1-develop.us-east-1.default.private` and return a partial NetworkEntity with the VPC, and only
-  the routeTables and subnets that have the same segment address.
+  the routeTables and subnets that have the same routeTable address.
 
-- If the `networkAddress` has the same `segment` address of: `project-1-develop.us-east-1.default.private` and the
+- If the `networkAddress` has the same `routeTable` address of: `project-1-develop.us-east-1.default.private` and the
   `matchOnAddress` value is changed to **`vpc`**. Then it will match the **first** and **second** entries
    and return the complete NetworkEntity for each.
 
@@ -17287,7 +17316,7 @@ new IamIdentityCenter(dlzStack: DlzStack, organization: DLzOrganization, iamIden
 ```typescript
 import { NetworkAddress } from '@DataChefHQ/data-landing-zone'
 
-new NetworkAddress(account: string, region?: string, vpc?: string, segment?: string, subnet?: string)
+new NetworkAddress(account: string, region?: string, vpc?: string, routeTable?: string, subnet?: string)
 ```
 
 | **Name** | **Type** | **Description** |
@@ -17295,7 +17324,7 @@ new NetworkAddress(account: string, region?: string, vpc?: string, segment?: str
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.account">account</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.region">region</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.vpc">vpc</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.routeTable">routeTable</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.subnet">subnet</a></code> | <code>string</code> | *No description.* |
 
 ---
@@ -17318,7 +17347,7 @@ new NetworkAddress(account: string, region?: string, vpc?: string, segment?: str
 
 ---
 
-##### `segment`<sup>Optional</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.segment"></a>
+##### `routeTable`<sup>Optional</sup> <a name="routeTable" id="@DataChefHQ/data-landing-zone.NetworkAddress.Initializer.parameter.routeTable"></a>
 
 - *Type:* string
 
@@ -17336,7 +17365,7 @@ new NetworkAddress(account: string, region?: string, vpc?: string, segment?: str
 | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isAccountAddress">isAccountAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isRegionAddress">isRegionAddress</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isSegmentAddress">isSegmentAddress</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isRouteTableAddress">isRouteTableAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isSubnetAddress">isSubnetAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.isVpcAddress">isVpcAddress</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.matches">matches</a></code> | *No description.* |
@@ -17356,10 +17385,10 @@ public isAccountAddress(): boolean
 public isRegionAddress(): boolean
 ```
 
-##### `isSegmentAddress` <a name="isSegmentAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isSegmentAddress"></a>
+##### `isRouteTableAddress` <a name="isRouteTableAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isRouteTableAddress"></a>
 
 ```typescript
-public isSegmentAddress(): boolean
+public isRouteTableAddress(): boolean
 ```
 
 ##### `isSubnetAddress` <a name="isSubnetAddress" id="@DataChefHQ/data-landing-zone.NetworkAddress.isSubnetAddress"></a>
@@ -17420,7 +17449,7 @@ NetworkAddress.fromString(props: string)
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.account">account</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.region">region</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.segment">segment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.routeTable">routeTable</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.subnet">subnet</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.NetworkAddress.property.vpc">vpc</a></code> | <code>string</code> | *No description.* |
 
@@ -17446,10 +17475,10 @@ public readonly region: string;
 
 ---
 
-##### `segment`<sup>Optional</sup> <a name="segment" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.segment"></a>
+##### `routeTable`<sup>Optional</sup> <a name="routeTable" id="@DataChefHQ/data-landing-zone.NetworkAddress.property.routeTable"></a>
 
 ```typescript
-public readonly segment: string;
+public readonly routeTable: string;
 ```
 
 - *Type:* string

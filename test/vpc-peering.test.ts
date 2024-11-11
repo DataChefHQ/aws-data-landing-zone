@@ -915,7 +915,7 @@ describe('vpt.7 Negative Tests', () => {
 
     expect(() => new DataLandingZone(app, config)).toThrow('VPC Peering addresses ' +
       '(source: development.eu-west-1.default.private.private-1, destination: production.us-east-1.default.private) ' +
-      'can not be specified on a subnet level, segment is the lowest');
+      'can not be specified on a subnet level, routeTable is the lowest');
   });
 
   test('Negative - Can not use VPC Peering within the same VPC', () => {

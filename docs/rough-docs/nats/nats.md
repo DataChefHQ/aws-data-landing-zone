@@ -132,37 +132,37 @@ configBase.organization.ous.workloads.accounts[0]["vpcs"] = [
     cidr: '10.'+thirdOctetMask+'.0.0/16',
     subnets: [
       {
-        segment: 'private-1',
+        routeTable: 'private-1',
         name: 'private-1-s', //s stands for subnet, coz complaining about name duplication
         cidr: '10.'+thirdOctetMask+'.0.0/19',
         az: region+'a',
       },
       {
-        segment: 'private-2',
+        routeTable: 'private-2',
         name: 'private-2-s',
         cidr: '10.'+thirdOctetMask+'.32.0/19',
         az: region+'b',
       },
       {
-        segment: 'private-3',
+        routeTable: 'private-3',
         name: 'private-3-s',
         cidr: '10.'+thirdOctetMask+'.64.0/19',
         az: region+'c',
       },
       {
-        segment: 'public-1',
+        routeTable: 'public-1',
         name: 'public-1-s',
         cidr: '10.'+thirdOctetMask+'.96.0/19',
         az: region+'a',
       },
       {
-        segment: 'public-2',
+        routeTable: 'public-2',
         name: 'public-2-s',
         cidr: '10.'+thirdOctetMask+'.128.0/19',
         az: region+'b',
       },
       {
-        segment: 'public-3',
+        routeTable: 'public-3',
         name: 'public-3-s',
         cidr: '10.'+thirdOctetMask+'.160.0/19',
         az: region+'c',

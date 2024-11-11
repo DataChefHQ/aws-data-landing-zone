@@ -20,13 +20,13 @@ export class Shared {
 
     for (const connection of this.props.network?.connections?.vpcPeering || []) {
 
-      const sourceAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.source); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
+      const sourceAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.source); // No `matchOnAddress`, can be region, vpc, routeTable,or subnet.
       if (!sourceAccountNetworks?.length) {
         throw new Error(`No DlzAccountNetworks found for VPC Peering source ${connection.source}`);
       }
 
 
-      const destinationAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.destination); // No `matchOnAddress`, can be region, vpc, segment,or subnet.
+      const destinationAccountNetworks = this.globals.dlzAccountNetworks.getEntitiesForAddress(connection.destination); // No `matchOnAddress`, can be region, vpc, routeTable,or subnet.
       if (!destinationAccountNetworks?.length) {
         throw new Error(`No DlzAccountNetworks found for VPC Peering destination ${connection.destination}`);
       }

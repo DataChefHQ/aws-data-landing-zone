@@ -31,13 +31,13 @@ const configBase: DataLandingZoneProps = {
                 subnets: [
                   /* Evenly divide, each /19 = 8k hosts */
                   {
-                    segment: 'private',
+                    routeTable: 'private',
                     name: 'private-1',
                     cidr: '10.0.0.0/19',
                     az: 'us-east-1a',
                   },
                   {
-                    segment: 'private',
+                    routeTable: 'private',
                     name: 'private-2',
                     cidr: '10.1.0.0/19',
                     az: 'us-east-1b',

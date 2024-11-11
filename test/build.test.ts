@@ -12,6 +12,10 @@ import {
   Region, SecurityHubNotificationSeverity, SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
 } from '../src';
+import {
+  cdkTemplateToJson,
+  //@ts-ignore
+} from './helpers.test';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 const jestConsole = console;
 
@@ -145,98 +149,109 @@ const configBase: DataLandingZoneProps = {
                 name: 'default',
                 region: Region.US_EAST_1,
                 cidr: '10.0.0.0/16',
-                subnets: [
+                routeTables: [
                   /* Evenly divide, each /19 = 8k hosts */
                   {
-                    segment: 'private',
-                    name: 'private-1',
-                    cidr: '10.0.0.0/19',
-                    az: 'us-east-1a',
+                    name: 'private',
+                    subnets: [
+                      {
+                        name: 'private-1',
+                        cidr: '10.0.0.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'private-2',
+                        cidr: '10.0.32.0/19',
+                        az: 'us-east-1b',
+                      },
+                      {
+                        name: 'private-3',
+                        cidr: '10.0.64.0/19',
+                        az: 'us-east-1c',
+                      },
+                    ],
                   },
                   {
-                    segment: 'private',
-                    name: 'private-2',
-                    cidr: '10.0.32.0/19',
-                    az: 'us-east-1b',
-                  },
-                  {
-                    segment: 'private',
-                    name: 'private-3',
-                    cidr: '10.0.64.0/19',
-                    az: 'us-east-1c',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-1',
-                    cidr: '10.0.96.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-2',
-                    cidr: '10.0.128.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-3',
-                    cidr: '10.0.160.0/19',
-                    az: 'us-east-1a',
+                    name: 'public',
+                    subnets: [
+                      {
+                        name: 'public-1',
+                        cidr: '10.0.96.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-2',
+                        cidr: '10.0.128.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-3',
+                        cidr: '10.0.160.0/19',
+                        az: 'us-east-1a',
+                      },
+
+                    ],
                   },
                   /* Remaining:
-                  *  - 10.0.192.0/19
-                  *  - 10.0.224.0/19
-                  * */
+                   *  - 10.0.192.0/19
+                   *  - 10.0.224.0/19
+                   * */
                 ],
               },
               {
                 name: 'default',
                 region: Region.EU_WEST_1,
                 cidr: '10.1.0.0/16',
-                subnets: [
+                routeTables: [
                   /* Evenly divide, each /19 = 8k hosts */
                   {
-                    segment: 'private',
-                    name: 'private-1',
-                    cidr: '10.1.0.1/19',
-                    az: 'us-east-1a',
+                    name: 'private',
+                    subnets: [
+                      /* Evenly divide, each /19 = 8k hosts */
+                      {
+                        name: 'private-1',
+                        cidr: '10.1.0.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'private-2',
+                        cidr: '10.1.32.0/19',
+                        az: 'us-east-1b',
+                      },
+                      {
+                        name: 'private-3',
+                        cidr: '10.1.64.0/19',
+                        az: 'us-east-1c',
+                      },
+                    ],
                   },
                   {
-                    segment: 'private',
-                    name: 'private-2',
-                    cidr: '10.1.32.0/19',
-                    az: 'us-east-1b',
-                  },
-                  {
-                    segment: 'private',
-                    name: 'private-3',
-                    cidr: '10.1.64.0/19',
-                    az: 'us-east-1c',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-1',
-                    cidr: '10.1.96.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-2',
-                    cidr: '10.1.128.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-3',
-                    cidr: '10.1.160.0/19',
-                    az: 'us-east-1a',
+                    name: 'public',
+                    subnets: [
+                      {
+                        name: 'public-1',
+                        cidr: '10.1.96.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-2',
+                        cidr: '10.1.128.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-3',
+                        cidr: '10.1.160.0/19',
+                        az: 'us-east-1a',
+                      },
+                    ],
                   },
                   /* Remaining:
-                  *  - 10.1.192.0/19
-                  *  - 10.1.224.0/19
-                  * */
+                   *  - 10.1.192.0/19
+                   *  - 10.1.224.0/19
+                   * */
                 ],
               },
+
             ],
           },
           {
@@ -248,96 +263,106 @@ const configBase: DataLandingZoneProps = {
                 name: 'default',
                 region: Region.US_EAST_1,
                 cidr: '10.2.0.0/16',
-                subnets: [
+                routeTables: [
                   /* Evenly divide, each /19 = 8k hosts */
                   {
-                    segment: 'private',
-                    name: 'private-1',
-                    cidr: '10.2.0.0/19',
-                    az: 'us-east-1a',
+                    name: 'private',
+                    subnets: [
+                      /* Evenly divide, each /19 = 8k hosts */
+                      {
+                        name: 'private-1',
+                        cidr: '10.2.0.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'private-2',
+                        cidr: '10.2.32.0/19',
+                        az: 'us-east-1b',
+                      },
+                      {
+                        name: 'private-3',
+                        cidr: '10.2.64.0/19',
+                        az: 'us-east-1c',
+                      },
+                    ],
                   },
                   {
-                    segment: 'private',
-                    name: 'private-2',
-                    cidr: '10.2.32.0/19',
-                    az: 'us-east-1b',
-                  },
-                  {
-                    segment: 'private',
-                    name: 'private-3',
-                    cidr: '10.2.64.0/19',
-                    az: 'us-east-1c',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-1',
-                    cidr: '10.2.96.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-2',
-                    cidr: '10.2.128.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-3',
-                    cidr: '10.2.160.0/19',
-                    az: 'us-east-1a',
+                    name: 'public',
+                    subnets: [
+                      {
+                        name: 'public-1',
+                        cidr: '10.2.96.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-2',
+                        cidr: '10.2.128.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-3',
+                        cidr: '10.2.160.0/19',
+                        az: 'us-east-1a',
+                      },
+                    ],
                   },
                   /* Remaining:
-                  *  - 10.0.192.0/19
-                  *  - 10.0.224.0/19
-                  * */
+                   *  - 10.2.192.0/19
+                   *  - 10.2.224.0/19
+                   * */
                 ],
               },
               {
                 name: 'default',
                 region: Region.EU_WEST_1,
                 cidr: '10.3.0.0/16',
-                subnets: [
+                routeTables: [
                   /* Evenly divide, each /19 = 8k hosts */
                   {
-                    segment: 'private',
-                    name: 'private-1',
-                    cidr: '10.3.0.1/19',
-                    az: 'us-east-1a',
+                    name: 'private',
+                    subnets: [
+                      /* Evenly divide, each /19 = 8k hosts */
+                      {
+                        name: 'private-1',
+                        cidr: '10.3.0.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'private-2',
+                        cidr: '10.3.32.0/19',
+                        az: 'us-east-1b',
+                      },
+                      {
+                        name: 'private-3',
+                        cidr: '10.3.64.0/19',
+                        az: 'us-east-1c',
+                      },
+                    ],
                   },
                   {
-                    segment: 'private',
-                    name: 'private-2',
-                    cidr: '10.3.32.0/19',
-                    az: 'us-east-1b',
-                  },
-                  {
-                    segment: 'private',
-                    name: 'private-3',
-                    cidr: '10.3.64.0/19',
-                    az: 'us-east-1c',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-1',
-                    cidr: '10.3.96.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-2',
-                    cidr: '10.3.128.0/19',
-                    az: 'us-east-1a',
-                  },
-                  {
-                    segment: 'public',
-                    name: 'public-3',
-                    cidr: '10.3.160.0/19',
-                    az: 'us-east-1a',
+                    name: 'public',
+                    subnets: [
+                      {
+                        name: 'public-1',
+                        cidr: '10.3.96.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-2',
+                        cidr: '10.3.128.0/19',
+                        az: 'us-east-1a',
+                      },
+                      {
+                        name: 'public-3',
+                        cidr: '10.3.160.0/19',
+                        az: 'us-east-1a',
+                      },
+                    ],
                   },
                   /* Remaining:
-                  *  - 10.1.192.0/19
-                  *  - 10.1.224.0/19
-                  * */
+                   *  - 10.3.192.0/19
+                   *  - 10.3.224.0/19
+                   * */
                 ],
               },
             ],
@@ -569,7 +594,7 @@ describe('Build', () => {
     const dlz = new DataLandingZone(app, configBase);
 
     const managementTemplate: Template = Template.fromStack(dlz.managementStack);
-    expect(managementTemplate.toJSON()).toMatchSnapshot('managementTemplate snapshot');
+    expect(cdkTemplateToJson(managementTemplate)).toMatchSnapshot('managementTemplate snapshot');
 
     const logStacksGlobalTemplate: Template = Template.fromStack(dlz.logStacks.global);
     expect(logStacksGlobalTemplate.toJSON()).toMatchSnapshot('logStacksGlobalTemplate snapshot');

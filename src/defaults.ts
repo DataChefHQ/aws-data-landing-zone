@@ -28,9 +28,11 @@ export class Defaults {
   }
 
   /**
-   * Creates a Default VPC configuration with 3 private and 3 public subnets.
+   * Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets.
    * Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
-   *
+   * There will be remaining space:
+   *   - 10.x.192.0/19
+   *   - 10.x.224.0/19
    * @param thirdOctetMask the third octet of the VPC CIDR
    * @param region the region where the VPC will be created
    * @returns a VPC configuration
@@ -40,47 +42,47 @@ export class Defaults {
       name: 'default',
       region: region,
       cidr: '10.' + thirdOctetMask + '.0.0/16',
-      subnets: [
+      routeTables: [
         {
-          segment: 'private',
-          name: 'private-1',
-          cidr: '10.' + thirdOctetMask + '.0.0/19',
-          az: region + 'a',
+          name: 'private',
+          subnets: [
+            {
+              name: 'private-1',
+              cidr: '10.' + thirdOctetMask + '.0.0/19',
+              az: region + 'a',
+            },
+            {
+              name: 'private-2',
+              cidr: '10.' + thirdOctetMask + '.32.0/19',
+              az: region + 'b',
+            },
+            {
+              name: 'private-3',
+              cidr: '10.' + thirdOctetMask + '.64.0/19',
+              az: region + 'c',
+            },
+          ],
         },
         {
-          segment: 'private',
-          name: 'private-2',
-          cidr: '10.' + thirdOctetMask + '.32.0/19',
-          az: region + 'b',
+          name: 'public',
+          subnets: [
+            {
+              name: 'public-1',
+              cidr: '10.' + thirdOctetMask + '.96.0/19',
+              az: region + 'a',
+            },
+            {
+              name: 'public-2',
+              cidr: '10.' + thirdOctetMask + '.128.0/19',
+              az: region + 'b',
+            },
+            {
+              name: 'public-3',
+              cidr: '10.' + thirdOctetMask + '.160.0/19',
+              az: region + 'c',
+            },
+          ],
         },
-        {
-          segment: 'private',
-          name: 'private-3',
-          cidr: '10.' + thirdOctetMask + '.64.0/19',
-          az: region + 'c',
-        },
-        {
-          segment: 'public',
-          name: 'public-1',
-          cidr: '10.' + thirdOctetMask + '.96.0/19',
-          az: region + 'a',
-        },
-        {
-          segment: 'public',
-          name: 'public-2',
-          cidr: '10.' + thirdOctetMask + '.128.0/19',
-          az: region + 'b',
-        },
-        {
-          segment: 'public',
-          name: 'public-3',
-          cidr: '10.' + thirdOctetMask + '.160.0/19',
-          az: region + 'c',
-        },
-        /* Remaining:
-        *  - 10.0.192.0/19
-        *  - 10.0.224.0/19
-        * */
       ],
     };
   }

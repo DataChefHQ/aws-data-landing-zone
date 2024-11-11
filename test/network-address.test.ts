@@ -223,7 +223,7 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
     expectVpc(result);
   });
 
-  function expectSegment(result: DlzAccountNetwork[] | undefined) {
+  function expectRouteTable(result: DlzAccountNetwork[] | undefined) {
     expect(result).toHaveLength(1);
     expect(result![0].dlzAccount.accountId).toBe(dlzAccountDev.accountId);
     expect(result![0].vpcs).toHaveLength(1);
@@ -232,11 +232,11 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
     expect(result![0].vpcs[0].routeTables[0].address.toString()).toBe('dev.us-east-1.default.private');
     expect(result![0].vpcs[0].routeTables[0].subnets).toHaveLength(2);
   }
-  test('matchOn - segment', () => {
-    /* Full network Address, we want to find the NetworkEntities for the address's segment */
+  test('matchOn - routeTable', () => {
+    /* Full network Address, we want to find the NetworkEntities for the address's routeTable */
     const networkAddress = new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1');
-    const result = networkEntities.getEntitiesForAddress(networkAddress, 'segment');
-    expectSegment(result);
+    const result = networkEntities.getEntitiesForAddress(networkAddress, 'routeTable');
+    expectRouteTable(result);
   });
 
   function expectSubnet(result: DlzAccountNetwork[] | undefined) {
@@ -273,7 +273,7 @@ describe('NetworkAddress - getEntitiesForAddress', () => {
       },
       {
         address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private'),
-        expected: expectSegment,
+        expected: expectRouteTable,
       },
       {
         address: new NetworkAddress(dlzAccountDev.name, 'us-east-1', 'default', 'private', 'subnet1'),
