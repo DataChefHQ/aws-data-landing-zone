@@ -322,13 +322,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-identitystore,@aws-sdk/client-sso-admin,@aws-sdk/client-sts,@aws-sdk/credential-providers,aws-lambda,table"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-identitystore,@aws-sdk/client-sso-admin,@aws-sdk/client-sts,@aws-sdk/credential-providers,table,cdk-express-pipeline"
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cost-explorer @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers aws-lambda execa table aws-cdk-lib constructs"
+          "exec": "npm update @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cost-explorer @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers execa table aws-cdk-lib cdk-express-pipeline constructs"
         },
         {
           "exec": "npx projen"

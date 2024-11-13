@@ -11,6 +11,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   typescriptVersion: '~5.3.0',
   name: '@DataChefHQ/data-landing-zone', //TODO: Change back when using NPM
   // name: 'data-landing-zone', //TODO: Change back when using NPM
+  description: 'AWS CDK Data Landing Zone construct',
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
   repositoryUrl: 'https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git',
@@ -46,11 +47,23 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'recipes_dlz',
     module: 'recipes_dlz',
   },
-  /* Runtime dependencies of this module that are jsii-enabled. */
-  // deps: [ ],
+  /* Runtime dependencies of this module that are jsii-enabled. Must be defined in peerDeps as well */
+  deps: [
+    'cdk-express-pipeline',
+  ],
+  peerDeps: [
+    'cdk-express-pipeline',
+  ],
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
-  bundledDeps: ['execa@5.1.1', '@aws-sdk/client-sts', '@aws-sdk/credential-providers', '@aws-sdk/client-cost-explorer', 'table', 'aws-lambda', '@aws-sdk/client-identitystore', '@aws-sdk/client-sso-admin'],
-  // description: undefined,
+  bundledDeps: [
+    'execa@5.1.1',
+    '@aws-sdk/client-sts',
+    '@aws-sdk/credential-providers',
+    '@aws-sdk/client-cost-explorer',
+    'table',
+    '@aws-sdk/client-identitystore',
+    '@aws-sdk/client-sso-admin',
+  ],
   /* Build dependencies for this repo/module. */
   devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node'],
   /* The "name" in package.json. */

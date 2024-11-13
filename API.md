@@ -57,6 +57,8 @@ new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLan
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.securityHubNotifications">securityHubNotifications</a></code> | *No description.* |
 
@@ -70,7 +72,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -454,6 +456,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.resourceName"></a>
 
 ```typescript
@@ -565,9 +597,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -659,7 +692,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -901,6 +936,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.accountId"></a>
 
 ```typescript
@@ -915,16 +974,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.AuditGlobalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -980,6 +1029,8 @@ new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -992,7 +1043,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -1376,6 +1427,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.resourceName"></a>
 
 ```typescript
@@ -1481,9 +1562,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.AuditRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -1575,7 +1657,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -1817,6 +1901,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.accountId"></a>
 
 ```typescript
@@ -1831,16 +1939,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.AuditRegionalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -1896,6 +1994,8 @@ new DlzStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -1908,7 +2008,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.DlzStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.DlzStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -2292,6 +2392,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.DlzStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.DlzStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.DlzStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.DlzStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.DlzStack.resourceName"></a>
 
 ```typescript
@@ -2397,9 +2527,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -2491,7 +2622,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.DlzStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.DlzStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -2733,6 +2866,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.DlzStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.DlzStack.property.accountId"></a>
 
 ```typescript
@@ -2747,16 +2904,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -3034,6 +3181,8 @@ new LogGlobalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -3046,7 +3195,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.LogGlobalStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.LogGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -3430,6 +3579,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.LogGlobalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.LogGlobalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.LogGlobalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.LogGlobalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.LogGlobalStack.resourceName"></a>
 
 ```typescript
@@ -3535,9 +3714,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.LogGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -3629,7 +3809,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -3871,6 +4053,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.accountId"></a>
 
 ```typescript
@@ -3885,16 +4091,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.LogGlobalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -3950,6 +4146,8 @@ new LogRegionalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -3962,7 +4160,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.LogRegionalStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.LogRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -4346,6 +4544,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.LogRegionalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.LogRegionalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.LogRegionalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.LogRegionalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.LogRegionalStack.resourceName"></a>
 
 ```typescript
@@ -4451,9 +4679,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.LogRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -4545,7 +4774,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -4787,6 +5018,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.accountId"></a>
 
 ```typescript
@@ -4801,16 +5056,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.LogRegionalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -4873,6 +5118,8 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
@@ -4891,7 +5138,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.ManagementStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.ManagementStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -5275,6 +5522,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.ManagementStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.ManagementStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.ManagementStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.ManagementStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.ManagementStack.resourceName"></a>
 
 ```typescript
@@ -5424,9 +5701,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -5518,7 +5796,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.ManagementStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.ManagementStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -5760,6 +6040,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.ManagementStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.ManagementStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.ManagementStack.property.accountId"></a>
 
 ```typescript
@@ -5774,16 +6078,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.ManagementStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -5846,6 +6140,8 @@ new WorkloadGlobalNetworkConnectionsPhase1Stack(scope: Construct, workloadAccoun
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.createPeeringRole">createPeeringRole</a></code> | *No description.* |
 
@@ -5859,7 +6155,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -6243,6 +6539,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resourceName"></a>
 
 ```typescript
@@ -6366,9 +6692,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -6460,7 +6787,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -6702,6 +7031,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.accountId"></a>
 
 ```typescript
@@ -6716,16 +7069,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -6788,6 +7131,8 @@ new WorkloadGlobalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccoun
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -6800,7 +7145,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -7184,6 +7529,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resourceName"></a>
 
 ```typescript
@@ -7289,9 +7664,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -7383,7 +7759,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -7625,6 +8003,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.accountId"></a>
 
 ```typescript
@@ -7639,16 +8041,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -7711,6 +8103,8 @@ new WorkloadGlobalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccoun
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -7723,7 +8117,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -8107,6 +8501,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resourceName"></a>
 
 ```typescript
@@ -8212,9 +8636,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -8306,7 +8731,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -8548,6 +8975,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.accountId"></a>
 
 ```typescript
@@ -8562,16 +9013,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -8634,6 +9075,8 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.defaultNotifications">defaultNotifications</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole">ssmAssumeCrossAccountRole</a></code> | *No description.* |
@@ -8648,7 +9091,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -9032,6 +9475,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.resourceName"></a>
 
 ```typescript
@@ -9149,9 +9622,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.defaultPolicyStatement">defaultPolicyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
 
 ---
@@ -9244,7 +9718,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -9486,6 +9962,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.accountId"></a>
 
 ```typescript
@@ -9500,16 +10000,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadGlobalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -9582,6 +10072,8 @@ new WorkloadRegionalNetworkConnectionsPhase2Stack(scope: Construct, workloadAcco
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -9594,7 +10086,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -9978,6 +10470,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resourceName"></a>
 
 ```typescript
@@ -10083,9 +10605,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -10177,7 +10700,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -10419,6 +10944,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.accountId"></a>
 
 ```typescript
@@ -10433,16 +10982,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -10505,6 +11044,8 @@ new WorkloadRegionalNetworkConnectionsPhase3Stack(scope: Construct, workloadAcco
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -10517,7 +11058,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -10901,6 +11442,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resourceName"></a>
 
 ```typescript
@@ -11006,9 +11577,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -11100,7 +11672,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -11342,6 +11916,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.accountId"></a>
 
 ```typescript
@@ -11356,16 +11954,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -11428,6 +12016,8 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
@@ -11440,7 +12030,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addDependency"></a>
+##### ~~`addDependency`~~ <a name="addDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -11824,6 +12414,36 @@ Convert an object, potentially containing tokens, to a YAML string.
 
 ---
 
+##### `addExpressDependency` <a name="addExpressDependency" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Add a dependency between this stack and another ExpressStack.
+
+This can be used to define dependencies between any two stacks within an
+
+###### `target`<sup>Required</sup> <a name="target" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
 ##### `resourceName` <a name="resourceName" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.resourceName"></a>
 
 ```typescript
@@ -11929,9 +12549,10 @@ The construct to start the search from.
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.id">id</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -12023,7 +12644,9 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.dependencies"></a>
+##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.dependencies"></a>
+
+- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -12265,6 +12888,30 @@ Whether termination protection is enabled for this stack.
 
 ---
 
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
 ##### `accountId`<sup>Required</sup> <a name="accountId" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.accountId"></a>
 
 ```typescript
@@ -12279,16 +12926,6 @@ public readonly accountId: string;
 
 ```typescript
 public readonly accountName: string;
-```
-
-- *Type:* string
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.WorkloadRegionalStack.property.id"></a>
-
-```typescript
-public readonly id: string;
 ```
 
 - *Type:* string
@@ -13615,6 +14252,7 @@ const dlzStackProps: DlzStackProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzStackProps.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | *No description.* |
 
 ---
 
@@ -13635,6 +14273,16 @@ public readonly name: DlzStackNameProps;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a>
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.DlzStackProps.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
 
 ---
 
@@ -15961,6 +16609,7 @@ const workloadAccountProps: WorkloadAccountProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.name">name</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.dlzAccount">dlzAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount">DLzAccount</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.globalVariables">globalVariables</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.GlobalVariables">GlobalVariables</a></code> | *No description.* |
 
@@ -15983,6 +16632,16 @@ public readonly name: DlzStackNameProps;
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzStackNameProps">DlzStackNameProps</a>
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="@DataChefHQ/data-landing-zone.WorkloadAccountProps.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
 
 ---
 

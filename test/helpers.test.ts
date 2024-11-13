@@ -29,38 +29,38 @@ export function getDlzResources(dataLandingZone: DataLandingZone) {
     dev: {
       workload: {
         base: {
-          global: getStackAndTemplate('workloads--development--global--eu-west-1'),
-          regional: getStackAndTemplate('workloads--development--regional--us-east-1'),
+          global: getStackAndTemplate('workloads--base--global_development--development_eu-west-1'),
+          regional: getStackAndTemplate('workloads--base--regional_development--development_us-east-1'),
         },
         ncp1: {
-          global: getStackAndTemplate('workloads--development--ncp1-global--eu-west-1'),
+          global: getStackAndTemplate('workloads--ncp1--global_development--development_eu-west-1'),
         },
         ncp2: {
-          global: getStackAndTemplate('workloads--development--ncp2-global--eu-west-1'),
-          regional: getStackAndTemplate('workloads--development--ncp2-regional--us-east-1'),
+          global: getStackAndTemplate('workloads--ncp2--global_development--development_eu-west-1'),
+          regional: getStackAndTemplate('workloads--ncp2--regional_development--development_us-east-1'),
         },
         ncp3: {
-          global: getStackAndTemplate('workloads--development--ncp3-global--eu-west-1'),
-          regional: getStackAndTemplate('workloads--development--ncp3-regional--us-east-1'),
+          global: getStackAndTemplate('workloads--ncp3--global_development--development_eu-west-1'),
+          regional: getStackAndTemplate('workloads--ncp3--regional_development--development_us-east-1'),
         },
       },
     },
     prod: {
       workload: {
         base: {
-          global: getStackAndTemplate('workloads--production--global--eu-west-1'),
-          regional: getStackAndTemplate('workloads--production--regional--us-east-1'),
+          global: getStackAndTemplate('workloads--base--global_production--production_eu-west-1'),
+          regional: getStackAndTemplate('workloads--base--regional_production--production_us-east-1'),
         },
         ncp1: {
-          global: getStackAndTemplate('workloads--production--ncp1-global--eu-west-1'),
+          global: getStackAndTemplate('workloads--ncp1--global_production--production_eu-west-1'),
         },
         ncp2: {
-          global: getStackAndTemplate('workloads--production--ncp2-global--eu-west-1'),
-          regional: getStackAndTemplate('workloads--production--ncp2-regional--us-east-1'),
+          global: getStackAndTemplate('workloads--ncp2--global_production--production_eu-west-1'),
+          regional: getStackAndTemplate('workloads--ncp2--regional_production--production_us-east-1'),
         },
         ncp3: {
-          global: getStackAndTemplate('workloads--production--ncp3-global--eu-west-1'),
-          regional: getStackAndTemplate('workloads--production--ncp3-regional--us-east-1'),
+          global: getStackAndTemplate('workloads--ncp3--global_production--production_eu-west-1'),
+          regional: getStackAndTemplate('workloads--ncp3--regional_production--production_us-east-1'),
         },
       },
 
