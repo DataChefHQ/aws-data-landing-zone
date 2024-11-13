@@ -1,5 +1,5 @@
-import * as cdk from 'aws-cdk-lib';
 import { Environment } from 'aws-cdk-lib/core/lib/environment';
+import { ExpressStage, ExpressStack } from 'cdk-express-pipeline';
 import { Construct } from 'constructs';
 
 export interface DlzStackNameProps {
@@ -11,29 +11,22 @@ export interface DlzStackNameProps {
 export interface DlzStackProps {
   readonly name: DlzStackNameProps;
   readonly env: Environment;
+  readonly stage: ExpressStage;
 }
 
 const DlzStackNamePrefix = 'dlz-';
-export class DlzStack extends cdk.Stack {
-  public readonly id: string;
+export class DlzStack extends ExpressStack {
+
   public readonly accountName: string;
   public readonly accountId: string;
 
   constructor(scope: Construct, props: DlzStackProps) {
-    const stackId = [
-      props.name.ou,
-      props.name.account,
-      props.name.stack,
-      props.name.region,
-    ].filter(Boolean).join('--');
-
-    super(scope, stackId, {
+    super(scope, props.name.region!, props.stage, {
       ...props,
       stackName: DlzStackNamePrefix + props.name.stack,
       analyticsReporting: false,
     });
 
-    this.id = stackId;
     this.accountName = props.name.account!;
     this.accountId = props.env.account!;
   }

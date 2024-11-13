@@ -6,6 +6,7 @@ import {
   UpdateUserCommand,
   DescribeUserCommand,
 } from '@aws-sdk/client-identitystore';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import {
   CloudFormationCustomResourceEvent,
   CloudFormationCustomResourceResponse,

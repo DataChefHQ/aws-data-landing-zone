@@ -1,22 +1,24 @@
 import * as path from 'path';
-import { App } from 'aws-cdk-lib';
 import * as cdk from 'aws-cdk-lib';
+import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import {
-  DataLandingZone, DataLandingZoneProps,
+  DataLandingZone,
+  DataLandingZoneProps,
   Defaults,
   DlzAccountType,
-  DlzControlTowerStandardControls, IdentityStoreUser,
-  Region, SecurityHubNotificationSeverity, SecurityHubNotificationSWorkflowStatus,
+  DlzControlTowerStandardControls,
+  IdentityStoreUser,
+  Region,
+  SecurityHubNotificationSeverity,
+  SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
 } from '../src';
-import {
-  cdkTemplateToJson,
-  //@ts-ignore
-} from './helpers.test';
+import { cdkTemplateToJson } from './helpers.test';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
+
 const jestConsole = console;
 
 const slackBudgetNotifications: SlackChannel = {

@@ -14,6 +14,7 @@ import {
   CloudFormationCustomResourceUpdateEvent,
   CloudFormationCustomResourceDeleteEvent,
 } from 'aws-lambda';
+import { CdkExpressPipeline } from 'cdk-express-pipeline';
 import { Construct } from 'constructs';
 import { DlzAccountType } from '../src';
 import { DlzStack, DlzStackProps } from '../src/constructs/dlz-stack/index';
@@ -88,10 +89,12 @@ jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
 });
 
 describe('Permission sets', () => {
-
-
   const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
   const stack = new TestStack(app, {
+    stage,
     name: {
       stack: 'test',
       region: 'eu-west-1',
@@ -157,7 +160,11 @@ describe('Permission sets', () => {
 describe('Access groups', () => {
 
   const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
   const stack = new TestStack(app, {
+    stage,
     name: {
       stack: 'test',
       region: 'eu-west-1',
@@ -281,7 +288,11 @@ describe('IAM Identity Center', () => {
 
   test('iamIdentityCenter function', () => {
     const app = new App();
+    const pipeline = new CdkExpressPipeline();
+    const wave = pipeline.addWave('wave');
+    const stage = wave.addStage('stage');
     const stack = new TestStack(app, {
+      stage,
       name: {
         stack: 'test',
         region: 'eu-west-1',
