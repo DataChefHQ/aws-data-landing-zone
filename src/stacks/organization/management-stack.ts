@@ -4,7 +4,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import {
   AccountChatbots,
-  Budget,
+  DlzBudget,
   ControlTowerControlMappings,
   DlzStack,
   DlzStackProps,
@@ -13,7 +13,7 @@ import {
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
-} from '../../constructs/control-tower-control';
+} from '../../constructs/dlz-control-tower-control';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
 import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone-types';
@@ -258,7 +258,7 @@ export class ManagementStack extends DlzStack {
     }
 
     for (const budget of this.props.budgets) {
-      new Budget(this, this.resourceName(`budget-${budget.name}`), budget);
+      new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget);
     }
   }
 
