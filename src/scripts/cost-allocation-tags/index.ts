@@ -1,6 +1,6 @@
 import { CostExplorerClient, UpdateCostAllocationTagsStatusCommand } from '@aws-sdk/client-cost-explorer';
 import { fromIni } from '@aws-sdk/credential-providers';
-import { DataLandingZoneProps } from '../../data-landing-zone';
+import { DataLandingZoneProps } from '../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../defaults';
 
 

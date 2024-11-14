@@ -17028,12 +17028,12 @@ new DataLandingZoneClient()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId">bastionSecurityGroupId</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn">notificationTopicArn</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn">permissionsBoundaryArn</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId">routeTableId</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId">subnetId</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId">vpcId</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId">bastionSecurityGroupId</a></code> | Fetches the bastion security group ID from the SSM Parameter Store. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn">notificationTopicArn</a></code> | Fetches the notification topic ARN from the SSM Parameter Store. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn">permissionsBoundaryArn</a></code> | Fetches the permissions boundary ARN from the SSM Parameter Store. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId">routeTableId</a></code> | Fetches the route table ID from the SSM Parameter Store. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId">subnetId</a></code> | Fetches the subnet ID from the SSM Parameter Store. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId">vpcId</a></code> | Fetches the VPC ID from the SSM Parameter Store. |
 
 ---
 
@@ -17045,9 +17045,13 @@ import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 DataLandingZoneClient.bastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps)
 ```
 
+Fetches the bastion security group ID from the SSM Parameter Store.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.scope"></a>
 
 - *Type:* constructs.Construct
+
+The scope of the construct.
 
 ---
 
@@ -17055,11 +17059,15 @@ DataLandingZoneClient.bastionSecurityGroupId(scope: Construct, id: string, props
 
 - *Type:* string
 
+The id of the construct.
+
 ---
 
 ###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.bastionSecurityGroupId.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientBastionProps">DataLandingZoneClientBastionProps</a>
+
+The props of the construct.
 
 ---
 
@@ -17071,15 +17079,21 @@ import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 DataLandingZoneClient.notificationTopicArn(scope: Construct, id: string)
 ```
 
+Fetches the notification topic ARN from the SSM Parameter Store.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn.parameter.scope"></a>
 
 - *Type:* constructs.Construct
+
+The scope of the construct.
 
 ---
 
 ###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.notificationTopicArn.parameter.id"></a>
 
 - *Type:* string
+
+The id of the construct.
 
 ---
 
@@ -17091,15 +17105,21 @@ import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 DataLandingZoneClient.permissionsBoundaryArn(scope: Construct, id: string)
 ```
 
+Fetches the permissions boundary ARN from the SSM Parameter Store.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn.parameter.scope"></a>
 
 - *Type:* constructs.Construct
+
+The scope of the construct.
 
 ---
 
 ###### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.permissionsBoundaryArn.parameter.id"></a>
 
 - *Type:* string
+
+The id of the construct.
 
 ---
 
@@ -17111,9 +17131,13 @@ import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 DataLandingZoneClient.routeTableId(scope: Construct, id: string, props: DataLandingZoneClientRouteTableIdProps)
 ```
 
+Fetches the route table ID from the SSM Parameter Store.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.scope"></a>
 
 - *Type:* constructs.Construct
+
+The scope of the construct.
 
 ---
 
@@ -17121,11 +17145,15 @@ DataLandingZoneClient.routeTableId(scope: Construct, id: string, props: DataLand
 
 - *Type:* string
 
+The id of the construct.
+
 ---
 
 ###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.routeTableId.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientRouteTableIdProps">DataLandingZoneClientRouteTableIdProps</a>
+
+The props of the construct.
 
 ---
 
@@ -17137,9 +17165,13 @@ import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 DataLandingZoneClient.subnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps)
 ```
 
+Fetches the subnet ID from the SSM Parameter Store.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.scope"></a>
 
 - *Type:* constructs.Construct
+
+The scope of the construct.
 
 ---
 
@@ -17147,11 +17179,15 @@ DataLandingZoneClient.subnetId(scope: Construct, id: string, props: DataLandingZ
 
 - *Type:* string
 
+The id of the construct.
+
 ---
 
 ###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.subnetId.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientSubnetIdProps">DataLandingZoneClientSubnetIdProps</a>
+
+The props of the construct.
 
 ---
 
@@ -17163,9 +17199,13 @@ import { DataLandingZoneClient } from '@DataChefHQ/data-landing-zone'
 DataLandingZoneClient.vpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps)
 ```
 
+Fetches the VPC ID from the SSM Parameter Store.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.scope"></a>
 
 - *Type:* constructs.Construct
+
+The scope of the construct.
 
 ---
 
@@ -17173,11 +17213,15 @@ DataLandingZoneClient.vpcId(scope: Construct, id: string, props: DataLandingZone
 
 - *Type:* string
 
+The id of the construct.
+
 ---
 
 ###### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DataLandingZoneClient.vpcId.parameter.props"></a>
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.DataLandingZoneClientVpcIdProps">DataLandingZoneClientVpcIdProps</a>
+
+The props of the construct.
 
 ---
 

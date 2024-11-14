@@ -4,7 +4,7 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { DlzConfigRule } from '../../../../constructs/config/index';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
 import { DlzStack, DlzVpc } from '../../../../constructs/index';
-import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone';
+import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
 

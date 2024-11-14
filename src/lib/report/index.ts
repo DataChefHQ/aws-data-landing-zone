@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { table } from 'table';
-import { DLzAccount, DlzRegions, OrgOuSecurity } from '../../data-landing-zone';
+import { DLzAccount, DlzRegions, OrgOuSecurity } from '../../data-landing-zone-types';
 import { groupByField } from '../ts-utils';
 
 export enum ReportType {

@@ -1,7 +1,8 @@
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { DlzStack } from '../../../../constructs';
-import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+
+import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone-types';
 
 export class WorkloadRegionalStack extends DlzStack {
 

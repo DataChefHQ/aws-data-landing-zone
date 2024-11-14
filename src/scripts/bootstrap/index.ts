@@ -1,6 +1,6 @@
 import { AssumeRoleCommand, STS } from '@aws-sdk/client-sts';
 import { fromIni } from '@aws-sdk/credential-providers';
-import { DataLandingZoneProps, DlzAllRegions } from '../../data-landing-zone';
+import { DataLandingZoneProps, DlzAllRegions } from '../../data-landing-zone-types';
 import { runCommand } from '../lib/helpers';
 
 const tags = '--tags Owner=infra --tags Project=dlz --tags Environment=dlz';

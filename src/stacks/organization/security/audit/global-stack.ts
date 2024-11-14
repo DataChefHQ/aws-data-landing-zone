@@ -6,7 +6,8 @@ import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
 import { AccountChatbots, DlzStack } from '../../../../constructs';
 import { DlzStackProps } from '../../../../constructs/dlz-stack/index';
-import { DataLandingZoneProps } from '../../../../data-landing-zone';
+
+import { DataLandingZoneProps } from '../../../../data-landing-zone-types';
 
 export class AuditGlobalStack extends DlzStack {
   constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {

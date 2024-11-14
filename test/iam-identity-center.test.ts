@@ -16,12 +16,11 @@ import {
 } from 'aws-lambda';
 import { CdkExpressPipeline } from 'cdk-express-pipeline';
 import { Construct } from 'constructs';
-import { DlzAccountType } from '../src';
+import { DataLandingZoneProps, DlzAccountType, Region } from '../src';
 import { DlzStack, DlzStackProps } from '../src/constructs/dlz-stack/index';
 import { IamIdentityCenter } from '../src/constructs/iam-identity-center';
 import { IdentityStoreUser } from '../src/constructs/iam-identity-center/identity-store-user';
 import { handler } from '../src/constructs/iam-identity-center/identity-store-user-lambda';
-import { DataLandingZoneProps, Region } from '../src/data-landing-zone';
 import { Defaults } from '../src/defaults';
 
 jest.mock('@aws-sdk/client-identitystore');

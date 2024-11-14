@@ -31,13 +31,13 @@ export interface DataLandingZoneClientSubnetIdProps extends DataLandingZoneClien
 */
 export class DataLandingZoneClient {
 
-  /*
-      * Fetches the bastion security group ID from the SSM Parameter Store
-      *@param scope - The scope of the construct
-      *@param id - The id of the construct
-      *@param props - The props of the construct
-      *@returns - The security group ID of the bastion
-      */
+  /**
+   * Fetches the bastion security group ID from the SSM Parameter Store
+   *@param scope - The scope of the construct
+   *@param id - The id of the construct
+   *@param props - The props of the construct
+   *@returns - The security group ID of the bastion
+   */
   public static bastionSecurityGroupId(scope: Construct, id: string, props: DataLandingZoneClientBastionProps): string {
     const bastionName = props.bastionName ?? 'default';
 
@@ -48,13 +48,13 @@ export class DataLandingZoneClient {
     return parameter.stringValue;
   }
 
-  /*
-      * Fetches the VPC ID from the SSM Parameter Store
-      *@param scope - The scope of the construct
-      *@param id - The id of the construct
-      *@param props - The props of the construct
-      *@returns - The ID of the VPC
-      */
+  /**
+   * Fetches the VPC ID from the SSM Parameter Store
+   *@param scope - The scope of the construct
+   *@param id - The id of the construct
+   *@param props - The props of the construct
+   *@returns - The ID of the VPC
+   */
   public static vpcId(scope: Construct, id: string, props: DataLandingZoneClientVpcIdProps): string {
     const accountName = props.accountName;
     const region = props.region;
@@ -68,13 +68,13 @@ export class DataLandingZoneClient {
     return parameter.stringValue;
   }
 
-  /*
-      * Fetches the route table ID from the SSM Parameter Store
-      *@param scope - The scope of the construct
-      *@param id - The id of the construct
-      *@param props - The props of the construct
-      *@returns - The ID of the route table
-      */
+  /**
+   * Fetches the route table ID from the SSM Parameter Store
+   *@param scope - The scope of the construct
+   *@param id - The id of the construct
+   *@param props - The props of the construct
+   *@returns - The ID of the route table
+   */
   public static routeTableId(scope: Construct, id: string, props: DataLandingZoneClientRouteTableIdProps): string {
     const accountName = props.accountName;
     const region = props.region;
@@ -89,13 +89,13 @@ export class DataLandingZoneClient {
     return parameter.stringValue;
   }
 
-  /*
-      * Fetches the subnet ID from the SSM Parameter Store
-      *@param scope - The scope of the construct
-      *@param id - The id of the construct
-      *@param props - The props of the construct
-      *@returns - The ID of the subnet
-      */
+  /**
+   * Fetches the subnet ID from the SSM Parameter Store
+   *@param scope - The scope of the construct
+   *@param id - The id of the construct
+   *@param props - The props of the construct
+   *@returns - The ID of the subnet
+   */
   public static subnetId(scope: Construct, id: string, props: DataLandingZoneClientSubnetIdProps): string {
     const accountName = props.accountName;
     const region = props.region;
@@ -111,12 +111,12 @@ export class DataLandingZoneClient {
     return parameter.stringValue;
   }
 
-  /*
-      * Fetches the notification topic ARN from the SSM Parameter Store
-      *@param scope - The scope of the construct
-      *@param id - The id of the construct
-      *@returns - The ARN of the notification topic
-      */
+  /**
+   * Fetches the notification topic ARN from the SSM Parameter Store
+   *@param scope - The scope of the construct
+   *@param id - The id of the construct
+   *@returns - The ARN of the notification topic
+   */
   public static notificationTopicArn(scope: Construct, id: string): string {
     const parameterName = `${SSM_PARAMETER_DLZ_PREFIX}/sns/default-notification/arn`;
     const parameter = ssm.StringParameter.fromStringParameterName(
@@ -126,12 +126,12 @@ export class DataLandingZoneClient {
     return parameter.stringValue;
   }
 
-  /*
-      * Fetches the permissions boundary ARN from the SSM Parameter Store
-      *@param scope - The scope of the construct
-      *@param id - The id of the construct
-      *@returns - The ARN of the permissions boundary
-      */
+  /**
+   * Fetches the permissions boundary ARN from the SSM Parameter Store
+   *@param scope - The scope of the construct
+   *@param id - The id of the construct
+   *@returns - The ARN of the permissions boundary
+   */
   public static permissionsBoundaryArn(scope: Construct, id: string): string {
     const parameterName = `${SSM_PARAMETER_DLZ_PREFIX}/iam/permission-boundary-policy/arn`;
     const parameter = ssm.StringParameter.fromStringParameterName(
