@@ -3,7 +3,8 @@ import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPe
 import { BudgetProps } from './constructs/budget';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps, Region } from './data-landing-zone';
+
+import { DataLandingZoneProps, Region } from './data-landing-zone-types';
 
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',

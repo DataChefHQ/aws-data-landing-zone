@@ -16,7 +16,7 @@ import {
 } from '../../constructs/control-tower-control';
 import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
 import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone';
+import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../defaults';
 import { limitCfnExecutions } from '../../lib/cdk-utils';
 import { Report } from '../../lib/report';

@@ -1,6 +1,6 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { DlzStack, NetworkEntityVpc } from '../../../../constructs/index';
-import { DataLandingZoneProps, GlobalVariables } from '../../../../data-landing-zone';
+import { DataLandingZoneProps, GlobalVariables } from '../../../../data-landing-zone-types';
 import { Logger } from '../../../../lib/logger';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 

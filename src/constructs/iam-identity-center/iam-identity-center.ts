@@ -5,9 +5,7 @@ import { CfnPermissionSet } from 'aws-cdk-lib/aws-sso/lib/sso.generated';
 import { Construct } from 'constructs';
 import { IamIdentityCenterGroup, IamIdentityCenterGroupUser } from './iam-identity-center-group';
 import { IdentityStoreUser, IdentityStoreUserProps } from './identity-store-user';
-import {
-  DLzOrganization,
-} from '../../data-landing-zone';
+import { DLzOrganization } from '../../data-landing-zone-types';
 import { durationToIso8601 } from '../../lib/cdk-utils';
 import { DlzStack } from '../dlz-stack/index';
 

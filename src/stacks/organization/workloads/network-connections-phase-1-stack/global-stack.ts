@@ -3,7 +3,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { DlzStack, DlzAccountNetwork } from '../../../../constructs/index';
-import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone-types';
 import { Logger } from '../../../../lib/logger';
 import { SSM_PARAMETERS_DLZ } from '../../constants';
 

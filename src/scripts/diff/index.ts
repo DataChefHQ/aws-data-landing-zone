@@ -1,4 +1,4 @@
-import { DataLandingZoneProps } from '../../data-landing-zone';
+import { DataLandingZoneProps } from '../../data-landing-zone-types';
 import { runCommand } from '../lib/helpers';
 
 export async function all(props: DataLandingZoneProps) {

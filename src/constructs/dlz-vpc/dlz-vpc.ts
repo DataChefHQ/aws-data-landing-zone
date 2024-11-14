@@ -4,7 +4,7 @@ import { UserData } from 'aws-cdk-lib/aws-ec2';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { NetworkEntityRouteTable, NetworkEntityVpc } from './dlz-account-network';
 import { NetworkAddress } from './network-address';
-import { DLzAccount, NetworkNat, Region } from '../../data-landing-zone';
+import { DLzAccount, NetworkNat, Region } from '../../data-landing-zone-types';
 import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 import { DlzStack } from '../dlz-stack/index';
 

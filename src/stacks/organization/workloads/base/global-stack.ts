@@ -5,7 +5,7 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { Shared } from './shared';
 import { AccountChatbots, DlzStack, SlackChannel } from '../../../../constructs';
-import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone';
+import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-landing-zone-types';
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
 export class WorkloadGlobalStack extends DlzStack {

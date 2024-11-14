@@ -1,6 +1,7 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { NetworkAddress } from './network-address';
-import { DLzAccount } from '../../data-landing-zone';
+
+import { DLzAccount } from '../../data-landing-zone-types';
 
 export interface NetworkEntitySubnet {
   readonly address: NetworkAddress;

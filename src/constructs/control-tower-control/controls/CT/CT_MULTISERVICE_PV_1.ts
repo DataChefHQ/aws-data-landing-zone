@@ -1,4 +1,4 @@
-import { Region } from '../../../../data-landing-zone';
+import { Region } from '../../../../data-landing-zone-types';
 import { DlzControlTowerControlFormat, IDlzControlTowerControl, DlzControlTowerSpecializedControls } from '../index';
 
 export interface CT_MULTISERVICE_PV_1Props {

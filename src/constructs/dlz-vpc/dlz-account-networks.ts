@@ -1,7 +1,8 @@
 /* Use `undefined` to automatically detect level */
 import { DlzAccountNetwork, NetworkEntityVpc } from './dlz-account-network';
 import { NetworkAddress } from './network-address';
-import { DLzAccount } from '../../data-landing-zone';
+
+import { DLzAccount } from '../../data-landing-zone-types';
 
 type MatchOnAddress = 'account' | 'region' | 'vpc' | 'routeTable' | 'subnet' | undefined;
 

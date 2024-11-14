@@ -3,7 +3,7 @@ import { CfnTag } from 'aws-cdk-lib';
 import * as controltower from 'aws-cdk-lib/aws-controltower';
 import { Construct } from 'constructs';
 import { DlzControlTowerControlFormat, IDlzControlTowerControl } from './controls';
-import { Region } from '../../data-landing-zone';
+import { Region } from '../../data-landing-zone-types';
 import { IReportResource, ReportResource, ReportType, kebabToCamelCase } from '../../lib';
 
 
