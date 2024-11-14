@@ -1,8 +1,8 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { DlzConfigRule } from '../../../../constructs/config/index';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
+import { DlzConfigRule } from '../../../../constructs/dlz-config-rule/index';
 import { DlzStack, DlzVpc } from '../../../../constructs/index';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../../defaults';

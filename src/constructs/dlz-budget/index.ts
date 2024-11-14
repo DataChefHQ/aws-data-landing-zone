@@ -11,18 +11,18 @@ export interface BudgetSubscribers {
   readonly slack?: SlackChannel;
 }
 
-export interface BudgetProps {
+export interface DlzBudgetProps {
   readonly name: string;
   readonly amount: number;
   readonly forTags?: Record<string, string>;
   readonly subscribers :BudgetSubscribers;
 }
 
-export class Budget {
+export class DlzBudget {
   public readonly cfnBudget: budgets.CfnBudget;
   public readonly notificationTopic: sns.Topic;
 
-  constructor(scope: Construct, id: string, props: BudgetProps) {
+  constructor(scope: Construct, id: string, props: DlzBudgetProps) {
 
     let costFilters: undefined | { TagKeyValue: string[] } = undefined;
     if (props.forTags) {

@@ -198,3 +198,13 @@ npm run npm-link-manual
 ```
 
 This will link the local package to the typescript project pointing to your data-landing-zone project.
+
+## Contributing Guidelines
+
+### Naming Conventions
+
+- Constructs: Constructs names that have similar names to L2 and L3 constructs in the AWS CDK should be prefixed with 
+  `Dlz` to avoid confusion. For example, an L3 `Vpc` construct already exists in the AWS CDK, so the Data Landing Zone
+  VPC construct should be named `DlzVpc`.
+- Stack resources names: The `DlzStack` class has a `resourceName` function that should be used to generate resource 
+  names. This function will prefix the resource name with the stack name to ensure easily identifiable resources.

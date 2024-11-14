@@ -13032,67 +13032,6 @@ The name of the Bastion, defaults to 'default', specify the name if there are mo
 
 ---
 
-### BudgetProps <a name="BudgetProps" id="@DataChefHQ/data-landing-zone.BudgetProps"></a>
-
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.BudgetProps.Initializer"></a>
-
-```typescript
-import { BudgetProps } from '@DataChefHQ/data-landing-zone'
-
-const budgetProps: BudgetProps = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.BudgetProps.property.amount">amount</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.BudgetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.BudgetProps.property.subscribers">subscribers</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.BudgetSubscribers">BudgetSubscribers</a></code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.BudgetProps.property.forTags">forTags</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
-
----
-
-##### `amount`<sup>Required</sup> <a name="amount" id="@DataChefHQ/data-landing-zone.BudgetProps.property.amount"></a>
-
-```typescript
-public readonly amount: number;
-```
-
-- *Type:* number
-
----
-
-##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.BudgetProps.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
----
-
-##### `subscribers`<sup>Required</sup> <a name="subscribers" id="@DataChefHQ/data-landing-zone.BudgetProps.property.subscribers"></a>
-
-```typescript
-public readonly subscribers: BudgetSubscribers;
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
-
----
-
-##### `forTags`<sup>Optional</sup> <a name="forTags" id="@DataChefHQ/data-landing-zone.BudgetProps.property.forTags"></a>
-
-```typescript
-public readonly forTags: {[ key: string ]: string};
-```
-
-- *Type:* {[ key: string ]: string}
-
----
-
 ### BudgetSubscribers <a name="BudgetSubscribers" id="@DataChefHQ/data-landing-zone.BudgetSubscribers"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.BudgetSubscribers.Initializer"></a>
@@ -13418,7 +13357,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.budgets">budgets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.BudgetProps">BudgetProps</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.budgets">budgets</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
@@ -13440,10 +13379,10 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 ##### `budgets`<sup>Required</sup> <a name="budgets" id="@DataChefHQ/data-landing-zone.DataLandingZoneProps.property.budgets"></a>
 
 ```typescript
-public readonly budgets: BudgetProps[];
+public readonly budgets: DlzBudgetProps[];
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.BudgetProps">BudgetProps</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]
 
 ---
 
@@ -13816,6 +13755,67 @@ public readonly vpcs: NetworkEntityVpc[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.NetworkEntityVpc">NetworkEntityVpc</a>[]
+
+---
+
+### DlzBudgetProps <a name="DlzBudgetProps" id="@DataChefHQ/data-landing-zone.DlzBudgetProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzBudgetProps.Initializer"></a>
+
+```typescript
+import { DlzBudgetProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzBudgetProps: DlzBudgetProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps.property.amount">amount</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps.property.subscribers">subscribers</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.BudgetSubscribers">BudgetSubscribers</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps.property.forTags">forTags</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+
+---
+
+##### `amount`<sup>Required</sup> <a name="amount" id="@DataChefHQ/data-landing-zone.DlzBudgetProps.property.amount"></a>
+
+```typescript
+public readonly amount: number;
+```
+
+- *Type:* number
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@DataChefHQ/data-landing-zone.DlzBudgetProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="@DataChefHQ/data-landing-zone.DlzBudgetProps.property.subscribers"></a>
+
+```typescript
+public readonly subscribers: BudgetSubscribers;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
+
+---
+
+##### `forTags`<sup>Optional</sup> <a name="forTags" id="@DataChefHQ/data-landing-zone.DlzBudgetProps.property.forTags"></a>
+
+```typescript
+public readonly forTags: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
 
 ---
 
@@ -16778,74 +16778,6 @@ public readonly slackChatBots: {[ key: string ]: SlackChannelConfiguration};
 ---
 
 
-### Budget <a name="Budget" id="@DataChefHQ/data-landing-zone.Budget"></a>
-
-#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.Budget.Initializer"></a>
-
-```typescript
-import { Budget } from '@DataChefHQ/data-landing-zone'
-
-new Budget(scope: Construct, id: string, props: BudgetProps)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.Budget.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.Budget.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.Budget.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.BudgetProps">BudgetProps</a></code> | *No description.* |
-
----
-
-##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.Budget.Initializer.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.Budget.Initializer.parameter.id"></a>
-
-- *Type:* string
-
----
-
-##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.Budget.Initializer.parameter.props"></a>
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.BudgetProps">BudgetProps</a>
-
----
-
-
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.Budget.property.cfnBudget">cfnBudget</a></code> | <code>aws-cdk-lib.aws_budgets.CfnBudget</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.Budget.property.notificationTopic">notificationTopic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
-
----
-
-##### `cfnBudget`<sup>Required</sup> <a name="cfnBudget" id="@DataChefHQ/data-landing-zone.Budget.property.cfnBudget"></a>
-
-```typescript
-public readonly cfnBudget: CfnBudget;
-```
-
-- *Type:* aws-cdk-lib.aws_budgets.CfnBudget
-
----
-
-##### `notificationTopic`<sup>Required</sup> <a name="notificationTopic" id="@DataChefHQ/data-landing-zone.Budget.property.notificationTopic"></a>
-
-```typescript
-public readonly notificationTopic: Topic;
-```
-
-- *Type:* aws-cdk-lib.aws_sns.Topic
-
----
-
-
 ### DataLandingZone <a name="DataLandingZone" id="@DataChefHQ/data-landing-zone.DataLandingZone"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DataLandingZone.Initializer"></a>
@@ -17458,6 +17390,74 @@ Given we have these NetworkEntity[]:
 ---
 
 
+
+
+### DlzBudget <a name="DlzBudget" id="@DataChefHQ/data-landing-zone.DlzBudget"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzBudget.Initializer"></a>
+
+```typescript
+import { DlzBudget } from '@DataChefHQ/data-landing-zone'
+
+new DlzBudget(scope: Construct, id: string, props: DlzBudgetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudget.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudget.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudget.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps">DlzBudgetProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DlzBudget.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzBudget.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DlzBudget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>
+
+---
+
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudget.property.cfnBudget">cfnBudget</a></code> | <code>aws-cdk-lib.aws_budgets.CfnBudget</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzBudget.property.notificationTopic">notificationTopic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+
+---
+
+##### `cfnBudget`<sup>Required</sup> <a name="cfnBudget" id="@DataChefHQ/data-landing-zone.DlzBudget.property.cfnBudget"></a>
+
+```typescript
+public readonly cfnBudget: CfnBudget;
+```
+
+- *Type:* aws-cdk-lib.aws_budgets.CfnBudget
+
+---
+
+##### `notificationTopic`<sup>Required</sup> <a name="notificationTopic" id="@DataChefHQ/data-landing-zone.DlzBudget.property.notificationTopic"></a>
+
+```typescript
+public readonly notificationTopic: Topic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.Topic
+
+---
 
 
 ### DlzControlTowerEnabledControl <a name="DlzControlTowerEnabledControl" id="@DataChefHQ/data-landing-zone.DlzControlTowerEnabledControl"></a>

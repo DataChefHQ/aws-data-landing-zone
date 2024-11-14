@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
-import { BudgetProps } from './constructs/budget';
+import { DlzBudgetProps } from './constructs/dlz-budget';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 
@@ -162,7 +162,7 @@ export class Defaults {
    * @param infraDlz Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD
    * @param subscribers Subscribers for the budget
    */
-  public static budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers): BudgetProps[] {
+  public static budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers): DlzBudgetProps[] {
     return [
       {
         name: 'org-total',

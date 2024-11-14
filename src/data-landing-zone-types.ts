@@ -2,7 +2,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import {
-  BudgetProps,
+  DlzBudgetProps,
   DlzAccountNetworks,
   DlzControlTowerStandardControls,
   DlzSsmReaderStackCache,
@@ -465,7 +465,7 @@ export interface DataLandingZoneProps {
    */
   readonly saveReport?: boolean;
 
-  readonly budgets: BudgetProps[];
+  readonly budgets: DlzBudgetProps[];
 
   readonly securityHubNotifications: SecurityHubNotification[];
 
