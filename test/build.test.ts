@@ -255,6 +255,41 @@ const configBase: DataLandingZoneProps = {
               },
 
             ],
+            lakeFormation: {
+              lakeFormationAdmins: ['arn:aws:iam::123456789012:role/MyLakeFormationAdminRole'],
+              lakeFormationTags: [
+                {
+                  tagKey: 'tag1',
+                  tagValues: ['value1', 'value2'],
+                  shareWith: [
+                    {
+                      principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
+                      specificValues: ['value1'],
+                      // NOTE: @rehanvdm for external accounts, only `DESCRIBE` and `ASSOCIATE` are allowed.
+                      // We assume that the user knows this? Otherwise, if they try to add write permissions
+                      // on tags to external accounts, it's likely that it will crash (haven't tested).
+                      permissions: ['DESCRIBE', 'ASSOCIATE'],
+                      permissionsWithGrantOption: ['DESCRIBE'],
+                    },
+                  ],
+                },
+              ],
+              lakePermissions: [
+                {
+                  principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
+                  tags: [
+                    {
+                      tagKey: 'tag1',
+                      tagValues: ['value1', 'value2'],
+                    },
+                  ],
+                  database: ['DESCRIBE'],
+                  databaseWithGrant: ['DESCRIBE'],
+                  table: ['DESCRIBE', 'SELECT'],
+                  tableWithGrant: ['DESCRIBE', 'SELECT'],
+                },
+              ],
+            },
           },
           {
             name: 'project-1-production',

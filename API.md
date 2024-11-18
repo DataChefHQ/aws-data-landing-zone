@@ -13660,6 +13660,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications settings for the account. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.lakeFormation">lakeFormation</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a></code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
@@ -13706,6 +13707,16 @@ Default notifications settings for the account.
 
 Defines settings for email notifications or the slack channel details.
 This will override the organization level defaultNotification.
+
+---
+
+##### `lakeFormation`<sup>Optional</sup> <a name="lakeFormation" id="@DataChefHQ/data-landing-zone.DLzAccount.property.lakeFormation"></a>
+
+```typescript
+public readonly lakeFormation: DlzLakeFormationProps;
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>
 
 ---
 
@@ -13940,6 +13951,90 @@ public readonly tags: CfnTag[];
 ```
 
 - *Type:* aws-cdk-lib.CfnTag[]
+
+---
+
+### DlzLakeFormationProps <a name="DlzLakeFormationProps" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.Initializer"></a>
+
+```typescript
+import { DlzLakeFormationProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzLakeFormationProps: DlzLakeFormationProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationAdmins">lakeFormationAdmins</a></code> | <code>string[]</code> | A list of strings representing the IAM role ARNs. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationTags">lakeFormationTags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]</code> | A list of Lake Formation tags that can be shared across accounts and principals. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakePermissions">lakePermissions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]</code> | A list of permission settings, specifying which Lake Formation permissions apply to which principals. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion">crossAccountVersion</a></code> | <code>number</code> | OPTIONAL - Version for cross-account data sharing. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissionMode">permissionMode</a></code> | <code>string</code> | OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation. |
+
+---
+
+##### `lakeFormationAdmins`<sup>Required</sup> <a name="lakeFormationAdmins" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationAdmins"></a>
+
+```typescript
+public readonly lakeFormationAdmins: string[];
+```
+
+- *Type:* string[]
+
+A list of strings representing the IAM role ARNs.
+
+---
+
+##### `lakeFormationTags`<sup>Required</sup> <a name="lakeFormationTags" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationTags"></a>
+
+```typescript
+public readonly lakeFormationTags: LFTagSharable[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]
+
+A list of Lake Formation tags that can be shared across accounts and principals.
+
+---
+
+##### `lakePermissions`<sup>Required</sup> <a name="lakePermissions" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakePermissions"></a>
+
+```typescript
+public readonly lakePermissions: LakePermission[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]
+
+A list of permission settings, specifying which Lake Formation permissions apply to which principals.
+
+---
+
+##### `crossAccountVersion`<sup>Optional</sup> <a name="crossAccountVersion" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion"></a>
+
+```typescript
+public readonly crossAccountVersion: number;
+```
+
+- *Type:* number
+
+OPTIONAL - Version for cross-account data sharing.
+
+Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html here}.
+
+---
+
+##### `permissionMode`<sup>Optional</sup> <a name="permissionMode" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissionMode"></a>
+
+```typescript
+public readonly permissionMode: string;
+```
+
+- *Type:* string
+
+OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation.
 
 ---
 
@@ -15422,6 +15517,192 @@ public readonly userName: string;
 
 ---
 
+### LakePermission <a name="LakePermission" id="@DataChefHQ/data-landing-zone.LakePermission"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.LakePermission.Initializer"></a>
+
+```typescript
+import { LakePermission } from '@DataChefHQ/data-landing-zone'
+
+const lakePermission: LakePermission = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.database">database</a></code> | <code>string[]</code> | Actions that can be performed on databases, using Lake Formation Tag Based Access Control. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.databaseWithGrant">databaseWithGrant</a></code> | <code>string[]</code> | Actions on databases with grant option, allowing grantees to further grant these permissions. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.table">table</a></code> | <code>string[]</code> | Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.tableWithGrant">tableWithGrant</a></code> | <code>string[]</code> | Actions on tables with grant option, allowing grantees to further grant these permissions. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.tags">tags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTag">LFTag</a>[]</code> | LF tags associated with the permissions, used to specify fine-grained access controls. |
+
+---
+
+##### `database`<sup>Required</sup> <a name="database" id="@DataChefHQ/data-landing-zone.LakePermission.property.database"></a>
+
+```typescript
+public readonly database: string[];
+```
+
+- *Type:* string[]
+
+Actions that can be performed on databases, using Lake Formation Tag Based Access Control.
+
+---
+
+##### `databaseWithGrant`<sup>Required</sup> <a name="databaseWithGrant" id="@DataChefHQ/data-landing-zone.LakePermission.property.databaseWithGrant"></a>
+
+```typescript
+public readonly databaseWithGrant: string[];
+```
+
+- *Type:* string[]
+
+Actions on databases with grant option, allowing grantees to further grant these permissions.
+
+---
+
+##### `principals`<sup>Required</sup> <a name="principals" id="@DataChefHQ/data-landing-zone.LakePermission.property.principals"></a>
+
+```typescript
+public readonly principals: string[];
+```
+
+- *Type:* string[]
+
+A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
+
+---
+
+##### `table`<sup>Required</sup> <a name="table" id="@DataChefHQ/data-landing-zone.LakePermission.property.table"></a>
+
+```typescript
+public readonly table: string[];
+```
+
+- *Type:* string[]
+
+Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control.
+
+---
+
+##### `tableWithGrant`<sup>Required</sup> <a name="tableWithGrant" id="@DataChefHQ/data-landing-zone.LakePermission.property.tableWithGrant"></a>
+
+```typescript
+public readonly tableWithGrant: string[];
+```
+
+- *Type:* string[]
+
+Actions on tables with grant option, allowing grantees to further grant these permissions.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.LakePermission.property.tags"></a>
+
+```typescript
+public readonly tags: LFTag[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LFTag">LFTag</a>[]
+
+LF tags associated with the permissions, used to specify fine-grained access controls.
+
+---
+
+### LFTag <a name="LFTag" id="@DataChefHQ/data-landing-zone.LFTag"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.LFTag.Initializer"></a>
+
+```typescript
+import { LFTag } from '@DataChefHQ/data-landing-zone'
+
+const lFTag: LFTag = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.LFTag.property.tagKey">tagKey</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.LFTag.property.tagValues">tagValues</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `tagKey`<sup>Required</sup> <a name="tagKey" id="@DataChefHQ/data-landing-zone.LFTag.property.tagKey"></a>
+
+```typescript
+public readonly tagKey: string;
+```
+
+- *Type:* string
+
+---
+
+##### `tagValues`<sup>Required</sup> <a name="tagValues" id="@DataChefHQ/data-landing-zone.LFTag.property.tagValues"></a>
+
+```typescript
+public readonly tagValues: string[];
+```
+
+- *Type:* string[]
+
+---
+
+### LFTagSharable <a name="LFTagSharable" id="@DataChefHQ/data-landing-zone.LFTagSharable"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.LFTagSharable.Initializer"></a>
+
+```typescript
+import { LFTagSharable } from '@DataChefHQ/data-landing-zone'
+
+const lFTagSharable: LFTagSharable = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.tagKey">tagKey</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.tagValues">tagValues</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.shareWith">shareWith</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps">SharedTagProps</a>[]</code> | OPTIONAL - A list of entities with which this LFTag can be shared, along with specific values of the tag and associated permissions. |
+
+---
+
+##### `tagKey`<sup>Required</sup> <a name="tagKey" id="@DataChefHQ/data-landing-zone.LFTagSharable.property.tagKey"></a>
+
+```typescript
+public readonly tagKey: string;
+```
+
+- *Type:* string
+
+---
+
+##### `tagValues`<sup>Required</sup> <a name="tagValues" id="@DataChefHQ/data-landing-zone.LFTagSharable.property.tagValues"></a>
+
+```typescript
+public readonly tagValues: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `shareWith`<sup>Optional</sup> <a name="shareWith" id="@DataChefHQ/data-landing-zone.LFTagSharable.property.shareWith"></a>
+
+```typescript
+public readonly shareWith: SharedTagProps[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.SharedTagProps">SharedTagProps</a>[]
+
+OPTIONAL - A list of entities with which this LFTag can be shared, along with specific values of the tag and associated permissions.
+
+---
+
 ### LogStacks <a name="LogStacks" id="@DataChefHQ/data-landing-zone.LogStacks"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.LogStacks.Initializer"></a>
@@ -16543,6 +16824,75 @@ public readonly slack: SlackChannel;
 
 ---
 
+### SharedTagProps <a name="SharedTagProps" id="@DataChefHQ/data-landing-zone.SharedTagProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.SharedTagProps.Initializer"></a>
+
+```typescript
+import { SharedTagProps } from '@DataChefHQ/data-landing-zone'
+
+const sharedTagProps: SharedTagProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.permissions">permissions</a></code> | <code>string[]</code> | A list of actions that can be performed on the tag. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.permissionsWithGrantOption">permissionsWithGrantOption</a></code> | <code>string[]</code> | A list of actions on the tag with grant option, allowing grantees to further grant these permissions. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.specificValues">specificValues</a></code> | <code>string[]</code> | A list of specific values of the tag that can be shared. |
+
+---
+
+##### `permissions`<sup>Required</sup> <a name="permissions" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.permissions"></a>
+
+```typescript
+public readonly permissions: string[];
+```
+
+- *Type:* string[]
+
+A list of actions that can be performed on the tag.
+
+---
+
+##### `permissionsWithGrantOption`<sup>Required</sup> <a name="permissionsWithGrantOption" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.permissionsWithGrantOption"></a>
+
+```typescript
+public readonly permissionsWithGrantOption: string[];
+```
+
+- *Type:* string[]
+
+A list of actions on the tag with grant option, allowing grantees to further grant these permissions.
+
+---
+
+##### `principals`<sup>Required</sup> <a name="principals" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.principals"></a>
+
+```typescript
+public readonly principals: string[];
+```
+
+- *Type:* string[]
+
+A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
+
+---
+
+##### `specificValues`<sup>Required</sup> <a name="specificValues" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.specificValues"></a>
+
+```typescript
+public readonly specificValues: string[];
+```
+
+- *Type:* string[]
+
+A list of specific values of the tag that can be shared.
+
+---
+
 ### SlackChannel <a name="SlackChannel" id="@DataChefHQ/data-landing-zone.SlackChannel"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.SlackChannel.Initializer"></a>
@@ -17553,6 +17903,82 @@ public readonly reportResource: ReportResource;
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.ReportResource">ReportResource</a>
 
 ---
+
+
+### DlzLakeFormation <a name="DlzLakeFormation" id="@DataChefHQ/data-landing-zone.DlzLakeFormation"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer"></a>
+
+```typescript
+import { DlzLakeFormation } from '@DataChefHQ/data-landing-zone'
+
+new DlzLakeFormation(scope: Construct, id: string, userProps: DlzLakeFormationProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer.parameter.userProps">userProps</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `userProps`<sup>Required</sup> <a name="userProps" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.Initializer.parameter.userProps"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormation.roleForAccount">roleForAccount</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormation.roleFromPermissionSet">roleFromPermissionSet</a></code> | *No description.* |
+
+---
+
+##### `roleForAccount` <a name="roleForAccount" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.roleForAccount"></a>
+
+```typescript
+import { DlzLakeFormation } from '@DataChefHQ/data-landing-zone'
+
+DlzLakeFormation.roleForAccount(_accountName: string)
+```
+
+###### `_accountName`<sup>Required</sup> <a name="_accountName" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.roleForAccount.parameter._accountName"></a>
+
+- *Type:* string
+
+---
+
+##### `roleFromPermissionSet` <a name="roleFromPermissionSet" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.roleFromPermissionSet"></a>
+
+```typescript
+import { DlzLakeFormation } from '@DataChefHQ/data-landing-zone'
+
+DlzLakeFormation.roleFromPermissionSet(_permissionSetName: string)
+```
+
+###### `_permissionSetName`<sup>Required</sup> <a name="_permissionSetName" id="@DataChefHQ/data-landing-zone.DlzLakeFormation.roleFromPermissionSet.parameter._permissionSetName"></a>
+
+- *Type:* string
+
+---
+
 
 
 ### DlzServiceControlPolicy <a name="DlzServiceControlPolicy" id="@DataChefHQ/data-landing-zone.DlzServiceControlPolicy"></a>
