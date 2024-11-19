@@ -55,4 +55,5 @@ tsconfig.json
 *.js.map
 *.d.ts
 *.DS_Store
+.vscode/
 !/.projenrc.ts
