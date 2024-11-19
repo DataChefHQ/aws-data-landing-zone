@@ -17,6 +17,7 @@ import {
   SlackChannel,
 } from '../src';
 import { cdkTemplateToJson } from './helpers.test';
+import { DatabaseAction, TableAction, TagAction } from '../src/constructs/dlz-lake-formation';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 
 const jestConsole = console;
@@ -256,25 +257,35 @@ const configBase: DataLandingZoneProps = {
 
             ],
             lakeFormation: {
-              lakeFormationAdmins: ['arn:aws:iam::123456789012:role/MyLakeFormationAdminRole'],
-              lakeFormationTags: [
+              admins: ['arn:aws:iam::123456789012:role/MyLakeFormationAdminRole'],
+              tags: [
                 {
                   tagKey: 'tag1',
                   tagValues: ['value1', 'value2'],
-                  shareWith: [
-                    {
-                      principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
-                      specificValues: ['value1'],
-                      // NOTE: @rehanvdm for external accounts, only `DESCRIBE` and `ASSOCIATE` are allowed.
-                      // We assume that the user knows this? Otherwise, if they try to add write permissions
-                      // on tags to external accounts, it's likely that it will crash (haven't tested).
-                      permissions: ['DESCRIBE', 'ASSOCIATE'],
-                      permissionsWithGrantOption: ['DESCRIBE'],
-                    },
-                  ],
+                  share: {
+                    withinAccount: [
+                      {
+                        tagActions: [TagAction.ALTER, TagAction.ASSOCIATE, TagAction.DESCRIBE, TagAction.DROP],
+                        tagActionsWithGrant: [TagAction.ALTER, TagAction.ASSOCIATE, TagAction.DESCRIBE, TagAction.DROP],
+                        principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
+                        specificValues: ['value1'],
+                      },
+                    ],
+                    withExternalAccount: [
+                      {
+                        tagActions: [TagAction.ASSOCIATE, TagAction.DESCRIBE],
+                        tagActionsWithGrant: [TagAction.ASSOCIATE, TagAction.DESCRIBE],
+                        principals: ['arn:aws:iam::123456789012:root'],
+                      },
+                    ],
+                  },
+                },
+                {
+                  tagKey: 'tag2',
+                  tagValues: ['value3', 'value4'],
                 },
               ],
-              lakePermissions: [
+              permissions: [
                 {
                   principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
                   tags: [
@@ -283,10 +294,21 @@ const configBase: DataLandingZoneProps = {
                       tagValues: ['value1', 'value2'],
                     },
                   ],
-                  database: ['DESCRIBE'],
-                  databaseWithGrant: ['DESCRIBE'],
-                  table: ['DESCRIBE', 'SELECT'],
-                  tableWithGrant: ['DESCRIBE', 'SELECT'],
+                  databaseActions: [DatabaseAction.DESCRIBE],
+                  databaseActionsWithGrant: [DatabaseAction.DESCRIBE],
+                  tableActions: [TableAction.DESCRIBE, TableAction.SELECT],
+                  tableActionsWithGrant: [TableAction.DESCRIBE, TableAction.SELECT],
+                },
+                {
+                  principals: ['arn:aws:iam::123456789012:role/FakeRole1'],
+                  tags: [
+                    {
+                      tagKey: 'tag2',
+                      tagValues: ['value3'],
+                    },
+                  ],
+                  databaseActions: [DatabaseAction.DESCRIBE],
+                  tableActions: [TableAction.DESCRIBE, TableAction.SELECT],
                 },
               ],
             },

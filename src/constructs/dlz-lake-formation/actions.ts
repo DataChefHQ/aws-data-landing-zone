@@ -1,11 +1,24 @@
-export type TagAction = 'DESCRIBE' | 'ALTER' | 'ASSOCIATE' | 'DROP';
-export type DatabaseAction = 'DESCRIBE' | 'ALTER' | 'DROP' | 'CREATE_TABLE';
-export type TableAction = 'DESCRIBE' | 'SELECT' | 'DELETE' | 'INSERT' | 'DROP' | 'ALTER';
+export enum DatabaseAction {
+  DESCRIBE = 'DESCRIBE',
+  ALTER = 'ALTER',
+  DROP = 'DROP',
+  CREATE_TABLE = 'CREATE_TABLE'
+}
 
-type ResourcePermissionsMap = {
-  TAG: TagAction;
-  DATABASE: DatabaseAction;
-  TABLE: TableAction;
-};
+export enum TableAction {
+  DESCRIBE = 'DESCRIBE',
+  SELECT = 'SELECT',
+  DELETE = 'DELETE',
+  INSERT = 'INSERT',
+  DROP = 'DROP',
+  ALTER = 'ALTER'
+}
 
-export type PermissionsForResource<T extends 'TAG' | 'DATABASE' | 'TABLE'> = ResourcePermissionsMap[T];
+export enum TagAction {
+  DESCRIBE = 'DESCRIBE',
+  ASSOCIATE = 'ASSOCIATE',
+  ALTER = 'ALTER',
+  DROP = 'DROP'
+}
+
+export type TagActionExternal = Exclude<TagAction, 'ALTER' | 'DROP'>

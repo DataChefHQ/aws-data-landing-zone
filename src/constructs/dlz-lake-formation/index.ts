@@ -2,65 +2,119 @@ import * as crypto from 'crypto';
 import { DefaultStackSynthesizer, Stack } from 'aws-cdk-lib';
 import * as lf from 'aws-cdk-lib/aws-lakeformation';
 import { Construct } from 'constructs';
-import { DatabaseAction, PermissionsForResource, TableAction, TagAction } from './actions';
+import { DatabaseAction, TableAction, TagAction, TagActionExternal } from './actions';
 
-export type PermissionMode = 'LakeFormation' | 'Hybrid';
+export * from './actions';
 
 export interface LFTag {
   readonly tagKey: string;
   readonly tagValues: string[];
 }
 
-export interface SharedTagProps {
-  /** A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. */
+export interface BaseSharedTagProps {
+  /**
+   * A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
+   */
   readonly principals: string[];
-  /** A list of specific values of the tag that can be shared. */
-  readonly specificValues: string[];
-  /** A list of actions that can be performed on the tag. */
-  readonly permissions: TagAction[];
-  /** A list of actions on the tag with grant option, allowing grantees to further grant these permissions. */
-  readonly permissionsWithGrantOption: TagAction[];
+  /**
+   * OPTIONAL - A list of specific values of the tag that can be shared. All possible values if omitted.
+   */
+  readonly specificValues?: string[];
+}
+
+export interface SharedInternal extends BaseSharedTagProps {
+  /**
+   * A list of actions that can be performed on the tag.
+   */
+  readonly tagActions: TagAction[];
+  /**
+   * A list of actions on the tag with grant option, allowing grantees to further grant these permissions.
+   */
+  readonly tagActionsWithGrant: TagAction[];
+}
+
+export interface SharedExternal extends BaseSharedTagProps {
+  /**
+   * A list of actions that can be performed on the tag.
+   */
+  readonly tagActions: TagActionExternal[];
+  /**
+   * A list of actions on the tag with grant option, allowing grantees to further grant these permissions.
+   */
+  readonly tagActionsWithGrant: TagActionExternal[];
+}
+
+export interface ShareProps {
+  /**
+   * Configurations for sharing LF-Tags with principals within the same AWS account.
+   */
+  readonly withinAccount: SharedInternal[];
+  /**
+   * Configurations for sharing LF-Tags with external AWS accounts.
+   */
+  readonly withExternalAccount: SharedExternal[];
 }
 
 export interface LFTagSharable extends LFTag {
   /**
-   * OPTIONAL - A list of entities with which this LFTag can be shared,
-   * along with specific values of the tag and associated permissions.
+   * OPTIONAL - Configuration detailing how the tag can be shared with specified principals.
    */
-  readonly shareWith?: SharedTagProps[];
+  readonly share?: ShareProps;
 }
 
 export interface LakePermission {
-  /** A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. */
+  /**
+   * A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
+   */
   readonly principals: string[];
-  /** LF tags associated with the permissions, used to specify fine-grained access controls. */
+  /**
+   * LF tags associated with the permissions, used to specify fine-grained access controls.
+   */
   readonly tags: LFTag[];
-  /** Actions that can be performed on databases, using Lake Formation Tag Based Access Control. */
-  readonly database: DatabaseAction[];
-  /** Actions on databases with grant option, allowing grantees to further grant these permissions. */
-  readonly databaseWithGrant: DatabaseAction[];
-  /** Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control. */
-  readonly table: TableAction[];
-  /** Actions on tables with grant option, allowing grantees to further grant these permissions. */
-  readonly tableWithGrant: TableAction[];
+  /**
+   * Actions that can be performed on databases, using Lake Formation Tag Based Access Control.
+   */
+  readonly databaseActions: DatabaseAction[];
+  /**
+   * OPTIONAL - Actions on databases with grant option, allowing grantees to further grant these permissions.
+   */
+  readonly databaseActionsWithGrant?: DatabaseAction[];
+  /**
+   * OPTIONAL - Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control.
+   */
+  readonly tableActions?: TableAction[];
+  /**
+   * OPTIONAL - Actions on tables with grant option, allowing grantees to further grant these permissions.
+   */
+  readonly tableActionsWithGrant?: TableAction[];
 }
 
 export interface DlzLakeFormationProps {
-  /** A list of strings representing the IAM role ARNs. */
-  readonly lakeFormationAdmins: string[];
-  /** OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation. */
-  readonly permissionMode?: PermissionMode;
-  /** OPTIONAL - Version for cross-account data sharing. Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html | here}. */
-  readonly crossAccountVersion?: 1 | 2 | 3;
-  /** A list of Lake Formation tags that can be shared across accounts and principals. */
-  readonly lakeFormationTags: LFTagSharable[];
-  /** A list of permission settings, specifying which Lake Formation permissions apply to which principals. */
-  readonly lakePermissions: LakePermission[];
+  /**
+   * A list of strings representing the IAM role ARNs.
+   */
+  readonly admins: string[];
+  /**
+   * OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation.
+   */
+  readonly hybridMode?: boolean;
+  /**
+   * OPTIONAL - Version for cross-account data sharing. Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html | here}.
+   */
+  readonly crossAccountVersion?: 1 | 2 | 3 | 4;
+  /**
+   * A list of Lake Formation tags that can be shared across accounts and principals.
+   */
+  readonly tags: LFTagSharable[];
+  /**
+   * A list of permission settings, specifying which Lake Formation permissions apply to which principals.
+   */
+  readonly permissions: LakePermission[];
 }
 
 const DEFAULTS: Partial<DlzLakeFormationProps> = {
-  permissionMode: 'LakeFormation',
-  crossAccountVersion: 3,
+  hybridMode: false,
+  crossAccountVersion: 4,
 };
 
 export class DlzLakeFormation {
@@ -72,50 +126,50 @@ export class DlzLakeFormation {
 
   private account: string;
   private props: DlzLakeFormationProps;
+  private lfTags: Record<string, lf.CfnTag> = {};
 
   constructor(private scope: Construct, private id: string, userProps: DlzLakeFormationProps) {
     this.account = Stack.of(scope).account;
     this.props = { ...DEFAULTS, ...userProps };
 
     this.setUpLFSettings();
-    this.props.lakeFormationTags.forEach((tag) => {
+
+    for (const tag of this.props.tags) {
       this.createTag(tag);
       this.shareTag(tag);
-    });
-    this.props.lakePermissions.forEach((permission) => {
-      const { principals, tags, database, databaseWithGrant, table, tableWithGrant } = permission;
-      principals.forEach((principal) => {
-        this.grantPermission(principal, tags, 'DATABASE', database, databaseWithGrant);
-        this.grantPermission(principal, tags, 'TABLE', table, tableWithGrant);
-      });
-    });
+    }
+
+    for (const permission of this.props.permissions) {
+      const {
+        principals,
+        tags,
+        databaseActions,
+        databaseActionsWithGrant = [],
+        tableActions = [],
+        tableActionsWithGrant = [],
+      } = permission;
+      for (const principal of principals) {
+        this.grantPermissionOnDatabase(principal, tags, databaseActions, databaseActionsWithGrant);
+        this.grantPermissionOnTable(principal, tags, tableActions, tableActionsWithGrant);
+      }
+    }
   }
 
   private setUpLFSettings() {
-    const { lakeFormationAdmins, permissionMode, crossAccountVersion } = this.props;
+    const { admins, hybridMode, crossAccountVersion } = this.props;
     const synthesizer = Stack.of(this.scope).synthesizer as DefaultStackSynthesizer;
-    const admins = [
-      ...lakeFormationAdmins.map((adminRole) => ({
-        dataLakePrincipalIdentifier: adminRole,
-      })),
-      {
-        dataLakePrincipalIdentifier: synthesizer.cloudFormationExecutionRoleArn.replace('${AWS::Partition}', 'aws'),
-      },
-    ];
-    const defaultPermissions =
-      permissionMode === 'LakeFormation'
-        ? []
-        : [
-          {
-            principal: {
-              dataLakePrincipalIdentifier: 'IAM_ALLOWED_PRINCIPALS',
-            },
-            permissions: ['ALL'],
-          },
-        ];
+    const cfnAdmin = synthesizer.cloudFormationExecutionRoleArn.replace('${AWS::Partition}', 'aws');
+    const lfAdmins = [{ dataLakePrincipalIdentifier: cfnAdmin }];
+    for (const admin of admins) {
+      lfAdmins.push({ dataLakePrincipalIdentifier: admin });
+    }
+
+    const defaultPermissions = hybridMode
+      ? [{ principal: { dataLakePrincipalIdentifier: 'IAM_ALLOWED_PRINCIPALS' }, permissions: ['ALL'] }]
+      : [];
 
     new lf.CfnDataLakeSettings(this.scope, `${this.id}-data-lake-settings`, {
-      admins: admins,
+      admins: lfAdmins,
       createDatabaseDefaultPermissions: defaultPermissions,
       createTableDefaultPermissions: defaultPermissions,
       parameters: { CrossAccountVersion: crossAccountVersion },
@@ -124,56 +178,72 @@ export class DlzLakeFormation {
 
   private createTag(tag: LFTagSharable) {
     const { tagKey, tagValues } = tag;
-    new lf.CfnTag(
+    const lfTag = new lf.CfnTag(
       this.scope,
       `${this.id}-lftag-${tagKey}`,
       { tagKey, tagValues, catalogId: this.account },
     );
+    this.lfTags[tagKey] = lfTag;
   }
 
   private shareTag(tag: LFTagSharable) {
-    const { shareWith } = tag;
-    if (!shareWith) return;
-    shareWith.forEach((share) => {
-      const { principals, specificValues, permissions, permissionsWithGrantOption } = share;
-      principals.forEach((principal) => {
-        const sharedTag = { tagKey: tag.tagKey, tagValues: specificValues };
-        this.grantPermission(principal, sharedTag, 'TAG', permissions, permissionsWithGrantOption);
-      });
-    });
+    const { tagKey, tagValues, share } = tag;
+    if (!share) return;
+
+    const { withinAccount, withExternalAccount } = share;
+    const shares = [...withinAccount, ...withExternalAccount];
+
+    for (const shareOptions of shares) {
+      const { principals, specificValues, tagActions, tagActionsWithGrant } = shareOptions;
+      for (const principal of principals) {
+        const sharedTag = { tagKey, tagValues: specificValues || tagValues };
+        this.grantPermissionOnTag(principal, sharedTag, tagActions, tagActionsWithGrant);
+      }
+    }
   }
 
-  // #region grantPermissionOverloads
-  private grantPermission(
+  private grantPermissionOnTag(
     principalIdentifier: string,
     tag: LFTag,
-    resourceType: 'TAG',
-    permissions: PermissionsForResource<'TAG'>[],
-    grantablePermissions: PermissionsForResource<'TAG'>[]
-  ): void;
-  private grantPermission(
+    permissions: TagAction[],
+    grantablePermissions: TagAction[],
+  ) {
+    this._grantPermission(principalIdentifier, tag, 'TAG', permissions, grantablePermissions);
+  }
+
+  private grantPermissionOnDatabase(
     principalIdentifier: string,
     tags: LFTag[],
-    resourceType: 'DATABASE' | 'TABLE',
-    permissions: PermissionsForResource<'DATABASE' | 'TABLE'>[],
-    grantablePermissions: PermissionsForResource<'DATABASE' | 'TABLE'>[]
-  ): void;
-  // #endregion
-  private grantPermission(
+    permissions: DatabaseAction[],
+    grantablePermissions: DatabaseAction[],
+  ) {
+    this._grantPermission(principalIdentifier, tags, 'DATABASE', permissions, grantablePermissions);
+  }
+
+  private grantPermissionOnTable(
+    principalIdentifier: string,
+    tags: LFTag[],
+    permissions: TableAction[],
+    grantablePermissions: TableAction[],
+  ) {
+    this._grantPermission(principalIdentifier, tags, 'TABLE', permissions, grantablePermissions);
+  }
+
+  private _grantPermission(
     principalIdentifier: string,
     tagOrTags: LFTag | LFTag[],
     resourceType: 'TAG' | 'DATABASE' | 'TABLE',
-    permissions: PermissionsForResource<typeof resourceType>[],
-    grantablePermissions: PermissionsForResource<typeof resourceType>[],
+    permissions: (DatabaseAction | TableAction | TagAction)[],
+    grantablePermissions: (DatabaseAction | TableAction | TagAction)[],
   ) {
     const tags = Array.isArray(tagOrTags) ? tagOrTags : [tagOrTags];
-    const tagsHash = this._hashTags(tags);
+    const tagsHash = this._tagsHashValue(tags);
     const baseResourceProps = { catalogId: this.account };
     const resource = resourceType === 'TAG'
       ? { lfTag: { ...baseResourceProps, tagKey: tags[0].tagKey, tagValues: tags[0].tagValues } }
       : { lfTagPolicy: { ...baseResourceProps, resourceType: resourceType, expression: tags } };
 
-    new lf.CfnPrincipalPermissions(
+    const permission = new lf.CfnPrincipalPermissions(
       this.scope,
       `${this.id}-${principalIdentifier}-${resourceType.toLowerCase()}-grant-${tagsHash}`,
       {
@@ -184,9 +254,14 @@ export class DlzLakeFormation {
         resource: resource,
       },
     );
+
+    for (const tag of tags) {
+      const { tagKey } = tag;
+      permission.node.addDependency(this.lfTags[tagKey]);
+    }
   }
 
-  private _hashTags(tags: LFTag[]) {
+  private _tagsHashValue(tags: LFTag[]) {
     const serializedTags = JSON.stringify(
       tags
         .map((tag) => ({ key: tag.tagKey, values: tag.tagValues.sort() }))

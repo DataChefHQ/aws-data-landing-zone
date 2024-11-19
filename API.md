@@ -12974,6 +12974,51 @@ public readonly regional: AuditRegionalStack[];
 
 ---
 
+### BaseSharedTagProps <a name="BaseSharedTagProps" id="@DataChefHQ/data-landing-zone.BaseSharedTagProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.BaseSharedTagProps.Initializer"></a>
+
+```typescript
+import { BaseSharedTagProps } from '@DataChefHQ/data-landing-zone'
+
+const baseSharedTagProps: BaseSharedTagProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.BaseSharedTagProps.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.BaseSharedTagProps.property.specificValues">specificValues</a></code> | <code>string[]</code> | OPTIONAL - A list of specific values of the tag that can be shared. |
+
+---
+
+##### `principals`<sup>Required</sup> <a name="principals" id="@DataChefHQ/data-landing-zone.BaseSharedTagProps.property.principals"></a>
+
+```typescript
+public readonly principals: string[];
+```
+
+- *Type:* string[]
+
+A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
+
+---
+
+##### `specificValues`<sup>Optional</sup> <a name="specificValues" id="@DataChefHQ/data-landing-zone.BaseSharedTagProps.property.specificValues"></a>
+
+```typescript
+public readonly specificValues: string[];
+```
+
+- *Type:* string[]
+
+OPTIONAL - A list of specific values of the tag that can be shared.
+
+All possible values if omitted.
+
+---
+
 ### BastionHost <a name="BastionHost" id="@DataChefHQ/data-landing-zone.BastionHost"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.BastionHost.Initializer"></a>
@@ -13968,18 +14013,18 @@ const dlzLakeFormationProps: DlzLakeFormationProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationAdmins">lakeFormationAdmins</a></code> | <code>string[]</code> | A list of strings representing the IAM role ARNs. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationTags">lakeFormationTags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]</code> | A list of Lake Formation tags that can be shared across accounts and principals. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakePermissions">lakePermissions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]</code> | A list of permission settings, specifying which Lake Formation permissions apply to which principals. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.admins">admins</a></code> | <code>string[]</code> | A list of strings representing the IAM role ARNs. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissions">permissions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]</code> | A list of permission settings, specifying which Lake Formation permissions apply to which principals. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.tags">tags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]</code> | A list of Lake Formation tags that can be shared across accounts and principals. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion">crossAccountVersion</a></code> | <code>number</code> | OPTIONAL - Version for cross-account data sharing. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissionMode">permissionMode</a></code> | <code>string</code> | OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.hybridMode">hybridMode</a></code> | <code>boolean</code> | OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation. |
 
 ---
 
-##### `lakeFormationAdmins`<sup>Required</sup> <a name="lakeFormationAdmins" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationAdmins"></a>
+##### `admins`<sup>Required</sup> <a name="admins" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.admins"></a>
 
 ```typescript
-public readonly lakeFormationAdmins: string[];
+public readonly admins: string[];
 ```
 
 - *Type:* string[]
@@ -13988,27 +14033,27 @@ A list of strings representing the IAM role ARNs.
 
 ---
 
-##### `lakeFormationTags`<sup>Required</sup> <a name="lakeFormationTags" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakeFormationTags"></a>
+##### `permissions`<sup>Required</sup> <a name="permissions" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissions"></a>
 
 ```typescript
-public readonly lakeFormationTags: LFTagSharable[];
-```
-
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]
-
-A list of Lake Formation tags that can be shared across accounts and principals.
-
----
-
-##### `lakePermissions`<sup>Required</sup> <a name="lakePermissions" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.lakePermissions"></a>
-
-```typescript
-public readonly lakePermissions: LakePermission[];
+public readonly permissions: LakePermission[];
 ```
 
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]
 
 A list of permission settings, specifying which Lake Formation permissions apply to which principals.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.tags"></a>
+
+```typescript
+public readonly tags: LFTagSharable[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]
+
+A list of Lake Formation tags that can be shared across accounts and principals.
 
 ---
 
@@ -14026,13 +14071,13 @@ Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-acco
 
 ---
 
-##### `permissionMode`<sup>Optional</sup> <a name="permissionMode" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissionMode"></a>
+##### `hybridMode`<sup>Optional</sup> <a name="hybridMode" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.hybridMode"></a>
 
 ```typescript
-public readonly permissionMode: string;
+public readonly hybridMode: boolean;
 ```
 
-- *Type:* string
+- *Type:* boolean
 
 OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation.
 
@@ -15531,36 +15576,24 @@ const lakePermission: LakePermission = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.database">database</a></code> | <code>string[]</code> | Actions that can be performed on databases, using Lake Formation Tag Based Access Control. |
-| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.databaseWithGrant">databaseWithGrant</a></code> | <code>string[]</code> | Actions on databases with grant option, allowing grantees to further grant these permissions. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.databaseActions">databaseActions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DatabaseAction">DatabaseAction</a>[]</code> | Actions that can be performed on databases, using Lake Formation Tag Based Access Control. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
-| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.table">table</a></code> | <code>string[]</code> | Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control. |
-| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.tableWithGrant">tableWithGrant</a></code> | <code>string[]</code> | Actions on tables with grant option, allowing grantees to further grant these permissions. |
 | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.tags">tags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTag">LFTag</a>[]</code> | LF tags associated with the permissions, used to specify fine-grained access controls. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.databaseActionsWithGrant">databaseActionsWithGrant</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DatabaseAction">DatabaseAction</a>[]</code> | OPTIONAL - Actions on databases with grant option, allowing grantees to further grant these permissions. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.tableActions">tableActions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.TableAction">TableAction</a>[]</code> | OPTIONAL - Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LakePermission.property.tableActionsWithGrant">tableActionsWithGrant</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.TableAction">TableAction</a>[]</code> | OPTIONAL - Actions on tables with grant option, allowing grantees to further grant these permissions. |
 
 ---
 
-##### `database`<sup>Required</sup> <a name="database" id="@DataChefHQ/data-landing-zone.LakePermission.property.database"></a>
+##### `databaseActions`<sup>Required</sup> <a name="databaseActions" id="@DataChefHQ/data-landing-zone.LakePermission.property.databaseActions"></a>
 
 ```typescript
-public readonly database: string[];
+public readonly databaseActions: DatabaseAction[];
 ```
 
-- *Type:* string[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DatabaseAction">DatabaseAction</a>[]
 
 Actions that can be performed on databases, using Lake Formation Tag Based Access Control.
-
----
-
-##### `databaseWithGrant`<sup>Required</sup> <a name="databaseWithGrant" id="@DataChefHQ/data-landing-zone.LakePermission.property.databaseWithGrant"></a>
-
-```typescript
-public readonly databaseWithGrant: string[];
-```
-
-- *Type:* string[]
-
-Actions on databases with grant option, allowing grantees to further grant these permissions.
 
 ---
 
@@ -15576,30 +15609,6 @@ A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the
 
 ---
 
-##### `table`<sup>Required</sup> <a name="table" id="@DataChefHQ/data-landing-zone.LakePermission.property.table"></a>
-
-```typescript
-public readonly table: string[];
-```
-
-- *Type:* string[]
-
-Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control.
-
----
-
-##### `tableWithGrant`<sup>Required</sup> <a name="tableWithGrant" id="@DataChefHQ/data-landing-zone.LakePermission.property.tableWithGrant"></a>
-
-```typescript
-public readonly tableWithGrant: string[];
-```
-
-- *Type:* string[]
-
-Actions on tables with grant option, allowing grantees to further grant these permissions.
-
----
-
 ##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.LakePermission.property.tags"></a>
 
 ```typescript
@@ -15609,6 +15618,42 @@ public readonly tags: LFTag[];
 - *Type:* <a href="#@DataChefHQ/data-landing-zone.LFTag">LFTag</a>[]
 
 LF tags associated with the permissions, used to specify fine-grained access controls.
+
+---
+
+##### `databaseActionsWithGrant`<sup>Optional</sup> <a name="databaseActionsWithGrant" id="@DataChefHQ/data-landing-zone.LakePermission.property.databaseActionsWithGrant"></a>
+
+```typescript
+public readonly databaseActionsWithGrant: DatabaseAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DatabaseAction">DatabaseAction</a>[]
+
+OPTIONAL - Actions on databases with grant option, allowing grantees to further grant these permissions.
+
+---
+
+##### `tableActions`<sup>Optional</sup> <a name="tableActions" id="@DataChefHQ/data-landing-zone.LakePermission.property.tableActions"></a>
+
+```typescript
+public readonly tableActions: TableAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.TableAction">TableAction</a>[]
+
+OPTIONAL - Actions that can be performed on tables, using Lake Formation Lake Formation Tag Based Access Control.
+
+---
+
+##### `tableActionsWithGrant`<sup>Optional</sup> <a name="tableActionsWithGrant" id="@DataChefHQ/data-landing-zone.LakePermission.property.tableActionsWithGrant"></a>
+
+```typescript
+public readonly tableActionsWithGrant: TableAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.TableAction">TableAction</a>[]
+
+OPTIONAL - Actions on tables with grant option, allowing grantees to further grant these permissions.
 
 ---
 
@@ -15667,7 +15712,7 @@ const lFTagSharable: LFTagSharable = { ... }
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.tagKey">tagKey</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.tagValues">tagValues</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.shareWith">shareWith</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps">SharedTagProps</a>[]</code> | OPTIONAL - A list of entities with which this LFTag can be shared, along with specific values of the tag and associated permissions. |
+| <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable.property.share">share</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.ShareProps">ShareProps</a></code> | OPTIONAL - Configuration detailing how the tag can be shared with specified principals. |
 
 ---
 
@@ -15691,15 +15736,15 @@ public readonly tagValues: string[];
 
 ---
 
-##### `shareWith`<sup>Optional</sup> <a name="shareWith" id="@DataChefHQ/data-landing-zone.LFTagSharable.property.shareWith"></a>
+##### `share`<sup>Optional</sup> <a name="share" id="@DataChefHQ/data-landing-zone.LFTagSharable.property.share"></a>
 
 ```typescript
-public readonly shareWith: SharedTagProps[];
+public readonly share: ShareProps;
 ```
 
-- *Type:* <a href="#@DataChefHQ/data-landing-zone.SharedTagProps">SharedTagProps</a>[]
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.ShareProps">ShareProps</a>
 
-OPTIONAL - A list of entities with which this LFTag can be shared, along with specific values of the tag and associated permissions.
+OPTIONAL - Configuration detailing how the tag can be shared with specified principals.
 
 ---
 
@@ -16824,52 +16869,28 @@ public readonly slack: SlackChannel;
 
 ---
 
-### SharedTagProps <a name="SharedTagProps" id="@DataChefHQ/data-landing-zone.SharedTagProps"></a>
+### SharedExternal <a name="SharedExternal" id="@DataChefHQ/data-landing-zone.SharedExternal"></a>
 
-#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.SharedTagProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.SharedExternal.Initializer"></a>
 
 ```typescript
-import { SharedTagProps } from '@DataChefHQ/data-landing-zone'
+import { SharedExternal } from '@DataChefHQ/data-landing-zone'
 
-const sharedTagProps: SharedTagProps = { ... }
+const sharedExternal: SharedExternal = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.permissions">permissions</a></code> | <code>string[]</code> | A list of actions that can be performed on the tag. |
-| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.permissionsWithGrantOption">permissionsWithGrantOption</a></code> | <code>string[]</code> | A list of actions on the tag with grant option, allowing grantees to further grant these permissions. |
-| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
-| <code><a href="#@DataChefHQ/data-landing-zone.SharedTagProps.property.specificValues">specificValues</a></code> | <code>string[]</code> | A list of specific values of the tag that can be shared. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedExternal.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedExternal.property.specificValues">specificValues</a></code> | <code>string[]</code> | OPTIONAL - A list of specific values of the tag that can be shared. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedExternal.property.tagActions">tagActions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]</code> | A list of actions that can be performed on the tag. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedExternal.property.tagActionsWithGrant">tagActionsWithGrant</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]</code> | A list of actions on the tag with grant option, allowing grantees to further grant these permissions. |
 
 ---
 
-##### `permissions`<sup>Required</sup> <a name="permissions" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.permissions"></a>
-
-```typescript
-public readonly permissions: string[];
-```
-
-- *Type:* string[]
-
-A list of actions that can be performed on the tag.
-
----
-
-##### `permissionsWithGrantOption`<sup>Required</sup> <a name="permissionsWithGrantOption" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.permissionsWithGrantOption"></a>
-
-```typescript
-public readonly permissionsWithGrantOption: string[];
-```
-
-- *Type:* string[]
-
-A list of actions on the tag with grant option, allowing grantees to further grant these permissions.
-
----
-
-##### `principals`<sup>Required</sup> <a name="principals" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.principals"></a>
+##### `principals`<sup>Required</sup> <a name="principals" id="@DataChefHQ/data-landing-zone.SharedExternal.property.principals"></a>
 
 ```typescript
 public readonly principals: string[];
@@ -16881,7 +16902,7 @@ A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the
 
 ---
 
-##### `specificValues`<sup>Required</sup> <a name="specificValues" id="@DataChefHQ/data-landing-zone.SharedTagProps.property.specificValues"></a>
+##### `specificValues`<sup>Optional</sup> <a name="specificValues" id="@DataChefHQ/data-landing-zone.SharedExternal.property.specificValues"></a>
 
 ```typescript
 public readonly specificValues: string[];
@@ -16889,7 +16910,147 @@ public readonly specificValues: string[];
 
 - *Type:* string[]
 
-A list of specific values of the tag that can be shared.
+OPTIONAL - A list of specific values of the tag that can be shared.
+
+All possible values if omitted.
+
+---
+
+##### `tagActions`<sup>Required</sup> <a name="tagActions" id="@DataChefHQ/data-landing-zone.SharedExternal.property.tagActions"></a>
+
+```typescript
+public readonly tagActions: TagAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]
+
+A list of actions that can be performed on the tag.
+
+---
+
+##### `tagActionsWithGrant`<sup>Required</sup> <a name="tagActionsWithGrant" id="@DataChefHQ/data-landing-zone.SharedExternal.property.tagActionsWithGrant"></a>
+
+```typescript
+public readonly tagActionsWithGrant: TagAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]
+
+A list of actions on the tag with grant option, allowing grantees to further grant these permissions.
+
+---
+
+### SharedInternal <a name="SharedInternal" id="@DataChefHQ/data-landing-zone.SharedInternal"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.SharedInternal.Initializer"></a>
+
+```typescript
+import { SharedInternal } from '@DataChefHQ/data-landing-zone'
+
+const sharedInternal: SharedInternal = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedInternal.property.principals">principals</a></code> | <code>string[]</code> | A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedInternal.property.specificValues">specificValues</a></code> | <code>string[]</code> | OPTIONAL - A list of specific values of the tag that can be shared. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedInternal.property.tagActions">tagActions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]</code> | A list of actions that can be performed on the tag. |
+| <code><a href="#@DataChefHQ/data-landing-zone.SharedInternal.property.tagActionsWithGrant">tagActionsWithGrant</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]</code> | A list of actions on the tag with grant option, allowing grantees to further grant these permissions. |
+
+---
+
+##### `principals`<sup>Required</sup> <a name="principals" id="@DataChefHQ/data-landing-zone.SharedInternal.property.principals"></a>
+
+```typescript
+public readonly principals: string[];
+```
+
+- *Type:* string[]
+
+A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
+
+---
+
+##### `specificValues`<sup>Optional</sup> <a name="specificValues" id="@DataChefHQ/data-landing-zone.SharedInternal.property.specificValues"></a>
+
+```typescript
+public readonly specificValues: string[];
+```
+
+- *Type:* string[]
+
+OPTIONAL - A list of specific values of the tag that can be shared.
+
+All possible values if omitted.
+
+---
+
+##### `tagActions`<sup>Required</sup> <a name="tagActions" id="@DataChefHQ/data-landing-zone.SharedInternal.property.tagActions"></a>
+
+```typescript
+public readonly tagActions: TagAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]
+
+A list of actions that can be performed on the tag.
+
+---
+
+##### `tagActionsWithGrant`<sup>Required</sup> <a name="tagActionsWithGrant" id="@DataChefHQ/data-landing-zone.SharedInternal.property.tagActionsWithGrant"></a>
+
+```typescript
+public readonly tagActionsWithGrant: TagAction[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.TagAction">TagAction</a>[]
+
+A list of actions on the tag with grant option, allowing grantees to further grant these permissions.
+
+---
+
+### ShareProps <a name="ShareProps" id="@DataChefHQ/data-landing-zone.ShareProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.ShareProps.Initializer"></a>
+
+```typescript
+import { ShareProps } from '@DataChefHQ/data-landing-zone'
+
+const shareProps: ShareProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.ShareProps.property.withExternalAccount">withExternalAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SharedExternal">SharedExternal</a>[]</code> | Configurations for sharing LF-Tags with external AWS accounts. |
+| <code><a href="#@DataChefHQ/data-landing-zone.ShareProps.property.withinAccount">withinAccount</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.SharedInternal">SharedInternal</a>[]</code> | Configurations for sharing LF-Tags with principals within the same AWS account. |
+
+---
+
+##### `withExternalAccount`<sup>Required</sup> <a name="withExternalAccount" id="@DataChefHQ/data-landing-zone.ShareProps.property.withExternalAccount"></a>
+
+```typescript
+public readonly withExternalAccount: SharedExternal[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.SharedExternal">SharedExternal</a>[]
+
+Configurations for sharing LF-Tags with external AWS accounts.
+
+---
+
+##### `withinAccount`<sup>Required</sup> <a name="withinAccount" id="@DataChefHQ/data-landing-zone.ShareProps.property.withinAccount"></a>
+
+```typescript
+public readonly withinAccount: SharedInternal[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.SharedInternal">SharedInternal</a>[]
+
+Configurations for sharing LF-Tags with principals within the same AWS account.
 
 ---
 
@@ -18922,6 +19083,39 @@ public readonly reportResource: ReportResource;
 
 ## Enums <a name="Enums" id="Enums"></a>
 
+### DatabaseAction <a name="DatabaseAction" id="@DataChefHQ/data-landing-zone.DatabaseAction"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DatabaseAction.DESCRIBE">DESCRIBE</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DatabaseAction.ALTER">ALTER</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DatabaseAction.DROP">DROP</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DatabaseAction.CREATE_TABLE">CREATE_TABLE</a></code> | *No description.* |
+
+---
+
+##### `DESCRIBE` <a name="DESCRIBE" id="@DataChefHQ/data-landing-zone.DatabaseAction.DESCRIBE"></a>
+
+---
+
+
+##### `ALTER` <a name="ALTER" id="@DataChefHQ/data-landing-zone.DatabaseAction.ALTER"></a>
+
+---
+
+
+##### `DROP` <a name="DROP" id="@DataChefHQ/data-landing-zone.DatabaseAction.DROP"></a>
+
+---
+
+
+##### `CREATE_TABLE` <a name="CREATE_TABLE" id="@DataChefHQ/data-landing-zone.DatabaseAction.CREATE_TABLE"></a>
+
+---
+
+
 ### DlzAccountType <a name="DlzAccountType" id="@DataChefHQ/data-landing-zone.DlzAccountType"></a>
 
 #### Members <a name="Members" id="Members"></a>
@@ -19487,6 +19681,84 @@ https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Workflow.html.
 
 
 ##### `RESOLVED` <a name="RESOLVED" id="@DataChefHQ/data-landing-zone.SecurityHubNotificationSWorkflowStatus.RESOLVED"></a>
+
+---
+
+
+### TableAction <a name="TableAction" id="@DataChefHQ/data-landing-zone.TableAction"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.TableAction.DESCRIBE">DESCRIBE</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TableAction.SELECT">SELECT</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TableAction.DELETE">DELETE</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TableAction.INSERT">INSERT</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TableAction.DROP">DROP</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TableAction.ALTER">ALTER</a></code> | *No description.* |
+
+---
+
+##### `DESCRIBE` <a name="DESCRIBE" id="@DataChefHQ/data-landing-zone.TableAction.DESCRIBE"></a>
+
+---
+
+
+##### `SELECT` <a name="SELECT" id="@DataChefHQ/data-landing-zone.TableAction.SELECT"></a>
+
+---
+
+
+##### `DELETE` <a name="DELETE" id="@DataChefHQ/data-landing-zone.TableAction.DELETE"></a>
+
+---
+
+
+##### `INSERT` <a name="INSERT" id="@DataChefHQ/data-landing-zone.TableAction.INSERT"></a>
+
+---
+
+
+##### `DROP` <a name="DROP" id="@DataChefHQ/data-landing-zone.TableAction.DROP"></a>
+
+---
+
+
+##### `ALTER` <a name="ALTER" id="@DataChefHQ/data-landing-zone.TableAction.ALTER"></a>
+
+---
+
+
+### TagAction <a name="TagAction" id="@DataChefHQ/data-landing-zone.TagAction"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.TagAction.DESCRIBE">DESCRIBE</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TagAction.ASSOCIATE">ASSOCIATE</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TagAction.ALTER">ALTER</a></code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.TagAction.DROP">DROP</a></code> | *No description.* |
+
+---
+
+##### `DESCRIBE` <a name="DESCRIBE" id="@DataChefHQ/data-landing-zone.TagAction.DESCRIBE"></a>
+
+---
+
+
+##### `ASSOCIATE` <a name="ASSOCIATE" id="@DataChefHQ/data-landing-zone.TagAction.ASSOCIATE"></a>
+
+---
+
+
+##### `ALTER` <a name="ALTER" id="@DataChefHQ/data-landing-zone.TagAction.ALTER"></a>
+
+---
+
+
+##### `DROP` <a name="DROP" id="@DataChefHQ/data-landing-zone.TagAction.DROP"></a>
 
 ---
 
