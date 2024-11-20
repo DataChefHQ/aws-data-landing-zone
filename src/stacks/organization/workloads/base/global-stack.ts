@@ -23,6 +23,7 @@ export class WorkloadGlobalStack extends DlzStack {
     shared.createVpcs();
     shared.createIamPermissionsBoundaryManagedPolicy();
     shared.createBastions();
+    shared.createLakeFormation();
 
     this.ssmAssumeCrossAccountRole();
     this.defaultNotifications();

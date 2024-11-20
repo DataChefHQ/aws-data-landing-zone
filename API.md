@@ -1946,6 +1946,215 @@ public readonly accountName: string;
 ---
 
 
+### DlzLakeFormationAccessControl <a name="DlzLakeFormationAccessControl" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer"></a>
+
+```typescript
+import { DlzLakeFormationAccessControl } from '@DataChefHQ/data-landing-zone'
+
+new DlzLakeFormationAccessControl(scope: Construct, id: string, props: DlzLakeFormationAccessControlProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps">DlzLakeFormationAccessControlProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps">DlzLakeFormationAccessControlProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.isConstruct"></a>
+
+```typescript
+import { DlzLakeFormationAccessControl } from '@DataChefHQ/data-landing-zone'
+
+DlzLakeFormationAccessControl.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControl.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+
+### DlzLakeFormationSetup <a name="DlzLakeFormationSetup" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup"></a>
+
+#### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer"></a>
+
+```typescript
+import { DlzLakeFormationSetup } from '@DataChefHQ/data-landing-zone'
+
+new DlzLakeFormationSetup(scope: Construct, id: string, props: DlzLakeFormationSetupProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer.parameter.props">props</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps">DlzLakeFormationSetupProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps">DlzLakeFormationSetupProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.isConstruct"></a>
+
+```typescript
+import { DlzLakeFormationSetup } from '@DataChefHQ/data-landing-zone'
+
+DlzLakeFormationSetup.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.property.dataLakeSettings">dataLakeSettings</a></code> | <code>aws-cdk-lib.aws_lakeformation.CfnDataLakeSettings</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `dataLakeSettings`<sup>Required</sup> <a name="dataLakeSettings" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetup.property.dataLakeSettings"></a>
+
+```typescript
+public readonly dataLakeSettings: CfnDataLakeSettings;
+```
+
+- *Type:* aws-cdk-lib.aws_lakeformation.CfnDataLakeSettings
+
+---
+
+
 ### DlzStack <a name="DlzStack" id="@DataChefHQ/data-landing-zone.DlzStack"></a>
 
 #### Initializers <a name="Initializers" id="@DataChefHQ/data-landing-zone.DlzStack.Initializer"></a>
@@ -13999,6 +14208,49 @@ public readonly tags: CfnTag[];
 
 ---
 
+### DlzLakeFormationAccessControlProps <a name="DlzLakeFormationAccessControlProps" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps.Initializer"></a>
+
+```typescript
+import { DlzLakeFormationAccessControlProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzLakeFormationAccessControlProps: DlzLakeFormationAccessControlProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps.property.permissions">permissions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]</code> | A list of permission settings, specifying which Lake Formation permissions apply to which principals. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps.property.tags">tags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]</code> | A list of Lake Formation tags that can be shared across accounts and principals. |
+
+---
+
+##### `permissions`<sup>Required</sup> <a name="permissions" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps.property.permissions"></a>
+
+```typescript
+public readonly permissions: LakePermission[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]
+
+A list of permission settings, specifying which Lake Formation permissions apply to which principals.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@DataChefHQ/data-landing-zone.DlzLakeFormationAccessControlProps.property.tags"></a>
+
+```typescript
+public readonly tags: LFTagSharable[];
+```
+
+- *Type:* <a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]
+
+A list of Lake Formation tags that can be shared across accounts and principals.
+
+---
+
 ### DlzLakeFormationProps <a name="DlzLakeFormationProps" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps"></a>
 
 #### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.Initializer"></a>
@@ -14014,10 +14266,10 @@ const dlzLakeFormationProps: DlzLakeFormationProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.admins">admins</a></code> | <code>string[]</code> | A list of strings representing the IAM role ARNs. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion">crossAccountVersion</a></code> | <code>number</code> | OPTIONAL - Version for cross-account data sharing. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.hybridMode">hybridMode</a></code> | <code>boolean</code> | OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.permissions">permissions</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LakePermission">LakePermission</a>[]</code> | A list of permission settings, specifying which Lake Formation permissions apply to which principals. |
 | <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.tags">tags</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.LFTagSharable">LFTagSharable</a>[]</code> | A list of Lake Formation tags that can be shared across accounts and principals. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion">crossAccountVersion</a></code> | <code>number</code> | OPTIONAL - Version for cross-account data sharing. |
-| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.hybridMode">hybridMode</a></code> | <code>boolean</code> | OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation. |
 
 ---
 
@@ -14030,6 +14282,34 @@ public readonly admins: string[];
 - *Type:* string[]
 
 A list of strings representing the IAM role ARNs.
+
+---
+
+##### `crossAccountVersion`<sup>Optional</sup> <a name="crossAccountVersion" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion"></a>
+
+```typescript
+public readonly crossAccountVersion: number;
+```
+
+- *Type:* number
+
+OPTIONAL - Version for cross-account data sharing.
+
+Defaults to `4`. Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html here}.
+
+---
+
+##### `hybridMode`<sup>Optional</sup> <a name="hybridMode" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.hybridMode"></a>
+
+```typescript
+public readonly hybridMode: boolean;
+```
+
+- *Type:* boolean
+
+OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only.
+
+Defaults to `false`.
 
 ---
 
@@ -14057,7 +14337,39 @@ A list of Lake Formation tags that can be shared across accounts and principals.
 
 ---
 
-##### `crossAccountVersion`<sup>Optional</sup> <a name="crossAccountVersion" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.crossAccountVersion"></a>
+### DlzLakeFormationSetupProps <a name="DlzLakeFormationSetupProps" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps"></a>
+
+#### Initializer <a name="Initializer" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.Initializer"></a>
+
+```typescript
+import { DlzLakeFormationSetupProps } from '@DataChefHQ/data-landing-zone'
+
+const dlzLakeFormationSetupProps: DlzLakeFormationSetupProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.property.admins">admins</a></code> | <code>string[]</code> | A list of strings representing the IAM role ARNs. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.property.crossAccountVersion">crossAccountVersion</a></code> | <code>number</code> | OPTIONAL - Version for cross-account data sharing. |
+| <code><a href="#@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.property.hybridMode">hybridMode</a></code> | <code>boolean</code> | OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only. |
+
+---
+
+##### `admins`<sup>Required</sup> <a name="admins" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.property.admins"></a>
+
+```typescript
+public readonly admins: string[];
+```
+
+- *Type:* string[]
+
+A list of strings representing the IAM role ARNs.
+
+---
+
+##### `crossAccountVersion`<sup>Optional</sup> <a name="crossAccountVersion" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.property.crossAccountVersion"></a>
 
 ```typescript
 public readonly crossAccountVersion: number;
@@ -14067,11 +14379,11 @@ public readonly crossAccountVersion: number;
 
 OPTIONAL - Version for cross-account data sharing.
 
-Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html here}.
+Defaults to `4`. Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html here}.
 
 ---
 
-##### `hybridMode`<sup>Optional</sup> <a name="hybridMode" id="@DataChefHQ/data-landing-zone.DlzLakeFormationProps.property.hybridMode"></a>
+##### `hybridMode`<sup>Optional</sup> <a name="hybridMode" id="@DataChefHQ/data-landing-zone.DlzLakeFormationSetupProps.property.hybridMode"></a>
 
 ```typescript
 public readonly hybridMode: boolean;
@@ -14079,7 +14391,9 @@ public readonly hybridMode: boolean;
 
 - *Type:* boolean
 
-OPTIONAL - Select `LakeFormation` for Lake Formation permissions or `Hybrid` for both IAM and Lake Formation.
+OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only.
+
+Defaults to `false`.
 
 ---
 
@@ -16926,9 +17240,11 @@ public readonly tagActions: TagAction[];
 
 A list of actions that can be performed on the tag.
 
+Only `TagAction.DESCRIBE` and `TagAction.ASSOCIATE` are allowed.
+
 ---
 
-##### `tagActionsWithGrant`<sup>Required</sup> <a name="tagActionsWithGrant" id="@DataChefHQ/data-landing-zone.SharedExternal.property.tagActionsWithGrant"></a>
+##### `tagActionsWithGrant`<sup>Optional</sup> <a name="tagActionsWithGrant" id="@DataChefHQ/data-landing-zone.SharedExternal.property.tagActionsWithGrant"></a>
 
 ```typescript
 public readonly tagActionsWithGrant: TagAction[];
@@ -16999,7 +17315,7 @@ A list of actions that can be performed on the tag.
 
 ---
 
-##### `tagActionsWithGrant`<sup>Required</sup> <a name="tagActionsWithGrant" id="@DataChefHQ/data-landing-zone.SharedInternal.property.tagActionsWithGrant"></a>
+##### `tagActionsWithGrant`<sup>Optional</sup> <a name="tagActionsWithGrant" id="@DataChefHQ/data-landing-zone.SharedInternal.property.tagActionsWithGrant"></a>
 
 ```typescript
 public readonly tagActionsWithGrant: TagAction[];
@@ -17030,7 +17346,7 @@ const shareProps: ShareProps = { ... }
 
 ---
 
-##### `withExternalAccount`<sup>Required</sup> <a name="withExternalAccount" id="@DataChefHQ/data-landing-zone.ShareProps.property.withExternalAccount"></a>
+##### `withExternalAccount`<sup>Optional</sup> <a name="withExternalAccount" id="@DataChefHQ/data-landing-zone.ShareProps.property.withExternalAccount"></a>
 
 ```typescript
 public readonly withExternalAccount: SharedExternal[];
@@ -17042,7 +17358,7 @@ Configurations for sharing LF-Tags with external AWS accounts.
 
 ---
 
-##### `withinAccount`<sup>Required</sup> <a name="withinAccount" id="@DataChefHQ/data-landing-zone.ShareProps.property.withinAccount"></a>
+##### `withinAccount`<sup>Optional</sup> <a name="withinAccount" id="@DataChefHQ/data-landing-zone.ShareProps.property.withinAccount"></a>
 
 ```typescript
 public readonly withinAccount: SharedInternal[];

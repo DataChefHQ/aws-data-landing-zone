@@ -14,5 +14,6 @@ export class WorkloadRegionalStack extends DlzStack {
     shared.createVpcs();
     shared.createIamPermissionsBoundaryParameter();
     shared.createBastions();
+    shared.createLakeFormation();
   }
 }

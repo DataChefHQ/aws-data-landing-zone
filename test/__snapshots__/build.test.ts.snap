@@ -3859,6 +3859,339 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::Config::ConfigRule",
     },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrant84ebc03d": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag2",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag2",
+                "TagValues": [
+                  "value3",
+                ],
+              },
+            ],
+            "ResourceType": "DATABASE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrantbac0ca16": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "DATABASE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrant84ebc03d": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag2",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "PermissionsWithGrantOption": [],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag2",
+                "TagValues": [
+                  "value3",
+                ],
+              },
+            ],
+            "ResourceType": "TABLE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrantbac0ca16": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "TABLE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1taggrantf7a988ae": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "value1",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2databasegrantbac0ca16": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole2",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "DATABASE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2tablegrantbac0ca16": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole2",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "TABLE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2taggrantf7a988ae": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole2",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "value1",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roottaggrantbac0ca16": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ASSOCIATE",
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [
+          "ASSOCIATE",
+          "DESCRIBE",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:root",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "value1",
+              "value2",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationaccesscontrollftagtag1": {
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag1",
+        "TagValues": [
+          "value1",
+          "value2",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
+    },
+    "dlzglobaldlzlakeformationaccesscontrollftagtag2": {
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag2",
+        "TagValues": [
+          "value3",
+          "value4",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
+    },
+    "dlzglobaldlzlakeformationsetupdatalakesettings": {
+      "Properties": {
+        "Admins": [
+          {
+            "DataLakePrincipalIdentifier": "arn:aws:iam::381491899779:role/cdk-hnb659fds-cfn-exec-role-381491899779-eu-west-1",
+          },
+          {
+            "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/MyLakeFormationAdminRole",
+          },
+        ],
+        "CreateDatabaseDefaultPermissions": [],
+        "CreateTableDefaultPermissions": [],
+        "Parameters": {
+          "CROSS_ACCOUNT_VERSION": 4,
+        },
+      },
+      "Type": "AWS::LakeFormation::DataLakeSettings",
+    },
     "dlzglobaldlzssmcrossaccountassumerole144F4F2E": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -5791,6 +6124,339 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         },
       },
       "Type": "AWS::Config::ConfigRule",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrant84ebc03d": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag2",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag2",
+                "TagValues": [
+                  "value3",
+                ],
+              },
+            ],
+            "ResourceType": "DATABASE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrantbac0ca16": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "DATABASE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrant84ebc03d": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag2",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "PermissionsWithGrantOption": [],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag2",
+                "TagValues": [
+                  "value3",
+                ],
+              },
+            ],
+            "ResourceType": "TABLE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrantbac0ca16": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "TABLE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1taggrantf7a988ae": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole1",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "value1",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2databasegrantbac0ca16": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole2",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "DATABASE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2tablegrantbac0ca16": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "PermissionsWithGrantOption": [
+          "DESCRIBE",
+          "SELECT",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole2",
+        },
+        "Resource": {
+          "LFTagPolicy": {
+            "CatalogId": "381491899779",
+            "Expression": [
+              {
+                "TagKey": "tag1",
+                "TagValues": [
+                  "value1",
+                  "value2",
+                ],
+              },
+            ],
+            "ResourceType": "TABLE",
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2taggrantf7a988ae": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/FakeRole2",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "value1",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roottaggrantbac0ca16": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ASSOCIATE",
+          "DESCRIBE",
+        ],
+        "PermissionsWithGrantOption": [
+          "ASSOCIATE",
+          "DESCRIBE",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:root",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "value1",
+              "value2",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationaccesscontrollftagtag1": {
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag1",
+        "TagValues": [
+          "value1",
+          "value2",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
+    },
+    "dlzregionaldlzlakeformationaccesscontrollftagtag2": {
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag2",
+        "TagValues": [
+          "value3",
+          "value4",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
+    },
+    "dlzregionaldlzlakeformationsetupdatalakesettings": {
+      "Properties": {
+        "Admins": [
+          {
+            "DataLakePrincipalIdentifier": "arn:aws:iam::381491899779:role/cdk-hnb659fds-cfn-exec-role-381491899779-us-east-1",
+          },
+          {
+            "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/MyLakeFormationAdminRole",
+          },
+        ],
+        "CreateDatabaseDefaultPermissions": [],
+        "CreateTableDefaultPermissions": [],
+        "Parameters": {
+          "CROSS_ACCOUNT_VERSION": 4,
+        },
+      },
+      "Type": "AWS::LakeFormation::DataLakeSettings",
     },
     "dlzregionalsecurityentityiampermissionboundaryACAACA16": {
       "Properties": {

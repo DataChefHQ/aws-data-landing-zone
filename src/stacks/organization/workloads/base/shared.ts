@@ -1,9 +1,9 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
+import { DlzLakeFormation, DlzStack, DlzVpc } from '../../../../constructs';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
-import { DlzConfigRule } from '../../../../constructs/dlz-config-rule/index';
-import { DlzStack, DlzVpc } from '../../../../constructs/index';
+import { DlzConfigRule } from '../../../../constructs/dlz-config-rule';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
@@ -68,7 +68,7 @@ export class Shared {
 
       /* Find the account and region that is the same as the bastion location, meaning we can use direct references as
        * the VPC is also defined in this stack */
-      if (this.dlzAccount.name !== bastion.location.account || this.stack.region !== bastion.location.region) {continue;}
+      if (this.dlzAccount.name !== bastion.location.account || this.stack.region !== bastion.location.region) { continue; }
 
       /* Find the CDK resources for VPC and Subnet using the AccountNetworks, we can be assured that we can use direct
        * references as the VPC is also defined in this stack. The location for a bastion is always at a subnet level,
@@ -91,4 +91,9 @@ export class Shared {
     }
   }
 
+  public createLakeFormation() {
+    const { lakeFormation } = this.dlzAccount;
+    if (!lakeFormation) return;
+    new DlzLakeFormation(this.stack, this.stack.resourceName('dlz-lake-formation'), lakeFormation);
+  }
 }
