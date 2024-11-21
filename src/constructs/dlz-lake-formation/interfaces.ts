@@ -57,24 +57,6 @@ export interface LFTagSharable extends LFTag {
   readonly share?: ShareProps;
 }
 
-// MARK: LF setup
-export interface DlzLakeFormationSetupProps {
-  /**
-   * A list of strings representing the IAM role ARNs.
-   */
-  readonly admins: string[];
-  /**
-   * OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only. Defaults to `false`.
-   * @note Hybrid mode is only recommended for accounts that already have a data lake managed via IAM permissions.
-   * For new accounts or accounts that don't have a data lake yet, it is strongly recommended to use Lake Formation only.
-   */
-  readonly hybridMode?: boolean;
-  /**
-   * OPTIONAL - Version for cross-account data sharing. Defaults to `4`. Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html | here}.
-   */
-  readonly crossAccountVersion?: 1 | 2 | 3 | 4;
-}
-
 // MARK: Lake
 export interface LakePermission {
   /**
@@ -103,7 +85,24 @@ export interface LakePermission {
   readonly tableActionsWithGrant?: TableAction[];
 }
 
-export interface DlzLakeFormationAccessControlProps {
+export interface DlzLakeFormationProps {
+  /**
+   * A list of strings representing the IAM role ARNs.
+   */
+  readonly admins: string[];
+  /**
+   * OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only. Defaults to `false`.
+   * @note Hybrid mode is only recommended for accounts that already have a data lake managed via IAM permissions.
+   * For new accounts or accounts that don't have a data lake yet, it is strongly recommended to use Lake Formation only.
+   * @note `false` is currently not working due to issue with AWS API.
+   * You will have do disable hybrid mode manually via the AWS console.
+   * See {@link https://github.com/pulumi/pulumi-aws/issues/4366}
+   */
+  readonly hybridMode?: boolean;
+  /**
+   * OPTIONAL - Version for cross-account data sharing. Defaults to `4`. Read more {@link https://docs.aws.amazon.com/lake-formation/latest/dg/cross-account.html | here}.
+   */
+  readonly crossAccountVersion?: 1 | 2 | 3 | 4;
   /**
    * A list of Lake Formation tags that can be shared across accounts and principals.
    */
@@ -113,5 +112,3 @@ export interface DlzLakeFormationAccessControlProps {
    */
   readonly permissions: LakePermission[];
 }
-
-export interface DlzLakeFormationProps extends DlzLakeFormationSetupProps, DlzLakeFormationAccessControlProps { }

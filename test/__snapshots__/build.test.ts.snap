@@ -3859,9 +3859,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::Config::ConfigRule",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrant84ebc03d": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole1databasegrant84ebc03d": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag2",
+        "dlzglobaldlzlakeformationlftagtag2",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -3889,9 +3889,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrantbac0ca16": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole1databasegrantbac0ca16": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -3922,9 +3922,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrant84ebc03d": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole1tablegrant84ebc03d": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag2",
+        "dlzglobaldlzlakeformationlftagtag2",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -3953,9 +3953,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrantbac0ca16": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole1tablegrantbac0ca16": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -3988,9 +3988,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1taggrantf7a988ae": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole1taggrantf7a988ae": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -4021,9 +4021,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2databasegrantbac0ca16": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole2databasegrantbac0ca16": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -4054,9 +4054,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2tablegrantbac0ca16": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole2tablegrantbac0ca16": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -4089,9 +4089,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2taggrantf7a988ae": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleFakeRole2taggrantf7a988ae": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -4122,9 +4122,75 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrolarnawsiam123456789012roottaggrantbac0ca16": {
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleMyLakeFormationAdminRoletaggrant27e7f0a2": {
       "DependsOn": [
-        "dlzglobaldlzlakeformationaccesscontrollftagtag1",
+        "dlzglobaldlzlakeformationlftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/MyLakeFormationAdminRole",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "*",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationarnawsiam123456789012roleMyLakeFormationAdminRoletaggrant80e5e3f6": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationlftagtag2",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/MyLakeFormationAdminRole",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag2",
+            "TagValues": [
+              "*",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzglobaldlzlakeformationarnawsiam123456789012roottaggrantbac0ca16": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -4152,29 +4218,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzglobaldlzlakeformationaccesscontrollftagtag1": {
-      "Properties": {
-        "CatalogId": "381491899779",
-        "TagKey": "tag1",
-        "TagValues": [
-          "value1",
-          "value2",
-        ],
-      },
-      "Type": "AWS::LakeFormation::Tag",
-    },
-    "dlzglobaldlzlakeformationaccesscontrollftagtag2": {
-      "Properties": {
-        "CatalogId": "381491899779",
-        "TagKey": "tag2",
-        "TagValues": [
-          "value3",
-          "value4",
-        ],
-      },
-      "Type": "AWS::LakeFormation::Tag",
-    },
-    "dlzglobaldlzlakeformationsetupdatalakesettings": {
+    "dlzglobaldlzlakeformationdatalakesettings": {
       "Properties": {
         "Admins": [
           {
@@ -4191,6 +4235,34 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         },
       },
       "Type": "AWS::LakeFormation::DataLakeSettings",
+    },
+    "dlzglobaldlzlakeformationlftagtag1": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationdatalakesettings",
+      ],
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag1",
+        "TagValues": [
+          "value1",
+          "value2",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
+    },
+    "dlzglobaldlzlakeformationlftagtag2": {
+      "DependsOn": [
+        "dlzglobaldlzlakeformationdatalakesettings",
+      ],
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag2",
+        "TagValues": [
+          "value3",
+          "value4",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
     },
     "dlzglobaldlzssmcrossaccountassumerole144F4F2E": {
       "Properties": {
@@ -6125,9 +6197,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::Config::ConfigRule",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrant84ebc03d": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole1databasegrant84ebc03d": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag2",
+        "dlzregionaldlzlakeformationlftagtag2",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6155,9 +6227,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1databasegrantbac0ca16": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole1databasegrantbac0ca16": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6188,9 +6260,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrant84ebc03d": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole1tablegrant84ebc03d": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag2",
+        "dlzregionaldlzlakeformationlftagtag2",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6219,9 +6291,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1tablegrantbac0ca16": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole1tablegrantbac0ca16": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6254,9 +6326,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole1taggrantf7a988ae": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole1taggrantf7a988ae": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6287,9 +6359,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2databasegrantbac0ca16": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole2databasegrantbac0ca16": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6320,9 +6392,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2tablegrantbac0ca16": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole2tablegrantbac0ca16": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6355,9 +6427,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roleFakeRole2taggrantf7a988ae": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleFakeRole2taggrantf7a988ae": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6388,9 +6460,75 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrolarnawsiam123456789012roottaggrantbac0ca16": {
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleMyLakeFormationAdminRoletaggrant27e7f0a2": {
       "DependsOn": [
-        "dlzregionaldlzlakeformationaccesscontrollftagtag1",
+        "dlzregionaldlzlakeformationlftagtag1",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/MyLakeFormationAdminRole",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag1",
+            "TagValues": [
+              "*",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationarnawsiam123456789012roleMyLakeFormationAdminRoletaggrant80e5e3f6": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationlftagtag2",
+      ],
+      "Properties": {
+        "Catalog": "381491899779",
+        "Permissions": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "PermissionsWithGrantOption": [
+          "ALTER",
+          "ASSOCIATE",
+          "DESCRIBE",
+          "DROP",
+        ],
+        "Principal": {
+          "DataLakePrincipalIdentifier": "arn:aws:iam::123456789012:role/MyLakeFormationAdminRole",
+        },
+        "Resource": {
+          "LFTag": {
+            "CatalogId": "381491899779",
+            "TagKey": "tag2",
+            "TagValues": [
+              "*",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::LakeFormation::PrincipalPermissions",
+    },
+    "dlzregionaldlzlakeformationarnawsiam123456789012roottaggrantbac0ca16": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationlftagtag1",
       ],
       "Properties": {
         "Catalog": "381491899779",
@@ -6418,29 +6556,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       },
       "Type": "AWS::LakeFormation::PrincipalPermissions",
     },
-    "dlzregionaldlzlakeformationaccesscontrollftagtag1": {
-      "Properties": {
-        "CatalogId": "381491899779",
-        "TagKey": "tag1",
-        "TagValues": [
-          "value1",
-          "value2",
-        ],
-      },
-      "Type": "AWS::LakeFormation::Tag",
-    },
-    "dlzregionaldlzlakeformationaccesscontrollftagtag2": {
-      "Properties": {
-        "CatalogId": "381491899779",
-        "TagKey": "tag2",
-        "TagValues": [
-          "value3",
-          "value4",
-        ],
-      },
-      "Type": "AWS::LakeFormation::Tag",
-    },
-    "dlzregionaldlzlakeformationsetupdatalakesettings": {
+    "dlzregionaldlzlakeformationdatalakesettings": {
       "Properties": {
         "Admins": [
           {
@@ -6457,6 +6573,34 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         },
       },
       "Type": "AWS::LakeFormation::DataLakeSettings",
+    },
+    "dlzregionaldlzlakeformationlftagtag1": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationdatalakesettings",
+      ],
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag1",
+        "TagValues": [
+          "value1",
+          "value2",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
+    },
+    "dlzregionaldlzlakeformationlftagtag2": {
+      "DependsOn": [
+        "dlzregionaldlzlakeformationdatalakesettings",
+      ],
+      "Properties": {
+        "CatalogId": "381491899779",
+        "TagKey": "tag2",
+        "TagValues": [
+          "value3",
+          "value4",
+        ],
+      },
+      "Type": "AWS::LakeFormation::Tag",
     },
     "dlzregionalsecurityentityiampermissionboundaryACAACA16": {
       "Properties": {
