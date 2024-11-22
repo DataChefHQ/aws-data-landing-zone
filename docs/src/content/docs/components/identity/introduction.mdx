@@ -1,0 +1,84 @@
+---
+title: Intro
+description: Intro
+---
+
+
+import DualCode from '../../components/DualCode.astro';
+
+# Demo page
+
+To show what we can do, see a better guide here:
+https://starlight.astro.build/guides/authoring-content/
+
+## Heading 2
+
+### Heading 3
+
+[Link](#demo-page) section on this page
+
+[Link](/getting-started#heading-1) to another page and section
+
+![data_landing_zone_logo.png](../../assets/data_landing_zone_logo.png)
+
+
+:::tip[Did you know?]
+Astro helps you build faster websites
+:::
+
+:::caution
+Astro helps you build faster websites
+:::
+
+:::danger
+Astro helps you build faster websites
+:::
+
+> This is a blockquote, which is commonly used when quoting another person or document.
+>
+> Blockquotes are indicated by a `>` at the start of each line.
+
+
+Highlight the code that is being talked about. Its not needed if it is basic/simple piece of code, but if it gets
+long and complex where you have to show the imports or other configs for example that are important for the piece
+of code you want to highlight and talk about.
+
+```ts {4-5}
+import * from not_important
+
+function demo() {
+  // This line (#2) and the next one are highlighted
+  return 'This is line #3 of this snippet';
+}
+```
+
+You can add the filename to the code block if it is important to know where the code is from.
+
+```ts
+// my-test-file.js
+function demo() {
+
+}
+```
+
+We should be displaying both the TS and Python code blocks in the same way.
+
+We loose the nice autocomplete in our IDEs(webstorm at least), but I have not found any way to prevent it,
+unfortunate, but it is what it is.
+
+
+<DualCode>
+  <Fragment slot="ts">
+```ts
+  function demo() {
+
+  }
+```
+  </Fragment>
+  <Fragment slot="python">
+```python
+  def demo:
+      pass
+```
+  </Fragment>
+</DualCode>
