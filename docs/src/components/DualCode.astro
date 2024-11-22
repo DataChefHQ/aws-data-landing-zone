@@ -1,0 +1,12 @@
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+---
+
+<Tabs syncKey="dual-code">
+    <TabItem label="TypeScript" icon="seti:typescript">
+        <slot name="ts" />
+    </TabItem>
+    <TabItem label="Python" icon="seti:python">
+        <slot name="python" />
+    </TabItem>
+</Tabs>
