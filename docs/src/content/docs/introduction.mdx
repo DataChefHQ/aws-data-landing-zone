@@ -2,7 +2,8 @@
 title: Introduction
 description: Intro
 ---
-import DualCode from '../../components/DualCode.astro';
+
+import DualCode from "../../components/DualCode.astro";
 
 The **Data Landing Zone (DLZ)** is a CDK construct designed to accelerate AI and data-related projects. It provides an
 opinionated Landing Zone, laying the foundation for a multi-account AWS strategy, so you can focus on delivering data
@@ -12,6 +13,7 @@ The DLZ can be deployed in existing AWS Organizations or used in greenfield proj
 from small organizations with a few accounts to large enterprises with hundreds of accounts.
 
 The CDK construct is available in both TypeScript and Python. Example GitHub repositories showing usage:
+
 - [TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript)
 - [Python Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-python)
 
@@ -22,6 +24,7 @@ It's easy enough for Data Engineers to use on their own, but flexible enough to 
 experienced Cloud Engineers.
 
 It's important to establish the following responsibilities to understand what is in and out of scope for the DLZ:
+
 - **In scope** - Any CCoE responsibilities and tasks, such as account management, security, networking, compliance, etc.
 - **Out of scope** - Application development, data engineering, and data science tasks.
 
@@ -35,7 +38,7 @@ Notable features of the DLZ include:
 - Suitable for greenfield projects or integration with existing AWS resources.
 - Deployable using any build systems like GitHub, GitLab, Jenkins, or locally.
 - Generates compliance reports, reporting the Control Tower Standards, SecurityHub controls, Config Rules and
-Service Control Policies enabled in each account.
+  Service Control Policies enabled in each account.
 - Implements an internal wave- and stage-based deployment strategy for dependency management.
 - Includes helper scripts and Standard Operating Procedures (SOPs) for routine tasks.
 - Accompanied by comprehensive documentation.
@@ -73,8 +76,6 @@ The DLZ adheres to the following principles:
   - General settings, like admins, version and setting hybrid iam mode
   - Create **Tags** and specify their permissions for use within the same account and when sharing to other accounts.
   - Optionally, set **Tag Permissions** on Tags. This is usually out of scope for DLZ, but can be configured.
-
-
 
 ## How it works
 
@@ -125,6 +126,7 @@ approvals in production environments.
      }
     });
     ```
+
   </Fragment>
   <Fragment slot="python">
     ```python
@@ -165,8 +167,10 @@ approvals in production environments.
             )
         ),
     )
+
 app.synth()
-    ```
+```
+
   </Fragment>
 </DualCode>
 
@@ -292,6 +296,7 @@ all subnets, to the private subnets in the `production` account's VPC in the `eu
      ...
     });
     ```
+
   </Fragment>
   <Fragment slot="python">
     ```python {80-85}
@@ -385,10 +390,10 @@ all subnets, to the private subnets in the `production` account's VPC in the `eu
     )
     app.synth()
     ```
+
   </Fragment>
 </DualCode>
 
 The DLZ abstracts the complexity of the AWS resources and ensures that the correct resources are created in the
 correct accounts in the right order. For instance, this example provisions the VPCs in the Base Layer and sets up the
 many VPC Peering roles, connections, and routes within the Networking Layers.
-
