@@ -2,9 +2,10 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import {
-  DlzBudgetProps,
   DlzAccountNetworks,
+  DlzBudgetProps,
   DlzControlTowerStandardControls,
+  DlzLakeFormationProps,
   DlzSsmReaderStackCache,
   DlzStackProps,
   DlzTag,
@@ -207,6 +208,11 @@ export interface DLzAccount {
    * This will override the organization level defaultNotification.
    */
   readonly defaultNotification?: NotificationDetailsProps;
+
+  /**
+   * LakeFormation settings and tags
+   */
+  readonly lakeFormation?: DlzLakeFormationProps[];
 }
 
 export enum Ou {

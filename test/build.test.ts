@@ -17,6 +17,7 @@ import {
   SlackChannel,
 } from '../src';
 import { cdkTemplateToJson } from './helpers.test';
+import { DatabaseAction, TableAction, TagAction } from '../src/constructs/dlz-lake-formation';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 
 const jestConsole = console;
@@ -255,6 +256,63 @@ const configBase: DataLandingZoneProps = {
               },
 
             ],
+            lakeFormation: [{
+              region: Region.EU_WEST_1,
+              admins: ['arn:aws:iam::123456789012:role/MyLakeFormationAdminRole'],
+              tags: [
+                {
+                  tagKey: 'tag1',
+                  tagValues: ['value1', 'value2'],
+                  share: {
+                    withinAccount: [
+                      {
+                        tagActions: [TagAction.ALTER, TagAction.ASSOCIATE, TagAction.DESCRIBE, TagAction.DROP],
+                        tagActionsWithGrant: [TagAction.ALTER, TagAction.ASSOCIATE, TagAction.DESCRIBE, TagAction.DROP],
+                        principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
+                        specificValues: ['value1'],
+                      },
+                    ],
+                    withExternalAccount: [
+                      {
+                        tagActions: [TagAction.ASSOCIATE, TagAction.DESCRIBE],
+                        tagActionsWithGrant: [TagAction.ASSOCIATE, TagAction.DESCRIBE],
+                        principals: ['arn:aws:iam::123456789012:root'],
+                      },
+                    ],
+                  },
+                },
+                {
+                  tagKey: 'tag2',
+                  tagValues: ['value3', 'value4'],
+                },
+              ],
+              permissions: [
+                {
+                  principals: ['arn:aws:iam::123456789012:role/FakeRole1', 'arn:aws:iam::123456789012:role/FakeRole2'],
+                  tags: [
+                    {
+                      tagKey: 'tag1',
+                      tagValues: ['value1', 'value2'],
+                    },
+                  ],
+                  databaseActions: [DatabaseAction.DESCRIBE],
+                  databaseActionsWithGrant: [DatabaseAction.DESCRIBE],
+                  tableActions: [TableAction.DESCRIBE, TableAction.SELECT],
+                  tableActionsWithGrant: [TableAction.DESCRIBE, TableAction.SELECT],
+                },
+                {
+                  principals: ['arn:aws:iam::123456789012:role/FakeRole1'],
+                  tags: [
+                    {
+                      tagKey: 'tag2',
+                      tagValues: ['value3'],
+                    },
+                  ],
+                  databaseActions: [DatabaseAction.DESCRIBE],
+                  tableActions: [TableAction.DESCRIBE, TableAction.SELECT],
+                },
+              ],
+            }],
           },
           {
             name: 'project-1-production',
@@ -398,7 +456,6 @@ const configBase: DataLandingZoneProps = {
         ouId: 'ou-vh4d-rhcmhzsy',
       },
     },
-
   },
   deploymentPlatform: {
     gitHub: {

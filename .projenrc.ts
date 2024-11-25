@@ -112,5 +112,6 @@ project.gitignore.addPatterns('*.js');
 project.gitignore.addPatterns('*.js.map');
 project.gitignore.addPatterns('*.d.ts');
 project.gitignore.addPatterns('*.DS_Store');
+project.gitignore.addPatterns('.vscode/');
 
 project.synth();
