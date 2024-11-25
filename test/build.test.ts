@@ -256,7 +256,8 @@ const configBase: DataLandingZoneProps = {
               },
 
             ],
-            lakeFormation: {
+            lakeFormation: [{
+              region: Region.EU_WEST_1,
               admins: ['arn:aws:iam::123456789012:role/MyLakeFormationAdminRole'],
               tags: [
                 {
@@ -311,7 +312,7 @@ const configBase: DataLandingZoneProps = {
                   tableActions: [TableAction.DESCRIBE, TableAction.SELECT],
                 },
               ],
-            },
+            }],
           },
           {
             name: 'project-1-production',
@@ -455,7 +456,6 @@ const configBase: DataLandingZoneProps = {
         ouId: 'ou-vh4d-rhcmhzsy',
       },
     },
-
   },
   deploymentPlatform: {
     gitHub: {

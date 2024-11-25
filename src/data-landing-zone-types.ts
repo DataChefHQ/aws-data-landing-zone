@@ -208,7 +208,11 @@ export interface DLzAccount {
    * This will override the organization level defaultNotification.
    */
   readonly defaultNotification?: NotificationDetailsProps;
-  readonly lakeFormation?: DlzLakeFormationProps;
+
+  /**
+   * LakeFormation settings and tags
+   */
+  readonly lakeFormation?: DlzLakeFormationProps[];
 }
 
 export enum Ou {

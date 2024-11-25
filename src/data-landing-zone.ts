@@ -12,6 +12,12 @@ import { LogGlobalStack } from './stacks/organization/security/log/global-stack'
 import { WorkloadGlobalStack } from './stacks/organization/workloads/base/global-stack';
 import { WorkloadRegionalStack } from './stacks/organization/workloads/base/regional-stack';
 import {
+  WorkloadGlobalDataServicesPhase1Stack,
+} from './stacks/organization/workloads/data-services-phase-1-stack/global-stack';
+import {
+  WorkloadRegionalDataServicesPhase1Stack,
+} from './stacks/organization/workloads/data-services-phase-1-stack/regional-stack';
+import {
   WorkloadGlobalNetworkConnectionsPhase2Stack,
 } from './stacks/organization/workloads/network-connections-phase-2-stack/global-stack';
 import {
@@ -135,6 +141,9 @@ export class DataLandingZone {
   public workloadGlobalNetworkConnectionsPhase3Stacks: WorkloadGlobalNetworkConnectionsPhase3Stack[] = [];
   public workloadRegionalNetworkConnectionsPhase3Stacks: WorkloadRegionalNetworkConnectionsPhase3Stack[] = [];
 
+  public workloadGlobalDataServicesPhase1Stacks: WorkloadGlobalDataServicesPhase1Stack[] = [];
+  public workloadRegionalDataServicesPhase1Stacks: WorkloadRegionalDataServicesPhase1Stack[] = [];
+
   private globalVariables: GlobalVariables = {
     dlzAccountNetworks: new DlzAccountNetworks(),
     ncp1: {
@@ -171,6 +180,9 @@ export class DataLandingZone {
 
     this.workloadGlobalNetworkConnectionsPhase3Stacks = this.stageWorkloadGlobalNetworkConnectionsPhase3Stack();
     this.workloadRegionalNetworkConnectionsPhase3Stacks = this.stageWorkloadRegionalNetworkConnectionsPhase3Stack();
+
+    this.workloadGlobalDataServicesPhase1Stacks = this.stageWorkloadGlobalDataServicesPhase1Stack();
+    this.workloadRegionalDataServicesPhase1Stacks = this.stageWorkloadRegionalDataServicesPhase1Stack();
 
     this.pipeline.synth(this.pipeline.waves, this.props.printDeploymentOrder);
 
@@ -447,6 +459,55 @@ export class DataLandingZone {
     }
     return workloadRegionalStacks;
   }
+
+  private stageWorkloadGlobalDataServicesPhase1Stack() {
+    const ou = 'workloads';
+
+    const waveGlobal = this.pipeline.addWave('workloads--dsp1--global');
+    const stacks: WorkloadGlobalDataServicesPhase1Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const stage = waveGlobal.addStage(this.accountStageName(dlzAccount));
+      const stack = new WorkloadGlobalDataServicesPhase1Stack(this.app, {
+        stage,
+        /* ncp3 abbreviation for NetworkConnectionsPhase3Stack */
+        name: { ou, account: dlzAccount.name, stack: 'dsp1-global', region: this.props.regions.global },
+        env: {
+          account: dlzAccount.accountId,
+          region: this.props.regions.global,
+        },
+        dlzAccount,
+        globalVariables: this.globalVariables,
+      });
+
+      stacks.push(stack);
+    }
+    return stacks;
+  }
+  private stageWorkloadRegionalDataServicesPhase1Stack() {
+    const ou = 'workloads';
+
+    const waveRegional = this.pipeline.addWave('workloads--dsp1--regional');
+    const stacks: WorkloadRegionalDataServicesPhase1Stack[] = [];
+    for (const dlzAccount of this.props.organization.ous.workloads.accounts) {
+      const stage = waveRegional.addStage(this.accountStageName(dlzAccount));
+      for (const region of this.props.regions.regional) {
+        const stack = new WorkloadRegionalDataServicesPhase1Stack(this.app, {
+          stage,
+          /* ncp3 abbreviation for NetworkConnectionsPhase3Stack */
+          name: { ou, account: dlzAccount.name, stack: 'dsp1-regional', region },
+          env: {
+            account: dlzAccount.accountId,
+            region: region,
+          },
+          dlzAccount,
+          globalVariables: this.globalVariables,
+        });
+        stacks.push(stack);
+      }
+    }
+    return stacks;
+  }
+
 
   private accountStageName(dlzAccount: DLzAccount) {
     return `${dlzAccount.type}--${dlzAccount.name}`;

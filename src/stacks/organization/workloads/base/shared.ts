@@ -1,7 +1,7 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { DlzLakeFormation, DlzStack, DlzVpc } from '../../../../constructs';
+import { DlzStack, DlzVpc } from '../../../../constructs';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
 import { DlzConfigRule } from '../../../../constructs/dlz-config-rule';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
@@ -89,11 +89,5 @@ export class Shared {
       bastionHost.ec2.addDependency(bastionAccountNetworks[0].vpcs[0].routeTables[0].subnets[0].subnet);
 
     }
-  }
-
-  public createLakeFormation() {
-    const { lakeFormation } = this.dlzAccount;
-    if (!lakeFormation) return;
-    new DlzLakeFormation(this.stack, this.stack.resourceName('dlz-lake-formation'), lakeFormation);
   }
 }

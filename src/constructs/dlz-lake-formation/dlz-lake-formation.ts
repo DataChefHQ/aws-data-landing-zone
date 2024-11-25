@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { CfnResource, DefaultStackSynthesizer, Stack } from 'aws-cdk-lib';
+import { DefaultStackSynthesizer, Stack } from 'aws-cdk-lib';
 import * as lf from 'aws-cdk-lib/aws-lakeformation';
 import { Construct } from 'constructs';
 import { DatabaseAction, TableAction, TagAction } from './actions';
@@ -11,18 +11,13 @@ const DEFAULTS: Partial<DlzLakeFormationProps> = {
 };
 
 export class DlzLakeFormation {
-  // TODO: finish these 2 @rehanvdm
-  public static roleFromPermissionSet(_permissionSetName: string) { }
-  public static roleForAccount(_accountName: string) { }
-
   private props: DlzLakeFormationProps;
   private account: string;
   private dataLakeSettings: lf.CfnDataLakeSettings;
   private lfTags: Record<string, lf.CfnTag> = {};
-  private resources: CfnResource[] = [];
 
-  constructor(private scope: Construct, private id: string, userProps: DlzLakeFormationProps) {
-    this.props = { ...DEFAULTS, ...userProps };
+  constructor(private scope: Construct, private id: string, lfProps: DlzLakeFormationProps) {
+    this.props = { ...DEFAULTS, ...lfProps };
     this.account = Stack.of(scope).account;
     this.dataLakeSettings = this.setUpLFSettings();
 
@@ -52,8 +47,8 @@ export class DlzLakeFormation {
       }
     }
 
-    for (const resource of this.resources) {
-      resource.addDependency(this.dataLakeSettings);
+    for (const tag of Object.values(this.lfTags)) {
+      tag.addDependency(this.dataLakeSettings);
     }
   }
 
@@ -66,7 +61,7 @@ export class DlzLakeFormation {
       lfAdmins.push({ dataLakePrincipalIdentifier: admin });
     }
 
-    // WARN: Currently broken due to AWS API!!! See https://github.com/pulumi/pulumi-aws/issues/4366
+    // WARN: Currently broken due to AWS API!!! https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/2197
     const defaultPermissions = hybridMode
       ? [{ principal: { dataLakePrincipalIdentifier: 'IAM_ALLOWED_PRINCIPALS' }, permissions: ['ALL'] }]
       : [];
@@ -87,7 +82,6 @@ export class DlzLakeFormation {
       { tagKey, tagValues, catalogId: this.account },
     );
     this.lfTags[tagKey] = lfTag;
-    this.resources.push(lfTag);
   }
 
   private shareTag(tag: LFTagSharable) {

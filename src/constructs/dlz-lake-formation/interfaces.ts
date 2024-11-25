@@ -1,6 +1,6 @@
 import { DatabaseAction, TableAction, TagAction, TagActionExternal } from './actions';
+import { Region } from '../../data-landing-zone-types';
 
-// MARK: Tags
 export interface LFTag {
   readonly tagKey: string;
   readonly tagValues: string[];
@@ -57,7 +57,6 @@ export interface LFTagSharable extends LFTag {
   readonly share?: ShareProps;
 }
 
-// MARK: Lake
 export interface LakePermission {
   /**
    * A list of principal identity ARNs (e.g., AWS accounts, IAM roles/users) that the permissions apply to.
@@ -86,6 +85,10 @@ export interface LakePermission {
 }
 
 export interface DlzLakeFormationProps {
+  /**
+   * The region where LakeFormation will be created in
+   */
+  readonly region: Region;
   /**
    * A list of strings representing the IAM role ARNs.
    */
