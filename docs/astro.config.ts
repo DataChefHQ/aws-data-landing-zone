@@ -1,12 +1,19 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import rehypeMermaid from "rehype-mermaid";
 
 // https://astro.build/config
 export default defineConfig({
+    devToolbar: {
+        enabled: false,
+    },
     integrations: [starlight({
         title: 'Data Landing Zone',
+        components: {
+            Footer: './src/components/Footer.astro',
+        },
         social: {
-            github: 'https://github.com/withastro/starlight',
+            github: 'https://github.com/withastro/starlight', //TODO
         },
         sidebar: [
             {
@@ -96,6 +103,11 @@ export default defineConfig({
             },
 
         ],
-		})
-		],
+        customCss: [
+            './src/styles/custom.css',
+        ],
+		})],
+    markdown: {
+        rehypePlugins: [rehypeMermaid],
+    },
 });

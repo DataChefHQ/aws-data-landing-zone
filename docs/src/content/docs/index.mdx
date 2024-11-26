@@ -5,32 +5,35 @@ template: splash
 hero:
   tagline: Data Landing Zone (DLZ) is CDK Construct of an opinionated Landing Zone that is built to support and enabled AI, data, data mesh and general purpose projects.
   image:
-    file: ../../assets/data_landing_zone_logo-white.png
+    light: ../../assets/data_landing_zone_logo.png
+    dark: ../../assets/data_landing_zone_logo-white.png
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Introduction
+      link: /introduction
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Get Started
+      link: /getting-started
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## What is the Data Landing Zone?
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="All-in-one CDK component" icon="pencil">
+		A CDK construct published in Typescript and Python to orchestrate AWS accounts and all the resources needed
+    for a Data Landing Zone.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Landing Zone" icon="add-document">
+		The Data Landing Zone is first and foremost a Landing Zone. Taking care of the basics like security and
+    networking so you can focus on your data and AI related projects.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="Industry standards & Best practices" icon="setting">
+		The DLZ follows the Well-Architected Framework for best practices on implementing a multi-account strategy to ensure that your projects
+    are secure and compliant.
 	</Card>
 	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+		Learn more by reading the [documentation](/introduction).
 	</Card>
 </CardGrid>
