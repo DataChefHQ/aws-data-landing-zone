@@ -13,13 +13,17 @@ import Pagination from '@astrojs/starlight/components/Pagination.astro';
         <LastUpdated {...Astro.props} />
     </div>
     <Pagination {...Astro.props} />
-    <div class="meta sl-flex">
+    <div class="made-with">
         <span>Made with ❤️ by <a href="https://datachef.co?source=dlz-docs" target="_blank">DataChef</a></span>
     </div>
 
 </footer>
 
 <style>
+    .made-with {
+        display: flex;
+        justify-content: center;
+    }
     footer {
         flex-direction: column;
         gap: 1.5rem;
