@@ -194,48 +194,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.AuditGlobalStack.exportValue.parameter.exportedValue"></a>
 
@@ -1165,48 +1128,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.AuditRegionalStack.exportValue.parameter.exportedValue"></a>
 
@@ -2130,48 +2056,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.DlzStack.exportValue.parameter.exportedValue"></a>
 
@@ -3317,48 +3206,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.LogGlobalStack.exportValue.parameter.exportedValue"></a>
 
@@ -4282,48 +4134,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.LogRegionalStack.exportValue.parameter.exportedValue"></a>
 
@@ -5260,48 +5075,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementStack.exportValue.parameter.exportedValue"></a>
 
@@ -6269,48 +6047,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.exportValue.parameter.exportedValue"></a>
 
@@ -7242,48 +6983,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportValue.parameter.exportedValue"></a>
 
@@ -8232,48 +7936,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportValue.parameter.exportedValue"></a>
 
@@ -9204,48 +8871,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportValue.parameter.exportedValue"></a>
 
@@ -10178,48 +9808,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadGlobalStack.exportValue.parameter.exportedValue"></a>
 
@@ -11166,48 +10759,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.exportValue.parameter.exportedValue"></a>
 
@@ -12138,48 +11694,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportValue.parameter.exportedValue"></a>
 
@@ -13110,48 +12629,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportValue.parameter.exportedValue"></a>
 
@@ -14082,48 +13564,11 @@ public exportValue(exportedValue: any, options?: ExportValueOptions): string
 
 Create a CloudFormation Export for a string value.
 
-Returns a string representing the corresponding `Fn.importValue()`
-expression for this Export. You can control the name for the export by
-passing the `name` option.
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
 
-If you don't supply a value for `name`, the value you're exporting must be
-a Resource attribute (for example: `bucket.bucketName`) and it will be
-given the same name as the automatic cross-stack reference that would be created
-if you used the attribute in another Stack.
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
 
-One of the uses for this method is to *remove* the relationship between
-two Stacks established by automatic cross-stack references. It will
-temporarily ensure that the CloudFormation Export still exists while you
-remove the reference from the consuming stack. After that, you can remove
-the resource and the manual export.
-
-## Example
-
-Here is how the process works. Let's say there are two stacks,
-`producerStack` and `consumerStack`, and `producerStack` has a bucket
-called `bucket`, which is referenced by `consumerStack` (perhaps because
-an AWS Lambda Function writes into it, or something like that).
-
-It is not safe to remove `producerStack.bucket` because as the bucket is being
-deleted, `consumerStack` might still be using it.
-
-Instead, the process takes two deployments:
-
-### Deployment 1: break the relationship
-
-- Make sure `consumerStack` no longer references `bucket.bucketName` (maybe the consumer
-  stack now uses its own bucket, or it writes to an AWS DynamoDB table, or maybe you just
-  remove the Lambda Function altogether).
-- In the `ProducerStack` class, call `this.exportValue(this.bucket.bucketName)`. This
-  will make sure the CloudFormation Export continues to exist while the relationship
-  between the two stacks is being broken.
-- Deploy (this will effectively only change the `consumerStack`, but it's safe to deploy both).
-
-### Deployment 2: remove the bucket resource
-
-- You are now free to remove the `bucket` resource from `producerStack`.
-- Don't forget to remove the `exportValue()` call as well.
-- Deploy again (this time only the `producerStack` will be changed -- the bucket will be deleted).
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
 ###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.WorkloadRegionalStack.exportValue.parameter.exportedValue"></a>
 
@@ -14879,8 +14324,7 @@ const auditStacks: AuditStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.AuditStacks.property.global">global</a></code> | <code><a href="#aws-data-landing-zone.AuditGlobalStack">AuditGlobalStack</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.AuditStacks.property.regional">regional</a></code> | <code><a href="#aws-data-landing-zone.AuditRegionalStack">AuditRegionalStack</a>[]</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.AuditStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack">AuditGlobalStack</a></code> | *No description.* |
 
 ---
 
@@ -14894,17 +14338,7 @@ public readonly global: AuditGlobalStack;
 
 ---
 
-##### `regional`<sup>Required</sup> <a name="regional" id="aws-data-landing-zone.AuditStacks.property.regional"></a>
-
-```typescript
-public readonly regional: AuditRegionalStack[];
-```
-
-- *Type:* <a href="#aws-data-landing-zone.AuditRegionalStack">AuditRegionalStack</a>[]
-
----
-
-### BaseSharedTagProps <a name="BaseSharedTagProps" id="aws-data-landing-zone.BaseSharedTagProps"></a>
+### BaseSharedTagProps <a name="BaseSharedTagProps" id="@DataChefHQ/data-landing-zone.BaseSharedTagProps"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.BaseSharedTagProps.Initializer"></a>
 
@@ -16625,9 +16059,9 @@ const gitHubReference: GitHubReference = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.GitHubReference.property.owner">owner</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.GitHubReference.property.repo">repo</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.GitHubReference.property.filter">filter</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@DataChefHQ/data-landing-zone.GitHubReference.property.owner">owner</a></code> | <code>string</code> | The owner of the GitHub repository. |
+| <code><a href="#@DataChefHQ/data-landing-zone.GitHubReference.property.repo">repo</a></code> | <code>string</code> | The repository name. |
+| <code><a href="#@DataChefHQ/data-landing-zone.GitHubReference.property.filter">filter</a></code> | <code>string</code> | For a complete list of filters see https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token. |
 
 ---
 
@@ -16639,6 +16073,8 @@ public readonly owner: string;
 
 - *Type:* string
 
+The owner of the GitHub repository.
+
 ---
 
 ##### `repo`<sup>Required</sup> <a name="repo" id="aws-data-landing-zone.GitHubReference.property.repo"></a>
@@ -16649,6 +16085,8 @@ public readonly repo: string;
 
 - *Type:* string
 
+The repository name.
+
 ---
 
 ##### `filter`<sup>Optional</sup> <a name="filter" id="aws-data-landing-zone.GitHubReference.property.filter"></a>
@@ -16658,6 +16096,16 @@ public readonly filter: string;
 ```
 
 - *Type:* string
+
+For a complete list of filters see https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token.
+
+Some common Examples:
+- specific environment `environment:ENVIRONMENT-NAME`
+- specific branch `ref:refs/heads/BRANCH-NAME`
+- specific tag `ref:refs/tags/TAG-NAME`
+- only PRs `pull_request`
+
+A `*` can be used for most parts like `ENVIRONMENT-NAME`, `BRANCH-NAME`, `TAG-NAME`
 
 ---
 
@@ -17732,7 +17180,6 @@ public readonly regional: LogGlobalStack[];
 
 - *Type:* <a href="#aws-data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]
 
----
 
 ### MandatoryTags <a name="MandatoryTags" id="aws-data-landing-zone.MandatoryTags"></a>
 

@@ -5,10 +5,8 @@ import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-read
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import { AuditStacks, DataLandingZoneProps, DLzAccount, GlobalVariables, LogStacks } from './data-landing-zone-types';
 import { Report } from './lib/report';
-import { LogRegionalStack, ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
+import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
-import { AuditRegionalStack } from './stacks/organization/security/audit/regional-stack';
-import { LogGlobalStack } from './stacks/organization/security/log/global-stack';
 import { WorkloadGlobalStack } from './stacks/organization/workloads/base/global-stack';
 import { WorkloadRegionalStack } from './stacks/organization/workloads/base/regional-stack';
 import {
@@ -214,39 +212,38 @@ export class DataLandingZone {
   };
 
   private stageLog() {
-    const ou = 'security';
-    const account = 'log';
-
-    const waveGlobal = this.pipeline.addWave('security--log--global');
-    const stageGlobal = waveGlobal.addStage('global');
-    const logGlobal = new LogGlobalStack(this.app, {
-      stage: stageGlobal,
-      name: { ou, account, stack: 'global', region: this.props.regions.global },
-      env: {
-        account: this.props.organization.ous.security.accounts.log.accountId,
-        region: this.props.regions.global,
-      },
-    });
-
-    const waveRegional = this.pipeline.addWave('security--log--regional');
-    const stageRegional = waveRegional.addStage('regional');
-    const logRegionalStacks: AuditRegionalStack[] = [];
-    for (const region of this.props.regions.regional) {
-      const logRegional = new LogRegionalStack(this.app, {
-        stage: stageRegional,
-        name: { ou, account, stack: 'regional', region },
-        env: {
-          account: this.props.organization.ous.security.accounts.log.accountId,
-          region: region,
-        },
-      });
-      logRegionalStacks.push(logRegional);
-    }
+    // const ou = 'security';
+    // const account = 'log';
+    // const waveGlobal = this.pipeline.addWave('security--log--global');
+    // const stageGlobal = waveGlobal.addStage('global');
+    // const logGlobal = new LogGlobalStack(this.app, {
+    //   stage: stageGlobal,
+    //   name: { ou, account, stack: 'global', region: this.props.regions.global },
+    //   env: {
+    //     account: this.props.organization.ous.security.accounts.log.accountId,
+    //     region: this.props.regions.global,
+    //   },
+    // });
+    //
+    // const waveRegional = this.pipeline.addWave('security--log--regional');
+    // const stageRegional = waveRegional.addStage('regional');
+    // const logRegionalStacks: AuditRegionalStack[] = [];
+    // for (const region of this.props.regions.regional) {
+    //   const logRegional = new LogRegionalStack(this.app, {
+    //     stage: stageRegional,
+    //     name: { ou, account, stack: 'regional', region },
+    //     env: {
+    //       account: this.props.organization.ous.security.accounts.log.accountId,
+    //       region: region,
+    //     },
+    //   });
+    //   logRegionalStacks.push(logRegional);
+    // }
 
     return {
-      global: logGlobal,
-      regional: logRegionalStacks,
-    };
+      // global: logGlobal,
+      // regional: logRegionalStacks,
+    } satisfies LogStacks;
   };
 
   private stageAudit() {
@@ -265,25 +262,24 @@ export class DataLandingZone {
     },
     this.props);
 
-    const waveRegional = this.pipeline.addWave('security--audit--regional');
-    const stageRegional = waveRegional.addStage('regional');
-    const auditRegionalStacks: AuditRegionalStack[] = [];
-    for (const region of this.props.regions.regional) {
-      const auditRegional = new AuditRegionalStack(this.app, {
-        stage: stageRegional,
-        name: { ou, account, stack: 'regional', region: region },
-        env: {
-          account: this.props.organization.ous.security.accounts.audit.accountId,
-          region: region,
-        },
-      });
-      auditRegionalStacks.push(auditRegional);
-    }
+    // const waveRegional = this.pipeline.addWave('security--audit--regional');
+    // const stageRegional = waveRegional.addStage('regional');
+    // const auditRegionalStacks: AuditRegionalStack[] = [];
+    // for (const region of this.props.regions.regional) {
+    //   const auditRegional = new AuditRegionalStack(this.app, {
+    //     stage: stageRegional,
+    //     name: { ou, account, stack: 'regional', region: region },
+    //     env: {
+    //       account: this.props.organization.ous.security.accounts.audit.accountId,
+    //       region: region,
+    //     },
+    //   });
+    //   auditRegionalStacks.push(auditRegional);
+    // }
 
     return {
       global: auditGlobalStack,
-      regional: auditRegionalStacks,
-    };
+    } satisfies AuditStacks;
   };
 
   private stageWorkloadGlobalStacks() {

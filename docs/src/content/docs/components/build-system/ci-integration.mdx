@@ -1,0 +1,336 @@
+---
+title: CI Integration
+description: Build System - CI Integration
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone (DLZ) construct offers built-in support to streamline authentication between AWS and CI/CD
+systems, enhancing security and simplifying setup processes.
+
+Relevant API References:
+- [DeploymentPlatform](/reference/api#deploymentplatform)
+
+## GitHub Actions
+
+DLZ facilitates seamless integration with GitHub Actions using OpenID Connect (OIDC). OIDC is recommended over
+long-lived IAM credentials due to its enhanced security and flexibility. For detailed information, refer to the
+official documentation from [Github](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+or
+[AWS](https://aws.amazon.com/blogs/security/use-iam-roles-to-connect-github-actions-to-actions-in-aws/)
+
+We first need to configure the AWS side and then pass the generated IAM Role ARN to the GitHub Actions workflow.
+
+### 1. Config AWS
+
+:::note
+The OIDC role has to be created before it can be used by GitHub Actions. This creates a "chicken and egg" problem and
+requires manual deployment of the `management` stack. This only has to be done manually once as setup for the OIDC
+integration, more details at the end of this section.
+:::
+
+
+The following section demonstrates how to configure OIDC integration for a sample repository.
+This example uses the [DataChefHQ/data-landing-zone-example-typescript](https://github.com/DataChefHQ/data-landing-zone-example-typescript)
+repository. Ensure you replace the placeholders with values specific to your setup.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    const dlz = new DataLandingZone(app, {
+      ...
+      deploymentPlatform: {
+        gitHub: {
+          references: [
+            { owner: 'DataChefHQ', repo: 'data-landing-zone-example-typescript ' },
+            // { owner: "DataChefHQ", repo: 'recipes_data-landing-zone_data-landing-zone-sandbox', filter: "refs/heads/main"}
+          ],
+        },
+      },
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+  ```python
+  dlz.DataLandingZone(app,
+    ...
+    deployment_platform=dlz.DeploymentPlatform(
+        git_hub=dlz.GitHub(
+            references=[
+                dlz.GitHubReference(owner='DataChefHQ', repo='data-landing-zone-example-typescript'),
+                # dlz.GitHubReference(owner='DataChefHQ', repo='recipes_data-landing-zone_data-landing-zone-sandbox', filter='main')
+            ]
+        )
+    )
+  )
+  ```
+  </Fragment>
+</DualCode>
+
+The example above does not specify the `filter` property, which means all environments, tags, branches and PRs can
+assume the generated IAM Role to authenticate with AWS. For a complete list of filters see the
+[Github documentation](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token)
+
+Some common Examples:
+- `environment:ENVIRONMENT-NAME` - Specific environment
+- `ref:refs/heads/BRANCH-NAME` - Specific branch
+- `ref:refs/tags/TAG-NAME` - Specific tag
+- `pull_request` - Only PRs
+
+A `*` can be used for most parts of the `ENVIRONMENT-NAME`, `BRANCH-NAME`, `TAG-NAME`
+
+#### Manual setup deployment
+
+The OIDC role created by the configuration above has to happen before it can be used by GitHub Actions. This creates
+a "chicken and egg" problem and requires manual deployment of the `management` stack. This only has to be done
+manually once as setup for the OIDC integration.
+
+```bash
+cdk deploy "root--global_management_*"
+```
+
+After deployment, the OIDC role ARN can be found in the `dlz-global` stack outputs with the name
+`dlz-global-git-hub-deploy-role`. It will be in this format:
+
+```
+arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
+```
+
+----
+
+Relevant API References:
+- [DeploymentPlatformGitHub](/reference/api#deploymentplatformgithub--1)
+- [GitHubReference](/reference/api#githubreference)
+
+### 2. Use within GitHub workflows
+
+The GitHub workflow for the given repository can now be updated to use the OIDC role ARN.
+It is important to set the `permissions` so that `aws-actions/configure-aws-credentials@v4` works correctly.
+
+This workflow can be used to do a CDK diff when a PR is opened or synchronized. It can also be triggered manually.
+```yaml title=".github/workflows/diff.yml" {12-15, 26-30}
+name: Diff
+on:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch: {}
+env:
+  FORCE_COLOR: 1
+jobs:
+  deploy:
+    name: CDK Diff and Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install ci
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
+          aws-region: YOUR_MANAGEMENT_ACCOUNT_GLOBAL_REGION
+      - name: CDK diff
+        run: "cdk diff \"**\""
+```
+
+This workflow can be used to do a CDK deploy when a PR is merged. It can also be triggered manually.
+```yaml title=".github/workflows/deploy.yml"
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+env:
+  FORCE_COLOR: 1
+jobs:
+  deploy:
+    name: CDK Diff and Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install ci
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
+          aws-region: YOUR_MANAGEMENT_ACCOUNT_GLOBAL_REGION
+      - name: CDK diff
+        run: npm run diff
+      - name: CDK deploy
+        run: "cdk deploy \"**\" --require-approval never --progress events --concurrency 10"
+```
+
+It is possible to split the deployment of the `development` and `production` workload accounts and place an approval step
+in the middle. This requires knowledge of the correct CDK commands to use. The example below demonstrates this.
+
+
+<details>
+  <summary>
+   Click to show the **Advance Deploy Workflow**
+  </summary>
+
+  Ensure that the the `production` GitHub environment exists and is configured to require manual approval. See the
+  [GitHub documentation](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment#deployment-protection-rules)
+  for more information.
+
+  This workflow first builds the CDK cloud assembly and caches the assets. It then deploys the Management and Security
+  Phases. Then it deploys the all the `type: DlzAccountType.DEVELOP` workload stacks. The last job deploys the
+  `type: DlzAccountType.PRODUCTION` workload stacks. But this job will not start as it has the `environment: production`
+  property set and will only start after manual Approval has been given on GitHub.
+
+  ```yaml title=".github/workflows/deploy.yml"
+  name: Deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {} # While testing only
+env:
+  FORCE_COLOR: 1
+jobs:
+  synth:
+    name: Build and Synth
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install ci
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
+          aws-region: YOUR_MANAGEMENT_ACCOUNT_GLOBAL_REGION
+      - name: CDK Synth
+        run: npm run cdk -- synth --output ./cloud_assembly_output
+      - name: Cache CDK Assets
+        uses: actions/cache/save@v4
+        with:
+          path: ./
+          key: "cdk-assets-${{ github.sha }}"
+
+  root:
+    needs:
+      - synth
+    uses: ./.github/workflows/cdk-diff-deploy-cloud-assembly.yml
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    secrets: inherit
+    with:
+      name: Root Deploy
+      stack_selection: "root--*"
+
+  security:
+    needs:
+      - root
+    uses: ./.github/workflows/cdk-diff-deploy-cloud-assembly.yml
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    secrets: inherit
+    with:
+      name: Security Deploy
+      stack_selection: "security--*"
+
+  workloads-development:
+    needs:
+      - security
+    uses: ./.github/workflows/cdk-diff-deploy-cloud-assembly.yml
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    secrets: inherit
+    with:
+      name: Workloads Development Deploy
+      stack_selection: "*_development--*_*"
+
+  workloads-production:
+    environment: production
+    needs:
+      - workloads-development
+    needs:
+      - security
+    uses: ./.github/workflows/cdk-diff-deploy-cloud-assembly.yml
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    secrets: inherit
+    with:
+      name: Workloads Production Deploy
+      stack_selection: "*_production--*_*"
+  ```
+
+  Create following composable action file in the `.github/workflows` directory as it is used in the above workflow to
+  prevent code duplication.
+
+  ```yaml title=".github/workflows/cdk-diff-deploy-cloud-assembly.yml"
+  name: Diff CDK Application
+on:
+  workflow_call:
+    inputs:
+      name:
+        description: The name of the job
+        required: true
+        type: string
+      stack_selection:
+        description: The CDK stack selector
+        required: true
+        type: string
+env:
+  FORCE_COLOR: 1
+jobs:
+  job:
+    name: ${{ inputs.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch CDK Assets
+        uses: actions/cache/restore@v4
+        with:
+          path: ./
+          key: "cdk-assets-${{ github.sha }}"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
+          aws-region: YOUR_MANAGEMENT_ACCOUNT_GLOBAL_REGION
+      - name: CDK diff
+        run: npm run cdk -- diff '${{ inputs.stack_selection }}' --exclusively --app ./cloud_assembly_output
+      - name: CDK deploy
+        run: npm run cdk -- deploy '${{ inputs.stack_selection }}' --require-approval never --concurrency 10 --exclusively --app ./cloud_assembly_output
+  ```
+</details>

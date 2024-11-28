@@ -142,6 +142,9 @@
       "steps": [
         {
           "exec": "jsii-docgen -o API.md"
+        },
+        {
+          "exec": "bash post-docgen.sh"
         }
       ]
     },

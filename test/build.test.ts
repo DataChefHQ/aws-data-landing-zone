@@ -461,7 +461,7 @@ const configBase: DataLandingZoneProps = {
     gitHub: {
       references: [
         { owner: 'DataChefHQ', repo: 'recipes_data-landing-zone_data-landing-zone-sandbox' },
-        // { owner: "DataChefHQ", repo: 'recipes_data-landing-zone_data-landing-zone-sandbox', filter: "main"}
+        // { owner: "DataChefHQ", repo: 'recipes_data-landing-zone_data-landing-zone-sandbox', filter: "refs/heads/main"}
       ],
     },
   },
@@ -655,17 +655,17 @@ describe('Build', () => {
     const managementTemplate: Template = Template.fromStack(dlz.managementStack);
     expect(cdkTemplateToJson(managementTemplate)).toMatchSnapshot('managementTemplate snapshot');
 
-    const logStacksGlobalTemplate: Template = Template.fromStack(dlz.logStacks.global);
-    expect(logStacksGlobalTemplate.toJSON()).toMatchSnapshot('logStacksGlobalTemplate snapshot');
+    // const logStacksGlobalTemplate: Template = Template.fromStack(dlz.logStacks.global);
+    // expect(logStacksGlobalTemplate.toJSON()).toMatchSnapshot('logStacksGlobalTemplate snapshot');
 
-    const logStacksRegionalTemplates: Template[] = dlz.logStacks.regional.map(stack => Template.fromStack(stack));
-    logStacksRegionalTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('logStacksRegionalTemplates snapshot'));
+    // const logStacksRegionalTemplates: Template[] = dlz.logStacks.regional.map(stack => Template.fromStack(stack));
+    // logStacksRegionalTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('logStacksRegionalTemplates snapshot'));
 
     const auditStacksGlobalTemplate: Template = Template.fromStack(dlz.auditStacks.global);
     expect(auditStacksGlobalTemplate.toJSON()).toMatchSnapshot('auditStacksGlobalTemplate snapshot');
 
-    const auditStacksRegionalTemplates: Template[] = dlz.auditStacks.regional.map(stack => Template.fromStack(stack));
-    auditStacksRegionalTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('auditStacksRegionalTemplates snapshot'));
+    // const auditStacksRegionalTemplates: Template[] = dlz.auditStacks.regional.map(stack => Template.fromStack(stack));
+    // auditStacksRegionalTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('auditStacksRegionalTemplates snapshot'));
 
     const workloadGlobalStacksTemplates: Template[] = dlz.workloadGlobalStacks.map(stack => Template.fromStack(stack));
     workloadGlobalStacksTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('workloadGlobalStacksTemplates snapshot'));

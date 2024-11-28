@@ -14,7 +14,7 @@ import {
   NetworkAddress,
   SlackChannel,
 } from './constructs';
-import { AuditGlobalStack, AuditRegionalStack, LogGlobalStack } from './stacks';
+import { AuditGlobalStack } from './stacks';
 
 /**
  * Control Tower Supported Regions as listed here
@@ -310,8 +310,25 @@ export interface SecurityHubNotification {
 }
 
 export interface GitHubReference {
+  /**
+   * The owner of the GitHub repository
+   */
   readonly owner: string;
+  /**
+   * The repository name
+   */
   readonly repo: string;
+  /**
+   * For a complete list of filters see https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token
+   *
+   * Some common Examples:
+   * - specific environment `environment:ENVIRONMENT-NAME`
+   * - specific branch `ref:refs/heads/BRANCH-NAME`
+   * - specific tag `ref:refs/tags/TAG-NAME`
+   * - only PRs `pull_request`
+   *
+   * A `*` can be used for most parts like `ENVIRONMENT-NAME`, `BRANCH-NAME`, `TAG-NAME`
+   */
   readonly filter?: string;
 }
 
@@ -481,13 +498,13 @@ export interface DataLandingZoneProps {
 }
 
 export interface LogStacks {
-  readonly global: LogGlobalStack;
-  readonly regional: LogGlobalStack[];
+  // readonly global: LogGlobalStack;
+  // readonly regional: LogGlobalStack[];
 }
 
 export interface AuditStacks {
   readonly global: AuditGlobalStack;
-  readonly regional: AuditRegionalStack[];
+  // readonly regional: AuditRegionalStack[];
 }
 
 export interface GlobalVariablesNcp1 {
