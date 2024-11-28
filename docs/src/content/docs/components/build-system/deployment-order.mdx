@@ -10,7 +10,7 @@ The [cdk-express-pipeline](https://github.com/rehanvdm/cdk-express-pipeline) is 
 enabling the controlled deployment of resources. This enables deployments from any build
 systems, like GitHub, GitLab, Jenkins, and even local environments.
 
-Internally, the DLZ creates `layers`, which is a collection of `waves`. Each `layer` typically consists of a
+Internally, the DLZ creates `phases`, which is a collection of `waves`. Each `phase` typically consists of a
 `global` `wave` and optionally one or more `regional` `waves` which are deployed sequentially. Waves contains `stages`
 which are groupings of `stacks` deployed in parallel. For the DLZ the `stage` and dependencies between `stacks` within
 the same `stage` are of little importance as we rely on `waves` only.
@@ -45,14 +45,14 @@ The regions are defined in the `config`, you can only have a single Global regio
 
 To recap:
 
-- `Layer` - A collection of `Waves`, this is a logical grouping only, and not implemented in code. Deployed sequentially, one after the other.
+- `Phase` - A collection of `Waves`, this is a logical grouping only, and not implemented in code. Deployed sequentially, one after the other.
 - `Wave` - A collection of `Stages`. Deployed sequentially, one after the other.
 - `Stage` - A collection of `Stacks`. Deployed in parallel.
 - `Stack` - A collection of ` AWS resources`. Deployed in parallel when possible as determined by stack dependencies within the `Stage`.
 
 ```mermaid
 graph
-    subgraph base["Layer"]
+    subgraph base["Phase"]
       direction TB
 
       subgraph global["Wave"]
@@ -96,7 +96,7 @@ Conceptually the DLZ deployment order has the following structure:
 
 ```mermaid
 graph
-    subgraph root["Root Layer"]
+    subgraph root["Root Phase"]
       direction TB
       subgraph rootGlobalWave["Global Wave"]
         direction TB
@@ -107,7 +107,7 @@ graph
       end
     end
 
-    subgraph secOuA["Security OU - Audit Layer"]
+    subgraph secOuA["Security OU - Audit Phase"]
       direction TB
       subgraph secOuAGlobal["Global Wave"]
         direction TB
@@ -126,7 +126,7 @@ graph
 %%      secOuAGlobal --> secOuARegional
     end
 
-%%    subgraph secOuL["Security OU - Log Layer"]
+%%    subgraph secOuL["Security OU - Log Phase"]
 %%      direction TB
 %%      subgraph secOuLGlobal["Global Wave"]
 %%        direction TB
@@ -145,7 +145,7 @@ graph
 %%      secOuLGlobal --> secOuLRegional
 %%    end
 
-    subgraph base["Workload OU - Base Layer"]
+    subgraph base["Workload OU - Base Phase"]
       direction TB
       subgraph global["Global Wave"]
         direction TB
@@ -180,7 +180,7 @@ graph
       global --> regional
     end
 
-    subgraph ncp1["Workload OU - NCP1 Layer"]
+    subgraph ncp1["Workload OU - NCP1 Phase"]
       direction TB
       subgraph ncp1G["Global Wave"]
         direction TB
@@ -215,7 +215,7 @@ graph
 %%      ncp1G --> ncp1R
     end
 
-    subgraph ncp2["Workload OU - NCP2 Layer"]
+    subgraph ncp2["Workload OU - NCP2 Phase"]
       direction TB
       subgraph ncp2G["Global Wave"]
         direction TB
@@ -251,7 +251,7 @@ graph
       ncp2G --> ncp2R
     end
 
-    subgraph ncp3["Workload OU - NCP3 Layer"]
+    subgraph ncp3["Workload OU - NCP3 Phase"]
       direction TB
       subgraph ncp3G["Global Wave"]
         direction TB
@@ -286,7 +286,7 @@ graph
       ncp3G --> ncp3R
     end
 
-    subgraph dsp1["Workload OU - DSP1 Layer"]
+    subgraph dsp1["Workload OU - DSP1 Phase"]
       direction TB
       subgraph dsp1G["Global Wave"]
         direction TB
@@ -330,20 +330,20 @@ graph
     ncp3 --> dsp1
 ```
 
-A brief description of the resources deployed in each layer:
+A brief description of the resources deployed in each phase:
 
-- **Root Layer** - Deploys to the `root` account, resources like the Organisation's SCPs, and IAM Identity Center resources etc.
-- **Security OU - Audit Layer** - Deploys to the `audit` account, resources like SecurityHub and Chatbot notifications.
-- **Workload OU - Base Layer** - Deploys to each account specified under workloads. IAM roles, which is a global service, would for example be
+- **Root Phase** - Deploys to the `root` account, resources like the Organisation's SCPs, and IAM Identity Center resources etc.
+- **Security OU - Audit Phase** - Deploys to the `audit` account, resources like SecurityHub and Chatbot notifications.
+- **Workload OU - Base Phase** - Deploys to each account specified under workloads. IAM roles, which is a global service, would for example be
 deployed in the Global wave. While resources such as a VPCs will be deployed in both the Global and the Regional wave as per configuration.
-The majority of the services are deployed in this layer.
-- **Workload OU - NCP1 + NCP2 + NCP3 Layers** - NCP stands for **Network Connections Phase**, these layers are logically
+The majority of the services are deployed in this phase.
+- **Workload OU - NCP1 + NCP2 + NCP3 Phases** - NCP stands for **Network Connections Phase**, these phases are logically
 numbered to indicate the order of deployment to control dependencies between accounts and regions. It will deploy
 resources related to networking that require multiple steps, like VPC Peering. For example, for VPC Peering to work,
 NCP1 defines the peering roles. NCP2 creates the peering connections, knowing that it can use the cross account roles
 in all accounts. NCP3 creates the route table entries to allow traffic to flow between the VPCs knowing the
 VPC peering connections have been established.
-- **Workload OU - DSP1 Layer** - DSP is the abbreviation for **Data Services Phase**, this layer deploys resources
+- **Workload OU - DSP1 Phase** - DSP is the abbreviation for **Data Services Phase**, this phase deploys resources
 like Lake Formation, etc.
 
 ## Stacks
@@ -488,8 +488,8 @@ ORDER OF DEPLOYMENT
     📄 dlz-dsp1-regional (workloads--dsp1--regional_production--production_us-east-1)
 ```
 
-DLZ is only using Waves and not Stages to control dependency, so let's break this down into the "Layers" of deployment
-and focus on the stacks (removing the stages) that are deployed in each layer.
+DLZ is only using Waves and not Stages to control dependency, so let's break this down into the "Phases" of deployment
+and focus on the stacks (removing the stages) that are deployed in each phase.
 
 Each stack is identified by the `📄` symbol, and has the following format:
 
@@ -500,19 +500,19 @@ Each stack is identified by the `📄` symbol, and has the following format:
 - `<stack-name>` - The name of the stack as seen in the AWS Console
 - `<stack-id>` - The unique identifier of the stack that we use to target for CDK commands like diff, deploy, destroy etc.
 
-**Root Layer**
+**Root Phase**
 ```
 🌊 root--global
     📄 dlz-global (root--global_management_eu-west-1)
 ```
 
-**Security OU - Audit Layer**
+**Security OU - Audit Phase**
 ```
 🌊 security--audit--global
     📄 dlz-global (security--audit--global_global_eu-west-1)
 ```
 
-**Workload OU - Base Layer**
+**Workload OU - Base Phase**
 ```
 🌊 workloads--base--global
     📄 dlz-global (workloads--base--global_development--development_eu-west-1)
@@ -522,14 +522,14 @@ Each stack is identified by the `📄` symbol, and has the following format:
     📄 dlz-regional (workloads--base--regional_production--production_us-east-1)
 ```
 
-**Workload OU - NCP1 Layer**
+**Workload OU - NCP1 Phase**
 ```
 🌊 workloads--ncp1--global
     📄 dlz-ncp1-global (workloads--ncp1--global_development--development_eu-west-1)
     📄 dlz-ncp1-global (workloads--ncp1--global_production--production_eu-west-1)
 ```
 
-**Workload OU - NCP2 Layer**
+**Workload OU - NCP2 Phase**
 ```
 🌊 workloads--ncp2--global
     📄 dlz-ncp2-global (workloads--ncp2--global_development--development_eu-west-1)
@@ -539,7 +539,7 @@ Each stack is identified by the `📄` symbol, and has the following format:
     📄 dlz-ncp2-regional (workloads--ncp2--regional_production--production_us-east-1)
 ```
 
-**Workload OU - NCP3 Layer**
+**Workload OU - NCP3 Phase**
 ```
 🌊 workloads--ncp3--global
     📄 dlz-ncp3-global (workloads--ncp3--global_development--development_eu-west-1)
@@ -549,7 +549,7 @@ Each stack is identified by the `📄` symbol, and has the following format:
     📄 dlz-ncp3-regional (workloads--ncp3--regional_production--production_us-east-1)
 ```
 
-**Workload OU - DSP1 Layer**
+**Workload OU - DSP1 Phase**
 ```
 🌊 workloads--dsp1--global
     📄 dlz-dsp1-global (workloads--dsp1--global_development--development_eu-west-1)
@@ -565,23 +565,23 @@ The DLZ uses stack IDs to enable precise targeting of specific stacks, allowing 
 Below are some commonly used patterns that can be applied with the CDK command:
 
 - `**` - Target all stacks
-- `root--*` - Target all stacks in the root layer
-- `security--*` - Target all stacks in the security layer
-- `workloads--*` - Target all workload stacks in all layers
-- `workloads--base--*` - Target all workload stacks of the base layer
-- `workloads--ncp*` - Target all workload stacks of all the NCP layers
-- `workloads--ncp1--*` - Target all workload stacks of the NCP1 layer
-- `workloads--ncp2--*` - Target all workload stacks of the NCP2 layer
-- `workloads--ncp3--*` - Target all workload stacks of the NCP3 layer
-- `workloads--dsp1--*` - Target all workload stacks of the DSP1 layer
+- `root--*` - Target all stacks in the root phase
+- `security--*` - Target all stacks in the security phase
+- `workloads--*` - Target all workload stacks in all phases
+- `workloads--base--*` - Target all workload stacks of the base phase
+- `workloads--ncp*` - Target all workload stacks of all the NCP phases
+- `workloads--ncp1--*` - Target all workload stacks of the NCP1 phase
+- `workloads--ncp2--*` - Target all workload stacks of the NCP2 phase
+- `workloads--ncp3--*` - Target all workload stacks of the NCP3 phase
+- `workloads--dsp1--*` - Target all workload stacks of the DSP1 phase
 
 Stacks can be targeted by global/regional waves as well, for example:
-- `workloads--base--global_*` - Target all workload global stacks in the base layer
-- `workloads--base--regional_*` - Target all workload regional stacks in the base layer
+- `workloads--base--global_*` - Target all workload global stacks in the base phase
+- `workloads--base--regional_*` - Target all workload regional stacks in the base phase
 
 They can also be targeted by account type, for example:
-- `*_*--development_*` - Target all stacks in the workload layer of type `development` (specified in the config by `type: DlzAccountType.DEVELOP`)
-- `*_*--production_*` - Target all stacks in the workload layer of type `production` (specified in the config by `type: DlzAccountType.PRODUCTION`)
+- `*_*--development_*` - Target all stacks in the workload phase of type `development` (specified in the config by `type: DlzAccountType.DEVELOP`)
+- `*_*--production_*` - Target all stacks in the workload phase of type `production` (specified in the config by `type: DlzAccountType.PRODUCTION`)
 
 
 ### Basic deployment
@@ -594,7 +594,7 @@ cdk deploy "**"
 
 ### Advanced deployment
 
-The advance deployment deploys the layers individually, allowing for manual approval steps between the deployment of
+The advance deployment deploys the phases individually, allowing for manual approval steps between the deployment of
 the `development` and `production` accounts in the workload OU.
 
 ```bash

@@ -195,7 +195,7 @@ in the middle. This requires knowledge of the correct CDK commands to use. The e
   for more information.
 
   This workflow first builds the CDK cloud assembly and caches the assets. It then deploys the Management and Security
-  Layers. Then it deploys the all the `type: DlzAccountType.DEVELOP` workload stacks. The last job deploys the
+  Phases. Then it deploys the all the `type: DlzAccountType.DEVELOP` workload stacks. The last job deploys the
   `type: DlzAccountType.PRODUCTION` workload stacks. But this job will not start as it has the `environment: production`
   property set and will only start after manual Approval has been given on GitHub.
 
