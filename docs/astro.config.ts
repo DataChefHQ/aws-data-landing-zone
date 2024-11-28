@@ -32,6 +32,7 @@ export default defineConfig({
             {
                 label: 'Introduction', slug: 'introduction'
             },
+            // TODO: Complete docs
             // {
             //     label: 'Getting Started', slug: 'getting-started'
             // },
@@ -47,6 +48,7 @@ export default defineConfig({
             {
                 label: 'Components',
                 items: [
+                    // TODO: Complete docs
                     // {
                     //     label: 'Account Management',
                     //     items: [
@@ -108,6 +110,7 @@ export default defineConfig({
                 label: 'Reference',
                 items: [
                     { label: 'API',  slug: 'reference/api'},
+                    // TODO: Complete docs
                     // { label: 'Defaults',  slug: 'introduction'},
                     // { label: 'Config sharing',  slug: 'introduction'},
                     // { label: 'Scripts & commands',  slug: 'introduction'},

@@ -1,4 +1,4 @@
-import { awscdk, javascript } from 'projen';
+import { awscdk, javascript, JsonPatch } from 'projen';
 import { ArrowParens, TrailingComma } from 'projen/lib/javascript';
 
 const project = new awscdk.AwsCdkConstructLibrary({
@@ -115,5 +115,8 @@ project.gitignore.addPatterns('*.DS_Store');
 project.gitignore.addPatterns('.vscode/');
 
 project.tasks.tryFind('docgen')?.exec('bash post-docgen.sh');
+
+const ghReleaseWorkflow = project.tryFindObjectFile('.github/workflows/release.yml');
+ghReleaseWorkflow?.patch(JsonPatch.add('/on/push/paths-ignore', ['docs/**']));
 
 project.synth();
