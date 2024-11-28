@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import rehypeMermaid from "rehype-mermaid";
+import * as rehypeMermaid from "rehype-mermaid";
 import starlightImageZoom from 'starlight-image-zoom'
 
 let site: string;
@@ -125,7 +125,7 @@ export default defineConfig({
         plugins: [starlightImageZoom()],
 		})],
     markdown: {
-        rehypePlugins: [ [rehypeMermaid, {strategy: "img-png", mermaidConfig:{ theme: 'neutral' } }] ], // CSS styles do not apply, have to inline
+        rehypePlugins: [ [rehypeMermaid.default, {strategy: "img-png", mermaidConfig:{ theme: 'neutral' } }] ], // CSS styles do not apply, have to inline
         // rehypePlugins: [ rehypeMermaid ], //For occasional testing, see the SVG component and class names
     },
 });
