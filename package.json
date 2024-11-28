@@ -1,9 +1,9 @@
 {
-  "name": "@DataChefHQ/data-landing-zone",
+  "name": "aws-data-landing-zone",
   "description": "AWS CDK Data Landing Zone construct",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git"
+    "url": "https://github.com/DataChefHQ/aws-data-landing-zone.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -102,7 +102,7 @@
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "version": "0.0.0",
   "jest": {
@@ -166,8 +166,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "recipes_dlz",
-        "module": "recipes_dlz"
+        "distName": "aws-data-landing-zone",
+        "module": "aws_data_landing_zone"
       }
     },
     "tsc": {
