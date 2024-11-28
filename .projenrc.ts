@@ -114,4 +114,6 @@ project.gitignore.addPatterns('*.d.ts');
 project.gitignore.addPatterns('*.DS_Store');
 project.gitignore.addPatterns('.vscode/');
 
+project.tasks.tryFind('docgen')?.exec('bash post-docgen.sh');
+
 project.synth();
