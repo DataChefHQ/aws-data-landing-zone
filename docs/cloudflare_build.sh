@@ -1,5 +1,7 @@
 #!/bin/bash
 
+npx playwright install
+
 if [ "$CF_PAGES_BRANCH" = "main" ]; then
   npm run "build:production"
 else

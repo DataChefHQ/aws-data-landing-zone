@@ -14324,7 +14324,7 @@ const auditStacks: AuditStacks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.AuditStacks.property.global">global</a></code> | <code><a href="#@DataChefHQ/data-landing-zone.AuditGlobalStack">AuditGlobalStack</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.AuditStacks.property.global">global</a></code> | <code><a href="#aws-data-landing-zone.AuditGlobalStack">AuditGlobalStack</a></code> | *No description.* |
 
 ---
 
@@ -14338,7 +14338,7 @@ public readonly global: AuditGlobalStack;
 
 ---
 
-### BaseSharedTagProps <a name="BaseSharedTagProps" id="@DataChefHQ/data-landing-zone.BaseSharedTagProps"></a>
+### BaseSharedTagProps <a name="BaseSharedTagProps" id="aws-data-landing-zone.BaseSharedTagProps"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.BaseSharedTagProps.Initializer"></a>
 
@@ -16059,9 +16059,9 @@ const gitHubReference: GitHubReference = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@DataChefHQ/data-landing-zone.GitHubReference.property.owner">owner</a></code> | <code>string</code> | The owner of the GitHub repository. |
-| <code><a href="#@DataChefHQ/data-landing-zone.GitHubReference.property.repo">repo</a></code> | <code>string</code> | The repository name. |
-| <code><a href="#@DataChefHQ/data-landing-zone.GitHubReference.property.filter">filter</a></code> | <code>string</code> | For a complete list of filters see https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token. |
+| <code><a href="#aws-data-landing-zone.GitHubReference.property.owner">owner</a></code> | <code>string</code> | The owner of the GitHub repository. |
+| <code><a href="#aws-data-landing-zone.GitHubReference.property.repo">repo</a></code> | <code>string</code> | The repository name. |
+| <code><a href="#aws-data-landing-zone.GitHubReference.property.filter">filter</a></code> | <code>string</code> | For a complete list of filters see https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token. |
 
 ---
 
@@ -17152,33 +17152,6 @@ import { LogStacks } from 'aws-data-landing-zone'
 
 const logStacks: LogStacks = { ... }
 ```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.LogStacks.property.global">global</a></code> | <code><a href="#aws-data-landing-zone.LogGlobalStack">LogGlobalStack</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.LogStacks.property.regional">regional</a></code> | <code><a href="#aws-data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]</code> | *No description.* |
-
----
-
-##### `global`<sup>Required</sup> <a name="global" id="aws-data-landing-zone.LogStacks.property.global"></a>
-
-```typescript
-public readonly global: LogGlobalStack;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.LogGlobalStack">LogGlobalStack</a>
-
----
-
-##### `regional`<sup>Required</sup> <a name="regional" id="aws-data-landing-zone.LogStacks.property.regional"></a>
-
-```typescript
-public readonly regional: LogGlobalStack[];
-```
-
-- *Type:* <a href="#aws-data-landing-zone.LogGlobalStack">LogGlobalStack</a>[]
 
 
 ### MandatoryTags <a name="MandatoryTags" id="aws-data-landing-zone.MandatoryTags"></a>
