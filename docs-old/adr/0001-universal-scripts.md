@@ -90,8 +90,8 @@ and then the script language. This is a lot of work and will not be done now, bu
 
 ## Consequences
 
-Option 1 was explored in detail in https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone/tree/feature/universal-scripts-failed-attempt
-and https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone-sandbox/tree/feature/universal-scripts-failed-attempt.
+Option 1 was explored in detail in https://github.com/DataChefHQ/aws-data-landing-zone/tree/feature/universal-scripts-failed-attempt
+and https://github.com/DataChefHQ/aws-data-landing-zone-sandbox/tree/feature/universal-scripts-failed-attempt.
 The projen project also contains a python test zip of how the scripts were used in Python. The TS version is working 
 but the Python version is in a broken state. 
 

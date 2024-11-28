@@ -8,12 +8,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.5.0',
   typescriptVersion: '~5.5.0',
-  name: '@DataChefHQ/data-landing-zone', //TODO: Change back when using NPM
-  // name: 'data-landing-zone', //TODO: Change back when using NPM
+  name: 'aws-data-landing-zone',
   description: 'AWS CDK Data Landing Zone construct',
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone.git',
+  repositoryUrl: 'https://github.com/DataChefHQ/aws-data-landing-zone.git',
   tsconfig: {
     compilerOptions: {
       sourceMap: true,
@@ -41,10 +40,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   workflowNodeVersion: '20',
-  // Publishing disabled as no secrets are set yet.
   publishToPypi: {
-    distName: 'recipes_dlz',
-    module: 'recipes_dlz',
+    distName: 'aws-data-landing-zone',
+    module: 'aws_data_landing_zone',
   },
   /* Runtime dependencies of this module that are jsii-enabled. Must be defined in peerDeps as well */
   deps: [
@@ -72,7 +70,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
     },
   },
-  npmRegistryUrl: 'https://npm.pkg.github.com',
 });
 
 
@@ -90,13 +87,6 @@ project.eslint!.addRules({
 project.package.addEngine('node', '~20.*');
 project.package.addEngine('npm', '~10.*');
 
-// `publishToPypi` needs to be specified above for the `package:python` command to be available to be used locally.
-// The `release.yml` GH Workflow will fail to publish a new GH release as teh secrets have not been set to publish to
-// PyPi in the `release_python` job. The GitHub release depends on both of these jobs. For now we need to remove the
-// `release_python` dependency so that the GH release is created. This is needed for Projen to know what the next
-// version is when it publishes.
-const releaseWorkflow = project.tryFindObjectFile('.github/workflows/release.yml');
-releaseWorkflow?.addOverride('jobs.release_github.needs', ['release', 'release_npm']);
 
 // Need to clear before compiling and packaging. Have to remove these because they are not cleared for some reason,
 // only new files are added and it causes issues especially because when changing the folder structure the whole time.
