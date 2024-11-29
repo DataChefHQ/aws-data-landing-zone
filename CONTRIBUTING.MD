@@ -33,7 +33,9 @@ git add .
 3. Create a fork form of the repository
 4. Create a branch of the `main` branch with a meaningful name
 5. Make your changes on your branch
-6. Update the documentation if necessary
+6. Update the documentation if necessary. Preview your documentation changes by running 
+   `cd docs && npm run dev:development`. A local server will be started at `http://localhost:4321/` to preview your
+    changes.
 7. Write tests for your changes
 8. Push your changes to your branch
 9. Create a PR from your branch to the `main` branch of the original repository. PR names must follow the
@@ -46,4 +48,11 @@ git add .
     - chore
 10. Add a good description of your changes in the PR, and link the issue you are working on.
 
+## Documentation Previews
+
+The documentation site is deployed with Cloudflare Pages. Cloudflare automatically deploys any branch with the prefix 
+`preview-`. Only project admins can create `preview-` branches (they are protected).
+
+If you are making many big changes and would like to preview the deployed site, reach out to an admin (comment in the
+issue) so that they can create a preview branch for you.
 
