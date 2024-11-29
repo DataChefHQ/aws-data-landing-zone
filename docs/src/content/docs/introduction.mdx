@@ -38,7 +38,7 @@ Notable features of the DLZ include:
 - Suitable for greenfield projects or integration with existing AWS resources.
 - Deployable using any build systems like GitHub, GitLab, Jenkins, or locally.
 - Generates compliance reports, reporting the Control Tower Standards, SecurityHub controls, Config Rules and
-  Service Control Policies enabled in each account.
+- Service Control Policies enabled in each account.
 - Implements an internal wave- and stage-based deployment strategy for dependency management.
 - Includes helper scripts and Standard Operating Procedures (SOPs) for routine tasks.
 - Accompanied by comprehensive documentation.
@@ -169,7 +169,8 @@ approvals in production environments.
     )
 
 app.synth()
-```
+
+````
 
   </Fragment>
 </DualCode>
@@ -217,7 +218,7 @@ graph
       end
       global --> regional
     end
-```
+````
 
 Dependencies between regions and accounts are managed by separating stacks into waves. This ensures that any
 specified SSM Parameter value is available for use in subsequent waves.

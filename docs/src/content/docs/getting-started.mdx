@@ -1,0 +1,299 @@
+---
+title: Getting Started
+description: Step-by-step guide to configuring and deploying the AWS Data Landing Zone
+---
+
+import DualCode from "../../components/DualCode.astro";
+
+# Getting Started
+
+This guide will walk you through the process of configuring and deploying the
+**AWS Data Landing Zone**. The landing zone simplifies the setup of a secure,
+scalable, and well-architected multi-account AWS environment. Let’s get started!
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following tools installed and configured:
+
+- **AWS CLI**: Installed and configured with credentials. Ensure you have
+  an **SSO User** or **IAM User** in the **management account** with
+  **admin access** or the necessary permissions to assume CDK roles
+  and perform deployments.
+- **Node.js**: Version 14 or higher.
+- **AWS CDK**: Installed globally using `npm install -g aws-cdk`.
+- **Git**: For cloning repositories.
+
+Additionally, if you plan to use the TypeScript scripts included with
+the project, you can use the **profile name** for your AWS CLI
+configuration that is specified in the `localProfile` property of the
+project configuration file.
+
+---
+
+## Step 1: Create a New CDK Project
+
+To get started, create a new AWS CDK project:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```bash
+    mkdir my-data-landing-zone
+    cd my-data-landing-zone
+    cdk init app --language=typescript
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```bash
+    mkdir my-data-landing-zone
+    cd my-data-landing-zone
+    cdk init app --language=python
+    ```
+
+  </Fragment>
+</DualCode>
+
+This initializes a new CDK project with the necessary files and folder structure.
+
+---
+
+## Step 2: Add the DataChef AWS Data Landing Zone Package
+
+Add the **DataChef** Data Landing Zone as a dependency to your project:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```bash
+    npm install aws-data-landing-zone
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```bash
+    pip install aws-data-landing-zone
+    ```
+
+  </Fragment>
+</DualCode>
+
+---
+
+## Step 3: Configuration
+
+Now you need to config the basic parameters required for deploying DLZ.
+
+**NOTE:** Make sure to replace all of the IDs with correct IDs related to your AWS
+accounts.
+
+<DualCode>
+  <Fragment slot="ts">
+    - For a complete example check [DLZ TypeScript Sample](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript).
+    ```ts
+    export const config: DataLandingZoneProps = {
+    localProfile: '', // TODO: Not required; Will be optional from next release
+    regions: {
+      global: Region.EU_WEST_1,
+      regional: [Region.US_EAST_1],
+    },
+    mandatoryTags: {
+      owner: ['backend'],
+      project: ['accounting'],
+      environment: ['development', 'staging', 'production'],
+    },
+    budgets: [
+      ...Defaults.budgets(100, 20, {}),
+    ],
+    securityHubNotifications: [
+    ],
+    organization: {
+      organizationId: 'RootOrganizationID',
+      root: {
+        accounts: {
+          management: {
+            accountId: 'YourRootAccountID',
+          },
+        },
+        controls: [],
+      },
+      ous: {
+        security: {
+          ouId: 'SecurityOrganizationUnitId',
+          accounts: {
+            log: {
+              accountId: 'YourLogsAccountID',
+            },
+            audit: {
+              accountId: 'YourAuditAccountID',
+            },
+          },
+        },
+        workloads: {
+          ouId: 'WorkloadOrganizationUnitId',
+          accounts: [
+            {
+              name: 'development',
+              accountId: 'YourDevelopmentAccountID',
+              type: DlzAccountType.DEVELOP,
+            },
+          ],
+        },
+        suspended: {
+          ouId: 'SuspendedOrganizationUnitId',
+        },
+      },
+    },
+    deploymentPlatform: {
+      gitHub: {
+        references: [
+          {
+            owner: 'DataChefHQ',
+            repo: 'data-landing-zone-example-typescript',
+          },
+        ],
+      },
+    },
+
+};
+```
+
+
+  </Fragment>
+  <Fragment slot="python">
+    - For a complete example check [DLZ Python Sample](https://github.com/DataChefHQ/aws-data-landing-zone-example-python).
+    ```python
+      DataLandingZone(
+      app,
+      local_profile="",  # TODO: Not required; Will be optional from next release
+      regions={
+          "global": Region.EU_WEST_1,
+          "regional": [Region.US_EAST_1],
+      },
+      mandatory_tags={
+          "owner": ["backend"],
+          "project": ["accounting"],
+          "environment": ["development", "staging", "production"],
+      },
+      budgets=Defaults.budgets(100, 20),
+      security_hub_notifications=[],
+      organization={
+          "organization_id": "RootOrganizationID",
+          "root": {
+              "accounts": {
+                  "management": {
+                      "account_id": "YourRootAccountID",
+                  },
+              },
+          },
+          "ous": {
+              "security": {
+                  "ou_id": "SecurityOrganizationUnitId",
+                  "accounts": {
+                      "log": {
+                          "account_id": "YourLogsAccountID",
+                      },
+                      "audit": {
+                          "account_id": "YourAuditAccountID",
+                      },
+                  },
+              },
+              "workloads": {
+                  "ou_id": "WorkloadOrganizationUnitId",
+                  "accounts": [
+                      {
+                          "name": "development",
+                          "account_id": "YourDevelopmentAccountID",
+                          "type": DlzAccountType.DEVELOP,
+                      },
+                  ],
+              },
+              "suspended": {
+                  "ou_id": "SuspendedOrganizationUnitId",
+              },
+          },
+      },
+    )
+    ```
+
+  </Fragment>
+</DualCode>
+
+---
+
+## Step 4: Add the Landing Zone to Your CDK Stack
+
+Now you need to call the Landing Zone constructs from your CDK stacks.
+
+<DualCode>
+  <Fragment slot="ts">
+    In your `lib/my-data-landing-zone-stack.ts` file, add the Data Landing Zone construct:
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import {config} from "./minimum_config";
+    import * as sns from 'aws-cdk-lib/aws-sns';
+    import { DataLandingZone } from '@DataChefHQ/data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, config)
+
+````
+
+  </Fragment>
+  <Fragment slot="python">
+    In your `main.py` file, add the Data Landing Zone construct: 
+    ```python
+      import aws_cdk as cdk
+      from aws_data_landing_zone import (
+          Defaults,
+          DlzAccountType,
+          Region,
+          DataLandingZone,
+      )
+
+      app = cdk.App()
+
+      DataLandingZone(
+        app,
+        ... # your config parameters
+      )
+
+      app.synth()
+    ```
+
+  </Fragment>
+</DualCode>
+
+---
+
+## Step 5: Deploy the Landing Zone
+
+### 5.1 Bootstrap the Environment
+
+Bootstrap your environment to prepare it for CDK deployments:
+
+```bash
+cdk bootstrap aws://ACCOUNT_ID/REGION
+
+```
+
+### 5.2 Deploy the Stacks
+
+Deploy the stack you created:
+
+```bash
+cdk deploy
+
+```
+
+### 5.3 Verify Deployment
+
+Once deployment completes, verify the resources in the AWS Management Console.
+
+---
+
+## Next Steps
+
+- Explore the documentation to learn more about advanced configurations.
+- Customize the stacks to meet your specific organizational needs.
+- Add additional controls or policies as required.

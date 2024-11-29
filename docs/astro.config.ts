@@ -33,9 +33,9 @@ export default defineConfig({
                 label: 'Introduction', slug: 'introduction'
             },
             // TODO: Complete docs
-            // {
-            //     label: 'Getting Started', slug: 'getting-started'
-            // },
+            {
+                label: 'Getting Started', slug: 'getting-started'
+            },
             // {
             //     label: 'Tutorial',
             //     collapsed: true,
