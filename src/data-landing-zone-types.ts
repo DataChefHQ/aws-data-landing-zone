@@ -409,6 +409,13 @@ export interface Network {
 }
 
 export interface DataLandingZoneProps {
+  /**
+   * The the AWS CLI profile that will be used to run the Scripts.
+   * For the `bootstrap` script, this profile must be an Admin of the root management account and it must be able to assume
+   * the `AWSControlTowerExecution` role created by ControlTower. This is an extremely powerful set of credentials and
+   * should be treated with care. The permissions can be reduced for the everyday use of the `diff` and `deploy` scripts
+   * but the `bootstrap` script requires full admin access.
+   */
   readonly localProfile: string;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;

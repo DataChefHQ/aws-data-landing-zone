@@ -42,7 +42,7 @@ async function bootstrapChildAccount(props: DataLandingZoneProps, bootstrapRoleN
   });
 }
 
-export async function management(props: DataLandingZoneProps) {
+async function management(props: DataLandingZoneProps) {
   await runCommand('cdk', [
     'bootstrap',
     '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess',
@@ -51,18 +51,18 @@ export async function management(props: DataLandingZoneProps) {
     `aws://${props.organization.root.accounts.management.accountId}/${props.regions.global}`,
   ].join(' '));
 }
-export async function log(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
+async function log(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   for (let region of DlzAllRegions(props.regions)) {
     await bootstrapChildAccount(props, bootstrapRoleName, props.organization.ous.security.accounts.log.accountId, region);
   }
 }
-export async function audit(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
+async function audit(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   for (let region of DlzAllRegions(props.regions)) {
     await bootstrapChildAccount(props, bootstrapRoleName, props.organization.ous.security.accounts.audit.accountId, region);
   }
 }
 
-export async function workloadAccounts(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
+async function workloadAccounts(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   for (const account of props.organization.ous.workloads.accounts) {
     for (let region of DlzAllRegions(props.regions)) {
       await bootstrapChildAccount(props, bootstrapRoleName, account.accountId, region);

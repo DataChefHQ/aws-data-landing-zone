@@ -113,7 +113,7 @@ export default defineConfig({
                     // TODO: Complete docs
                     // { label: 'Defaults',  slug: 'introduction'},
                     // { label: 'Config sharing',  slug: 'introduction'},
-                    // { label: 'Scripts & commands',  slug: 'introduction'},
+                    { label: 'Scripts & commands',  slug: 'reference/scripts-commands'},
                     // { label: 'Roadmap',  slug: 'introduction'},
                 ]
             },

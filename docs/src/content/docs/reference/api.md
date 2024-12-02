@@ -14771,7 +14771,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.budgets">budgets</a></code> | <code><a href="#aws-data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | The the AWS CLI profile that will be used to run the Scripts. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#aws-data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#aws-data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
@@ -14806,6 +14806,13 @@ public readonly localProfile: string;
 ```
 
 - *Type:* string
+
+The the AWS CLI profile that will be used to run the Scripts.
+
+For the `bootstrap` script, this profile must be an Admin of the root management account and it must be able to assume
+the `AWSControlTowerExecution` role created by ControlTower. This is an extremely powerful set of credentials and
+should be treated with care. The permissions can be reduced for the everyday use of the `diff` and `deploy` scripts
+but the `bootstrap` script requires full admin access.
 
 ---
 
@@ -20321,6 +20328,139 @@ public readonly reports: ReportItem[];
 - *Type:* <a href="#aws-data-landing-zone.ReportItem">ReportItem</a>[]
 
 ---
+
+
+### Scripts <a name="Scripts" id="aws-data-landing-zone.Scripts"></a>
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.Scripts.Initializer"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+new Scripts()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.Scripts.boostrapAll">boostrapAll</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Scripts.configureCostAllocationTags">configureCostAllocationTags</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Scripts.deployAll">deployAll</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Scripts.deploySelect">deploySelect</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Scripts.diffAll">diffAll</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Scripts.diffSelect">diffSelect</a></code> | *No description.* |
+
+---
+
+##### `boostrapAll` <a name="boostrapAll" id="aws-data-landing-zone.Scripts.boostrapAll"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+Scripts.boostrapAll(props: DataLandingZoneProps, bootstrapRoleName?: string)
+```
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.boostrapAll.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+###### `bootstrapRoleName`<sup>Optional</sup> <a name="bootstrapRoleName" id="aws-data-landing-zone.Scripts.boostrapAll.parameter.bootstrapRoleName"></a>
+
+- *Type:* string
+
+---
+
+##### `configureCostAllocationTags` <a name="configureCostAllocationTags" id="aws-data-landing-zone.Scripts.configureCostAllocationTags"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+Scripts.configureCostAllocationTags(props: DataLandingZoneProps)
+```
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.configureCostAllocationTags.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+##### `deployAll` <a name="deployAll" id="aws-data-landing-zone.Scripts.deployAll"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+Scripts.deployAll(props: DataLandingZoneProps)
+```
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.deployAll.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+##### `deploySelect` <a name="deploySelect" id="aws-data-landing-zone.Scripts.deploySelect"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+Scripts.deploySelect(props: DataLandingZoneProps, id: string)
+```
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.deploySelect.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.Scripts.deploySelect.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `diffAll` <a name="diffAll" id="aws-data-landing-zone.Scripts.diffAll"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+Scripts.diffAll(props: DataLandingZoneProps)
+```
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.diffAll.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+##### `diffSelect` <a name="diffSelect" id="aws-data-landing-zone.Scripts.diffSelect"></a>
+
+```typescript
+import { Scripts } from 'aws-data-landing-zone'
+
+Scripts.diffSelect(props: DataLandingZoneProps, id: string)
+```
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.diffSelect.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.Scripts.diffSelect.parameter.id"></a>
+
+- *Type:* string
+
+---
+
 
 
 ## Protocols <a name="Protocols" id="Protocols"></a>
