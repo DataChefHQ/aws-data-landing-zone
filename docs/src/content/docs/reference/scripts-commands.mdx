@@ -1,0 +1,223 @@
+---
+title: Scripts and Commands
+description: Reference - Scripts and Commands
+---
+import DualCode from '../../../components/DualCode.astro';
+
+## Scripts
+
+The DLZ provides utility functions that abstract the complexity of common tasks such as bootstrapping accounts across
+regions, running CDK diff or deploy commands, setting cost allocation tags, and more.
+
+These functions are exposed as static methods on the `Scripts` class and can be executed outside the CDK application,
+either manually or as part of a pipeline. The `localProfile` property specifies the AWS CLI profile to use when
+executing the scripts.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    const dlz = new DataLandingZone(app, {
+    ...
+      localProfile: 'YOUR_PROFILE,
+    ...
+  });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    dlz.DataLandingZone(app,
+    ...
+    local_profile='YOUR_PROFILE',
+    ...
+    );
+    ```
+  </Fragment>
+</DualCode>
+
+### Scripts permission
+
+For most commands, such as `diff` and `deploy`, the AWS profile (`localProfile`) used can operate with restricted permissions.
+These scripts do not require full administrative access, allowing for a more restricted permissions model to
+enhance security.
+
+The `bootstrap` script, however, requires elevated permissions. The specified profile must have administrative access
+to the root management account and the ability to assume the `AWSControlTowerExecution` role created by AWS
+Control Tower. These permissions are highly privileged and should be handled with caution.
+
+### TypeScript Usage
+
+A complete example is available in the [TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript)
+
+The code snippets below are from:
+- [/scripts](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript/tree/main/scripts)
+- [packge.josn](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript/tree/main/package.json)
+
+There are many ways to run scripts in a TypeScript project. Here, we’ll explore a simple and straightforward approach.
+Start by creating a `scripts` directory at the root of your project, and add individual TypeScript files, each
+containing the specific DLZ `Scripts` you want to execute.
+
+```ts
+// scripts/bootstrap.ts
+import { Scripts } from 'aws-data-landing-zone';
+import { config } from '../bin/minimum_config';
+
+(async () => {
+  await Scripts.boostrapAll(config);
+})();
+```
+
+You can run the script using `npx ts-node`, which is typically included as a dev dependency in AWS CDK projects. To
+simplify the process, add a corresponding script to your `package.json`.
+
+```json
+// package.json
+{
+  "scripts": {
+    "bootstrap": "npx ts-node scripts/bootstrap.ts"
+  }
+}
+```
+You can then execute the script with `npm run bootstrap`. The `bootstrapAll` function reads the DLZ configuration,
+including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
+root, security audit, security log, and workload accounts, ensuring they all trust the root account.
+
+#### Available Scripts
+
+- `Scripts.boostrapAll(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
+and workload accounts) in all regions.
+- `Scripts.diffAll(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
+- `Scripts.diffSelect(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
+- `Scripts.deployAll(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
+- `Scripts.deploySelect(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
+- `Scripts.configureCostAllocationTags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
+  `additionalMandatoryTags` properties as cost allocation tags.
+
+
+More examples and pre-configured scripts are available in the
+[TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript). These can
+be copied and reused in your project. They contain pre-configured scripts for the most common stack
+selecting ids for the `Scripts.diffSelect` and `Scripts.deploySelect` functions.
+
+Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-patterns) section for a full list of stack selecting IDs.
+
+### Python Usage
+
+:::caution[Log lines are out of order in Python]
+The log lines are out of order when using the scripts in Python. This is a known issue and requires further
+investigation.
+
+TODO open GH issue and link on the "known issue" text.
+:::
+
+TODO
+
+## Commands (manual)
+
+:::tip[Use Scripts when possible]
+The [Scripts](#scripts) are a higher level abstraction that can be used to manage the DLZ. They are easier to use and understand.
+:::
+
+The [Scripts](#scripts) abstraction simplifies DLZ tasks and is recommended for most use cases. However, manual
+commands are detailed below for reference or troubleshooting purposes.
+
+### Bootstrap
+
+Each account and region defined in the DLZ configuration must be CDK bootstrapped. This process is automated by the
+`Scripts.boostrapAll` function. For manual execution, use the following steps:
+
+Script replacements:
+- `YOUR_PROFILE` - The AWS CLI profile to use. See required permission as mentioned in [Scripts permission](#scripts-permission).
+- `ROOT_ACCOUNT_ID` - The AWS Account ID of the root management account. All other accounts will trust this account.
+- `SECURITY_LOG_ACCOUNT_ID` - The AWS Account ID of the security log account.
+- `SECURITY_AUDIT_ACCOUNT_ID` - The AWS Account ID of the security log account.
+- `GLOBAL_REGION` - The region where the management account is located.
+- `REGIONS` - The list of other regions to bootstrap.
+- `WORKLOAD_ACCOUNT_IDS` - The list of account IDs to bootstrap.
+
+```bash
+GLOBAL_REGION="GLOBAL_REGION"
+REGIONS=(
+  "REGIONS")
+
+ACCOUNTS=(
+  "SECURITY_LOG_ACCOUNT_ID"
+  "SECURITY_AUDIT_ACCOUNT_ID"
+  "WORKLOAD_ACCOUNT_IDS")
+
+cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --profile $YOUR_PROFILE --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$ROOT_ACCOUNT_ID/$GLOBAL_REGION
+
+for account in "${ACCOUNTS[@]}"; do
+
+  ROLE_ARN="arn:aws:iam::$account:role/AWSControlTowerExecution"
+  SESSION_NAME="CDKBootstrap"
+  ASSUME_ROLE_OUTPUT=$(aws sts assume-role --profile $YOUR_PROFILE --role-arn $ROLE_ARN --role-session-name $SESSION_NAME)
+
+  AWS_ACCESS_KEY_ID=$(echo $ASSUME_ROLE_OUTPUT | jq -r '.Credentials.AccessKeyId')
+  AWS_SECRET_ACCESS_KEY=$(echo $ASSUME_ROLE_OUTPUT | jq -r '.Credentials.SecretAccessKey')
+  AWS_SESSION_TOKEN=$(echo $ASSUME_ROLE_OUTPUT | jq -r '.Credentials.SessionToken')
+  export AWS_ACCESS_KEY_ID
+  export AWS_SECRET_ACCESS_KEY
+  export AWS_SESSION_TOKEN
+
+  cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --trust $ROOT_ACCOUNT_ID --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$account/$GLOBAL_REGION
+  for region in "${REGIONS[@]}"; do
+    cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --trust $ROOT_ACCOUNT_ID --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$account/$region
+  done
+done
+```
+
+
+### Diff
+
+The cdk diff command compares the current state of stacks with the code definition.
+This process is automated by the `Scripts.diffAll` and `Scripts.diffSelect` functions.
+For manual execution, see the following examples:
+
+Below are a few examples of how to run the diff command manually.
+```bash
+# To diff all the stacks in all accounts and regions.
+cdk diff "**" --profile YOUR_PROFILE
+# To diff all the stacks in all accounts and regions in the "root" phase.
+cdk diff "root--*" --exclusively --profile YOUR_PROFILE
+# To diff all the stacks in the workload phase of type development (specified in the config by type: DlzAccountType.DEVELOP)
+cdk diff "*_development--*_*" --exclusively --profile YOUR_PROFILE
+```
+
+Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-patterns) section for a full list of stack selecting IDs.
+
+### Deploy
+
+The CDK deploy command deploys the stacks defined in the CDK code.
+This process is automated by the `Scripts.deployAll` and `Scripts.deploySelect` functions.
+For manual execution, see the following examples:
+
+```bash
+# To deploy all the stacks in all accounts and regions.
+cdk deploy "**" --require-approval never --progress events --concurrency 10 --profile ct-sandbox-exported
+# To deploy all the stacks in all accounts and regions in the "root" phase.
+cdk deploy "root--*" --require-approval never --progress events --concurrency 10 --exclusively --profile ct-sandbox-exported
+# To deploy all the stacks in the workload phase of type development (specified in the config by type: DlzAccountType.DEVELOP)
+cdk deploy "*_development--*_*" --require-approval never --progress events --concurrency 10 --exclusively --profile ct-sandbox-exported
+```
+
+Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-patterns) section for a full list of stack selecting IDs.
+
+### Configure Cost Allocation Tags
+
+Manually set cost allocation tags using the following script:
+
+```bash
+TAGS=("Tag1" "Tag2")
+TAGS_JSON=$(printf ',{"Key":"%s","Status":"ACTIVE"}' "${TAGS[@]}")
+TAGS_JSON="[${TAGS_JSON:1}]"
+aws ce update-cost-allocation-tags-status --cost-allocation-tags-statuses "$TAGS_JSON"
+```
+
+The `Scripts.configureCostAllocationTags` script sets the `mandatoryTags` and `additionalMandatoryTags`
+properties as cost allocation tags.
+
+
+
+
+
+
