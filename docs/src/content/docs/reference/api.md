@@ -16056,6 +16056,31 @@ The route tables to be created in the VPC.
 
 ---
 
+### ForceNoPythonArgumentLifting <a name="ForceNoPythonArgumentLifting" id="aws-data-landing-zone.ForceNoPythonArgumentLifting"></a>
+
+This is a type that is used to force JSII to not "argument lift" the arguments.
+
+Use it as the last argument of
+user facing function that you want to prevent argument lifting on. Example:
+```
+public async diffAll(props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {})
+
+export class DataLandingZone {
+  constructor(app: App, props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {}) {
+```
+
+Then just call the function/constructor and "forget about the last parameter". It's an ugly hack but acceptable for
+the time being. Tracking issue: https://github.com/aws/jsii/issues/4721
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.ForceNoPythonArgumentLifting.Initializer"></a>
+
+```typescript
+import { ForceNoPythonArgumentLifting } from 'aws-data-landing-zone'
+
+const forceNoPythonArgumentLifting: ForceNoPythonArgumentLifting = { ... }
+```
+
+
 ### GitHubReference <a name="GitHubReference" id="aws-data-landing-zone.GitHubReference"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.GitHubReference.Initializer"></a>
@@ -18676,13 +18701,14 @@ public readonly slackChatBots: {[ key: string ]: SlackChannelConfiguration};
 ```typescript
 import { DataLandingZone } from 'aws-data-landing-zone'
 
-new DataLandingZone(app: App, props: DataLandingZoneProps)
+new DataLandingZone(app: App, props: DataLandingZoneProps, _?: ForceNoPythonArgumentLifting)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DataLandingZone.Initializer.parameter.app">app</a></code> | <code>aws-cdk-lib.App</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DataLandingZone.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DataLandingZone.Initializer.parameter.app">app</a></code> | <code>aws-cdk-lib.App</code> | The CDK App. |
+| <code><a href="#aws-data-landing-zone.DataLandingZone.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | The DataLandingZoneProps. |
+| <code><a href="#aws-data-landing-zone.DataLandingZone.Initializer.parameter._">_</a></code> | <code><a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a></code> | Ignore this parameter, it is used to force a consistent interface across TS and Python usage. |
 
 ---
 
@@ -18690,11 +18716,23 @@ new DataLandingZone(app: App, props: DataLandingZoneProps)
 
 - *Type:* aws-cdk-lib.App
 
+The CDK App.
+
 ---
 
 ##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DataLandingZone.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+The DataLandingZoneProps.
+
+---
+
+##### `_`<sup>Optional</sup> <a name="_" id="aws-data-landing-zone.DataLandingZone.Initializer.parameter._"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
+
+Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
 
 ---
 
@@ -20345,27 +20383,26 @@ new Scripts()
 
 ---
 
-
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+#### Methods <a name="Methods" id="Methods"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.Scripts.boostrapAll">boostrapAll</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.Scripts.configureCostAllocationTags">configureCostAllocationTags</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.Scripts.deployAll">deployAll</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.Scripts.deploySelect">deploySelect</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.Scripts.diffAll">diffAll</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.Scripts.diffSelect">diffSelect</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Scripts.boostrapAll">boostrapAll</a></code> | Bootstraps all accounts in all regions as defined by the config. |
+| <code><a href="#aws-data-landing-zone.Scripts.configureCostAllocationTags">configureCostAllocationTags</a></code> | Sets the Cost Allocation Tags for the organization. |
+| <code><a href="#aws-data-landing-zone.Scripts.deployAll">deployAll</a></code> | CDK deploy all stacks. |
+| <code><a href="#aws-data-landing-zone.Scripts.deploySelect">deploySelect</a></code> | CDK deploy stacks identified by the id. |
+| <code><a href="#aws-data-landing-zone.Scripts.diffAll">diffAll</a></code> | CDK diff all stacks. |
+| <code><a href="#aws-data-landing-zone.Scripts.diffSelect">diffSelect</a></code> | CDK diff stacks identified by the id. |
 
 ---
 
 ##### `boostrapAll` <a name="boostrapAll" id="aws-data-landing-zone.Scripts.boostrapAll"></a>
 
 ```typescript
-import { Scripts } from 'aws-data-landing-zone'
-
-Scripts.boostrapAll(props: DataLandingZoneProps, bootstrapRoleName?: string)
+public boostrapAll(props: DataLandingZoneProps, bootstrapRoleName?: string): void
 ```
+
+Bootstraps all accounts in all regions as defined by the config.
 
 ###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.boostrapAll.parameter.props"></a>
 
@@ -20382,10 +20419,10 @@ Scripts.boostrapAll(props: DataLandingZoneProps, bootstrapRoleName?: string)
 ##### `configureCostAllocationTags` <a name="configureCostAllocationTags" id="aws-data-landing-zone.Scripts.configureCostAllocationTags"></a>
 
 ```typescript
-import { Scripts } from 'aws-data-landing-zone'
-
-Scripts.configureCostAllocationTags(props: DataLandingZoneProps)
+public configureCostAllocationTags(props: DataLandingZoneProps, _?: ForceNoPythonArgumentLifting): void
 ```
+
+Sets the Cost Allocation Tags for the organization.
 
 ###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.configureCostAllocationTags.parameter.props"></a>
 
@@ -20393,13 +20430,21 @@ Scripts.configureCostAllocationTags(props: DataLandingZoneProps)
 
 ---
 
+###### `_`<sup>Optional</sup> <a name="_" id="aws-data-landing-zone.Scripts.configureCostAllocationTags.parameter._"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
+
+Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
+
+---
+
 ##### `deployAll` <a name="deployAll" id="aws-data-landing-zone.Scripts.deployAll"></a>
 
 ```typescript
-import { Scripts } from 'aws-data-landing-zone'
-
-Scripts.deployAll(props: DataLandingZoneProps)
+public deployAll(props: DataLandingZoneProps, _?: ForceNoPythonArgumentLifting): void
 ```
+
+CDK deploy all stacks.
 
 ###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.deployAll.parameter.props"></a>
 
@@ -20407,13 +20452,21 @@ Scripts.deployAll(props: DataLandingZoneProps)
 
 ---
 
+###### `_`<sup>Optional</sup> <a name="_" id="aws-data-landing-zone.Scripts.deployAll.parameter._"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
+
+Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
+
+---
+
 ##### `deploySelect` <a name="deploySelect" id="aws-data-landing-zone.Scripts.deploySelect"></a>
 
 ```typescript
-import { Scripts } from 'aws-data-landing-zone'
-
-Scripts.deploySelect(props: DataLandingZoneProps, id: string)
+public deploySelect(props: DataLandingZoneProps, id: string): void
 ```
+
+CDK deploy stacks identified by the id.
 
 ###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.deploySelect.parameter.props"></a>
 
@@ -20430,10 +20483,10 @@ Scripts.deploySelect(props: DataLandingZoneProps, id: string)
 ##### `diffAll` <a name="diffAll" id="aws-data-landing-zone.Scripts.diffAll"></a>
 
 ```typescript
-import { Scripts } from 'aws-data-landing-zone'
-
-Scripts.diffAll(props: DataLandingZoneProps)
+public diffAll(props: DataLandingZoneProps, _?: ForceNoPythonArgumentLifting): void
 ```
+
+CDK diff all stacks.
 
 ###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.diffAll.parameter.props"></a>
 
@@ -20441,13 +20494,21 @@ Scripts.diffAll(props: DataLandingZoneProps)
 
 ---
 
+###### `_`<sup>Optional</sup> <a name="_" id="aws-data-landing-zone.Scripts.diffAll.parameter._"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
+
+Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
+
+---
+
 ##### `diffSelect` <a name="diffSelect" id="aws-data-landing-zone.Scripts.diffSelect"></a>
 
 ```typescript
-import { Scripts } from 'aws-data-landing-zone'
-
-Scripts.diffSelect(props: DataLandingZoneProps, id: string)
+public diffSelect(props: DataLandingZoneProps, id: string): void
 ```
+
+CDK diff stacks identified by the id.
 
 ###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.diffSelect.parameter.props"></a>
 
@@ -20460,6 +20521,7 @@ Scripts.diffSelect(props: DataLandingZoneProps, id: string)
 - *Type:* string
 
 ---
+
 
 
 
