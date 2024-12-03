@@ -104,11 +104,6 @@ Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-p
 
 ### Python Usage
 
-:::caution[Log lines are out of order in Python]
-The log lines are out of order when using the scripts in Python. This is a known issue and requires further
-investigation.
-:::
-
 A complete example is available in the [Python Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-python)
 
 The code snippets below are from:
@@ -134,13 +129,13 @@ root, security audit, security log, and workload accounts, ensuring they all tru
 
 #### Available Scripts
 
-- `Scripts.boostrapAll(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
+- `Scripts.boostrap_all(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
   and workload accounts) in all regions.
-- `Scripts.diffAll(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
-- `Scripts.diffSelect(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
-- `Scripts.deployAll(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
-- `Scripts.deploySelect(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
-- `Scripts.configureCostAllocationTags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
+- `Scripts.diff_all(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
+- `Scripts.diff_select(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
+- `Scripts.deploy_all(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
+- `Scripts.deploy_select(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
+- `Scripts.configure_cost_allocation_tags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
   `additionalMandatoryTags` properties as cost allocation tags.
 
 More examples and pre-configured scripts are available in the
