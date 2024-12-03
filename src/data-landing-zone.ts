@@ -3,7 +3,14 @@ import { CdkExpressPipeline } from 'cdk-express-pipeline';
 import { DlzAccountNetworks } from './constructs';
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
-import { AuditStacks, DataLandingZoneProps, DLzAccount, GlobalVariables, LogStacks } from './data-landing-zone-types';
+import {
+  AuditStacks,
+  DataLandingZoneProps,
+  DLzAccount,
+  ForceNoPythonArgumentLifting,
+  GlobalVariables,
+  LogStacks,
+} from './data-landing-zone-types';
 import { Report } from './lib/report';
 import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
@@ -158,7 +165,13 @@ export class DataLandingZone {
     },
   };
 
-  constructor(private app: App, private props: DataLandingZoneProps) {
+  /**
+   * Create a new Data Landing Zone
+   * @param app The CDK App
+   * @param props The DataLandingZoneProps
+   * @param _ Ignore this parameter, it is used to force a consistent interface across TS and Python usage
+   */
+  constructor(private app: App, private props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {}) {
 
     validations(props);
 

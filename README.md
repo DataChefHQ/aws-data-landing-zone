@@ -134,8 +134,8 @@ dlz.DataLandingZone(app,
                         account_id='123456789012',
                         type=dlz.DlzAccountType.DEVELOP,
                         vpcs=[
-                            *dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.US_EAST_1),
-                            *dlz.Defaults.vpc_class_b3_private3_public(1, dlz.Region.EU_WEST_1),
+                            dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.US_EAST_1),
+                            dlz.Defaults.vpc_class_b3_private3_public(1, dlz.Region.EU_WEST_1),
                         ]
                     ),
                     dlz.DLzAccount(
@@ -143,8 +143,8 @@ dlz.DataLandingZone(app,
                         account_id='123456789012',
                         type=dlz.DlzAccountType.PRODUCTION,
                         vpcs=[
-                            *dlz.Defaults.vpc_class_b3_private3_public(2, dlz.Region.US_EAST_1),
-                            *dlz.Defaults.vpc_class_b3_private3_public(3, dlz.Region.EU_WEST_1),
+                            dlz.Defaults.vpc_class_b3_private3_public(2, dlz.Region.US_EAST_1),
+                            dlz.Defaults.vpc_class_b3_private3_public(3, dlz.Region.EU_WEST_1),
                         ]
                     ),
                 ],

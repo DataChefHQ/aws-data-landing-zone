@@ -547,3 +547,18 @@ export interface WorkloadAccountProps extends DlzStackProps {
   readonly dlzAccount: DLzAccount;
   readonly globalVariables: GlobalVariables;
 }
+
+/**
+ * This is a type that is used to force JSII to not "argument lift" the arguments. Use it as the last argument of
+ * user facing function that you want to prevent argument lifting on. Example:
+ * ```
+ * public async diffAll(props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {})
+ *
+ * export class DataLandingZone {
+ *   constructor(app: App, props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {}) {
+ * ```
+ *
+ * Then just call the function/constructor and "forget about the last parameter". It's an ugly hack but acceptable for
+ * the time being. Tracking issue: https://github.com/aws/jsii/issues/4721
+ */
+export interface ForceNoPythonArgumentLifting {}
