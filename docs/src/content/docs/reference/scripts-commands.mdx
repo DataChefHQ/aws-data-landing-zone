@@ -2,7 +2,8 @@
 title: Scripts and Commands
 description: Reference - Scripts and Commands
 ---
-import DualCode from '../../../components/DualCode.astro';
+
+import DualCode from "../../../components/DualCode.astro";
 
 ## Scripts
 
@@ -49,8 +50,9 @@ Control Tower. These permissions are highly privileged and should be handled wit
 A complete example is available in the [TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript)
 
 The code snippets below are from:
+
 - [/scripts](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript/tree/main/scripts)
-- [packge.josn](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript/tree/main/package.json)
+- [package.json](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript/tree/main/package.json)
 
 There are many ways to run scripts in a TypeScript project. Here, we’ll explore a simple and straightforward approach.
 Start by creating a `scripts` directory at the root of your project, and add individual TypeScript files, each
@@ -58,8 +60,8 @@ containing the specific DLZ `Scripts` you want to execute.
 
 ```ts
 // scripts/bootstrap.ts
-import { Scripts } from 'aws-data-landing-zone';
-import { config } from '../bin/minimum_config';
+import { Scripts } from "aws-data-landing-zone";
+import { config } from "../bin/minimum_config";
 
 (async () => {
   await (new Scripts()).boostrapAll(config);
@@ -77,6 +79,7 @@ simplify the process, add a corresponding script to your `package.json`.
   }
 }
 ```
+
 You can then execute the script with `npm run bootstrap`. The `bootstrapAll` function reads the DLZ configuration,
 including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
 root, security audit, security log, and workload accounts, ensuring they all trust the root account.
@@ -84,14 +87,13 @@ root, security audit, security log, and workload accounts, ensuring they all tru
 #### Available Scripts
 
 - `Scripts.boostrapAll(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
-and workload accounts) in all regions.
+  and workload accounts) in all regions.
 - `Scripts.diffAll(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
 - `Scripts.diffSelect(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
 - `Scripts.deployAll(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
 - `Scripts.deploySelect(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
 - `Scripts.configureCostAllocationTags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
   `additionalMandatoryTags` properties as cost allocation tags.
-
 
 More examples and pre-configured scripts are available in the
 [TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript). These can
@@ -102,14 +104,44 @@ Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-p
 
 ### Python Usage
 
-:::caution[Log lines are out of order in Python]
-The log lines are out of order when using the scripts in Python. This is a known issue and requires further
-investigation.
+A complete example is available in the [Python Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-python)
 
-TODO open GH issue and link on the "known issue" text.
-:::
+The code snippets below are from:
 
-TODO
+- [/scripts](https://github.com/DataChefHQ/aws-data-landing-zone-example-python/tree/main/scripts)
+
+Here, we’ll explore a simple and straightforward approach to run the DLZ scripts in Python.
+Start by creating a `scripts` directory at the root of your project, and add individual Python files, each
+containing the specific DLZ `Scripts` you want to execute.
+
+```python
+// scripts/bootstrap.py
+from aws_data_landing_zone import Scripts
+from data_landing_zone_example_python import config_basic
+
+Scripts.deploy_all(props=config_basic.config)
+
+```
+
+You can then execute the script with `python scripts/bootstrap.py`. The `bootstrapAll` function reads the DLZ configuration,
+including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
+root, security audit, security log, and workload accounts, ensuring they all trust the root account.
+
+#### Available Scripts
+
+- `Scripts.boostrap_all(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
+  and workload accounts) in all regions.
+- `Scripts.diff_all(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
+- `Scripts.diff_select(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
+- `Scripts.deploy_all(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
+- `Scripts.deploy_select(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
+- `Scripts.configure_cost_allocation_tags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
+  `additionalMandatoryTags` properties as cost allocation tags.
+
+More examples and pre-configured scripts are available in the
+[Python Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-python). These can
+be copied and reused in your project. They contain pre-configured scripts for the most common stack
+selecting ids for the `Scripts.diffSelect` and `Scripts.deploySelect` functions.
 
 ## Commands (manual)
 
@@ -126,6 +158,7 @@ Each account and region defined in the DLZ configuration must be CDK bootstrappe
 `Scripts.boostrapAll` function. For manual execution, use the following steps:
 
 Script replacements:
+
 - `YOUR_PROFILE` - The AWS CLI profile to use. See required permission as mentioned in [Scripts permission](#scripts-permission).
 - `ROOT_ACCOUNT_ID` - The AWS Account ID of the root management account. All other accounts will trust this account.
 - `SECURITY_LOG_ACCOUNT_ID` - The AWS Account ID of the security log account.
@@ -166,7 +199,6 @@ for account in "${ACCOUNTS[@]}"; do
 done
 ```
 
-
 ### Diff
 
 The cdk diff command compares the current state of stacks with the code definition.
@@ -174,6 +206,7 @@ This process is automated by the `Scripts.diffAll` and `Scripts.diffSelect` func
 For manual execution, see the following examples:
 
 Below are a few examples of how to run the diff command manually.
+
 ```bash
 # To diff all the stacks in all accounts and regions.
 cdk diff "**" --profile YOUR_PROFILE
@@ -215,9 +248,3 @@ aws ce update-cost-allocation-tags-status --cost-allocation-tags-statuses "$TAGS
 
 The `Scripts.configureCostAllocationTags` script sets the `mandatoryTags` and `additionalMandatoryTags`
 properties as cost allocation tags.
-
-
-
-
-
-
