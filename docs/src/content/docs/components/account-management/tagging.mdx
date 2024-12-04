@@ -1,0 +1,119 @@
+---
+title: Regions
+description: Regions
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone implements a mandatory tagging strategy across all accounts and resources.
+This ensures that resource costs can be tracked and the responsible creators can be identified.
+
+The following AWS services are utilized to enforce an effective tagging strategy:
+1. An AWS Organization Tag Policy at the account level.
+2. A Service Control Policy (SCP) at the account level, which enforces that all CloudFormation (CFN) Stacks
+must include these tags upon creation.
+3. An AWS Config rule that checks for these tags on supported resources. While the rule does not support all
+resources, it ensures that key resources, such as `AWS::CloudFormation::Stack`, will inherently apply tags
+to the resources they create. For more information, refer to the config rule [required-tags](https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html).
+
+:::info
+It is not possible to enforce tags on all resources universally. The strategy outlined here represents
+the best possible effort. The Config Rule will report any untagged resources to Security Hub, where they
+can be tracked. It is then necessary to identify the responsible party and ensure the tags are applied
+to the resources.
+:::
+
+## Default Mandatory Tags
+
+The mandatory tags all begin with a capital letter, but the underlying code property is lowercase. The mandatory tags include:
+- `Owner` - Identifies the team or individual responsible for the resource.
+- `Project` - Specifies the project to which the resource belongs.
+- `Environment` - Defines the environment of the resource, such as `development`, `staging`, or `production`.
+
+The DLZ construct will automatically apply the following tags to all resources it creates:
+- `Owner`: `infra`
+- `Project`: `dlz`
+- `Environment`: `dlz`
+
+These tag values can be customized by providing an array of values for each tag in `mandatoryTags`.
+Note that while the code property is lowercase, the tags created will follow the capitalized format outlined above.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      mandatoryTags: {
+        owner: ['backend'],
+        project: ['project1'],
+        environment: ['development', 'staging', 'production'],
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        mandatory_tags={
+            "owner": ["backend"],
+            "project": ["project1"],
+            "environment": ["development", "staging", "production"],
+        },
+        ...
+    )
+    app.synth()
+    ```
+  </Fragment>
+</DualCode>
+
+## Additional Mandatory Tags
+
+Additional mandatory tags can be added to the Data Landing Zone construct by specifying the `additionalMandatoryTags`
+property.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      additionalMandatoryTags: [
+        {
+          name: 'cost-center',
+          values: ['test']
+        },
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        additional_mandatory_tags=[
+            dlz.DlzTag(
+                name='cost-center',
+                values=['test']
+            )
+        ],
+        ...
+    )
+    app.synth()
+    ```
+  </Fragment>
+</DualCode>

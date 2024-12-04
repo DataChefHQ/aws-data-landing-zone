@@ -46,7 +46,7 @@ two non-overlapping VPCs in two regions in each account.
 
 ```ts
 import {App} from 'aws-cdk-lib';
-import { DataLandingZone } from '@DataChefHQ/data-landing-zone';
+import { DataLandingZone } from 'aws-data-landing-zone';
 
 const app = new App();
 const dlz = new DataLandingZone(app, {
@@ -109,7 +109,7 @@ two non-overlapping VPCs in two regions in each account.
 ```python
 #!/usr/bin/env python3
 import aws_cdk as cdk
-import recipes_dlz as dlz
+import aws_data_landing_zone as dlz
 
 app = cdk.App()
 dlz.DataLandingZone(app,

@@ -17200,9 +17200,9 @@ const mandatoryTags: MandatoryTags = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | The values of the mandatory `Environment` tag that all resources must have. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | The values of the mandatory `Owner` tag that all resources must have. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | The values of the mandatory `Project` tag that all resources must have. |
 
 ---
 
@@ -17214,6 +17214,8 @@ public readonly environment: string[];
 
 - *Type:* string[]
 
+The values of the mandatory `Environment` tag that all resources must have.
+
 ---
 
 ##### `owner`<sup>Required</sup> <a name="owner" id="aws-data-landing-zone.MandatoryTags.property.owner"></a>
@@ -17224,6 +17226,8 @@ public readonly owner: string[];
 
 - *Type:* string[]
 
+The values of the mandatory `Owner` tag that all resources must have.
+
 ---
 
 ##### `project`<sup>Required</sup> <a name="project" id="aws-data-landing-zone.MandatoryTags.property.project"></a>
@@ -17233,6 +17237,8 @@ public readonly project: string[];
 ```
 
 - *Type:* string[]
+
+The values of the mandatory `Project` tag that all resources must have.
 
 ---
 

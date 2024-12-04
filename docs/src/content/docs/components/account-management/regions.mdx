@@ -1,0 +1,54 @@
+---
+title: Regions
+description: Regions
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone supports multiple regions. You have to define:
+- A global region, also referred to as the home region according to Control Tower. The global region is where
+Control Tower is deployed and will be used for resources that are not region-specific like IAM. This region will
+always be deployed before the other additional regions as they might depend on resources created in the global region.
+Your global region can/should not be changed after it has been created.
+- One or more additional regions where you want to manage and govern resources.
+
+:::caution
+Not all [regions](https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html) supports all resources.
+It is recommended to use "major" region, both `eu-west-1` or `us-east-1` regions are usually good choices.
+:::
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      regions: {
+        global: Region.EU_WEST_1,
+        regional: [Region.US_EAST_1],
+      },
+     ...
+    });
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        regions=dlz.DlzRegions(
+            global_=dlz.Region.EU_WEST_1,
+            regional=[dlz.Region.US_EAST_1],
+        ),
+        ...
+    )
+    app.synth()
+    ```
+
+  </Fragment>
+</DualCode>

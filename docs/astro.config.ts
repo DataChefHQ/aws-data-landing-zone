@@ -49,16 +49,18 @@ export default defineConfig({
                 label: 'Components',
                 items: [
                     // TODO: Complete docs
-                    // {
-                    //     label: 'Account Management',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'Tagging',  slug: 'introduction'},
-                    //         { label: 'Budgets',  slug: 'introduction'},
-                    //         { label: 'SOP - Create Account',  slug: 'introduction'},
-                    //         { label: 'SOP - Add Account & Bootstrap',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Account Management',
+                        items: [
+                            { label: 'Overview',  slug: 'introduction'},
+                            { label: 'Accounts',  slug: 'components/account-management/accounts'},
+                            { label: 'Regions',  slug: 'components/account-management/regions'},
+                            { label: 'Tagging',  slug: 'components/account-management/tagging'},
+                            { label: 'Budgets',  slug: 'components/account-management/budgets'},
+                            { label: 'SOP - Initial Control Tower Setup',  slug: 'components/account-management/sop-initial-control-tower-setup'},
+                            { label: 'SOP - Add Account',  slug: 'components/account-management/sop-add-account'},
+                        ]
+                    },
                     // {
                     //     label: 'Networking',
                     //     items: [

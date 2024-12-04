@@ -1,0 +1,43 @@
+---
+title: Budgets
+description: Budgets
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      regions: {
+        global: Region.EU_WEST_1,
+        regional: [Region.US_EAST_1],
+      },
+     ...
+    });
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        regions=dlz.DlzRegions(
+            global_=dlz.Region.EU_WEST_1,
+            regional=[dlz.Region.US_EAST_1],
+        ),
+        ...
+    )
+    app.synth()
+    ```
+
+  </Fragment>
+</DualCode>
