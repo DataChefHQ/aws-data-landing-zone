@@ -1,0 +1,123 @@
+---
+title: TBAC - Recommended Strategy
+description: Lake Formation - Tag Based Access Control Strategy
+---
+
+This guide provides a simple and effective framework to help readers design and implement Lake Formation in a production environment.
+
+Lake Formation tagging system differs quite a big from the traditional AWS tag system that most are used to. For a brief overview of how LF-tags work and their limitations, refer to [the previous section](./lf-tbac-guide).
+
+To summarize, here are the main concepts:
+- **LF-tags** are key-value pairs attached to resources
+- **Resources** are databases, tables and columns registered in Lake Formation
+- **Principals** are IAM entities, but also AWS accounts, Organizations and organizational units
+- Principals are given access to resources via **grants** on respective LF-tags
+
+In pseducode, a grant looks like this:
+```sql
+GRANT ACCESS ON TAGS foo=bar AND spam=eggs TO DataLakeUser
+```
+
+## Goal
+
+The goal of this guide is to provide a Lake Formation tagging strategy, that matches the following requirements:
+- Easy to reason about.
+- Simple to implement.
+- Brief, contains the least amount of LF-tags.
+- Extensible with minimal effort.
+
+Notwithstanding, one should keep in mind that a one-size-fits all solution is unrealistic, and that the most ideal strategy is the one that best reflects an organization's structure.
+
+## Design
+
+The most difficult aspect of Lake Formation is organizational: it's very easy to get carried away and setup dozens of tags for all possible scenarios, but eventually this ends up being counter-productive.
+
+At the same time, the limitations don't allow for too clever solutions, so this approach is essentially a stripped down version of the one suggested [here](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/example-usecase/).
+
+### Tags
+
+We recommend using the following tag ontology as a starting point.
+
+###### `team:<TeamName> = true`
+|||
+|-|-|
+| **Description** | Because of [this limitation](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/limitations/#limitation-1-you-can-only-attach-a-single-value-of-an-lf-tag-tag-to-a-resource) it's unadvisable to create tags such as `team = Sales`. The workaround is to embed the team's name into the tag key. Example: `team:Sales = true`.
+| **Usage** | Apply to resources belonging to a specific team.
+| **Resources** | Databases, tables
+
+<br/>
+
+###### `team:Executives = true` - OPTIONAL
+|||
+|-|-|
+| **Description** | A special case of the above one, this assumes that executives should have access to any resource.
+| **Usage** | Apply to all resources.
+| **Resources** | Databases
+
+<br/>
+
+###### `common = [true | false]`
+|||
+|-|-|
+| **Description** | When a resource should be available across all the account.
+| **Usage** | Apply to resources that should be available to anybody in the account.
+| **Resources** | Databases, tables
+
+<br/>
+
+###### `sensitive = [true | false]`
+|||
+|-|-|
+| **Description** | For those resources that contain sensitive data such as PII.
+| **Usage** | Apply to resources that only specific users should be able to access due to their sensitive nature.
+| **Resources** | Tables, columns
+
+### Role Structure
+
+We assume a situation where the roles for data lake users are defined (roughly) in a structure such as this one:
+- `ExecutiveUser` - [Optional] For users with executive responsibilities.
+- `<Team>User` - For users belonging to a specific team, e.g. `SalesUser`.
+- `LakeUser` - For users not belonging to any specific team.
+
+### Grants
+
+The following grants should be used as default, the baseline from which to branch off if more specific needs arise.
+- Everyone
+    ```sql
+    GRANT ACCESS ON TAGS common=true
+    ```
+- ExecutiveUser
+    ```sql
+    GRANT ACCESS ON TAGS team:Executives=true
+    ```
+- \<Team>User
+    ```sql
+    GRANT ACCESS ON TAGS team:<TeamName>=true AND sensitive=false
+    ```
+
+This set of grants allow for the following situation:
+- Executives have access to every resource.
+- Everyone has access to shared resources.
+- Teams have access to resources tagged with their team's name, but only those not flagged as sensitive.
+
+## Getting Started
+
+This is a blueprint to follow when starting a greenfield Lake Formation project.
+1. Agree with the business on the strategy. Specifically, find out if there are any sensitive resources that **must** be flagged as such from the get go.
+2. Create LF users (roles).
+3. With DLZ, declare the tags and grants that you decided in point 1.
+4. Tagging: if there's any sensitive resource, tag them first.
+5. Tag all databases with `team:Executives = true` (if you chose to use this tag)
+6. Tag other resources (databases if you have many, or tables if only one database exists) with the necessary `team` tags.
+7. Tag resources that should be available to anybody with `common = true`.
+    :::caution
+    In the case of a single database setup, this works seamlessly. When the setup has multiple databases, a different approach should be considered in order to avoid the issue described below.
+    :::
+
+## Limitations
+
+There are limitations to the proposed approach, as well as some caveats.
+- LF-tags don't allow for named access control. Lake Formation allows NamedResources for this scope, but the cost is increased complexity.
+- `<Team>Users` cannot access sensitive data on their own dataset. For this goal, either the grant is changed or another principal is created (e.g. `<Team>UserPrivileged`).
+- Shared tables from databases where a user has no `DESCRIBE` permission are not visible from the GUI, but can still be queried.
+This can be addressed by either modifying the grant, or revisiting the tagging strategy.
