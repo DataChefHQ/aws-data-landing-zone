@@ -94,7 +94,7 @@ The list of all tags keys and corresponding values to be created for use in Lake
 Here you define "grants". Each element of the array represents a set of allowed actions granted to one or more principals, upon a combination of tags and values.
 > _✨ Note - When sharing data across accounts, additional steps are needed. Check the [cross-account sharing section](introduction#cross-account-sharing) for guidance._
 :::caution
-Defining permissions requires knowledge of how Lake Formation Tag Based Access Contorl (TBAC) works. Do not make assumptions, you will make mistakes and waste time. Do yourself a favor and go read [this brief explanation](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/basics/) or [the included guide](./lf-tbac-strategy.mdx).
+Defining permissions requires knowledge of how Lake Formation Tag Based Access Contorl (TBAC) works. Do not make assumptions, you will make mistakes and waste time. Do yourself a favor and go read [this brief explanation](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/basics/) or [the included guide](./lf-tbac-strategy).
 :::
 
 ## Cross-Account Sharing
@@ -111,9 +111,9 @@ In this example, we'll illustrate how to share resources with an external accoun
 
 Sharing with an external account is, in practice, no different than sharing with an internal entity: you grant it a set of allowed actions upon a combination of tags and values.
 
-The only difference is that the external account must have **at least** `DESCRIBE` permission on any key:value pair used in the aforementioned grants.
+The only difference is that the external account must have **at least** `DESCRIBE` permission on any key-value pair used in the aforementioned grants.
 
-In other words, let's assume that you created a tag `shared` with possible values `true` and `false`, and you want to give an external account read access on any Data Catalog resource that you tag with `shared: true`.
+In other words, let's assume that you created a tag `shared` with possible values `true` and `false`, and you want to give an external account read access on any Data Catalog resource that you tag with `shared = true`.
 
 This operation consists of two steps. In pseudocode it looks like this:
 
