@@ -1,0 +1,40 @@
+---
+title: SOP - Account Setup
+description: SOP - Account Setup
+---
+
+This Standard Operating Procedure (SOP) provides a once-off guide for enabling and configuring various AWS services
+required for specific features in the Data Landing Zone.
+
+## AWS Chatbot and Slack Integration
+
+To deliver notifications to a Slack channel, a one-time account-level setup is required to integrate the Slack
+Workspace with AWS Chatbot. While the Data Landing Zone (DLZ) manages the SNS topics and Slack channel configurations
+using the `SlackChannel` construct, the initial Slack Workspace integration must be completed manually.
+
+### Steps to Connect AWS Chatbot to Slack
+
+The following steps outline the process of connecting AWS Chatbot to your Slack Workspace:
+
+1. Open the **AWS Chatbot Console** and select Slack as your chat platform.
+2. Click **Configure new client** under Slack to begin the authorization process.
+3. Log in to the Slack workspace where notifications will be sent.
+4. Review and approve the requested permissions for AWS Chatbot.
+5. Verify the installation in Slack by locating the app under the **Apps** section.
+
+Additional References:
+- Refer to [Step 1 of the AWS documentation](https://docs.aws.amazon.com/chatbot/latest/adminguide/slack-setup.html#slack-client-setup)
+for detailed instructions.
+
+### Available Integrations
+
+:::note
+Slack is used only for one-way notifications from AWS to Slack. A default "Deny All" IAM policy is applied to the
+ChatBot guardrails for enhanced security.
+:::
+
+Slack notifications can be configured for the following accounts and regions:
+
+1. **AWS Budgets**: Requires linking the Slack Workspace in the **Management Account**.
+2. **AWS Security Hub**: Requires linking the Slack Workspace in the **Security Audit Account**.
+3. **Default Application Notifications**: Requires linking the Slack Workspace in each individual account.

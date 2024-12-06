@@ -1,0 +1,62 @@
+---
+title: Defaults
+description: Defaults
+---
+import DualCode from "../../../components/DualCode.astro";
+
+The Data Landing Zone provides opinionated yet configurable setups by offering optional defaults for various
+parts of the configuration. These defaults help streamline setup while remaining adaptable to specific requirements.
+
+### Example: Using Defaults in Budgets
+
+An example of applying defaults is demonstrated in the [Budgets](/components/account-management/budgets#defaults)
+component, where the `Defaults.budgets` object is used to create two standard budgets.
+
+Below is a code snippet illustrating how to configure a budget of $100 for the entire organization and $20 for
+resources created by the DLZ:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      budgets: [
+        ...Defaults.budgets(100, 20, {
+          emails: ['you@org.com'],
+        }),
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+            budgets=[
+                *dlz.Defaults.budgets(
+                    100,
+                    20,
+                    emails=["you@org.com"],
+                ),
+            ],
+        ...
+    )
+    app.synth()
+    ```
+  </Fragment>
+</DualCode>
+
+### List of Defaults
+
+A comprehensive list of defaults referenced throughout the documentation:
+
+- [Defaults.budgets](/components/account-management/budgets#defaults): Creates two budgets, one for the organization
+and another for the DLZ-managed resources.

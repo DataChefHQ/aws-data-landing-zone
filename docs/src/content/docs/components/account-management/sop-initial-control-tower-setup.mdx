@@ -14,20 +14,20 @@ existing Control Tower setups or newly created (greenfield) environments.
 ## Prerequisites
 
 You must have an existing AWS account that can act as or already serves as the head of the AWS Organization/Control
-Tower. Alternatively, create a new root AWS account by signing up at
+Tower. Alternatively, create a new Management AWS account by signing up at
 [https://portal.aws.amazon.com/billing/signup](https://portal.aws.amazon.com/billing/signup).
 - Use an email address not already associated with an AWS account and ensure it is accessible.
 - Store the username and password securely.
 - You will have to link a Credit card to the account.
 
-This account will be referred to as the `root`/management account.
+This account will be referred to as the Management account.
 
 Additional References:
 - [AWS Control Tower Prerequisites](https://docs.aws.amazon.com/controltower/latest/userguide/setting-up.html)
 
 ## Enable Control Tower
 
-1. Log in to the `root` account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
+1. Log in to the Management account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
 1. Make a choice on what you want your `home`/`global` region is. This is the region where you CT will be deployed.
 Not all [regions](https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html) supports all resources.
 It is recommended to use "major" region, both `eu-west-1` or `us-east-1` regions are usually good choices.
@@ -45,7 +45,7 @@ Additional References:
 
 ## Create AWS Organization OUs
 
-1. Log in to the `root` account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
+1. Log in to the Management account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
 2. Select **Organizational Units** from the left-hand menu, then click **Add an OU**.
 3. Ensure the following OUs are created if not already present:
     - `Workloads`
@@ -59,7 +59,7 @@ and will no longer be governed by the properties of the previous OU.
 
 ## Verify IAM Identity Center
 
-1. Log in to the `root` account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
+1. Log in to the Management account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
 2. In the left-hand menu, navigate to **Users and Access**.
 3. Verify that **IAM Identity Center** is enabled.
 
@@ -71,7 +71,7 @@ Since VPCs will be defined by the DLZ CDK construct, Control Tower's VPC creatio
 [official AWS documentation](https://docs.aws.amazon.com/controltower/latest/userguide/configure-without-vpc.html)
 to disable VPC creation:
 
-1. Log in to the `root` account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
+1. Log in to the Management account and navigate to [Control Tower](https://console.aws.amazon.com/controltower)
 2. In the Control Tower console, select **Account Factory**.
 3. Edit the **Network configuration**:
     - Disable **Internet-accessible subnet**.
@@ -91,7 +91,7 @@ Gather the following IDs required by the DLZ construct in the
 [AWS Organisation](https://us-east-1.console.aws.amazon.com/organizations/v2/home/accounts) console:
 
 - AWS Organisation ID
-- Root account ID
+- Management account ID
 - Security OU ID
 - Audit Account ID
 - Log Archive Account ID

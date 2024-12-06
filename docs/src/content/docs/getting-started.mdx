@@ -1,42 +1,28 @@
 ---
 title: Getting Started
-description: Step-by-step guide to configuring and deploying the AWS Data Landing Zone
+description: Step-by-step guide to configuring and deploying the Data Landing Zone
 ---
 
 import DualCode from "../../components/DualCode.astro";
 
-:::caution
-WIP: This part is still under development.
-:::
+This guide provides a step-by-step walkthrough for configuring and deploying the **Data Landing Zone** (DLZ). The DLZ
+streamlines the setup of a secure, scalable, and well-architected multi-account AWS environment. Let’s get started!
 
-This guide will walk you through the process of configuring and deploying the
-**AWS Data Landing Zone**. The landing zone simplifies the setup of a secure,
-scalable, and well-architected multi-account AWS environment. Let’s get started!
+## Quick Start
 
----
+### Prerequisites
 
-## Prerequisites
+Before starting, ensure you have the following tools installed and configured:
 
-Before you begin, ensure you have the following tools installed and configured:
-
-- **AWS CLI**: Installed and configured with credentials. Ensure you have
-  an **SSO User** or **IAM User** in the **management account** with
-  **admin access** or the necessary permissions to assume CDK roles
-  and perform deployments.
-- **Node.js**: Version 14 or higher.
+- **AWS CLI**: Installed and configured with credentials. Use an **SSO User** or **IAM User** in the **management
+account** with admin access or permissions to assume CDK roles and perform deployments. Ensure the AWS profile is
+properly configured in your `~/.aws` config files.
+- **Node.js**: Version 18 or higher.
 - **AWS CDK**: Installed globally using `npm install -g aws-cdk`.
-- **Git**: For cloning repositories.
 
-Additionally, if you plan to use the TypeScript scripts included with
-the project, you can use the **profile name** for your AWS CLI
-configuration that is specified in the `localProfile` property of the
-project configuration file.
+### Step 1: Create a New CDK Project
 
----
-
-## Step 1: Create a New CDK Project
-
-To get started, create a new AWS CDK project:
+Begin by creating a new AWS CDK project:
 
 <DualCode>
   <Fragment slot="ts">
@@ -45,7 +31,6 @@ To get started, create a new AWS CDK project:
     cd my-data-landing-zone
     cdk init app --language=typescript
     ```
-
   </Fragment>
   <Fragment slot="python">
     ```bash
@@ -53,135 +38,130 @@ To get started, create a new AWS CDK project:
     cd my-data-landing-zone
     cdk init app --language=python
     ```
-
   </Fragment>
 </DualCode>
 
-This initializes a new CDK project with the necessary files and folder structure.
+### Step 2: Install the package
 
----
-
-## Step 2: Add the DataChef AWS Data Landing Zone Package
-
-Add the **DataChef** Data Landing Zone as a dependency to your project:
+Install the AWS Data Landing Zone package:
 
 <DualCode>
   <Fragment slot="ts">
     ```bash
     npm install aws-data-landing-zone
     ```
-
   </Fragment>
   <Fragment slot="python">
     ```bash
     pip install aws-data-landing-zone
     ```
-
   </Fragment>
 </DualCode>
 
----
+### Step 3: Create the Configuration
 
-## Step 3: Configuration
+Define the basic configuration parameters for the DLZ. It is recommended to create this configuration in a separate file,
+such as `config.ts` or `config.py`, as it will be used by both CDK and local scripts.
 
-Now you need to config the basic parameters required for deploying DLZ.
+Refer to the example projects for guidance:
+- [DLZ TypeScript Example Repository](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript)
+- [DLZ Python Example Repository](https://github.com/DataChefHQ/aws-data-landing-zone-example-python)
 
-**NOTE:** Make sure to replace all of the IDs with correct IDs related to your AWS
-accounts.
+The configuration requires the following:
+
+1. **Control Tower**: Ensure Control Tower is already set up. For details, see
+[SOP - Control Tower Setup](/components/account-management/sop-initial-control-tower-setup).
+2. **Local Profile**: Specify the AWS profile for local scripts like deploy and bootstrap.
+See [Scripts and Commands](/reference/scripts-commands) for more details.
+3. **Regions**: Define the global and regional AWS regions. The global(home) region is where Control Tower is deployed,
+while the regional regions are additional managed regions. See [Regions](/components/account-management/regions)
+for more information.
+4. **Mandatory Tags**: Specify the mandatory tag values required for resources. Refer to
+[Tagging](/components/account-management/tagging) for details.
+5. **AWS Organization**: Provide details about your AWS Organization, including the Organization ID, OU IDs, and
+Account IDs. Copy the IDs of accounts created by Control Tower, such as the management, security log, and security
+audit accounts. Additional accounts can be created manually or moved under the Workloads OU. For more details, see
+[AWS Organization](/components/account-management/aws-organization). In the code snippet below, we define a single
+development account.
 
 <DualCode>
   <Fragment slot="ts">
-    - For a complete example check [DLZ TypeScript Sample](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript).
     ```ts
+    // bin/config.ts
     export const config: DataLandingZoneProps = {
-    localProfile: '', // TODO: Not required; Will be optional from next release
-    regions: {
-      global: Region.EU_WEST_1,
-      regional: [Region.US_EAST_1],
-    },
-    mandatoryTags: {
-      owner: ['backend'],
-      project: ['accounting'],
-      environment: ['development', 'staging', 'production'],
-    },
-    budgets: [
-      ...Defaults.budgets(100, 20, {}),
-    ],
-    securityHubNotifications: [
-    ],
-    organization: {
-      organizationId: 'RootOrganizationID',
-      root: {
-        accounts: {
-          management: {
-            accountId: 'YourRootAccountID',
-          },
-        },
-        controls: [],
+      localProfile: 'YourAwsProfile',
+      regions: {
+        global: Region.CHOOSE_A_GLOBAL_REGION,
+        regional: [Region.CHOOSE_ONE_OR_MORE_ADDITIONAL_REGIONS],
       },
-      ous: {
-        security: {
-          ouId: 'SecurityOrganizationUnitId',
+      mandatoryTags: {
+        owner: ['ALLOWED_VALUES'],
+        project: ['ALLOWED_VALUES'],
+        environment: ['ALLOWED_VALUES'],
+      },
+      budgets: [
+        ...Defaults.budgets(100, 20, {}),
+      ],
+      securityHubNotifications: [
+      ],
+      organization: {
+        organizationId: 'OrganizationID',
+        root: {
           accounts: {
-            log: {
-              accountId: 'YourLogsAccountID',
-            },
-            audit: {
-              accountId: 'YourAuditAccountID',
+            management: {
+              accountId: 'YourRootAccountID',
             },
           },
+          controls: [],
         },
-        workloads: {
-          ouId: 'WorkloadOrganizationUnitId',
-          accounts: [
-            {
-              name: 'development',
-              accountId: 'YourDevelopmentAccountID',
-              type: DlzAccountType.DEVELOP,
+        ous: {
+          security: {
+            ouId: 'SecurityOrganizationUnitId',
+            accounts: {
+              log: {
+                accountId: 'YourLogsAccountID',
+              },
+              audit: {
+                accountId: 'YourAuditAccountID',
+              },
             },
-          ],
-        },
-        suspended: {
-          ouId: 'SuspendedOrganizationUnitId',
-        },
-      },
-    },
-    deploymentPlatform: {
-      gitHub: {
-        references: [
-          {
-            owner: 'DataChefHQ',
-            repo: 'data-landing-zone-example-typescript',
           },
-        ],
+          workloads: {
+            ouId: 'WorkloadOrganizationUnitId',
+            accounts: [
+              {
+                name: 'development',
+                accountId: 'YourDevelopmentAccountID',
+                type: DlzAccountType.DEVELOP,
+              },
+            ],
+          },
+          suspended: {
+            ouId: 'SuspendedOrganizationUnitId',
+          },
+        },
       },
-    },
-
-};
-
-````
-
-
+  };
+  ```
   </Fragment>
   <Fragment slot="python">
-    - For a complete example check [DLZ Python Sample](https://github.com/DataChefHQ/aws-data-landing-zone-example-python).
     ```python
-      DataLandingZone(
-      app,
-      local_profile="",  # TODO: Not required; Will be optional from next release
+    # my_data_landing_zone/config.py
+    config = DataLandingZoneProps(
+      local_profile="YourAwsProfile",
       regions={
-          "global": Region.EU_WEST_1,
-          "regional": [Region.US_EAST_1],
+          "global": Region.CHOOSE_A_GLOBAL_REGION,
+          "regional": [Region.CHOOSE_ONE_OR_MORE_ADDITIONAL_REGIONS],
       },
       mandatory_tags={
-          "owner": ["backend"],
-          "project": ["accounting"],
-          "environment": ["development", "staging", "production"],
+          "owner": ["ALLOWED_VALUES"],
+          "project": ["ALLOWED_VALUES"],
+          "environment": ["ALLOWED_VALUES"],
       },
       budgets=Defaults.budgets(100, 20),
       security_hub_notifications=[],
       organization={
-          "organization_id": "RootOrganizationID",
+          "organization_id": "OrganizationID",
           "root": {
               "accounts": {
                   "management": {
@@ -218,85 +198,133 @@ accounts.
       },
     )
     ```
-
   </Fragment>
 </DualCode>
 
----
 
-## Step 4: Add the Landing Zone to Your CDK Stack
+### Step 4: Use the Configuration in CDK
 
-Now you need to call the Landing Zone constructs from your CDK stacks.
+Pass the configuration to the Data Landing Zone construct. This will create the necessary stacks in the appropriate
+AWS accounts and regions. For more information, see [Deployment Order](/components/build-system/deployment-order).
 
 <DualCode>
   <Fragment slot="ts">
-    In your `lib/my-data-landing-zone-stack.ts` file, add the Data Landing Zone construct:
     ```ts
+    // bin/my-data-landing-zone.ts
     import {App} from 'aws-cdk-lib';
-    import {config} from "./minimum_config";
-    import * as sns from 'aws-cdk-lib/aws-sns';
+    import {config} from "./config";
     import { DataLandingZone } from 'aws-data-landing-zone';
 
     const app = new App();
     const dlz = new DataLandingZone(app, config)
-
-````
-
+    ```
   </Fragment>
   <Fragment slot="python">
-    In your `main.py` file, add the Data Landing Zone construct:
     ```python
-      import aws_cdk as cdk
-      from aws_data_landing_zone import (
-          Defaults,
-          DlzAccountType,
-          Region,
-          DataLandingZone,
-      )
+    // app.py
+    import aws_cdk as cdk
+    from aws_data_landing_zone import ( DataLandingZone )
+    from my_data_landing_zone.config import config
 
-      app = cdk.App()
-
-      DataLandingZone(
-        app,
-        ... # your config parameters
-      )
-
-      app.synth()
+    app = cdk.App()
+    DataLandingZone(app, config)
     ```
-
   </Fragment>
 </DualCode>
 
----
+### Step 5: Bootstrap Accounts
 
-## Step 5: Deploy the Landing Zone
+All accounts and regions need to be CDK bootstrapped before deploying.
 
-### 5.1 Bootstrap the Environment
+The DLZ provides utility functions that abstract the complexity of common tasks such as bootstrapping accounts across
+regions, running CDK diff or deploy commands, setting cost allocation tags, and more.
 
-Bootstrap your environment to prepare it for CDK deployments:
+Use the `bootstrapAll` script or perform the process manually using bash and AWS CDK commands.
+See [Scripts and Commands](/reference/scripts-commands) for more details.
 
+Let's use the scripts. Create a standalone script file (e.g., `scripts/bootstrap.ts` or `scripts/bootstrap.py`) to handle bootstrapping.
+The script uses the configuration file to identify the accounts and regions requiring bootstrap. This is why the
+configuration file is standalone file, to be shared between the CDK and the scripts.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    // scripts/bootstrap.ts
+    import { Scripts } from "aws-data-landing-zone";
+    import { config } from "../bin/config";
+
+    (async () => {
+      await (new Scripts()).boostrapAll(config);
+    })();
+    ```
+
+    Then run the script:
+    ```bash
+    npx ts-node --prefer-ts-exts scripts/bootstrap.ts
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    // scripts/bootstrap.py
+    from aws_data_landing_zone import Scripts
+    from data_landing_zone_example_python.config_minimum import config
+
+    scripts = Scripts()
+    scripts.bootstrap_all(props=config)
+    ```
+
+    Then run the script:
+    ```bash
+    python scripts/bootstrap.py
+    ```
+  </Fragment>
+</DualCode>
+
+### Step 6: Deploy
+
+Similar to the `bootstrapAll` script, a `deployAll`(`deploy_all`) script is also available.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    // scripts/deploy_all.ts
+    import { Scripts } from "aws-data-landing-zone";
+    import { config } from "../bin/config";
+
+    (async () => {
+    await (new Scripts()).deployAll(config);
+  })();
+    ```
+
+    Then run the script:
+    ```bash
+    npx ts-node --prefer-ts-exts scripts/deploy_all.ts
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    // scripts/deploy_all.py
+    from aws_data_landing_zone import Scripts
+    from data_landing_zone_example_python.config_minimum import config
+
+    scripts = Scripts()
+    scripts.deploy_all(props=config)
+    ```
+
+    Then run the script:
+    ```bash
+    python scripts/deploy_all.py
+    ```
+  </Fragment>
+</DualCode>
+
+Alternatively deploy the CDK application with the following command:
 ```bash
-cdk bootstrap aws://ACCOUNT_ID/REGION
-
+cdk deploy "**" --require-approval never --progress events --concurrency 10 --profile YourAwsProfile
 ```
-
-### 5.2 Deploy the Stacks
-
-Deploy the stack you created:
-
-```bash
-cdk deploy
-
-```
-
-### 5.3 Verify Deployment
-
-Once deployment completes, verify the resources in the AWS Management Console.
-
----
 
 ## Next Steps
 
-- Explore the documentation to learn more about advanced configurations.
-- Customize the stacks to meet your specific organizational needs.
-- Add additional controls or policies as required.
+This guide covers the minimal setup required to get started. At this stage, only a few resources are deployed. Explore
+the documentation to learn about advanced configurations and features, such as creating non-overlapping VPCs, bastions,
+NAT gateways, Lake Formation setups and many more.

@@ -1,6 +1,6 @@
 ---
-title: Regions
-description: Regions
+title: Service Deny List
+description: Service Deny List
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
@@ -9,7 +9,6 @@ The Data Landing Zone supports deployment across multiple AWS regions. When conf
 It hosts non-regional resources such as IAM. The global region is deployed first, as other regions may depend on
 resources created there. Note: the global region should not and cannot be changed after deployment.
 - **Additional Regions**: One or more regions where you wish to manage and govern resources.
-
 
 :::tip
 Not all [AWS regions](https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html) support every resource.
@@ -54,13 +53,6 @@ Below is an example of defining a global region and one additional region.
 
   </Fragment>
 </DualCode>
-
-## Adding a region
-
-1. Add the region to Control Tower and wait for the setup/deployment to complete.
-1. Update the Data Landing Zone configuration to include the new region.
-1. Run the `bootstrapAll` script or manually bootstrap the account using the AWS CDK. Refer to
-[Scripts and Commands](/reference/scripts-commands) for detailed instructions.
 
 ## API References
 - [DataLandingZoneProps.regions](/reference/api#aws-data-landing-zone.DataLandingZoneProps.property.regions)

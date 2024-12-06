@@ -1,6 +1,6 @@
 ---
-title: Regions
-description: Regions
+title: Tagging
+description: Tagging
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
@@ -15,7 +15,7 @@ must include these tags upon creation.
 resources, it ensures that key resources, such as `AWS::CloudFormation::Stack`, will inherently apply tags
 to the resources they create. For more information, refer to the config rule [required-tags](https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html).
 
-:::info
+:::note
 It is not possible to enforce tags on all resources universally. The strategy outlined here represents
 the best possible effort. The Config Rule will report any untagged resources to Security Hub, where they
 can be tracked. It is then necessary to identify the responsible party and ensure the tags are applied
@@ -117,3 +117,14 @@ property.
     ```
   </Fragment>
 </DualCode>
+
+## Activate Cost Allocation Tags
+
+To activate Cost Allocation Tags, you need to either locally run the `configureCostAllocationTags` script, as
+outlined in [Scripts and Commands](/reference/scripts-commands), or enable them through the AWS Management Console.
+This step is essential for utilizing tags in AWS Cost Explorer and applying them as filters when setting up AWS Budgets.
+
+## API References
+- [MandatoryTags](/reference/api#mandatorytags)
+- [DataLandingZoneProps.additionalMandatoryTags](/reference/api#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags)
+- [DlzTag](/reference/api#dlztag)
