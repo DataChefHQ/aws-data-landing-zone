@@ -1,0 +1,68 @@
+---
+title: Regions
+description: Regions
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone supports deployment across multiple AWS regions. When configuring regions, you must define:
+- **Global Region**: Also referred to as the "home region" by Control Tower, this is where Control Tower is deployed.
+It hosts non-regional resources such as IAM. The global region is deployed first, as other regions may depend on
+resources created there. Note: the global region should not and cannot be changed after deployment.
+- **Additional Regions**: One or more regions where you wish to manage and govern resources.
+
+
+:::tip
+Not all [AWS regions](https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html) support every resource.
+It is recommended to use major regions like `eu-west-1` or `us-east-1`, which typically have comprehensive support.
+:::
+
+Below is an example of defining a global region and one additional region.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      regions: {
+        global: Region.EU_WEST_1,
+        regional: [Region.US_EAST_1],
+      },
+     ...
+    });
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        regions=dlz.DlzRegions(
+            global_=dlz.Region.EU_WEST_1,
+            regional=[dlz.Region.US_EAST_1],
+        ),
+        ...
+    )
+    app.synth()
+    ```
+
+  </Fragment>
+</DualCode>
+
+## Adding a region
+
+1. Add the region to Control Tower and wait for the setup/deployment to complete.
+1. Update the Data Landing Zone configuration to include the new region.
+1. Run the `bootstrapAll` script or manually bootstrap the account using the AWS CDK. Refer to
+[Scripts and Commands](/reference/scripts-commands) for detailed instructions.
+
+## API References
+- [DataLandingZoneProps.regions](/reference/api#aws-data-landing-zone.DataLandingZoneProps.property.regions)
+- [DlzRegions](/reference/api#aws-data-landing-zone.DlzRegions)
+- [Region](/reference/api#aws-data-landing-zone.Region)

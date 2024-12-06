@@ -10184,7 +10184,6 @@ The construct to start the search from.
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.property.defaultPolicyStatement">defaultPolicyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatementProps</code> | *No description.* |
 
 ---
 
@@ -10561,16 +10560,6 @@ public readonly accountName: string;
 ```
 
 - *Type:* string
-
----
-
-##### `defaultPolicyStatement`<sup>Required</sup> <a name="defaultPolicyStatement" id="aws-data-landing-zone.WorkloadGlobalStack.property.defaultPolicyStatement"></a>
-
-```typescript
-public readonly defaultPolicyStatement: PolicyStatementProps;
-```
-
-- *Type:* aws-cdk-lib.aws_iam.PolicyStatementProps
 
 ---
 
@@ -17200,9 +17189,9 @@ const mandatoryTags: MandatoryTags = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | The values of the mandatory `Environment` tag that all resources must have. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | The values of the mandatory `Owner` tag that all resources must have. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | The values of the mandatory `Project` tag that all resources must have. |
 
 ---
 
@@ -17214,6 +17203,8 @@ public readonly environment: string[];
 
 - *Type:* string[]
 
+The values of the mandatory `Environment` tag that all resources must have.
+
 ---
 
 ##### `owner`<sup>Required</sup> <a name="owner" id="aws-data-landing-zone.MandatoryTags.property.owner"></a>
@@ -17224,6 +17215,8 @@ public readonly owner: string[];
 
 - *Type:* string[]
 
+The values of the mandatory `Owner` tag that all resources must have.
+
 ---
 
 ##### `project`<sup>Required</sup> <a name="project" id="aws-data-landing-zone.MandatoryTags.property.project"></a>
@@ -17233,6 +17226,8 @@ public readonly project: string[];
 ```
 
 - *Type:* string[]
+
+The values of the mandatory `Project` tag that all resources must have.
 
 ---
 
@@ -18469,9 +18464,9 @@ const slackChannel: SlackChannel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.SlackChannel.property.slackChannelConfigurationName">slackChannelConfigurationName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.SlackChannel.property.slackChannelId">slackChannelId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.SlackChannel.property.slackWorkspaceId">slackWorkspaceId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.SlackChannel.property.slackChannelConfigurationName">slackChannelConfigurationName</a></code> | <code>string</code> | The name of Slack channel configuration. |
+| <code><a href="#aws-data-landing-zone.SlackChannel.property.slackChannelId">slackChannelId</a></code> | <code>string</code> | The ID of the Slack channel. |
+| <code><a href="#aws-data-landing-zone.SlackChannel.property.slackWorkspaceId">slackWorkspaceId</a></code> | <code>string</code> | The ID of the Slack workspace authorized with AWS Chatbot. |
 
 ---
 
@@ -18483,6 +18478,8 @@ public readonly slackChannelConfigurationName: string;
 
 - *Type:* string
 
+The name of Slack channel configuration.
+
 ---
 
 ##### `slackChannelId`<sup>Required</sup> <a name="slackChannelId" id="aws-data-landing-zone.SlackChannel.property.slackChannelId"></a>
@@ -18493,6 +18490,11 @@ public readonly slackChannelId: string;
 
 - *Type:* string
 
+The ID of the Slack channel.
+
+To get the ID, open Slack, right click on the channel name in the left pane, then choose Copy Link.
+The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ.
+
 ---
 
 ##### `slackWorkspaceId`<sup>Required</sup> <a name="slackWorkspaceId" id="aws-data-landing-zone.SlackChannel.property.slackWorkspaceId"></a>
@@ -18502,6 +18504,14 @@ public readonly slackWorkspaceId: string;
 ```
 
 - *Type:* string
+
+The ID of the Slack workspace authorized with AWS Chatbot.
+
+To get the workspace ID, you must perform the initial authorization flow with Slack in the AWS Chatbot console.
+Then you can copy and paste the workspace ID from the console.
+For more details, see steps 1-4 in Setting Up AWS Chatbot with Slack in the AWS Chatbot User Guide.
+
+> [https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up.html#Setup_intro](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up.html#Setup_intro)
 
 ---
 

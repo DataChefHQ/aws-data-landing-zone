@@ -1,0 +1,152 @@
+---
+title: Budgets
+description: Budgets
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+AWS Budgets provides tools to monitor and control costs by setting custom spending thresholds. You can create monthly
+budgets, specifying the budget amount and filtering resources based on their tags.
+
+:::caution
+Tags used for budget filters must be activated as Cost Allocation Tags in your account settings. See
+[Activate Cost Allocation Tags](/components/account-management/tagging#activate-cost-allocation-tags) for details.
+:::
+
+Budget notifications are sent via Amazon SNS, which can be configured for the following delivery methods:
+- **Email**: Each email address must confirm the notification opt-in the first time it is deployed.
+- **Slack**: Notifications are sent to a designated Slack channel. The Slack workspace must be linked to the Management
+Account. For setup details, see the SOP [AWS Chatbot and Slack Integration](sop-account-setup#aws-chatbot-and-slack-integration).
+
+Below is an example of creating a budget for resources tagged with `Owner: backend`. Notifications will be sent to a
+specified Slack channel and email address once the budget exceeds $100.
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone, SlackChannel } from 'aws-data-landing-zone';
+
+    const slackBudgetNotifications: SlackChannel = {
+      slackChannelConfigurationName: 'budget-alerts',
+      slackWorkspaceId: 'YourWorkspaceId:',
+      slackChannelId: 'YourChannelId',
+    };
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      budgets: [
+        {
+          name: 'backend',
+          forTags: {
+            owner: 'backend',
+          },
+          amount: 100,
+          subscribers: {
+            slack: slackBudgetNotifications,
+            emails: ['you@org.com'],
+          },
+        },
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    slack_budget_notifications = dlz.SlackChannel(
+        slack_channel_configuration_name="budget-alerts",
+        slack_workspace_id="YourWorkspaceId",
+        slack_channel_id="YourChannelId",
+    )
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+            budgets=[
+                {
+                    "name": "backend",
+                    "for_tags": {
+                        "owner": "backend",
+                    },
+                    "amount": 100,
+                    "subscribers": {
+                        "slack": slack_budget_notifications,
+                        "emails": ["you@org.com"],
+                    },
+                },
+            ],
+        ...
+    )
+    app.synth()
+    ```
+  </Fragment>
+</DualCode>
+
+## Defaults
+
+The construct provides two default budgets available via `Defaults.budgets`. These include:
+- **Organizational Budget**: Covers all resources across all AWS accounts.
+- **DLZ Resources Budget**: Tracks resources created by DLZ, filtered by the tags `Owner: 'infra'` and `Project: 'dlz'`.
+
+The example below demonstrates creating a $100 budget for the entire organization and a $20 budget for DLZ-managed
+resources. Notifications are sent to the specified Slack channel and email address.
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone, SlackChannel } from 'aws-data-landing-zone';
+
+    const slackBudgetNotifications: SlackChannel = {
+      slackChannelConfigurationName: 'budget-alerts',
+      slackWorkspaceId: 'YourWorkspaceId:',
+      slackChannelId: 'YourChannelId',
+    };
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      budgets: [
+        ...Defaults.budgets(100, 20, {
+          slack: slackBudgetNotifications,
+          emails: ['you@org.com'],
+        }),
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    slack_budget_notifications = dlz.SlackChannel(
+        slack_channel_configuration_name="budget-alerts",
+        slack_workspace_id="YourWorkspaceId",
+        slack_channel_id="YourChannelId",
+    )
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+            budgets=[
+                *dlz.Defaults.budgets(
+                    100,
+                    20,
+                    slack=slack_budget_notifications,
+                    emails=["you@org.com"],
+                ),
+            ],
+        ...
+    )
+    app.synth()
+    ```
+  </Fragment>
+</DualCode>
+
+## API References
+- [Budget](/reference/api#dlzbudget)
+- [BudgetProps](/reference/api#dlzbudgetprops)
+- [Defaults.budgets](/reference/api#aws-data-landing-zone.Defaults.budgets)
+- [SlackChannel](/reference/api#slackchannel)

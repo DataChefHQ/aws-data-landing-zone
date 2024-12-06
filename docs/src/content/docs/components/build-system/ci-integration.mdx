@@ -7,9 +7,6 @@ import DualCode from '../../../../components/DualCode.astro';
 The Data Landing Zone (DLZ) construct offers built-in support to streamline authentication between AWS and CI/CD
 systems, enhancing security and simplifying setup processes.
 
-Relevant API References:
-- [DeploymentPlatform](/reference/api#deploymentplatform)
-
 ## GitHub Actions
 
 DLZ facilitates seamless integration with GitHub Actions using OpenID Connect (OIDC). OIDC is recommended over
@@ -96,10 +93,6 @@ arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
 ```
 
 ----
-
-Relevant API References:
-- [DeploymentPlatformGitHub](/reference/api#deploymentplatformgithub--1)
-- [GitHubReference](/reference/api#githubreference)
 
 ### 2. Use within GitHub workflows
 
@@ -334,3 +327,9 @@ jobs:
         run: npm run cdk -- deploy '${{ inputs.stack_selection }}' --require-approval never --concurrency 10 --exclusively --app ./cloud_assembly_output
   ```
 </details>
+
+## API References
+
+- [DeploymentPlatform](/reference/api#deploymentplatform)
+- [DeploymentPlatformGitHub](/reference/api#deploymentplatformgithub--1)
+- [GitHubReference](/reference/api#githubreference)

@@ -42,7 +42,7 @@ These scripts do not require full administrative access, allowing for a more res
 enhance security.
 
 The `bootstrap` script, however, requires elevated permissions. The specified profile must have administrative access
-to the root management account and the ability to assume the `AWSControlTowerExecution` role created by AWS
+to the Management account and the ability to assume the `AWSControlTowerExecution` role created by AWS
 Control Tower. These permissions are highly privileged and should be handled with caution.
 
 ### TypeScript Usage
@@ -75,30 +75,35 @@ simplify the process, add a corresponding script to your `package.json`.
 // package.json
 {
   "scripts": {
-    "bootstrap": "npx ts-node scripts/bootstrap.ts"
+    "bootstrap": "npx ts-node --prefer-ts-exts scripts/bootstrap.ts"
   }
 }
 ```
 
-You can then execute the script with `npm run bootstrap`. The `bootstrapAll` function reads the DLZ configuration,
+You can then execute the script with:
+```
+npm run bootstrap
+```
+
+The `bootstrapAll` function reads the DLZ configuration,
 including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
-root, security audit, security log, and workload accounts, ensuring they all trust the root account.
+management, security audit, security log, and workload accounts, ensuring they all trust the Management account.
 
 #### Available Scripts
 
-- `Scripts.boostrapAll(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
+- `boostrapAll(props: DataLandingZoneProps)` - Bootstraps all accounts (management, security audit, security log,
   and workload accounts) in all regions.
-- `Scripts.diffAll(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
-- `Scripts.diffSelect(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
-- `Scripts.deployAll(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
-- `Scripts.deploySelect(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
-- `Scripts.configureCostAllocationTags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
+- `diffAll(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
+- `diffSelect(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
+- `deployAll(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
+- `deploySelect(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
+- `configureCostAllocationTags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
   `additionalMandatoryTags` properties as cost allocation tags.
 
 More examples and pre-configured scripts are available in the
 [TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript). These can
 be copied and reused in your project. They contain pre-configured scripts for the most common stack
-selecting ids for the `Scripts.diffSelect` and `Scripts.deploySelect` functions.
+selecting ids for the `diffSelect` and `deploySelect` functions.
 
 Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-patterns) section for a full list of stack selecting IDs.
 
@@ -117,31 +122,36 @@ containing the specific DLZ `Scripts` you want to execute.
 ```python
 // scripts/bootstrap.py
 from aws_data_landing_zone import Scripts
-from data_landing_zone_example_python import config_basic
+from data_landing_zone_example_python.config_minimum import config
 
-Scripts.deploy_all(props=config_basic.config)
-
+scripts = Scripts()
+scripts.deploy_all(props=config)
 ```
 
-You can then execute the script with `python scripts/bootstrap.py`. The `bootstrapAll` function reads the DLZ configuration,
+You can then execute the script with:
+```
+python scripts/bootstrap.py
+```
+
+The `bootstrapAll` function reads the DLZ configuration,
 including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
-root, security audit, security log, and workload accounts, ensuring they all trust the root account.
+management, security audit, security log, and workload accounts, ensuring they all trust the Management account.
 
 #### Available Scripts
 
-- `Scripts.boostrap_all(props: DataLandingZoneProps)` - Bootstraps all accounts (root, security audit, security log,
+- `boostrap_all(props: DataLandingZoneProps)` - Bootstraps all accounts (management, security audit, security log,
   and workload accounts) in all regions.
-- `Scripts.diff_all(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
-- `Scripts.diff_select(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
-- `Scripts.deploy_all(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
-- `Scripts.deploy_select(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
-- `Scripts.configure_cost_allocation_tags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
+- `diff_all(props: DataLandingZoneProps)` - Runs `cdk diff "**"` to show differences for all stacks across all accounts and regions.
+- `diff_select(props: DataLandingZoneProps, id: string)` - Runs `cdk diff "${id}"` to show differences for a selected stack using its ID.
+- `deploy_all(props: DataLandingZoneProps)` - Deploys all stacks in all accounts and regions using `cdk deploy "**"`.
+- `deploy_select(props: DataLandingZoneProps, id: string)` - Deploys a selected stack using `cdk deploy "${id}"`.
+- `configure_cost_allocation_tags(props: DataLandingZoneProps)` - Sets the `mandatoryTags` and
   `additionalMandatoryTags` properties as cost allocation tags.
 
 More examples and pre-configured scripts are available in the
 [Python Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-python). These can
 be copied and reused in your project. They contain pre-configured scripts for the most common stack
-selecting ids for the `Scripts.diffSelect` and `Scripts.deploySelect` functions.
+selecting ids for the `diffSelect` and `deploySelect` functions.
 
 ## Commands (manual)
 
@@ -155,12 +165,12 @@ commands are detailed below for reference or troubleshooting purposes.
 ### Bootstrap
 
 Each account and region defined in the DLZ configuration must be CDK bootstrapped. This process is automated by the
-`Scripts.boostrapAll` function. For manual execution, use the following steps:
+`boostrapAll` function. For manual execution, use the following steps:
 
 Script replacements:
 
 - `YOUR_PROFILE` - The AWS CLI profile to use. See required permission as mentioned in [Scripts permission](#scripts-permission).
-- `ROOT_ACCOUNT_ID` - The AWS Account ID of the root management account. All other accounts will trust this account.
+- `MANAGMENT_ACCOUNT_ID` - The AWS Account ID of the management account. All other accounts will trust this account.
 - `SECURITY_LOG_ACCOUNT_ID` - The AWS Account ID of the security log account.
 - `SECURITY_AUDIT_ACCOUNT_ID` - The AWS Account ID of the security log account.
 - `GLOBAL_REGION` - The region where the management account is located.
@@ -177,7 +187,7 @@ ACCOUNTS=(
   "SECURITY_AUDIT_ACCOUNT_ID"
   "WORKLOAD_ACCOUNT_IDS")
 
-cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --profile $YOUR_PROFILE --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$ROOT_ACCOUNT_ID/$GLOBAL_REGION
+cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --profile $YOUR_PROFILE --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$MANAGMENT_ACCOUNT_ID/$GLOBAL_REGION
 
 for account in "${ACCOUNTS[@]}"; do
 
@@ -192,9 +202,9 @@ for account in "${ACCOUNTS[@]}"; do
   export AWS_SECRET_ACCESS_KEY
   export AWS_SESSION_TOKEN
 
-  cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --trust $ROOT_ACCOUNT_ID --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$account/$GLOBAL_REGION
+  cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --trust $MANAGMENT_ACCOUNT_ID --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$account/$GLOBAL_REGION
   for region in "${REGIONS[@]}"; do
-    cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --trust $ROOT_ACCOUNT_ID --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$account/$region
+    cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --trust $MANAGMENT_ACCOUNT_ID --tags Owner=infra --tags Project=dlz --tags Environment=dlz aws://$account/$region
   done
 done
 ```
@@ -202,7 +212,7 @@ done
 ### Diff
 
 The cdk diff command compares the current state of stacks with the code definition.
-This process is automated by the `Scripts.diffAll` and `Scripts.diffSelect` functions.
+This process is automated by the `diffAll` and `diffSelect` functions.
 For manual execution, see the following examples:
 
 Below are a few examples of how to run the diff command manually.
@@ -221,7 +231,7 @@ Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-p
 ### Deploy
 
 The CDK deploy command deploys the stacks defined in the CDK code.
-This process is automated by the `Scripts.deployAll` and `Scripts.deploySelect` functions.
+This process is automated by the `deployAll` and `deploySelect` functions.
 For manual execution, see the following examples:
 
 ```bash
@@ -237,7 +247,7 @@ Refer to the [Stack Patterns](/components/build-system/deployment-order#stacks-p
 
 ### Configure Cost Allocation Tags
 
-Manually set cost allocation tags using the following script:
+Manually set cost allocation tags for the Management account's global region using the following script:
 
 ```bash
 TAGS=("Tag1" "Tag2")
@@ -246,5 +256,5 @@ TAGS_JSON="[${TAGS_JSON:1}]"
 aws ce update-cost-allocation-tags-status --cost-allocation-tags-statuses "$TAGS_JSON"
 ```
 
-The `Scripts.configureCostAllocationTags` script sets the `mandatoryTags` and `additionalMandatoryTags`
+The `configureCostAllocationTags` script sets the `mandatoryTags` and `additionalMandatoryTags`
 properties as cost allocation tags.

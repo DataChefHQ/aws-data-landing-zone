@@ -266,8 +266,19 @@ export interface DLzOrganization {
 }
 
 export interface MandatoryTags {
+  /**
+   * The values of the mandatory `Owner` tag that all resources must have.
+   */
   readonly owner: string[];
+
+  /**
+   * The values of the mandatory `Project` tag that all resources must have.
+   */
   readonly project: string[];
+
+  /**
+   * The values of the mandatory `Environment` tag that all resources must have.
+   */
   readonly environment: string[];
 }
 

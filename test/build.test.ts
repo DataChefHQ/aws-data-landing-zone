@@ -43,6 +43,12 @@ const configBase: DataLandingZoneProps = {
     project: ['accounting-internal'],
     environment: ['development', 'staging', 'production'],
   },
+  additionalMandatoryTags: [
+    {
+      name: 'Cost Center',
+      values: ['test'],
+    },
+  ],
   budgets: [
     ...Defaults.budgets(100, 20, {
       slack: slackBudgetNotifications,

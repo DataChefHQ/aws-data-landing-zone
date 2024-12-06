@@ -1,0 +1,142 @@
+---
+title: Accounts
+description: Accounts
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+Data Landing Zone (DLZ) integrates seamlessly with AWS Control Tower, complementing its functionality rather than
+replacing or conflicting with it. Control Tower and AWS Organization setup must be created manually. DLZ does not
+define Control Tower and accounts within CDK but instead accepts the IDs of these entities. This approach allows DLZ
+to be easily integrated into both existing Control Tower configurations and new (greenfield) setups.
+
+
+AWS Control Tower automatically creates two accounts, `Audit` and `Log Archive`, under the `Security` Organizational
+Unit (OU). In addition to these, DLZ requires two manually created OUs: `Workloads` and `Suspended`.
+
+The `Workloads` OU is designed to house all AWS accounts according to your organization's specific needs. For instance:
+
+- **Small Product-Based Company:**
+  A smaller company might maintain only three accounts:
+  - `Development` - Used for all project development, type: `DlzAccountType.DEVELOP`
+  - `Stage` - Used for testing projects, type: `DlzAccountType.PRODUCTION`
+  - `Production` - Used for live projects, type: `DlzAccountType.PRODUCTION`
+
+- **Larger Organization:**
+  A larger organization might adopt a more complex structure, including centralized tooling and network accounts as
+  well as project-specific accounts. For example:
+  - `Tooling` - Centralized tooling, type: `DlzAccountType.PRODUCTION`
+  - `Network` - Centralized network, type: `DlzAccountType.PRODUCTION`
+  - `Project 1 - Develop` - Project 1, type: `DlzAccountType.DEVELOP`
+  - `Project 1 - Production` - Project 1, type: `DlzAccountType.PRODUCTION`
+  - `Project 2 - Develop` - Project 2, type: `DlzAccountType.DEVELOP`
+  - `Project 2 - Production` - Project 2, type: `DlzAccountType.PRODUCTION`
+
+Each account is classified as one of the following types:
+- `DlzAccountType.DEVELOP` - Accounts with fewer security restrictions, designed to enhance the developer experience.
+- `DlzAccountType.PRODUCTION` - Accounts requiring tight security measures, used for hosting production workloads.
+
+To begin, follow the [SOP - Initial Control Tower Setup](sop-initial-control-tower-setup) guide to enable Control
+Tower, configure the AWS Organization, and create the required OUs. The final step,
+[Gather the required information for DLZ](sop-initial-control-tower-setup#gather-the-required-information-for-dlz),
+provides instructions for identifying and copying the necessary Organization ID, OU IDs, and Account IDs.
+
+After gathering the required information, input the IDs into the DLZ CDK construct. Below is an example configuration
+for two accounts in the `Workloads` OU. Additional accounts can be added as needed.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      ...
+      organization: {
+        organizationId: 'o-0f5h921gk9',
+        root: { accounts: { management: { accountId: '123456789012', }, }, },
+        ous: {
+          security: {
+            ouId: 'ou-hj29-dfhjj787i7',
+            accounts: {
+              log: { accountId: '123456789012', },
+              audit: { accountId: '123456789012', },
+            },
+          },
+          workloads: {
+            ouId: 'ou-h2l0-gjr36ikn',
+            accounts: [{
+                name: 'development',
+                accountId: '123456789012',
+                type: DlzAccountType.DEVELOP,
+                ...
+              },{
+                name: 'production',
+                accountId: '123456789012',
+                type: DlzAccountType.PRODUCTION,
+                ...
+              },
+
+              ...AS MANY ACCOUNTS AS DESIRED...
+              ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        ...
+        organization=dlz.DLzOrganization(
+            organization_id='o-0f5h921gk9',
+            root=dlz.RootOptions(
+                accounts=dlz.OrgRootAccounts(
+                    management=dlz.DLzManagementAccount(account_id='123456789012'),
+                ),
+            ),
+            ous=dlz.OrgOus(
+                security=dlz.OrgOuSecurity(
+                    ou_id='ou-hj29-dfhjj787i7',
+                    accounts=dlz.OrgOuSecurityAccounts(
+                        log=dlz.DLzManagementAccount(account_id='123456789012'),
+                        audit=dlz.DLzManagementAccount(account_id='123456789012'),
+                    ),
+                ),
+                workloads=dlz.OrgOuWorkloads(
+                    ou_id='ou-h2l0-gjr36ikn',
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            account_id='123456789012',
+                            type=dlz.DlzAccountType.DEVELOP,
+                        ),
+                        dlz.DLzAccount(
+                            name='production',
+                            account_id='123456789012',
+                            type=dlz.DlzAccountType.PRODUCTION,
+                        ),
+
+                        ...AS MANY ACCOUNTS AS DESIRED...
+                    ],
+                ),
+            )
+        ),
+    )
+
+app.synth()
+````
+  </Fragment>
+</DualCode>
+
+## API References
+- [DataLandingZoneProps](/reference/api#datalandingzoneprops)
+- [DLzOrganization](/reference/api#aws-data-landing-zone.DLzOrganization)

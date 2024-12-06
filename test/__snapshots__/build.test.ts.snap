@@ -2304,6 +2304,9 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
               "Action": "cloudformation:CreateStack",
               "Condition": {
                 "Null": {
+                  "aws:RequestTag/Cost Center": [
+                    "test",
+                  ],
                   "aws:RequestTag/Environment": [
                     "dlz",
                     "development",
@@ -2374,6 +2377,9 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
               "Action": "cloudformation:CreateStack",
               "Condition": {
                 "Null": {
+                  "aws:RequestTag/Cost Center": [
+                    "test",
+                  ],
                   "aws:RequestTag/Environment": [
                     "dlz",
                     "development",
@@ -2467,6 +2473,16 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Content": {
           "tags": {
+            "Cost Center": {
+              "tag_key": {
+                "@@assign": "Cost Center",
+              },
+              "tag_value": {
+                "@@assign": [
+                  "test",
+                ],
+              },
+            },
             "Environment": {
               "tag_key": {
                 "@@assign": "Environment",
@@ -2531,6 +2547,16 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Content": {
           "tags": {
+            "Cost Center": {
+              "tag_key": {
+                "@@assign": "Cost Center",
+              },
+              "tag_value": {
+                "@@assign": [
+                  "test",
+                ],
+              },
+            },
             "Environment": {
               "tag_key": {
                 "@@assign": "Environment",
@@ -2595,6 +2621,16 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Content": {
           "tags": {
+            "Cost Center": {
+              "tag_key": {
+                "@@assign": "Cost Center",
+              },
+              "tag_value": {
+                "@@assign": [
+                  "test",
+                ],
+              },
+            },
             "Environment": {
               "tag_key": {
                 "@@assign": "Environment",
@@ -3734,6 +3770,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "tag2Value": "dlz,accounting-internal",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
+          "tag4Key": "Cost Center",
+          "tag4Value": "test",
         },
         "Source": {
           "Owner": "AWS",
@@ -4579,6 +4617,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "tag2Value": "dlz,accounting-internal",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
+          "tag4Key": "Cost Center",
+          "tag4Value": "test",
         },
         "Source": {
           "Owner": "AWS",
@@ -5667,6 +5707,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "tag2Value": "dlz,accounting-internal",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
+          "tag4Key": "Cost Center",
+          "tag4Value": "test",
         },
         "Source": {
           "Owner": "AWS",
@@ -6211,6 +6253,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "tag2Value": "dlz,accounting-internal",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
+          "tag4Key": "Cost Center",
+          "tag4Value": "test",
         },
         "Source": {
           "Owner": "AWS",

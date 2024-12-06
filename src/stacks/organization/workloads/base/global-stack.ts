@@ -9,11 +9,6 @@ import { DataLandingZoneProps, WorkloadAccountProps } from '../../../../data-lan
 import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
 
 export class WorkloadGlobalStack extends DlzStack {
-  public static defaultPolicyStatement: iam.PolicyStatementProps = {
-    effect: iam.Effect.DENY,
-    actions: ['*'],
-    resources: ['*'],
-  };
 
   constructor(scope: Construct, workloadAccountProps: WorkloadAccountProps, private props: DataLandingZoneProps) {
     super(scope, workloadAccountProps);
@@ -67,18 +62,23 @@ export class WorkloadGlobalStack extends DlzStack {
     };
 
     if (!AccountChatbots.existsSlackChannel(this, channel)) {
-      const policyStatement = WorkloadGlobalStack.defaultPolicyStatement;
-      const policy = new iam.ManagedPolicy(this, this.resourceName(`${idPrefix}-guardrail-policy`), {
-        managedPolicyName: this.resourceName(`${idPrefix}-guardrail-policy`),
-        description: 'guardrail policy',
-        statements: [new iam.PolicyStatement(policyStatement)],
+      const denyAllPolicy = new iam.ManagedPolicy(this, this.resourceName('deny-all-guardrail-policies'), {
+        managedPolicyName: this.resourceName('deny-all-guardrail-policies'),
+        description: 'Deny all guardrail policies',
+        statements: [
+          new iam.PolicyStatement({
+            effect: iam.Effect.DENY,
+            actions: ['*'],
+            resources: ['*'],
+          }),
+        ],
       });
 
       const id = this.resourceName(`slack-bot-${channel.slackWorkspaceId}-${channel.slackChannelId}`);
       AccountChatbots.addSlackChannel(this, id, {
         ...channel,
         guardrailPolicies: [
-          policy,
+          denyAllPolicy,
         ],
       });
     }

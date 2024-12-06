@@ -49,16 +49,19 @@ export default defineConfig({
                 label: 'Components',
                 items: [
                     // TODO: Complete docs
-                    // {
-                    //     label: 'Account Management',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'Tagging',  slug: 'introduction'},
-                    //         { label: 'Budgets',  slug: 'introduction'},
-                    //         { label: 'SOP - Create Account',  slug: 'introduction'},
-                    //         { label: 'SOP - Add Account & Bootstrap',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Account Management',
+                        items: [
+                            { label: 'Accounts',  slug: 'components/account-management/accounts'},
+                            { label: 'Regions',  slug: 'components/account-management/regions'},
+                            { label: 'Tagging',  slug: 'components/account-management/tagging'},
+                            { label: 'Budgets',  slug: 'components/account-management/budgets'},
+                            // { label: 'Default Notifications',  slug: 'components/account-management/budgets'}, //TODO Later
+                            { label: 'SOP - Initial Control Tower Setup',  slug: 'components/account-management/sop-initial-control-tower-setup'},
+                            { label: 'SOP - Add Account',  slug: 'components/account-management/sop-add-account'},
+                            { label: 'SOP - Account Setup',  slug: 'components/account-management/sop-account-setup'},
+                        ]
+                    },
                     // {
                     //     label: 'Networking',
                     //     items: [
@@ -73,7 +76,7 @@ export default defineConfig({
                     //     label: 'Security',
                     //     items: [
                     //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'Service Control Policies',  slug: 'introduction'},
+                    //         { label: 'Service Control Policies',  slug: 'introduction'}, // Mention the service deny list
                     //         { label: 'Permission Boundary',  slug: 'introduction'},
                     //         { label: 'SecurityHub',  slug: 'introduction'},
                     //         { label: 'Control Tower Controls',  slug: 'introduction'},
@@ -99,7 +102,6 @@ export default defineConfig({
                     {
                         label: 'Build System',
                         items: [
-                            { label: 'Overview',  slug: 'components/build-system/overview'},
                             { label: 'Deployment Order',  slug: 'components/build-system/deployment-order'},
                             { label: 'CI Integration',  slug: 'components/build-system/ci-integration'},
                         ]
@@ -109,12 +111,13 @@ export default defineConfig({
             {
                 label: 'Reference',
                 items: [
-                    { label: 'API',  slug: 'reference/api'},
                     // TODO: Complete docs
-                    // { label: 'Defaults',  slug: 'introduction'},
+                    { label: 'API',  slug: 'reference/api'},
+                    { label: 'Defaults',  slug: 'reference/defaults'},
                     // { label: 'Config sharing',  slug: 'introduction'},
                     { label: 'Scripts & commands',  slug: 'reference/scripts-commands'},
                     // { label: 'Roadmap',  slug: 'introduction'},
+                    // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]
             },
 
