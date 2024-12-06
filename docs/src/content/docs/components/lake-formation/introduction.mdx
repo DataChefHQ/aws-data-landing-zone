@@ -81,7 +81,10 @@ At the very least, each Lake Formation setting must include the following:
 Self explanatory. Specify the AWS region where Lake Formation should be activated.
 
 ### `admins`
-It is essential to include an admin for Lake Formation. While DLZ automatically assigns the CDK execution role as an LF admin, you need to ensure at least one role that can be assumed by a human is also included. Failing to do so will leave you unable to utilize Lake Formation beyond the initial configuration. TODO: include that the admins become also "owners" of any tag created and whatnot.
+It is essential to include at least an admin for Lake Formation. While DLZ automatically assigns the CDK execution role as an LF admin, you need to ensure at least one role that can be assumed by a human is also included. Failing to do so will leave you unable to utilize Lake Formation beyond the initial configuration.
+:::note
+In typical Lake Formation setups, administrators don't automatically gain permissions for tags created by other users or roles. Here, however, any administrator you specify is automatically granted permissions for all actions on any tag created via DLZ configs.
+:::
 
 ### `tags`
 The list of all tags keys and corresponding values to be created for use in Lake Formation.
@@ -91,7 +94,7 @@ The list of all tags keys and corresponding values to be created for use in Lake
 Here you define "grants". Each element of the array represents a set of allowed actions granted to one or more principals, upon a combination of tags and values.
 > _✨ Note - When sharing data across accounts, additional steps are needed. Check the [cross-account sharing section](introduction#cross-account-sharing) for guidance._
 :::caution
-Defining permissions requires knowledge of how Lake Formation Tag Based Access Contorl (TBAC) works. Do not make assumptions, you will make mistakes and waste time. Do yourself a favor and go read [this brief explanation](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/basics/) or [the included guide]({/*TODO: ADD LINK HERE*/})
+Defining permissions requires knowledge of how Lake Formation Tag Based Access Contorl (TBAC) works. Do not make assumptions, you will make mistakes and waste time. Do yourself a favor and go read [this brief explanation](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/basics/) or [the included guide](./lf-tbac-strategy.mdx).
 :::
 
 ## Cross-Account Sharing
