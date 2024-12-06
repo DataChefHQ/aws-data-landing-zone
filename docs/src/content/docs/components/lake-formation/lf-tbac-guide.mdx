@@ -38,7 +38,7 @@ LF tags follow a small but fundamental set of rules:
     -- `user` has access on resources tagged both `foo=bar` AND `spam=eggs`
 
     GRANT ACCESS ON TAGS foo=['bar', 'baz'] TO user
-    -- `user` has access on resource `foo=bar` OR `foo=baz`
+    -- `user` has access on resources tagged with either `foo=bar` OR `foo=baz`
     ```
 - 📜 Tags assigned to resources are **inherited**, unless specifically overridden.
     <p align='center'>
@@ -84,7 +84,7 @@ Given the rules and limitations mentioned, use the following tips when designing
 
 - Since LF-tags are hierarchical, a `GRANT` on a tag key-value pair applied to a high level resource (e.g. a database) inherently allows access to all of its children with the same value, no matter all the other tags that may exist on those resources.
 
-- When writing a single `GRANT` statement, one should think **ONLY** rather than **ALSO**:
+- When writing a single `GRANT` statement, one should think **"ONLY"** rather than **"ALSO"**:
 
     ```sql
     GRANT ACCESS ON TAGS team:marketing=true TO executives
@@ -95,7 +95,7 @@ Given the rules and limitations mentioned, use the following tips when designing
     ```sql
     GRANT ACCESS ON TAGS team:marketing=true AND PII=true TO executives
     ```
-    This does not imply that executives now have access to all resources tagged as `PII` in addition to those tagged with `team:marketing`. Instead, executives are granted access solely to resources that are tagged with both `team:marketing=true` and `PII=true`.
+    This does not imply that executives now have access to all resources tagged as `PII` and **ALSO** to those tagged with `team:marketing`. Instead, executives are granted access **ONLY** to resources that are tagged with both `team:marketing=true` and `PII=true`.
 
 ---
 

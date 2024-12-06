@@ -56,7 +56,7 @@ We recommend using the following tag ontology as a starting point.
 
 <br/>
 
-###### `common = [true | false]`
+###### `common = [true, false]`
 |||
 |-|-|
 | **Description** | When a resource should be available across all the account.
@@ -65,7 +65,7 @@ We recommend using the following tag ontology as a starting point.
 
 <br/>
 
-###### `sensitive = [true | false]`
+###### `sensitive = [true, false]`
 |||
 |-|-|
 | **Description** | For those resources that contain sensitive data such as PII.
@@ -97,7 +97,7 @@ The following grants should be used as default, the baseline from which to branc
 
 This set of grants allow for the following situation:
 - Executives have access to every resource.
-- Everyone has access to shared resources.
+- Everyone has access to common resources.
 - Teams have access to resources tagged with their team's name, but only those not flagged as sensitive.
 
 ## Getting Started
