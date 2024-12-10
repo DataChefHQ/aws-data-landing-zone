@@ -1,0 +1,422 @@
+---
+title: Lake Formation
+description: Data Services - Lake Formation
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+[Lake Formation](https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html) (LF) is a service
+designed to help with data governance, data sharing, and manage permissions for secure data lakes.
+
+Data Landing Zone provides the option to manage LakeFormation settings, tags, tag permissios and data lake permissions.
+The usage of Lake Formation from your DLZ is **optional** as it usually falls outside the
+[responsibility of a landing zone](http://localhost:4321/introduction#intended-audience)
+but rather to your Data Engineering or other workload teams. However, it can be useful to have a central place to manage
+Lake Formation settings, tags and permissions especially when you have a multi-account setup.
+
+The snippet below specifies the `region` the LF configuration applies to and the `admins` that will be given Lake Formation
+Admin permissions. The `tags` array defines the tags and gives tag permissions and the `permissions` array defines the
+data lake permissions.
+
+The DLZ recommends using Tag Based Access Control (TBAC) to manage permissions in Lake Formation. The `hybridMode`
+property defaults to `false` disabling IAM permissions.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [{
+              name: 'development',
+              accountId: '111111111111',
+              lakeFormation: [{
+                region: Region.EU_WEST_1,
+                admins: ['arn:aws:iam::111111111111:role/Admin'],
+                tags: [ ... ],
+                permissions: [ ... ]
+              }]
+              },{
+                name: 'production',
+                accountId: '222222222222',
+                ...
+              },
+              ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            account_id='111111111111',
+                            lake_formation=[dlz.DlzLakeFormationProps(
+                                region=dlz.Region.EU_WEST_1,
+                                admins=['arn:aws:iam::123456789012:role/Admin'],
+                                tags=[ ... ],
+                                permissions=[ ... ]
+                            )]
+                        ),
+                        dlz.DLzAccount(
+                            name='production',
+                            account_id='222222222222',
+                        ),
+                    ],
+                ),
+            )
+        ),
+    )
+````
+  </Fragment>
+</DualCode>
+
+## LF-Tags and permissions
+
+The `tags` array defines the tags that will be created in Lake Formation. Each tag has a key and a list of possible values.
+
+Permissions must then be granted on these tags by using the `share` property that allows you to share tags within the account
+or with external accounts.
+
+The `share.withinAccount` property allows you to share tags within the account. The `principals` property is an array of
+IAM principals that will be granted permissions on the tag. These principals can be IAM roles, IAM users, SAML Users
+and SAML Groups.
+
+The CDK role is a Lake Formation admin by default.
+Usually Lake Formation admins can not manage tags created by other admins. Internally we explicitly grant all Admins
+access to all tags created by the CDK DLZ construct. This is the equivalent to listing every admin under the
+`share.withinAccount.principals` property with all access.
+
+The only difference between sharing tags internally(`withinAccount`) and externally(`withExternalAccount`) is that we
+prevent the use of the `TagAction.ALTER` and `TagAction.DROP` actions externally. We explicitly make the distinction
+that they can be read-only, otherwise CloudFormation will fail later down the line anyway.
+
+When sharing tags with external accounts, the `principals` property can contain AWS Account, OU and Organisation IDs as
+well as specific IAM Roles. If Account, OU or Organisation IDs are specified, then all the Lake Formation admins
+in the external account will be granted the permission and they will be able to grant usage to other roles
+(if it was specified as such).
+
+If you want to grant permissions on a subset of values, you can specify it with `specificValues`. Otherwise, permission
+will be granted on all values of the tag by default.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone, TagAction } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [{
+              name: 'development',
+              accountId: '111111111111',
+              lakeFormation: [{
+                ...
+                tags: [
+                  { tagKey: 'product:ProductA', tagValues: ['true'] },
+                  {
+                    tagKey: 'shared',
+                    tagValues: ['true', 'false'],
+                    share: {
+                      withinAccount: [{
+                        principals: ['arn:aws:iam::111111111111:role/Team1'],
+                        tagActions: [TagAction.DESCRIBE, TagAction.ASSOCIATE, TagAction.ALTER, TagAction.DROP],
+                        tagActionsWithGrant: [TagAction.DESCRIBE, TagAction.ASSOCIATE, TagAction.ALTER, TagAction.DROP]
+                      }],
+                      withExternalAccount: [{
+                        principals: ['222222222222'],
+                        tagActions: [TagAction.DESCRIBE, TagAction.ASSOCIATE],
+                        tagActionsWithGrant: [TagAction.DESCRIBE, TagAction.ASSOCIATE],
+                        specificValues: ['true']
+                      }]
+                    }
+                  },
+                ],
+              }]
+              },{
+                name: 'production',
+                accountId: '222222222222',
+                ...
+              },
+              ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            account_id='111111111111',
+                            lake_formation=[dlz.DlzLakeFormationProps(
+                                ...
+                                tags=[
+                                    {"tag_key": "product:Product1", "tag_values": ["true"]},
+                                    {
+                                        "tag_key": "shared",
+                                        "tag_values": ["true", "false"],
+                                        "share": {
+                                            "with_internal_account": [
+                                                {
+                                                    "principals": [
+                                                        "arn:aws:iam::111111111111:role/Team1"
+                                                    ],
+                                                    "tag_actions": [
+                                                        dlz.TagAction.DESCRIBE,
+                                                        dlz.TagAction.ASSOCIATE,
+                                                        dlz.TagAction.ALTER,
+                                                        dlz.TagAction.DROP,
+                                                    ],
+                                                    "tag_actions_with_grant": [
+                                                        dlz.TagAction.DESCRIBE,
+                                                        dlz.TagAction.ASSOCIATE,
+                                                        dlz.TagAction.ALTER,
+                                                        dlz.TagAction.DROP,
+                                                    ],
+                                                }
+                                            ],
+                                            "with_external_account": [
+                                                {
+                                                    "principals": [
+                                                        "222222222222"
+                                                    ],
+                                                    "tag_actions": [
+                                                        dlz.TagAction.DESCRIBE,
+                                                        dlz.TagAction.ASSOCIATE,
+                                                    ],
+                                                    "tag_actions_with_grant": [
+                                                        dlz.TagAction.DESCRIBE,
+                                                        dlz.TagAction.ASSOCIATE,
+                                                    ],
+                                                    "specific_values": ["true"],
+                                                }
+                                            ]
+                                        },
+                                  },
+                                ],
+                                permissions=[ ... ]
+                            )]
+                        ),
+                        dlz.DLzAccount(
+                            name='production',
+                            account_id='222222222222',
+                        ),
+                    ],
+                ),
+            )
+        ),
+    )
+````
+  </Fragment>
+</DualCode>
+
+## Data Lake permissions
+
+Now that you have defined  LF-Tags and their permissions, the next step is to attach these LF-Tags to Data Catalog resource
+like Databases, Tables, etc. Adding LF-Tags to Data Catalog resources is out of scope for the DLZ, it is the responsibility
+of the Data Engineering or other workload teams.
+
+The DLZ does however provide the option to manage the "Data permissions", by assigning permissions (like SELECT) to principals (like IAM roles)
+on all Data Catalog resources (like databases and tables) that have certain LF-Tags. We will call this Data permission
+a `Grant`.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [{
+              name: 'development',
+              accountId: '111111111111',
+              lakeFormation: [{
+                ...
+                permissions: [
+                  {
+                    principals: ['222222222222'],
+                    tags: [{ tagKey: 'shared', tagValues: ['true'] }],
+                    databaseActions: [DatabaseAction.DESCRIBE],
+                    tableActions: [TableAction.DESCRIBE, TableAction.SELECT]
+                  },
+                  {
+                    principals: [
+                      'arn:aws:iam::111111111111:role/Team1',
+                      'arn:aws:iam::111111111111:role/Team2'
+                    ],
+                    tags: [{ tagKey: 'product:ProductA', tagValues: ['true'] }],
+                    databaseActions: [DatabaseAction.DESCRIBE, DatabaseAction.CREATE_TABLE, DatabaseAction.ALTER, DatabaseAction.DROP],
+                    tableActions: [TableAction.DESCRIBE, TableAction.SELECT, TableAction.ALTER, TableAction.DELETE, TableAction.INSERT, TableAction.DROP],
+                    databaseActionsWithGrant: [DatabaseAction.DESCRIBE, DatabaseAction.CREATE_TABLE, DatabaseAction.ALTER, DatabaseAction.DROP],
+                    tableActionsWithGrant: [TableAction.DESCRIBE, TableAction.SELECT, TableAction.ALTER, TableAction.DELETE, TableAction.INSERT, TableAction.DROP]
+                  },
+                ]
+              }]
+              },{
+                name: 'production',
+                accountId: '222222222222',
+                ...
+              },
+              ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            account_id='111111111111',
+                            lake_formation=[dlz.DlzLakeFormationProps(
+                                region=dlz.Region.EU_WEST_1,
+                                admins=['arn:aws:iam::123456789012:role/Admin'],
+                                tags=[ ... ],
+                                permissions=[
+                                    {
+                                        "principals": ["222222222222"],
+                                        "tags": [
+                                            {
+                                                "tag_key": "shared",
+                                                "tag_values": ["true"],
+                                            }
+                                        ],
+                                        "database_actions": [DatabaseAction.DESCRIBE],
+                                        "table_actions": [
+                                            TableAction.DESCRIBE,
+                                            TableAction.SELECT,
+                                        ],
+                                    },
+                                    {
+                                        "principals": [
+                                            "arn:aws:iam::111111111111:role/Team1",
+                                            "arn:aws:iam::111111111111:role/Team2",
+                                        ],
+                                        "tags": [
+                                            {
+                                                "tag_key": "product:ProductA",
+                                                "tag_values": ["true"],
+                                            }
+                                        ],
+                                        "database_actions": [
+                                            DatabaseAction.DESCRIBE,
+                                            DatabaseAction.CREATE_TABLE,
+                                            DatabaseAction.ALTER,
+                                            DatabaseAction.DROP,
+                                        ],
+                                        "table_actions": [
+                                            TableAction.DESCRIBE,
+                                            TableAction.SELECT,
+                                            TableAction.ALTER,
+                                            TableAction.DELETE,
+                                            TableAction.INSERT,
+                                            TableAction.DROP,
+                                        ],
+                                        "database_actions_with_grant": [
+                                            DatabaseAction.DESCRIBE,
+                                            DatabaseAction.CREATE_TABLE,
+                                            DatabaseAction.ALTER,
+                                            DatabaseAction.DROP,
+                                        ],
+                                        "table_actions_with_grant": [
+                                            TableAction.DESCRIBE,
+                                            TableAction.SELECT,
+                                            TableAction.ALTER,
+                                            TableAction.DELETE,
+                                            TableAction.INSERT,
+                                            TableAction.DROP,
+                                        ],
+                                    },
+                                ]
+                            )]
+                        ),
+                        dlz.DLzAccount(
+                            name='production',
+                            account_id='222222222222',
+                        ),
+                    ],
+                ),
+            )
+        ),
+    )
+````
+  </Fragment>
+</DualCode>
+
+The code snippet above creates the following Grants. These grants are expressed as SQL statements but are pseudocode to conceptualize the
+permissions that are being granted. They translate into CloudFormation/CDK constructs.
+
+Permission 1 is expressed as two Grants:
+```
+GRANT (DESCRIBE ON DATABASES)      ON TAGS (shared=True) TO '222222222222'
+GRANT (DESCRIBE, SELECT ON TABLES) ON TAGS (shared=True) TO '222222222222'
+```
+
+The 2nd permission is expressed as four Grants:
+```
+GRANT (DESCRIBE, CREATE_TABLE, ALTER, DROP ON DATABASES)        ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team1'
+GRANT (DESCRIBE, SELECT, ALTER, DELETE, INSERT, DROP ON TABLES) ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team1'
+
+GRANT (DESCRIBE, CREATE_TABLE, ALTER, DROP ON DATABASES)        ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team2'
+GRANT (DESCRIBE, SELECT, ALTER, DELETE, INSERT, DROP ON TABLES) ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team2'
+```
+
+Defining permissions requires a good understanding of how Lake Formation Tag Based Access Control (TBAC) works.
+
+See the DLZ [Lake Formation TBAC strategy](/reference/lake-formation-tbac-recommended-strategy) to learn more about
+Tag Based Access Control (TBAC) permissions and our recommended strategy.
+
+## API References
+
+- [DlzLakeFormationProps](/reference/api#dlzlakeformationprops)
+- [LFTagSharable](/reference/api#lftagsharable)
+- [LakePermission](/reference/api#lakepermission)
