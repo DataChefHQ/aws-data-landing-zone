@@ -34,8 +34,6 @@ GRANT ACCESS ON TAGS foo=bar AND spam=eggs TO DataLakeUser
 
 LF-Tags follow a set of fundamental rules:
 
-- Tags are assigned to data catalog resources (databases, tables and columns), and each resource can
-have multiple tags, with a maximum of **50 tags** and **no duplicate keys**.
 - Grants are applied **TO** principals **ON** specific tags. For example:
 
   ```sql
@@ -66,6 +64,8 @@ evaluated using `OR` logic. For instance:
 ### Limitations
 
 There are a few limitations in designing flexible tag systems:
+- Tags are assigned to data catalog resources (databases, tables and columns), and each resource can
+have multiple tags, with a maximum of **50 tags** and **no duplicate keys**.
 
 - A resource cannot have the same LF-tag key more than once. For example, you cannot apply both
 `team=sales` and `team=marketing` to the same table.
@@ -115,16 +115,146 @@ this inherently grants access to all child resources (like a table) that share t
 ## Tag Strategy
 
 There is no one-size-fits-all solution; the most effective strategy is the one that aligns best with an
-organization's structure. The recommended strategy is a modified version of the
+organization's structure. The recommended strategies is a modified version of the
 [AWS Recommended Common LF-Tag Ontologies](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/common-ontologies/).
 
-Below are some suggested LF-tagging conventions:
+We suggest one of two strategies, pick the one that best fits your organization's structure:
+- **Product based tagging**: Tag resources based on the product/project they belong to and then create fine-grained permission
+grants per principal/team. **This is the recommended strategy when you have many products and many teams**. It scales with
+both products and team size, but requires more effort in creating permission grants.
 
+- **Team based tagging**: Tag resources based on the team that needs access to them assuming the same team tag will have
+the same permission level to all resources that it has access to. **This is the recommended strategy due to its simplicity
+when you have many products and only ever a few teams.** It scales with the number of products but not the number of teams,
+as there is a 50 tag limit on resources.
+
+Let's consider a scenario where we have the following teams:
+- `Admin` has role `RoleAdmin`
+- `DataEngineering` has role `RoleDataEngineering`
+- `DataScience` has role `RoleDataScience`
+
+We have the following Products and their Databases:
+- `ProductA`: `Database1`, `Database2`
+- `ProductB`: `Database3`
+
+### Product based tagging
+
+This strategy works by tagging resources based on the product they belong to and then creating fined grained permission
+grants per principal/team.
+
+We suggest to start with a basic tagging strategy and limiting the number of tags:
 - `product:<product_name> = true`: Apply this tag to resources that belong to a specific product.
+- `sensitive = [true, false]`: For resources containing sensitive data, such as Personally Identifiable
+Information (PII).
+
+Start by tagging your resources, let's only apply them to Databases to keep things simple. Apply the following tags:
+- `Database1` with tags (`sensitive=false`, `product:productA=true`)
+- `Database2` with tags (`sensitive=true`,  `product:productA=true`)
+- `Database3` with tags (`sensitive=false`, `product:productB=true`)
+
+Admins need full access to all Databases, we don't have to specify the `senstive` tag as the value is irrelevant.
+```sql
+GRANT FULL ACCESS ON TAGS product:productA=true TO RoleAdmin
+GRANT FULL ACCESS ON TAGS product:productB=true TO RoleAdmin
+```
+
+The following grants will allow the `DataEngineering` team full access to all Databases of all products that are not
+sensitive. So they can only access `Database1` and `Database3`.
+```sql
+GRANT FULL ACCESS ON TAGS product:productA=true AND sensitive=false TO RoleDataEngineering
+GRANT FULL ACCESS ON TAGS product:productB=true AND sensitive=false TO RoleDataEngineering
+```
+
+The `DataScience` team requires read only access to ProductB. So they can only access `Database3`.
+```sql
+GRANT READ ACCESS ON TAGS product:productB=true AND sensitive=true TO RoleDataScience
+```
+
+#### Pros and Cons
+
+This model works well when you have **a few products/databases** that need to be shared with teams. You simply add the product
+tag once to the resource but then have to apply permission grants to each team that needs access to that product.
+**You do not to apply more tags to resources, but crate more access grants instead.**
+
+For example, let's consider you have 100 products/databases and 5 teams. We now have to add the SalesTeam to have access to 50
+of these products. This involves creating the following grants:
+```sql
+GRANT READ ONLY ACCESS ON TAGS product:productA=true AND sensitive=false TO RoleSales
+GRANT READ ONLY ACCESS ON TAGS product:productB=true AND sensitive=false TO RoleSales
+... repeat for remaining 48 products
+```
+
+If we have to add a new product then we also have to give each team that needs access to that product access.
+```sql
+GRANT FULL ACCESS ON TAGS product:productNEW=true AND sensitive=false TO RoleDataEngineering
+GRANT READONLY ACCESS ON TAGS product:productNEW=true AND sensitive=false TO RoleDataScience
+GRANT READONLY ACCESS ON TAGS product:productNEW=true AND sensitive=false TO RoleSales
+```
+
+### Team based tagging
+
+This strategy works by tagging resources based on the team that needs access to them but the same team tag will have
+the same permission level to all resources that it has access to.
+
+We suggest to start with a basic tagging strategy and limiting the number of tags:
 - `team:<team_name> = true`: Apply this tag to resources belonging to a specific team.
 - `sensitive = [true, false]`: For resources containing sensitive data, such as Personally Identifiable
 Information (PII).
-- `sharable = [true, false]`: For resources that can be shared with other teams.
+
+Start by tagging your resources, let's only apply them to Databases to keep things simple. Apply the following tags,
+let's assume that we always have the `team:Admin=true` tag on all resources as they must always have access to all
+resources:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`)
+
+Since Admins need full access to all Databases, we don't have to specify the `senstive` tag as the value is irrelevant.
+```sql
+GRANT FULL ACCESS ON TAGS team:Admin=true TO RoleAdmin
+```
+
+For the `DataEngineering` team to have full access to all Databases that are not sensitive, we need ot specify their
+grants as:
+```sql
+GRANT FULL ACCESS ON TAGS team:DataEngineering=true AND sensitive=false TO RoleDataEngineering
+```
+But now we have to add tags to our resources, our Databases now look like:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`, `team:DataEngineering=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`)
+
+
+The `DataScience` team requires read only access to Database3.
+```sql
+GRANT READ ACCESS ON TAGS team:DataScience=true AND sensitive=false TO RoleDataScience
+```
+But again, we have to add tags to our resources, our Databases now look like:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`, `team:DataEngineering=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:DataScience=true`)
+
+#### Pros and Cons
+
+:::caution
+This strategy is not scalable if you have many teams. There is a 50 tag limit on resources, meaning you will never
+be able to go beyond 50 teams. Keep in mind that might have other tags as well, such as `sensitive` and they all
+count towards the 50 tag limit.
+:::
+
+This model works well when you have **many products/databases** that need to be shared with **a few teams** and
+can accept that a team will have the same permissions across all resources that it's tag has access to. You simply create the permission grant
+once for the team's tag and then apply the team's tag to all resources that the team needs access to.
+**You do not to create more permission grants, but need to tag resources instead.**
+
+For example, let's consider you have 100 products/databases and 5 teams. We now have to add the SalesTeam to have
+access to 50 of these products. This involves adding the sales team tag to each of the databases:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:Sales=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`, `team:DataEngineering=true`, `team:Sales=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:DataScience=true`, `team:Sales=true`)
+- ... repeat for remaining 47 products/databases
+
+If we have to add a new product/database then we also have to add a tag for each team that needs access.
+- `DatabaseNEW` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:Sales=true`)
 
 ## Roles and Grants
 
