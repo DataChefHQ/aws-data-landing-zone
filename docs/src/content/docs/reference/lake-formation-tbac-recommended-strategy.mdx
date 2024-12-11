@@ -5,68 +5,77 @@ description: References - Lake Formation TBAC strategy
 import DualCode from '../../../components/DualCode.astro';
 
 
+We recommend adopting a Tag-Based Access Control (TBAC) strategy in Lake Formation, which is the default
+behavior when the `hybridMode` flag is set to `false`, disabling IAM management.
 
-We recomend that a Tag Based Access Control (TBAC) strategy be used in Lake Formation. This is the default
-as defined by the `hybridMode` flag that is set false to disallow IAM management
+Rather than directly assigning permissions to individual resources, this approach uses tags on resources,
+and permissions are granted based on those tags to principals. This strategy simplifies data governance by significantly
+reducing the effort required to set up and manage permissions, especially in large environments.
 
-In short, instead of assigning permissions to individual resources, you tag the resources and grant permissions upon those tags.
-This approach simplifies data governance. By implementing a strong tagging strategy, you can significantly reduce the effort
-required to set up and manage permissions.
+Here is a summary of the key concepts involved in Tag-Based Access Control (TBAC):
 
-To summarize, here are the main concepts:
-- **LF-tags** are key-value pairs attached to resources
-- **Resources** are databases, tables and columns registered in Lake Formation
-- **Principals** are IAM entities, but also AWS accounts, Organizations and organizational units
-- Principals are given access to resources via **grants** on respective LF-tags
+- **LF-Tags**: Key-value pairs that are attached to resources.
+- **Resources**: These include databases, tables, and columns registered in Lake Formation.
+- **Principals**: IAM entities (Users, Roles, AWS SSO, SAML), AWS accounts, Organizations, and Organizational Units.
+- **Grants**: Permissions given to principals for accessing resources based on their LF-tags.
 
-## Tag Based Access Control (TBAC)
+## Tag-Based Access Control (TBAC)
 
-We express grants as SQL statements but are pseudocode to easily conceptualize the
-permissions that are being granted. They translate into CloudFormation/CDK constructs.
-In pseducode, a grant looks like this:
+Grants in TBAC are typically expressed as SQL statements, but here they are provided in pseudocode for easy
+conceptualization. These grants ultimately translate into CloudFormation/CDK constructs. We will reason about
+permissions in this Grant format.
+
+A typical Grant expression might look like this:
+
 ```sql
 GRANT ACCESS ON TAGS foo=bar AND spam=eggs TO DataLakeUser
 ```
 
 ### Rules
 
-LF tags follow a small but fundamental set of rules:
+LF-Tags follow a set of fundamental rules:
 
-- Tags are assigned to data catalog resources (databases, tables, columns), and a resource can have multiple tags attached, to a maximum of **50 tags**, and **no duplicate keys**.
-- Grants are made **TO** principals **ON** tags.
+- Tags are assigned to data catalog resources (databases, tables and columns), and each resource can
+have multiple tags, with a maximum of **50 tags** and **no duplicate keys**.
+- Grants are applied **TO** principals **ON** specific tags. For example:
 
   ```sql
   GRANT ACCESS ON TAGS foo=bar TO user
     ```
-- In grant expressions, all tag **keys** are evaluated in an `AND` fashion, whereas tag **values** are evaluated in an `OR` fashion.
 
+- In a grant expression, all tag **keys** are evaluated using `AND` logic, while tag **values** are
+evaluated using `OR` logic. For instance:
+
+
+  The user has access to resources tagged with both `foo=bar` AND `spam=eggs`
   ```sql
   GRANT ACCESS ON TAGS foo=bar AND spam=eggs TO user
-  -- `user` has access on resources tagged both `foo=bar` AND `spam=eggs`
+  ```
 
+  The user has access to resources tagged with either `foo=bar` OR `foo=baz`
+  ```sql
   GRANT ACCESS ON TAGS foo=['bar', 'baz'] TO user
-  -- `user` has access on resources tagged with either `foo=bar` OR `foo=baz`
   ```
 - Tags assigned to resources are **inherited**, unless specifically overridden.
 
   ![Tag Inheritance Diagram](imgs/tag_inheritance.png)
-- Grants allow access to resources where **ALL** conditions are true.
+- Grants ensure access to resources where **ALL** conditions specified are true.
 
   ![Grants Diagram](imgs/grants_diagram.png)
 
 
 ### Limitations
 
-There are some limitations that may restrict the flexibility of creating tag systems.
+There are a few limitations in designing flexible tag systems:
 
-- A resource cannot have the same LF-tag key more than once.
+- A resource cannot have the same LF-tag key more than once. For example, you cannot apply both
+`team=sales` and `team=marketing` to the same table.
 
-  For instance, you can't both add `team = sales` and `team = marketing` to the same table.
+  One workaround is to embed the name inside the tag key, making the tag behave as a toggle, such as
+  `team:sales=true` and `team:marketing=true`.
 
-  One workaround is to embed the name inside the tag key, and turn the tag into a toggle:
-  `team:sales = true` and `team:marketing = true`.
-
-- A `GRANT` cannot use `OR` for different tag keys, the Grant below is INVALID:
+- A `GRANT` statement cannot use an `OR` condition across different tag keys. The following statement is
+**invalid**:
 
   ❌ Invalid
   ```sql
@@ -80,52 +89,55 @@ There are some limitations that may restrict the flexibility of creating tag sys
   ```
 
 
-### Suggestions
+### Best Practices
 
-Given the rules and limitations mentioned, use the following tips when designing your tagging system.
+Here are some best practices and recommendations to consider when designing your tagging system:
 
-- Since LF-tags are hierarchical, a `GRANT` on a tag key-value pair applied to a high level resource (e.g. a database) inherently allows access to all of its children with the same value, no matter all the other tags that may exist on those resources.
+- LF-Tags are hierarchical. If you apply a `GRANT` statement to a high-level resource (like a database),
+this inherently grants access to all child resources (like a table) that share the same tag value.
 
-- When writing a single `GRANT` statement, rember tags are `ANDed` and can not be `ORed`. For example:
+- When creating a `GRANT` statement, remember that tags are **AND-ed**, not **OR-ed**. For example:
 
   ```sql
   GRANT ACCESS ON TAGS team:marketing=true TO executives
   ```
-  Allows the group `executives` to access everything that has the tag `team:marketing=true`
 
-  If the statement is changed to be:
+  This grants the `executives` group access to all resources tagged with `team:marketing=true`.
+
+  If the statement is modified to:
+
   ```sql
   GRANT ACCESS ON TAGS team:marketing=true AND PII=true TO executives
   ```
 
-  This grants executives access to resources that are tagged with BOTH `team:marketing=true` and `PII=true`.
-
-
-### Other Sources
-- https://aws.github.io/aws-lakeformation-best-practices/
-- https://docs.aws.amazon.com/lake-formation/latest/dg/lf-tag-considerations.html
-
+  The `executives` group is granted access only to resources that are tagged with both `team:marketing=true`
+  and `PII=true`.
 
 ## Tag Strategy
 
-There is no one-size-fits all solution, the most ideal strategy is the one that best reflects an organization’s
-structure. The recommended strategy is a modified version of the
-suggested [AWS recommended Common LF-Tag Ontologies](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/common-ontologies/).
+There is no one-size-fits-all solution; the most effective strategy is the one that aligns best with an
+organization's structure. The recommended strategy is a modified version of the
+[AWS Recommended Common LF-Tag Ontologies](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/common-ontologies/).
 
-- `product:<product_name> = true`: Apply to resources that belong to a specific product.
-- `team:<team_name> = true`: Apply to resources belonging to a specific team.
-- `sensitive = [true, false]`: For those resources that contain sensitive data such as PII.
+Below are some suggested LF-tagging conventions:
+
+- `product:<product_name> = true`: Apply this tag to resources that belong to a specific product.
+- `team:<team_name> = true`: Apply this tag to resources belonging to a specific team.
+- `sensitive = [true, false]`: For resources containing sensitive data, such as Personally Identifiable
+Information (PII).
 - `sharable = [true, false]`: For resources that can be shared with other teams.
 
 ## Roles and Grants
 
-We recommend having roles defined (roughly) in a structure such as this one:
-- `AdminTeamRole` - For users with executive/admin responsibilities.
-- `<team_name>TeamRole` - For users belonging to a specific team, e.g. `SalesTeamRole`.
+We recommend defining roles in a structure similar to the one below:
 
-The following grants can be created for defaults, the baseline from which to branch off if more specific needs arise.
+- `AdminTeamRole`: For users with executive or administrative responsibilities.
+- `<team_name>TeamRole`: For users belonging to specific teams, e.g., `SalesTeamRole`.
 
-- Admins have access to every resource.
+The following grants can serve as defaults or a baseline, which can be expanded upon as more specific
+needs arise.
+
+- Admins have access to every resource:
   ```sql
   GRANT READ ACCESS ON TAGS team:Admins=true
   ```
@@ -135,7 +147,12 @@ The following grants can be created for defaults, the baseline from which to bra
   GRANT READ ACCESS ON TAGS sharable=true
   ```
 
-- Teams have access to resources tagged with their team's name, but only those not flagged as sensitive.
+- Teams have access to resources tagged with their team's name, but only those not flagged as sensitive. They are the
+  only ones that have write access to their resources.
   ```sql
   GRANT FULL ACCESS ON TAGS team:<team_name>=true AND sensitive=false
   ```
+
+## Other Sources
+- https://aws.github.io/aws-lakeformation-best-practices/
+- https://docs.aws.amazon.com/lake-formation/latest/dg/lf-tag-considerations.html

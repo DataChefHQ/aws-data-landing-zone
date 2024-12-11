@@ -98,14 +98,6 @@ export default defineConfig({
                             {
                                 label: 'Lake Formation',  slug: 'components/data-services/lake-formation'
                             },
-                            {
-                                label: 'Lake Formation',
-                                items: [
-                                    { label: 'Introduction', slug: 'components/lake-formation/introduction' },
-                                    { label: 'How TBAC Works', slug: 'components/lake-formation/lf-tbac-guide' },
-                                    { label: 'TBAC recommended strategy', slug: 'components/lake-formation/lf-tbac-strategy' },
-                                ]
-                            }
                         ]
                     },
                     {

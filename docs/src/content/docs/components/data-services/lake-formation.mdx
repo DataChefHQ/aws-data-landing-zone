@@ -4,21 +4,21 @@ description: Data Services - Lake Formation
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
-[Lake Formation](https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html) (LF) is a service
-designed to help with data governance, data sharing, and manage permissions for secure data lakes.
+[Lake Formation](https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html) (LF) is a
+service designed to facilitate data governance, data sharing, and the management of permissions for secure data lakes.
 
-Data Landing Zone provides the option to manage LakeFormation settings, tags, tag permissios and data lake permissions.
-The usage of Lake Formation from your DLZ is **optional** as it usually falls outside the
-[responsibility of a landing zone](http://localhost:4321/introduction#intended-audience)
-but rather to your Data Engineering or other workload teams. However, it can be useful to have a central place to manage
-Lake Formation settings, tags and permissions especially when you have a multi-account setup.
+The Data Landing Zone (DLZ) offers the option to manage Lake Formation settings, tags, tag permissions, and data
+lake permissions. While utilizing Lake Formation within your DLZ is **optional**, it typically falls outside the
+scope of a landing zone’s responsibilities. Instead, this is usually handled by your Data Engineering or other
+workload teams. That said, having a centralized location for managing Lake Formation settings, tags, and permissions
+can be beneficial, particularly in multi-account environments.
 
-The snippet below specifies the `region` the LF configuration applies to and the `admins` that will be given Lake Formation
-Admin permissions. The `tags` array defines the tags and gives tag permissions and the `permissions` array defines the
-data lake permissions.
+The following snippet demonstrates how to specify the `region` for the Lake Formation configuration, the `admins`
+who are granted Lake Formation Admin permissions, the `tags` array to define tags and their corresponding permissions,
+and the `permissions` array to set data lake permissions.
 
-The DLZ recommends using Tag Based Access Control (TBAC) to manage permissions in Lake Formation. The `hybridMode`
-property defaults to `false` disabling IAM permissions.
+We recommend using Tag-Based Access Control (TBAC) for managing permissions within Lake Formation. By default, the
+`hybridMode` property is set to `false`, which disables IAM permissions and relies solely on Lake Formation permissions.
 
 <DualCode>
   <Fragment slot="ts">
@@ -88,33 +88,35 @@ property defaults to `false` disabling IAM permissions.
   </Fragment>
 </DualCode>
 
-## LF-Tags and permissions
+## LF-Tags and Permissions
 
-The `tags` array defines the tags that will be created in Lake Formation. Each tag has a key and a list of possible values.
+The `tags` array defines the tags created in Lake Formation. Each tag consists of a key and a list of possible values.
 
-Permissions must then be granted on these tags by using the `share` property that allows you to share tags within the account
-or with external accounts.
+To manage permissions on these tags, you use the `share` property, which allows you to share tags either within the account
+or with external accounts. If you want to grant permissions on only a subset of tag values, use the `specificValues`
+property. If this property is not provided, permissions will be granted to all values of the tag by default.
 
-The `share.withinAccount` property allows you to share tags within the account. The `principals` property is an array of
-IAM principals that will be granted permissions on the tag. These principals can be IAM roles, IAM users, SAML Users
-and SAML Groups.
+### Sharing Tags Within an Account
 
-The CDK role is a Lake Formation admin by default.
-Usually Lake Formation admins can not manage tags created by other admins. Internally we explicitly grant all Admins
-access to all tags created by the CDK DLZ construct. This is the equivalent to listing every admin under the
-`share.withinAccount.principals` property with all access.
+The `share.withinAccount` property allows you to share tags within the same account. You specify the IAM principals
+(granted permissions on the tag) in the `principals` property. These principals can be IAM roles, IAM users, SAML users,
+or SAML groups.
 
-The only difference between sharing tags internally(`withinAccount`) and externally(`withExternalAccount`) is that we
-prevent the use of the `TagAction.ALTER` and `TagAction.DROP` actions externally. We explicitly make the distinction
-that they can be read-only, otherwise CloudFormation will fail later down the line anyway.
+By default, the CDK role is assigned as a Lake Formation admin. Normally, Lake Formation admins cannot manage tags created
+by other admins. To address this, we explicitly grant all admins access to the tags created by the CDK DLZ construct. This
+is equivalent to adding every admin under the `share.withinAccount.principals` property with full access.
 
-When sharing tags with external accounts, the `principals` property can contain AWS Account, OU and Organisation IDs as
-well as specific IAM Roles. If Account, OU or Organisation IDs are specified, then all the Lake Formation admins
-in the external account will be granted the permission and they will be able to grant usage to other roles
-(if it was specified as such).
+### Sharing Tags with External Accounts
 
-If you want to grant permissions on a subset of values, you can specify it with `specificValues`. Otherwise, permission
-will be granted on all values of the tag by default.
+When sharing tags with external accounts, the `share.withExternalAccount` property is used. The primary difference
+between sharing tags internally (`withinAccount`) and externally (`withExternalAccount`) is that we restrict certain
+actions externally. Specifically, the `TagAction.ALTER` and `TagAction.DROP` actions are not allowed for external sharing,
+which ensures that external sharing remains read-only. This restriction prevents CloudFormation errors later in the process.
+
+When sharing tags externally, the `principals` property can include AWS Account IDs, Organizational Unit (OU) IDs,
+Organization IDs, or specific IAM roles. If you provide Account, OU, or Organization IDs, all Lake Formation admins
+in the external account will receive the specified permissions. These admins can then grant permissions to other roles,
+if applicable.
 
 <DualCode>
   <Fragment slot="ts">
@@ -243,16 +245,16 @@ will be granted on all values of the tag by default.
   </Fragment>
 </DualCode>
 
-## Data Lake permissions
+## Data Lake Permissions
 
-Now that you have defined  LF-Tags and their permissions, the next step is to attach these LF-Tags to Data Catalog resource
-like Databases, Tables, etc. Adding LF-Tags to Data Catalog resources is out of scope for the DLZ, it is the responsibility
-of the Data Engineering or other workload teams.
+Once you have defined the LF-Tags and their corresponding permissions, the next step is to associate these LF-Tags
+with Data Catalog resources such as Databases and Tables. While the DLZ does not handle the task of adding LF-Tags
+to Data Catalog resources, this responsibility lies with your Data Engineering or other workload teams. It does provide
+the option to manage "Data permissions" by granting specific permissions (such as `SELECT`) to principals (such as
+IAM roles) on Data Catalog resources that are tagged with certain LF-Tags. We refer to these permissions as `Grants`.
 
-The DLZ does however provide the option to manage the "Data permissions", by assigning permissions (like SELECT) to principals (like IAM roles)
-on all Data Catalog resources (like databases and tables) that have certain LF-Tags. We will call this Data permission
-a `Grant`.
-
+The following code snippet demonstrates how to specify permissions for principals on Data Catalog resources that
+match specific LF-Tags.
 <DualCode>
   <Fragment slot="ts">
     ```ts
@@ -392,16 +394,17 @@ a `Grant`.
   </Fragment>
 </DualCode>
 
-The code snippet above creates the following Grants. These grants are expressed as SQL statements but are pseudocode to conceptualize the
-permissions that are being granted. They translate into CloudFormation/CDK constructs.
+The code snippet above generates the following Grants, which are expressed as SQL statements for conceptual purposes.
+These statements are pseudocode and are used to illustrate the permissions granted. In practice, these will be
+translated into CloudFormation/CDK constructs.
 
-Permission 1 is expressed as two Grants:
+The first permission expressed as two Grants:
 ```
 GRANT (DESCRIBE ON DATABASES)      ON TAGS (shared=True) TO '222222222222'
 GRANT (DESCRIBE, SELECT ON TABLES) ON TAGS (shared=True) TO '222222222222'
 ```
 
-The 2nd permission is expressed as four Grants:
+The second permission expressed as four Grants:
 ```
 GRANT (DESCRIBE, CREATE_TABLE, ALTER, DROP ON DATABASES)        ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team1'
 GRANT (DESCRIBE, SELECT, ALTER, DELETE, INSERT, DROP ON TABLES) ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team1'
@@ -410,10 +413,11 @@ GRANT (DESCRIBE, CREATE_TABLE, ALTER, DROP ON DATABASES)        ON TAGS (product
 GRANT (DESCRIBE, SELECT, ALTER, DELETE, INSERT, DROP ON TABLES) ON TAGS (product:ProductA=True) TO 'arn:aws:iam::111111111111:role/Team2'
 ```
 
-Defining permissions requires a good understanding of how Lake Formation Tag Based Access Control (TBAC) works.
+Defining permissions requires a thorough understanding of how Lake Formation's Tag-Based Access Control (TBAC)
+functions.
 
-See the DLZ [Lake Formation TBAC strategy](/reference/lake-formation-tbac-recommended-strategy) to learn more about
-Tag Based Access Control (TBAC) permissions and our recommended strategy.
+For more information on Tag-Based Access Control (TBAC) permissions and our recommended strategy, please refer to the
+[Lake Formation TBAC strategy](/reference/lake-formation-tbac-recommended-strategy).
 
 ## API References
 
