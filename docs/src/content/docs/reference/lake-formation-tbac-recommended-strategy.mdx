@@ -5,8 +5,8 @@ description: References - Lake Formation TBAC strategy
 import DualCode from '../../../components/DualCode.astro';
 
 
-We recommend adopting a Tag-Based Access Control (TBAC) strategy in Lake Formation, which is the default
-behavior when the `hybridMode` flag is set to `false`, disabling IAM management.
+We recommend adopting a Tag-Based Access Control (TBAC) strategy in Lake Formation and setting the `hybridMode` flag
+to `false`, disabling IAM management.
 
 Rather than directly assigning permissions to individual resources, this approach uses tags on resources,
 and permissions are granted based on those tags to principals. This strategy simplifies data governance by significantly
@@ -16,14 +16,13 @@ Here is a summary of the key concepts involved in Tag-Based Access Control (TBAC
 
 - **LF-Tags**: Key-value pairs that are attached to resources.
 - **Resources**: These include databases, tables, and columns registered in Lake Formation.
-- **Principals**: IAM entities (Users, Roles, AWS SSO, SAML), AWS accounts, Organizations, and Organizational Units.
+- **Principals**: IAM entities (Users, Roles, AWS IAM Identity Center, SAML), AWS accounts, Organizations, and Organizational Units.
 - **Grants**: Permissions given to principals for accessing resources based on their LF-tags.
 
 ## Tag-Based Access Control (TBAC)
 
-Grants in TBAC are typically expressed as SQL statements, but here they are provided in pseudocode for easy
-conceptualization. These grants ultimately translate into CloudFormation/CDK constructs. We will reason about
-permissions in this Grant format.
+Grants in TBAC are typically expressed as SQL statement pseudocode for easy conceptualization. These grants
+ultimately translate into CloudFormation/CDK constructs. We will reason about permissions in this SQL format.
 
 A typical Grant expression might look like this:
 
