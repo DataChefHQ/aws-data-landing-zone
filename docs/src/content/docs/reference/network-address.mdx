@@ -1,0 +1,53 @@
+---
+title: Network Address
+description: Network Address
+---
+import DualCode from "../../../components/DualCode.astro";
+
+A Network Address is a unique identifier for a network resource, such as a VPC, subnet, or route table. These addresses
+work across accounts and regions, allowing for easy selection and addressing of network resources. A Network Address
+is used when defining VPC bound resources in the DLZ, like NATs, Bastion Hosts, VPC Peering etc.
+
+Network Addresses are weekly typed strings that has the following schema:
+```
+<account-name>.<region>.<vpc-name>.<route-table-name>.<subnet-name>
+```
+
+Examples of specifying a Network Addresses:
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    /* As a string */
+    NetworkAddress.fromString("account.region.vpc.route-table.subnet")
+    /* Using the class constructor */
+    new NetworkAddress('account', 'region', 'vpc', 'route-table', 'subnet')
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    # As a string
+    NetworkAddress.from_string("account.region.vpc.route-table.subnet")
+    # Using the class constructor
+    NetworkAddress('account', 'region', 'vpc', 'route-table', 'subnet')
+    ```
+  </Fragment>
+</DualCode>
+
+
+This schema allows us to select various network entities, where a network entity is defined as one or more an accounts,
+vpcs, regions, subnets or subnets. This enables selections like:
+
+- `development.us-east-1.default.private.private-1`: Selects a specific private subnet in the default VPC in the
+development account in the us-east-1 region.
+- `development.us-east-1.default.private`: Select all the private subnets in the default VPC in the development
+account in the us-east-1 region.
+- `development.us-east-1.default`: Select all the route tables and all their respective subnets in the default
+VPC in the development account in the us-east-1 region.
+- `development.us-east-1`: Select all the VPCs and their respective route tables and subnets in the development
+account in the us-east-1 region.
+- `development`: Select all the VPCs, route tables and subnets in the development account in all the regions.
+
+
+## API References
+- [NetworkAddress](/reference/api#networkaddress)
+- [DlzAccountNetworks](/reference/api#dlzaccountnetworks)

@@ -62,16 +62,15 @@ export default defineConfig({
                             { label: 'SOP - Account Setup',  slug: 'components/account-management/sop-account-setup'},
                         ]
                     },
-                    // {
-                    //     label: 'Networking',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'VPCs',  slug: 'introduction'},
-                    //         { label: 'NATs',  slug: 'introduction'},
-                    //         { label: 'Bastion Hosts',  slug: 'introduction'},
-                    //         { label: 'VPC Peering',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Networking',
+                        items: [
+                            { label: 'VPCs',  slug: 'components/networking/vpcs'},
+                            // { label: 'NATs',  slug: 'introduction'},
+                            // { label: 'Bastion Hosts',  slug: 'introduction'},
+                            // { label: 'VPC Peering',  slug: 'introduction'},
+                        ]
+                    },
                     // {
                     //     label: 'Security',
                     //     items: [
@@ -118,7 +117,8 @@ export default defineConfig({
                     // { label: 'Config sharing',  slug: 'introduction'},
                     { label: 'Scripts & commands', slug: 'reference/scripts-commands' },
                     { label: 'Lake Formation TBAC strategy', slug: 'reference/lake-formation-tbac-recommended-strategy' },
-                    // { label: 'Roadmap',  slug: 'introduction'},
+                    { label: 'Network Address',  slug: 'reference/network-address'},
+                  // { label: 'Roadmap',  slug: 'introduction'},
                     // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]
             },
