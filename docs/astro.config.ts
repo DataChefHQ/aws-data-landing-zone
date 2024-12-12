@@ -26,7 +26,7 @@ export default defineConfig({
             Footer: './src/components/Footer.astro',
         },
         social: {
-            github: 'https://github.com/withastro/starlight', //TODO
+            github: 'https://github.com/DataChefHQ/aws-data-landing-zone',
         },
         sidebar: [
             {
@@ -92,26 +92,19 @@ export default defineConfig({
                     //         { label: 'Iam Identity Center',  slug: 'introduction'},
                     //     ]
                     // },
-                    // {
-                    //     label: 'Data Services',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'LakeFormation',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Data Services',
+                        items: [
+                            {
+                                label: 'Lake Formation',  slug: 'components/data-services/lake-formation'
+                            },
+                        ]
+                    },
                     {
                         label: 'Build System',
                         items: [
                             { label: 'Deployment Order',  slug: 'components/build-system/deployment-order'},
                             { label: 'CI Integration',  slug: 'components/build-system/ci-integration'},
-                        ]
-                    },
-                    {
-                        label: 'Lake Formation',
-                        items: [
-                            { label: 'Introduction', slug: 'components/lake-formation/introduction' },
-                            { label: 'How TBAC Works', slug: 'components/lake-formation/lf-tbac-guide' },
-                            { label: 'TBAC recommended strategy', slug: 'components/lake-formation/lf-tbac-strategy' },
                         ]
                     }
                 ],
@@ -124,6 +117,7 @@ export default defineConfig({
                     { label: 'Defaults',  slug: 'reference/defaults'},
                     // { label: 'Config sharing',  slug: 'introduction'},
                     { label: 'Scripts & commands', slug: 'reference/scripts-commands' },
+                    { label: 'Lake Formation TBAC strategy', slug: 'reference/lake-formation-tbac-recommended-strategy' },
                     // { label: 'Roadmap',  slug: 'introduction'},
                     // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]

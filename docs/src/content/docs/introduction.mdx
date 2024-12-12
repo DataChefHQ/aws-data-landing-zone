@@ -130,7 +130,6 @@ approvals in production environments.
   </Fragment>
   <Fragment slot="python">
     ```python
-    #!/usr/bin/env python3
     import aws_cdk as cdk
     import aws_data_landing_zone as dlz
 
@@ -167,8 +166,6 @@ approvals in production environments.
             )
         ),
     )
-
-app.synth()
 ````
 
   </Fragment>
@@ -299,8 +296,7 @@ all subnets, to the private subnets in the `production` account's VPC in the `eu
 
   </Fragment>
   <Fragment slot="python">
-    ```python {80-85}
-    #!/usr/bin/env python3
+    ```python {79-84}
     import aws_cdk as cdk
     import aws_data_landing_zone as dlz
 
@@ -388,7 +384,6 @@ all subnets, to the private subnets in the `production` account's VPC in the `eu
             )
         )
     )
-    app.synth()
     ```
 
   </Fragment>

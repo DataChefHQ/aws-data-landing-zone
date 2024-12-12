@@ -152,7 +152,6 @@ dlz.DataLandingZone(app,
         )
     ),
 )
-app.synth()
 ```
 
 Continue reading [Getting Started](https://datalandingzone.com/getting-started/) on the DLZ documentation site.
