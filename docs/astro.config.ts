@@ -66,7 +66,7 @@ export default defineConfig({
                         label: 'Networking',
                         items: [
                             { label: 'VPCs',  slug: 'components/networking/vpcs'},
-                            // { label: 'NATs',  slug: 'introduction'},
+                            { label: 'NATs',  slug: 'components/networking/nats'},
                             // { label: 'Bastion Hosts',  slug: 'introduction'},
                             // { label: 'VPC Peering',  slug: 'introduction'},
                         ]

@@ -41,7 +41,7 @@ approximately 8k hosts per subnet.
             accounts: [{
                 name: 'development',
                 vpcs: [
-                  /* Use a default */
+                  /* Use the default function  */
                   Defaults.vpcClassB3Private3Public(0, Region.EU_WEST_1),
                   /* Or define manually */
                   {
@@ -126,6 +126,9 @@ approximately 8k hosts per subnet.
                         dlz.DLzAccount(
                             name='development',
                             vpcs: [
+                                # Use the default function
+                                dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.EU_WEST_1),
+                                # Or define manually
                                 {
                                     "name": "default",
                                     "region": Region.US_EAST_1,
