@@ -4,20 +4,16 @@ description: Bastion Hosts
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
-The Data Landing Zone provides bastion hosts that can be accessed via AWS SSM Session Manager. This allows secure
-access without the need for SSH keys and an open inbound port (security group rule).
+The Data Landing Zone provides Bastion Hosts that can be accessed via AWS SSM Session Manager. This ensures secure
+access without the need for SSH keys or an open inbound port in security group rules.
 
-The Bastion host (EC2 instance) allows all outbound traffic so that it can communicate to the AWS SSM services over the
-public internet. If this is not desired, access the bastion host security group and change the rules to only allow
-traffic within the VPC. Be sure to configuring the necessary VPC endpoints for communication with AWS SSM.
-
-A Bastion host can be added to the `network` section of the configuration with the following required properties:
-- `name`: is optional, but if not provided, it will default to `default`. It only needs to be specified
-if you have multiple bastion hosts in the same stack (account + region combination).
-- `location`: must specify a **Subnet** [Network Address](/reference/network-address) to deploy in.
-We recommend you choose a private subnet to minimize your attack surface (ensure that the private subnet has internet
-access through a [NAT](nats)).
-- `instanceType`: is the size of the EC2 instance. Amazon Linux 2023 will be used as the image.
+To add a Bastion Host to the `network` section of the configuration, the following properties are important:
+- `name`: This is optional. If not specified, it defaults to `default`. You only need to provide a name if you have
+multiple bastion hosts in the same stack (account and region combination).
+- `location`: Specifies the **Subnet** [Network Address](/reference/network-address) to deploy the Bastion host in.
+We recommend using a private subnet to reduce the attack surface. Ensure the private subnet has internet access
+through a [NAT](nats).
+- `instanceType`: Defines the size of the EC2 instance. The image used will be Amazon Linux 2023.
 
 <DualCode>
   <Fragment slot="ts">
@@ -100,21 +96,20 @@ access through a [NAT](nats)).
   </Fragment>
 </DualCode>
 
-## Allowing a resource to be accessed via the bastion host
+## Allowing a resource to be accessed via the Bastion Host
 
-The Bastion host does not allow any inbound traffic outside its own security group. To allow a resource to be accessed
-via the bastion host, you must add the bastion host security group to that resource's security groups that you are
-trying to access.
+The Bastion Host restricts inbound traffic to its own security group. To allow a resource to be accessed through the
+Bastion Host, you must add the Bastion Host’s security group to the security group of the resource you wish to access.
 
-For example, if you have a private RDS instance that you want to access via the bastion host, you must add the bastion
-host's security group to the RDS instance's security groups.
+For example, to access a private RDS instance through the Bastion Host, you must include the Bastion Host’s security
+group in the RDS instance’s security groups.
 
-The Bastion host security group ID can be found in AWS SSM Parameter Store with the following path:
+The Bastion host security group ID can be found in the AWS SSM Parameter Store under the following path:
 ```
 dlz/bastion/${name}/security-group/id
 ```
 
-The following code provides a snippet of what this would look like in CDK as used in a Workload team's repository:
+Here is an example of how this would look in CDK, as used in a Workload team's repository:
 ```typescript
     // Create a security group for the RDS instance
     const rdsSecurityGroup = new ec2.SecurityGroup(this, 'RdsSecurityGroup', {
@@ -139,22 +134,22 @@ The following code provides a snippet of what this would look like in CDK as use
     });
 ```
 
-## Accessing the bastion host
+## Accessing the Bastion Host
 
 :::tip
-Ensure the Bastion host can access the AWS endpoints to use the AWS SSM Session Manager. This is done by allowing
-communication over the internet (default) or as alternative, manually configure VPC endpoints for private VPC
-communication.
+Ensure the Bastion host can access AWS endpoints to use AWS SSM Session Manager. This can be achieved by allowing
+communication over the internet (default). Alternatively, you can configure VPC endpoints for private VPC communication
+and modify the security group of the Bastion Host to allow only traffic from within the VPC.
 :::
 
-The bastion host can be accessed via the [AWS SSM Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html).
+You can access the Bastion host through the [AWS SSM Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html).
 
 The following parameters are used in the scripts:
-- `PROFILE` - The AWS CLI profile to use, omit if using the default profile (also remove --profile).
-- `EC2_BASTION_ID` - The EC2 instance ID of the bastion host, look this up manually using the CLI/Console.
+- `PROFILE` - The AWS CLI profile to use. Omit this if you are using environment variables instead (also remove --profile).
+- `EC2_BASTION_ID` - The EC2 instance ID of the bastion host. This can be found manually using the CLI or Console.
 - `RDS_ENDPOINT` - The RDS endpoint to connect to.
 
-Open an SSH session to the bastion host:
+To open an SSH session to the Bastion host:
 ```bash
 PROFILE=""
 EC2_BASTION_ID=""
@@ -164,9 +159,9 @@ aws ssm start-session \
     --target "EC2_BASTION_ID"
 ```
 
-Connecting to Bastion on its own is not that useful, as you would have to run commands on the bastion itself. It's best used
-for port forwarding your local ports to access resources in the VPC. The following command will forward local port
-5432 to the RDS port 5432, in the private subnet.
+While accessing the Bastion host directly is useful for running commands on the host, it is typically more effective
+for port forwarding to access resources within the VPC. The following command forwards local port 5432 to the RDS
+port 5432, which is located in a private subnet.
 
 ```bash
 PROFILE=""
@@ -181,7 +176,7 @@ aws ssm start-session \
     --parameters "{\"host\":[\"$RDS_ENDPOINT\"],\"portNumber\":[\"$PORT\"],\"localPortNumber\":[\"$PORT\"]}"
 ```
 
-We can now connect to the RDS instance with a GUI locally, by specifying address as `localhost` and port `5432`.
+You can now connect to the RDS instance with a local GUI by specifying `localhost` as the address and `5432` as the port.
 
 ## API References
 - [BastionHost](/reference/api/#bastionhost)
