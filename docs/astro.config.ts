@@ -1,7 +1,7 @@
-import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { defineConfig } from 'astro/config';
 import rehypeMermaid from "rehype-mermaid";
-import starlightImageZoom from 'starlight-image-zoom'
+import starlightImageZoom from 'starlight-image-zoom';
 
 let site: string;
 if (process.env.CF_PAGES_BRANCH) {
@@ -26,7 +26,7 @@ export default defineConfig({
             Footer: './src/components/Footer.astro',
         },
         social: {
-            github: 'https://github.com/withastro/starlight', //TODO
+            github: 'https://github.com/DataChefHQ/aws-data-landing-zone',
         },
         sidebar: [
             {
@@ -92,20 +92,21 @@ export default defineConfig({
                     //         { label: 'Iam Identity Center',  slug: 'introduction'},
                     //     ]
                     // },
-                    // {
-                    //     label: 'Data Services',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'LakeFormation',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Data Services',
+                        items: [
+                            {
+                                label: 'Lake Formation',  slug: 'components/data-services/lake-formation'
+                            },
+                        ]
+                    },
                     {
                         label: 'Build System',
                         items: [
                             { label: 'Deployment Order',  slug: 'components/build-system/deployment-order'},
                             { label: 'CI Integration',  slug: 'components/build-system/ci-integration'},
                         ]
-                    },
+                    }
                 ],
             },
             {
@@ -115,7 +116,8 @@ export default defineConfig({
                     { label: 'API',  slug: 'reference/api'},
                     { label: 'Defaults',  slug: 'reference/defaults'},
                     // { label: 'Config sharing',  slug: 'introduction'},
-                    { label: 'Scripts & commands',  slug: 'reference/scripts-commands'},
+                    { label: 'Scripts & commands', slug: 'reference/scripts-commands' },
+                    { label: 'Lake Formation TBAC strategy', slug: 'reference/lake-formation-tbac-recommended-strategy' },
                     // { label: 'Roadmap',  slug: 'introduction'},
                     // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]
@@ -126,9 +128,9 @@ export default defineConfig({
             './src/styles/custom.css',
         ],
         plugins: [starlightImageZoom()],
-		})],
+    })],
     markdown: {
-        rehypePlugins: [ [rehypeMermaid, {strategy: "img-png", mermaidConfig:{ theme: 'neutral' } }] ], // CSS styles do not apply, have to inline
+        rehypePlugins: [[rehypeMermaid, { strategy: "img-png", mermaidConfig: { theme: 'neutral' } }]], // CSS styles do not apply, have to inline
         // rehypePlugins: [ rehypeMermaid ], //For occasional testing, see the SVG component and class names
     },
 });

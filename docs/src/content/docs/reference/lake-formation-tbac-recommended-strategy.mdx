@@ -1,0 +1,286 @@
+---
+title: Lake Formation TBAC strategy
+description: References - Lake Formation TBAC strategy
+---
+import DualCode from '../../../components/DualCode.astro';
+
+
+We recommend adopting a Tag-Based Access Control (TBAC) strategy in Lake Formation and setting the `hybridMode` flag
+to `false`, disabling IAM management.
+
+Rather than directly assigning permissions to individual resources, this approach uses tags on resources,
+and permissions are granted based on those tags to principals. This strategy simplifies data governance by significantly
+reducing the effort required to set up and manage permissions, especially in large environments.
+
+Here is a summary of the key concepts involved in Tag-Based Access Control (TBAC):
+
+- **LF-Tags**: Key-value pairs that are attached to resources.
+- **Resources**: These include databases, tables, and columns registered in Lake Formation.
+- **Principals**: IAM entities (Users, Roles, AWS IAM Identity Center, SAML), AWS accounts, Organizations, and Organizational Units.
+- **Grants**: Permissions given to principals for accessing resources based on their LF-tags.
+
+## Tag-Based Access Control (TBAC)
+
+Grants in TBAC are typically expressed as SQL statement pseudocode for easy conceptualization. These grants
+ultimately translate into CloudFormation/CDK constructs. We will reason about permissions in this SQL format.
+
+A typical Grant expression might look like this:
+
+```sql
+GRANT ACCESS ON TAGS foo=bar AND spam=eggs TO DataLakeUser
+```
+
+### Rules
+
+LF-Tags follow a set of fundamental rules:
+
+- Grants are applied **TO** principals **ON** specific tags. For example:
+
+  ```sql
+  GRANT ACCESS ON TAGS foo=bar TO user
+    ```
+
+- In a grant expression, all tag **keys** are evaluated using `AND` logic, while tag **values** are
+evaluated using `OR` logic. For instance:
+
+
+  The user has access to resources tagged with both `foo=bar` AND `spam=eggs`
+  ```sql
+  GRANT ACCESS ON TAGS foo=bar AND spam=eggs TO user
+  ```
+
+  The user has access to resources tagged with either `foo=bar` OR `foo=baz`
+  ```sql
+  GRANT ACCESS ON TAGS foo=['bar', 'baz'] TO user
+  ```
+- Tags assigned to resources are **inherited**, unless specifically overridden.
+
+  ![Tag Inheritance Diagram](imgs/tag_inheritance.png)
+- Grants ensure access to resources where **ALL** conditions specified are true.
+
+  ![Grants Diagram](imgs/grants_diagram.png)
+
+
+### Limitations
+
+There are a few limitations in designing flexible tag systems:
+- Tags are assigned to data catalog resources (databases, tables and columns), and each resource can
+have multiple tags, with a maximum of **50 tags** and **no duplicate keys**.
+
+- A resource cannot have the same LF-tag key more than once. For example, you cannot apply both
+`team=sales` and `team=marketing` to the same table.
+
+  One workaround is to embed the name inside the tag key, making the tag behave as a toggle, such as
+  `team:sales=true` and `team:marketing=true`.
+
+- A `GRANT` statement cannot use an `OR` condition across different tag keys. The following statement is
+**invalid**:
+
+  ❌ Invalid
+  ```sql
+  GRANT ACCESS ON TAGS foo=bar OR spam=eggs TO user
+  ```
+
+  ✅ Valid
+  ```sql
+  GRANT ACCESS ON TAGS foo=bar TO user
+  GRANT ACCESS ON TAGS spam=eggs TO user
+  ```
+
+
+### Best Practices
+
+Here are some best practices and recommendations to consider when designing your tagging system:
+
+- LF-Tags are hierarchical. If you apply a `GRANT` statement to a high-level resource (like a database),
+this inherently grants access to all child resources (like a table) that share the same tag value.
+
+- When creating a `GRANT` statement, remember that tags are **AND-ed**, not **OR-ed**. For example:
+
+  ```sql
+  GRANT ACCESS ON TAGS team:marketing=true TO executives
+  ```
+
+  This grants the `executives` group access to all resources tagged with `team:marketing=true`.
+
+  If the statement is modified to:
+
+  ```sql
+  GRANT ACCESS ON TAGS team:marketing=true AND PII=true TO executives
+  ```
+
+  The `executives` group is granted access only to resources that are tagged with both `team:marketing=true`
+  and `PII=true`.
+
+## Tag Strategy
+
+There is no one-size-fits-all solution, the most effective strategy is the one that aligns best with an organization's
+structure. The recommended strategies are a modified version of the
+[AWS Recommended Common LF-Tag Ontologies](https://aws.github.io/aws-lakeformation-best-practices/lf-tags/common-ontologies/).
+
+We suggest two strategies, pick the one that best fits your organization's structure:
+
+- **Product-based tagging**: Tag resources based on the product/project they belong to and then create fine-grained
+permission grants per principal/team. **Recommended for scenarios with many products and many teams**. This approach scales
+with both products and team size but requires more effort in creating permission grants.
+
+- **Team-based tagging**: Tag resources based on the team that needs access, assuming that it is acceptable that the same team tag will have
+the same permission level to all resources they have access to. **Recommended for simplicity when you have many products but only a few
+teams and can accept certain limitations.** This approach scales with the number of products but not the number of teams, due to the 50-tag limit on
+resources.
+
+Let's consider a scenario with the following teams and roles:
+- `Admin` has the role `RoleAdmin`
+- `DataEngineering` has the role `RoleDataEngineering`
+- `DataScience` has the role `RoleDataScience`
+
+We have the following products and their respective databases:
+- `ProductA`: `Database1`, `Database2`
+- `ProductB`: `Database3`
+
+### Product-based tagging
+
+This strategy involves tagging resources based on the product they belong to, followed by creating fine-grained
+permission grants per team.
+
+#### Suggested Tags
+We suggest to start with a basic tagging strategy and limiting the number of tags:
+- `product:<product_name> = true`: Tag resources belonging to a specific product.
+- `sensitive = [true, false]`: Tag resources containing sensitive data (e.g., PII).
+
+#### Resource Tagging
+Start by tagging your resources, let's only apply them to Databases to keep things simple. Apply the following tags:
+- `Database1`: `sensitive=false`, `product:productA=true`
+- `Database2`: `sensitive=true`, `product:productA=true`
+- `Database3`: `sensitive=false`, `product:productB=true`
+
+#### Permissions
+Admins need full access to all Databases, we don't have to specify the `senstive` tag as the value is irrelevant.
+```sql
+GRANT FULL ACCESS ON TAGS product:productA=true TO RoleAdmin
+GRANT FULL ACCESS ON TAGS product:productB=true TO RoleAdmin
+```
+
+The following grants will allow the `DataEngineering` team full access to all Databases of all products that are not
+sensitive. They will only be able to access `Database1` and `Database3`.
+```sql
+GRANT FULL ACCESS ON TAGS product:productA=true AND sensitive=false TO RoleDataEngineering
+GRANT FULL ACCESS ON TAGS product:productB=true AND sensitive=false TO RoleDataEngineering
+```
+
+The `DataScience` team requires read only access to ProductB. So they can only access `Database3`.
+```sql
+GRANT READ ACCESS ON TAGS product:productB=true AND sensitive=true TO RoleDataScience
+```
+
+#### Pros and Cons
+
+This approach is effective when there are only a few products or databases that need to be shared across multiple teams.
+In this model, you assign a product tag to each resource once and then configure permission grants for every team that
+requires access to the product.
+
+**Advantages**:
+- You do not need to add additional tags to resources.
+- Permission grants can be tailored to each team's requirements.
+
+**Disadvantages**:
+- Creating permission grants for every team and product can become time-consuming and complex as the number of teams
+and products increases.
+
+**Example Scenario**:
+
+Assume you have 100 products or databases and 5 teams. If the SalesTeam requires access to 50 of these products, the
+following grants would need to be created:
+```sql
+GRANT READ ONLY ACCESS ON TAGS product:productA=true AND sensitive=false TO RoleSales
+GRANT READ ONLY ACCESS ON TAGS product:productB=true AND sensitive=false TO RoleSales
+... repeat for remaining 48 products
+```
+
+If a new product is introduced, you must also grant permissions to each relevant team. For example:
+```sql
+GRANT FULL ACCESS ON TAGS product:productNEW=true AND sensitive=false TO RoleDataEngineering
+GRANT READONLY ACCESS ON TAGS product:productNEW=true AND sensitive=false TO RoleDataScience
+GRANT READONLY ACCESS ON TAGS product:productNEW=true AND sensitive=false TO RoleSales
+```
+
+### Team based tagging
+
+This strategy involves tagging resources based on the team that requires access. However, it is important to note that
+all resources associated with the same team tag will share the same permission level.
+
+#### Suggested Tags
+We suggest to start with a basic tagging strategy and limiting the number of tags:
+Here are the basic tags:
+- `team:<team_name> = true`: Assigned to resources that a specific team should access.
+- `sensitive = [true, false]`: Indicates whether a resource contains sensitive data, such as Personally Identifiable
+Information (PII).
+
+#### Resource Tagging
+Start by tagging your resources, let's only apply them to Databases to keep things simple. Apply the following tags,
+assuming that we always have the `team:Admin=true` tag on all resources, as they must always have access to all
+resources:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`)
+
+#### Permissions
+Since Admins need full access to all Databases, we don't have to specify the `senstive` tag as the value is irrelevant.
+```sql
+GRANT FULL ACCESS ON TAGS team:Admin=true TO RoleAdmin
+```
+
+For the `DataEngineering` team to have full access to all Databases that are not sensitive, we need to specify their
+grants as:
+```sql
+GRANT FULL ACCESS ON TAGS team:DataEngineering=true AND sensitive=false TO RoleDataEngineering
+```
+But now we have to add tags to our resources, our Databases now look like:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`, `team:DataEngineering=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`)
+
+The `DataScience` team requires read only access to Database3.
+```sql
+GRANT READ ACCESS ON TAGS team:DataScience=true AND sensitive=false TO RoleDataScience
+```
+But again, we have to add tags to our resources, our Databases now look like:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`, `team:DataEngineering=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:DataScience=true`)
+
+#### Pros and Cons
+
+:::caution
+This strategy has scalability limitations. AWS enforces a 50-tag limit per resource, which means you cannot exceed 50
+teams. Additionally, other tags such as `sensitive` count toward this limit, reducing the number of team tags you can use.
+:::
+
+This approach is effective when you need to share **many products or databases** with **a small number of teams** and
+can accommodate the restriction that all resources with the same team tag share identical permissions. You define the
+permission grant once for the team's tag and apply it to all resources requiring access.
+
+**Advantages**:
+- Reduces the need for multiple permission grants.
+- Straightforward to manage with a limited number of teams.
+
+**Disadvantages**:
+- Requires tagging resources for each team, which can become cumbersome.
+- Teams with the same tag will have identical permissions for all tagged resources.
+- Limited scalability due to the 50-tag resource limit.
+
+**Example Scenario**:
+
+Consider a situation with 100 products or databases and 5 teams. If the `SalesTeam` requires access to 50 of these
+products, you would need to update the tags on each database:
+- `Database1` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:Sales=true`)
+- `Database2` with tags (`sensitive=true`,  `team:Admin=true`, `team:DataEngineering=true`, `team:Sales=true`)
+- `Database3` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:DataScience=true`, `team:Sales=true`)
+- ... repeat for remaining 47 products/databases
+
+When introducing a new product or database, you must also update its tags for each relevant team:
+- `DatabaseNEW` with tags (`sensitive=false`, `team:Admin=true`, `team:DataEngineering=true`, `team:Sales=true`)
+
+## Other Sources
+- https://aws.github.io/aws-lakeformation-best-practices/
+- https://docs.aws.amazon.com/lake-formation/latest/dg/lf-tag-considerations.html
