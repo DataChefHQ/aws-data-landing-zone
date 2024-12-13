@@ -1,0 +1,70 @@
+---
+title: IAM Permission Boundary
+description: IAM Permission Boundary
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+A permissions boundary uses a managed IAM policy to define the maximum permissions an
+identity-based policy can grant to an IAM entity. This ensures that the entity can perform only actions permitted
+by both its identity-based policies and the permissions boundary, effectively preventing unauthorized permission
+escalation.
+
+The Data Landing Zone enables specifying an IAM policy to be used as a permissions boundary for all IAM users and
+roles. The DLZ creates a managed policy named `IamPolicyPermissionBoundaryPolicy` and enforces its attachment to all IAM
+users and roles through a
+[Service Control Policy](https://github.com/DataChefHQ/aws-data-landing-zone/blob/cd54815aa4c2bdc7f1ba2d91b18df914280553fb/src/constructs/organization-policies/service-control-policy.ts#L38).
+
+The example below demonstrates a permissions boundary that allows listing S3 bucket contents (`s3:ListBucket`) and
+downloading objects (`s3:GetObject`) across all S3 resources in the account. Note that the entity must also have matching
+permissions in its identity-based policy to perform these actions. This policy is for demonstration purposes only, as
+it has limited scope and usability.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      iamPolicyPermissionBoundary: {
+        policyStatement: {
+          effect: iam.Effect.ALLOW,
+          actions: [
+            's3:ListBucket',
+            's3:GetObject',
+          ],
+          resources: ['*'],
+        },
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        iam_policy_permission_boundary={
+            "policy_statement": {
+                "effect": iam.Effect.ALLOW,
+                "actions: [
+                    's3:ListBucket',
+                    's3:GetObject',
+                ],
+                "resources": ["*"],
+            },
+        },
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+
+## API References
+- [iamPolicyPermissionBoundary](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary)
+

@@ -1,0 +1,66 @@
+---
+title: Control Tower Controls
+description: Control Tower Controls
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone supports specifying Control Tower Controls using the `controlTowerControls` property. This property
+applies controls to the entire organization and all accounts within it.
+
+The example below demonstrates how to use DLZ defaults and add the `SH_SECRETS_MANAGER_3` control:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      organization: {
+        root: {
+          ...
+          controls: [
+            ...Defaults.rootControls(),
+            DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3,
+          ],
+        },
+        ous: ...
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            root=dlz.RootOptions(
+                ...
+                controls=[
+                    *dlz.Defaults.root_controls(),
+                    dlz.DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3
+                ]
+            ),
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Defaults
+
+The `Defaults.rootControls` function returns a list of commonly used Control Tower Controls based on best practices
+and data management. You can find a detailed list of these controls in the code
+[here](https://github.com/DataChefHQ/aws-data-landing-zone/blob/dfe6f6d7ea991aa37976fae41b9ab38c81a2748a/src/defaults.ts#L143).
+
+## API References
+- [DlzControlTowerEnabledControl](/reference/api/#dlzcontroltowerenabledcontrol)
+- [DlzControlTowerControlFormat](/reference/api/#dlzcontroltowercontrolformat)
+- [IDlzControlTowerControl](/reference/api/#idlzcontroltowercontrol)
+- [DlzControlTowerStandardControls](/reference/api/#dlzcontroltowerstandardcontrols)
+- [DlzControlTowerSpecializedControls](/reference/api/#dlzcontroltowerspecializedcontrols)

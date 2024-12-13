@@ -1,0 +1,50 @@
+---
+title: Extending and Escape Hatches
+description: Extending and Escape Hatches
+---
+import DualCode from "../../../components/DualCode.astro";
+
+The Data Landing Zone provides the flexibility to customize and extend stacks and their constructs. This section explains
+how to extend the Data Landing Zone and use escape hatches to modify default behavior.
+
+## Extending the Data Landing Zone
+
+All stacks are accessible through the DLZ construct, enabling the addition or removal of constructs from these stacks.
+
+Below is an example showing how to add an SNS topic to the management stack:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, { ... });
+
+    const topic = new sns.Topic(dlz.managementStack, "new-topic", {
+      displayName: "new-topic",
+      topicName: "new-topic",
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    from aws_data_landing_zone import DataLandingZone
+    from aws_cdk import aws_sns as sns
+
+    app = cdk.App()
+    dlz = DataLandingZone(app, ... )
+
+    topic = sns.Topic(dlz.management_stack, "new-topic",
+                      display_name="new-topic",
+                      topic_name="new-topic")
+    ```
+  </Fragment>
+</DualCode>
+
+## Escape Hatches
+
+Constructs can be accessed and customized using common CDK [escape hatches](https://docs.aws.amazon.com/cdk/v2/guide/cfn_layer.html).
+These include Aspects, using the `node` property, and the `addOverride` method.

@@ -1,0 +1,123 @@
+---
+title: Security Hub
+description: Security Hub
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone integrates with Security Hub, utilizing the setup provided by Control Tower to enable Security Hub
+in all regions of all accounts. Security Hub should be accessed through the Audit Account in the Security OU.
+
+Security Hub notifications are delivered via Amazon SNS, with support for the following methods:
+- **Email**: Each email address must confirm the notification opt-in the first time it is deployed.
+- **Slack**: Notifications are sent to a designated Slack channel. The Slack workspace must be linked to the Management
+Account. For setup details, see the SOP [AWS Chatbot and Slack Integration](sop-account-setup#aws-chatbot-and-slack-integration).
+
+:::note
+Email notifications are unstructured JSON and may appear messy. Slack notifications are well-formatted and easy to read.
+:::
+
+Below is an example of creating filters for findings based on their severity and workflow status. Notifications for
+medium, high, and critical severity findings marked as "new" are sent to the `security-hub-high` Slack channel. A
+separate filter for resolved and suppressed findings sends notifications to the `security-hub-resolved` Slack channel.
+
+Using separate Slack channels helps manage the volume of notifications. Users interested in new findings can focus on
+the `security-hub-high` channel, while others tracking resolved findings can monitor the `security-hub-resolved` channel.
+This allows users to mute or unsubscribe from the channel they are not interested in.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+        securityHubNotifications: [
+          {
+            id: 'notify-high',
+            severity: [
+              SecurityHubNotificationSeverity.MEDIUM,
+              SecurityHubNotificationSeverity.HIGH,
+              SecurityHubNotificationSeverity.CRITICAL,
+            ],
+            workflowStatus: [
+              SecurityHubNotificationSWorkflowStatus.NEW,
+            ],
+            notification: {
+              // emails: ['you@org.com'],
+              slack: {
+                slackChannelConfigurationName: 'security-hub-high',
+                slackWorkspaceId: 'YourWorkspaceId',
+                slackChannelId: 'YourChannelId',
+              },
+            },
+          },
+          {
+            id: 'notify-resolved',
+            workflowStatus: [
+              SecurityHubNotificationSWorkflowStatus.RESOLVED,
+              SecurityHubNotificationSWorkflowStatus.SUPPRESSED,
+            ],
+            notification: {
+            // emails: ['you@org.com'],
+              slack: {
+                slackChannelConfigurationName: 'security-hub-resolved',
+                slackWorkspaceId: 'YourWorkspaceId',
+                slackChannelId: 'YourChannelId',
+              },
+            },
+          },
+        ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        security_hub_notifications=[
+            {
+                "id": "notify-high",
+                "severity": [
+                    SecurityHubNotificationSeverity.MEDIUM,
+                    SecurityHubNotificationSeverity.HIGH,
+                    SecurityHubNotificationSeverity.CRITICAL,
+                ],
+                "workflow_status": [SecurityHubNotificationSWorkflowStatus.NEW],
+                "notification": {
+                    "slack": {
+                        "slack_channel_configuration_name": "security-hub-high",
+                        "slack_workspace_id": "YourWordspaceID",
+                        "slack_channel_id": "YourChannelID",
+                    },
+                },
+            },
+            {
+                "id": "notify-resolved",
+                "workflow_status": [
+                    SecurityHubNotificationSWorkflowStatus.RESOLVED,
+                    SecurityHubNotificationSWorkflowStatus.SUPPRESSED,
+                ],
+                "notification": {
+                    "slack": {
+                        "slack_channel_configuration_name": "security-hub-resolved",
+                        "slack_workspace_id": "YourWordspaceID",
+                        "slack_channel_id": "YourChannelID",
+                    },
+                },
+            },
+        ],
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+
+## API References
+- [SecurityHubNotification](/reference/api/#aws-data-landing-zone.SecurityHubNotification)
+
