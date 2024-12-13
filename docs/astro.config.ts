@@ -62,29 +62,28 @@ export default defineConfig({
                             { label: 'SOP - Account Setup',  slug: 'components/account-management/sop-account-setup'},
                         ]
                     },
-                    // {
-                    //     label: 'Networking',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'VPCs',  slug: 'introduction'},
-                    //         { label: 'NATs',  slug: 'introduction'},
-                    //         { label: 'Bastion Hosts',  slug: 'introduction'},
-                    //         { label: 'VPC Peering',  slug: 'introduction'},
-                    //     ]
-                    // },
-                    // {
-                    //     label: 'Security',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'Service Control Policies',  slug: 'introduction'}, // Mention the service deny list
-                    //         { label: 'Permission Boundary',  slug: 'introduction'},
-                    //         { label: 'SecurityHub',  slug: 'introduction'},
-                    //         { label: 'Control Tower Controls',  slug: 'introduction'},
-                    //         { label: 'AWS Config',  slug: 'introduction'},
-                    //         { label: 'AWS Guard Duty',  slug: 'introduction'},
-                    //         { label: 'AWS Macie',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Networking',
+                        items: [
+                            { label: 'VPCs',  slug: 'components/networking/vpcs'},
+                            { label: 'NATs',  slug: 'components/networking/nats'},
+                            { label: 'Bastion Hosts',  slug: 'components/networking/bastion-hosts'},
+                            { label: 'VPC Peering',  slug: 'components/networking/vpc-peering'},
+                        ]
+                    },
+                    {
+                        label: 'Security',
+                        items: [
+                            // { label: 'Overview',  slug: 'introduction'},
+                            { label: 'Service Control Policies',  slug: 'components/security/service-deny-list'}, // Mention the service deny list
+                            // { label: 'Permission Boundary',  slug: 'introduction'},
+                            // { label: 'SecurityHub',  slug: 'introduction'},
+                            // { label: 'Control Tower Controls',  slug: 'introduction'},
+                            // { label: 'AWS Config',  slug: 'introduction'},
+                            // { label: 'AWS Guard Duty',  slug: 'introduction'},
+                            // { label: 'AWS Macie',  slug: 'introduction'},
+                        ]
+                    },
                     // {
                     //     label: 'Identity',
                     //     items: [
@@ -115,10 +114,17 @@ export default defineConfig({
                     // TODO: Complete docs
                     { label: 'API',  slug: 'reference/api'},
                     { label: 'Defaults',  slug: 'reference/defaults'},
-                    // { label: 'Config sharing',  slug: 'introduction'},
+                    {
+                        label: 'Integration',
+                        items: [
+                            { label: 'Exported SSM Parameters',  slug: 'reference/integration/exported-ssm-parameters'},
+                            { label: 'CDK Client',  slug: 'reference/integration/cdk-client'},
+                        ]
+                    },
                     { label: 'Scripts & commands', slug: 'reference/scripts-commands' },
                     { label: 'Lake Formation TBAC strategy', slug: 'reference/lake-formation-tbac-recommended-strategy' },
-                    // { label: 'Roadmap',  slug: 'introduction'},
+                    { label: 'Network Address',  slug: 'reference/network-address'},
+                  // { label: 'Roadmap',  slug: 'introduction'},
                     // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]
             },

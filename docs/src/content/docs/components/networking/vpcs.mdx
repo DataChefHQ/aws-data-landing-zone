@@ -1,0 +1,284 @@
+---
+title: VPCs
+description: VPCs
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone provides support for creating Virtual Private Clouds (VPCs) in multiple regions and accounts. It
+enforces non-overlapping CIDR ranges across VPCs within the same account and across accounts.
+
+:::note
+Ensure that default VPC creation is disabled when setting up accounts with Control Tower, as outlined in the
+[SOP - Add Account](/components/account-management/sop-add-account). All VPCs are defined programmatically by the DLZ.
+:::
+
+The DLZ enables precise control over VPCs, subnets, and route tables. Each VPC, route table, and subnet is named to
+facilitate addressing using a
+[Network Address](/reference/network-address). For example, this allows you to target a specific subnet for deploying a
+resource.
+
+The example below defines two VPCs:
+- A VPC created using the default function in the `eu-west-1` region with a CIDR block of `10.0.0.0/16`.
+- A manually configured VPC in the `us-east-1` region with a CIDR block of `10.1.0.0/16`.
+
+Both VPCs include:
+- A `private` route table and a `public` route table, each containing three subnets with `/19` CIDRs that allow for
+approximately 8k hosts per subnet.
+- Reserved space for additional subnets, leaving two `/19` subnets available at the end of each VPC's CIDR range.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      ...
+      organization: {
+        ...
+          workloads: {
+            accounts: [{
+                name: 'development',
+                vpcs: [
+                  /* Use the default function  */
+                  Defaults.vpcClassB3Private3Public(0, Region.EU_WEST_1),
+                  /* Or define manually */
+                  {
+                    name: 'default',
+                    region: Region.US_EAST_1,
+                    cidr: '10.1.0.0/16',
+                    routeTables: [
+                      /* Evenly divide, each /19 = 8k hosts */
+                      {
+                        name: 'private',
+                        subnets: [
+                          /* Evenly divide, each /19 = 8k hosts */
+                          {
+                            name: 'private-1',
+                            cidr: '10.1.0.0/19',
+                            az: 'us-east-1a',
+                          },
+                          {
+                            name: 'private-2',
+                            cidr: '10.1.32.0/19',
+                            az: 'us-east-1b',
+                          },
+                          {
+                            name: 'private-3',
+                            cidr: '10.1.64.0/19',
+                            az: 'us-east-1c',
+                          },
+                        ],
+                      },
+                      {
+                        name: 'public',
+                        subnets: [
+                          {
+                            name: 'public-1',
+                            cidr: '10.1.96.0/19',
+                            az: 'us-east-1a',
+                          },
+                          {
+                            name: 'public-2',
+                            cidr: '10.1.128.0/19',
+                            az: 'us-east-1a',
+                          },
+                          {
+                            name: 'public-3',
+                            cidr: '10.1.160.0/19',
+                            az: 'us-east-1a',
+                          },
+                        ],
+                      },
+                      /* Remaining:
+                       *  - 10.1.192.0/19
+                       *  - 10.1.224.0/19
+                       * */
+                    ],
+                  },
+                ],
+                ...
+              },
+              ...
+              ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        ...
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                ...
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            vpcs: [
+                                # Use the default function
+                                dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.EU_WEST_1),
+                                # Or define manually
+                                {
+                                    "name": "default",
+                                    "region": Region.US_EAST_1,
+                                    "cidr": "10.1.0.0/16",
+                                    "route_tables": [
+                                        # Evenly divide, each /19 = 8k hosts
+                                        {
+                                            "name": "private",
+                                            "subnets": [
+                                                # Evenly divide, each /19 = 8k hosts
+                                                {
+                                                  "name": "private-1",
+                                                  "cidr": "10.1.0.0/19",
+                                                  "az": "us-east-1a",
+                                                },
+                                                {
+                                                  "name": "private-2",
+                                                  "cidr": "10.1.32.0/19",
+                                                  "az": "us-east-1b",
+                                                },
+                                                {
+                                                  "name": "private-3",
+                                                  "cidr": "10.1.64.0/19",
+                                                  "az": "us-east-1c",
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            "name": "public",
+                                            "subnets": [
+                                                {
+                                                  "name": "public-1",
+                                                  "cidr": "10.1.96.0/19",
+                                                  "az": "us-east-1a",
+                                                },
+                                                {
+                                                  "name": "public-2",
+                                                  "cidr": "10.1.128.0/19",
+                                                  "az": "us-east-1a",
+                                                },
+                                                {
+                                                  "name": "public-3",
+                                                  "cidr": "10.1.160.0/19",
+                                                  "az": "us-east-1a",
+                                                },
+                                            ],
+                                        },
+                                        # Remaining:
+                                        #  - 10.1.192.0/19
+                                        #  - 10.1.224.0/19
+                                   ],
+                               },
+                            ]
+                            ...
+                        ),
+                    ],
+                ),
+            )
+        ),
+    )
+````
+  </Fragment>
+</DualCode>
+
+## Defaults
+
+The `Defaults.vpcClassB3Private3Public` function creates a VPC with a CIDR block of `10.x.0.0/16`, where `x` can be
+specified. It creates two route tables; one for public subnets and one for private subnets, each containing three
+subnets. Each subnet is assigned a `/19` CIDR block. The VPC CIDR block is divided into eight subnets, with six in use
+and two `/19` blocks reserved for future expansion. The specified region determines the availability zones for the
+subnets.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts {25}
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      ...
+      organization: {
+        ...
+          workloads: {
+            accounts: [{
+                name: 'development',
+                vpcs: [
+                  Defaults.vpcClassB3Private3Public(0, Region.EU_WEST_1),
+              ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python {25}
+    #!/usr/bin/env python3
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        ...
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                ...
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            vpcs: [
+                                dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.EU_WEST_1),
+                            ]
+                            ...
+                        ),
+                    ],
+                ),
+            )
+        ),
+    )
+````
+  </Fragment>
+</DualCode>
+
+## Exported SSM Parameters
+
+Each VPC generates the following parameters in the SSM Parameter Store:
+- `/dlz/networking-entity/vpc/<account-name>.<region>.<vpc-name>/id`: The VPC ID.
+- `/dlz/networking-entity/vpc/<account-name>.<region>.<vpc-name>.<route-table-name>/id`: The route table ID for each route table.
+- `/dlz/networking-entity/vpc/<account-name>.<region>.<vpc-name>.<route-table-name>.<subnet-name>/id`: The subnet ID for each subnet.
+
+For instance, the `Defaults.vpcClassB3Private3Public(0, Regions.EU_WEST_1)` function creates a VPC named `default` in
+the `eu-west-1` region. This VPC has a CIDR block of `10.0.0.0/16`, two route tables (`private` and `public`), and six
+subnets named `private-1`, `private-2`, `private-3`, `public-1`, `public-2`, and `public-3`.
+
+The following parameters will be created in the account for this VPC:
+- VPC parameters:
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default/id`
+- Route table parameters:
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.private/id`
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.public/id`
+- Subnet parameters:
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.private.private-1/id`
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.private.private-2/id`
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.private.private-3/id`
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.public.public-1/id`
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.public.public-2/id`
+  - `/dlz/networking-entity/vpc/development.eu-west-1.default.public/public-3/id`
+
+## API References
+- [DlzVpcProps](/reference/api#dlzvpcprops)
