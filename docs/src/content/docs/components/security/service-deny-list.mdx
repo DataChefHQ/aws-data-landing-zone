@@ -1,0 +1,59 @@
+---
+title: Service Deny List
+description: Service Deny List
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone allows organizations to define a list of IAM actions (services) to be denied across all accounts and
+regions. This feature is particularly useful for enforcing compliance with internal policies or regulatory
+requirements by restricting access to specific services.
+
+
+To add a service to the `denyServiceList` property of the configuration, provide the service name in the format
+`<service>:<action>`. For example, to deny all the `Default` actions and the complete ECS service, use `ecs:*`.
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      denyServiceList: [
+        ...Defaults.denyServiceList(),
+        'ecs:*',
+      ],
+     ...
+    });
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        deny_service_list=[
+            *dlz.Defaults.deny_service_list(),
+            "ecs:*"
+        ],
+        ...
+    )
+    ```
+
+  </Fragment>
+</DualCode>
+
+## Defaults
+
+The `Defaults.denyServiceList` function is used to create a list of services that should be denied across all accounts
+and regions. This function currently returns the following list of services:
+```
+'eks:*',
+```
+
+## API References
+- [DataLandingZoneProps.denyServiceList](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList)
+

@@ -1,0 +1,28 @@
+---
+title: Integration - Exported SSM Parameters
+description: Integration - Exported SSM Parameters
+---
+
+The Data Landing Zone exports SSM Parameters that allow other repositories or IaC projects owned by Workload teams to
+reference resources created by the Data Landing Zone. For example, the Data Engineering team can use these parameters
+to reference the VPC ID and Subnet IDs when defining an RDS cluster in a private subnet.
+
+SSM Parameters can be utilized by any Infrastructure-as-Code (IaC) tool, including Terraform, CDK, CloudFormation, or
+even custom scripts. This flexibility ensures that choosing CDK for the Data Landing Zone does not limit the
+organization's ability to adopt other IaC tools across different projects.
+
+:::tip
+**CDK User?** Avoid directly referencing or consuming the SSM Parameters. Instead, use the convenient
+[CDK Client](cdk-client), which provides a thin, type-safe wrapper to fetch these SSM Parameters.
+:::
+
+### List of Exported SSM Parameters
+
+- [/dlz/networking-entity/vpc/\<account-name\>.\<region\>.\<vpc-name\>/id](/components/networking/vpcs#exported-ssm-parameters):
+The VPC ID.
+- [/dlz/networking-entity/vpc/\<account-name\>.\<region\>.\<vpc-name\>.\<route-table-name\>/id](/components/networking/vpcs#exported-ssm-parameters):
+The Route Table ID, one for each route table created in the VPC.
+- [/dlz/networking-entity/vpc/\<account-name\>.\<region\>.\<vpc-name\>.\<route-table-name\>.\<subnet-name\>/id](/components/networking/vpcs#exported-ssm-parameters):
+The Subnet ID, one for each subnet created in the route tables.
+- [/dlz/networking-entity/bastion/\<bastion-name\>/security-group/id](/components/networking/bastion-hosts#exported-ssm-parameters):
+The security group ID of the bastion host.

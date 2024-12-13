@@ -118,7 +118,7 @@ Here is an example of how this would look in CDK, as used in a Workload team's r
     rdsSecurityGroup.addIngressRule(c2.Peer.anyIpv4(), ec2.Port.tcp(5432));
 
     // Retrieve the Bastion security group ID from SSM Parameter Store, given its name is `default`
-    const bastionSecurityGroupId = ssm.StringParameter.valueForStringParameter(this, 'dlz/bastion/default/security-group/id');
+    const bastionSecurityGroupId = ssm.StringParameter.valueForStringParameter(this, 'dlz/networking-entity/bastion/default/security-group/id');
 
     // Import a construct of the Bastion Security group
     const bastionSecurityGroup = ec2.SecurityGroup.fromSecurityGroupId(this, 'BastionSecurityGroup', bastionSecurityGroupId);
@@ -177,6 +177,13 @@ aws ssm start-session \
 ```
 
 You can now connect to the RDS instance with a local GUI by specifying `localhost` as the address and `5432` as the port.
+
+## Exported SSM Parameters
+
+Each Bastion Host creates the following parameters in the SSM Parameter Store:
+- `/dlz/networking-entity/bastion/<bastion-name>/security-group/id`: This is the Security Group ID associated with the
+Security Group created for the Bastion Host.
+
 
 ## API References
 - [BastionHost](/reference/api/#bastionhost)

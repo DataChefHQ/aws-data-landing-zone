@@ -1,0 +1,122 @@
+---
+title: Integration - CDK Client
+description: Integration - CDK Client
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone exports SSM Parameters, enabling other repositories or IaC projects owned by Workload teams to
+reference resources created by the DLZ.
+
+The CDK Client is a lightweight, type-safe wrapper that ensures SSM Parameter Keys are constructed correctly based on
+the provided function arguments.
+
+The following example is from one of the Data Engineering team's repositories. It demonstrates how the VPC ID can be
+referenced using the CDK Client. These function arguments corresponds with the resource names specified in the
+configuration passed to the Data Landing Zone.
+
+Given the following DLZ configuration:
+<DualCode>
+  <Fragment slot="ts">
+    ```ts {11} {14-15}
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      ...
+      organization: {
+        ...
+          workloads: {
+            accounts: [{
+                name: 'development',
+                vpcs: [
+                  {
+                    name: 'default',
+                    region: Region.EU_WEST_1,
+                    cidr: '10.1.0.0/16',
+                    ...
+                  },
+                ],
+                ...
+    ````
+  </Fragment>
+  <Fragment slot="python">
+    ```python {13} {15-17}
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        ...
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                ...
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            vpcs: [
+                                {
+                                    "name": "default",
+                                    "region": Region.EU_WEST_1,
+                                    "cidr": "10.1.0.0/16",
+                                    ...
+                               },
+                            ]
+                            ...
+    ````
+  </Fragment>
+</DualCode>
+
+
+To reference the VPC ID of the VPC in the `development` account's `eu-west-1` region, named `default`, from the
+Data Engineering team's repository stack:
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import * as cdk from 'aws-cdk-lib';
+    import { Construct } from 'constructs';
+    import {DataLandingZoneClient} from "aws-data-landing-zone";
+
+    export class DataEngineeringStack extends cdk.Stack {
+      constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+        super(scope, id, props);
+
+        const vpcId = DataLandingZoneClient.vpcId(this, "vpc-id", {
+          accountName: "development",
+          region: this.region, // "eu-west-1"
+          vpcName: "default",
+        });
+
+        ...
+
+      }
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    from aws_cdk import ( Stack )
+    from constructs import Construct
+    from aws_data_landing_zone import DataLandingZoneClient
+
+    class DataEngineeringStack(Stack):
+        def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+            super().__init__(scope, construct_id, **kwargs)
+
+            vpc_id = DataLandingZoneClient.vpc_id(self, "vpc-id", "default", "development", self.region)
+
+            ...
+    ```
+  </Fragment>
+</DualCode>
+
+## List of available functions
+
+- `DataLandingZoneClient.vpcId`: Returns the VPC ID given the account name, region, and VPC name.
+- `DataLandingZoneClient.routeTableId`: Returns the Route Table ID given the account name, region, VPC name and Route Table name.
+- `DataLandingZoneClient.subnetId`: Returns the Route Table ID given the account name, region, VPC name, Route Table name and Subnet name.
+- `DataLandingZoneClient.bastionSecurityGroupId`: Returns the Bastion Security Group ID given the Bastion name.
+
+## API References
+- [DataLandingZoneClient](/reference/api#datalandingzoneclient)
