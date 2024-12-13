@@ -74,11 +74,11 @@ export default defineConfig({
                     {
                         label: 'Security',
                         items: [
-                            // { label: 'Overview',  slug: 'introduction'},
-                            { label: 'Service Control Policies',  slug: 'components/security/service-deny-list'}, // Mention the service deny list
-                            // { label: 'Permission Boundary',  slug: 'introduction'},
-                            // { label: 'SecurityHub',  slug: 'introduction'},
-                            // { label: 'Control Tower Controls',  slug: 'introduction'},
+                            { label: 'SecurityHub',  slug: 'components/security/security-hub'},
+                            { label: 'Control Tower Controls',  slug: 'components/security/control-tower-controls'},
+                            { label: 'Service Deny Lists',  slug: 'components/security/service-deny-list'}, // Change to SCPs when we support them externally and make the deny list a subheading
+                            { label: 'IAM Permission Boundary',  slug: 'components/security/iam-permission-boundary'},
+
                             // { label: 'AWS Config',  slug: 'introduction'},
                             // { label: 'AWS Guard Duty',  slug: 'introduction'},
                             // { label: 'AWS Macie',  slug: 'introduction'},
@@ -109,21 +109,23 @@ export default defineConfig({
                 ],
             },
             {
+                label: 'Integration',
+                items: [
+                    { label: 'Exported SSM Parameters',  slug: 'reference/integration/exported-ssm-parameters'},
+                    { label: 'CDK Client',  slug: 'reference/integration/cdk-client'},
+                ]
+            },
+            {
                 label: 'Reference',
                 items: [
                     // TODO: Complete docs
                     { label: 'API',  slug: 'reference/api'},
                     { label: 'Defaults',  slug: 'reference/defaults'},
-                    {
-                        label: 'Integration',
-                        items: [
-                            { label: 'Exported SSM Parameters',  slug: 'reference/integration/exported-ssm-parameters'},
-                            { label: 'CDK Client',  slug: 'reference/integration/cdk-client'},
-                        ]
-                    },
                     { label: 'Scripts & commands', slug: 'reference/scripts-commands' },
+                    { label: 'Extending and Escape Hatches',  slug: 'reference/extending-and-escape-hatches'},
                     { label: 'Lake Formation TBAC strategy', slug: 'reference/lake-formation-tbac-recommended-strategy' },
                     { label: 'Network Address',  slug: 'reference/network-address'},
+
                   // { label: 'Roadmap',  slug: 'introduction'},
                     // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]
