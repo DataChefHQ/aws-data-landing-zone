@@ -22,6 +22,7 @@ export default defineConfig({
     },
     integrations: [starlight({
         title: 'Data Landing Zone',
+        favicon: 'favicon.png',
         components: {
             Footer: './src/components/Footer.astro',
         },
