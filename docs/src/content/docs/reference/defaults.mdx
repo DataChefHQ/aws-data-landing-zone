@@ -57,7 +57,7 @@ resources created by the DLZ:
 
 A comprehensive list of defaults referenced throughout the documentation:
 
-- [Defaults.denyServiceList](/components/account-management/budgets#defaults): Creates two budgets, one for the organization
+- [Defaults.denyServiceList](/components/security/service-deny-list#defaults): Creates two budgets, one for the organization
 - [Defaults.budgets](/components/account-management/budgets#defaults): Creates two budgets, one for the organization
 and another for the DLZ-managed resources.
 - [Defaults.vpcClassB3Private3Public](/components/networking/vpcs#defaults): Creates a VPC with three public and three
@@ -66,3 +66,5 @@ private subnets in the `eu-west-1` region.
 be denied by default.
 - [Defaults.rootControls](/components/security/control-tower-controls#defaults): Specifies a list of commonly used
 Control Tower Controls based on best practices and data management.
+- [Defaults.iamIdentityCenterPermissionSets](/components/identity/iam-identity-center) function creates two permission
+sets, `AdministratorAccess` and `ReadOnlyAccess` from the respective AWS managed policies.

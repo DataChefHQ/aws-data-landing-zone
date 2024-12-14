@@ -6,22 +6,23 @@ import DualCode from '../../../../components/DualCode.astro';
 
 AWS IAM Identity Center (formerly AWS Single Sign-On) is a service that simplifies access management by enabling
 centralized user sign-in and permissions for AWS accounts and applications. It integrates with external identity
-providers (IdPs) or the internal Identity Center directory to manage users, their authentication and provides a
-unified way to assign and enforce access permissions.
+providers (IdPs) or the internal Identity Center directory to manage users and authentication. This provides a unified
+way to assign and enforce access permissions.
 
-The Data Landing Zone does not create an IAM Identity Center instance but instead integrates with an existing one.
-Once the correct IDs are provided to the DLC construct, it manages users, permissions and roles within the IAM
-Identity Center. See the [SOP - IAM Identity Center Setup](iam-identity-center-setup) for detailed steps on
-setting up IAM Identity Center and providing the necessary IDs to the DLZ config.
+The Data Landing Zone does not create an IAM Identity Center instance but integrates with an existing one. Once the
+required IDs are provided to the DLZ construct, it manages users, permissions, and thier account assignment
+within the IAM Identity Center.
+
+Refer to the [SOP - IAM Identity Center Setup](/sop/iam-identity-center) for detailed instructions on setting up IAM
+Identity Center and providing the necessary IDs to the DLZ configuration.
 
 :::note
-The email address must be used as the username. If an external IdP is used, the email address must match the
-email address in the IdP.
+The email address must be used as the username. If an external IdP is used, the email address must match the one in the IdP.
 :::
 
 Users can be added to access groups, which are assigned permission sets. Permission sets can be created from managed
-policies or inline policies. Access groups accepts wildcards for account names, allowing for easy assignment of
-permissions across multiple accounts.
+policies or inline policies. Access groups support wildcards for account names, making it easy to assign permissions
+across multiple accounts.
 
 The example below assigns the `AdministratorAccess` permission set (created by
 `...Defaults.iamIdentityCenterPermissionSets()`) to the user `you@org.com` in all accounts, as specified by the wildcard

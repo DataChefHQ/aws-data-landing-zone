@@ -17,17 +17,6 @@ The CDK construct is available in both TypeScript and Python. Example GitHub rep
 - [TypeScript Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-typescript)
 - [Python Example GitHub Repo](https://github.com/DataChefHQ/aws-data-landing-zone-example-python)
 
-## Intended Audience
-
-The DLZ handles the responsibilities and routine tasks typically managed by a Cloud Center of Excellence (CCoE) team.
-It's easy enough for Data Engineers to use on their own, but flexible enough to be customized and fine-tuned by
-experienced Cloud Engineers.
-
-It's important to establish the following responsibilities to understand what is in and out of scope for the DLZ:
-
-- **In scope** - Any CCoE responsibilities and tasks, such as account management, security, networking, compliance, etc.
-- **Out of scope** - Application development, data engineering, and data science tasks.
-
 ## Key Features
 
 Notable features of the DLZ include:
@@ -42,6 +31,194 @@ Notable features of the DLZ include:
 - Implements an internal wave- and stage-based deployment strategy for dependency management.
 - Includes helper scripts and Standard Operating Procedures (SOPs) for routine tasks.
 - Accompanied by comprehensive documentation.
+
+## How it works
+
+The DLZ defines all accounts and resources in a single CDK construct that can be used in Typescript or Python CDK
+project.
+
+The DLZ deploys resources into specified AWS accounts. These accounts must be created manually (SOP provided) in the
+workloads OU, and their Account IDs must be provided in the DLZ configuration. Each account is designated
+as either `development` or `production` to enable controlled, staged deployments, including the option for manual
+approvals in production environments.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone, Defaults } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      ...
+      regions: {
+        global: Region.EU_WEST_1,
+        regional: [Region.US_EAST_1],
+      },
+      budgets: [
+        ...Defaults.budgets(100, 20, {
+          slack: slackBudgetNotifications,
+          emails: ['you@org.com'],
+        }),
+      ],
+      denyServiceList: [
+        ...Defaults.denyServiceList(),
+        'ecs:*',
+      ],
+      organization: {
+        organizationId: 'o-0f5h921gk9',
+        root: { accounts: { management: { accountId: '123456789012', }, }, },
+        ous: {
+          workloads: {
+            ouId: 'ou-h2l0-gjr36ikn',
+            accounts: [{
+                name: 'development',
+                accountId: '123456789012',
+                type: DlzAccountType.DEVELOP,
+                vpcs: [
+                  Defaults.vpcClassB3Private3Public(0, Region.EU_WEST_1), // CIDR 10.0.0./19
+                  Defaults.vpcClassB3Private3Public(1, Region.US_EAST_1), // CIDR 10.1.0./19
+                ]
+              },{
+                name: 'production',
+                accountId: '123456789012',
+                type: DlzAccountType.PRODUCTION,
+                ...
+              },
+
+              ...AS MANY ACCOUNTS AS DESIRED...
+              ]
+          },
+       },
+       ...
+      },
+      network: {
+        nats: [
+          {
+            name: "development-eu-west-1-internet-access",
+            location: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'public', 'public-1'),
+            allowAccessFrom: [
+              new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private')
+            ],
+            type: {
+              gateway: {
+                eip: ... //Optional
+              }
+            }
+          },
+        ],
+        bastionHosts: [
+          {
+            name: 'default',
+            location: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private', 'private-1'),
+            instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
+          }
+        ]
+      }
+    });
+    ```
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        ...
+        regions=dlz.DlzRegions(
+            global_=dlz.Region.EU_WEST_1,
+            regional=[dlz.Region.US_EAST_1],
+        ),
+        budgets=[
+            *dlz.Defaults.budgets(
+                100,
+                20,
+                slack=slack_budget_notifications,
+                emails=["you@org.com"],
+            ),
+        ],
+        deny_service_list=[
+            *dlz.Defaults.deny_service_list(),
+            "ecs:*"
+        ],
+        organization=dlz.DLzOrganization(
+            organization_id='o-0f5h921gk9',
+            root=dlz.RootOptions(
+                accounts=dlz.OrgRootAccounts(
+                    management=dlz.DLzManagementAccount(account_id='123456789012'),
+                ),
+            ),
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    ou_id='ou-h2l0-gjr36ikn',
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            account_id='123456789012',
+                            type=dlz.DlzAccountType.DEVELOP,
+                            vpcs: [
+                                dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.EU_WEST_1), # CIDR 10.0.0./19
+                                dlz.Defaults.vpc_class_b3_private3_public(1, dlz.Region.US_EAST_1), # CIDR 10.1.0./19
+                            ]
+                        ),
+                        dlz.DLzAccount(
+                            name='production',
+                            account_id='123456789012',
+                            type=dlz.DlzAccountType.PRODUCTION,
+                        ),
+                    ],
+                ),
+            )
+        ),
+        network={
+            "nats": [
+                {
+                    "name": "development-eu-west-1-internet-access",
+                    "location": NetworkAddress(
+                      "development",  str(Region.EU_WEST_1), "default", "public", "public-1",
+                    ),
+                    "allow_access_from": [
+                        NetworkAddress(
+                            "development", str(Region.EU_WEST_1), "default", "private"
+                        ),
+                    ],
+                    "type": {
+                        "gateway": {
+                        },
+                    },
+                },
+            ],
+            "bastion_hosts": [
+                {
+                    "name": "default",
+                    "location": NetworkAddress(
+                        "development",  str(Region.EU_WEST_1), "default", "public", "public-1",
+                    ),
+                    "instance_type": ec2.InstanceType.of(
+                        ec2.InstanceClass.T3, ec2.InstanceSize.MICRO
+                    ),
+                }
+            ]
+        }
+    )
+````
+
+  </Fragment>
+</DualCode>
+
+## Intended Audience
+
+The DLZ handles the responsibilities and routine tasks typically managed by a Cloud Center of Excellence (CCoE) team.
+It's easy enough for Data Engineers to use on their own, but flexible enough to be customized and fine-tuned by
+experienced Cloud Engineers.
+
+It's important to establish the following responsibilities to understand what is in and out of scope for the DLZ:
+
+- **In scope** - Any CCoE responsibilities and tasks, such as account management, security, networking, compliance, etc.
+- **Out of scope** - Application development, data engineering, and data science tasks.
+
 
 ## Core Principles
 
@@ -77,99 +254,7 @@ The DLZ adheres to the following principles:
   - Create **Tags** and specify their permissions for use within the same account and when sharing to other accounts.
   - Optionally, set **Tag Permissions** on Tags. This is usually out of scope for DLZ, but can be configured.
 
-## How it works
-
-The DLZ defines all accounts and resources in a single CDK construct that can be used in Typescript or Python CDK
-project.
-
-The DLZ deploys resources into specified AWS accounts. These accounts must be created manually (SOP provided) in the
-workloads OU, and their Account IDs must be provided in the DLZ configuration. Each account is designated
-as either `development` or `production` to enable controlled, staged deployments, including the option for manual
-approvals in production environments.
-
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    import {App} from 'aws-cdk-lib';
-    import { DataLandingZone } from 'aws-data-landing-zone';
-
-    const app = new App();
-    const dlz = new DataLandingZone(app, {
-      ...
-      regions: {
-        global: Region.EU_WEST_1,
-        regional: [Region.US_EAST_1],
-      },
-      organization: {
-        organizationId: 'o-0f5h921gk9',
-        root: { accounts: { management: { accountId: '123456789012', }, }, },
-        ous: {
-          workloads: {
-            ouId: 'ou-h2l0-gjr36ikn',
-            accounts: [{
-                name: 'development',
-                accountId: '123456789012',
-                type: DlzAccountType.DEVELOP,
-                ...
-              },{
-                name: 'production',
-                accountId: '123456789012',
-                type: DlzAccountType.PRODUCTION,
-                ...
-              },
-
-              ...AS MANY ACCOUNTS AS DESIRED...
-              ]
-          },
-       },
-       ...
-     }
-    });
-    ```
-
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    import aws_cdk as cdk
-    import aws_data_landing_zone as dlz
-
-    app = cdk.App()
-    dlz.DataLandingZone(app,
-        local_profile="ct-sandbox-exported",
-        regions=dlz.DlzRegions(
-            global_=dlz.Region.EU_WEST_1,
-            regional=[dlz.Region.US_EAST_1],
-        ),
-        organization=dlz.DLzOrganization(
-            organization_id='o-0f5h921gk9',
-            root=dlz.RootOptions(
-                accounts=dlz.OrgRootAccounts(
-                    management=dlz.DLzManagementAccount(account_id='123456789012'),
-                ),
-            ),
-            ous=dlz.OrgOus(
-                workloads=dlz.OrgOuWorkloads(
-                    ou_id='ou-h2l0-gjr36ikn',
-                    accounts=[
-                        dlz.DLzAccount(
-                            name='development',
-                            account_id='123456789012',
-                            type=dlz.DlzAccountType.DEVELOP,
-                        ),
-                        dlz.DLzAccount(
-                            name='production',
-                            account_id='123456789012',
-                            type=dlz.DlzAccountType.PRODUCTION,
-                        ),
-                    ],
-                ),
-            )
-        ),
-    )
-````
-
-  </Fragment>
-</DualCode>
+## Internal Structure
 
 The construct processes the provided configuration to create logical deployment layers for resources. Each layer
 consists of a Global Wave and optionally one or more Regional Waves. This structure ensures that all `global` stacks

@@ -113,10 +113,10 @@ export default defineConfig({
             {
                 label: 'SOPs',
                 items: [
-                    { label: 'Initial Control Tower Setup',  slug: 'sops/initial-control-tower-setup'},
-                    { label: 'Add Account',  slug: 'sops/add-account'},
-                    { label: 'Account Setup',  slug: 'sops/account-setup'},
-                    { label: 'IAM Identity Center',  slug: 'sops/iam-identity-center'},
+                    { label: 'Initial Control Tower Setup',  slug: 'sop/initial-control-tower-setup'},
+                    { label: 'Add Account',  slug: 'sop/add-account'},
+                    { label: 'Account Setup',  slug: 'sop/account-setup'},
+                    { label: 'IAM Identity Center',  slug: 'sop/iam-identity-center'},
                 ]
             },
             {

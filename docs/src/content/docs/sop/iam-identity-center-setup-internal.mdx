@@ -1,0 +1,23 @@
+---
+title: IAM Identity Center Setup - Internal User Store
+description: IAM Identity Center Setup - Internal User Store
+---
+
+*AWS IAM Identity Center* (formerly AWS Single Sign-On) enables centralized access management for multiple AWS accounts
+and applications. This guide provides a detailed step-by-step process to set up IAM Identity Center using the
+Identity Center directory to manage users within your AWS environment.
+
+For additional details, refer to the official AWS documentation on
+[IAM Identity Center Identity Source](https://docs.aws.amazon.com/singlesignon/latest/userguide/tutorials.html).
+
+## Enable IAM Identity Center
+1. Log in to the **Management** account, which serves as the root account for the organization and the AWS Control Tower
+account.
+2. Ensure you are in the home/global region specified in your Control Tower setup.
+3. Navigate to the **IAM Identity Center** service.
+4. If accessing IAM Identity Center for the first time, you will be prompted to enable it.
+5. Click **Enable IAM Identity Center**, choose "Enable with AWS Organizations," and click **Continue**.
+![Enable IAM Identity Center](imgs/aws_sso_enable_iam_identity_center.png)
+6. Select **Identity Center directory** as your identity source.
+![Select Identity Source](imgs/aws_sso_internal_select_identity_source.png)
+7. Click **Next** and complete any additional steps as required.
