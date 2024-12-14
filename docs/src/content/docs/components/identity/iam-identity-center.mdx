@@ -1,0 +1,147 @@
+---
+title: IAM Identity Center
+description: IAM Identity Center
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+AWS IAM Identity Center (formerly AWS Single Sign-On) is a service that simplifies access management by enabling
+centralized user sign-in and permissions for AWS accounts and applications. It integrates with external identity
+providers (IdPs) or the internal Identity Center directory to manage users, their authentication and provides a
+unified way to assign and enforce access permissions.
+
+The Data Landing Zone does not create an IAM Identity Center instance but instead integrates with an existing one.
+Once the correct IDs are provided to the DLC construct, it manages users, permissions and roles within the IAM
+Identity Center. See the [SOP - IAM Identity Center Setup](iam-identity-center-setup) for detailed steps on
+setting up IAM Identity Center and providing the necessary IDs to the DLZ config.
+
+:::note
+The email address must be used as the username. If an external IdP is used, the email address must match the
+email address in the IdP.
+:::
+
+Users can be added to access groups, which are assigned permission sets. Permission sets can be created from managed
+policies or inline policies. Access groups accepts wildcards for account names, allowing for easy assignment of
+permissions across multiple accounts.
+
+The example below assigns the `AdministratorAccess` permission set (created by
+`...Defaults.iamIdentityCenterPermissionSets()`) to the user `you@org.com` in all accounts, as specified by the wildcard
+`*`.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      iamIdentityCenter: {
+      arn: 'IdentityCenterARN',
+      id: 'IdentityCenterID',
+      storeId: 'StoreID',
+      users: [
+        {
+          userName: 'you@org.com',
+          name: 'Name',
+          surname: 'LastName',
+        },
+      ],
+      permissionSets: [
+        // Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets
+        ...Defaults.iamIdentityCenterPermissionSets(),
+        // Create custom permission sets from managed policies
+        {
+          name: 'power-user-permission-set',
+          managedPolicyArns: ['arn:aws:iam::aws:policy/PowerUserAccess']
+        },
+        // Create a custom permission sets from inline policies
+        {
+          name: 's3-only-access',
+          inlinePolicyStatement: new iam.PolicyStatement({
+            actions: ['s3:*'],
+            resources: ['*'],
+          })
+        }
+      ],
+      accessGroups: [
+        {
+          name: 'admin-access-group',
+          accountNames: ['*'], // All accounts
+          // accountNames: ['project-1-*'], // All accounts starting with `project-1-`
+          // accountNames: ['root', 'development', 'production'], // Specific accounts
+          userNames: [
+            'you@org.com',
+          ],
+          permissionSetName: 'AdministratorAccess',
+        },
+      ],
+    },
+    });
+    ````
+
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        ...
+        organization=dlz.DLzOrganization(
+            iam_identity_center={
+            "arn": "IdentityCenterARN",
+            "id": "IdentityCenterID",
+            "store_id": "StoreID",
+            "users": [
+                {
+                    "user_name": "you@org.com",
+                    "name": "Name",
+                    "surname": "LastName",
+                },
+            ],
+            "permission_sets": [
+                # Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets
+                *Defaults.iam_identity_center_permission_sets(),
+                # Create custom permission sets from managed policies
+                {
+                  name: 'power-user-permission-set',
+                  managed_policy_arns: ['arn:aws:iam::aws:policy/PowerUserAccess']
+                },
+                # Create a custom permission sets from inline policies
+                {
+                  name: 's3-only-access',
+                  inline_policy_statement: {
+                    actions: ['s3:*'],
+                    resources: ['*'],
+                  }
+                }
+            ],
+            "access_groups": [
+                {
+                    "name": "admin-access-group",
+                    "account_names": ["*"], # All accounts
+                    # accountNames: ['project-1-*'], # All accounts starting with `project-1-`
+                    # accountNames: ['root', 'development', 'production'], # Specific accounts
+                    "user_names": ["you@org.com"],
+                    "permission_set_name": "AdministratorAccess",
+                },
+            ],
+        },
+        ),
+    )
+  ````
+  </Fragment>
+</DualCode>
+
+
+
+
+## Defaults
+
+The `Defaults.iamIdentityCenterPermissionSets` function creates two permission sets:
+- `AdministratorAccess`: Using the AWS managed policy `AdministratorAccess`
+- `ReadOnlyAccess`: Using the AWS managed policy `ReadOnlyAccess`
+
+## API References
+- [IamIdentityCenterProps](/reference/api/#aws-data-landing-zone.IamIdentityCenterProps)

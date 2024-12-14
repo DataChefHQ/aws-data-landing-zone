@@ -17,7 +17,7 @@
     - [Key Settings for IAM Identity Center](#key-settings-for-iam-identity-center)
 
 ---
-
+![img.png](../../../docs/src/content/docs/sops/imgs/aws_sso_settings_configure.png)
 ## Prerequisites
 
 Before you begin setting up AWS IAM Identity Center, ensure you have the following:

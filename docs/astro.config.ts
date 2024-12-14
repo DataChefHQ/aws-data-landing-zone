@@ -57,9 +57,6 @@ export default defineConfig({
                             { label: 'Tagging',  slug: 'components/account-management/tagging'},
                             { label: 'Budgets',  slug: 'components/account-management/budgets'},
                             // { label: 'Default Notifications',  slug: 'components/account-management/budgets'}, //TODO Later
-                            { label: 'SOP - Initial Control Tower Setup',  slug: 'components/account-management/sop-initial-control-tower-setup'},
-                            { label: 'SOP - Add Account',  slug: 'components/account-management/sop-add-account'},
-                            { label: 'SOP - Account Setup',  slug: 'components/account-management/sop-account-setup'},
                         ]
                     },
                     {
@@ -78,19 +75,17 @@ export default defineConfig({
                             { label: 'Control Tower Controls',  slug: 'components/security/control-tower-controls'},
                             { label: 'Service Deny Lists',  slug: 'components/security/service-deny-list'}, // Change to SCPs when we support them externally and make the deny list a subheading
                             { label: 'IAM Permission Boundary',  slug: 'components/security/iam-permission-boundary'},
-
                             // { label: 'AWS Config',  slug: 'introduction'},
                             // { label: 'AWS Guard Duty',  slug: 'introduction'},
                             // { label: 'AWS Macie',  slug: 'introduction'},
                         ]
                     },
-                    // {
-                    //     label: 'Identity',
-                    //     items: [
-                    //         { label: 'Overview',  slug: 'introduction'},
-                    //         { label: 'Iam Identity Center',  slug: 'introduction'},
-                    //     ]
-                    // },
+                    {
+                        label: 'Identity',
+                        items: [
+                            { label: 'Iam Identity Center',  slug: 'components/identity/iam-identity-center'},
+                        ]
+                    },
                     {
                         label: 'Data Services',
                         items: [
@@ -116,6 +111,15 @@ export default defineConfig({
                 ]
             },
             {
+                label: 'SOPs',
+                items: [
+                    { label: 'Initial Control Tower Setup',  slug: 'sops/initial-control-tower-setup'},
+                    { label: 'Add Account',  slug: 'sops/add-account'},
+                    { label: 'Account Setup',  slug: 'sops/account-setup'},
+                    { label: 'IAM Identity Center',  slug: 'sops/iam-identity-center'},
+                ]
+            },
+            {
                 label: 'Reference',
                 items: [
                     // TODO: Complete docs
@@ -125,9 +129,7 @@ export default defineConfig({
                     { label: 'Extending and Escape Hatches',  slug: 'reference/extending-and-escape-hatches'},
                     { label: 'Lake Formation TBAC strategy', slug: 'reference/lake-formation-tbac-recommended-strategy' },
                     { label: 'Network Address',  slug: 'reference/network-address'},
-
                   // { label: 'Roadmap',  slug: 'introduction'},
-                    // { label: 'Escape Hatches',  slug: 'introduction'}, // How to extend and modify/add components
                 ]
             },
 

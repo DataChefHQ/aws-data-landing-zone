@@ -69,7 +69,7 @@ IAM Identity Center allows you to choose where your user identities are managed.
 ![select external identity so](external_identity_select.png)
 
 ---
-
+![img.png](../../../docs/src/content/docs/sops/imgs/aws_sso_external_idp_config.png)
 ## Step 5: Configure External Identity Provider
 
 Configure a SAML application in your IdP. If for example you are using Google Workspace, you can follow the steps in [this guide](https://support.google.com/a/answer/6087519?hl=en#zippy=%2Cstep-add-the-custom-saml-app) to set up a SAML app.
