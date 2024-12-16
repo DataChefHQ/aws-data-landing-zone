@@ -3,3 +3,32 @@
 th, td {
     min-width: 100px;
 }
+
+/*!* Enable Debug Mode *!*/
+/**,*/
+/**::before,*/
+/**::after {*/
+/*    box-sizing: border-box;*/
+/*    outline: 2px solid lime;*/
+/*}*/
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+    gap: 20px; /* Space between columns */
+}
+
+.column {
+    flex: 1; /* Distribute space equally between columns */
+    min-width: 300px; /* Ensures columns don't shrink too small */
+    padding: 20px;
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* Optional shadow for aesthetics *!*/
+    margin-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stacks columns vertically on small screens */
+    }
+}
