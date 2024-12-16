@@ -46,7 +46,7 @@ two non-overlapping VPCs in two regions in each account.
 
 ```ts
 import {App} from 'aws-cdk-lib';
-import { DataLandingZone } from 'aws-data-landing-zone';
+import { DataLandingZone, Defaults } from 'aws-data-landing-zone';
 
 const app = new App();
 const dlz = new DataLandingZone(app, {
@@ -55,6 +55,16 @@ const dlz = new DataLandingZone(app, {
     global: Region.EU_WEST_1,
     regional: [Region.US_EAST_1],
   },
+  budgets: [
+    ...Defaults.budgets(100, 20, {
+      slack: slackBudgetNotifications,
+      emails: ['you@org.com'],
+    }),
+  ],
+  denyServiceList: [
+    ...Defaults.denyServiceList(),
+    'ecs:*',
+  ],
   organization: {
     organizationId: 'o-0f5h921gk9',
     root: { accounts: { management: { accountId: '123456789012', }, }, },
@@ -66,26 +76,45 @@ const dlz = new DataLandingZone(app, {
             accountId: '123456789012',
             type: DlzAccountType.DEVELOP,
             vpcs: [
-              Defaults.vpcClassB3Private3Public(0, Region.US_EAST_1),
-              Defaults.vpcClassB3Private3Public(1, Region.EU_WEST_1),
-            ],
+              Defaults.vpcClassB3Private3Public(0, Region.EU_WEST_1), // CIDR 10.0.0./19
+              Defaults.vpcClassB3Private3Public(1, Region.US_EAST_1), // CIDR 10.1.0./19
+            ]
           },{
             name: 'production',
             accountId: '123456789012',
             type: DlzAccountType.PRODUCTION,
-            vpcs: [
-              Defaults.vpcClassB3Private3Public(2, Region.US_EAST_1),
-              Defaults.vpcClassB3Private3Public(3, Region.EU_WEST_1),
-            ],
+            ...
           },
 
           ...AS MANY ACCOUNTS AS DESIRED...
-                
           ]
       },
    },
    ...
- }
+  },
+  network: {
+    nats: [
+      {
+        name: "development-eu-west-1-internet-access",
+        location: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'public', 'public-1'),
+        allowAccessFrom: [
+          new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private')
+        ],
+        type: {
+          gateway: {
+            eip: ... //Optional
+          }
+        }
+      },
+    ],
+    bastionHosts: [
+      {
+        name: 'default',
+        location: new NetworkAddress('development', Region.EU_WEST_1, 'default', 'private', 'private-1'),
+        instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
+      }
+    ]
+  }
 });
 ```
 
@@ -107,17 +136,28 @@ The example below shows a simple DLZ setup with two accounts, one for developmen
 two non-overlapping VPCs in two regions in each account.
 
 ```python
-#!/usr/bin/env python3
 import aws_cdk as cdk
 import aws_data_landing_zone as dlz
 
 app = cdk.App()
 dlz.DataLandingZone(app,
-    local_profile="ct-sandbox-exported",
+    ...
     regions=dlz.DlzRegions(
         global_=dlz.Region.EU_WEST_1,
         regional=[dlz.Region.US_EAST_1],
     ),
+    budgets=[
+        *dlz.Defaults.budgets(
+            100,
+            20,
+            slack=slack_budget_notifications,
+            emails=["you@org.com"],
+        ),
+    ],
+    deny_service_list=[
+        *dlz.Defaults.deny_service_list(),
+        "ecs:*"
+    ],
     organization=dlz.DLzOrganization(
         organization_id='o-0f5h921gk9',
         root=dlz.RootOptions(
@@ -133,24 +173,50 @@ dlz.DataLandingZone(app,
                         name='development',
                         account_id='123456789012',
                         type=dlz.DlzAccountType.DEVELOP,
-                        vpcs=[
-                            dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.US_EAST_1),
-                            dlz.Defaults.vpc_class_b3_private3_public(1, dlz.Region.EU_WEST_1),
+                        vpcs: [
+                            dlz.Defaults.vpc_class_b3_private3_public(0, dlz.Region.EU_WEST_1), # CIDR 10.0.0./19
+                            dlz.Defaults.vpc_class_b3_private3_public(1, dlz.Region.US_EAST_1), # CIDR 10.1.0./19
                         ]
                     ),
                     dlz.DLzAccount(
                         name='production',
                         account_id='123456789012',
                         type=dlz.DlzAccountType.PRODUCTION,
-                        vpcs=[
-                            dlz.Defaults.vpc_class_b3_private3_public(2, dlz.Region.US_EAST_1),
-                            dlz.Defaults.vpc_class_b3_private3_public(3, dlz.Region.EU_WEST_1),
-                        ]
                     ),
                 ],
             ),
         )
     ),
+    network={
+        "nats": [
+            {
+                "name": "development-eu-west-1-internet-access",
+                "location": NetworkAddress(
+                  "development",  str(Region.EU_WEST_1), "default", "public", "public-1",
+                ),
+                "allow_access_from": [
+                    NetworkAddress(
+                        "development", str(Region.EU_WEST_1), "default", "private"
+                    ),
+                ],
+                "type": {
+                    "gateway": {
+                    },
+                },
+            },
+        ],
+        "bastion_hosts": [
+            {
+                "name": "default",
+                "location": NetworkAddress(
+                    "development",  str(Region.EU_WEST_1), "default", "public", "public-1",
+                ),
+                "instance_type": ec2.InstanceType.of(
+                    ec2.InstanceClass.T3, ec2.InstanceSize.MICRO
+                ),
+            }
+        ]
+    }
 )
 ```
 
