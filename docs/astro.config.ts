@@ -15,6 +15,7 @@ if (process.env.CF_PAGES_BRANCH) {
     site = 'http://localhost:4321';
 }
 
+const ogUrl = `${site}/dlz-dark-og.png`;
 export default defineConfig({
     site: site,
     devToolbar: {
@@ -29,6 +30,20 @@ export default defineConfig({
         social: {
             github: 'https://github.com/DataChefHQ/aws-data-landing-zone',
         },
+        head: [
+            {
+                tag: 'meta',
+                attrs: { property: 'og:image', content: ogUrl },
+            },
+            {
+                tag: 'meta',
+                attrs: { property: 'og:image:alt', content: "Data Landing Zone" },
+            },
+            {
+                tag: 'meta',
+                attrs: { property: 'og:image:type', content: "image/png" },
+            },
+        ],
         sidebar: [
             {
                 label: 'Introduction', slug: 'introduction'
