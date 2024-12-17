@@ -16,6 +16,39 @@ if (process.env.CF_PAGES_BRANCH) {
 }
 
 const ogUrl = `${site}/dlz-dark-og.png`;
+const trackAnalytics = process.env.CF_PAGES_BRANCH === 'main';
+
+interface HeadConfig {
+    tag: 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template';
+    attrs: Record<string, string | boolean | undefined>;
+    content?: string;
+}
+let head: HeadConfig[] = [
+    {
+        tag: 'meta',
+        attrs: { property: 'og:image', content: ogUrl },
+    },
+    {
+        tag: 'meta',
+        attrs: { property: 'og:image:alt', content: "Data Landing Zone" },
+    },
+    {
+        tag: 'meta',
+        attrs: { property: 'og:image:type', content: "image/png" },
+    },
+];
+
+if(trackAnalytics) {
+    head.push({
+        tag: 'script',
+        attrs: {
+            src: 'https://cdn.usefathom.com/script.js',
+            'data-site': 'CTOOTLUX',
+            defer: true,
+        },
+    });
+}
+
 export default defineConfig({
     site: site,
     devToolbar: {
@@ -30,20 +63,7 @@ export default defineConfig({
         social: {
             github: 'https://github.com/DataChefHQ/aws-data-landing-zone',
         },
-        head: [
-            {
-                tag: 'meta',
-                attrs: { property: 'og:image', content: ogUrl },
-            },
-            {
-                tag: 'meta',
-                attrs: { property: 'og:image:alt', content: "Data Landing Zone" },
-            },
-            {
-                tag: 'meta',
-                attrs: { property: 'og:image:type', content: "image/png" },
-            },
-        ],
+        head: head,
         sidebar: [
             {
                 label: 'Introduction', slug: 'introduction'
