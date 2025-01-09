@@ -3615,7 +3615,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "3a4f4905323f3487edc976cc90e3020118765f1ee29dd2a71567d2581c42b51f.zip",
+          "S3Key": "a835a6772f0f0b87a7d354f07cf594fafaba105e8803b6749e206726ccdb70b2.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
