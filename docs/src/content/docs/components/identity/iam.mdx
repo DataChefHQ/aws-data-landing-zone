@@ -134,7 +134,7 @@ policy and the users to ensure they are created first.
                                     minimum_password_length=15,
                                 ),
                                 policies=[
-                                    dlz.DlzIamUser(
+                                    dlz.DlzIamPolicy(
                                         policy_name='TestPolicy1',
                                         statements=[
                                             iam.PolicyStatement(
