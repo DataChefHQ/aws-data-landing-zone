@@ -18,7 +18,7 @@ export interface IamAccountAliasProps {
 export class IamAccountAlias extends Construct implements IReportResource {
 
   public static fetchCodeDirectory(): string {
-    return path.join(__dirname, 'lambda', 'account-alias');
+    return path.join(__dirname, 'lambda', 'iam-account-alias');
   }
 
   readonly reportResource: ReportResource;
