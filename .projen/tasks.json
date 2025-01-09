@@ -48,6 +48,9 @@
       "steps": [
         {
           "spawn": "bundle:constructs/iam-identity-center/identity-store-user-lambda"
+        },
+        {
+          "spawn": "bundle:constructs/iam/lambda/iam-account-alias"
         }
       ]
     },
@@ -56,7 +59,7 @@
       "description": "Create a JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap"
+          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap"
         }
       ]
     },
@@ -65,7 +68,25 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node20\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap --watch"
+          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/iam/lambda/iam-account-alias": {
+      "name": "bundle:constructs/iam/lambda/iam-account-alias",
+      "description": "Create a JavaScript bundle from ./src/constructs/iam/lambda/iam-account-alias/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/iam/lambda/iam-account-alias:watch": {
+      "name": "bundle:constructs/iam/lambda/iam-account-alias:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/iam/lambda/iam-account-alias/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
@@ -328,13 +349,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-identitystore,@aws-sdk/client-sso-admin,@aws-sdk/client-sts,@aws-sdk/credential-providers,table,cdk-express-pipeline"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@aws-sdk/client-cost-explorer,@aws-sdk/client-iam,@aws-sdk/client-identitystore,@aws-sdk/client-sso-admin,@aws-sdk/client-sts,@aws-sdk/credential-providers,table,cdk-express-pipeline"
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cost-explorer @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers execa table aws-cdk-lib cdk-express-pipeline constructs"
+          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cost-explorer @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers execa table aws-cdk-lib cdk-express-pipeline constructs"
         },
         {
           "exec": "npx projen"

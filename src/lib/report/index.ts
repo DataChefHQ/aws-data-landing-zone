@@ -8,14 +8,21 @@ export enum ReportType {
   CONFIG_RULE = 'Config Rule',
   SECURITY_HUB_STANDARD = 'SecurityHub Standard',
   TAG_POLICY = 'Tag Policy',
-  SERVICE_CONTROL_POLICY = 'Service Control Policy'
+  SERVICE_CONTROL_POLICY = 'Service Control Policy',
+  IAM_ACCOUNT_ALIAS = 'IAM Account Alias',
+  IAM_PASSWORD_POLICY = 'IAM Password Policy',
+  IAM_PERMISSION_BOUNDARY = 'IAM Permission Boundary',
+  IAM_POLICY = 'IAM Policy',
+  IAM_ROLE = 'IAM Role',
+  IAM_USER = 'IAM User',
+  IAM_USER_GROUP = 'IAM User Group',
 }
 
 export interface ReportResource {
   readonly type: ReportType;
   readonly name: string;
   readonly description: string;
-  readonly externalLink: string;
+  readonly externalLink?: string;
 }
 
 /**
@@ -207,11 +214,11 @@ export class Report {
 
           const reportItem = groupedByAccountItemsByTypeByName[name][0];
           grouped[accountName][type].push({
-            appliedFrom: reportItem.appliedFrom,
             name: reportItem.name,
             description: reportItem.description,
-            externalLink: reportItem.externalLink,
+            externalLink: reportItem.externalLink || '',
             regions: groupedByAccountItemsByTypeByName[name].map(item => item.region).join(', '),
+            appliedFrom: reportItem.appliedFrom,
           });
         }
       }

@@ -111,6 +111,10 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/client-iam",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-identitystore",
       "type": "bundled"
     },

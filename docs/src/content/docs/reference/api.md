@@ -2804,6 +2804,129 @@ public readonly accountName: string;
 ---
 
 
+### IamAccountAlias <a name="IamAccountAlias" id="aws-data-landing-zone.IamAccountAlias"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Set the IAM Account Alias.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.IamAccountAlias.Initializer"></a>
+
+```typescript
+import { IamAccountAlias } from 'aws-data-landing-zone'
+
+new IamAccountAlias(scope: Construct, id: string, props: IamAccountAliasProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.IamAccountAliasProps">IamAccountAliasProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.IamAccountAlias.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.IamAccountAlias.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.IamAccountAlias.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.IamAccountAliasProps">IamAccountAliasProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.IamAccountAlias.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.IamAccountAlias.isConstruct"></a>
+
+```typescript
+import { IamAccountAlias } from 'aws-data-landing-zone'
+
+IamAccountAlias.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.IamAccountAlias.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.IamAccountAlias.fetchCodeDirectory"></a>
+
+```typescript
+import { IamAccountAlias } from 'aws-data-landing-zone'
+
+IamAccountAlias.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.IamAccountAlias.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.IamAccountAlias.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
 ### IamIdentityCenterGroup <a name="IamIdentityCenterGroup" id="aws-data-landing-zone.IamIdentityCenterGroup"></a>
 
 A group of users in the IAM Identity Center.
@@ -2901,6 +3024,120 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+
+### IamPasswordPolicy <a name="IamPasswordPolicy" id="aws-data-landing-zone.IamPasswordPolicy"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Set the IAM Password Policy.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.IamPasswordPolicy.Initializer"></a>
+
+```typescript
+import { IamPasswordPolicy } from 'aws-data-landing-zone'
+
+new IamPasswordPolicy(scope: Construct, id: string, props: IamPasswordPolicyProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps">IamPasswordPolicyProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.IamPasswordPolicy.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.IamPasswordPolicy.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.IamPasswordPolicy.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.IamPasswordPolicyProps">IamPasswordPolicyProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.IamPasswordPolicy.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.IamPasswordPolicy.isConstruct"></a>
+
+```typescript
+import { IamPasswordPolicy } from 'aws-data-landing-zone'
+
+IamPasswordPolicy.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.IamPasswordPolicy.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.IamPasswordPolicy.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.IamPasswordPolicy.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
 
 ---
 
@@ -9677,8 +9914,6 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.defaultNotifications">defaultNotifications</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole">ssmAssumeCrossAccountRole</a></code> | *No description.* |
 
 ---
 
@@ -10080,18 +10315,6 @@ Create unique ResourceNames.
 - *Type:* string
 
 ---
-
-##### `defaultNotifications` <a name="defaultNotifications" id="aws-data-landing-zone.WorkloadGlobalStack.defaultNotifications"></a>
-
-```typescript
-public defaultNotifications(): void
-```
-
-##### `ssmAssumeCrossAccountRole` <a name="ssmAssumeCrossAccountRole" id="aws-data-landing-zone.WorkloadGlobalStack.ssmAssumeCrossAccountRole"></a>
-
-```typescript
-public ssmAssumeCrossAccountRole(): void
-```
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -15069,6 +15292,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#aws-data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications settings for the account. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.iam">iam</a></code> | <code><a href="#aws-data-landing-zone.DLzIamProps">DLzIamProps</a></code> | IAM configuration for the account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.lakeFormation">lakeFormation</a></code> | <code><a href="#aws-data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>[]</code> | LakeFormation settings and tags. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#aws-data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
@@ -15116,6 +15340,18 @@ Default notifications settings for the account.
 
 Defines settings for email notifications or the slack channel details.
 This will override the organization level defaultNotification.
+
+---
+
+##### `iam`<sup>Optional</sup> <a name="iam" id="aws-data-landing-zone.DLzAccount.property.iam"></a>
+
+```typescript
+public readonly iam: DLzIamProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DLzIamProps">DLzIamProps</a>
+
+IAM configuration for the account.
 
 ---
 
@@ -15362,6 +15598,500 @@ public readonly tags: CfnTag[];
 ```
 
 - *Type:* aws-cdk-lib.CfnTag[]
+
+---
+
+### DlzIamPolicy <a name="DlzIamPolicy" id="aws-data-landing-zone.DlzIamPolicy"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzIamPolicy.Initializer"></a>
+
+```typescript
+import { DlzIamPolicy } from 'aws-data-landing-zone'
+
+const dlzIamPolicy: DlzIamPolicy = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzIamPolicy.property.policyName">policyName</a></code> | <code>string</code> | The name of the policy. |
+| <code><a href="#aws-data-landing-zone.DlzIamPolicy.property.document">document</a></code> | <code>aws-cdk-lib.aws_iam.PolicyDocument</code> | Initial PolicyDocument to use for this Policy. |
+| <code><a href="#aws-data-landing-zone.DlzIamPolicy.property.statements">statements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Initial set of permissions to add to this policy document. |
+
+---
+
+##### `policyName`<sup>Required</sup> <a name="policyName" id="aws-data-landing-zone.DlzIamPolicy.property.policyName"></a>
+
+```typescript
+public readonly policyName: string;
+```
+
+- *Type:* string
+
+The name of the policy.
+
+Differs from `Policy`, now required.
+
+---
+
+##### `document`<sup>Optional</sup> <a name="document" id="aws-data-landing-zone.DlzIamPolicy.property.document"></a>
+
+```typescript
+public readonly document: PolicyDocument;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyDocument
+- *Default:* An empty policy.
+
+Initial PolicyDocument to use for this Policy.
+
+If omited, any
+`PolicyStatement` provided in the `statements` property will be applied
+against the empty default `PolicyDocument`.
+
+---
+
+##### `statements`<sup>Optional</sup> <a name="statements" id="aws-data-landing-zone.DlzIamPolicy.property.statements"></a>
+
+```typescript
+public readonly statements: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Default:* No statements.
+
+Initial set of permissions to add to this policy document.
+
+You can also use `addStatements(...statement)` to add permissions later.
+
+---
+
+### DLzIamProps <a name="DLzIamProps" id="aws-data-landing-zone.DLzIamProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DLzIamProps.Initializer"></a>
+
+```typescript
+import { DLzIamProps } from 'aws-data-landing-zone'
+
+const dLzIamProps: DLzIamProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DLzIamProps.property.accountAlias">accountAlias</a></code> | <code>string</code> | The account alias to set for this account. |
+| <code><a href="#aws-data-landing-zone.DLzIamProps.property.passwordPolicy">passwordPolicy</a></code> | <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps">IamPasswordPolicyProps</a></code> | The password policy for this account If not set the default AWS IAM policy is applied, use this to customize the password policy. |
+| <code><a href="#aws-data-landing-zone.DLzIamProps.property.policies">policies</a></code> | <code><a href="#aws-data-landing-zone.DlzIamPolicy">DlzIamPolicy</a>[]</code> | IAM policies to create in this account. |
+| <code><a href="#aws-data-landing-zone.DLzIamProps.property.roles">roles</a></code> | <code><a href="#aws-data-landing-zone.DlzIamRole">DlzIamRole</a>[]</code> | IAM roles to create in this account. |
+| <code><a href="#aws-data-landing-zone.DLzIamProps.property.userGroups">userGroups</a></code> | <code><a href="#aws-data-landing-zone.DLzIamUserGroup">DLzIamUserGroup</a>[]</code> | IAM groups to create in this account with their associated users. |
+| <code><a href="#aws-data-landing-zone.DLzIamProps.property.users">users</a></code> | <code><a href="#aws-data-landing-zone.DlzIamUser">DlzIamUser</a>[]</code> | IAM users to create in this account. |
+
+---
+
+##### `accountAlias`<sup>Optional</sup> <a name="accountAlias" id="aws-data-landing-zone.DLzIamProps.property.accountAlias"></a>
+
+```typescript
+public readonly accountAlias: string;
+```
+
+- *Type:* string
+
+The account alias to set for this account.
+
+---
+
+##### `passwordPolicy`<sup>Optional</sup> <a name="passwordPolicy" id="aws-data-landing-zone.DLzIamProps.property.passwordPolicy"></a>
+
+```typescript
+public readonly passwordPolicy: IamPasswordPolicyProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.IamPasswordPolicyProps">IamPasswordPolicyProps</a>
+
+The password policy for this account If not set the default AWS IAM policy is applied, use this to customize the password policy.
+
+---
+
+##### `policies`<sup>Optional</sup> <a name="policies" id="aws-data-landing-zone.DLzIamProps.property.policies"></a>
+
+```typescript
+public readonly policies: DlzIamPolicy[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzIamPolicy">DlzIamPolicy</a>[]
+
+IAM policies to create in this account.
+
+---
+
+##### `roles`<sup>Optional</sup> <a name="roles" id="aws-data-landing-zone.DLzIamProps.property.roles"></a>
+
+```typescript
+public readonly roles: DlzIamRole[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzIamRole">DlzIamRole</a>[]
+
+IAM roles to create in this account.
+
+---
+
+##### `userGroups`<sup>Optional</sup> <a name="userGroups" id="aws-data-landing-zone.DLzIamProps.property.userGroups"></a>
+
+```typescript
+public readonly userGroups: DLzIamUserGroup[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DLzIamUserGroup">DLzIamUserGroup</a>[]
+
+IAM groups to create in this account with their associated users.
+
+---
+
+##### `users`<sup>Optional</sup> <a name="users" id="aws-data-landing-zone.DLzIamProps.property.users"></a>
+
+```typescript
+public readonly users: DlzIamUser[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzIamUser">DlzIamUser</a>[]
+
+IAM users to create in this account.
+
+---
+
+### DlzIamRole <a name="DlzIamRole" id="aws-data-landing-zone.DlzIamRole"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzIamRole.Initializer"></a>
+
+```typescript
+import { DlzIamRole } from 'aws-data-landing-zone'
+
+const dlzIamRole: DlzIamRole = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.assumedBy">assumedBy</a></code> | <code>aws-cdk-lib.aws_iam.IPrincipal</code> | The IAM principal (i.e. `new ServicePrincipal('sns.amazonaws.com')`) which can assume this role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.roleName">roleName</a></code> | <code>string</code> | A name for the IAM role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.description">description</a></code> | <code>string</code> | A description of the role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.externalIds">externalIds</a></code> | <code>string[]</code> | List of IDs that the role assumer needs to provide one of when assuming this role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.inlinePolicies">inlinePolicies</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_iam.PolicyDocument}</code> | A list of named policies to inline into this role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.managedPolicyNames">managedPolicyNames</a></code> | <code>string[]</code> | A list of managed policies associated with this role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.maxSessionDuration">maxSessionDuration</a></code> | <code>aws-cdk-lib.Duration</code> | The maximum session duration that you want to set for the specified role. |
+| <code><a href="#aws-data-landing-zone.DlzIamRole.property.permissionsBoundary">permissionsBoundary</a></code> | <code>aws-cdk-lib.aws_iam.IManagedPolicy</code> | AWS supports permissions boundaries for IAM entities (users or roles). |
+
+---
+
+##### `assumedBy`<sup>Required</sup> <a name="assumedBy" id="aws-data-landing-zone.DlzIamRole.property.assumedBy"></a>
+
+```typescript
+public readonly assumedBy: IPrincipal;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IPrincipal
+
+The IAM principal (i.e. `new ServicePrincipal('sns.amazonaws.com')`) which can assume this role.
+
+You can later modify the assume role policy document by accessing it via
+the `assumeRolePolicy` property.
+
+---
+
+##### `roleName`<sup>Required</sup> <a name="roleName" id="aws-data-landing-zone.DlzIamRole.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+
+A name for the IAM role.
+
+For valid values, see the RoleName parameter for
+the CreateRole action in the IAM API Reference.
+
+Differs from `Role`, now required.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="aws-data-landing-zone.DlzIamRole.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+
+A description of the role.
+
+It can be up to 1000 characters long.
+
+---
+
+##### `externalIds`<sup>Optional</sup> <a name="externalIds" id="aws-data-landing-zone.DlzIamRole.property.externalIds"></a>
+
+```typescript
+public readonly externalIds: string[];
+```
+
+- *Type:* string[]
+
+List of IDs that the role assumer needs to provide one of when assuming this role.
+
+If the configured and provided external IDs do not match, the
+AssumeRole operation will fail.
+
+---
+
+##### `inlinePolicies`<sup>Optional</sup> <a name="inlinePolicies" id="aws-data-landing-zone.DlzIamRole.property.inlinePolicies"></a>
+
+```typescript
+public readonly inlinePolicies: {[ key: string ]: PolicyDocument};
+```
+
+- *Type:* {[ key: string ]: aws-cdk-lib.aws_iam.PolicyDocument}
+
+A list of named policies to inline into this role.
+
+These policies will be
+created with the role, whereas those added by ``addToPolicy`` are added
+using a separate CloudFormation resource (allowing a way around circular
+dependencies that could otherwise be introduced)..
+
+---
+
+##### `managedPolicyNames`<sup>Optional</sup> <a name="managedPolicyNames" id="aws-data-landing-zone.DlzIamRole.property.managedPolicyNames"></a>
+
+```typescript
+public readonly managedPolicyNames: string[];
+```
+
+- *Type:* string[]
+
+A list of managed policies associated with this role.
+
+Differs from `Role` that accepts `IManagedPolicy[]`. This is to not expose the scope of the stack and make
+it difficult to pass `new iam.ManagedPolicy.fromAwsManagedPolicyName...` that gets defined as a construct
+
+---
+
+##### `maxSessionDuration`<sup>Optional</sup> <a name="maxSessionDuration" id="aws-data-landing-zone.DlzIamRole.property.maxSessionDuration"></a>
+
+```typescript
+public readonly maxSessionDuration: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* Duration.hours(1)
+
+The maximum session duration that you want to set for the specified role.
+
+This setting can have a value from 1 hour (3600sec) to 12 (43200sec) hours.
+
+Anyone who assumes the role from the AWS CLI or API can use the
+DurationSeconds API parameter or the duration-seconds CLI parameter to
+request a longer session. The MaxSessionDuration setting determines the
+maximum duration that can be requested using the DurationSeconds
+parameter.
+
+If users don't specify a value for the DurationSeconds parameter, their
+security credentials are valid for one hour by default. This applies when
+you use the AssumeRole* API operations or the assume-role* CLI operations
+but does not apply when you use those operations to create a console URL.
+
+> [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
+
+---
+
+##### `permissionsBoundary`<sup>Optional</sup> <a name="permissionsBoundary" id="aws-data-landing-zone.DlzIamRole.property.permissionsBoundary"></a>
+
+```typescript
+public readonly permissionsBoundary: IManagedPolicy;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IManagedPolicy
+- *Default:* No permissions boundary.
+
+AWS supports permissions boundaries for IAM entities (users or roles).
+
+A permissions boundary is an advanced feature for using a managed policy
+to set the maximum permissions that an identity-based policy can grant to
+an IAM entity. An entity's permissions boundary allows it to perform only
+the actions that are allowed by both its identity-based policies and its
+permissions boundaries.
+
+> [https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+
+---
+
+### DlzIamUser <a name="DlzIamUser" id="aws-data-landing-zone.DlzIamUser"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzIamUser.Initializer"></a>
+
+```typescript
+import { DlzIamUser } from 'aws-data-landing-zone'
+
+const dlzIamUser: DlzIamUser = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzIamUser.property.userName">userName</a></code> | <code>string</code> | A name for the IAM user. |
+| <code><a href="#aws-data-landing-zone.DlzIamUser.property.managedPolicyNames">managedPolicyNames</a></code> | <code>string[]</code> | A list of managed policies associated with this role. |
+| <code><a href="#aws-data-landing-zone.DlzIamUser.property.password">password</a></code> | <code>aws-cdk-lib.SecretValue</code> | The password for the user. This is required so the user can access the AWS Management Console. |
+| <code><a href="#aws-data-landing-zone.DlzIamUser.property.passwordResetRequired">passwordResetRequired</a></code> | <code>boolean</code> | Specifies whether the user is required to set a new password the next time the user logs in to the AWS Management Console. |
+| <code><a href="#aws-data-landing-zone.DlzIamUser.property.permissionsBoundary">permissionsBoundary</a></code> | <code>aws-cdk-lib.aws_iam.IManagedPolicy</code> | AWS supports permissions boundaries for IAM entities (users or roles). |
+
+---
+
+##### `userName`<sup>Required</sup> <a name="userName" id="aws-data-landing-zone.DlzIamUser.property.userName"></a>
+
+```typescript
+public readonly userName: string;
+```
+
+- *Type:* string
+
+A name for the IAM user.
+
+Differs from `User`, now required.
+
+---
+
+##### `managedPolicyNames`<sup>Optional</sup> <a name="managedPolicyNames" id="aws-data-landing-zone.DlzIamUser.property.managedPolicyNames"></a>
+
+```typescript
+public readonly managedPolicyNames: string[];
+```
+
+- *Type:* string[]
+
+A list of managed policies associated with this role.
+
+Differs from `User` that accepts `IManagedPolicy[]`. This is to not expose the scope of the stack and make
+it difficult to pass `new iam.ManagedPolicy.fromAwsManagedPolicyName...` that gets defined as a construct
+
+---
+
+##### `password`<sup>Optional</sup> <a name="password" id="aws-data-landing-zone.DlzIamUser.property.password"></a>
+
+```typescript
+public readonly password: SecretValue;
+```
+
+- *Type:* aws-cdk-lib.SecretValue
+- *Default:* User won't be able to access the management console without a password.
+
+The password for the user. This is required so the user can access the AWS Management Console.
+
+You can use `SecretValue.unsafePlainText` to specify a password in plain text or
+use `secretsmanager.Secret.fromSecretAttributes` to reference a secret in
+Secrets Manager.
+
+---
+
+##### `passwordResetRequired`<sup>Optional</sup> <a name="passwordResetRequired" id="aws-data-landing-zone.DlzIamUser.property.passwordResetRequired"></a>
+
+```typescript
+public readonly passwordResetRequired: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Specifies whether the user is required to set a new password the next time the user logs in to the AWS Management Console.
+
+If this is set to 'true', you must also specify "initialPassword".
+
+---
+
+##### `permissionsBoundary`<sup>Optional</sup> <a name="permissionsBoundary" id="aws-data-landing-zone.DlzIamUser.property.permissionsBoundary"></a>
+
+```typescript
+public readonly permissionsBoundary: IManagedPolicy;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IManagedPolicy
+
+AWS supports permissions boundaries for IAM entities (users or roles).
+
+A permissions boundary is an advanced feature for using a managed policy
+to set the maximum permissions that an identity-based policy can grant to
+an IAM entity. An entity's permissions boundary allows it to perform only
+the actions that are allowed by both its identity-based policies and its
+permissions boundaries.
+
+> [https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+
+---
+
+### DLzIamUserGroup <a name="DLzIamUserGroup" id="aws-data-landing-zone.DLzIamUserGroup"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DLzIamUserGroup.Initializer"></a>
+
+```typescript
+import { DLzIamUserGroup } from 'aws-data-landing-zone'
+
+const dLzIamUserGroup: DLzIamUserGroup = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DLzIamUserGroup.property.groupName">groupName</a></code> | <code>string</code> | A name for the IAM group. |
+| <code><a href="#aws-data-landing-zone.DLzIamUserGroup.property.users">users</a></code> | <code>string[]</code> | List of usernames that should be added to this group. |
+| <code><a href="#aws-data-landing-zone.DLzIamUserGroup.property.managedPolicyNames">managedPolicyNames</a></code> | <code>string[]</code> | A list of managed policies associated with this role. |
+
+---
+
+##### `groupName`<sup>Required</sup> <a name="groupName" id="aws-data-landing-zone.DLzIamUserGroup.property.groupName"></a>
+
+```typescript
+public readonly groupName: string;
+```
+
+- *Type:* string
+
+A name for the IAM group.
+
+Differs from `Group`, now required.
+
+---
+
+##### `users`<sup>Required</sup> <a name="users" id="aws-data-landing-zone.DLzIamUserGroup.property.users"></a>
+
+```typescript
+public readonly users: string[];
+```
+
+- *Type:* string[]
+
+List of usernames that should be added to this group.
+
+Differs from `Group`, does not exist
+
+---
+
+##### `managedPolicyNames`<sup>Optional</sup> <a name="managedPolicyNames" id="aws-data-landing-zone.DLzIamUserGroup.property.managedPolicyNames"></a>
+
+```typescript
+public readonly managedPolicyNames: string[];
+```
+
+- *Type:* string[]
+
+A list of managed policies associated with this role.
+
+Differs from `Group` that accepts `IManagedPolicy[]`. This is to not expose the scope of the stack and make
+it difficult to pass `new iam.ManagedPolicy.fromAwsManagedPolicyName...` that gets defined as a construct
 
 ---
 
@@ -16312,6 +17042,38 @@ public readonly vpcPeeringConnectionIds: DlzSsmReaderStackCache;
 
 ---
 
+### IamAccountAliasProps <a name="IamAccountAliasProps" id="aws-data-landing-zone.IamAccountAliasProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.IamAccountAliasProps.Initializer"></a>
+
+```typescript
+import { IamAccountAliasProps } from 'aws-data-landing-zone'
+
+const iamAccountAliasProps: IamAccountAliasProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.IamAccountAliasProps.property.accountAlias">accountAlias</a></code> | <code>string</code> | Must be not more than 63 characters. |
+
+---
+
+##### `accountAlias`<sup>Required</sup> <a name="accountAlias" id="aws-data-landing-zone.IamAccountAliasProps.property.accountAlias"></a>
+
+```typescript
+public readonly accountAlias: string;
+```
+
+- *Type:* string
+
+Must be not more than 63 characters.
+
+Valid characters are a-z, 0-9, and - (hyphen).
+
+---
+
 ### IamIdentityCenterAccessGroupProps <a name="IamIdentityCenterAccessGroupProps" id="aws-data-landing-zone.IamIdentityCenterAccessGroupProps"></a>
 
 An access group in the IAM Identity Center.
@@ -16688,6 +17450,148 @@ public readonly users: IdentityStoreUserProps[];
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.IdentityStoreUserProps">IdentityStoreUserProps</a>[]
+
+---
+
+### IamPasswordPolicyProps <a name="IamPasswordPolicyProps" id="aws-data-landing-zone.IamPasswordPolicyProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.IamPasswordPolicyProps.Initializer"></a>
+
+```typescript
+import { IamPasswordPolicyProps } from 'aws-data-landing-zone'
+
+const iamPasswordPolicyProps: IamPasswordPolicyProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.allowUsersToChangePassword">allowUsersToChangePassword</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.hardExpiry">hardExpiry</a></code> | <code>boolean</code> | Prevents IAM users who are accessing the account via the AWS Management Console from setting a new console password after their password has expired. |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.maxPasswordAge">maxPasswordAge</a></code> | <code>number</code> | The number of days that an IAM user password is valid. |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.minimumPasswordLength">minimumPasswordLength</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.passwordReusePrevention">passwordReusePrevention</a></code> | <code>number</code> | Specifies the number of previous passwords that IAM users are prevented from reusing. |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.requireLowercaseCharacters">requireLowercaseCharacters</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.requireNumbers">requireNumbers</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.requireSymbols">requireSymbols</a></code> | <code>boolean</code> | Specifies whether IAM user passwords must contain at least one of the following non-alphanumeric characters: ! |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicyProps.property.requireUppercaseCharacters">requireUppercaseCharacters</a></code> | <code>boolean</code> | *No description.* |
+
+---
+
+##### `allowUsersToChangePassword`<sup>Optional</sup> <a name="allowUsersToChangePassword" id="aws-data-landing-zone.IamPasswordPolicyProps.property.allowUsersToChangePassword"></a>
+
+```typescript
+public readonly allowUsersToChangePassword: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `hardExpiry`<sup>Optional</sup> <a name="hardExpiry" id="aws-data-landing-zone.IamPasswordPolicyProps.property.hardExpiry"></a>
+
+```typescript
+public readonly hardExpiry: boolean;
+```
+
+- *Type:* boolean
+
+Prevents IAM users who are accessing the account via the AWS Management Console from setting a new console password after their password has expired.
+
+The IAM user cannot access the console until an administrator resets
+the password.
+
+If you do not specify a value for this parameter, then the operation uses the default value of false. The result
+is that IAM users can change their passwords after they expire and continue to sign in as the user.
+
+---
+
+##### `maxPasswordAge`<sup>Optional</sup> <a name="maxPasswordAge" id="aws-data-landing-zone.IamPasswordPolicyProps.property.maxPasswordAge"></a>
+
+```typescript
+public readonly maxPasswordAge: number;
+```
+
+- *Type:* number
+
+The number of days that an IAM user password is valid.
+
+If you do not specify a value for this parameter, then the operation uses the default value of 0.
+The result is that IAM user passwords never expire.
+
+Valid Range: Minimum value of 1. Maximum value of 1095.
+
+---
+
+##### `minimumPasswordLength`<sup>Optional</sup> <a name="minimumPasswordLength" id="aws-data-landing-zone.IamPasswordPolicyProps.property.minimumPasswordLength"></a>
+
+```typescript
+public readonly minimumPasswordLength: number;
+```
+
+- *Type:* number
+
+---
+
+##### `passwordReusePrevention`<sup>Optional</sup> <a name="passwordReusePrevention" id="aws-data-landing-zone.IamPasswordPolicyProps.property.passwordReusePrevention"></a>
+
+```typescript
+public readonly passwordReusePrevention: number;
+```
+
+- *Type:* number
+
+Specifies the number of previous passwords that IAM users are prevented from reusing.
+
+If you do not specify a value for this parameter, then the operation uses the default value of 0. The result
+is that IAM users are not prevented from reusing previous passwords.
+
+Valid Range: Minimum value of 1. Maximum value of 24.
+
+---
+
+##### `requireLowercaseCharacters`<sup>Optional</sup> <a name="requireLowercaseCharacters" id="aws-data-landing-zone.IamPasswordPolicyProps.property.requireLowercaseCharacters"></a>
+
+```typescript
+public readonly requireLowercaseCharacters: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `requireNumbers`<sup>Optional</sup> <a name="requireNumbers" id="aws-data-landing-zone.IamPasswordPolicyProps.property.requireNumbers"></a>
+
+```typescript
+public readonly requireNumbers: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `requireSymbols`<sup>Optional</sup> <a name="requireSymbols" id="aws-data-landing-zone.IamPasswordPolicyProps.property.requireSymbols"></a>
+
+```typescript
+public readonly requireSymbols: boolean;
+```
+
+- *Type:* boolean
+
+Specifies whether IAM user passwords must contain at least one of the following non-alphanumeric characters: !
+
+@ # $ % ^ & * ( ) _ + - = [ ] { } | '
+
+---
+
+##### `requireUppercaseCharacters`<sup>Optional</sup> <a name="requireUppercaseCharacters" id="aws-data-landing-zone.IamPasswordPolicyProps.property.requireUppercaseCharacters"></a>
+
+```typescript
+public readonly requireUppercaseCharacters: boolean;
+```
+
+- *Type:* boolean
 
 ---
 
@@ -17986,9 +18890,9 @@ const reportItem: ReportItem = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.ReportItem.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ReportItem.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportItem.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportItem.property.type">type</a></code> | <code><a href="#aws-data-landing-zone.ReportType">ReportType</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportItem.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportItem.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportItem.property.appliedFrom">appliedFrom</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportItem.property.region">region</a></code> | <code>string</code> | *No description.* |
@@ -17999,16 +18903,6 @@ const reportItem: ReportItem = { ... }
 
 ```typescript
 public readonly description: string;
-```
-
-- *Type:* string
-
----
-
-##### `externalLink`<sup>Required</sup> <a name="externalLink" id="aws-data-landing-zone.ReportItem.property.externalLink"></a>
-
-```typescript
-public readonly externalLink: string;
 ```
 
 - *Type:* string
@@ -18032,6 +18926,16 @@ public readonly type: ReportType;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.ReportType">ReportType</a>
+
+---
+
+##### `externalLink`<sup>Optional</sup> <a name="externalLink" id="aws-data-landing-zone.ReportItem.property.externalLink"></a>
+
+```typescript
+public readonly externalLink: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -18080,9 +18984,9 @@ const reportResource: ReportResource = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.ReportResource.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ReportResource.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportResource.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportResource.property.type">type</a></code> | <code><a href="#aws-data-landing-zone.ReportType">ReportType</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportResource.property.externalLink">externalLink</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -18090,16 +18994,6 @@ const reportResource: ReportResource = { ... }
 
 ```typescript
 public readonly description: string;
-```
-
-- *Type:* string
-
----
-
-##### `externalLink`<sup>Required</sup> <a name="externalLink" id="aws-data-landing-zone.ReportResource.property.externalLink"></a>
-
-```typescript
-public readonly externalLink: string;
 ```
 
 - *Type:* string
@@ -18123,6 +19017,16 @@ public readonly type: ReportType;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.ReportType">ReportType</a>
+
+---
+
+##### `externalLink`<sup>Optional</sup> <a name="externalLink" id="aws-data-landing-zone.ReportResource.property.externalLink"></a>
+
+```typescript
+public readonly externalLink: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -20629,7 +21533,7 @@ Optional parameters for the control.
 
 ### IReportResource <a name="IReportResource" id="aws-data-landing-zone.IReportResource"></a>
 
-- *Implemented By:* <a href="#aws-data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#aws-data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#aws-data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+- *Implemented By:* <a href="#aws-data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#aws-data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#aws-data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#aws-data-landing-zone.IamAccountAlias">IamAccountAlias</a>, <a href="#aws-data-landing-zone.IamPasswordPolicy">IamPasswordPolicy</a>, <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
 
 Behavioral, used with Inheritance.
 
@@ -21152,6 +22056,13 @@ Hyderabad No Control Tower SecurityHub Standard support.
 | <code><a href="#aws-data-landing-zone.ReportType.SECURITY_HUB_STANDARD">SECURITY_HUB_STANDARD</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.TAG_POLICY">TAG_POLICY</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.SERVICE_CONTROL_POLICY">SERVICE_CONTROL_POLICY</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_ACCOUNT_ALIAS">IAM_ACCOUNT_ALIAS</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_PASSWORD_POLICY">IAM_PASSWORD_POLICY</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_PERMISSION_BOUNDARY">IAM_PERMISSION_BOUNDARY</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_POLICY">IAM_POLICY</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_ROLE">IAM_ROLE</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_USER">IAM_USER</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.IAM_USER_GROUP">IAM_USER_GROUP</a></code> | *No description.* |
 
 ---
 
@@ -21176,6 +22087,41 @@ Hyderabad No Control Tower SecurityHub Standard support.
 
 
 ##### `SERVICE_CONTROL_POLICY` <a name="SERVICE_CONTROL_POLICY" id="aws-data-landing-zone.ReportType.SERVICE_CONTROL_POLICY"></a>
+
+---
+
+
+##### `IAM_ACCOUNT_ALIAS` <a name="IAM_ACCOUNT_ALIAS" id="aws-data-landing-zone.ReportType.IAM_ACCOUNT_ALIAS"></a>
+
+---
+
+
+##### `IAM_PASSWORD_POLICY` <a name="IAM_PASSWORD_POLICY" id="aws-data-landing-zone.ReportType.IAM_PASSWORD_POLICY"></a>
+
+---
+
+
+##### `IAM_PERMISSION_BOUNDARY` <a name="IAM_PERMISSION_BOUNDARY" id="aws-data-landing-zone.ReportType.IAM_PERMISSION_BOUNDARY"></a>
+
+---
+
+
+##### `IAM_POLICY` <a name="IAM_POLICY" id="aws-data-landing-zone.ReportType.IAM_POLICY"></a>
+
+---
+
+
+##### `IAM_ROLE` <a name="IAM_ROLE" id="aws-data-landing-zone.ReportType.IAM_ROLE"></a>
+
+---
+
+
+##### `IAM_USER` <a name="IAM_USER" id="aws-data-landing-zone.ReportType.IAM_USER"></a>
+
+---
+
+
+##### `IAM_USER_GROUP` <a name="IAM_USER_GROUP" id="aws-data-landing-zone.ReportType.IAM_USER_GROUP"></a>
 
 ---
 

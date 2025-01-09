@@ -1,0 +1,199 @@
+---
+title: IAM
+description: IAM
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+AWS Identity and Access Management (IAM) is a fundamental service that enables secure management of access to AWS
+resources. It allows you to control who can perform specific actions and access certain data.
+
+The Data Landing Zone simplifies the definition of:
+- **IAM Policies**: Permissions attached to an IAM identity (User, User Group, or Role) that define the actions allowed
+on specified resources.
+- **IAM Roles**: Secure permissions granted to trusted entities, such as applications or AWS services like EC2.
+- **IAM Users**: Identities representing individuals or machine users (API access).
+- **IAM User Groups**: Collections of IAM users grouped together for simplified management.
+
+:::note
+IAM Users are generally not considered best practice due to their reliance on long-lived credentials. It is recommended
+to use IAM Identity Center Users instead. The exception is for "machine" users that cannot utilize IAM Identity Center
+Single Sign-On.
+:::
+
+The `accountAlias` property configures an IAM Account Alias, enabling IAM users to sign in to the AWS Management Console
+using a user-friendly URL in this format:
+`https://<accountAlias>.signin.aws.amazon.com/console`.
+
+By default, AWS provides a strong password policy
+([details here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html)), which is
+adequate for most use cases. However, you can override this default by specifying a custom `passwordPolicy` if needed.
+
+Within the `iam` block, Policies and Users can be referenced by their names. Dependencies between these resources are
+automatically managed.
+
+The following example demonstrates how to define an `accountAlias` and a custom `passwordPolicy`. It also includes two
+policies, `TestPolicy1` and `TestPolicy2`. The `TestPolicy1` policy is assigned to both a role (`TestRole`) and a user
+(`john.doe`). Dependencies are automatically created between these resources.
+
+Additionally, the example defines a second user (`jane.doe`) without any associated policies. A user group named
+`developers` is created, which includes the `TestPolicy1` policy and both users. The group depends on the `TestPolicy1`
+policy and the users to ensure they are created first.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [{
+              name: 'development',
+              accountId: '111111111111',
+              iam: {
+                accountAlias: 'dlz-development',
+                passwordPolicy: {
+                  allowUsersToChangePassword: true,
+                  requireLowercaseCharacters: true,
+                  requireNumbers: true,
+                  requireSymbols: true,
+                  requireUppercaseCharacters: true,
+                  minimumPasswordLength: 15,
+                },
+                policies: [{
+                  policyName: 'TestPolicy1',
+                  statements: [
+                    new iam.PolicyStatement({
+                      effect: iam.Effect.ALLOW,
+                      actions: ['s3:Get*', 's3:List*'],
+                      resources: ['*'],
+                    }),
+                  ],
+                },{
+                  policyName: 'TestPolicy2',
+                  statements: [ ... ],
+                }],
+                roles: [{
+                  roleName: 'TestRole',
+                  assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+                  managedPolicyNames: ['TestPolicy1'],
+                }],
+                users: [{
+                  userName: 'john.doe',
+                  managedPolicyNames: ['TestPolicy1',],
+                },{
+                  userName: 'jane.doe',
+                }],
+                userGroups: [{
+                  groupName: 'developers',
+                  managedPolicyNames: ['TestPolicy1'],
+                  users: [
+                    'john.doe',
+                    'jane.doe'
+                  ],
+                }],
+              }
+            }, {
+              name: 'production',
+              accountId: '222222222222',
+              ...
+            },
+            ]
+          },
+       },
+       ...
+     }
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name='development',
+                            account_id='111111111111',
+                            iam: iam=dlz.DLzIamProps(
+                                account_alias='dlz-development',
+                                password_policy=dlz.IamPasswordPolicyProps(
+                                    allow_users_to_change_password=True,
+                                    require_lowercase_characters=True,
+                                    require_numbers=True,
+                                    require_symbols=True,
+                                    require_uppercase_characters=True,
+                                    minimum_password_length=15,
+                                ),
+                                policies=[
+                                    dlz.DlzIamUser(
+                                        policy_name='TestPolicy1',
+                                        statements=[
+                                            iam.PolicyStatement(
+                                                effect=iam.Effect.ALLOW,
+                                                actions=['s3:Get*', 's3:List*'],
+                                                resources=['*'],
+                                            ),
+                                        ],
+                                    ),
+                                    dlz.DlzIamPolicy(
+                                        policy_name='TestPolicy2',
+                                        statements=[ ... ],
+                                    ),
+                                ],
+                                roles=[
+                                    dlz.DlzIamRole(
+                                        role_name='TestRole',
+                                        assumed_by=iam.ServicePrincipal('lambda.amazonaws.com'),
+                                        managed_policy_names=['TestPolicy1'],
+                                    ),
+                                ],
+                                users=[
+                                    dlz.DlzIamUser(
+                                        user_name='john.doe',
+                                        managed_policy_names=['TestPolicy1'],
+                                    ),
+                                    dlz.DlzIamUser(
+                                        user_name='jane.doe',
+                                    ),
+                                ],
+                                user_groups=[
+                                    dlz.DLzIamUserGroup(
+                                        group_name='developers',
+                                        managed_policy_names=['TestPolicy1'],
+                                        users=[
+                                            'john.doe',
+                                            'jane.doe',
+                                        ],
+                                    ),
+                                ],
+                            ),
+                        ),
+                        dlz.DLzAccount(
+                            name='production',
+                            account_id='222222222222',
+                        ),
+                    ],
+                ),
+            )
+        ),
+    )
+````
+  </Fragment>
+</DualCode>
+
+## API References
+- [DLzIamProps](/reference/api#dlziamprops)
+- [IamPasswordPolicyProps](/reference/api#aws-data-landing-zone.IamPasswordPolicyProps)
+- [DlzIamPolicy](/reference/api#aws-data-landing-zone.DlzIamPolicy)
+- [DlzIamRole](/reference/api#aws-data-landing-zone.DlzIamRole)
+- [DlzIamUser](/reference/api#aws-data-landing-zone.DlzIamUser)
+- [DLzIamUserGroup](/reference/api#aws-data-landing-zone.DLzIamUserGroup)
