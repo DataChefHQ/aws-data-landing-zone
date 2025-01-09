@@ -735,7 +735,7 @@ describe('Build', () => {
     // auditStacksRegionalTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('auditStacksRegionalTemplates snapshot'));
 
     const workloadGlobalStacksTemplates: Template[] = dlz.workloadGlobalStacks.map(stack => Template.fromStack(stack));
-    workloadGlobalStacksTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('workloadGlobalStacksTemplates snapshot'));
+    workloadGlobalStacksTemplates.forEach(template => expect(cdkTemplateToJson(template)).toMatchSnapshot('workloadGlobalStacksTemplates snapshot'));
 
     const workloadRegionalStacksTemplates: Template[] = dlz.workloadRegionalStacks.map(stack => Template.fromStack(stack));
     workloadRegionalStacksTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('workloadRegionalStacksTemplates snapshot'));

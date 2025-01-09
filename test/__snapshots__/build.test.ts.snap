@@ -3535,7 +3535,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
         },
         "Handler": "index.handler",
         "Role": {
@@ -3615,7 +3615,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "3a4f4905323f3487edc976cc90e3020118765f1ee29dd2a71567d2581c42b51f.zip",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,

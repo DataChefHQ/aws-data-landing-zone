@@ -150,7 +150,7 @@ export class WorkloadGlobalStack extends DlzStack {
         addUserDependencies(group, groupConfig.users);
 
         Report.addReportForAccountRegion(this.accountName, '*', {
-          type: ReportType.IAM_USER,
+          type: ReportType.IAM_USER_GROUP,
           name: groupConfig.groupName,
           description: JSON.stringify(groupConfig),
         });
