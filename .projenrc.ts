@@ -60,6 +60,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'table',
     '@aws-sdk/client-identitystore',
     '@aws-sdk/client-sso-admin',
+    '@aws-sdk/client-iam',
   ],
   /* Build dependencies for this repo/module. */
   devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node'],
@@ -75,7 +76,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
 project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',
-  target: 'node20',
+  target: 'node18',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/iam/lambda/iam-account-alias/', {
+  platform: 'node',
+  target: 'node18',
   sourcemap: true,
   externals: ['aws-sdk'],
 });

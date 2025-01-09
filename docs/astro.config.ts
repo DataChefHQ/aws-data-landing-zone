@@ -119,7 +119,8 @@ export default defineConfig({
                     {
                         label: 'Identity',
                         items: [
-                            { label: 'Iam Identity Center',  slug: 'components/identity/iam-identity-center'},
+                            { label: 'IAM Identity Center',  slug: 'components/identity/iam-identity-center'},
+                            { label: 'IAM',  slug: 'components/identity/iam'},
                         ]
                     },
                     {

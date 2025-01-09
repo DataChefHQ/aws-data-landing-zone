@@ -3528,6 +3528,175 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     },
   },
   "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
+        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustomDlzIamAccountAliasCustomResourceProviderHandler36037818": {
+      "DependsOn": [
+        "CustomDlzIamAccountAliasCustomResourceProviderRole6C28A239",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomDlzIamAccountAliasCustomResourceProviderRole6C28A239",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 15,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomDlzIamAccountAliasCustomResourceProviderRole6C28A239": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "iam:CreateAccountAlias",
+                    "iam:DeleteAccountAlias",
+                    "iam:ListAccountAliases",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "IamGroupdevelopersEA997063": {
+      "DependsOn": [
+        "IamPolicyTestPolicyB352C728",
+        "IamUserjohndoeD1B1B9F8",
+      ],
+      "Properties": {
+        "GroupName": "developers",
+        "ManagedPolicyArns": [
+          {
+            "Ref": "IamPolicyTestPolicyB352C728",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Group",
+    },
+    "IamGroupdevelopersUsers": {
+      "Properties": {
+        "GroupName": {
+          "Ref": "IamGroupdevelopersEA997063",
+        },
+        "Users": [
+          "john.doe",
+        ],
+      },
+      "Type": "AWS::IAM::UserToGroupAddition",
+    },
     "IamPolicyPermissionBoundaryPolicy3239EA44": {
       "Properties": {
         "Description": "",
@@ -3545,6 +3714,195 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         },
       },
       "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "IamPolicyTestPolicy2B02F6075": {
+      "Properties": {
+        "Description": "",
+        "ManagedPolicyName": "TestPolicy2",
+        "Path": "/",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:Get*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "IamPolicyTestPolicyB352C728": {
+      "Properties": {
+        "Description": "",
+        "ManagedPolicyName": "TestPolicy",
+        "Path": "/",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:Get*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "IamRoleTestRole244BBC3D": {
+      "DependsOn": [
+        "IamPolicyTestPolicyB352C728",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Ref": "IamPolicyTestPolicyB352C728",
+          },
+        ],
+        "RoleName": "TestRole",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "IamUserjanedoeCDF9D3E3": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "UserName": "jane.doe",
+      },
+      "Type": "AWS::IAM::User",
+    },
+    "IamUserjohndoeD1B1B9F8": {
+      "DependsOn": [
+        "IamPolicyTestPolicyB352C728",
+      ],
+      "Properties": {
+        "ManagedPolicyArns": [
+          {
+            "Ref": "IamPolicyTestPolicyB352C728",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "UserName": "john.doe",
+      },
+      "Type": "AWS::IAM::User",
+    },
+    "dlzglobalAccountAliasCustomResource3EF5607D": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzIamAccountAliasCustomResourceProviderHandler36037818",
+            "Arn",
+          ],
+        },
+        "accountAlias": "dlz-development",
+        "physicalResourceId": "dlz-global-AccountAlias",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobalPasswordPolicyiampasswordpolicycustomresourceCustomResourcePolicy0DCB7541": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "iam:UpdateAccountPasswordPolicy",
+                "iam:DeleteAccountPasswordPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "dlzglobalPasswordPolicyiampasswordpolicycustomresourceCustomResourcePolicy0DCB7541",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "dlzglobalPasswordPolicyiampasswordpolicycustomresourceD5B53866": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "dlzglobalPasswordPolicyiampasswordpolicycustomresourceCustomResourcePolicy0DCB7541",
+      ],
+      "Properties": {
+        "Create": "{"physicalResourceId":{"id":"dlz-global-PasswordPolicy"},"service":"IAM","action":"updateAccountPasswordPolicy","parameters":{"MinimumPasswordLength":14,"RequireSymbols":true,"RequireNumbers":true,"RequireUppercaseCharacters":true,"RequireLowercaseCharacters":true,"AllowUsersToChangePassword":true}}",
+        "Delete": "{"service":"IAM","action":"deleteAccountPasswordPolicy","parameters":{}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": "{"physicalResourceId":{"id":"dlz-global-PasswordPolicy"},"service":"IAM","action":"updateAccountPasswordPolicy","parameters":{"MinimumPasswordLength":14,"RequireSymbols":true,"RequireNumbers":true,"RequireUppercaseCharacters":true,"RequireLowercaseCharacters":true,"AllowUsersToChangePassword":true}}",
+      },
+      "Type": "Custom::IamSetPasswordPolicy",
+      "UpdateReplacePolicy": "Delete",
     },
     "dlzglobalbastiondefault": {
       "DependsOn": [

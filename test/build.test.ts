@@ -15,8 +15,12 @@ import {
   SecurityHubNotificationSeverity,
   SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
+  IamAccountAlias,
 } from '../src';
-import { cdkTemplateToJson } from './helpers.test';
+import {
+  cdkTemplateToJson,
+  //@ts-ignore
+} from './helpers.test';
 import { DatabaseAction, TableAction, TagAction } from '../src/constructs/dlz-lake-formation';
 import { NetworkAddress } from '../src/constructs/dlz-vpc/network-address';
 
@@ -319,6 +323,60 @@ const configBase: DataLandingZoneProps = {
                 },
               ],
             }],
+            iam: {
+              accountAlias: 'dlz-development',
+              passwordPolicy: {
+                minimumPasswordLength: 14,
+                allowUsersToChangePassword: true,
+                requireLowercaseCharacters: true,
+                requireNumbers: true,
+                requireSymbols: true,
+                requireUppercaseCharacters: true,
+              },
+              policies: [{
+                policyName: 'TestPolicy',
+                statements: [
+                  new iam.PolicyStatement({
+                    effect: iam.Effect.ALLOW,
+                    actions: ['s3:Get*', 's3:List*'],
+                    resources: ['*'],
+                  }),
+                ],
+              }, {
+                policyName: 'TestPolicy2',
+                statements: [
+                  new iam.PolicyStatement({
+                    effect: iam.Effect.ALLOW,
+                    actions: ['s3:Get*', 's3:List*'],
+                    resources: ['*'],
+                  }),
+                ],
+              }],
+              roles: [{
+                roleName: 'TestRole',
+                assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+                managedPolicyNames: [
+                  'TestPolicy',
+                ],
+              }],
+              users: [{
+                userName: 'john.doe',
+                managedPolicyNames: [
+                  'TestPolicy',
+                ],
+              }, {
+                userName: 'jane.doe',
+              }],
+              userGroups: [{
+                groupName: 'developers',
+                managedPolicyNames: [
+                  'TestPolicy',
+                ],
+                users: [
+                  'john.doe',
+                ],
+              }],
+            },
           },
           {
             name: 'project-1-production',
@@ -630,6 +688,9 @@ const configBase: DataLandingZoneProps = {
 jest.spyOn(IdentityStoreUser, 'fetchCodeDirectory').mockImplementation(() => {
   return path.join(__dirname, '../assets/constructs/iam-identity-center/identity-store-user-lambda');
 });
+jest.spyOn(IamAccountAlias, 'fetchCodeDirectory').mockImplementation(() => {
+  return path.join(__dirname, '../assets/constructs/iam/lambda/iam-account-alias');
+});
 
 describe('Build', () => {
 
@@ -674,7 +735,7 @@ describe('Build', () => {
     // auditStacksRegionalTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('auditStacksRegionalTemplates snapshot'));
 
     const workloadGlobalStacksTemplates: Template[] = dlz.workloadGlobalStacks.map(stack => Template.fromStack(stack));
-    workloadGlobalStacksTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('workloadGlobalStacksTemplates snapshot'));
+    workloadGlobalStacksTemplates.forEach(template => expect(cdkTemplateToJson(template)).toMatchSnapshot('workloadGlobalStacksTemplates snapshot'));
 
     const workloadRegionalStacksTemplates: Template[] = dlz.workloadRegionalStacks.map(stack => Template.fromStack(stack));
     workloadRegionalStacksTemplates.forEach(template => expect(template.toJSON()).toMatchSnapshot('workloadRegionalStacksTemplates snapshot'));

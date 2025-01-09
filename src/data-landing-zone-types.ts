@@ -1,6 +1,11 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import { IManagedPolicy } from 'aws-cdk-lib/aws-iam/lib/managed-policy';
+import { PolicyDocument } from 'aws-cdk-lib/aws-iam/lib/policy-document';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam/lib/policy-statement';
+import { IPrincipal } from 'aws-cdk-lib/aws-iam/lib/principals';
+import { Duration, SecretValue } from 'aws-cdk-lib/core';
 import {
   DlzAccountNetworks,
   DlzBudgetProps,
@@ -10,7 +15,7 @@ import {
   DlzStackProps,
   DlzTag,
   DlzVpcProps,
-  IamIdentityCenterProps,
+  IamIdentityCenterProps, IamPasswordPolicyProps,
   NetworkAddress,
   SlackChannel,
 } from './constructs';
@@ -198,11 +203,226 @@ export interface DLzManagementAccount {
   readonly accountId: string;
 }
 
+export interface DLzIamUserGroup {
+  /**
+   * A name for the IAM group.
+   *
+   * Differs from `Group`, now required.
+   */
+  readonly groupName: string;
+  /**
+   * A list of managed policies associated with this role.
+   *
+   * Differs from `Group` that accepts `IManagedPolicy[]`. This is to not expose the scope of the stack and make
+   * it difficult to pass `new iam.ManagedPolicy.fromAwsManagedPolicyName...` that gets defined as a construct
+   */
+  readonly managedPolicyNames?: string[];
+  /**
+   * List of usernames that should be added to this group
+   *
+   * Differs from `Group`, does not exist
+   */
+  readonly users: string[];
+}
+
+export interface DlzIamPolicy {
+  /**
+   * The name of the policy.
+   *
+   * Differs from `Policy`, now required.
+   */
+  readonly policyName: string;
+  /**
+   * Initial set of permissions to add to this policy document.
+   * You can also use `addStatements(...statement)` to add permissions later.
+   *
+   * @default - No statements.
+   */
+  readonly statements?: PolicyStatement[];
+  /**
+   * Initial PolicyDocument to use for this Policy. If omited, any
+   * `PolicyStatement` provided in the `statements` property will be applied
+   * against the empty default `PolicyDocument`.
+   *
+   * @default - An empty policy.
+   */
+  readonly document?: PolicyDocument;
+}
+
+export interface DlzIamRole {
+  /**
+   * A name for the IAM role. For valid values, see the RoleName parameter for
+   * the CreateRole action in the IAM API Reference.
+   *
+   * Differs from `Role`, now required.
+   */
+  readonly roleName: string;
+  /**
+   * The IAM principal (i.e. `new ServicePrincipal('sns.amazonaws.com')`)
+   * which can assume this role.
+   *
+   * You can later modify the assume role policy document by accessing it via
+   * the `assumeRolePolicy` property.
+   */
+  readonly assumedBy: IPrincipal;
+  /**
+   * List of IDs that the role assumer needs to provide one of when assuming this role
+   *
+   * If the configured and provided external IDs do not match, the
+   * AssumeRole operation will fail.
+   */
+  readonly externalIds?: string[];
+  /**
+   * A list of managed policies associated with this role.
+   *
+   * Differs from `Role` that accepts `IManagedPolicy[]`. This is to not expose the scope of the stack and make
+   * it difficult to pass `new iam.ManagedPolicy.fromAwsManagedPolicyName...` that gets defined as a construct
+   */
+  readonly managedPolicyNames?: string[];
+  /**
+   * A list of named policies to inline into this role. These policies will be
+   * created with the role, whereas those added by ``addToPolicy`` are added
+   * using a separate CloudFormation resource (allowing a way around circular
+   * dependencies that could otherwise be introduced)..
+   */
+  readonly inlinePolicies?: {
+    [name: string]: PolicyDocument;
+  };
+  /**
+   * AWS supports permissions boundaries for IAM entities (users or roles).
+   * A permissions boundary is an advanced feature for using a managed policy
+   * to set the maximum permissions that an identity-based policy can grant to
+   * an IAM entity. An entity's permissions boundary allows it to perform only
+   * the actions that are allowed by both its identity-based policies and its
+   * permissions boundaries.
+   *
+   * @link https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-permissionsboundary
+   * @link https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+   *
+   * @default - No permissions boundary.
+   */
+  readonly permissionsBoundary?: IManagedPolicy;
+  /**
+   * The maximum session duration that you want to set for the specified role.
+   * This setting can have a value from 1 hour (3600sec) to 12 (43200sec) hours.
+   *
+   * Anyone who assumes the role from the AWS CLI or API can use the
+   * DurationSeconds API parameter or the duration-seconds CLI parameter to
+   * request a longer session. The MaxSessionDuration setting determines the
+   * maximum duration that can be requested using the DurationSeconds
+   * parameter.
+   *
+   * If users don't specify a value for the DurationSeconds parameter, their
+   * security credentials are valid for one hour by default. This applies when
+   * you use the AssumeRole* API operations or the assume-role* CLI operations
+   * but does not apply when you use those operations to create a console URL.
+   *
+   * @link https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+   *
+   * @default Duration.hours(1)
+   */
+  readonly maxSessionDuration?: Duration;
+  /**
+   * A description of the role. It can be up to 1000 characters long.
+   */
+  readonly description?: string;
+}
+
+export interface DlzIamUser {
+  /**
+   * A name for the IAM user.
+   *
+   * Differs from `User`, now required.
+   */
+  readonly userName: string;
+  /**
+   * A list of managed policies associated with this role.
+   *
+   * Differs from `User` that accepts `IManagedPolicy[]`. This is to not expose the scope of the stack and make
+   * it difficult to pass `new iam.ManagedPolicy.fromAwsManagedPolicyName...` that gets defined as a construct
+   */
+  readonly managedPolicyNames?: string[];
+  /**
+   * AWS supports permissions boundaries for IAM entities (users or roles).
+   * A permissions boundary is an advanced feature for using a managed policy
+   * to set the maximum permissions that an identity-based policy can grant to
+   * an IAM entity. An entity's permissions boundary allows it to perform only
+   * the actions that are allowed by both its identity-based policies and its
+   * permissions boundaries.
+   *
+   * @link https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-permissionsboundary
+   * @link https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+   */
+  readonly permissionsBoundary?: IManagedPolicy;
+  /**
+   * The password for the user. This is required so the user can access the
+   * AWS Management Console.
+   *
+   * You can use `SecretValue.unsafePlainText` to specify a password in plain text or
+   * use `secretsmanager.Secret.fromSecretAttributes` to reference a secret in
+   * Secrets Manager.
+   *
+   * @default - User won't be able to access the management console without a password.
+   */
+  readonly password?: SecretValue;
+  /**
+   * Specifies whether the user is required to set a new password the next
+   * time the user logs in to the AWS Management Console.
+   *
+   * If this is set to 'true', you must also specify "initialPassword".
+   *
+   * @default false
+   */
+  readonly passwordResetRequired?: boolean;
+}
+
+export interface DLzIamProps {
+  /**
+   * The account alias to set for this account
+   */
+  readonly accountAlias?: string;
+
+  /**
+   * The password policy for this account
+   * If not set the default AWS IAM policy is applied, use this to customize the password policy.
+   * @Default below:
+   * - Password minimum length: 8 characters
+   * - Uppercase
+   * - Lowercase
+   * - Numbers
+   * - Non-alphanumeric characters
+   * - Never expire password
+   * - Must not be identical to your AWS account name or email address
+   */
+  readonly passwordPolicy?: IamPasswordPolicyProps;
+
+  /**
+   * IAM policies to create in this account.
+   */
+  readonly policies?: DlzIamPolicy[];
+
+  /**
+   * IAM roles to create in this account.
+   */
+  readonly roles?: DlzIamRole[];
+
+  /**
+   * IAM users to create in this account.
+   */
+  readonly users?: DlzIamUser[];
+
+  /**
+   * IAM groups to create in this account with their associated users
+   */
+  readonly userGroups?: DLzIamUserGroup[];
+}
+
 export interface DLzAccount {
   readonly accountId: string;
   readonly name: string;
   readonly type: DlzAccountType;
   readonly vpcs?: DlzVpcProps[];
+
   /**
    * Default notifications settings for the account. Defines settings for email notifications or the slack channel details.
    * This will override the organization level defaultNotification.
@@ -213,6 +433,11 @@ export interface DLzAccount {
    * LakeFormation settings and tags
    */
   readonly lakeFormation?: DlzLakeFormationProps[];
+
+  /**
+   * IAM configuration for the account
+   */
+  readonly iam?: DLzIamProps;
 }
 
 export enum Ou {

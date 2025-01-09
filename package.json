@@ -11,6 +11,8 @@
     "bundle": "npx projen bundle",
     "bundle:constructs/iam-identity-center/identity-store-user-lambda": "npx projen bundle:constructs/iam-identity-center/identity-store-user-lambda",
     "bundle:constructs/iam-identity-center/identity-store-user-lambda:watch": "npx projen bundle:constructs/iam-identity-center/identity-store-user-lambda:watch",
+    "bundle:constructs/iam/lambda/iam-account-alias": "npx projen bundle:constructs/iam/lambda/iam-account-alias",
+    "bundle:constructs/iam/lambda/iam-account-alias:watch": "npx projen bundle:constructs/iam/lambda/iam-account-alias:watch",
     "clear-lib-and-dist": "npx projen clear-lib-and-dist",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
@@ -51,7 +53,7 @@
     "aws-cdk-lib": "2.133.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.0.5",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.24.2",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.31.0",
@@ -75,6 +77,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-cost-explorer": "^3.691.0",
+    "@aws-sdk/client-iam": "^3.723.0",
     "@aws-sdk/client-identitystore": "^3.691.0",
     "@aws-sdk/client-sso-admin": "^3.691.0",
     "@aws-sdk/client-sts": "^3.691.0",
@@ -85,6 +88,7 @@
   },
   "bundledDependencies": [
     "@aws-sdk/client-cost-explorer",
+    "@aws-sdk/client-iam",
     "@aws-sdk/client-identitystore",
     "@aws-sdk/client-sso-admin",
     "@aws-sdk/client-sts",
