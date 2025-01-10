@@ -61,6 +61,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-identitystore',
     '@aws-sdk/client-sso-admin',
     '@aws-sdk/client-iam',
+    '@aws-sdk/client-cloudformation',
   ],
   /* Build dependencies for this repo/module. */
   devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node'],

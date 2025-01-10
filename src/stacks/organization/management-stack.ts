@@ -70,7 +70,7 @@ export class ManagementStack extends DlzStack {
    * Control Tower Controls applied on all OUs
    */
   private rootControls() {
-    const allOus = [Ou.SECURITY, Ou.WORKLOADS, Ou.SUSPENDED];
+    const allOus = [Ou.SECURITY, Ou.WORKLOADS];
     console.assert(this.props.regions.global === Region.EU_WEST_1);
 
     const standardControls = ControlTowerControlMappings.standardControl();
@@ -206,8 +206,6 @@ export class ManagementStack extends DlzStack {
    * Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account
    */
   suspendedOuPolicies() {
-    const tags = PropsOrDefaults.getOrganizationTags(this.props);
-
     new DlzServiceControlPolicy(this,
       this.resourceName('scp-suspended-ou'), {
         name: this.resourceName('scp-suspended-ou'),
@@ -218,13 +216,6 @@ export class ManagementStack extends DlzStack {
         statements: [
           DlzServiceControlPolicy.denyServiceActionStatements(['*']),
         ],
-      });
-    new DlzTagPolicy(this,
-      this.resourceName('tag-policy-suspended-ou'), {
-        name: this.resourceName('tag-policy-suspended-ou'),
-        description: 'Tag policy for the suspended OU',
-        targetIds: [this.props.organization.ous.suspended.ouId],
-        policyTags: tags,
       });
   }
 

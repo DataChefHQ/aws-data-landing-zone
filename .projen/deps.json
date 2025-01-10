@@ -107,6 +107,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-cloudformation",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-cost-explorer",
       "type": "bundled"
     },

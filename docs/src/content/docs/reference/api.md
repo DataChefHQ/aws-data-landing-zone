@@ -15416,6 +15416,45 @@ public readonly vpcs: NetworkEntityVpc[];
 
 ---
 
+### DLzAccountSuspended <a name="DLzAccountSuspended" id="aws-data-landing-zone.DLzAccountSuspended"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DLzAccountSuspended.Initializer"></a>
+
+```typescript
+import { DLzAccountSuspended } from 'aws-data-landing-zone'
+
+const dLzAccountSuspended: DLzAccountSuspended = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DLzAccountSuspended.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DLzAccountSuspended.property.name">name</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.DLzAccountSuspended.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="aws-data-landing-zone.DLzAccountSuspended.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
 ### DlzBudgetProps <a name="DlzBudgetProps" id="aws-data-landing-zone.DlzBudgetProps"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzBudgetProps.Initializer"></a>
@@ -18756,6 +18795,7 @@ const orgOuSuspended: OrgOuSuspended = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.OrgOuSuspended.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.OrgOuSuspended.property.accounts">accounts</a></code> | <code><a href="#aws-data-landing-zone.DLzAccountSuspended">DLzAccountSuspended</a>[]</code> | *No description.* |
 
 ---
 
@@ -18766,6 +18806,16 @@ public readonly ouId: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `accounts`<sup>Optional</sup> <a name="accounts" id="aws-data-landing-zone.OrgOuSuspended.property.accounts"></a>
+
+```typescript
+public readonly accounts: DLzAccountSuspended[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DLzAccountSuspended">DLzAccountSuspended</a>[]
 
 ---
 
@@ -18836,6 +18886,34 @@ public readonly management: DLzManagementAccount;
 
 ---
 
+### PartialAccount <a name="PartialAccount" id="aws-data-landing-zone.PartialAccount"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.PartialAccount.Initializer"></a>
+
+```typescript
+import { PartialAccount } from 'aws-data-landing-zone'
+
+const partialAccount: PartialAccount = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.PartialAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="aws-data-landing-zone.PartialAccount.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
 ### PartialOu <a name="PartialOu" id="aws-data-landing-zone.PartialOu"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.PartialOu.Initializer"></a>
@@ -18851,7 +18929,7 @@ const partialOu: PartialOu = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.PartialOu.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.PartialOu.property.accounts">accounts</a></code> | <code><a href="#aws-data-landing-zone.DLzAccount">DLzAccount</a>[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.PartialOu.property.accounts">accounts</a></code> | <code><a href="#aws-data-landing-zone.PartialAccount">PartialAccount</a>[]</code> | *No description.* |
 
 ---
 
@@ -18868,10 +18946,10 @@ public readonly ouId: string;
 ##### `accounts`<sup>Optional</sup> <a name="accounts" id="aws-data-landing-zone.PartialOu.property.accounts"></a>
 
 ```typescript
-public readonly accounts: DLzAccount[];
+public readonly accounts: PartialAccount[];
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.DLzAccount">DLzAccount</a>[]
+- *Type:* <a href="#aws-data-landing-zone.PartialAccount">PartialAccount</a>[]
 
 ---
 
@@ -21307,6 +21385,7 @@ new Scripts()
 | <code><a href="#aws-data-landing-zone.Scripts.deploySelect">deploySelect</a></code> | CDK deploy stacks identified by the id. |
 | <code><a href="#aws-data-landing-zone.Scripts.diffAll">diffAll</a></code> | CDK diff all stacks. |
 | <code><a href="#aws-data-landing-zone.Scripts.diffSelect">diffSelect</a></code> | CDK diff stacks identified by the id. |
+| <code><a href="#aws-data-landing-zone.Scripts.warnSuspendedAccountResources">warnSuspendedAccountResources</a></code> | Warns about suspended account resources by finding stacks that starts with `dlz-`. |
 
 ---
 
@@ -21433,6 +21512,28 @@ CDK diff stacks identified by the id.
 ###### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.Scripts.diffSelect.parameter.id"></a>
 
 - *Type:* string
+
+---
+
+##### `warnSuspendedAccountResources` <a name="warnSuspendedAccountResources" id="aws-data-landing-zone.Scripts.warnSuspendedAccountResources"></a>
+
+```typescript
+public warnSuspendedAccountResources(props: DataLandingZoneProps, _?: ForceNoPythonArgumentLifting): void
+```
+
+Warns about suspended account resources by finding stacks that starts with `dlz-`.
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.warnSuspendedAccountResources.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+###### `_`<sup>Optional</sup> <a name="_" id="aws-data-landing-zone.Scripts.warnSuspendedAccountResources.parameter._"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
+
+Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
 
 ---
 

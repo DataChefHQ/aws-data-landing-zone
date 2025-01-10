@@ -2,6 +2,7 @@ import * as bootstrap from './bootstrap';
 import * as cost from './cost-allocation-tags';
 import * as deploy from './deploy';
 import * as diff from './diff';
+import { warnSuspendedAccountResources } from './warn-suspended-account-resources';
 import { DataLandingZoneProps, ForceNoPythonArgumentLifting } from '../data-landing-zone-types';
 
 export class Scripts {
@@ -58,6 +59,15 @@ export class Scripts {
    */
   public async configureCostAllocationTags(props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {}) {
     return cost.setCostAllocationTags(props);
+  }
+
+  /**
+   * Warns about suspended account resources by finding stacks that starts with `dlz-`
+   * @param props
+   * @param _ Ignore this parameter, it is used to force a consistent interface across TS and Python usage
+   */
+  public async warnSuspendedAccountResources(props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {}) {
+    return warnSuspendedAccountResources(props);
   }
 }
 

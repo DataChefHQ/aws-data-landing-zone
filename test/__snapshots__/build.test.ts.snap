@@ -526,27 +526,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended": {
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ENCRYPTED_VOLUMES",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads": {
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ENCRYPTED_VOLUMES",
@@ -586,27 +565,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
         ],
         "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-lpyovlyp",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
-    "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended": {
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
@@ -652,27 +610,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended": {
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads": {
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK",
@@ -715,52 +652,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads": {
-      "DependsOn": [
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
-      ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED",
         "Tags": [
@@ -782,18 +674,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Type": "AWS::ControlTower::EnabledControl",
     },
     "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity": {
-      "DependsOn": [
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
-      ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_STORAGE_ENCRYPTED",
         "Tags": [
@@ -814,52 +694,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_STORAGE_ENCRYPTED",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads": {
-      "DependsOn": [
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
-      ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_STORAGE_ENCRYPTED",
         "Tags": [
@@ -883,15 +718,15 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     "dlzglobalAWSGRRESTRICTEDSSHsecurity": {
       "DependsOn": [
         "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
         "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICTED_SSH",
@@ -913,51 +748,18 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRRESTRICTEDSSHsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICTED_SSH",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRRESTRICTEDSSHworkloads": {
       "DependsOn": [
         "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
         "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICTED_SSH",
@@ -981,16 +783,16 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     },
     "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity": {
       "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS",
@@ -1012,51 +814,18 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSworkloads": {
       "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS",
@@ -1081,15 +850,15 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     "dlzglobalAWSGRRESTRICTROOTUSERsecurity": {
       "DependsOn": [
         "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
         "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER",
@@ -1111,51 +880,18 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRRESTRICTROOTUSERsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRRESTRICTROOTUSERworkloads": {
       "DependsOn": [
         "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
-        "dlzglobalAWSGRENCRYPTEDVOLUMESsuspended",
         "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
-        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsuspended",
         "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
-        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsuspended",
         "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
+        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER",
@@ -1179,16 +915,16 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     },
     "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsecurity": {
       "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ROOT_ACCOUNT_MFA_ENABLED",
@@ -1210,51 +946,18 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ROOT_ACCOUNT_MFA_ENABLED",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRROOTACCOUNTMFAENABLEDworkloads": {
       "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ROOT_ACCOUNT_MFA_ENABLED",
@@ -1278,16 +981,16 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     },
     "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsecurity": {
       "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED",
@@ -1309,51 +1012,18 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDworkloads": {
       "DependsOn": [
-        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsuspended",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity",
+        "dlzglobalAWSGRENCRYPTEDVOLUMESworkloads",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSsecurity",
+        "dlzglobalAWSGRMFAENABLEDFORIAMCONSOLEACCESSworkloads",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKsecurity",
+        "dlzglobalAWSGRRDSINSTANCEPUBLICACCESSCHECKworkloads",
+        "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDsecurity",
         "dlzglobalAWSGRRDSSNAPSHOTSPUBLICPROHIBITEDworkloads",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsecurity",
-        "dlzglobalAWSGRRDSSTORAGEENCRYPTEDsuspended",
         "dlzglobalAWSGRRDSSTORAGEENCRYPTEDworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
-        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
-        "dlzglobalAWSGRRESTRICTEDSSHsuspended",
-        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
       ],
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED",
@@ -1378,14 +1048,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     "dlzglobalAWSGRS3BUCKETPUBLICWRITEPROHIBITEDsecurity": {
       "DependsOn": [
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsuspended",
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsuspended",
+        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
+        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
+        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
+        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
         "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsecurity",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsuspended",
         "dlzglobalAWSGRROOTACCOUNTMFAENABLEDworkloads",
         "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsecurity",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsuspended",
         "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDworkloads",
       ],
       "Properties": {
@@ -1408,50 +1078,17 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAWSGRS3BUCKETPUBLICWRITEPROHIBITEDsuspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsuspended",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsuspended",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsecurity",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsuspended",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDworkloads",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsecurity",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsuspended",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDworkloads",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalAWSGRS3BUCKETPUBLICWRITEPROHIBITEDworkloads": {
       "DependsOn": [
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsuspended",
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsuspended",
+        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
+        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
+        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
+        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
         "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsecurity",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsuspended",
         "dlzglobalAWSGRROOTACCOUNTMFAENABLEDworkloads",
         "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsecurity",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsuspended",
         "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDworkloads",
       ],
       "Properties": {
@@ -1526,50 +1163,17 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::SSO::PermissionSet",
     },
-    "dlzglobalSHSecretsManager3suspended": {
-      "DependsOn": [
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsuspended",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsuspended",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsecurity",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsuspended",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDworkloads",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsecurity",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsuspended",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDworkloads",
-      ],
-      "Properties": {
-        "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/KRZOMDMWLCLU",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-rhcmhzsy",
-      },
-      "Type": "AWS::ControlTower::EnabledControl",
-    },
     "dlzglobalSHSecretsManager3workloads": {
       "DependsOn": [
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity",
-        "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsuspended",
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSworkloads",
-        "dlzglobalAWSGRRESTRICTROOTUSERsuspended",
+        "dlzglobalAWSGRRESTRICTROOTUSERsecurity",
+        "dlzglobalAWSGRRESTRICTROOTUSERworkloads",
+        "dlzglobalAWSGRRESTRICTEDSSHsecurity",
+        "dlzglobalAWSGRRESTRICTEDSSHworkloads",
         "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsecurity",
-        "dlzglobalAWSGRROOTACCOUNTMFAENABLEDsuspended",
         "dlzglobalAWSGRROOTACCOUNTMFAENABLEDworkloads",
         "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsecurity",
-        "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDsuspended",
         "dlzglobalAWSGRS3BUCKETPUBLICREADPROHIBITEDworkloads",
       ],
       "Properties": {
@@ -2612,80 +2216,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         ],
         "TargetIds": [
           "234567890123",
-        ],
-        "Type": "TAG_POLICY",
-      },
-      "Type": "AWS::Organizations::Policy",
-    },
-    "dlzglobaltagpolicysuspendedou": {
-      "Properties": {
-        "Content": {
-          "tags": {
-            "Cost Center": {
-              "tag_key": {
-                "@@assign": "Cost Center",
-              },
-              "tag_value": {
-                "@@assign": [
-                  "test",
-                ],
-              },
-            },
-            "Environment": {
-              "tag_key": {
-                "@@assign": "Environment",
-              },
-              "tag_value": {
-                "@@assign": [
-                  "dlz",
-                  "development",
-                  "staging",
-                  "production",
-                ],
-              },
-            },
-            "Owner": {
-              "tag_key": {
-                "@@assign": "Owner",
-              },
-              "tag_value": {
-                "@@assign": [
-                  "infra",
-                  "backend",
-                ],
-              },
-            },
-            "Project": {
-              "tag_key": {
-                "@@assign": "Project",
-              },
-              "tag_value": {
-                "@@assign": [
-                  "dlz",
-                  "accounting-internal",
-                ],
-              },
-            },
-          },
-        },
-        "Description": "Tag policy for the suspended OU",
-        "Name": "dlz-global-tag-policy-suspended-ou",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TargetIds": [
-          "ou-vh4d-rhcmhzsy",
         ],
         "Type": "TAG_POLICY",
       },
