@@ -1,28 +1,11 @@
-import { AssumeRoleCommand, STS } from '@aws-sdk/client-sts';
-import { fromIni } from '@aws-sdk/credential-providers';
 import { DataLandingZoneProps, DlzAllRegions } from '../../data-landing-zone-types';
-import { runCommand } from '../lib/helpers';
+import { assumeRole, runCommand } from '../lib/helpers';
 
 const tags = '--tags Owner=infra --tags Project=dlz --tags Environment=dlz';
-async function assumeRole(profile: string, region: string, roleArn: string) {
-  const stsClient = new STS({
-    region,
-    credentials: fromIni({
-      profile,
-    }),
-  });
 
-  const response = await stsClient.send(new AssumeRoleCommand({
-    RoleArn: roleArn,
-    RoleSessionName: 'CDKBootstrap',
-  }));
-  if (!response.Credentials) {throw new Error('No credentials returned from AssumeRole');}
-
-  return response.Credentials;
-}
 async function bootstrapChildAccount(props: DataLandingZoneProps, bootstrapRoleName: string, accountId: string, region: string) {
   const accountRole = `arn:aws:iam::${accountId}:role/${bootstrapRoleName}`;
-  const accountCreds = await assumeRole(props.localProfile, props.regions.global, accountRole);
+  const accountCreds = await assumeRole(props.localProfile, props.regions.global, accountRole, 'CDKBootstrap');
 
   await runCommand('cdk', [
     'bootstrap',

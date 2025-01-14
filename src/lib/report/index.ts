@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { table } from 'table';
-import { DLzAccount, DlzRegions, OrgOuSecurity } from '../../data-landing-zone-types';
+import { DlzRegions, OrgOuSecurity } from '../../data-landing-zone-types';
 import { groupByField } from '../ts-utils';
 
 export enum ReportType {
@@ -38,9 +38,12 @@ export interface ReportItem extends ReportResource {
   readonly region: string;
 }
 
+export interface PartialAccount {
+  readonly name: string;
+}
 export interface PartialOu {
   readonly ouId: string;
-  readonly accounts?: DLzAccount[];
+  readonly accounts?: PartialAccount[];
 }
 
 export class Report {

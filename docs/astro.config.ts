@@ -154,6 +154,7 @@ export default defineConfig({
                     { label: 'Add Account',  slug: 'sop/add-account'},
                     { label: 'Account Setup',  slug: 'sop/account-setup'},
                     { label: 'IAM Identity Center',  slug: 'sop/iam-identity-center'},
+                    { label: 'AWS Nuke',  slug: 'sop/aws-nuke'},
                 ]
             },
             {

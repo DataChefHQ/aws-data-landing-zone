@@ -1,0 +1,140 @@
+---
+title: AWS Nuke
+description: AWS Nuke
+---
+import DualCode from '../../../components/DualCode.astro';
+
+This Standard Operating Procedure (SOP) provides guidance on cleaning resources within an AWS account. The Data Landing
+Zone (DLZ) includes a [script](/reference/scripts-commands#available-scripts) that utilizes a third-party open-source
+tool called [AWS Nuke](https://github.com/ekristen/aws-nuke).
+
+The script requires the path to the AWS Nuke binary, which is not included in the DLZ and is specific to your
+architecture. It can be executed locally or integrated into a pipeline. The AWS Nuke configuration YAML file will be
+generated and used by the script to execute the AWS Nuke binary.
+
+The generated configuration file varies based on the account's Organizational Unit (OU) in the config file:
+- **Workloads OU**: Will delete all resources except:
+    - ControlTower resources
+    - CDK Bootstrap resources
+    - DLZ-defined resources
+- **Suspended OU**: Will delete all resources except:
+    - ControlTower resources
+    - CDK Bootstrap resources
+
+Refer to the [Account Management / Accounts](/components/account-management/accounts#suspended-ou) page for instructions
+on moving an account from the Workloads OU to the Suspended OU.
+
+## Usage
+
+The AWS Nuke script can be used in a similar manner to the suggested script usage described in the
+[Scripts and Commands](/reference/scripts-commands) page. This section provides an additional example of running
+scripts in TypeScript or Python with arguments. This is one of several ways to execute the script.
+
+1. Add a `bin` directory to the `/scripts` folder.
+2. Download the AWS Nuke binary for your architecture from GitHub and save it in `scripts/bin` as `aws-nuke-local` to
+enable local execution. The script(defined lter) will check the `CI` flag to determine which binary to use.
+3. Download the AWS Nuke binary for the build system's architecture from GitHub and save it in `scripts/bin` as
+`aws-nuke`.
+4. Add the following entries to the `.gitignore` file:
+    ```bash
+    scripts/bin/aws-nuke-local
+    scripts/aws-nuke-config.ym
+    ```
+5. Verify the directory structure. It should resemble the following:
+    ```
+    scripts/
+    ├── bin/
+    │   ├── aws-nuke-local
+    │   └── aws-nuke
+    └── aws-nuke-config.yaml  # This file will only be created when the script runs
+    ```
+6. Create and execute the script using your preferred programming language.
+    <DualCode>
+      <Fragment slot="ts">
+        ```ts
+        // scripts/aws-nuke.ts
+        import { Scripts } from "aws-data-landing-zone";
+        import { config } from "../bin/minimum_config";
+
+        const [,, accountName, ...options] = process.argv;
+        if (!accountName) {
+          console.error('Error: The `accountName` argument is required. `node scripts/aws-nuke.js <accountName> [--no-dry-run]`');
+          process.exit(1);
+        }
+
+        const dryRun = !options.includes('--no-dry-run');
+        if (!dryRun) {
+          console.log('Option `--no-dry-run` specified.');
+        }
+
+        const awsNukeBinary = process.env.CI ? './bin/aws-nuke' : './bin/aws-nuke-local';
+        (async () => {
+          await (new Scripts()).awsNuke(config, __dirname, awsNukeBinary, accountName, dryRun );
+        })();
+        ```
+
+        You can run the script using `npx ts-node`, which is typically included as a dev dependency in AWS CDK projects. To
+        simplify the process, add a corresponding script to your `package.json`.
+
+        ```json
+        // package.json
+        {
+          "scripts": {
+            "aws-nuke": "scripts/aws-nuke.ts"
+          }
+        }
+        ```
+
+        You can then execute the script with:
+        ```
+        npm run aws-nuke -- <accountName> [--no-dry-run]
+        ```
+        For example, to only verify what will be deleted (a dry run) on the the `development` account:
+        ```
+        npm run aws-nuke -- development
+        ```
+        For example, to delete all resources in the `development` account:
+        ```
+        npm run aws-nuke -- development --no-dry-run
+        ```
+
+      </Fragment>
+      <Fragment slot="python">
+      ```python
+      # scripts/aws_nuke.py
+      import os
+      import sys
+      from aws_data_landing_zone import Scripts
+      from data_landing_zone_example_python.config_minimum import config
+
+      if len(sys.argv) < 2:
+          print('Error: The `accountName` argument is required. Use: python scripts/aws_nuke.py <accountName> [--no-dry-run]')
+          sys.exit(1)
+
+      account_name = sys.argv[1]
+      options = sys.argv[2:]
+      dry_run = '--no-dry-run' not in options
+
+      if not dry_run:
+          print('Option `--no-dry-run` specified.')
+
+      aws_nuke_binary = './bin/aws-nuke' if os.getenv('CI') else './bin/aws-nuke-local'
+
+      scripts = Scripts()
+      scripts.aws_nuke(config, os.path.dirname(__file__), aws_nuke_binary, account_name, dry_run)
+      ```
+
+      You can then execute the script with:
+      ```bash
+      python scripts/aws_nuke.py <accountName> [--no-dry-run]
+      ```
+      For example, to only verify what will be deleted (a dry run) on the the `development` account:
+      ```
+      python scripts/aws_nuke.py development
+      ```
+      For example, to delete all resources in the `development` account:
+      ```
+      python scripts/aws_nuke.py development --no-dry-run
+      ```
+      </Fragment>
+    </DualCode>

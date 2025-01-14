@@ -440,6 +440,11 @@ export interface DLzAccount {
   readonly iam?: DLzIamProps;
 }
 
+export interface DLzAccountSuspended {
+  readonly accountId: string;
+  readonly name: string;
+}
+
 export enum Ou {
   SECURITY = 'security',
   WORKLOADS = 'workloads',
@@ -467,6 +472,7 @@ export interface OrgOuWorkloads {
 
 export interface OrgOuSuspended {
   readonly ouId: string;
+  readonly accounts?: DLzAccountSuspended[];
 }
 
 export interface OrgOus {
