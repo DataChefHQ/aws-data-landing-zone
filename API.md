@@ -21375,6 +21375,7 @@ new Scripts()
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#aws-data-landing-zone.Scripts.awsNuke">awsNuke</a></code> | Runs AWS Nuke on the account. |
 | <code><a href="#aws-data-landing-zone.Scripts.boostrapAll">boostrapAll</a></code> | Bootstraps all accounts in all regions as defined by the config. |
 | <code><a href="#aws-data-landing-zone.Scripts.configureCostAllocationTags">configureCostAllocationTags</a></code> | Sets the Cost Allocation Tags for the organization. |
 | <code><a href="#aws-data-landing-zone.Scripts.deployAll">deployAll</a></code> | CDK deploy all stacks. |
@@ -21382,6 +21383,55 @@ new Scripts()
 | <code><a href="#aws-data-landing-zone.Scripts.diffAll">diffAll</a></code> | CDK diff all stacks. |
 | <code><a href="#aws-data-landing-zone.Scripts.diffSelect">diffSelect</a></code> | CDK diff stacks identified by the id. |
 | <code><a href="#aws-data-landing-zone.Scripts.warnSuspendedAccountResources">warnSuspendedAccountResources</a></code> | Warns about suspended account resources by finding stacks that starts with `dlz-`. |
+
+---
+
+##### `awsNuke` <a name="awsNuke" id="aws-data-landing-zone.Scripts.awsNuke"></a>
+
+```typescript
+public awsNuke(props: DataLandingZoneProps, relativeDir: string, awsNukeBinary: string, accountName: string, dryRun?: boolean): void
+```
+
+Runs AWS Nuke on the account.
+
+If the account is in the Workloads OU, it will delete all resources but exclude the ControlTower, CDK Bootstrap and DLZ resources.
+If the account is in the Suspended OU, it will delete all resources but exclude the ControlTower and CDK Bootstrap resources.
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.Scripts.awsNuke.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+###### `relativeDir`<sup>Required</sup> <a name="relativeDir" id="aws-data-landing-zone.Scripts.awsNuke.parameter.relativeDir"></a>
+
+- *Type:* string
+
+Path to the binary.
+
+---
+
+###### `awsNukeBinary`<sup>Required</sup> <a name="awsNukeBinary" id="aws-data-landing-zone.Scripts.awsNuke.parameter.awsNukeBinary"></a>
+
+- *Type:* string
+
+Path to the binary.
+
+---
+
+###### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.Scripts.awsNuke.parameter.accountName"></a>
+
+- *Type:* string
+
+Account name as in the props.
+
+---
+
+###### `dryRun`<sup>Optional</sup> <a name="dryRun" id="aws-data-landing-zone.Scripts.awsNuke.parameter.dryRun"></a>
+
+- *Type:* boolean
+
+If true (default), it will not delete resources but only list them.
 
 ---
 

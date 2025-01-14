@@ -1,3 +1,4 @@
+import { awsNuke } from './aws-nuke';
 import * as bootstrap from './bootstrap';
 import * as cost from './cost-allocation-tags';
 import * as deploy from './deploy';
@@ -68,6 +69,21 @@ export class Scripts {
    */
   public async warnSuspendedAccountResources(props: DataLandingZoneProps, _: ForceNoPythonArgumentLifting = {}) {
     return warnSuspendedAccountResources(props);
+  }
+
+  /**
+   * Runs AWS Nuke on the account.
+   *
+   * If the account is in the Workloads OU, it will delete all resources but exclude the ControlTower, CDK Bootstrap and DLZ resources.
+   * If the account is in the Suspended OU, it will delete all resources but exclude the ControlTower and CDK Bootstrap resources.
+   * @param props
+   * @param relativeDir Path to the binary
+   * @param awsNukeBinary Path to the binary
+   * @param accountName Account name as in the props
+   * @param dryRun If true (default), it will not delete resources but only list them
+   */
+  public async awsNuke(props: DataLandingZoneProps, relativeDir: string, awsNukeBinary: string, accountName: string, dryRun: boolean = true) {
+    return awsNuke(props, relativeDir, awsNukeBinary, accountName, dryRun);
   }
 }
 

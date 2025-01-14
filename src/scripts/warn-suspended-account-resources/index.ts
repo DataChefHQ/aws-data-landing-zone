@@ -2,26 +2,8 @@ import {
   CloudFormationClient,
   ListStacksCommand,
 } from '@aws-sdk/client-cloudformation';
-import { AssumeRoleCommand, STS } from '@aws-sdk/client-sts';
-import { fromIni } from '@aws-sdk/credential-providers';
 import { DataLandingZoneProps } from '../../data-landing-zone-types';
-
-async function assumeRole(profile: string, region: string, roleArn: string) {
-  const stsClient = new STS({
-    region,
-    credentials: !process.env.CI ? fromIni({
-      profile,
-    }) : undefined,
-  });
-
-  const response = await stsClient.send(new AssumeRoleCommand({
-    RoleArn: roleArn,
-    RoleSessionName: 'DlzInspectBootstrappedStacks',
-  }));
-  if (!response.Credentials) {throw new Error('No credentials returned from AssumeRole');}
-
-  return response.Credentials;
-}
+import { assumeRole } from '../lib/helpers';
 
 export async function warnSuspendedAccountResources(props: DataLandingZoneProps) {
   process.env.CDK_DEBUG === 'true' && console.log('Checking for DLZ stacks in suspended accounts...');
@@ -36,7 +18,8 @@ export async function warnSuspendedAccountResources(props: DataLandingZoneProps)
       process.env.CDK_DEBUG === 'true' && console.log('Checking region:', region);
 
       const accountRole = `arn:aws:iam::${account.accountId}:role/${accountRoleName}`;
-      const assumedRoleCreds = await assumeRole(props.localProfile, props.regions.global, accountRole);
+      const assumedRoleCreds = await assumeRole(props.localProfile, props.regions.global, accountRole,
+        'DlzWarnSuspendedStackAccountResources');
       const cloudFormationClient = new CloudFormationClient({
         region,
         credentials: {

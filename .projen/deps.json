@@ -135,8 +135,16 @@
       "type": "bundled"
     },
     {
+      "name": "@types/js-yaml",
+      "type": "bundled"
+    },
+    {
       "name": "execa",
       "version": "5.1.1",
+      "type": "bundled"
+    },
+    {
+      "name": "js-yaml",
       "type": "bundled"
     },
     {
