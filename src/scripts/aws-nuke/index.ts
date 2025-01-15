@@ -27,6 +27,16 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       type: 'contains',
       value: 'aws-controltower',
     },
+
+    //Some AWS SSO and IAM Identity Center resources should nto be deleted, grouping them with the ControlTower filters
+    {
+      type: 'regex',
+      value: 'AWSSSO_.*_DO_NOT_DELETE',
+    },
+    {
+      type: 'glob',
+      value: 'AWSReservedSSO_*',
+    },
   ];
   const cdkFilters = [
     {
