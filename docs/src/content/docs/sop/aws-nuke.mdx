@@ -30,25 +30,22 @@ The AWS Nuke script can be used in a similar manner to the suggested script usag
 [Scripts and Commands](/reference/scripts-commands) page. This section provides an additional example of running
 scripts in TypeScript or Python with arguments. This is one of several ways to execute the script.
 
-1. Add a `bin` directory to the `/scripts` folder.
-2. Download the AWS Nuke binary for your architecture from GitHub and save it in `scripts/bin` as `aws-nuke-local` to
-enable local execution. The script(defined lter) will check the `CI` flag to determine which binary to use.
-3. Download the AWS Nuke binary for the build system's architecture from GitHub and save it in `scripts/bin` as
-`aws-nuke`.
-4. Add the following entries to the `.gitignore` file:
+1. OPTIONAL, to run and test the script locally. Download and extract the AWS Nuke binary from the
+[GitHub releases page](https://github.com/ekristen/aws-nuke/releases) for your architecture and
+save it in `scripts` folder as `aws-nuke`.
+2. Add the following entries to the `.gitignore` file:
     ```bash
-    scripts/bin/aws-nuke-local
-    scripts/aws-nuke-config.ym
+    scripts/aws-nuke
+    scripts/aws-nuke-config.yml
     ```
-5. Verify the directory structure. It should resemble the following:
+3. Verify the directory structure. It should resemble the following:
     ```
     scripts/
-    ├── bin/
-    │   ├── aws-nuke-local
-    │   └── aws-nuke
+    └── aws-nuke
+    └── aws-nuke.ts           # Created in the next step
     └── aws-nuke-config.yaml  # This file will only be created when the script runs
     ```
-6. Create and execute the script using your preferred programming language.
+4. Create and execute the script using your preferred programming language.
     <DualCode>
       <Fragment slot="ts">
         ```ts
@@ -67,7 +64,7 @@ enable local execution. The script(defined lter) will check the `CI` flag to det
           console.log('Option `--no-dry-run` specified.');
         }
 
-        const awsNukeBinary = process.env.CI ? './bin/aws-nuke' : './bin/aws-nuke-local';
+        const awsNukeBinary = './aws-nuke';
         (async () => {
           await (new Scripts()).awsNuke(config, __dirname, awsNukeBinary, accountName, dryRun );
         })();
@@ -118,7 +115,7 @@ enable local execution. The script(defined lter) will check the `CI` flag to det
       if not dry_run:
           print('Option `--no-dry-run` specified.')
 
-      aws_nuke_binary = './bin/aws-nuke' if os.getenv('CI') else './bin/aws-nuke-local'
+      aws_nuke_binary = './aws-nuke'
 
       scripts = Scripts()
       scripts.aws_nuke(config, os.path.dirname(__file__), aws_nuke_binary, account_name, dry_run)
@@ -138,3 +135,61 @@ enable local execution. The script(defined lter) will check the `CI` flag to det
       ```
       </Fragment>
     </DualCode>
+
+## Build / CI Usage
+
+The AWS Nuke binary is 200MB+ extracted and around 40MB compressed. It is recommended to let the pipeline download the
+binary and place it in the `scripts` directory, otherwise Git LFS (Large File System) must be used to commit the binary.
+
+### GitHub Workflow
+
+This workflow can be started by going to the `Actions` tab in your GitHub repository, selecting the `AWS Nuke` workflow,
+and providing the required inputs.
+
+```yml
+name: AWS Nuke
+on:
+  workflow_dispatch:
+    inputs:
+      account-name:
+        description: 'AWS Account Name'
+        required: true
+      dry-run:
+        description: 'Dry Run'
+        required: true
+        default: 'true'
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  nuke:
+    name: AWS Nuke
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install ci
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_MANAGEMENT_ACCOUNT_ID:role/dlz-global-git-hub-deploy-role
+          aws-region: YOUR_MANAGEMENT_ACCOUNT_GLOBAL_REGION
+      - name: Download the aws-nuke binary
+        run: |
+          cd scripts
+          curl -L -o aws-nuke.tar.gz https://github.com/ekristen/aws-nuke/releases/download/v3.44.0/aws-nuke-v3.44.0-linux-amd64.tar.gz
+          tar -xzf aws-nuke.tar.gz
+      - name: Run AWS Nuke
+        run: npm run aws-nuke -- ${{ inputs.account-name }} ${{ inputs.dry-run == 'false' && '--no-dry-run' || '' }}
+```
