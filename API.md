@@ -43,7 +43,7 @@ new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLan
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.AuditGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.AuditGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -57,7 +57,7 @@ new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLan
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.AuditGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.AuditGlobalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.securityHubNotifications">securityHubNotifications</a></code> | *No description.* |
@@ -72,16 +72,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.AuditGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.AuditGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.AuditGlobalStack.addDependency.parameter.target"></a>
 
@@ -425,9 +425,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.AuditGlobalStack.addExpressDependency.parameter.target"></a>
 
@@ -655,9 +656,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.AuditGlobalStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.AuditGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -978,7 +977,7 @@ new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.AuditRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.AuditRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -992,7 +991,7 @@ new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.AuditRegionalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.AuditRegionalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -1006,16 +1005,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.AuditRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.AuditRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.AuditRegionalStack.addDependency.parameter.target"></a>
 
@@ -1359,9 +1358,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.AuditRegionalStack.addExpressDependency.parameter.target"></a>
 
@@ -1583,9 +1583,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.AuditRegionalStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.AuditRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -1906,7 +1904,7 @@ new DlzStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.DlzStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.DlzStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.DlzStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.DlzStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -1920,7 +1918,7 @@ new DlzStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.DlzStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.DlzStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.DlzStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.DlzStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.DlzStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.DlzStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.DlzStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -1934,16 +1932,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.DlzStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.DlzStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.DlzStack.addDependency.parameter.target"></a>
 
@@ -2287,9 +2285,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.DlzStack.addExpressDependency.parameter.target"></a>
 
@@ -2511,9 +2510,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.DlzStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.DlzStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -3293,7 +3290,7 @@ new LogGlobalStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.LogGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.LogGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -3307,7 +3304,7 @@ new LogGlobalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.LogGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.LogGlobalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -3321,16 +3318,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.LogGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.LogGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.LogGlobalStack.addDependency.parameter.target"></a>
 
@@ -3674,9 +3671,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.LogGlobalStack.addExpressDependency.parameter.target"></a>
 
@@ -3898,9 +3896,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.LogGlobalStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.LogGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -4221,7 +4217,7 @@ new LogRegionalStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.LogRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.LogRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -4235,7 +4231,7 @@ new LogRegionalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.LogRegionalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.LogRegionalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -4249,16 +4245,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.LogRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.LogRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.LogRegionalStack.addDependency.parameter.target"></a>
 
@@ -4602,9 +4598,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.LogRegionalStack.addExpressDependency.parameter.target"></a>
 
@@ -4826,9 +4823,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.LogRegionalStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.LogRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -5156,7 +5151,7 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.ManagementStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -5170,7 +5165,7 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 | <code><a href="#aws-data-landing-zone.ManagementStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.ManagementStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#aws-data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
@@ -5190,16 +5185,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.ManagementStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementStack.addDependency.parameter.target"></a>
 
@@ -5543,9 +5538,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementStack.addExpressDependency.parameter.target"></a>
 
@@ -5811,9 +5807,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -6134,7 +6128,7 @@ new WorkloadGlobalDataServicesPhase1Stack(scope: Construct, workloadAccountProps
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -6148,7 +6142,7 @@ new WorkloadGlobalDataServicesPhase1Stack(scope: Construct, workloadAccountProps
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -6162,16 +6156,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency.parameter.target"></a>
 
@@ -6515,9 +6509,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addExpressDependency.parameter.target"></a>
 
@@ -6739,9 +6734,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -7069,7 +7062,7 @@ new WorkloadGlobalNetworkConnectionsPhase1Stack(scope: Construct, workloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -7083,7 +7076,7 @@ new WorkloadGlobalNetworkConnectionsPhase1Stack(scope: Construct, workloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.createPeeringRole">createPeeringRole</a></code> | *No description.* |
@@ -7098,16 +7091,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency.parameter.target"></a>
 
@@ -7451,9 +7444,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addExpressDependency.parameter.target"></a>
 
@@ -7693,9 +7687,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -8023,7 +8015,7 @@ new WorkloadGlobalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -8037,7 +8029,7 @@ new WorkloadGlobalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -8051,16 +8043,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency.parameter.target"></a>
 
@@ -8404,9 +8396,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addExpressDependency.parameter.target"></a>
 
@@ -8628,9 +8621,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -8958,7 +8949,7 @@ new WorkloadGlobalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -8972,7 +8963,7 @@ new WorkloadGlobalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -8986,16 +8977,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency.parameter.target"></a>
 
@@ -9339,9 +9330,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addExpressDependency.parameter.target"></a>
 
@@ -9563,9 +9555,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -9893,7 +9883,7 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -9907,7 +9897,7 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -9921,16 +9911,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalStack.addDependency.parameter.target"></a>
 
@@ -10274,9 +10264,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalStack.addExpressDependency.parameter.target"></a>
 
@@ -10498,9 +10489,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadGlobalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -10821,7 +10810,7 @@ new WorkloadRegionalDataServicesPhase1Stack(scope: Construct, workloadAccountPro
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -10835,7 +10824,7 @@ new WorkloadRegionalDataServicesPhase1Stack(scope: Construct, workloadAccountPro
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -10849,16 +10838,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency.parameter.target"></a>
 
@@ -11202,9 +11191,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addExpressDependency.parameter.target"></a>
 
@@ -11426,9 +11416,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -11756,7 +11744,7 @@ new WorkloadRegionalNetworkConnectionsPhase2Stack(scope: Construct, workloadAcco
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -11770,7 +11758,7 @@ new WorkloadRegionalNetworkConnectionsPhase2Stack(scope: Construct, workloadAcco
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -11784,16 +11772,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency.parameter.target"></a>
 
@@ -12137,9 +12125,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addExpressDependency.parameter.target"></a>
 
@@ -12361,9 +12350,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -12691,7 +12678,7 @@ new WorkloadRegionalNetworkConnectionsPhase3Stack(scope: Construct, workloadAcco
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -12705,7 +12692,7 @@ new WorkloadRegionalNetworkConnectionsPhase3Stack(scope: Construct, workloadAcco
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -12719,16 +12706,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency.parameter.target"></a>
 
@@ -13072,9 +13059,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addExpressDependency.parameter.target"></a>
 
@@ -13296,9 +13284,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -13626,7 +13612,7 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addDependency">addDependency</a></code> | Add a dependency between this stack and another stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -13640,7 +13626,7 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addExpressDependency">addExpressDependency</a></code> | Add a dependency between this stack and another ExpressStack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
@@ -13654,16 +13640,16 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### ~~`addDependency`~~ <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
 ```
 
-Add a dependency between this stack and another stack.
+Use `addDependency` for dependencies between stacks in an ExpressStage.
 
-This can be used to define dependencies between any two stacks within an
-app, and also supports nested stacks.
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalStack.addDependency.parameter.target"></a>
 
@@ -14007,9 +13993,10 @@ Convert an object, potentially containing tokens, to a YAML string.
 public addExpressDependency(target: ExpressStack, reason?: string): void
 ```
 
-Add a dependency between this stack and another ExpressStack.
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
 
-This can be used to define dependencies between any two stacks within an
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
 ###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalStack.addExpressDependency.parameter.target"></a>
 
@@ -14231,9 +14218,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### ~~`dependencies`~~<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalStack.property.dependencies"></a>
-
-- *Deprecated:* Use `expressDependencies()` instead of `dependencies` to get the dependencies of an `ExpressStack`.
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.WorkloadRegionalStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];

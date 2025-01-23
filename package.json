@@ -72,7 +72,7 @@
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.133.0",
-    "cdk-express-pipeline": "^1.0.2",
+    "cdk-express-pipeline": "^1.1.0",
     "constructs": "^10.0.5"
   },
   "dependencies": {
@@ -84,8 +84,7 @@
     "@aws-sdk/client-sts": "^3.691.0",
     "@aws-sdk/credential-providers": "^3.691.0",
     "@types/js-yaml": "^4.0.9",
-    "cdk-express-pipeline": "^1.0.2",
-    "execa": "5.1.1",
+    "cdk-express-pipeline": "^1.1.0",
     "js-yaml": "^4.1.0",
     "table": "^6.8.2"
   },
@@ -98,7 +97,6 @@
     "@aws-sdk/client-sts",
     "@aws-sdk/credential-providers",
     "@types/js-yaml",
-    "execa",
     "js-yaml",
     "table"
   ],

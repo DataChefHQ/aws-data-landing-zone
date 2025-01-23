@@ -355,7 +355,7 @@
           "exec": "npm install"
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml execa js-yaml table aws-cdk-lib cdk-express-pipeline constructs"
+          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib cdk-express-pipeline constructs"
         },
         {
           "exec": "npx projen"
