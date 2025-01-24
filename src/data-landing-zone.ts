@@ -197,9 +197,13 @@ export class DataLandingZone {
 
     this.pipeline.synth(this.pipeline.waves, this.props.printDeploymentOrder);
 
-    Tags.of(app).add('Owner', 'infra');
-    Tags.of(app).add('Project', 'dlz');
-    Tags.of(app).add('Environment', 'dlz');
+    // https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/2244
+    const excludeResourceTypes = [
+      'AWS::Organizations::Policy',
+    ];
+    Tags.of(app).add('Owner', 'infra', { excludeResourceTypes: excludeResourceTypes });
+    Tags.of(app).add('Project', 'dlz', { excludeResourceTypes: excludeResourceTypes });
+    Tags.of(app).add('Environment', 'dlz', { excludeResourceTypes: excludeResourceTypes });
 
     if (this.props.printReport !== false) {
       Report.printConsoleReport();
