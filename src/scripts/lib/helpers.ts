@@ -1,39 +1,65 @@
+import { spawn } from 'child_process';
 import { AssumeRoleCommand, STS } from '@aws-sdk/client-sts';
 import { fromIni } from '@aws-sdk/credential-providers';
-//eslint-disable-next-line @typescript-eslint/no-require-imports
-import execa = require('execa');
 
 export async function runCommand(
   command: string,
   args: string,
   options: {
-    stdout?: 'inherit' | 'pipe' | 'ignore';
-    stderr?: 'inherit' | 'pipe' | 'ignore';
     env?: Record<string, string>;
     cwd?: string;
-  } = {
-  },
+  } = {},
+  outputPrefix: string = '',
   echoCommand: boolean = true,
   exitProcessOnError: boolean = true,
 ) {
 
-  if (echoCommand) console.log('> Running:', command, args);
+  if (echoCommand) console.log(outputPrefix + '> Running:', command, args);
 
-  const resp = await execa(command, args.split(' '), {
-    stdout: options.stdout || 'inherit',
-    stderr: options.stderr || 'inherit',
-    env: options.env,
+  const argsArray = args.split(' ');
+  const child = spawn(command, argsArray, {
+    stdio: ['inherit', 'pipe', 'pipe'],
+    env: {
+      ...process.env,
+      ...options.env,
+      FORCE_COLOR: 'true',
+    },
     cwd: options.cwd,
-    preferLocal: true,
-    reject: false,
     shell: true,
   });
 
-  if (resp.exitCode !== 0) {
+  let stdoutAll = '';
+  let stderrAll = '';
+
+  let stdoutLineBuffer = '';
+  child.stdout.on('data', (data) => {
+    stdoutAll += data;
+    stdoutLineBuffer += data;
+    let lines = stdoutLineBuffer.split('\n');
+    stdoutLineBuffer = lines.pop() || '';
+    lines.forEach(line => console.log(outputPrefix + line));
+  });
+
+  let stderrLineBuffer = '';
+  child.stderr.on('data', (data) => {
+    stderrAll += data;
+    stderrLineBuffer += data;
+    let lines = stderrLineBuffer.split('\n');
+    stderrLineBuffer = lines.pop() || '';
+    lines.forEach(line => console.log(outputPrefix + line));
+  });
+
+  const exitCode = await new Promise<number>((resolve, reject) => {
+    child.on('close', resolve);
+    child.on('error', reject);
+  });
+
+  if (exitCode !== 0) {
     if (exitProcessOnError) {
-      console.error(resp.stderr || resp.stdout);
       process.exit(1);
-    } else {throw new Error(resp.stderr || resp.stdout);}
+    } else {
+      throw new Error((stderrAll || stdoutAll).split('\n').map((line) => outputPrefix+line.trim()).join('\n'));
+    }
   }
 }
 
