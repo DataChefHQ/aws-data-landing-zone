@@ -484,20 +484,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         },
         "Description": "Deny all IAM policy creation/modification unless permissions boundary is applied",
         "Name": "IamPolicyPermissionBoundaryPolicy",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
         "TargetIds": [
           "ou-vh4d-nc2zzf9z",
         ],
@@ -1936,20 +1922,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         },
         "Description": "SCP statements applied to the project-1-development account",
         "Name": "dlz-global-scp-project-1-development-account",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
         "TargetIds": [
           "381491899779",
         ],
@@ -2009,20 +1981,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         },
         "Description": "SCP statements applied to the project-1-production account",
         "Name": "dlz-global-scp-project-1-production-account",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
         "TargetIds": [
           "234567890123",
         ],
@@ -2052,20 +2010,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         },
         "Description": "SCP statements applied to the suspended OU",
         "Name": "dlz-global-scp-suspended-ou",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
         "TargetIds": [
           "ou-vh4d-rhcmhzsy",
         ],
@@ -2126,20 +2070,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         },
         "Description": "Tag policy for the project-1-development account",
         "Name": "dlz-global-tag-policy-project-1-development-account",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
         "TargetIds": [
           "381491899779",
         ],
@@ -2200,20 +2130,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         },
         "Description": "Tag policy for the project-1-production account",
         "Name": "dlz-global-tag-policy-project-1-production-account",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
         "TargetIds": [
           "234567890123",
         ],
