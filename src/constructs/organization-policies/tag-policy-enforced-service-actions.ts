@@ -20,7 +20,7 @@ export const tagPolicyEnforcedServiceActions = [
   'comprehend:*',
   'config:*',
   'dms:*',
-  '"directconnect:*',
+  'directconnect:*',
   'dynamodb:*',
   'elasticfilesystem:*',
   'events:*',
