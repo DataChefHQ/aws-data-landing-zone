@@ -16634,7 +16634,7 @@ const dlzTag: DlzTag = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.DlzTag.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzTag.property.values">values</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTag.property.values">values</a></code> | <code>string[]</code> | Specifying an empty array or undefined still enforces the tag presence but does not enforce the value. |
 
 ---
 
@@ -16655,6 +16655,8 @@ public readonly values: string[];
 ```
 
 - *Type:* string[]
+
+Specifying an empty array or undefined still enforces the tag presence but does not enforce the value.
 
 ---
 
@@ -18127,7 +18129,7 @@ const mandatoryTags: MandatoryTags = { ... }
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="aws-data-landing-zone.MandatoryTags.property.environment"></a>
+##### `environment`<sup>Optional</sup> <a name="environment" id="aws-data-landing-zone.MandatoryTags.property.environment"></a>
 
 ```typescript
 public readonly environment: string[];
@@ -18137,9 +18139,12 @@ public readonly environment: string[];
 
 The values of the mandatory `Environment` tag that all resources must have.
 
+Specifying an empty array or undefined
+still enforces the tag presence but does not enforce the value.
+
 ---
 
-##### `owner`<sup>Required</sup> <a name="owner" id="aws-data-landing-zone.MandatoryTags.property.owner"></a>
+##### `owner`<sup>Optional</sup> <a name="owner" id="aws-data-landing-zone.MandatoryTags.property.owner"></a>
 
 ```typescript
 public readonly owner: string[];
@@ -18149,9 +18154,12 @@ public readonly owner: string[];
 
 The values of the mandatory `Owner` tag that all resources must have.
 
+Specifying an empty array or undefined
+still enforces the tag presence but does not enforce the value.
+
 ---
 
-##### `project`<sup>Required</sup> <a name="project" id="aws-data-landing-zone.MandatoryTags.property.project"></a>
+##### `project`<sup>Optional</sup> <a name="project" id="aws-data-landing-zone.MandatoryTags.property.project"></a>
 
 ```typescript
 public readonly project: string[];
@@ -18160,6 +18168,9 @@ public readonly project: string[];
 - *Type:* string[]
 
 The values of the mandatory `Project` tag that all resources must have.
+
+Specifying an empty array or undefined
+still enforces the tag presence but does not enforce the value.
 
 ---
 

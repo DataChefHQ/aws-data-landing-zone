@@ -1,11 +1,16 @@
 import * as organizations from 'aws-cdk-lib/aws-organizations';
 import * as cdk from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
+import { tagPolicyEnforcedServiceActions } from './tag-policy-enforced-service-actions';
 import { IReportResource, ReportResource, ReportType } from '../../lib/report';
 
 
 export interface DlzTag {
   readonly name: string;
+
+  /**
+   * Specifying an empty array or undefined still enforces the tag presence but does not enforce the value.
+   */
   readonly values?: string[];
 }
 export interface DlzTagPolicyProps {
@@ -26,6 +31,9 @@ type PolicyTags = {
     tag_value?: {
       '@@assign': string[];
     };
+    enforced_for?: {
+      '@@assign': string[];
+    };
   };
 };
 
@@ -44,6 +52,9 @@ export class DlzTagPolicy implements IReportResource {
             '@@assign': tag.values,
           },
         } : {}),
+        enforced_for: {
+          '@@assign': tagPolicyEnforcedServiceActions,
+        },
       };
       return acc;
     }, {});
