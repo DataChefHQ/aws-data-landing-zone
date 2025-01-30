@@ -118,22 +118,22 @@ export class Defaults {
   public static mandatoryTags(props: DataLandingZoneProps): DlzTag[] {
     return [{
       name: 'Owner',
-      values: [
+      values: props.mandatoryTags.owner && props.mandatoryTags.owner.length > 0 ? [
         'infra',
         ...props.mandatoryTags.owner,
-      ],
+      ]: undefined,
     }, {
       name: 'Project',
-      values: [
+      values: props.mandatoryTags.project && props.mandatoryTags.project.length > 0 ? [
         'dlz',
         ...props.mandatoryTags.project,
-      ],
+      ]: undefined,
     }, {
       name: 'Environment',
-      values: [
+      values: props.mandatoryTags.environment && props.mandatoryTags.environment.length > 0 ? [
         'dlz',
         ...props.mandatoryTags.environment,
-      ],
+      ] : undefined,
     }];
   }
 

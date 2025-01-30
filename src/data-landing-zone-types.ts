@@ -498,19 +498,22 @@ export interface DLzOrganization {
 
 export interface MandatoryTags {
   /**
-   * The values of the mandatory `Owner` tag that all resources must have.
+   * The values of the mandatory `Owner` tag that all resources must have. Specifying an empty array or undefined
+   * still enforces the tag presence but does not enforce the value.
    */
-  readonly owner: string[];
+  readonly owner: string[] | undefined;
 
   /**
-   * The values of the mandatory `Project` tag that all resources must have.
+   * The values of the mandatory `Project` tag that all resources must have. Specifying an empty array or undefined
+   * still enforces the tag presence but does not enforce the value.
    */
-  readonly project: string[];
+  readonly project: string[] | undefined;
 
   /**
-   * The values of the mandatory `Environment` tag that all resources must have.
+   * The values of the mandatory `Environment` tag that all resources must have. Specifying an empty array or undefined
+   * still enforces the tag presence but does not enforce the value.
    */
-  readonly environment: string[];
+  readonly environment: string[] | undefined;
 }
 
 export interface SecurityHubNotificationProps {

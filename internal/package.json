@@ -1,0 +1,23 @@
+{
+  "name": "internal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "extract-tag-policy-enforcement-resources": "npx ts-node --prefer-ts-exts extract-tag-policy-enforcement-resources.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.4.3"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "chromium": "^3.0.3",
+    "esbuild": "^0.24.2",
+    "puppeteer-core": "^23.11.1"
+  }
+}

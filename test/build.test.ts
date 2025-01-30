@@ -43,8 +43,8 @@ const configBase: DataLandingZoneProps = {
     'ecs:*',
   ],
   mandatoryTags: {
-    owner: ['backend'],
-    project: ['accounting-internal'],
+    owner: [],
+    project: undefined,
     environment: ['development', 'staging', 'production'],
   },
   additionalMandatoryTags: [
