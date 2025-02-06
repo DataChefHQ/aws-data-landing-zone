@@ -24,7 +24,7 @@ to the resources.
 
 ## Default Mandatory Tags
 
-The mandatory tags all begin with a capital letter, but the underlying code property is lowercase. The mandatory tags include:
+The mandatory tags all begin with a capital letter, but the underlying code property is lowercase. The mandatory tags are:
 - `Owner` - Identifies the team or individual responsible for the resource.
 - `Project` - Specifies the project to which the resource belongs.
 - `Environment` - Defines the environment of the resource, such as `development`, `staging`, or `production`.
@@ -37,6 +37,14 @@ The DLZ construct will automatically apply the following tags to all resources i
 These tag values can be customized by providing an array of values for each tag in `mandatoryTags`.
 Note that while the code property is lowercase, the tags created will follow the capitalized format outlined above.
 
+Tag values are optional, but if provided, the resource will only be created if the tag value matches one of the specified
+values. Specifying an empty array or `undefined` enforces the presence of the tag but does not restrict
+its value.
+
+Not all service actions are supported for enforcement by the Organization Tag Policy. To keep the policy size manageable,
+we do not list every resource in the [list of supported resources](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_supported-resources-enforcement.html).
+Instead, we include all `:*` actions and focus on "major" services to ensure the policy remains concise.
+
 <DualCode>
   <Fragment slot="ts">
     ```ts
@@ -46,8 +54,8 @@ Note that while the code property is lowercase, the tags created will follow the
     const app = new App();
     const dlz = new DataLandingZone(app, {
       mandatoryTags: {
-        owner: ['backend'],
-        project: ['project1'],
+        owner: [],
+        project: undefined,
         environment: ['development', 'staging', 'production'],
       },
      ...
@@ -62,8 +70,8 @@ Note that while the code property is lowercase, the tags created will follow the
     app = cdk.App()
     dlz.DataLandingZone(app,
         mandatory_tags={
-            "owner": ["backend"],
-            "project": ["project1"],
+            "owner": None,
+            "project": dlz.ANY_TAG_VALUE,
             "environment": ["development", "staging", "production"],
         },
         ...
