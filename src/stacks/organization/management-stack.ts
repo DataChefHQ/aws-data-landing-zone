@@ -129,6 +129,7 @@ export class ManagementStack extends DlzStack {
       DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags),
     ];
 
+    const orgPolicies: Construct[] = [];
     // ============================================================================================
     // ======================================= DEVELOPMENT ========================================
     // ============================================================================================
@@ -162,6 +163,9 @@ export class ManagementStack extends DlzStack {
         '*',
         dlzTagPolicyDevelop.reportResource,
       );
+
+      orgPolicies.push(dlzScpDevelop.policy);
+      orgPolicies.push(dlzTagPolicyDevelop.policy);
     }
 
 
@@ -199,7 +203,12 @@ export class ManagementStack extends DlzStack {
         '*',
         dlzTagPolicyProduction.reportResource,
       );
+
+      orgPolicies.push(dlzScpProd.policy);
+      orgPolicies.push(dlzTagPolicyProduction.policy);
     }
+
+    limitCfnExecutions(orgPolicies, 8);
   }
 
   /**
