@@ -19,7 +19,10 @@ import {
   NetworkAddress,
   SlackChannel,
 } from './constructs';
-import { AuditGlobalStack } from './stacks';
+import { AuditGlobalStack, ManagementGlobalStack } from './stacks';
+import {
+  ManagementGlobalIamIdentityCenterStack,
+} from './stacks/organization/management/management-global-iam-identity-center-stack';
 
 /**
  * Control Tower Supported Regions as listed here
@@ -747,6 +750,11 @@ export interface DataLandingZoneProps {
   readonly deploymentPlatform?: DeploymentPlatform;
 
   readonly network?: Network;
+}
+
+export interface ManagementStacks {
+  readonly global: ManagementGlobalStack;
+  readonly globalIamIdentityCenter?: ManagementGlobalIamIdentityCenterStack;
 }
 
 export interface LogStacks {

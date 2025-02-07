@@ -719,8 +719,11 @@ describe('Build', () => {
 
     const dlz = new DataLandingZone(app, configBase);
 
-    const managementTemplate: Template = Template.fromStack(dlz.managementStack);
+    const managementTemplate: Template = Template.fromStack(dlz.managementStacks.global);
     expect(cdkTemplateToJson(managementTemplate)).toMatchSnapshot('managementTemplate snapshot');
+
+    const globalIamIdentityCenter: Template = Template.fromStack(dlz.managementStacks.globalIamIdentityCenter!);
+    expect(cdkTemplateToJson(globalIamIdentityCenter)).toMatchSnapshot('globalIamIdentityCenter snapshot');
 
     // const logStacksGlobalTemplate: Template = Template.fromStack(dlz.logStacks.global);
     // expect(logStacksGlobalTemplate.toJSON()).toMatchSnapshot('logStacksGlobalTemplate snapshot');

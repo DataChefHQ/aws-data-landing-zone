@@ -9,10 +9,13 @@ import {
   DLzAccount,
   ForceNoPythonArgumentLifting,
   GlobalVariables,
-  LogStacks,
+  LogStacks, ManagementStacks,
 } from './data-landing-zone-types';
 import { Report } from './lib/report';
-import { ManagementStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
+import { ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
+import {
+  ManagementGlobalIamIdentityCenterStack,
+} from './stacks/organization/management/management-global-iam-identity-center-stack';
 import { AuditGlobalStack } from './stacks/organization/security/audit/global-stack';
 import { WorkloadGlobalStack } from './stacks/organization/workloads/base/global-stack';
 import { WorkloadRegionalStack } from './stacks/organization/workloads/base/regional-stack';
@@ -131,7 +134,7 @@ export class DataLandingZone {
   private pipeline: CdkExpressPipeline;
 
   /* For direct access to stacks */
-  public managementStack!: ManagementStack;
+  public managementStacks!: ManagementStacks;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
 
@@ -177,7 +180,7 @@ export class DataLandingZone {
 
     this.pipeline = new CdkExpressPipeline();
 
-    this.managementStack = this.stageManagement();
+    this.managementStacks = this.stageManagement();
     this.auditStacks = this.stageAudit();
     this.logStacks = this.stageLog();
 
@@ -215,7 +218,7 @@ export class DataLandingZone {
     const managementWave = this.pipeline.addWave('root--global');
     const managementStage = managementWave.addStage('management');
 
-    const management = new ManagementStack(this.app, {
+    const global = new ManagementGlobalStack(this.app, {
       stage: managementStage,
       name: { ou: 'root', account: 'management', stack: 'global', region: this.props.regions.global },
       env: {
@@ -225,7 +228,26 @@ export class DataLandingZone {
     },
     this.props);
 
-    return management;
+    let globalIamIdentityCenter: ManagementGlobalIamIdentityCenterStack | undefined = undefined;
+    if (this.props.iamIdentityCenter) {
+      const iamIdentityCcenterStage = managementWave.addStage('iam-identity-center');
+      globalIamIdentityCenter = new ManagementGlobalIamIdentityCenterStack(this.app, {
+        stage: iamIdentityCcenterStage,
+        // iamic - iam identity center
+        name: { ou: 'root', account: 'management', stack: 'global-iamic', region: this.props.regions.global },
+        env: {
+          account: this.props.organization.root.accounts.management.accountId,
+          region: this.props.regions.global,
+        },
+      },
+      this.props);
+    }
+
+    const ret: ManagementStacks = {
+      global,
+      globalIamIdentityCenter,
+    };
+    return ret;
   };
 
   private stageLog() {

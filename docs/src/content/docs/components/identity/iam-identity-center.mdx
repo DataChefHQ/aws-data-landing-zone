@@ -22,7 +22,9 @@ The email address must be used as the username. If an external IdP is used, the 
 
 Users can be added to access groups, which are assigned permission sets. Permission sets can be created from managed
 policies or inline policies. Access groups support wildcards for account names, making it easy to assign permissions
-across multiple accounts.
+across multiple accounts. There are three fixed named accounts: `root`, `log`, and `audit` as per required configuration,
+the rest are as per the account configuration in the Workloads OU.
+
 
 The example below assigns the `AdministratorAccess` permission set (created by
 `...Defaults.iamIdentityCenterPermissionSets()`) to the user `you@org.com` in all accounts, as specified by the wildcard

@@ -49,10 +49,8 @@ To add a service to the `denyServiceList` property of the configuration, provide
 ## Defaults
 
 The `Defaults.denyServiceList` function is used to create a list of services that should be denied across all accounts
-and regions. This function currently returns the following list of services:
-```
-'eks:*',
-```
+and regions. You can find a detailed list of these controls in the code
+[here](https://github.com/DataChefHQ/aws-data-landing-zone/blob/2c4cc83116cc124bee8f1f83d53ccff4d02e8ab4/src/defaults.ts#L21).
 
 ## API References
 - [DataLandingZoneProps.denyServiceList](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList)

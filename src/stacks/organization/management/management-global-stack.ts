@@ -3,31 +3,29 @@ import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import {
+  DlzControlTowerEnabledControl,
+  IDlzControlTowerControl,
+} from '../../../constructs/dlz-control-tower-control';
+import {
   AccountChatbots,
   DlzBudget,
   ControlTowerControlMappings,
   DlzStack,
   DlzStackProps,
-  IamIdentityCenter,
-} from '../../constructs';
-import {
-  DlzControlTowerEnabledControl,
-  IDlzControlTowerControl,
-} from '../../constructs/dlz-control-tower-control';
-import { DlzServiceControlPolicy } from '../../constructs/organization-policies';
-import { DlzTagPolicy } from '../../constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../data-landing-zone-types';
-import { PropsOrDefaults } from '../../defaults';
-import { limitCfnExecutions } from '../../lib/cdk-utils';
-import { Report } from '../../lib/report';
+} from '../../../constructs/index';
+import { DlzServiceControlPolicy } from '../../../constructs/organization-policies/index';
+import { DlzTagPolicy } from '../../../constructs/organization-policies/tag-policy';
+import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../../data-landing-zone-types';
+import { PropsOrDefaults } from '../../../defaults';
+import { limitCfnExecutions } from '../../../lib/cdk-utils';
+import { Report } from '../../../lib/report';
 
-export class ManagementStack extends DlzStack {
+export class ManagementGlobalStack extends DlzStack {
 
   constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
     super(scope, stackProps);
 
     this.rootControls();
-    this.iamIdentityCenter();
     this.iamPermissionBoundary();
 
     this.workloadAccountsOrgPolicies();
@@ -57,13 +55,6 @@ export class ManagementStack extends DlzStack {
         this.props.regions,
         boundaryPolicy.reportResource);
     }
-  }
-
-  /**
-   * IAM Identity Center
-   */
-  iamIdentityCenter() {
-    if (this.props.iamIdentityCenter) { new IamIdentityCenter(this, this.props.organization, this.props.iamIdentityCenter); }
   }
 
   /**

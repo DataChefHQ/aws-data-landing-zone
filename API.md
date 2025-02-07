@@ -5110,37 +5110,37 @@ public readonly accountName: string;
 ---
 
 
-### ManagementStack <a name="ManagementStack" id="aws-data-landing-zone.ManagementStack"></a>
+### ManagementGlobalIamIdentityCenterStack <a name="ManagementGlobalIamIdentityCenterStack" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack"></a>
 
-#### Initializers <a name="Initializers" id="aws-data-landing-zone.ManagementStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer"></a>
 
 ```typescript
-import { ManagementStack } from 'aws-data-landing-zone'
+import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
 
-new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new ManagementGlobalIamIdentityCenterStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.ManagementStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="aws-data-landing-zone.ManagementStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer.parameter.stackProps"></a>
 
 - *Type:* <a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.ManagementStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
@@ -5150,34 +5150,28 @@ new ManagementStack(scope: Construct, stackProps: DlzStackProps, props: DataLand
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.budgets">budgets</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStack.iamIdentityCenter">iamIdentityCenter</a></code> | IAM Identity Center. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="aws-data-landing-zone.ManagementStack.toString"></a>
+##### `toString` <a name="toString" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -5185,7 +5179,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -5196,19 +5190,19 @@ Use `addDependency` for dependencies between stacks in an ExpressStage.
 Otherwise, use `addExpressDependency`
 to construct the Pipeline of stacks between Waves and Stages.
 
-###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="aws-data-landing-zone.ManagementStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -5220,19 +5214,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="aws-data-landing-zone.ManagementStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addTransform` <a name="addTransform" id="aws-data-landing-zone.ManagementStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -5253,7 +5247,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="aws-data-landing-zone.ManagementStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -5261,7 +5255,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="aws-data-landing-zone.ManagementStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -5287,19 +5281,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="aws-data-landing-zone.ManagementStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -5313,19 +5307,19 @@ If you don’t supply a value for name, the value you’re exporting must be a R
 
 One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="aws-data-landing-zone.ManagementStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -5347,13 +5341,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="aws-data-landing-zone.ManagementStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="aws-data-landing-zone.ManagementStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -5369,7 +5363,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="aws-data-landing-zone.ManagementStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -5377,7 +5371,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="aws-data-landing-zone.ManagementStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -5401,19 +5395,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="aws-data-landing-zone.ManagementStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="aws-data-landing-zone.ManagementStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="aws-data-landing-zone.ManagementStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -5424,19 +5418,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="aws-data-landing-zone.ManagementStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="aws-data-landing-zone.ManagementStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="aws-data-landing-zone.ManagementStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -5447,7 +5441,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="aws-data-landing-zone.ManagementStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -5455,7 +5449,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="aws-data-landing-zone.ManagementStack.resolve"></a>
+##### `resolve` <a name="resolve" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -5463,13 +5457,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="aws-data-landing-zone.ManagementStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -5482,7 +5476,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="aws-data-landing-zone.ManagementStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -5490,7 +5484,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="aws-data-landing-zone.ManagementStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -5498,7 +5492,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="aws-data-landing-zone.ManagementStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -5506,19 +5500,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="aws-data-landing-zone.ManagementStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="aws-data-landing-zone.ManagementStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -5526,13 +5520,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `addExpressDependency` <a name="addExpressDependency" id="aws-data-landing-zone.ManagementStack.addExpressDependency"></a>
+##### `addExpressDependency` <a name="addExpressDependency" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addExpressDependency"></a>
 
 ```typescript
 public addExpressDependency(target: ExpressStack, reason?: string): void
@@ -5543,19 +5537,19 @@ Only use to create dependencies between Stacks in Waves and Stages for building 
 If the `addExpressDependency` is used outside the Pipeline construction,
 it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
-###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementStack.addExpressDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addExpressDependency.parameter.target"></a>
 
 - *Type:* cdk-express-pipeline.ExpressStack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementStack.addExpressDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addExpressDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `expressDependencies` <a name="expressDependencies" id="aws-data-landing-zone.ManagementStack.expressDependencies"></a>
+##### `expressDependencies` <a name="expressDependencies" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.expressDependencies"></a>
 
 ```typescript
 public expressDependencies(): ExpressStack[]
@@ -5563,7 +5557,7 @@ public expressDependencies(): ExpressStack[]
 
 The ExpressStack dependencies of the stack.
 
-##### `resourceName` <a name="resourceName" id="aws-data-landing-zone.ManagementStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -5571,77 +5565,33 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="aws-data-landing-zone.ManagementStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
 ---
 
-##### `budgets` <a name="budgets" id="aws-data-landing-zone.ManagementStack.budgets"></a>
-
-```typescript
-public budgets(): void
-```
-
-##### `deploymentPlatformGitHub` <a name="deploymentPlatformGitHub" id="aws-data-landing-zone.ManagementStack.deploymentPlatformGitHub"></a>
-
-```typescript
-public deploymentPlatformGitHub(): void
-```
-
-##### `iamIdentityCenter` <a name="iamIdentityCenter" id="aws-data-landing-zone.ManagementStack.iamIdentityCenter"></a>
-
-```typescript
-public iamIdentityCenter(): void
-```
-
-IAM Identity Center.
-
-##### `iamPermissionBoundary` <a name="iamPermissionBoundary" id="aws-data-landing-zone.ManagementStack.iamPermissionBoundary"></a>
-
-```typescript
-public iamPermissionBoundary(): void
-```
-
-IAM Policy Permission Boundary.
-
-##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="aws-data-landing-zone.ManagementStack.suspendedOuPolicies"></a>
-
-```typescript
-public suspendedOuPolicies(): void
-```
-
-Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account.
-
-##### `workloadAccountsOrgPolicies` <a name="workloadAccountsOrgPolicies" id="aws-data-landing-zone.ManagementStack.workloadAccountsOrgPolicies"></a>
-
-```typescript
-public workloadAccountsOrgPolicies(): void
-```
-
-Service Control Policies and Tag Policies applied at the account level to enable customization per account.
-
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.ManagementStack.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct"></a>
 
 ```typescript
-import { ManagementStack } from 'aws-data-landing-zone'
+import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
 
-ManagementStack.isConstruct(x: any)
+ManagementGlobalIamIdentityCenterStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -5649,37 +5599,37 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="aws-data-landing-zone.ManagementStack.isStack"></a>
+##### `isStack` <a name="isStack" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isStack"></a>
 
 ```typescript
-import { ManagementStack } from 'aws-data-landing-zone'
+import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
 
-ManagementStack.isStack(x: any)
+ManagementGlobalIamIdentityCenterStack.isStack(x: any)
 ```
 
 Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="aws-data-landing-zone.ManagementStack.of"></a>
+##### `of` <a name="of" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.of"></a>
 
 ```typescript
-import { ManagementStack } from 'aws-data-landing-zone'
+import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
 
-ManagementStack.of(construct: IConstruct)
+ManagementGlobalIamIdentityCenterStack.of(construct: IConstruct)
 ```
 
 Looks up the first stack scope in which `construct` is defined.
 
 Fails if there is no stack up the tree.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="aws-data-landing-zone.ManagementStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -5691,35 +5641,35 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.ManagementStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -5731,7 +5681,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="aws-data-landing-zone.ManagementStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -5760,7 +5710,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="aws-data-landing-zone.ManagementStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -5772,7 +5722,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="aws-data-landing-zone.ManagementStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -5795,7 +5745,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="aws-data-landing-zone.ManagementStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -5807,7 +5757,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -5819,7 +5769,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="aws-data-landing-zone.ManagementStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -5843,7 +5793,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="aws-data-landing-zone.ManagementStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -5855,7 +5805,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="aws-data-landing-zone.ManagementStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -5867,7 +5817,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="aws-data-landing-zone.ManagementStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -5879,7 +5829,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.ManagementStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -5908,7 +5858,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="aws-data-landing-zone.ManagementStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -5928,7 +5878,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="aws-data-landing-zone.ManagementStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -5949,7 +5899,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="aws-data-landing-zone.ManagementStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -5961,7 +5911,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.ManagementStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -5973,7 +5923,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="aws-data-landing-zone.ManagementStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -5987,7 +5937,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="aws-data-landing-zone.ManagementStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -5999,7 +5949,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="aws-data-landing-zone.ManagementStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -6011,7 +5961,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="aws-data-landing-zone.ManagementStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -6023,7 +5973,7 @@ If this is a nested stack, returns it's parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="aws-data-landing-zone.ManagementStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -6037,7 +5987,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="aws-data-landing-zone.ManagementStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -6049,7 +5999,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.ManagementStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -6061,7 +6011,7 @@ The stack identifier which is a combination of the wave, stage and stack id.
 
 ---
 
-##### `stage`<sup>Required</sup> <a name="stage" id="aws-data-landing-zone.ManagementStack.property.stage"></a>
+##### `stage`<sup>Required</sup> <a name="stage" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.stage"></a>
 
 ```typescript
 public readonly stage: ExpressStage;
@@ -6073,7 +6023,7 @@ The stage that the stack belongs to.
 
 ---
 
-##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.ManagementStack.property.accountId"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.accountId"></a>
 
 ```typescript
 public readonly accountId: string;
@@ -6083,7 +6033,982 @@ public readonly accountId: string;
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.ManagementStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+---
+
+
+### ManagementGlobalStack <a name="ManagementGlobalStack" id="aws-data-landing-zone.ManagementGlobalStack"></a>
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ManagementGlobalStack.Initializer"></a>
+
+```typescript
+import { ManagementGlobalStack } from 'aws-data-landing-zone'
+
+new ManagementGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.stackProps"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a>
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.budgets">budgets</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.ManagementGlobalStack.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementGlobalStack.addDependency"></a>
+
+```typescript
+public addDependency(target: Stack, reason?: string): void
+```
+
+Use `addDependency` for dependencies between stacks in an ExpressStage.
+
+Otherwise, use `addExpressDependency`
+to construct the Pipeline of stacks between Waves and Stages.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementGlobalStack.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementGlobalStack.addDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="aws-data-landing-zone.ManagementGlobalStack.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Adds an arbitary key-value pair, with information you want to record about the stack.
+
+These get translated to the Metadata section of the generated template.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
+
+###### `key`<sup>Required</sup> <a name="key" id="aws-data-landing-zone.ManagementGlobalStack.addMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalStack.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addTransform` <a name="addTransform" id="aws-data-landing-zone.ManagementGlobalStack.addTransform"></a>
+
+```typescript
+public addTransform(transform: string): void
+```
+
+Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template.
+
+Duplicate values are removed when stack is synthesized.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
+
+*Example*
+
+```typescript
+declare const stack: Stack;
+
+stack.addTransform('AWS::Serverless-2016-10-31')
+```
+
+
+###### `transform`<sup>Required</sup> <a name="transform" id="aws-data-landing-zone.ManagementGlobalStack.addTransform.parameter.transform"></a>
+
+- *Type:* string
+
+The transform to add.
+
+---
+
+##### `exportStringListValue` <a name="exportStringListValue" id="aws-data-landing-zone.ManagementGlobalStack.exportStringListValue"></a>
+
+```typescript
+public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
+```
+
+Create a CloudFormation Export for a string list value.
+
+Returns a string list representing the corresponding `Fn.importValue()`
+expression for this Export. The export expression is automatically wrapped with an
+`Fn::Join` and the import value with an `Fn::Split`, since CloudFormation can only
+export strings. You can control the name for the export by passing the `name` option.
+
+If you don't supply a value for `name`, the value you're exporting must be
+a Resource attribute (for example: `bucket.bucketName`) and it will be
+given the same name as the automatic cross-stack reference that would be created
+if you used the attribute in another Stack.
+
+One of the uses for this method is to *remove* the relationship between
+two Stacks established by automatic cross-stack references. It will
+temporarily ensure that the CloudFormation Export still exists while you
+remove the reference from the consuming stack. After that, you can remove
+the resource and the manual export.
+
+See `exportValue` for an example of this process.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementGlobalStack.exportStringListValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementGlobalStack.exportStringListValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `exportValue` <a name="exportValue" id="aws-data-landing-zone.ManagementGlobalStack.exportValue"></a>
+
+```typescript
+public exportValue(exportedValue: any, options?: ExportValueOptions): string
+```
+
+Create a CloudFormation Export for a string value.
+
+Returns a string representing the corresponding Fn.importValue() expression for this Export. You can control the name for the export by passing the name option.
+
+If you don’t supply a value for name, the value you’re exporting must be a Resource attribute (for example: bucket.bucketName) and it will be given the same name as the automatic cross-stack reference that would be created if you used the attribute in another Stack.
+
+One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
+
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementGlobalStack.exportValue.parameter.exportedValue"></a>
+
+- *Type:* any
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementGlobalStack.exportValue.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.ExportValueOptions
+
+---
+
+##### `formatArn` <a name="formatArn" id="aws-data-landing-zone.ManagementGlobalStack.formatArn"></a>
+
+```typescript
+public formatArn(components: ArnComponents): string
+```
+
+Creates an ARN from components.
+
+If `partition`, `region` or `account` are not specified, the stack's
+partition, region and account will be used.
+
+If any component is the empty string, an empty string will be inserted
+into the generated ARN at the location that component corresponds to.
+
+The ARN will be formatted as follows:
+
+  arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}
+
+The required ARN pieces that are omitted will be taken from the stack that
+the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
+can be 'undefined'.
+
+###### `components`<sup>Required</sup> <a name="components" id="aws-data-landing-zone.ManagementGlobalStack.formatArn.parameter.components"></a>
+
+- *Type:* aws-cdk-lib.ArnComponents
+
+---
+
+##### `getLogicalId` <a name="getLogicalId" id="aws-data-landing-zone.ManagementGlobalStack.getLogicalId"></a>
+
+```typescript
+public getLogicalId(element: CfnElement): string
+```
+
+Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource.
+
+This method is called when a `CfnElement` is created and used to render the
+initial logical identity of resources. Logical ID renames are applied at
+this stage.
+
+This method uses the protected method `allocateLogicalId` to render the
+logical ID for an element. To modify the naming scheme, extend the `Stack`
+class and override this method.
+
+###### `element`<sup>Required</sup> <a name="element" id="aws-data-landing-zone.ManagementGlobalStack.getLogicalId.parameter.element"></a>
+
+- *Type:* aws-cdk-lib.CfnElement
+
+The CloudFormation element for which a logical identity is needed.
+
+---
+
+##### `regionalFact` <a name="regionalFact" id="aws-data-landing-zone.ManagementGlobalStack.regionalFact"></a>
+
+```typescript
+public regionalFact(factName: string, defaultValue?: string): string
+```
+
+Look up a fact value for the given fact for the region of this stack.
+
+Will return a definite value only if the region of the current stack is resolved.
+If not, a lookup map will be added to the stack and the lookup will be done at
+CDK deployment time.
+
+What regions will be included in the lookup map is controlled by the
+`@aws-cdk/core:target-partitions` context value: it must be set to a list
+of partitions, and only regions from the given partitions will be included.
+If no such context key is set, all regions will be included.
+
+This function is intended to be used by construct library authors. Application
+builders can rely on the abstractions offered by construct libraries and do
+not have to worry about regional facts.
+
+If `defaultValue` is not given, it is an error if the fact is unknown for
+the given region.
+
+###### `factName`<sup>Required</sup> <a name="factName" id="aws-data-landing-zone.ManagementGlobalStack.regionalFact.parameter.factName"></a>
+
+- *Type:* string
+
+---
+
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="aws-data-landing-zone.ManagementGlobalStack.regionalFact.parameter.defaultValue"></a>
+
+- *Type:* string
+
+---
+
+##### `renameLogicalId` <a name="renameLogicalId" id="aws-data-landing-zone.ManagementGlobalStack.renameLogicalId"></a>
+
+```typescript
+public renameLogicalId(oldId: string, newId: string): void
+```
+
+Rename a generated logical identities.
+
+To modify the naming scheme strategy, extend the `Stack` class and
+override the `allocateLogicalId` method.
+
+###### `oldId`<sup>Required</sup> <a name="oldId" id="aws-data-landing-zone.ManagementGlobalStack.renameLogicalId.parameter.oldId"></a>
+
+- *Type:* string
+
+---
+
+###### `newId`<sup>Required</sup> <a name="newId" id="aws-data-landing-zone.ManagementGlobalStack.renameLogicalId.parameter.newId"></a>
+
+- *Type:* string
+
+---
+
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="aws-data-landing-zone.ManagementGlobalStack.reportMissingContextKey"></a>
+
+```typescript
+public reportMissingContextKey(report: MissingContext): void
+```
+
+Indicate that a context key was expected.
+
+Contains instructions which will be emitted into the cloud assembly on how
+the key should be supplied.
+
+###### `report`<sup>Required</sup> <a name="report" id="aws-data-landing-zone.ManagementGlobalStack.reportMissingContextKey.parameter.report"></a>
+
+- *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
+
+The set of parameters needed to obtain the context.
+
+---
+
+##### `resolve` <a name="resolve" id="aws-data-landing-zone.ManagementGlobalStack.resolve"></a>
+
+```typescript
+public resolve(obj: any): any
+```
+
+Resolve a tokenized value in the context of the current stack.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementGlobalStack.resolve.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `splitArn` <a name="splitArn" id="aws-data-landing-zone.ManagementGlobalStack.splitArn"></a>
+
+```typescript
+public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
+```
+
+Splits the provided ARN into its components.
+
+Works both if 'arn' is a string like 'arn:aws:s3:::bucket',
+and a Token representing a dynamic CloudFormation expression
+(in which case the returned components will also be dynamic CloudFormation expressions,
+encoded as Tokens).
+
+###### `arn`<sup>Required</sup> <a name="arn" id="aws-data-landing-zone.ManagementGlobalStack.splitArn.parameter.arn"></a>
+
+- *Type:* string
+
+the ARN to split into its components.
+
+---
+
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="aws-data-landing-zone.ManagementGlobalStack.splitArn.parameter.arnFormat"></a>
+
+- *Type:* aws-cdk-lib.ArnFormat
+
+the expected format of 'arn' - depends on what format the service 'arn' represents uses.
+
+---
+
+##### `toJsonString` <a name="toJsonString" id="aws-data-landing-zone.ManagementGlobalStack.toJsonString"></a>
+
+```typescript
+public toJsonString(obj: any, space?: number): string
+```
+
+Convert an object, potentially containing tokens, to a JSON string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementGlobalStack.toJsonString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+###### `space`<sup>Optional</sup> <a name="space" id="aws-data-landing-zone.ManagementGlobalStack.toJsonString.parameter.space"></a>
+
+- *Type:* number
+
+---
+
+##### `toYamlString` <a name="toYamlString" id="aws-data-landing-zone.ManagementGlobalStack.toYamlString"></a>
+
+```typescript
+public toYamlString(obj: any): string
+```
+
+Convert an object, potentially containing tokens, to a YAML string.
+
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementGlobalStack.toYamlString.parameter.obj"></a>
+
+- *Type:* any
+
+---
+
+##### `addExpressDependency` <a name="addExpressDependency" id="aws-data-landing-zone.ManagementGlobalStack.addExpressDependency"></a>
+
+```typescript
+public addExpressDependency(target: ExpressStack, reason?: string): void
+```
+
+Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible.
+
+If the `addExpressDependency` is used outside the Pipeline construction,
+it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementGlobalStack.addExpressDependency.parameter.target"></a>
+
+- *Type:* cdk-express-pipeline.ExpressStack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementGlobalStack.addExpressDependency.parameter.reason"></a>
+
+- *Type:* string
+
+---
+
+##### `expressDependencies` <a name="expressDependencies" id="aws-data-landing-zone.ManagementGlobalStack.expressDependencies"></a>
+
+```typescript
+public expressDependencies(): ExpressStack[]
+```
+
+The ExpressStack dependencies of the stack.
+
+##### `resourceName` <a name="resourceName" id="aws-data-landing-zone.ManagementGlobalStack.resourceName"></a>
+
+```typescript
+public resourceName(resourceId: string): string
+```
+
+Create unique ResourceNames.
+
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="aws-data-landing-zone.ManagementGlobalStack.resourceName.parameter.resourceId"></a>
+
+- *Type:* string
+
+---
+
+##### `budgets` <a name="budgets" id="aws-data-landing-zone.ManagementGlobalStack.budgets"></a>
+
+```typescript
+public budgets(): void
+```
+
+##### `deploymentPlatformGitHub` <a name="deploymentPlatformGitHub" id="aws-data-landing-zone.ManagementGlobalStack.deploymentPlatformGitHub"></a>
+
+```typescript
+public deploymentPlatformGitHub(): void
+```
+
+##### `iamPermissionBoundary` <a name="iamPermissionBoundary" id="aws-data-landing-zone.ManagementGlobalStack.iamPermissionBoundary"></a>
+
+```typescript
+public iamPermissionBoundary(): void
+```
+
+IAM Policy Permission Boundary.
+
+##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="aws-data-landing-zone.ManagementGlobalStack.suspendedOuPolicies"></a>
+
+```typescript
+public suspendedOuPolicies(): void
+```
+
+Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account.
+
+##### `workloadAccountsOrgPolicies` <a name="workloadAccountsOrgPolicies" id="aws-data-landing-zone.ManagementGlobalStack.workloadAccountsOrgPolicies"></a>
+
+```typescript
+public workloadAccountsOrgPolicies(): void
+```
+
+Service Control Policies and Tag Policies applied at the account level to enable customization per account.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.ManagementGlobalStack.isConstruct"></a>
+
+```typescript
+import { ManagementGlobalStack } from 'aws-data-landing-zone'
+
+ManagementGlobalStack.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementGlobalStack.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isStack` <a name="isStack" id="aws-data-landing-zone.ManagementGlobalStack.isStack"></a>
+
+```typescript
+import { ManagementGlobalStack } from 'aws-data-landing-zone'
+
+ManagementGlobalStack.isStack(x: any)
+```
+
+Return whether the given object is a Stack.
+
+We do attribute detection since we can't reliably use 'instanceof'.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementGlobalStack.isStack.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="aws-data-landing-zone.ManagementGlobalStack.of"></a>
+
+```typescript
+import { ManagementGlobalStack } from 'aws-data-landing-zone'
+
+ManagementGlobalStack.of(construct: IConstruct)
+```
+
+Looks up the first stack scope in which `construct` is defined.
+
+Fails if there is no stack up the tree.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="aws-data-landing-zone.ManagementGlobalStack.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+The construct to start the search from.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns it's parent stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.ManagementGlobalStack.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="aws-data-landing-zone.ManagementGlobalStack.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The AWS account into which this stack will be deployed.
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.account` when the stack is defined. This can
+   either be a concrete account (e.g. `585695031111`) or the
+   `Aws.ACCOUNT_ID` token.
+3. `Aws.ACCOUNT_ID`, which represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::AccountId" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.account)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **account-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="aws-data-landing-zone.ManagementGlobalStack.property.artifactId"></a>
+
+```typescript
+public readonly artifactId: string;
+```
+
+- *Type:* string
+
+The ID of the cloud assembly artifact for this stack.
+
+---
+
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="aws-data-landing-zone.ManagementGlobalStack.property.availabilityZones"></a>
+
+```typescript
+public readonly availabilityZones: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack.
+
+If the stack is environment-agnostic (either account and/or region are
+tokens), this property will return an array with 2 tokens that will resolve
+at deploy-time to the first two availability zones returned from CloudFormation's
+`Fn::GetAZs` intrinsic function.
+
+If they are not available in the context, returns a set of dummy values and
+reports them as missing, and let the CLI resolve them by calling EC2
+`DescribeAvailabilityZones` on the target environment.
+
+To specify a different strategy for selecting availability zones override this method.
+
+---
+
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="aws-data-landing-zone.ManagementGlobalStack.property.bundlingRequired"></a>
+
+```typescript
+public readonly bundlingRequired: boolean;
+```
+
+- *Type:* boolean
+
+Indicates whether the stack requires bundling or not.
+
+---
+
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementGlobalStack.property.dependencies"></a>
+
+```typescript
+public readonly dependencies: Stack[];
+```
+
+- *Type:* aws-cdk-lib.Stack[]
+
+Return the stacks this stack depends on.
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="aws-data-landing-zone.ManagementGlobalStack.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The environment coordinates in which this stack is deployed.
+
+In the form
+`aws://account/region`. Use `stack.account` and `stack.region` to obtain
+the specific values, no need to parse.
+
+You can use this value to determine if two stacks are targeting the same
+environment.
+
+If either `stack.account` or `stack.region` are not concrete values (e.g.
+`Aws.ACCOUNT_ID` or `Aws.REGION`) the special strings `unknown-account` and/or
+`unknown-region` will be used respectively to indicate this stack is
+region/account-agnostic.
+
+---
+
+##### `nested`<sup>Required</sup> <a name="nested" id="aws-data-landing-zone.ManagementGlobalStack.property.nested"></a>
+
+```typescript
+public readonly nested: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if this is a nested stack, in which case `parentStack` will include a reference to it's parent.
+
+---
+
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="aws-data-landing-zone.ManagementGlobalStack.property.notificationArns"></a>
+
+```typescript
+public readonly notificationArns: string[];
+```
+
+- *Type:* string[]
+
+Returns the list of notification Amazon Resource Names (ARNs) for the current stack.
+
+---
+
+##### `partition`<sup>Required</sup> <a name="partition" id="aws-data-landing-zone.ManagementGlobalStack.property.partition"></a>
+
+```typescript
+public readonly partition: string;
+```
+
+- *Type:* string
+
+The partition in which this stack is defined.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.ManagementGlobalStack.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region into which this stack will be deployed (e.g. `us-west-2`).
+
+This value is resolved according to the following rules:
+
+1. The value provided to `env.region` when the stack is defined. This can
+   either be a concrete region (e.g. `us-west-2`) or the `Aws.REGION`
+   token.
+3. `Aws.REGION`, which is represents the CloudFormation intrinsic reference
+   `{ "Ref": "AWS::Region" }` encoded as a string token.
+
+Preferably, you should use the return value as an opaque string and not
+attempt to parse it to implement your logic. If you do, you must first
+check that it is a concrete value an not an unresolved token. If this
+value is an unresolved token (`Token.isUnresolved(stack.region)` returns
+`true`), this implies that the user wishes that this stack will synthesize
+into a **region-agnostic template**. In this case, your code should either
+fail (throw an error, emit a synth error using `Annotations.of(construct).addError()`) or
+implement some other region-agnostic behavior.
+
+---
+
+##### `stackId`<sup>Required</sup> <a name="stackId" id="aws-data-landing-zone.ManagementGlobalStack.property.stackId"></a>
+
+```typescript
+public readonly stackId: string;
+```
+
+- *Type:* string
+
+The ID of the stack.
+
+---
+
+*Example*
+
+```typescript
+// After resolving, looks like
+'arn:aws:cloudformation:us-west-2:123456789012:stack/teststack/51af3dc0-da77-11e4-872e-1234567db123'
+```
+
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="aws-data-landing-zone.ManagementGlobalStack.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The concrete CloudFormation physical stack name.
+
+This is either the name defined explicitly in the `stackName` prop or
+allocated based on the stack's location in the construct tree. Stacks that
+are directly defined under the app use their construct `id` as their stack
+name. Stacks that are defined deeper within the tree will use a hashed naming
+scheme based on the construct path to ensure uniqueness.
+
+If you wish to obtain the deploy-time AWS::StackName intrinsic,
+you can use `Aws.STACK_NAME` directly.
+
+---
+
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="aws-data-landing-zone.ManagementGlobalStack.property.synthesizer"></a>
+
+```typescript
+public readonly synthesizer: IStackSynthesizer;
+```
+
+- *Type:* aws-cdk-lib.IStackSynthesizer
+
+Synthesis method for this stack.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.ManagementGlobalStack.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+Tags to be applied to the stack.
+
+---
+
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="aws-data-landing-zone.ManagementGlobalStack.property.templateFile"></a>
+
+```typescript
+public readonly templateFile: string;
+```
+
+- *Type:* string
+
+The name of the CloudFormation template file emitted to the output directory during synthesis.
+
+Example value: `MyStack.template.json`
+
+---
+
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="aws-data-landing-zone.ManagementGlobalStack.property.templateOptions"></a>
+
+```typescript
+public readonly templateOptions: ITemplateOptions;
+```
+
+- *Type:* aws-cdk-lib.ITemplateOptions
+
+Options for CloudFormation template (like version, transform, description).
+
+---
+
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="aws-data-landing-zone.ManagementGlobalStack.property.urlSuffix"></a>
+
+```typescript
+public readonly urlSuffix: string;
+```
+
+- *Type:* string
+
+The Amazon domain suffix for the region in which this stack is defined.
+
+---
+
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="aws-data-landing-zone.ManagementGlobalStack.property.nestedStackParent"></a>
+
+```typescript
+public readonly nestedStackParent: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+If this is a nested stack, returns it's parent stack.
+
+---
+
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="aws-data-landing-zone.ManagementGlobalStack.property.nestedStackResource"></a>
+
+```typescript
+public readonly nestedStackResource: CfnResource;
+```
+
+- *Type:* aws-cdk-lib.CfnResource
+
+If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource.
+
+`undefined` for top-level (non-nested) stacks.
+
+---
+
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="aws-data-landing-zone.ManagementGlobalStack.property.terminationProtection"></a>
+
+```typescript
+public readonly terminationProtection: boolean;
+```
+
+- *Type:* boolean
+
+Whether termination protection is enabled for this stack.
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.ManagementGlobalStack.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+The stack identifier which is a combination of the wave, stage and stack id.
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="aws-data-landing-zone.ManagementGlobalStack.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+The stage that the stack belongs to.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.ManagementGlobalStack.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.ManagementGlobalStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -18105,6 +19030,45 @@ const logStacks: LogStacks = { ... }
 ```
 
 
+### ManagementStacks <a name="ManagementStacks" id="aws-data-landing-zone.ManagementStacks"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.ManagementStacks.Initializer"></a>
+
+```typescript
+import { ManagementStacks } from 'aws-data-landing-zone'
+
+const managementStacks: ManagementStacks = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ManagementStacks.property.global">global</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalStack">ManagementGlobalStack</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementStacks.property.globalIamIdentityCenter">globalIamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack">ManagementGlobalIamIdentityCenterStack</a></code> | *No description.* |
+
+---
+
+##### `global`<sup>Required</sup> <a name="global" id="aws-data-landing-zone.ManagementStacks.property.global"></a>
+
+```typescript
+public readonly global: ManagementGlobalStack;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ManagementGlobalStack">ManagementGlobalStack</a>
+
+---
+
+##### `globalIamIdentityCenter`<sup>Optional</sup> <a name="globalIamIdentityCenter" id="aws-data-landing-zone.ManagementStacks.property.globalIamIdentityCenter"></a>
+
+```typescript
+public readonly globalIamIdentityCenter: ManagementGlobalIamIdentityCenterStack;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack">ManagementGlobalIamIdentityCenterStack</a>
+
+---
+
 ### MandatoryTags <a name="MandatoryTags" id="aws-data-landing-zone.MandatoryTags"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.MandatoryTags.Initializer"></a>
@@ -19731,7 +20695,7 @@ Ignore this parameter, it is used to force a consistent interface across TS and 
 ##### `stageManagement` <a name="stageManagement" id="aws-data-landing-zone.DataLandingZone.stageManagement"></a>
 
 ```typescript
-public stageManagement(): ManagementStack
+public stageManagement(): ManagementStacks
 ```
 
 
@@ -19741,7 +20705,7 @@ public stageManagement(): ManagementStack
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.DataLandingZone.property.auditStacks">auditStacks</a></code> | <code><a href="#aws-data-landing-zone.AuditStacks">AuditStacks</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZone.property.logStacks">logStacks</a></code> | <code><a href="#aws-data-landing-zone.LogStacks">LogStacks</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DataLandingZone.property.managementStack">managementStack</a></code> | <code><a href="#aws-data-landing-zone.ManagementStack">ManagementStack</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DataLandingZone.property.managementStacks">managementStacks</a></code> | <code><a href="#aws-data-landing-zone.ManagementStacks">ManagementStacks</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZone.property.workloadGlobalDataServicesPhase1Stacks">workloadGlobalDataServicesPhase1Stacks</a></code> | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack">WorkloadGlobalDataServicesPhase1Stack</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase1Stacks">workloadGlobalNetworkConnectionsPhase1Stacks</a></code> | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack">WorkloadGlobalNetworkConnectionsPhase1Stack</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZone.property.workloadGlobalNetworkConnectionsPhase2Stacks">workloadGlobalNetworkConnectionsPhase2Stacks</a></code> | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack">WorkloadGlobalNetworkConnectionsPhase2Stack</a>[]</code> | *No description.* |
@@ -19774,13 +20738,13 @@ public readonly logStacks: LogStacks;
 
 ---
 
-##### `managementStack`<sup>Required</sup> <a name="managementStack" id="aws-data-landing-zone.DataLandingZone.property.managementStack"></a>
+##### `managementStacks`<sup>Required</sup> <a name="managementStacks" id="aws-data-landing-zone.DataLandingZone.property.managementStacks"></a>
 
 ```typescript
-public readonly managementStack: ManagementStack;
+public readonly managementStacks: ManagementStacks;
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.ManagementStack">ManagementStack</a>
+- *Type:* <a href="#aws-data-landing-zone.ManagementStacks">ManagementStacks</a>
 
 ---
 

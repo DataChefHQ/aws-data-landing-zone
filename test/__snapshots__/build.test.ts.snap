@@ -231,6 +231,292 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
 }
 `;
 
+exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7": {
+      "DependsOn": [
+        "CustomDlzIdentityStoreUserCustomResourceProviderRole5D5EB15B",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomDlzIdentityStoreUserCustomResourceProviderRole5D5EB15B",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 60,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomDlzIdentityStoreUserCustomResourceProviderRole5D5EB15B": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "identitystore:CreateUser",
+                    "identitystore:DescribeUser",
+                    "identitystore:UpdateUser",
+                    "identitystore:DeleteUser",
+                    "identitystore:ListUsers",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "dlzglobaliamicAdministratorAccess": {
+      "Properties": {
+        "Description": "Provides the AWS managed policy AdministratorAccess as permission set",
+        "InstanceArn": "sso-instance-arn",
+        "ManagedPolicies": [
+          "arn:aws:iam::aws:policy/AdministratorAccess",
+        ],
+        "Name": "AdministratorAccess",
+        "SessionDuration": "PT12H",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::SSO::PermissionSet",
+    },
+    "dlzglobaliamicReadOnlyAccess": {
+      "Properties": {
+        "Description": "Provides the AWS  managed policy ReadOnlyAccess as permission set",
+        "InstanceArn": "sso-instance-arn",
+        "ManagedPolicies": [
+          "arn:aws:iam::aws:policy/ReadOnlyAccess",
+        ],
+        "Name": "ReadOnlyAccess",
+        "SessionDuration": "PT12H",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::SSO::PermissionSet",
+    },
+    "dlzglobaliamicawsssousertestuseraexamplecomcustomResourceResult5937DAD4": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
+            "Arn",
+          ],
+        },
+        "displayName": "Test A User A",
+        "email": {
+          "type": "work",
+          "value": "testusera@example.com",
+        },
+        "identityStoreId": "identity-store-id",
+        "name": {
+          "familyName": "User A",
+          "formatted": "Test A User A",
+          "givenName": "Test A",
+        },
+        "userName": "testusera@example.com",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobaliamicawsssousertestuserbexamplecomcustomResourceResult17F1501E": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
+            "Arn",
+          ],
+        },
+        "displayName": "Test B User B",
+        "email": {
+          "type": "work",
+          "value": "testuserb@example.com",
+        },
+        "identityStoreId": "identity-store-id",
+        "name": {
+          "familyName": "User B",
+          "formatted": "Test B User B",
+          "givenName": "Test B",
+        },
+        "userName": "testuserb@example.com",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobaliamicawsssousertestusercexamplecomcustomResourceResultD240D2FF": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
+            "Arn",
+          ],
+        },
+        "displayName": "Test C User C",
+        "email": {
+          "type": "work",
+          "value": "testuserc@example.com",
+        },
+        "identityStoreId": "identity-store-id",
+        "name": {
+          "familyName": "User C",
+          "formatted": "Test C User C",
+          "givenName": "Test C",
+        },
+        "userName": "testuserc@example.com",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobaliamicinlinepermissionsetreadonlys3": {
+      "Properties": {
+        "Description": "Limited get object permission",
+        "InlinePolicy": {
+          "Action": "s3:GetObject",
+          "Effect": "Allow",
+          "Resource": "arn:aws:s3:::mybucket/*",
+        },
+        "InstanceArn": "sso-instance-arn",
+        "Name": "inline-permission-set-read-only-s3",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::SSO::PermissionSet",
+    },
+    "dlzglobaliamiclongerreadonly": {
+      "Properties": {
+        "Description": "Read only only for 12 hours",
+        "InstanceArn": "sso-instance-arn",
+        "ManagedPolicies": [
+          "arn:aws:iam::aws:policy/ReadOnlyAccess",
+        ],
+        "Name": "longer-read-only",
+        "SessionDuration": "PT12H",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::SSO::PermissionSet",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
 {
   "Outputs": {
@@ -307,71 +593,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                     "iam:UpdateOpenIDConnectProviderThumbprint",
                     "iam:AddClientIDToOpenIDConnectProvider",
                     "iam:RemoveClientIDFromOpenIDConnectProvider",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": "*",
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "Inline",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7": {
-      "DependsOn": [
-        "CustomDlzIdentityStoreUserCustomResourceProviderRole5D5EB15B",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
-          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
-        },
-        "Handler": "__entrypoint__.handler",
-        "MemorySize": 128,
-        "Role": {
-          "Fn::GetAtt": [
-            "CustomDlzIdentityStoreUserCustomResourceProviderRole5D5EB15B",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs18.x",
-        "Timeout": 60,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "CustomDlzIdentityStoreUserCustomResourceProviderRole5D5EB15B": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-          },
-        ],
-        "Policies": [
-          {
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Action": [
-                    "identitystore:CreateUser",
-                    "identitystore:DescribeUser",
-                    "identitystore:UpdateUser",
-                    "identitystore:DeleteUser",
-                    "identitystore:ListUsers",
                   ],
                   "Effect": "Allow",
                   "Resource": "*",
@@ -1097,58 +1318,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::ControlTower::EnabledControl",
     },
-    "dlzglobalAdministratorAccess": {
-      "Properties": {
-        "Description": "Provides the AWS managed policy AdministratorAccess as permission set",
-        "InstanceArn": "sso-instance-arn",
-        "ManagedPolicies": [
-          "arn:aws:iam::aws:policy/AdministratorAccess",
-        ],
-        "Name": "AdministratorAccess",
-        "SessionDuration": "PT12H",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::SSO::PermissionSet",
-    },
-    "dlzglobalReadOnlyAccess": {
-      "Properties": {
-        "Description": "Provides the AWS  managed policy ReadOnlyAccess as permission set",
-        "InstanceArn": "sso-instance-arn",
-        "ManagedPolicies": [
-          "arn:aws:iam::aws:policy/ReadOnlyAccess",
-        ],
-        "Name": "ReadOnlyAccess",
-        "SessionDuration": "PT12H",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::SSO::PermissionSet",
-    },
     "dlzglobalSHSecretsManager3workloads": {
       "DependsOn": [
         "dlzglobalAWSGRRESTRICTROOTUSERACCESSKEYSsecurity",
@@ -1181,81 +1350,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "TargetIdentifier": "arn:aws:organizations::882070149987:ou/o-05ev6vk6fa/ou-vh4d-nc2zzf9z",
       },
       "Type": "AWS::ControlTower::EnabledControl",
-    },
-    "dlzglobalawsssousertestuseraexamplecomcustomResourceResult6016ED08": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
-            "Arn",
-          ],
-        },
-        "displayName": "Test A User A",
-        "email": {
-          "type": "work",
-          "value": "testusera@example.com",
-        },
-        "identityStoreId": "identity-store-id",
-        "name": {
-          "familyName": "User A",
-          "formatted": "Test A User A",
-          "givenName": "Test A",
-        },
-        "userName": "testusera@example.com",
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "dlzglobalawsssousertestuserbexamplecomcustomResourceResultA57B7B24": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
-            "Arn",
-          ],
-        },
-        "displayName": "Test B User B",
-        "email": {
-          "type": "work",
-          "value": "testuserb@example.com",
-        },
-        "identityStoreId": "identity-store-id",
-        "name": {
-          "familyName": "User B",
-          "formatted": "Test B User B",
-          "givenName": "Test B",
-        },
-        "userName": "testuserb@example.com",
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "dlzglobalawsssousertestusercexamplecomcustomResourceResult69F9E8E1": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomDlzIdentityStoreUserCustomResourceProviderHandlerB083ECF7",
-            "Arn",
-          ],
-        },
-        "displayName": "Test C User C",
-        "email": {
-          "type": "work",
-          "value": "testuserc@example.com",
-        },
-        "identityStoreId": "identity-store-id",
-        "name": {
-          "familyName": "User C",
-          "formatted": "Test C User C",
-          "givenName": "Test C",
-        },
-        "userName": "testuserc@example.com",
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "dlzglobalbudgetbackend": {
       "Properties": {
@@ -1816,59 +1910,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "Custom::AWSCDKOpenIdConnectProvider",
       "UpdateReplacePolicy": "Delete",
-    },
-    "dlzglobalinlinepermissionsetreadonlys3": {
-      "Properties": {
-        "Description": "Limited get object permission",
-        "InlinePolicy": {
-          "Action": "s3:GetObject",
-          "Effect": "Allow",
-          "Resource": "arn:aws:s3:::mybucket/*",
-        },
-        "InstanceArn": "sso-instance-arn",
-        "Name": "inline-permission-set-read-only-s3",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::SSO::PermissionSet",
-    },
-    "dlzgloballongerreadonly": {
-      "Properties": {
-        "Description": "Read only only for 12 hours",
-        "InstanceArn": "sso-instance-arn",
-        "ManagedPolicies": [
-          "arn:aws:iam::aws:policy/ReadOnlyAccess",
-        ],
-        "Name": "longer-read-only",
-        "SessionDuration": "PT12H",
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-      },
-      "Type": "AWS::SSO::PermissionSet",
     },
     "dlzglobalscpproject1developmentaccount": {
       "Properties": {
