@@ -652,9 +652,13 @@ const configBase: DataLandingZoneProps = {
       {
         name: 'inline-permission-set-read-only-s3',
         description: 'Limited get object permission',
-        inlinePolicyStatement: new iam.PolicyStatement({
-          actions: ['s3:GetObject'],
-          resources: ['arn:aws:s3:::mybucket/*'],
+        inlinePolicyDocument: new iam.PolicyDocument({
+          statements: [
+            new iam.PolicyStatement({
+              actions: ['s3:GetObject'],
+              resources: ['arn:aws:s3:::mybucket/*'],
+            }),
+          ],
         }),
       },
     ],

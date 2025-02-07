@@ -437,9 +437,14 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
       "Properties": {
         "Description": "Limited get object permission",
         "InlinePolicy": {
-          "Action": "s3:GetObject",
-          "Effect": "Allow",
-          "Resource": "arn:aws:s3:::mybucket/*",
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::mybucket/*",
+            },
+          ],
+          "Version": "2012-10-17",
         },
         "InstanceArn": "sso-instance-arn",
         "Name": "inline-permission-set-read-only-s3",

@@ -15,7 +15,7 @@ import { DlzStack } from '../dlz-stack/index';
 export interface IamIdentityCenterPermissionSetProps {
   readonly name: string;
   readonly description?: string;
-  readonly inlinePolicyStatement?: iam.PolicyStatement;
+  readonly inlinePolicyDocument?: iam.PolicyDocument;
   readonly managedPolicyArns?: string[];
   readonly permissionsBoundary?: cdk.IResolvable | CfnPermissionSet.PermissionsBoundaryProperty;
   readonly sessionDuration?: cdk.Duration;
@@ -95,7 +95,7 @@ export class IamIdentityCenter {
           instanceArn: iamIdentityCenter.arn,
           name: permissionSetConf.name,
           description: permissionSetConf.description,
-          inlinePolicy: permissionSetConf.inlinePolicyStatement ? permissionSetConf.inlinePolicyStatement?.toJSON() : undefined,
+          inlinePolicy: permissionSetConf.inlinePolicyDocument ? permissionSetConf.inlinePolicyDocument.toJSON() : undefined,
           managedPolicies: permissionSetConf.managedPolicyArns,
           permissionsBoundary: permissionSetConf.permissionsBoundary,
           sessionDuration: permissionSetConf.sessionDuration ? durationToIso8601(permissionSetConf.sessionDuration) : undefined,

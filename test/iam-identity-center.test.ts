@@ -119,9 +119,13 @@ describe('Permission sets', () => {
         {
           name: 'inline-permission-set-read-only-s3',
           description: 'Limited get object permission',
-          inlinePolicyStatement: new iam.PolicyStatement({
-            actions: ['s3:GetObject'],
-            resources: ['arn:aws:s3:::mybucket/*'],
+          inlinePolicyDocument: new iam.PolicyDocument({
+            statements: [
+              new iam.PolicyStatement({
+                actions: ['s3:GetObject'],
+                resources: ['arn:aws:s3:::mybucket/*'],
+              }),
+            ],
           }),
         },
       ],
@@ -139,9 +143,14 @@ describe('Permission sets', () => {
       Description: 'Limited get object permission',
       InstanceArn: 'arn:aws:sso:::instance/sso-instance-id',
       InlinePolicy: {
-        Action: 's3:GetObject',
-        Effect: 'Allow',
-        Resource: 'arn:aws:s3:::mybucket/*',
+        Statement: [
+          {
+            Action: 's3:GetObject',
+            Effect: 'Allow',
+            Resource: 'arn:aws:s3:::mybucket/*',
+          },
+        ],
+        Version: '2012-10-17',
       },
     });
   });

@@ -18250,7 +18250,7 @@ const iamIdentityCenterPermissionSetProps: IamIdentityCenterPermissionSetProps =
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.inlinePolicyStatement">inlinePolicyStatement</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.inlinePolicyDocument">inlinePolicyDocument</a></code> | <code>aws-cdk-lib.aws_iam.PolicyDocument</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.managedPolicyArns">managedPolicyArns</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.permissionsBoundary">permissionsBoundary</a></code> | <code>aws-cdk-lib.IResolvable \| aws-cdk-lib.aws_sso.CfnPermissionSet.PermissionsBoundaryProperty</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.sessionDuration">sessionDuration</a></code> | <code>aws-cdk-lib.Duration</code> | *No description.* |
@@ -18277,13 +18277,13 @@ public readonly description: string;
 
 ---
 
-##### `inlinePolicyStatement`<sup>Optional</sup> <a name="inlinePolicyStatement" id="aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.inlinePolicyStatement"></a>
+##### `inlinePolicyDocument`<sup>Optional</sup> <a name="inlinePolicyDocument" id="aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.inlinePolicyDocument"></a>
 
 ```typescript
-public readonly inlinePolicyStatement: PolicyStatement;
+public readonly inlinePolicyDocument: PolicyDocument;
 ```
 
-- *Type:* aws-cdk-lib.aws_iam.PolicyStatement
+- *Type:* aws-cdk-lib.aws_iam.PolicyDocument
 
 ---
 

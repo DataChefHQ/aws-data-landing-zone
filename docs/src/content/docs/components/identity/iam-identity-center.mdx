@@ -60,10 +60,14 @@ The example below assigns the `AdministratorAccess` permission set (created by
         // Create a custom permission sets from inline policies
         {
           name: 's3-only-access',
-          inlinePolicyStatement: new iam.PolicyStatement({
-            actions: ['s3:*'],
-            resources: ['*'],
-          })
+          inlinePolicyDocument: new iam.PolicyDocument({
+            statements: [
+              new iam.PolicyStatement({
+                actions: ['s3:GetObject'],
+                resources: ['arn:aws:s3:::mybucket/*'],
+              })
+            ]
+          }),
         }
       ],
       accessGroups: [
@@ -87,6 +91,7 @@ The example below assigns the `AdministratorAccess` permission set (created by
     ```python
     import aws_cdk as cdk
     import aws_data_landing_zone as dlz
+    from aws_cdk.aws_iam import (PolicyDocument, Effect, PolicyStatement)
 
     app = cdk.App()
     dlz.DataLandingZone(app,
@@ -108,16 +113,21 @@ The example below assigns the `AdministratorAccess` permission set (created by
                 *Defaults.iam_identity_center_permission_sets(),
                 # Create custom permission sets from managed policies
                 {
-                  name: 'power-user-permission-set',
-                  managed_policy_arns: ['arn:aws:iam::aws:policy/PowerUserAccess']
+                    name: 'power-user-permission-set',
+                    managed_policy_arns: ['arn:aws:iam::aws:policy/PowerUserAccess']
                 },
                 # Create a custom permission sets from inline policies
                 {
-                  name: 's3-only-access',
-                  inline_policy_statement: {
-                    actions: ['s3:*'],
-                    resources: ['*'],
-                  }
+                    name: 's3-only-access',
+                    inline_policy_document: PolicyDocument(
+                        statements=[
+                            PolicyStatement(
+                                effect=Effect.ALLOW,
+                                actions=["s3:*"],
+                                resources=["*"]
+                            )
+                        ]
+                    )
                 }
             ],
             "access_groups": [
