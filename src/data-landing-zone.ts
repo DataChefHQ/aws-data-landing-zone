@@ -153,6 +153,7 @@ export class DataLandingZone {
   public workloadRegionalDataServicesPhase1Stacks: WorkloadRegionalDataServicesPhase1Stack[] = [];
 
   private globalVariables: GlobalVariables = {
+    budgetSnsCache: {},
     dlzAccountNetworks: new DlzAccountNetworks(),
     ncp1: {
       vpcPeeringRoleKeys: [],
@@ -225,6 +226,7 @@ export class DataLandingZone {
         account: this.props.organization.root.accounts.management.accountId,
         region: this.props.regions.global,
       },
+      globalVariables: this.globalVariables,
     },
     this.props);
 

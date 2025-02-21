@@ -15,7 +15,7 @@ import {
   SecurityHubNotificationSeverity,
   SecurityHubNotificationSWorkflowStatus,
   SlackChannel,
-  IamAccountAlias,
+  IamAccountAlias, BudgetSubscribers,
 } from '../src';
 import {
   cdkTemplateToJson,
@@ -31,6 +31,17 @@ const slackBudgetNotifications: SlackChannel = {
   slackWorkspaceId: 'T1',
   slackChannelId: 'C2',
 };
+
+const subscribers: BudgetSubscribers = {
+  snsTopicName: 'budgets',
+  slacks: [{
+    slackChannelConfigurationName: 'budget-alerts2',
+    slackWorkspaceId: 'YourWorkspaceId',
+    slackChannelId: 'YourChannelId',
+  }],
+  emails: ['you@org.com'],
+};
+console.log('subscribers', subscribers);
 
 const configBase: DataLandingZoneProps = {
   localProfile: 'ct-sandbox-exported',
@@ -54,10 +65,9 @@ const configBase: DataLandingZoneProps = {
     },
   ],
   budgets: [
-    ...Defaults.budgets(100, 20, {
-      slack: slackBudgetNotifications,
-      emails: ['rehan+dc-budget--defaults@datachef.co'],
-    }),
+    // ...Defaults.budgets(100, 20, subscribers),
+    { name: 'budget-high', amount: 1_000, subscribers },
+    { name: 'budget-high-1', amount: 2_000, subscribers },
     {
       name: 'backend',
       forTags: {
@@ -65,7 +75,7 @@ const configBase: DataLandingZoneProps = {
       },
       amount: 100,
       subscribers: {
-        slack: slackBudgetNotifications,
+        slacks: [slackBudgetNotifications],
         emails: ['rehan+dc-budget--backend@datachef.co'],
       },
     },
@@ -78,7 +88,7 @@ const configBase: DataLandingZoneProps = {
       },
       amount: 100,
       subscribers: {
-        slack: slackBudgetNotifications,
+        slacks: [slackBudgetNotifications],
         emails: ['rehan+dc-budget--backend-accounting-internal-development@datachef.co'],
       },
     },

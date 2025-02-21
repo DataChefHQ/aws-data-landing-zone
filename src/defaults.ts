@@ -4,7 +4,7 @@ import { DlzBudgetProps } from './constructs/dlz-budget';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 
-import { DataLandingZoneProps, Region } from './data-landing-zone-types';
+import { DataLandingZoneProps, ForceNoPythonArgumentLifting, Region } from './data-landing-zone-types';
 
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',
@@ -161,13 +161,20 @@ export class Defaults {
    * @param orgTotal Total budget for the organization in USD
    * @param infraDlz Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD
    * @param subscribers Subscribers for the budget
+   * @param _ Ignore this parameter, it is used to force a consistent interface across TS and Python usage
    */
-  public static budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers): DlzBudgetProps[] {
+  public static budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers,
+    _: ForceNoPythonArgumentLifting = {}): DlzBudgetProps[] {
+    const defaultTopicName = 'dlz-budget-topic';
     return [
       {
         name: 'org-total',
         amount: orgTotal,
-        subscribers,
+        subscribers: {
+          snsTopicName: subscribers.snsTopicName || defaultTopicName,
+          emails: subscribers.emails,
+          slacks: subscribers.slacks,
+        },
       },
       {
         name: 'infra-dlz',
@@ -176,7 +183,11 @@ export class Defaults {
           Owner: 'infra',
           Project: 'dlz',
         },
-        subscribers,
+        subscribers: {
+          snsTopicName: subscribers.snsTopicName || defaultTopicName,
+          emails: subscribers.emails,
+          slacks: subscribers.slacks,
+        },
       },
     ];
   }

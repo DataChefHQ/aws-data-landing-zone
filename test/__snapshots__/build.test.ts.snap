@@ -717,6 +717,62 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::Organizations::Policy",
     },
+    "budgets4F6C55C4": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+        "TopicName": "budgets",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "budgetsPolicy64917026": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "budgets.amazonaws.com",
+              },
+              "Resource": {
+                "Ref": "budgets4F6C55C4",
+              },
+              "Sid": "0",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Topics": [
+          {
+            "Ref": "budgets4F6C55C4",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::TopicPolicy",
+    },
+    "budgetsyouorgcom6C33BE92": {
+      "Properties": {
+        "Endpoint": "you@org.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "budgets4F6C55C4",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
     "dlzglobalAWSGRENCRYPTEDVOLUMESsecurity": {
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ENCRYPTED_VOLUMES",
@@ -1582,127 +1638,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::SNS::Subscription",
     },
-    "dlzglobalbudgetinfradlz": {
+    "dlzglobalbudgetbudgethigh": {
       "Properties": {
         "Budget": {
           "BudgetLimit": {
-            "Amount": 20,
+            "Amount": 1000,
             "Unit": "USD",
           },
-          "BudgetName": "infra-dlz",
-          "BudgetType": "COST",
-          "CostFilters": {
-            "TagKeyValue": [
-              "user:Owner$infra",
-              "user:Project$dlz",
-            ],
-          },
-          "CostTypes": {
-            "IncludeCredit": false,
-          },
-          "TimeUnit": "MONTHLY",
-        },
-        "NotificationsWithSubscribers": [
-          {
-            "Notification": {
-              "ComparisonOperator": "GREATER_THAN",
-              "NotificationType": "ACTUAL",
-              "Threshold": 100,
-              "ThresholdType": "PERCENTAGE",
-            },
-            "Subscribers": [
-              {
-                "Address": {
-                  "Ref": "dlzglobalbudgetinfradlztopic0163CD4D",
-                },
-                "SubscriptionType": "SNS",
-              },
-            ],
-          },
-          {
-            "Notification": {
-              "ComparisonOperator": "GREATER_THAN",
-              "NotificationType": "FORECASTED",
-              "Threshold": 100,
-              "ThresholdType": "PERCENTAGE",
-            },
-            "Subscribers": [
-              {
-                "Address": {
-                  "Ref": "dlzglobalbudgetinfradlztopic0163CD4D",
-                },
-                "SubscriptionType": "SNS",
-              },
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::Budgets::Budget",
-    },
-    "dlzglobalbudgetinfradlztopic0163CD4D": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
-          },
-          {
-            "Key": "Owner",
-            "Value": "infra",
-          },
-          {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-budget-infra-dlz-topic",
-      },
-      "Type": "AWS::SNS::Topic",
-    },
-    "dlzglobalbudgetinfradlztopicPolicy9D69FF3F": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sns:Publish",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "budgets.amazonaws.com",
-              },
-              "Resource": {
-                "Ref": "dlzglobalbudgetinfradlztopic0163CD4D",
-              },
-              "Sid": "0",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Topics": [
-          {
-            "Ref": "dlzglobalbudgetinfradlztopic0163CD4D",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::TopicPolicy",
-    },
-    "dlzglobalbudgetinfradlztopicrehandcbudgetdefaultsdatachefco455377B3": {
-      "Properties": {
-        "Endpoint": "rehan+dc-budget--defaults@datachef.co",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "dlzglobalbudgetinfradlztopic0163CD4D",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
-    "dlzglobalbudgetorgtotal": {
-      "Properties": {
-        "Budget": {
-          "BudgetLimit": {
-            "Amount": 100,
-            "Unit": "USD",
-          },
-          "BudgetName": "org-total",
+          "BudgetName": "budget-high",
           "BudgetType": "COST",
           "CostTypes": {
             "IncludeCredit": false,
@@ -1720,7 +1663,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Subscribers": [
               {
                 "Address": {
-                  "Ref": "dlzglobalbudgetorgtotaltopicDE27DBE5",
+                  "Ref": "budgets4F6C55C4",
                 },
                 "SubscriptionType": "SNS",
               },
@@ -1736,7 +1679,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Subscribers": [
               {
                 "Address": {
-                  "Ref": "dlzglobalbudgetorgtotaltopicDE27DBE5",
+                  "Ref": "budgets4F6C55C4",
                 },
                 "SubscriptionType": "SNS",
               },
@@ -1746,61 +1689,56 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       },
       "Type": "AWS::Budgets::Budget",
     },
-    "dlzglobalbudgetorgtotaltopicDE27DBE5": {
+    "dlzglobalbudgetbudgethigh1": {
       "Properties": {
-        "Tags": [
-          {
-            "Key": "Environment",
-            "Value": "dlz",
+        "Budget": {
+          "BudgetLimit": {
+            "Amount": 2000,
+            "Unit": "USD",
           },
-          {
-            "Key": "Owner",
-            "Value": "infra",
+          "BudgetName": "budget-high-1",
+          "BudgetType": "COST",
+          "CostTypes": {
+            "IncludeCredit": false,
           },
+          "TimeUnit": "MONTHLY",
+        },
+        "NotificationsWithSubscribers": [
           {
-            "Key": "Project",
-            "Value": "dlz",
-          },
-        ],
-        "TopicName": "dlz-global-budget-org-total-topic",
-      },
-      "Type": "AWS::SNS::Topic",
-    },
-    "dlzglobalbudgetorgtotaltopicPolicyC31000EF": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sns:Publish",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "budgets.amazonaws.com",
-              },
-              "Resource": {
-                "Ref": "dlzglobalbudgetorgtotaltopicDE27DBE5",
-              },
-              "Sid": "0",
+            "Notification": {
+              "ComparisonOperator": "GREATER_THAN",
+              "NotificationType": "ACTUAL",
+              "Threshold": 100,
+              "ThresholdType": "PERCENTAGE",
             },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Topics": [
+            "Subscribers": [
+              {
+                "Address": {
+                  "Ref": "budgets4F6C55C4",
+                },
+                "SubscriptionType": "SNS",
+              },
+            ],
+          },
           {
-            "Ref": "dlzglobalbudgetorgtotaltopicDE27DBE5",
+            "Notification": {
+              "ComparisonOperator": "GREATER_THAN",
+              "NotificationType": "FORECASTED",
+              "Threshold": 100,
+              "ThresholdType": "PERCENTAGE",
+            },
+            "Subscribers": [
+              {
+                "Address": {
+                  "Ref": "budgets4F6C55C4",
+                },
+                "SubscriptionType": "SNS",
+              },
+            ],
           },
         ],
       },
-      "Type": "AWS::SNS::TopicPolicy",
-    },
-    "dlzglobalbudgetorgtotaltopicrehandcbudgetdefaultsdatachefco6CF0886E": {
-      "Properties": {
-        "Endpoint": "rehan+dc-budget--defaults@datachef.co",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "dlzglobalbudgetorgtotaltopicDE27DBE5",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
+      "Type": "AWS::Budgets::Budget",
     },
     "dlzglobaldenyallguardrailpolicies52FB3D35": {
       "Properties": {

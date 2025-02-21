@@ -6055,13 +6055,13 @@ public readonly accountName: string;
 ```typescript
 import { ManagementGlobalStack } from 'aws-data-landing-zone'
 
-new ManagementGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new ManagementGlobalStack(scope: Construct, stackProps: ManagementGlobalStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalStackProps">ManagementGlobalStackProps</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
@@ -6074,7 +6074,7 @@ new ManagementGlobalStack(scope: Construct, stackProps: DlzStackProps, props: Da
 
 ##### `stackProps`<sup>Required</sup> <a name="stackProps" id="aws-data-landing-zone.ManagementGlobalStack.Initializer.parameter.stackProps"></a>
 
-- *Type:* <a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a>
+- *Type:* <a href="#aws-data-landing-zone.ManagementGlobalStackProps">ManagementGlobalStackProps</a>
 
 ---
 
@@ -15582,7 +15582,8 @@ const budgetSubscribers: BudgetSubscribers = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.BudgetSubscribers.property.emails">emails</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.BudgetSubscribers.property.slack">slack</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.BudgetSubscribers.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.BudgetSubscribers.property.snsTopicName">snsTopicName</a></code> | <code>string</code> | Optional, specify to reuse the same SNS topic for multiple budgets. |
 
 ---
 
@@ -15596,13 +15597,25 @@ public readonly emails: string[];
 
 ---
 
-##### `slack`<sup>Optional</sup> <a name="slack" id="aws-data-landing-zone.BudgetSubscribers.property.slack"></a>
+##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.BudgetSubscribers.property.slacks"></a>
 
 ```typescript
-public readonly slack: SlackChannel;
+public readonly slacks: SlackChannel[];
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>
+- *Type:* <a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]
+
+---
+
+##### `snsTopicName`<sup>Optional</sup> <a name="snsTopicName" id="aws-data-landing-zone.BudgetSubscribers.property.snsTopicName"></a>
+
+```typescript
+public readonly snsTopicName: string;
+```
+
+- *Type:* string
+
+Optional, specify to reuse the same SNS topic for multiple budgets.
 
 ---
 
@@ -17829,10 +17842,21 @@ const globalVariables: GlobalVariables = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GlobalVariables.property.budgetSnsCache">budgetSnsCache</a></code> | <code>{[ key: string ]: <a href="#aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord">GlobalVariablesBudgetSnsCacheRecord</a>}</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.GlobalVariables.property.dlzAccountNetworks">dlzAccountNetworks</a></code> | <code><a href="#aws-data-landing-zone.DlzAccountNetworks">DlzAccountNetworks</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.GlobalVariables.property.ncp1">ncp1</a></code> | <code><a href="#aws-data-landing-zone.GlobalVariablesNcp1">GlobalVariablesNcp1</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.GlobalVariables.property.ncp2">ncp2</a></code> | <code><a href="#aws-data-landing-zone.GlobalVariablesNcp2">GlobalVariablesNcp2</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.GlobalVariables.property.ncp3">ncp3</a></code> | <code><a href="#aws-data-landing-zone.GlobalVariablesNcp3">GlobalVariablesNcp3</a></code> | *No description.* |
+
+---
+
+##### `budgetSnsCache`<sup>Required</sup> <a name="budgetSnsCache" id="aws-data-landing-zone.GlobalVariables.property.budgetSnsCache"></a>
+
+```typescript
+public readonly budgetSnsCache: {[ key: string ]: GlobalVariablesBudgetSnsCacheRecord};
+```
+
+- *Type:* {[ key: string ]: <a href="#aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord">GlobalVariablesBudgetSnsCacheRecord</a>}
 
 ---
 
@@ -17873,6 +17897,45 @@ public readonly ncp3: GlobalVariablesNcp3;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.GlobalVariablesNcp3">GlobalVariablesNcp3</a>
+
+---
+
+### GlobalVariablesBudgetSnsCacheRecord <a name="GlobalVariablesBudgetSnsCacheRecord" id="aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord.Initializer"></a>
+
+```typescript
+import { GlobalVariablesBudgetSnsCacheRecord } from 'aws-data-landing-zone'
+
+const globalVariablesBudgetSnsCacheRecord: GlobalVariablesBudgetSnsCacheRecord = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord.property.subscribers">subscribers</a></code> | <code><a href="#aws-data-landing-zone.BudgetSubscribers">BudgetSubscribers</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+
+---
+
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord.property.subscribers"></a>
+
+```typescript
+public readonly subscribers: BudgetSubscribers;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
+
+---
+
+##### `topic`<sup>Required</sup> <a name="topic" id="aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord.property.topic"></a>
+
+```typescript
+public readonly topic: Topic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.Topic
 
 ---
 
@@ -19033,6 +19096,67 @@ import { LogStacks } from 'aws-data-landing-zone'
 const logStacks: LogStacks = { ... }
 ```
 
+
+### ManagementGlobalStackProps <a name="ManagementGlobalStackProps" id="aws-data-landing-zone.ManagementGlobalStackProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.ManagementGlobalStackProps.Initializer"></a>
+
+```typescript
+import { ManagementGlobalStackProps } from 'aws-data-landing-zone'
+
+const managementGlobalStackProps: ManagementGlobalStackProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStackProps.property.env">env</a></code> | <code>aws-cdk-lib.Environment</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStackProps.property.name">name</a></code> | <code><a href="#aws-data-landing-zone.DlzStackNameProps">DlzStackNameProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStackProps.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStackProps.property.globalVariables">globalVariables</a></code> | <code><a href="#aws-data-landing-zone.GlobalVariables">GlobalVariables</a></code> | *No description.* |
+
+---
+
+##### `env`<sup>Required</sup> <a name="env" id="aws-data-landing-zone.ManagementGlobalStackProps.property.env"></a>
+
+```typescript
+public readonly env: Environment;
+```
+
+- *Type:* aws-cdk-lib.Environment
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="aws-data-landing-zone.ManagementGlobalStackProps.property.name"></a>
+
+```typescript
+public readonly name: DlzStackNameProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzStackNameProps">DlzStackNameProps</a>
+
+---
+
+##### `stage`<sup>Required</sup> <a name="stage" id="aws-data-landing-zone.ManagementGlobalStackProps.property.stage"></a>
+
+```typescript
+public readonly stage: ExpressStage;
+```
+
+- *Type:* cdk-express-pipeline.ExpressStage
+
+---
+
+##### `globalVariables`<sup>Required</sup> <a name="globalVariables" id="aws-data-landing-zone.ManagementGlobalStackProps.property.globalVariables"></a>
+
+```typescript
+public readonly globalVariables: GlobalVariables;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.GlobalVariables">GlobalVariables</a>
+
+---
 
 ### ManagementStacks <a name="ManagementStacks" id="aws-data-landing-zone.ManagementStacks"></a>
 
@@ -21096,7 +21220,7 @@ new Defaults()
 ```typescript
 import { Defaults } from 'aws-data-landing-zone'
 
-Defaults.budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers)
+Defaults.budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers, _?: ForceNoPythonArgumentLifting)
 ```
 
 Budgets for the organization.
@@ -21122,6 +21246,14 @@ Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD.
 - *Type:* <a href="#aws-data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
 
 Subscribers for the budget.
+
+---
+
+###### `_`<sup>Optional</sup> <a name="_" id="aws-data-landing-zone.Defaults.budgets.parameter._"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
+
+Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
 
 ---
 
@@ -21302,7 +21434,7 @@ Given we have these NetworkEntity[]:
 ```typescript
 import { DlzBudget } from 'aws-data-landing-zone'
 
-new DlzBudget(scope: Construct, id: string, props: DlzBudgetProps)
+new DlzBudget(scope: Construct, id: string, props: DlzBudgetProps, budgetSnsCache: {[ key: string ]: GlobalVariablesBudgetSnsCacheRecord})
 ```
 
 | **Name** | **Type** | **Description** |
@@ -21310,6 +21442,7 @@ new DlzBudget(scope: Construct, id: string, props: DlzBudgetProps)
 | <code><a href="#aws-data-landing-zone.DlzBudget.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzBudget.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzBudget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzBudgetProps">DlzBudgetProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzBudget.Initializer.parameter.budgetSnsCache">budgetSnsCache</a></code> | <code>{[ key: string ]: <a href="#aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord">GlobalVariablesBudgetSnsCacheRecord</a>}</code> | *No description.* |
 
 ---
 
@@ -21331,6 +21464,12 @@ new DlzBudget(scope: Construct, id: string, props: DlzBudgetProps)
 
 ---
 
+##### `budgetSnsCache`<sup>Required</sup> <a name="budgetSnsCache" id="aws-data-landing-zone.DlzBudget.Initializer.parameter.budgetSnsCache"></a>
+
+- *Type:* {[ key: string ]: <a href="#aws-data-landing-zone.GlobalVariablesBudgetSnsCacheRecord">GlobalVariablesBudgetSnsCacheRecord</a>}
+
+---
+
 
 
 #### Properties <a name="Properties" id="Properties"></a>
@@ -21338,7 +21477,6 @@ new DlzBudget(scope: Construct, id: string, props: DlzBudgetProps)
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.DlzBudget.property.cfnBudget">cfnBudget</a></code> | <code>aws-cdk-lib.aws_budgets.CfnBudget</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzBudget.property.notificationTopic">notificationTopic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
 
 ---
 
@@ -21349,16 +21487,6 @@ public readonly cfnBudget: CfnBudget;
 ```
 
 - *Type:* aws-cdk-lib.aws_budgets.CfnBudget
-
----
-
-##### `notificationTopic`<sup>Required</sup> <a name="notificationTopic" id="aws-data-landing-zone.DlzBudget.property.notificationTopic"></a>
-
-```typescript
-public readonly notificationTopic: Topic;
-```
-
-- *Type:* aws-cdk-lib.aws_sns.Topic
 
 ---
 

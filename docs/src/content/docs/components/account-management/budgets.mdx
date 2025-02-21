@@ -15,7 +15,7 @@ Tags used for budget filters must be activated as Cost Allocation Tags in your a
 Budget notifications are sent via Amazon SNS, which can be configured for the following delivery methods:
 - **Email**: Each email address must confirm the notification opt-in the first time it is deployed.
 - **Slack**: Notifications are sent to a designated Slack channel. The Slack workspace must be linked to the Management
-Account. For setup details, see the SOP [AWS Chatbot and Slack Integration](sop-account-setup#aws-chatbot-and-slack-integration).
+Account. For setup details, see the SOP [AWS Chatbot and Slack Integration](/sop/account-setup#aws-chatbot-and-slack-integration).
 
 Below is an example of creating a budget for resources tagged with `Owner: backend`. Notifications will be sent to a
 specified Slack channel and email address once the budget exceeds $100.
@@ -41,7 +41,7 @@ specified Slack channel and email address once the budget exceeds $100.
           },
           amount: 100,
           subscribers: {
-            slack: slackBudgetNotifications,
+            slack: [slackBudgetNotifications],
             emails: ['you@org.com'],
           },
         },
@@ -71,10 +71,75 @@ specified Slack channel and email address once the budget exceeds $100.
                     },
                     "amount": 100,
                     "subscribers": {
-                        "slack": slack_budget_notifications,
+                        "slacks": [slack_budget_notifications],
                         "emails": ["you@org.com"],
                     },
                 },
+            ],
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Reusing the same SNS Topic
+
+Each budget creates a unique SNS topic with the name `${budget.name}-topic`. If multiple budgets share the same
+subscribers, you can use a single SNS topic to reduce the number of resources and subscription confirmations.
+To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts {5}
+    import {App} from 'aws-cdk-lib';
+    import { DataLandingZone, SlackChannel } from 'aws-data-landing-zone';
+
+    const subscribers: BudgetSubscribers = {
+      snsTopicName: 'budgets',
+      slacks: [{
+        slackChannelConfigurationName: 'budget-alerts',
+        slackWorkspaceId: 'YourWorkspaceId',
+        slackChannelId: 'YourChannelId',
+      }],
+      emails: ["you@org.com"],
+    };
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      budgets: [
+        ...Defaults.budgets(100, 20, subscribers),
+        { name: 'budget-high', amount: 1_000, subscribers },
+        { name: 'budget-high-1', amount: 2_000, subscribers },
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python" >
+    ```python {5}
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    budget_subscribers = dlz.BudgetSubscribers(
+        sns_topic_name= "budgets",
+        slacks=[
+            dlz.SlackChannel(
+              slack_channel_configuration_name="budget-alerts",
+              slack_workspace_id="YourWorkspaceId",
+              slack_channel_id="YourChannelId",
+            )
+        ],
+        emails=[
+            "you@org.com",
+        ]
+    )
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+            budgets=[
+                *dlz.Defaults.budgets(org_total=500, infra_dlz=20, subscribers=budget_subscribers),
+                dlz.DlzBudgetProps(name="budget-high", amount=1_000, subscribers=budget_subscribers),
+                dlz.DlzBudgetProps(name="budget-high-1", amount=2_000, subscribers=budget_subscribers)
             ],
         ...
     )

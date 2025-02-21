@@ -5,8 +5,10 @@ import { IManagedPolicy } from 'aws-cdk-lib/aws-iam/lib/managed-policy';
 import { PolicyDocument } from 'aws-cdk-lib/aws-iam/lib/policy-document';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam/lib/policy-statement';
 import { IPrincipal } from 'aws-cdk-lib/aws-iam/lib/principals';
+import * as sns from 'aws-cdk-lib/aws-sns';
 import { Duration, SecretValue } from 'aws-cdk-lib/core';
 import {
+  BudgetSubscribers,
   DlzAccountNetworks,
   DlzBudgetProps,
   DlzControlTowerStandardControls,
@@ -788,8 +790,18 @@ export interface GlobalVariablesNcp3 {
   readonly routeTablesSsmCache: DlzSsmReaderStackCache;
 }
 
+export interface GlobalVariablesBudgetSnsCacheRecord {
+  readonly topic: sns.Topic;
+  readonly subscribers: BudgetSubscribers;
+}
+
+// export interface GlobalVariablesBudgetSnsCache {
+//   readonly values: Record<string, GlobalVariablesBudgetSnsCacheRecord>
+// }
+
 /* Global variables need to be reset between Construct usage */
 export interface GlobalVariables {
+  readonly budgetSnsCache: Record<string, GlobalVariablesBudgetSnsCacheRecord>;
   readonly dlzAccountNetworks: DlzAccountNetworks;
   readonly ncp1: GlobalVariablesNcp1;
   readonly ncp2: GlobalVariablesNcp2;

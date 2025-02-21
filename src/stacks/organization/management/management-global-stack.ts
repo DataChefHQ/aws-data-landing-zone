@@ -11,18 +11,28 @@ import {
   DlzBudget,
   ControlTowerControlMappings,
   DlzStack,
-  DlzStackProps,
+  DlzStackProps, SlackChannel,
 } from '../../../constructs/index';
 import { DlzServiceControlPolicy } from '../../../constructs/organization-policies/index';
 import { DlzTagPolicy } from '../../../constructs/organization-policies/tag-policy';
-import { DataLandingZoneProps, DlzAccountType, Ou, Region } from '../../../data-landing-zone-types';
+import {
+  DataLandingZoneProps,
+  DlzAccountType,
+  GlobalVariables,
+  Ou,
+  Region,
+} from '../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../defaults';
 import { limitCfnExecutions } from '../../../lib/cdk-utils';
 import { Report } from '../../../lib/report';
 
+export interface ManagementGlobalStackProps extends DlzStackProps {
+  readonly globalVariables: GlobalVariables;
+}
+
 export class ManagementGlobalStack extends DlzStack {
 
-  constructor(scope: Construct, stackProps: DlzStackProps, private props: DataLandingZoneProps) {
+  constructor(scope: Construct, private stackProps: ManagementGlobalStackProps, private props: DataLandingZoneProps) {
     super(scope, stackProps);
 
     this.rootControls();
@@ -220,9 +230,9 @@ export class ManagementGlobalStack extends DlzStack {
   }
 
   budgets() {
-    const budgetSlackChannels = this.props.budgets
-      .filter(budget => budget.subscribers.slack)
-      .map(budget => budget.subscribers.slack!);
+    const budgetSlackChannels: SlackChannel[] = this.props.budgets
+      .filter(budget => budget.subscribers.slacks)
+      .flatMap(budget => budget.subscribers.slacks!);
 
     const denyAllPolicy = new iam.ManagedPolicy(this, this.resourceName('deny-all-guardrail-policies'), {
       managedPolicyName: this.resourceName('deny-all-guardrail-policies'),
@@ -249,7 +259,7 @@ export class ManagementGlobalStack extends DlzStack {
     }
 
     for (const budget of this.props.budgets) {
-      new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget);
+      new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget, this.stackProps.globalVariables.budgetSnsCache);
     }
   }
 
