@@ -30,7 +30,7 @@ export class DlzControlTowerEnabledControl implements IReportResource {
 
   constructor(scope: Construct, id: string, props: DlzControlTowerEnabledControlProps) {
 
-    let parameters: {key: string; value: any}[] | undefined = undefined;
+    let parameters: { key: string; value: any }[] | undefined = undefined;
     if (props.control.parameters) {
       parameters = Object.entries(props.control.parameters).map(([key, value]) => {
         return {

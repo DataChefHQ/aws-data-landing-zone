@@ -197,7 +197,7 @@ type RoutesPeeringConnectionProps = {
   region: 'global' | 'regional';
   fromVpcAddress: string;
   toVpcAddress: string;
-}
+};
 function ncp3CheckRoutes(dlzResources: DlzResources,
   routesAccount: 'prod' | 'dev', routesRegion: 'global' | 'regional',
   routeTablePartialAddress: string,
