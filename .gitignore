@@ -48,6 +48,7 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+.devenv
 /assets/
 .dlz-reports
 .idea
@@ -57,4 +58,3 @@ tsconfig.json
 *.DS_Store
 .vscode/
 !/.projenrc.ts
-.devenv

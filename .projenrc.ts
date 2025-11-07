@@ -75,6 +75,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 
+// ignore `devenv`'s local environment
+project.addGitIgnore('.devenv');
 
 project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',
