@@ -57,3 +57,4 @@ tsconfig.json
 *.DS_Store
 .vscode/
 !/.projenrc.ts
+.devenv
