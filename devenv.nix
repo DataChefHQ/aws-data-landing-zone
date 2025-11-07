@@ -9,7 +9,9 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = with pkgs; [];
+  packages = with pkgs; [
+    gnugrep
+  ];
 
   # https://devenv.sh/languages/
   languages.nix.enable = true;

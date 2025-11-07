@@ -201,7 +201,7 @@ export function DlzAllRegions(regions: DlzRegions): Region[] {
 export enum DlzAccountType {
   // SANDBOX = 'sandbox',
   DEVELOP = 'development',
-  PRODUCTION = 'production'
+  PRODUCTION = 'production',
 }
 
 export interface DLzManagementAccount {
