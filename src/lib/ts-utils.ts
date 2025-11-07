@@ -8,8 +8,8 @@ export function kebabToCamelCase(input: string): string {
   }).join('');
 }
 
-export function groupByField<T>(items: T[], field: keyof T): {[key: string]: T[]} {
-  return items.reduce<{[key: string]: T[]}>((acc, item) => {
+export function groupByField<T>(items: T[], field: keyof T): { [key: string]: T[] } {
+  return items.reduce<{ [key: string]: T[] }>((acc, item) => {
     const key = String(item[field]);
     if (!acc[key]) {
       acc[key] = [];
@@ -18,8 +18,8 @@ export function groupByField<T>(items: T[], field: keyof T): {[key: string]: T[]
     return acc;
   }, {});
 }
-export function groupByFieldByFunction<T>(items: T[], keyFunction: (item : T) => string): {[key: string]: T[]} {
-  return items.reduce<{[key: string]: T[]}>((acc, item) => {
+export function groupByFieldByFunction<T>(items: T[], keyFunction: (item : T) => string): { [key: string]: T[] } {
+  return items.reduce<{ [key: string]: T[] }>((acc, item) => {
     const key = keyFunction(item);
     if (!acc[key]) {
       acc[key] = [];

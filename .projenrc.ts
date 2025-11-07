@@ -6,7 +6,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'hi@datachef.co',
   cdkVersion: '2.133.0',
   defaultReleaseBranch: 'main',
-  jsiiVersion: '~5.5.0',
+  jsiiVersion: '~5.7.0',
   typescriptVersion: '~5.5.0',
   name: 'aws-data-landing-zone',
   description: 'AWS CDK Data Landing Zone construct',
@@ -75,6 +75,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 
+// ignore `devenv`'s local environment
+project.addGitIgnore('.devenv');
+project.addGitIgnore('.pre-commit-config.yaml');
 
 project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',

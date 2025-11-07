@@ -102,7 +102,7 @@ export function findDlzSsmReaderLogicalId(template: Template, accountId: string,
 }
 
 export function getResourceLogicalIdFromProperties(template: Template, resource: string,
-  properties: {[key: string]: any}) {
+  properties: { [key: string]: any }) {
   const foundResources = Object.entries(template.findResources(resource))
     .map(([key, value]) => {
       return { logicalId: key, ...value };

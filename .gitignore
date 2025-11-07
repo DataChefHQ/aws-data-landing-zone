@@ -48,6 +48,8 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+.devenv
+.pre-commit-config.yaml
 /assets/
 .dlz-reports
 .idea

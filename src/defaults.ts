@@ -9,7 +9,7 @@ import { DataLandingZoneProps, ForceNoPythonArgumentLifting, Region } from './da
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',
   SECURITY_LOG = 'dlz:security:log',
-  SECURITY_AUDIT = 'dlz:security:audit'
+  SECURITY_AUDIT = 'dlz:security:audit',
 }
 
 export enum IamIdentityPermissionSets {
