@@ -6,6 +6,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'hi@datachef.co',
   cdkVersion: '2.133.0',
   defaultReleaseBranch: 'main',
+  constructsVersion: '10.0.5',
   jsiiVersion: '~5.5.0',
   typescriptVersion: '~5.5.0',
   name: 'aws-data-landing-zone',
@@ -40,6 +41,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   workflowNodeVersion: '20',
+  compat: true,
   publishToPypi: {
     distName: 'aws-data-landing-zone',
     module: 'aws_data_landing_zone',
@@ -93,8 +95,8 @@ project.eslint!.addRules({
   'no-bitwise': 'off',
 });
 
-project.package.addEngine('node', '~20.*');
-project.package.addEngine('npm', '~10.*');
+project.package.addEngine('node', '^20.19');
+project.package.addEngine('npm', '^10');
 
 
 // Need to clear before compiling and packaging. Have to remove these because they are not cleared for some reason,
