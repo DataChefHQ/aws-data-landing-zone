@@ -9,7 +9,7 @@ type SourcePeeringConnectionProps = {
   sourceRegion: string;
   sourceVpc: NetworkEntityVpc;
   destinationVpc: NetworkEntityVpc;
-}
+};
 
 export class Shared {
 
