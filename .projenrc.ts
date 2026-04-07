@@ -6,9 +6,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'hi@datachef.co',
   cdkVersion: '2.133.0',
   defaultReleaseBranch: 'main',
-  constructsVersion: '10.0.5',
-  jsiiVersion: '~5.5.0',
-  typescriptVersion: '~5.5.0',
+  constructsVersion: '10.6.0',
+  jsiiVersion: '~5.9.0',
+  typescriptVersion: '~5.9.0',
   name: 'aws-data-landing-zone',
   description: 'AWS CDK Data Landing Zone construct',
   packageManager: javascript.NodePackageManager.NPM,
@@ -48,10 +48,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   /* Runtime dependencies of this module that are jsii-enabled. Must be defined in peerDeps as well */
   deps: [
-    'cdk-express-pipeline',
+    'cdk-express-pipeline@^1.6.0',
   ],
   peerDeps: [
-    'cdk-express-pipeline',
+    'cdk-express-pipeline@^1.6.0',
   ],
   /*  Runtime dependencies of this module that are NOT jsii-enabled. */
   bundledDeps: [
@@ -63,11 +63,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-sso-admin',
     '@aws-sdk/client-iam',
     '@aws-sdk/client-cloudformation',
-    'js-yaml',
+    'js-yaml@^4.1',
     '@types/js-yaml',
   ],
   /* Build dependencies for this repo/module. */
-  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node'],
+  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node', 'cdk-express-pipeline@^1.6.0'],
   /* The "name" in package.json. */
   // packageName: undefined,
   jestOptions: {

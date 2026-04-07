@@ -43,6 +43,7 @@ new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLan
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.AuditGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -71,6 +72,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.AuditGlobalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.AuditGlobalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.AuditGlobalStack.addDependency"></a>
 
@@ -480,7 +502,7 @@ public securityHubNotifications(): void
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.AuditGlobalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.AuditGlobalStack.isConstruct"></a>
 
 ```typescript
 import { AuditGlobalStack } from 'aws-data-landing-zone'
@@ -489,6 +511,20 @@ AuditGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.AuditGlobalStack.isConstruct.parameter.x"></a>
 
@@ -977,6 +1013,7 @@ new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.AuditRegionalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -1004,6 +1041,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.AuditRegionalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.AuditRegionalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.AuditRegionalStack.addDependency"></a>
 
@@ -1407,7 +1465,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.AuditRegionalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.AuditRegionalStack.isConstruct"></a>
 
 ```typescript
 import { AuditRegionalStack } from 'aws-data-landing-zone'
@@ -1416,6 +1474,20 @@ AuditRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.AuditRegionalStack.isConstruct.parameter.x"></a>
 
@@ -1904,6 +1976,7 @@ new DlzStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.DlzStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.DlzStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -1931,6 +2004,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.DlzStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.DlzStack.addDependency"></a>
 
@@ -2334,7 +2428,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.DlzStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzStack.isConstruct"></a>
 
 ```typescript
 import { DlzStack } from 'aws-data-landing-zone'
@@ -2343,6 +2437,20 @@ DlzStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzStack.isConstruct.parameter.x"></a>
 
@@ -2842,6 +2950,7 @@ new IamAccountAlias(scope: Construct, id: string, props: IamAccountAliasProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.IamAccountAlias.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.IamAccountAlias.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -2853,6 +2962,27 @@ public toString(): string
 
 Returns a string representation of this construct.
 
+##### `with` <a name="with" id="aws-data-landing-zone.IamAccountAlias.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.IamAccountAlias.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
@@ -2862,7 +2992,7 @@ Returns a string representation of this construct.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.IamAccountAlias.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.IamAccountAlias.isConstruct"></a>
 
 ```typescript
 import { IamAccountAlias } from 'aws-data-landing-zone'
@@ -2871,6 +3001,20 @@ IamAccountAlias.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.IamAccountAlias.isConstruct.parameter.x"></a>
 
@@ -2963,6 +3107,7 @@ new IamIdentityCenterGroup(scope: Construct, id: string, props: IamIdentityCente
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.IamIdentityCenterGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -2974,6 +3119,27 @@ public toString(): string
 
 Returns a string representation of this construct.
 
+##### `with` <a name="with" id="aws-data-landing-zone.IamIdentityCenterGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.IamIdentityCenterGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
@@ -2982,7 +3148,7 @@ Returns a string representation of this construct.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.IamIdentityCenterGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.IamIdentityCenterGroup.isConstruct"></a>
 
 ```typescript
 import { IamIdentityCenterGroup } from 'aws-data-landing-zone'
@@ -2991,6 +3157,20 @@ IamIdentityCenterGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.IamIdentityCenterGroup.isConstruct.parameter.x"></a>
 
@@ -3066,6 +3246,7 @@ new IamPasswordPolicy(scope: Construct, id: string, props: IamPasswordPolicyProp
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.IamPasswordPolicy.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.IamPasswordPolicy.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -3077,6 +3258,27 @@ public toString(): string
 
 Returns a string representation of this construct.
 
+##### `with` <a name="with" id="aws-data-landing-zone.IamPasswordPolicy.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.IamPasswordPolicy.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
@@ -3085,7 +3287,7 @@ Returns a string representation of this construct.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.IamPasswordPolicy.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.IamPasswordPolicy.isConstruct"></a>
 
 ```typescript
 import { IamPasswordPolicy } from 'aws-data-landing-zone'
@@ -3094,6 +3296,20 @@ IamPasswordPolicy.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.IamPasswordPolicy.isConstruct.parameter.x"></a>
 
@@ -3178,6 +3394,7 @@ new IdentityStoreUser(scope: Construct, id: string, props: IdentityStoreUserProp
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.IdentityStoreUser.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.IdentityStoreUser.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -3189,6 +3406,27 @@ public toString(): string
 
 Returns a string representation of this construct.
 
+##### `with` <a name="with" id="aws-data-landing-zone.IdentityStoreUser.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.IdentityStoreUser.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
@@ -3198,7 +3436,7 @@ Returns a string representation of this construct.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.IdentityStoreUser.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.IdentityStoreUser.isConstruct"></a>
 
 ```typescript
 import { IdentityStoreUser } from 'aws-data-landing-zone'
@@ -3207,6 +3445,20 @@ IdentityStoreUser.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.IdentityStoreUser.isConstruct.parameter.x"></a>
 
@@ -3290,6 +3542,7 @@ new LogGlobalStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.LogGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -3317,6 +3570,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.LogGlobalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.LogGlobalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.LogGlobalStack.addDependency"></a>
 
@@ -3720,7 +3994,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.LogGlobalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.LogGlobalStack.isConstruct"></a>
 
 ```typescript
 import { LogGlobalStack } from 'aws-data-landing-zone'
@@ -3729,6 +4003,20 @@ LogGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.LogGlobalStack.isConstruct.parameter.x"></a>
 
@@ -4217,6 +4505,7 @@ new LogRegionalStack(scope: Construct, props: DlzStackProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.LogRegionalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -4244,6 +4533,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.LogRegionalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.LogRegionalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.LogRegionalStack.addDependency"></a>
 
@@ -4647,7 +4957,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.LogRegionalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.LogRegionalStack.isConstruct"></a>
 
 ```typescript
 import { LogRegionalStack } from 'aws-data-landing-zone'
@@ -4656,6 +4966,20 @@ LogRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.LogRegionalStack.isConstruct.parameter.x"></a>
 
@@ -5151,6 +5475,7 @@ new ManagementGlobalIamIdentityCenterStack(scope: Construct, stackProps: DlzStac
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -5178,6 +5503,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency"></a>
 
@@ -5581,7 +5927,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct"></a>
 
 ```typescript
 import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
@@ -5590,6 +5936,20 @@ ManagementGlobalIamIdentityCenterStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct.parameter.x"></a>
 
@@ -6085,6 +6445,7 @@ new ManagementGlobalStack(scope: Construct, stackProps: ManagementGlobalStackPro
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -6117,6 +6478,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.ManagementGlobalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.ManagementGlobalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementGlobalStack.addDependency"></a>
 
@@ -6556,7 +6938,7 @@ Service Control Policies and Tag Policies applied at the account level to enable
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.ManagementGlobalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.ManagementGlobalStack.isConstruct"></a>
 
 ```typescript
 import { ManagementGlobalStack } from 'aws-data-landing-zone'
@@ -6565,6 +6947,20 @@ ManagementGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementGlobalStack.isConstruct.parameter.x"></a>
 
@@ -7053,6 +7449,7 @@ new WorkloadGlobalDataServicesPhase1Stack(scope: Construct, workloadAccountProps
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -7080,6 +7477,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency"></a>
 
@@ -7483,7 +7901,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadGlobalDataServicesPhase1Stack } from 'aws-data-landing-zone'
@@ -7492,6 +7910,20 @@ WorkloadGlobalDataServicesPhase1Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.isConstruct.parameter.x"></a>
 
@@ -7987,6 +8419,7 @@ new WorkloadGlobalNetworkConnectionsPhase1Stack(scope: Construct, workloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -8015,6 +8448,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency"></a>
 
@@ -8436,7 +8890,7 @@ public createPeeringRole(from: DlzAccountNetwork, to: DlzAccountNetwork): void
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadGlobalNetworkConnectionsPhase1Stack } from 'aws-data-landing-zone'
@@ -8445,6 +8899,20 @@ WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct.parameter.x"></a>
 
@@ -8940,6 +9408,7 @@ new WorkloadGlobalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -8967,6 +9436,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency"></a>
 
@@ -9370,7 +9860,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadGlobalNetworkConnectionsPhase2Stack } from 'aws-data-landing-zone'
@@ -9379,6 +9869,20 @@ WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct.parameter.x"></a>
 
@@ -9874,6 +10378,7 @@ new WorkloadGlobalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -9901,6 +10406,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency"></a>
 
@@ -10304,7 +10830,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadGlobalNetworkConnectionsPhase3Stack } from 'aws-data-landing-zone'
@@ -10313,6 +10839,20 @@ WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct.parameter.x"></a>
 
@@ -10808,6 +11348,7 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -10835,6 +11376,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadGlobalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadGlobalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadGlobalStack.addDependency"></a>
 
@@ -11238,7 +11800,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadGlobalStack.isConstruct"></a>
 
 ```typescript
 import { WorkloadGlobalStack } from 'aws-data-landing-zone'
@@ -11247,6 +11809,20 @@ WorkloadGlobalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadGlobalStack.isConstruct.parameter.x"></a>
 
@@ -11735,6 +12311,7 @@ new WorkloadRegionalDataServicesPhase1Stack(scope: Construct, workloadAccountPro
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -11762,6 +12339,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency"></a>
 
@@ -12165,7 +12763,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadRegionalDataServicesPhase1Stack } from 'aws-data-landing-zone'
@@ -12174,6 +12772,20 @@ WorkloadRegionalDataServicesPhase1Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.isConstruct.parameter.x"></a>
 
@@ -12669,6 +13281,7 @@ new WorkloadRegionalNetworkConnectionsPhase2Stack(scope: Construct, workloadAcco
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -12696,6 +13309,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency"></a>
 
@@ -13099,7 +13733,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadRegionalNetworkConnectionsPhase2Stack } from 'aws-data-landing-zone'
@@ -13108,6 +13742,20 @@ WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct.parameter.x"></a>
 
@@ -13603,6 +14251,7 @@ new WorkloadRegionalNetworkConnectionsPhase3Stack(scope: Construct, workloadAcco
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -13630,6 +14279,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency"></a>
 
@@ -14033,7 +14703,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct"></a>
 
 ```typescript
 import { WorkloadRegionalNetworkConnectionsPhase3Stack } from 'aws-data-landing-zone'
@@ -14042,6 +14712,20 @@ WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct.parameter.x"></a>
 
@@ -14537,6 +15221,7 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitary key-value pair, with information you want to record about the stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
@@ -14564,6 +15249,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.WorkloadRegionalStack.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.WorkloadRegionalStack.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.WorkloadRegionalStack.addDependency"></a>
 
@@ -14967,7 +15673,7 @@ Create unique ResourceNames.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.WorkloadRegionalStack.isConstruct"></a>
 
 ```typescript
 import { WorkloadRegionalStack } from 'aws-data-landing-zone'
@@ -14976,6 +15682,20 @@ WorkloadRegionalStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.WorkloadRegionalStack.isConstruct.parameter.x"></a>
 
