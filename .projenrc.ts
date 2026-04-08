@@ -7,8 +7,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: '2.133.0',
   defaultReleaseBranch: 'main',
   constructsVersion: '10.6.0',
-  jsiiVersion: '~5.9.0',
-  typescriptVersion: '~5.9.0',
+  cdkVersionPinning: false,
+  jsiiVersion: '^5.9.37',
+  typescriptVersion: '^5.9',
   name: 'aws-data-landing-zone',
   description: 'AWS CDK Data Landing Zone construct',
   packageManager: javascript.NodePackageManager.NPM,
@@ -46,30 +47,25 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'aws-data-landing-zone',
     module: 'aws_data_landing_zone',
   },
-  /* Runtime dependencies of this module that are jsii-enabled. Must be defined in peerDeps as well */
   deps: [
     'cdk-express-pipeline@^1.6.0',
   ],
   peerDeps: [
     'cdk-express-pipeline@^1.6.0',
   ],
-  /*  Runtime dependencies of this module that are NOT jsii-enabled. */
   bundledDeps: [
-    '@aws-sdk/client-sts',
-    '@aws-sdk/credential-providers',
-    '@aws-sdk/client-cost-explorer',
-    'table',
-    '@aws-sdk/client-identitystore',
-    '@aws-sdk/client-sso-admin',
-    '@aws-sdk/client-iam',
-    '@aws-sdk/client-cloudformation',
+    '@aws-sdk/client-sts@^3.1026.0',
+    '@aws-sdk/credential-providers@^3.1026.0',
+    '@aws-sdk/client-cost-explorer@^3.1026.0',
+    '@aws-sdk/client-identitystore@^3.1026.0',
+    '@aws-sdk/client-sso-admin@^3.1026.0',
+    '@aws-sdk/client-iam@^3.1026.0',
+    '@aws-sdk/client-cloudformation@^3.1026.0',
     'js-yaml@^4.1',
     '@types/js-yaml',
+    'table',
   ],
-  /* Build dependencies for this repo/module. */
   devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node', 'cdk-express-pipeline@^1.6.0'],
-  /* The "name" in package.json. */
-  // packageName: undefined,
   jestOptions: {
     jestConfig: {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring

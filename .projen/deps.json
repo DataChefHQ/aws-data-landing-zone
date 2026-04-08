@@ -86,12 +86,12 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "~5.9.0",
+      "version": "^5.9.37",
       "type": "build"
     },
     {
       "name": "jsii",
-      "version": "~5.9.0",
+      "version": "^5.9.37",
       "type": "build"
     },
     {
@@ -108,35 +108,42 @@
     },
     {
       "name": "typescript",
-      "version": "~5.9.0",
+      "version": "^5.9",
       "type": "build"
     },
     {
       "name": "@aws-sdk/client-cloudformation",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-cost-explorer",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-iam",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-identitystore",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sso-admin",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sts",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/credential-providers",
+      "version": "^3.1026.0",
       "type": "bundled"
     },
     {
