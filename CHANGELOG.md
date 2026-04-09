@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.2.0] - 2026-04-09
+
+### ⚠️ Breaking Changes
+
+- Release 0.2.0
 
 ### Chores
 
@@ -21,6 +25,16 @@ All notable changes to this project will be documented in this file.
 - **deps:** Updated @aws-sdk to ^3.1027.0 for dependency consistency
 
 - **deps:** Updated dependencies in .projenrc.ts
+
+- Self mutation
+
+- Self mutation
+
+- Configured cliff.toml for consistent changelog generation
+
+### Features
+
+- Release 0.2.0
 
 
 ## [0.1.0] - 2025-02-21
