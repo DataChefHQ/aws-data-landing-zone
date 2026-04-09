@@ -54,7 +54,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk-express-pipeline@^1.6.0',
   ],
   bundledDeps: [
-    '@aws-sdk/client-sts@^3.1026.0',
+    '@aws-sdk/client-sts@^3.1027.0',
     '@aws-sdk/credential-providers@^3.1027.0',
     '@aws-sdk/client-cost-explorer@^3.1027.0',
     '@aws-sdk/client-identitystore@^3.1027.0',
