@@ -54,20 +54,19 @@ commit_preprocessors = [
 ]
 
 commit_parsers = [
-  { message = "^feat!?:", group = "Features" },
-  { message = "^fix!?:", group = "Bug Fixes" },
-  { message = "^docs!?:", group = "Documentation" },
-  { message = "^refactor!?:", group = "Refactoring" },
-  { message = "^perf!?:", group = "Performance" },
-  { message = "^ci!?:", group = "CI/CD" },
-  { message = "^build!?:", group = "Build" },
-  { message = "^test!?:", group = "Tests" },
-  { message = "^chore!?:", group = "Chores" },
-  { message = "^revert!?:", group = "Reverts" },
+  { message = "^feat(\\([^)]+\\))?!?:", group = "Features" },
+  { message = "^fix(\\([^)]+\\))?!?:", group = "Bug Fixes" },
+  { message = "^docs(\\([^)]+\\))?!?:", group = "Documentation" },
+  { message = "^refactor(\\([^)]+\\))?!?:", group = "Refactoring" },
+  { message = "^perf(\\([^)]+\\))?!?:", group = "Performance" },
+  { message = "^ci(\\([^)]+\\))?!?:", group = "CI/CD" },
+  { message = "^build(\\([^)]+\\))?!?:", group = "Build" },
+  { message = "^test(\\([^)]+\\))?!?:", group = "Tests" },
+  { message = "^chore(\\([^)]+\\))?!?:", group = "Chores" },
+  { message = "^revert(\\([^)]+\\))?!?:", group = "Reverts" },
   { message = "^merge:", skip = true },
   { message = "^last touches$", skip = true },
 ]
-
 link_parsers = [
   { pattern = "#([0-9]+)", href = "https://github.com/DataChefHQ/aws-data-landing-zone/pull/$1", text = "$1" },
 ]

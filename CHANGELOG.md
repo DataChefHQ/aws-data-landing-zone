@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
-### chore
+### Chores
 
 - **projen:** Update projen to 0.90.6 and pin some values
 
@@ -13,6 +13,14 @@ All notable changes to this project will be documented in this file.
 - **@aws-cdk:** Align to 3.1026.0
 
 - **deps:** Update devDependencies and dependencies
+
+- **deps:** Upgraded projen and @aws-sdk for compatibility and features
+
+- Added CHANGELOG.md and configured cliff.toml for git-cliff
+
+- **deps:** Updated @aws-sdk to ^3.1027.0 for dependency consistency
+
+- **deps:** Updated dependencies in .projenrc.ts
 
 
 ## [0.1.0] - 2025-02-21
