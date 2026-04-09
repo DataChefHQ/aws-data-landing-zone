@@ -138,7 +138,7 @@
     },
     {
       "name": "@aws-sdk/client-sts",
-      "version": "^3.1026.0",
+      "version": "^3.1027.0",
       "type": "bundled"
     },
     {
