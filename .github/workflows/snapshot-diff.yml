@@ -1,0 +1,62 @@
+name: snapshot-diff
+on:
+  pull_request:
+    paths:
+      - "test/__snapshots__/**"
+jobs:
+  comment:
+    name: Snapshot Diff Comment
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Generate snapshot diff
+        id: diff
+        shell: bash
+        run: |
+          DIFF=$(git diff "origin/${{ github.event.pull_request.base.ref }}...HEAD" -- 'test/__snapshots__/' || true)
+          if [ -z "$DIFF" ]; then
+            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "has_diff=true" >> "$GITHUB_OUTPUT"
+          TRUNCATED=$(echo "$DIFF" | head -c 60000)
+          {
+            echo "content<<SNAPSHOT_EOF"
+            echo "$TRUNCATED"
+            echo "SNAPSHOT_EOF"
+          } >> "$GITHUB_OUTPUT"
+      - name: Find existing comment
+        if: steps.diff.outputs.has_diff == 'true'
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: "<!-- snapshot-diff -->"
+      - name: Post or update comment
+        if: steps.diff.outputs.has_diff == 'true'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          edit-mode: replace
+          body: |-
+            <!-- snapshot-diff -->
+            ### Snapshot Changes Detected
+
+            This PR modifies CDK synthesis snapshots. Please review the diff carefully.
+
+            <details>
+            <summary>Snapshot diff (click to expand)</summary>
+
+            ```diff
+            ${{ steps.diff.outputs.content }}
+            ```
+
+            </details>
