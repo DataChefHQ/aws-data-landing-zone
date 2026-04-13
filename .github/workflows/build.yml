@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "22"
           package-manager-cache: false
       - name: Install dependencies
         run: npm install
@@ -97,7 +97,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "22"
           package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
@@ -132,7 +132,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "22"
           package-manager-cache: "false"
       - uses: actions/setup-python@v6
         with:

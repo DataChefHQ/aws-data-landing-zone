@@ -60,7 +60,7 @@ export class IdentityStoreUser extends Construct {
       'Custom::DlzIdentityStoreUser',
       {
         codeDirectory: IdentityStoreUser.fetchCodeDirectory(),
-        runtime: CustomResourceProviderRuntime.NODEJS_18_X,
+        runtime: CustomResourceProviderRuntime.NODEJS_22_X,
         timeout: Duration.seconds(60),
         policyStatements: [
           {

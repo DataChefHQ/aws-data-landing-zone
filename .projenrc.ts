@@ -4,7 +4,7 @@ import { ArrowParens, TrailingComma } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'DataChefHQ',
   authorAddress: 'hi@datachef.co',
-  cdkVersion: '2.133.0',
+  cdkVersion: '2.248.0',
   defaultReleaseBranch: 'main',
   constructsVersion: '10.6.0',
   cdkVersionPinning: false,
@@ -41,7 +41,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
       },
     },
   },
-  workflowNodeVersion: '20',
+  workflowNodeVersion: '22',
   compat: true,
   publishToPypi: {
     distName: 'aws-data-landing-zone',
@@ -65,7 +65,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/js-yaml',
     'table',
   ],
-  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node', 'cdk-express-pipeline@^1.6.0'],
+  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node@^22', 'cdk-express-pipeline@^1.6.0'],
   jestOptions: {
     jestConfig: {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
@@ -76,13 +76,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
 project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',
-  target: 'node18',
+  target: 'node22',
   sourcemap: true,
   externals: ['aws-sdk'],
 });
 project.bundler.addBundle('./src/constructs/iam/lambda/iam-account-alias/', {
   platform: 'node',
-  target: 'node18',
+  target: 'node22',
   sourcemap: true,
   externals: ['aws-sdk'],
 });
@@ -91,7 +91,7 @@ project.eslint!.addRules({
   'no-bitwise': 'off',
 });
 
-project.package.addEngine('node', '^20.19');
+project.package.addEngine('node', '^22');
 project.package.addEngine('npm', '^10');
 
 
