@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh *)",
+      "Bash(python *)",
+      "Bash(grep *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node *)",
+      "Bash(npx *)",
+      "Bash(xargs *)"
+    ]
+  }
+}
