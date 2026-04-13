@@ -59,6 +59,20 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
         },
         "Name": "dlz-global-sh-notification-notify-high-rule",
         "State": "ENABLED",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
         "Targets": [
           {
             "Arn": {
@@ -142,6 +156,20 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
         },
         "Name": "dlz-global-sh-notification-notify-resolved-rule",
         "State": "ENABLED",
+        "Tags": [
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
         "Targets": [
           {
             "Arn": {
@@ -258,7 +286,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 60,
       },
       "Type": "AWS::Lambda::Function",
@@ -563,7 +591,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -1842,7 +1870,8 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ClientIDList": [
           "sts.amazonaws.com",
         ],
-        "CodeHash": "977fc1649d2dbcce16e23f6332faef6fa0f48aa74a0afe35f4a3467754e20cd8",
+        "CodeHash": "d75c48c9f82cde63e9bf414df335e84e8ac24f11eb34889be255b702aec71e50",
+        "RejectUnauthorized": false,
         "ServiceToken": {
           "Fn::GetAtt": [
             "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
@@ -2746,7 +2775,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -2755,7 +2784,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Tags": [
           {
             "Key": "Environment",
@@ -3087,7 +3116,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -3096,7 +3125,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Tags": [
           {
             "Key": "Environment",
@@ -3394,7 +3423,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Tags": [
           {
             "Key": "Environment",
@@ -3475,7 +3504,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 15,
       },
       "Type": "AWS::Lambda::Function",
@@ -5653,7 +5682,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-234567890123-us-east-1",
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -5662,7 +5691,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Tags": [
           {
             "Key": "Environment",

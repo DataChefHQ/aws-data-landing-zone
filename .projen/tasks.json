@@ -59,7 +59,7 @@
       "description": "Create a JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap"
+          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap"
         }
       ]
     },
@@ -68,7 +68,7 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap --watch"
+          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
@@ -77,7 +77,7 @@
       "description": "Create a JavaScript bundle from ./src/constructs/iam/lambda/iam-account-alias/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap"
+          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap"
         }
       ]
     },
@@ -86,7 +86,7 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/iam/lambda/iam-account-alias/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node18\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap --watch"
+          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
@@ -350,7 +350,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@types/js-yaml,table"
+          "exec": "npx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@types/js-yaml,table"
         },
         {
           "exec": "npm install"

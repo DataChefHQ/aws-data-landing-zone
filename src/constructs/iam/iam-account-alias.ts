@@ -30,7 +30,7 @@ export class IamAccountAlias extends Construct implements IReportResource {
       {
         useCfnResponseWrapper: true,
         codeDirectory: IamAccountAlias.fetchCodeDirectory(),
-        runtime: CustomResourceProviderRuntime.NODEJS_18_X,
+        runtime: CustomResourceProviderRuntime.NODEJS_22_X,
         timeout: Duration.seconds(15),
         policyStatements: [{
           Effect: 'Allow',
