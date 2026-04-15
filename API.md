@@ -3064,6 +3064,497 @@ public readonly accountName: string;
 ---
 
 
+### GuardDutyDelegatedAdmin <a name="GuardDutyDelegatedAdmin" id="aws-data-landing-zone.GuardDutyDelegatedAdmin"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Designates an account as the GuardDuty delegated administrator for the organization.
+
+Enables AWS service access for GuardDuty in AWS Organizations and registers the
+specified account as the delegated administrator.
+
+Must be deployed in the management account.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer"></a>
+
+```typescript
+import { GuardDutyDelegatedAdmin } from 'aws-data-landing-zone'
+
+new GuardDutyDelegatedAdmin(scope: Construct, id: string, props: GuardDutyDelegatedAdminProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdminProps">GuardDutyDelegatedAdminProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.GuardDutyDelegatedAdminProps">GuardDutyDelegatedAdminProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.isConstruct"></a>
+
+```typescript
+import { GuardDutyDelegatedAdmin } from 'aws-data-landing-zone'
+
+GuardDutyDelegatedAdmin.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.fetchCodeDirectory"></a>
+
+```typescript
+import { GuardDutyDelegatedAdmin } from 'aws-data-landing-zone'
+
+GuardDutyDelegatedAdmin.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.GuardDutyDelegatedAdmin.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
+### GuardDutyMemberFeatures <a name="GuardDutyMemberFeatures" id="aws-data-landing-zone.GuardDutyMemberFeatures"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Configures GuardDuty features on specific member accounts from the delegated admin account.
+
+Uses the UpdateMemberDetectors API to apply per-account feature configurations.
+
+Must be deployed in the delegated admin (audit) account.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.GuardDutyMemberFeatures.Initializer"></a>
+
+```typescript
+import { GuardDutyMemberFeatures } from 'aws-data-landing-zone'
+
+new GuardDutyMemberFeatures(scope: Construct, id: string, props: GuardDutyMemberFeaturesProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.GuardDutyMemberFeaturesProps">GuardDutyMemberFeaturesProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.GuardDutyMemberFeatures.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.GuardDutyMemberFeatures.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.GuardDutyMemberFeatures.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.GuardDutyMemberFeaturesProps">GuardDutyMemberFeaturesProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.GuardDutyMemberFeatures.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.GuardDutyMemberFeatures.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.GuardDutyMemberFeatures.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.GuardDutyMemberFeatures.isConstruct"></a>
+
+```typescript
+import { GuardDutyMemberFeatures } from 'aws-data-landing-zone'
+
+GuardDutyMemberFeatures.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.GuardDutyMemberFeatures.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.GuardDutyMemberFeatures.fetchCodeDirectory"></a>
+
+```typescript
+import { GuardDutyMemberFeatures } from 'aws-data-landing-zone'
+
+GuardDutyMemberFeatures.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatures.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.GuardDutyMemberFeatures.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.GuardDutyMemberFeatures.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
+### GuardDutyOrgConfig <a name="GuardDutyOrgConfig" id="aws-data-landing-zone.GuardDutyOrgConfig"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Configures GuardDuty organization-level settings from the delegated admin account.
+
+Replaces the AWS::GuardDuty::OrganizationConfiguration CloudFormation resource
+with a custom resource that calls the UpdateOrganizationConfiguration API directly.
+
+Must be deployed in the delegated admin (audit) account.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.GuardDutyOrgConfig.Initializer"></a>
+
+```typescript
+import { GuardDutyOrgConfig } from 'aws-data-landing-zone'
+
+new GuardDutyOrgConfig(scope: Construct, id: string, props: GuardDutyOrgConfigProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.GuardDutyOrgConfigProps">GuardDutyOrgConfigProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.GuardDutyOrgConfig.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.GuardDutyOrgConfig.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.GuardDutyOrgConfig.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.GuardDutyOrgConfigProps">GuardDutyOrgConfigProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.GuardDutyOrgConfig.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.GuardDutyOrgConfig.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.GuardDutyOrgConfig.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.GuardDutyOrgConfig.isConstruct"></a>
+
+```typescript
+import { GuardDutyOrgConfig } from 'aws-data-landing-zone'
+
+GuardDutyOrgConfig.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.GuardDutyOrgConfig.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.GuardDutyOrgConfig.fetchCodeDirectory"></a>
+
+```typescript
+import { GuardDutyOrgConfig } from 'aws-data-landing-zone'
+
+GuardDutyOrgConfig.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfig.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.GuardDutyOrgConfig.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.GuardDutyOrgConfig.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
 ### IamAccountAlias <a name="IamAccountAlias" id="aws-data-landing-zone.IamAccountAlias"></a>
 
 - *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
@@ -17479,6 +17970,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.guardDuty">guardDuty</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyProps">DlzGuardDutyProps</a></code> | GuardDuty configuration for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary">iamPolicyPermissionBoundary</a></code> | <code><a href="#aws-data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.network">network</a></code> | <code><a href="#aws-data-landing-zone.Network">Network</a></code> | *No description.* |
@@ -17632,6 +18124,22 @@ public readonly deploymentPlatform: DeploymentPlatform;
 
 ---
 
+##### `guardDuty`<sup>Optional</sup> <a name="guardDuty" id="aws-data-landing-zone.DataLandingZoneProps.property.guardDuty"></a>
+
+```typescript
+public readonly guardDuty: DlzGuardDutyProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzGuardDutyProps">DlzGuardDutyProps</a>
+
+GuardDuty configuration for the organization.
+
+When specified, enables GuardDuty at the organization level and delegates
+administration to the security audit account. The audit account will have
+a GuardDuty detector created and organization-wide auto-enable configured.
+
+---
+
 ##### `iamIdentityCenter`<sup>Optional</sup> <a name="iamIdentityCenter" id="aws-data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter"></a>
 
 ```typescript
@@ -17779,6 +18287,9 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#aws-data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications settings for the account. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.email">email</a></code> | <code>string</code> | The email address associated with this AWS account. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.guardDutyEnabled">guardDutyEnabled</a></code> | <code>boolean</code> | Explicitly enable GuardDuty for this account. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.guardDutyFeatures">guardDutyFeatures</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a></code> | GuardDuty feature overrides for this account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.iam">iam</a></code> | <code><a href="#aws-data-landing-zone.DLzIamProps">DLzIamProps</a></code> | IAM configuration for the account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.lakeFormation">lakeFormation</a></code> | <code><a href="#aws-data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>[]</code> | LakeFormation settings and tags. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#aws-data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
@@ -17827,6 +18338,57 @@ Default notifications settings for the account.
 
 Defines settings for email notifications or the slack channel details.
 This will override the organization level defaultNotification.
+
+---
+
+##### `email`<sup>Optional</sup> <a name="email" id="aws-data-landing-zone.DLzAccount.property.email"></a>
+
+```typescript
+public readonly email: string;
+```
+
+- *Type:* string
+- *Default:* 'noreply@example.com'
+
+The email address associated with this AWS account.
+
+Used by GuardDuty CreateMembers API when enrolling accounts.
+For organization-managed accounts the member relationship is established
+through AWS Organizations, not through email invitations — the email is
+a required API field but does not affect enrollment behavior.
+
+---
+
+##### `guardDutyEnabled`<sup>Optional</sup> <a name="guardDutyEnabled" id="aws-data-landing-zone.DLzAccount.property.guardDutyEnabled"></a>
+
+```typescript
+public readonly guardDutyEnabled: boolean;
+```
+
+- *Type:* boolean
+
+Explicitly enable GuardDuty for this account.
+
+Required when `autoEnableOrgMembers` is `'NONE'` or `'NEW'` (for existing accounts).
+When `autoEnableOrgMembers` is `'ALL'`, this flag is not needed as all accounts are auto-enrolled.
+Only takes effect when `guardDuty` is enabled at the organization level.
+
+---
+
+##### `guardDutyFeatures`<sup>Optional</sup> <a name="guardDutyFeatures" id="aws-data-landing-zone.DLzAccount.property.guardDutyFeatures"></a>
+
+```typescript
+public readonly guardDutyFeatures: DlzGuardDutyFeaturesProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a>
+
+GuardDuty feature overrides for this account.
+
+When specified, these features are applied to this account on top of the
+organization-level baseline from `Defaults.guardDutyFeatures()`.
+Additive only — cannot disable org-level features.
+Only takes effect when `guardDuty` is enabled at the organization level.
 
 ---
 
@@ -18124,6 +18686,164 @@ public readonly tags: CfnTag[];
 ```
 
 - *Type:* aws-cdk-lib.CfnTag[]
+
+---
+
+### DlzGuardDutyFeaturesProps <a name="DlzGuardDutyFeaturesProps" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps"></a>
+
+Individual GuardDuty protection feature toggles.
+
+All features are disabled by default.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.Initializer"></a>
+
+```typescript
+import { DlzGuardDutyFeaturesProps } from 'aws-data-landing-zone'
+
+const dlzGuardDutyFeaturesProps: DlzGuardDutyFeaturesProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.ebsMalwareProtection">ebsMalwareProtection</a></code> | <code>boolean</code> | Scan EBS volumes for malware when GuardDuty detects suspicious behavior on an EC2 instance. |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.eksAuditLogs">eksAuditLogs</a></code> | <code>boolean</code> | Monitor Kubernetes audit logs for EKS clusters. |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.lambdaNetworkLogs">lambdaNetworkLogs</a></code> | <code>boolean</code> | Monitor Lambda function network activity for threats. |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.rdsLoginEvents">rdsLoginEvents</a></code> | <code>boolean</code> | Monitor RDS login activity for anomalous access patterns. |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.runtimeMonitoring">runtimeMonitoring</a></code> | <code>boolean</code> | Runtime monitoring for EC2, ECS, and EKS workloads. |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.s3DataEvents">s3DataEvents</a></code> | <code>boolean</code> | Monitor S3 data access events for threat detection. |
+
+---
+
+##### `ebsMalwareProtection`<sup>Optional</sup> <a name="ebsMalwareProtection" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.ebsMalwareProtection"></a>
+
+```typescript
+public readonly ebsMalwareProtection: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Scan EBS volumes for malware when GuardDuty detects suspicious behavior on an EC2 instance.
+
+Agentless, triggered by findings.
+
+---
+
+##### `eksAuditLogs`<sup>Optional</sup> <a name="eksAuditLogs" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.eksAuditLogs"></a>
+
+```typescript
+public readonly eksAuditLogs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Monitor Kubernetes audit logs for EKS clusters.
+
+---
+
+##### `lambdaNetworkLogs`<sup>Optional</sup> <a name="lambdaNetworkLogs" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.lambdaNetworkLogs"></a>
+
+```typescript
+public readonly lambdaNetworkLogs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Monitor Lambda function network activity for threats.
+
+---
+
+##### `rdsLoginEvents`<sup>Optional</sup> <a name="rdsLoginEvents" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.rdsLoginEvents"></a>
+
+```typescript
+public readonly rdsLoginEvents: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Monitor RDS login activity for anomalous access patterns.
+
+---
+
+##### `runtimeMonitoring`<sup>Optional</sup> <a name="runtimeMonitoring" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.runtimeMonitoring"></a>
+
+```typescript
+public readonly runtimeMonitoring: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Runtime monitoring for EC2, ECS, and EKS workloads.
+
+---
+
+##### `s3DataEvents`<sup>Optional</sup> <a name="s3DataEvents" id="aws-data-landing-zone.DlzGuardDutyFeaturesProps.property.s3DataEvents"></a>
+
+```typescript
+public readonly s3DataEvents: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Monitor S3 data access events for threat detection.
+
+---
+
+### DlzGuardDutyProps <a name="DlzGuardDutyProps" id="aws-data-landing-zone.DlzGuardDutyProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzGuardDutyProps.Initializer"></a>
+
+```typescript
+import { DlzGuardDutyProps } from 'aws-data-landing-zone'
+
+const dlzGuardDutyProps: DlzGuardDutyProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyProps.property.autoEnableOrgMembers">autoEnableOrgMembers</a></code> | <code>string</code> | How to auto-enable GuardDuty for organization member accounts. |
+| <code><a href="#aws-data-landing-zone.DlzGuardDutyProps.property.features">features</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a></code> | GuardDuty protection features applied to the delegated admin detector and auto-enabled at the organization level. |
+
+---
+
+##### `autoEnableOrgMembers`<sup>Optional</sup> <a name="autoEnableOrgMembers" id="aws-data-landing-zone.DlzGuardDutyProps.property.autoEnableOrgMembers"></a>
+
+```typescript
+public readonly autoEnableOrgMembers: string;
+```
+
+- *Type:* string
+- *Default:* 'NONE'
+
+How to auto-enable GuardDuty for organization member accounts.
+
+'ALL': Enable for all existing and new member accounts
+- 'NEW': Enable only for new member accounts
+- 'NONE': Do not auto-enable
+
+---
+
+##### `features`<sup>Optional</sup> <a name="features" id="aws-data-landing-zone.DlzGuardDutyProps.property.features"></a>
+
+```typescript
+public readonly features: DlzGuardDutyFeaturesProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a>
+- *Default:* Defaults.guardDutyFeatures() (all features disabled)
+
+GuardDuty protection features applied to the delegated admin detector and auto-enabled at the organization level.
+
+Individual accounts can add extra features via `DLzAccount.guardDutyFeatures`.
 
 ---
 
@@ -19617,6 +20337,280 @@ public readonly vpcPeeringConnectionIds: DlzSsmReaderStackCache;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.DlzSsmReaderStackCache">DlzSsmReaderStackCache</a>
+
+---
+
+### GuardDutyDelegatedAdminProps <a name="GuardDutyDelegatedAdminProps" id="aws-data-landing-zone.GuardDutyDelegatedAdminProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GuardDutyDelegatedAdminProps.Initializer"></a>
+
+```typescript
+import { GuardDutyDelegatedAdminProps } from 'aws-data-landing-zone'
+
+const guardDutyDelegatedAdminProps: GuardDutyDelegatedAdminProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdminProps.property.auditAccountId">auditAccountId</a></code> | <code>string</code> | The account ID to designate as the GuardDuty delegated administrator. |
+| <code><a href="#aws-data-landing-zone.GuardDutyDelegatedAdminProps.property.managementAccountId">managementAccountId</a></code> | <code>string</code> | The management account ID. |
+
+---
+
+##### `auditAccountId`<sup>Required</sup> <a name="auditAccountId" id="aws-data-landing-zone.GuardDutyDelegatedAdminProps.property.auditAccountId"></a>
+
+```typescript
+public readonly auditAccountId: string;
+```
+
+- *Type:* string
+
+The account ID to designate as the GuardDuty delegated administrator.
+
+---
+
+##### `managementAccountId`<sup>Required</sup> <a name="managementAccountId" id="aws-data-landing-zone.GuardDutyDelegatedAdminProps.property.managementAccountId"></a>
+
+```typescript
+public readonly managementAccountId: string;
+```
+
+- *Type:* string
+
+The management account ID.
+
+Used to scope IAM policy resources.
+
+---
+
+### GuardDutyEnrollAccount <a name="GuardDutyEnrollAccount" id="aws-data-landing-zone.GuardDutyEnrollAccount"></a>
+
+Account details for GuardDuty enrollment.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GuardDutyEnrollAccount.Initializer"></a>
+
+```typescript
+import { GuardDutyEnrollAccount } from 'aws-data-landing-zone'
+
+const guardDutyEnrollAccount: GuardDutyEnrollAccount = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyEnrollAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyEnrollAccount.property.email">email</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.GuardDutyEnrollAccount.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `email`<sup>Required</sup> <a name="email" id="aws-data-landing-zone.GuardDutyEnrollAccount.property.email"></a>
+
+```typescript
+public readonly email: string;
+```
+
+- *Type:* string
+
+---
+
+### GuardDutyFeatureCfn <a name="GuardDutyFeatureCfn" id="aws-data-landing-zone.GuardDutyFeatureCfn"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GuardDutyFeatureCfn.Initializer"></a>
+
+```typescript
+import { GuardDutyFeatureCfn } from 'aws-data-landing-zone'
+
+const guardDutyFeatureCfn: GuardDutyFeatureCfn = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyFeatureCfn.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyFeatureCfn.property.status">status</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="aws-data-landing-zone.GuardDutyFeatureCfn.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `status`<sup>Required</sup> <a name="status" id="aws-data-landing-zone.GuardDutyFeatureCfn.property.status"></a>
+
+```typescript
+public readonly status: string;
+```
+
+- *Type:* string
+
+---
+
+### GuardDutyMemberFeatureGroup <a name="GuardDutyMemberFeatureGroup" id="aws-data-landing-zone.GuardDutyMemberFeatureGroup"></a>
+
+A group of accounts that share the same GuardDuty feature configuration.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GuardDutyMemberFeatureGroup.Initializer"></a>
+
+```typescript
+import { GuardDutyMemberFeatureGroup } from 'aws-data-landing-zone'
+
+const guardDutyMemberFeatureGroup: GuardDutyMemberFeatureGroup = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatureGroup.property.accountIds">accountIds</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatureGroup.property.features">features</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a></code> | *No description.* |
+
+---
+
+##### `accountIds`<sup>Required</sup> <a name="accountIds" id="aws-data-landing-zone.GuardDutyMemberFeatureGroup.property.accountIds"></a>
+
+```typescript
+public readonly accountIds: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `features`<sup>Required</sup> <a name="features" id="aws-data-landing-zone.GuardDutyMemberFeatureGroup.property.features"></a>
+
+```typescript
+public readonly features: DlzGuardDutyFeaturesProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a>
+
+---
+
+### GuardDutyMemberFeaturesProps <a name="GuardDutyMemberFeaturesProps" id="aws-data-landing-zone.GuardDutyMemberFeaturesProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GuardDutyMemberFeaturesProps.Initializer"></a>
+
+```typescript
+import { GuardDutyMemberFeaturesProps } from 'aws-data-landing-zone'
+
+const guardDutyMemberFeaturesProps: GuardDutyMemberFeaturesProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeaturesProps.property.disenrollAccountIds">disenrollAccountIds</a></code> | <code>string[]</code> | Account IDs to disenroll from GuardDuty via DisassociateMembers + DeleteMembers. |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeaturesProps.property.enrollAccounts">enrollAccounts</a></code> | <code><a href="#aws-data-landing-zone.GuardDutyEnrollAccount">GuardDutyEnrollAccount</a>[]</code> | Accounts to explicitly enroll in GuardDuty via CreateMembers. |
+| <code><a href="#aws-data-landing-zone.GuardDutyMemberFeaturesProps.property.memberFeatureGroups">memberFeatureGroups</a></code> | <code><a href="#aws-data-landing-zone.GuardDutyMemberFeatureGroup">GuardDutyMemberFeatureGroup</a>[]</code> | Groups of accounts with their desired feature configurations. |
+
+---
+
+##### `disenrollAccountIds`<sup>Optional</sup> <a name="disenrollAccountIds" id="aws-data-landing-zone.GuardDutyMemberFeaturesProps.property.disenrollAccountIds"></a>
+
+```typescript
+public readonly disenrollAccountIds: string[];
+```
+
+- *Type:* string[]
+
+Account IDs to disenroll from GuardDuty via DisassociateMembers + DeleteMembers.
+
+Used when `autoEnableOrgMembers` is `'NEW'` and accounts have `guardDutyEnabled: false`.
+
+---
+
+##### `enrollAccounts`<sup>Optional</sup> <a name="enrollAccounts" id="aws-data-landing-zone.GuardDutyMemberFeaturesProps.property.enrollAccounts"></a>
+
+```typescript
+public readonly enrollAccounts: GuardDutyEnrollAccount[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.GuardDutyEnrollAccount">GuardDutyEnrollAccount</a>[]
+
+Accounts to explicitly enroll in GuardDuty via CreateMembers.
+
+Used when `autoEnableOrgMembers` is not `'ALL'` and accounts need explicit enrollment.
+
+---
+
+##### `memberFeatureGroups`<sup>Optional</sup> <a name="memberFeatureGroups" id="aws-data-landing-zone.GuardDutyMemberFeaturesProps.property.memberFeatureGroups"></a>
+
+```typescript
+public readonly memberFeatureGroups: GuardDutyMemberFeatureGroup[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.GuardDutyMemberFeatureGroup">GuardDutyMemberFeatureGroup</a>[]
+
+Groups of accounts with their desired feature configurations.
+
+Accounts sharing the same feature set are batched into a single API call.
+
+---
+
+### GuardDutyOrgConfigProps <a name="GuardDutyOrgConfigProps" id="aws-data-landing-zone.GuardDutyOrgConfigProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.GuardDutyOrgConfigProps.Initializer"></a>
+
+```typescript
+import { GuardDutyOrgConfigProps } from 'aws-data-landing-zone'
+
+const guardDutyOrgConfigProps: GuardDutyOrgConfigProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfigProps.property.autoEnableOrgMembers">autoEnableOrgMembers</a></code> | <code>string</code> | Auto-enable setting for new or all organization member accounts. |
+| <code><a href="#aws-data-landing-zone.GuardDutyOrgConfigProps.property.features">features</a></code> | <code><a href="#aws-data-landing-zone.GuardDutyFeatureCfn">GuardDutyFeatureCfn</a>[]</code> | Baseline features in CFN format. |
+
+---
+
+##### `autoEnableOrgMembers`<sup>Required</sup> <a name="autoEnableOrgMembers" id="aws-data-landing-zone.GuardDutyOrgConfigProps.property.autoEnableOrgMembers"></a>
+
+```typescript
+public readonly autoEnableOrgMembers: string;
+```
+
+- *Type:* string
+
+Auto-enable setting for new or all organization member accounts.
+
+---
+
+##### `features`<sup>Required</sup> <a name="features" id="aws-data-landing-zone.GuardDutyOrgConfigProps.property.features"></a>
+
+```typescript
+public readonly features: GuardDutyFeatureCfn[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.GuardDutyFeatureCfn">GuardDutyFeatureCfn</a>[]
+
+Baseline features in CFN format.
+
+Each feature's AutoEnable will be set
+to `autoEnableOrgMembers` if ENABLED, or 'NONE' if DISABLED.
 
 ---
 
@@ -22772,6 +23766,7 @@ new Defaults()
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
+| <code><a href="#aws-data-landing-zone.Defaults.guardDutyFeatures">guardDutyFeatures</a></code> | Default GuardDuty features. |
 | <code><a href="#aws-data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#aws-data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
@@ -22830,6 +23825,23 @@ Defaults.denyServiceList()
 ```
 
 * List of services that are denied in the organization.
+
+##### `guardDutyFeatures` <a name="guardDutyFeatures" id="aws-data-landing-zone.Defaults.guardDutyFeatures"></a>
+
+```typescript
+import { Defaults } from 'aws-data-landing-zone'
+
+Defaults.guardDutyFeatures()
+```
+
+Default GuardDuty features.
+
+All additional protection features are disabled.
+Basic GuardDuty monitoring (CloudTrail management events, VPC Flow Logs, DNS query logs)
+is always active when the detector is enabled.
+
+Enable additional features at the org level via `DlzGuardDutyProps.features`
+or per-account via `DLzAccount.guardDutyFeatures`.
 
 ##### `iamIdentityCenterPermissionSets` <a name="iamIdentityCenterPermissionSets" id="aws-data-landing-zone.Defaults.iamIdentityCenterPermissionSets"></a>
 
@@ -24336,7 +25348,7 @@ Optional parameters for the control.
 
 ### IReportResource <a name="IReportResource" id="aws-data-landing-zone.IReportResource"></a>
 
-- *Implemented By:* <a href="#aws-data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#aws-data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#aws-data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#aws-data-landing-zone.IamAccountAlias">IamAccountAlias</a>, <a href="#aws-data-landing-zone.IamPasswordPolicy">IamPasswordPolicy</a>, <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+- *Implemented By:* <a href="#aws-data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#aws-data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#aws-data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin">GuardDutyDelegatedAdmin</a>, <a href="#aws-data-landing-zone.GuardDutyMemberFeatures">GuardDutyMemberFeatures</a>, <a href="#aws-data-landing-zone.GuardDutyOrgConfig">GuardDutyOrgConfig</a>, <a href="#aws-data-landing-zone.IamAccountAlias">IamAccountAlias</a>, <a href="#aws-data-landing-zone.IamPasswordPolicy">IamPasswordPolicy</a>, <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
 
 Behavioral, used with Inheritance.
 
@@ -24866,6 +25878,8 @@ Hyderabad No Control Tower SecurityHub Standard support.
 | <code><a href="#aws-data-landing-zone.ReportType.IAM_ROLE">IAM_ROLE</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.IAM_USER">IAM_USER</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.IAM_USER_GROUP">IAM_USER_GROUP</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.GUARDDUTY_DELEGATED_ADMIN">GUARDDUTY_DELEGATED_ADMIN</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.GUARDDUTY">GUARDDUTY</a></code> | *No description.* |
 
 ---
 
@@ -24925,6 +25939,16 @@ Hyderabad No Control Tower SecurityHub Standard support.
 
 
 ##### `IAM_USER_GROUP` <a name="IAM_USER_GROUP" id="aws-data-landing-zone.ReportType.IAM_USER_GROUP"></a>
+
+---
+
+
+##### `GUARDDUTY_DELEGATED_ADMIN` <a name="GUARDDUTY_DELEGATED_ADMIN" id="aws-data-landing-zone.ReportType.GUARDDUTY_DELEGATED_ADMIN"></a>
+
+---
+
+
+##### `GUARDDUTY` <a name="GUARDDUTY" id="aws-data-landing-zone.ReportType.GUARDDUTY"></a>
 
 ---
 

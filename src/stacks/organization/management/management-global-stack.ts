@@ -6,6 +6,7 @@ import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../../constructs/dlz-control-tower-control';
+import { GuardDutyDelegatedAdmin } from '../../../constructs/dlz-guardduty';
 import {
   AccountChatbots,
   DlzBudget,
@@ -42,6 +43,10 @@ export class ManagementGlobalStack extends DlzStack {
     this.suspendedOuPolicies();
 
     this.budgets();
+
+    if (this.props.guardDuty) {
+      this.guardDuty();
+    }
 
     if (this.props.deploymentPlatform?.gitHub) {
       this.deploymentPlatformGitHub();
@@ -261,6 +266,23 @@ export class ManagementGlobalStack extends DlzStack {
     for (const budget of this.props.budgets) {
       new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget, this.stackProps.globalVariables.budgetSnsCache);
     }
+  }
+
+  /**
+   * GuardDuty organization enablement and delegated admin designation
+   */
+  private guardDuty() {
+    const auditAccountId = this.props.organization.ous.security.accounts.audit.accountId;
+    const managementAccountId = this.props.organization.root.accounts.management.accountId;
+    const guardDutyAdmin = new GuardDutyDelegatedAdmin(this, this.resourceName('guardduty-delegated-admin'), {
+      managementAccountId,
+      auditAccountId,
+    });
+    Report.addReportForAccountRegion(
+      'management',
+      this.props.regions.global,
+      guardDutyAdmin.reportResource,
+    );
   }
 
   deploymentPlatformGitHub() {

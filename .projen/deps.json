@@ -114,37 +114,47 @@
     },
     {
       "name": "@aws-sdk/client-cloudformation",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-cost-explorer",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/client-guardduty",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-iam",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-identitystore",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/client-organizations",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sso-admin",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sts",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/credential-providers",
-      "version": "^3.1027.0",
+      "version": "^3.1030.0",
       "type": "bundled"
     },
     {

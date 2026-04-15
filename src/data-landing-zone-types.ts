@@ -21,6 +21,7 @@ import {
   NetworkAddress,
   SlackChannel,
 } from './constructs';
+import { DlzGuardDutyFeaturesProps, DlzGuardDutyProps } from './constructs/dlz-guardduty/guardduty-types';
 import { AuditGlobalStack, ManagementGlobalStack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
@@ -426,6 +427,17 @@ export interface DLzAccount {
   readonly accountId: string;
   readonly name: string;
   readonly type: DlzAccountType;
+
+  /**
+   * The email address associated with this AWS account.
+   * Used by GuardDuty CreateMembers API when enrolling accounts.
+   * For organization-managed accounts the member relationship is established
+   * through AWS Organizations, not through email invitations — the email is
+   * a required API field but does not affect enrollment behavior.
+   * @default 'noreply@example.com'
+   */
+  readonly email?: string;
+
   readonly vpcs?: DlzVpcProps[];
 
   /**
@@ -443,6 +455,23 @@ export interface DLzAccount {
    * IAM configuration for the account
    */
   readonly iam?: DLzIamProps;
+
+  /**
+   * Explicitly enable GuardDuty for this account.
+   * Required when `autoEnableOrgMembers` is `'NONE'` or `'NEW'` (for existing accounts).
+   * When `autoEnableOrgMembers` is `'ALL'`, this flag is not needed as all accounts are auto-enrolled.
+   * Only takes effect when `guardDuty` is enabled at the organization level.
+   */
+  readonly guardDutyEnabled?: boolean;
+
+  /**
+   * GuardDuty feature overrides for this account.
+   * When specified, these features are applied to this account on top of the
+   * organization-level baseline from `Defaults.guardDutyFeatures()`.
+   * Additive only — cannot disable org-level features.
+   * Only takes effect when `guardDuty` is enabled at the organization level.
+   */
+  readonly guardDutyFeatures?: DlzGuardDutyFeaturesProps;
 }
 
 export interface DLzAccountSuspended {
@@ -744,6 +773,14 @@ export interface DataLandingZoneProps {
    * @default true
    */
   readonly saveReport?: boolean;
+
+  /**
+   * GuardDuty configuration for the organization.
+   * When specified, enables GuardDuty at the organization level and delegates
+   * administration to the security audit account. The audit account will have
+   * a GuardDuty detector created and organization-wide auto-enable configured.
+   */
+  readonly guardDuty?: DlzGuardDutyProps;
 
   readonly budgets: DlzBudgetProps[];
 

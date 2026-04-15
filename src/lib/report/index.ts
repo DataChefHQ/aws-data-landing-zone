@@ -16,6 +16,8 @@ export enum ReportType {
   IAM_ROLE = 'IAM Role',
   IAM_USER = 'IAM User',
   IAM_USER_GROUP = 'IAM User Group',
+  GUARDDUTY_DELEGATED_ADMIN = 'GuardDuty Delegated Admin',
+  GUARDDUTY = 'GuardDuty',
 }
 
 export interface ReportResource {

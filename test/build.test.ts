@@ -93,6 +93,9 @@ const configBase: DataLandingZoneProps = {
       },
     },
   ],
+  guardDuty: {
+    autoEnableOrgMembers: 'ALL',
+  },
   securityHubNotifications: [
     {
       id: 'notify-high',
@@ -167,6 +170,10 @@ const configBase: DataLandingZoneProps = {
               emails: ['rehan+dc-default-notification@datachef.co'],
             },
             type: DlzAccountType.DEVELOP,
+            guardDutyEnabled: true,
+            guardDutyFeatures: {
+              s3DataEvents: true,
+            },
             vpcs: [
               {
                 name: 'default',

@@ -51,6 +51,69 @@
         },
         {
           "spawn": "bundle:constructs/iam/lambda/iam-account-alias"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-guardduty/lambda/guardduty-org-config"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin": {
+      "name": "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin:watch": {
+      "name": "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features": {
+      "name": "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-member-features/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features:watch": {
+      "name": "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-member-features/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-guardduty/lambda/guardduty-org-config": {
+      "name": "bundle:constructs/dlz-guardduty/lambda/guardduty-org-config",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-guardduty/lambda/guardduty-org-config:watch": {
+      "name": "bundle:constructs/dlz-guardduty/lambda/guardduty-org-config:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
@@ -356,7 +419,7 @@
           "exec": "npm install"
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
+          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-guardduty @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-organizations @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
