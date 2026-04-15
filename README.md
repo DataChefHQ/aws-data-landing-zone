@@ -194,10 +194,14 @@ dlz.DataLandingZone(app,
                         account_id='123456789012',
                         type=dlz.DlzAccountType.PRODUCTION,
                         guard_duty_enabled: True, # Only when we use NEW, this will enroll an old account into GuardDuty
-                        guard_duty_features: {
-                          eks_audit_logs: True,
-                          rds_login_events: True,
-                        },
+                        guard_duty_features=dlz.DlzGuardDutyFeaturesProps(
+                            s3_data_events=False,
+                            eks_audit_logs=True,
+                            ebs_malware_protection=False,
+                            rds_login_events=False,
+                            lambda_network_logs=False,
+                            runtime_monitoring=False,
+                        )
                     ),
                 ],
             ),
