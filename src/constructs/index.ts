@@ -8,3 +8,4 @@ export * from './dlz-vpc';
 export * from './iam-identity-center';
 export * from './organization-policies';
 export * from './iam';
+export * from './dlz-guardduty';

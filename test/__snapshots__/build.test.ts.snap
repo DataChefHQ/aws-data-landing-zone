@@ -10,6 +10,171 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
     },
   },
   "Resources": {
+    "CustomDlzGuardDutyMemberFeaturesCustomResourceProviderHandlerF3621C91": {
+      "DependsOn": [
+        "CustomDlzGuardDutyMemberFeaturesCustomResourceProviderRole17BBF0D8",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
+          "S3Key": "fedd5a3c54c8407c36608e5731e2f2de1501916765373d67dec18e2d1ff352e5.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomDlzGuardDutyMemberFeaturesCustomResourceProviderRole17BBF0D8",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomDlzGuardDutyMemberFeaturesCustomResourceProviderRole17BBF0D8": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "guardduty:CreateMembers",
+                    "guardduty:DeleteMembers",
+                    "guardduty:DisassociateMembers",
+                    "guardduty:GetMembers",
+                    "guardduty:ListMembers",
+                    "guardduty:UpdateMemberDetectors",
+                    "guardduty:ListDetectors",
+                    "guardduty:GetMemberDetectors",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustomDlzGuardDutyOrgConfigCustomResourceProviderHandlerFE83E42E": {
+      "DependsOn": [
+        "CustomDlzGuardDutyOrgConfigCustomResourceProviderRole1D1B4D25",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
+          "S3Key": "8c20743e438c1b71eae624d0fd907f58d93b5ee8dc039cdf6bf99714090bf64c.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomDlzGuardDutyOrgConfigCustomResourceProviderRole1D1B4D25",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomDlzGuardDutyOrgConfigCustomResourceProviderRole1D1B4D25": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "guardduty:UpdateDetector",
+                    "guardduty:UpdateOrganizationConfiguration",
+                    "guardduty:ListDetectors",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "dlzglobalguarddutymemberfeaturesCustomResource98DEA831": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "dlzglobalguarddutyorgconfigCustomResourceB3B16E6A",
+      ],
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzGuardDutyMemberFeaturesCustomResourceProviderHandlerF3621C91",
+            "Arn",
+          ],
+        },
+        "memberFeatureGroups": "[{"accountIds":["381491899779"],"features":[{"name":"S3_DATA_EVENTS","status":"ENABLED"},{"name":"EKS_AUDIT_LOGS","status":"DISABLED"},{"name":"EBS_MALWARE_PROTECTION","status":"DISABLED"},{"name":"RDS_LOGIN_EVENTS","status":"DISABLED"},{"name":"LAMBDA_NETWORK_LOGS","status":"DISABLED"},{"name":"RUNTIME_MONITORING","status":"DISABLED"}]}]",
+        "physicalResourceId": "dlz-global-guardduty-member-features",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobalguarddutyorgconfigCustomResourceB3B16E6A": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzGuardDutyOrgConfigCustomResourceProviderHandlerFE83E42E",
+            "Arn",
+          ],
+        },
+        "autoEnableOrgMembers": "ALL",
+        "features": "[{"name":"S3_DATA_EVENTS","status":"DISABLED","autoEnable":"NONE"},{"name":"EKS_AUDIT_LOGS","status":"DISABLED","autoEnable":"NONE"},{"name":"EBS_MALWARE_PROTECTION","status":"DISABLED","autoEnable":"NONE"},{"name":"RDS_LOGIN_EVENTS","status":"DISABLED","autoEnable":"NONE"},{"name":"LAMBDA_NETWORK_LOGS","status":"DISABLED","autoEnable":"NONE"},{"name":"RUNTIME_MONITORING","status":"DISABLED","autoEnable":"NONE"}]",
+        "physicalResourceId": "dlz-global-guardduty-org-config",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
     "dlzglobalshnotificationnotifyhighdenyallguardrailpoliciesC1D5E535": {
       "Properties": {
         "Description": "Deny all guardrail policies",
@@ -629,6 +794,90 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                   ],
                   "Effect": "Allow",
                   "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustomDlzGuardDutyDelegatedAdminCustomResourceProviderHandler19D4FBFB": {
+      "DependsOn": [
+        "CustomDlzGuardDutyDelegatedAdminCustomResourceProviderRole9068A666",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-882070149987-eu-west-1",
+          "S3Key": "REMOVED-BECAUSE-WE-ARE-NOT-INTERESTED-IN-ASSET-CHANGES",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomDlzGuardDutyDelegatedAdminCustomResourceProviderRole9068A666",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+        "Timeout": 60,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomDlzGuardDutyDelegatedAdminCustomResourceProviderRole9068A666": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "organizations:EnableAWSServiceAccess",
+                    "organizations:DisableAWSServiceAccess",
+                    "organizations:RegisterDelegatedAdministrator",
+                    "organizations:ListDelegatedAdministrators",
+                    "organizations:ListAWSServiceAccessForOrganization",
+                    "organizations:DescribeOrganizationalUnit",
+                    "organizations:DescribeAccount",
+                    "organizations:DescribeOrganization",
+                    "organizations:ListAccounts",
+                    "guardduty:CreateDetector",
+                    "guardduty:ListDetectors",
+                    "guardduty:EnableOrganizationAdminAccount",
+                    "guardduty:DisableOrganizationAdminAccount",
+                    "guardduty:ListOrganizationAdminAccounts",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+                {
+                  "Action": "iam:CreateServiceLinkedRole",
+                  "Condition": {
+                    "StringLike": {
+                      "iam:AWSServiceName": "guardduty.amazonaws.com",
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "arn:aws:iam::882070149987:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty",
                 },
               ],
               "Version": "2012-10-17",
@@ -1881,6 +2130,21 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "Url": "https://token.actions.githubusercontent.com",
       },
       "Type": "Custom::AWSCDKOpenIdConnectProvider",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dlzglobalguarddutydelegatedadminCustomResourceAB43FDC5": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDlzGuardDutyDelegatedAdminCustomResourceProviderHandler19D4FBFB",
+            "Arn",
+          ],
+        },
+        "auditAccountId": "851725452335",
+        "physicalResourceId": "dlz-global-guardduty-delegated-admin",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
     "dlzglobalscpproject1developmentaccount": {

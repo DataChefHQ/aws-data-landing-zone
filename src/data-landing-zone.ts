@@ -127,6 +127,39 @@ function validations(props: DataLandingZoneProps) {
       throw new Error(`The BastionHost (${bastion.name}) 'location' NetworkAddress must target a specific subnet`);
     }
   }
+
+  /* GuardDuty */
+  const autoEnable = props.guardDuty?.autoEnableOrgMembers ?? 'NONE';
+  for (const account of props.organization.ous.workloads.accounts) {
+    const hasEnabled = account.guardDutyEnabled;
+    const hasExplicitDisabled = account.guardDutyEnabled === false;
+    const hasFeatures = !!account.guardDutyFeatures;
+    if (!hasEnabled && !hasExplicitDisabled && !hasFeatures) continue;
+
+    if (!props.guardDuty) {
+      throw new Error(
+        `Account '${account.name}' has GuardDuty settings, but 'guardDuty' is not configured at the organization level.`,
+      );
+    }
+    if (autoEnable === 'NONE' && (hasEnabled || hasFeatures)) {
+      throw new Error(
+        `Account '${account.name}' has GuardDuty settings, but 'guardDuty.autoEnableOrgMembers' is 'NONE'. ` +
+        "Set 'autoEnableOrgMembers' to 'ALL' or 'NEW' to enroll accounts.",
+      );
+    }
+    if (autoEnable === 'ALL' && hasExplicitDisabled) {
+      throw new Error(
+        `Account '${account.name}' has guardDutyEnabled=false but autoEnableOrgMembers is 'ALL' — ` +
+        'all accounts are auto-enrolled, setting guardDutyEnabled to false is not supported.',
+      );
+    }
+    if (hasFeatures && autoEnable !== 'ALL' && !hasEnabled) {
+      throw new Error(
+        `Account '${account.name}' has 'guardDutyFeatures' but no detector. ` +
+        "Set 'autoEnableOrgMembers' to 'ALL', or set 'guardDutyEnabled: true' on the account.",
+      );
+    }
+  }
 }
 
 export class DataLandingZone {

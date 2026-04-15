@@ -54,13 +54,15 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk-express-pipeline@^1.6.0',
   ],
   bundledDeps: [
-    '@aws-sdk/client-sts@^3.1027.0',
-    '@aws-sdk/credential-providers@^3.1027.0',
-    '@aws-sdk/client-cost-explorer@^3.1027.0',
-    '@aws-sdk/client-identitystore@^3.1027.0',
-    '@aws-sdk/client-sso-admin@^3.1027.0',
-    '@aws-sdk/client-iam@^3.1027.0',
-    '@aws-sdk/client-cloudformation@^3.1027.0',
+    '@aws-sdk/client-sts@^3.1030.0',
+    '@aws-sdk/credential-providers@^3.1030.0',
+    '@aws-sdk/client-cost-explorer@^3.1030.0',
+    '@aws-sdk/client-identitystore@^3.1030.0',
+    '@aws-sdk/client-sso-admin@^3.1030.0',
+    '@aws-sdk/client-iam@^3.1030.0',
+    '@aws-sdk/client-cloudformation@^3.1030.0',
+    '@aws-sdk/client-guardduty@^3.1030.0',
+    '@aws-sdk/client-organizations@^3.1030.0',
     'js-yaml@^4.1',
     '@types/js-yaml',
     'table',
@@ -81,6 +83,24 @@ project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-u
   externals: ['aws-sdk'],
 });
 project.bundler.addBundle('./src/constructs/iam/lambda/iam-account-alias/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-guardduty/lambda/guardduty-member-features/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-guardduty/lambda/guardduty-org-config/', {
   platform: 'node',
   target: 'node22',
   sourcemap: true,

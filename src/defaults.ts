@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { DlzBudgetProps } from './constructs/dlz-budget';
+import { DlzGuardDutyFeaturesProps } from './constructs/dlz-guardduty/guardduty-types';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 
@@ -138,6 +139,25 @@ export class Defaults {
   }
 
   /**
+   * Default GuardDuty features. All additional protection features are disabled.
+   * Basic GuardDuty monitoring (CloudTrail management events, VPC Flow Logs, DNS query logs)
+   * is always active when the detector is enabled.
+   *
+   * Enable additional features at the org level via `DlzGuardDutyProps.features`
+   * or per-account via `DLzAccount.guardDutyFeatures`.
+   */
+  public static guardDutyFeatures(): DlzGuardDutyFeaturesProps {
+    return {
+      s3DataEvents: false,
+      ebsMalwareProtection: false,
+      rdsLoginEvents: false,
+      eksAuditLogs: false,
+      lambdaNetworkLogs: false,
+      runtimeMonitoring: false,
+    };
+  }
+
+  /**
    * Control Tower Controls applied to all the OUs in the organization
    */
   public static rootControls(): DlzControlTowerStandardControls[] {
@@ -210,6 +230,10 @@ export class PropsOrDefaults {
 
   public static getRootControls(props: DataLandingZoneProps) {
     return props.organization.root.controls || Defaults.rootControls();
+  }
+
+  public static getGuardDutyFeatures(props: DataLandingZoneProps): DlzGuardDutyFeaturesProps {
+    return props.guardDuty?.features ?? Defaults.guardDutyFeatures();
   }
 }
 

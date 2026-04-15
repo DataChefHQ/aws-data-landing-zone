@@ -65,6 +65,9 @@ const dlz = new DataLandingZone(app, {
     ...Defaults.denyServiceList(),
     'ecs:*',
   ],
+  guardDuty: {
+    autoEnableOrgMembers: 'NEW', // Can be ALL, NEW or NONE, Default is NONE
+  },
   organization: {
     organizationId: 'o-0f5h921gk9',
     root: { accounts: { management: { accountId: '123456789012', }, }, },
@@ -83,6 +86,11 @@ const dlz = new DataLandingZone(app, {
             name: 'production',
             accountId: '123456789012',
             type: DlzAccountType.PRODUCTION,
+            guardDutyEnabled: true, // Only when we use NEW, this will enroll an old account into GuardDuty
+            guardDutyFeatures: {
+              eksAuditLogs: true,
+              rdsLoginEvents: true,
+            },
             ...
           },
 
@@ -146,6 +154,9 @@ dlz.DataLandingZone(app,
         global_=dlz.Region.EU_WEST_1,
         regional=[dlz.Region.US_EAST_1],
     ),
+    guard_duty=dlz.DlzGuardDutyProps(
+        auto_enable_org_members='NEW', # Can be ALL, NEW or NONE, Default is NONE
+    ),
     budgets=[
         *dlz.Defaults.budgets(
             100,
@@ -182,6 +193,11 @@ dlz.DataLandingZone(app,
                         name='production',
                         account_id='123456789012',
                         type=dlz.DlzAccountType.PRODUCTION,
+                        guard_duty_enabled: True, # Only when we use NEW, this will enroll an old account into GuardDuty
+                        guard_duty_features: {
+                          eks_audit_logs: True,
+                          rds_login_events: True,
+                        },
                     ),
                 ],
             ),
