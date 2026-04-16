@@ -6194,6 +6194,492 @@ public readonly accountName: string;
 ---
 
 
+### MacieDelegatedAdmin <a name="MacieDelegatedAdmin" id="aws-data-landing-zone.MacieDelegatedAdmin"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Designates an account as the Macie delegated administrator for the organization.
+
+Enables AWS service access for Macie in AWS Organizations and registers the
+specified account as the delegated administrator.
+
+Must be deployed in the management account.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.MacieDelegatedAdmin.Initializer"></a>
+
+```typescript
+import { MacieDelegatedAdmin } from 'aws-data-landing-zone'
+
+new MacieDelegatedAdmin(scope: Construct, id: string, props: MacieDelegatedAdminProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.MacieDelegatedAdminProps">MacieDelegatedAdminProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.MacieDelegatedAdmin.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.MacieDelegatedAdmin.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.MacieDelegatedAdmin.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.MacieDelegatedAdminProps">MacieDelegatedAdminProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.MacieDelegatedAdmin.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.MacieDelegatedAdmin.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.MacieDelegatedAdmin.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.MacieDelegatedAdmin.isConstruct"></a>
+
+```typescript
+import { MacieDelegatedAdmin } from 'aws-data-landing-zone'
+
+MacieDelegatedAdmin.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.MacieDelegatedAdmin.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.MacieDelegatedAdmin.fetchCodeDirectory"></a>
+
+```typescript
+import { MacieDelegatedAdmin } from 'aws-data-landing-zone'
+
+MacieDelegatedAdmin.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdmin.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.MacieDelegatedAdmin.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.MacieDelegatedAdmin.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
+### MacieMembers <a name="MacieMembers" id="aws-data-landing-zone.MacieMembers"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Manages Macie member account enrollment from the delegated admin account. Enrolls and disenrolls member accounts as needed.
+
+Must be deployed in the delegated admin (audit) account.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.MacieMembers.Initializer"></a>
+
+```typescript
+import { MacieMembers } from 'aws-data-landing-zone'
+
+new MacieMembers(scope: Construct, id: string, props: MacieMembersProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieMembers.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieMembers.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieMembers.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.MacieMembersProps">MacieMembersProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.MacieMembers.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.MacieMembers.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.MacieMembers.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.MacieMembersProps">MacieMembersProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieMembers.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.MacieMembers.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.MacieMembers.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.MacieMembers.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.MacieMembers.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieMembers.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.MacieMembers.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.MacieMembers.isConstruct"></a>
+
+```typescript
+import { MacieMembers } from 'aws-data-landing-zone'
+
+MacieMembers.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.MacieMembers.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.MacieMembers.fetchCodeDirectory"></a>
+
+```typescript
+import { MacieMembers } from 'aws-data-landing-zone'
+
+MacieMembers.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieMembers.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.MacieMembers.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.MacieMembers.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.MacieMembers.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
+### MacieOrgConfig <a name="MacieOrgConfig" id="aws-data-landing-zone.MacieOrgConfig"></a>
+
+- *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+
+Configures Macie organization-level settings from the delegated admin account. Enables the Macie session and configures auto-enable for new member accounts.
+
+Must be deployed in the delegated admin (audit) account.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.MacieOrgConfig.Initializer"></a>
+
+```typescript
+import { MacieOrgConfig } from 'aws-data-landing-zone'
+
+new MacieOrgConfig(scope: Construct, id: string, props: MacieOrgConfigProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.MacieOrgConfigProps">MacieOrgConfigProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.MacieOrgConfig.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.MacieOrgConfig.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.MacieOrgConfig.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.MacieOrgConfigProps">MacieOrgConfigProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.MacieOrgConfig.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.MacieOrgConfig.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.MacieOrgConfig.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.fetchCodeDirectory">fetchCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.MacieOrgConfig.isConstruct"></a>
+
+```typescript
+import { MacieOrgConfig } from 'aws-data-landing-zone'
+
+MacieOrgConfig.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.MacieOrgConfig.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchCodeDirectory` <a name="fetchCodeDirectory" id="aws-data-landing-zone.MacieOrgConfig.fetchCodeDirectory"></a>
+
+```typescript
+import { MacieOrgConfig } from 'aws-data-landing-zone'
+
+MacieOrgConfig.fetchCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfig.property.reportResource">reportResource</a></code> | <code><a href="#aws-data-landing-zone.ReportResource">ReportResource</a></code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.MacieOrgConfig.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `reportResource`<sup>Required</sup> <a name="reportResource" id="aws-data-landing-zone.MacieOrgConfig.property.reportResource"></a>
+
+```typescript
+public readonly reportResource: ReportResource;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ReportResource">ReportResource</a>
+
+---
+
+
 ### ManagementGlobalIamIdentityCenterStack <a name="ManagementGlobalIamIdentityCenterStack" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack"></a>
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.Initializer"></a>
@@ -17977,6 +18463,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.guardDuty">guardDuty</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyProps">DlzGuardDutyProps</a></code> | GuardDuty configuration for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary">iamPolicyPermissionBoundary</a></code> | <code><a href="#aws-data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | IAM Policy Permission Boundary. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.macie">macie</a></code> | <code><a href="#aws-data-landing-zone.DlzMacieProps">DlzMacieProps</a></code> | Macie configuration for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.network">network</a></code> | <code><a href="#aws-data-landing-zone.Network">Network</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
@@ -18168,6 +18655,21 @@ IAM Policy Permission Boundary.
 
 ---
 
+##### `macie`<sup>Optional</sup> <a name="macie" id="aws-data-landing-zone.DataLandingZoneProps.property.macie"></a>
+
+```typescript
+public readonly macie: DlzMacieProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzMacieProps">DlzMacieProps</a>
+
+Macie configuration for the organization.
+
+When specified, enables Macie at the organization level and delegates
+administration to the security audit account.
+
+---
+
 ##### `network`<sup>Optional</sup> <a name="network" id="aws-data-landing-zone.DataLandingZoneProps.property.network"></a>
 
 ```typescript
@@ -18296,6 +18798,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.guardDutyFeatures">guardDutyFeatures</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a></code> | GuardDuty feature overrides for this account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.iam">iam</a></code> | <code><a href="#aws-data-landing-zone.DLzIamProps">DLzIamProps</a></code> | IAM configuration for the account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.lakeFormation">lakeFormation</a></code> | <code><a href="#aws-data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>[]</code> | LakeFormation settings and tags. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.macieEnabled">macieEnabled</a></code> | <code>boolean</code> | Explicitly enroll this existing account in Macie via CreateMember. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#aws-data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
@@ -18417,6 +18920,26 @@ public readonly lakeFormation: DlzLakeFormationProps[];
 - *Type:* <a href="#aws-data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>[]
 
 LakeFormation settings and tags.
+
+---
+
+##### `macieEnabled`<sup>Optional</sup> <a name="macieEnabled" id="aws-data-landing-zone.DLzAccount.property.macieEnabled"></a>
+
+```typescript
+public readonly macieEnabled: boolean;
+```
+
+- *Type:* boolean
+
+Explicitly enroll this existing account in Macie via CreateMember.
+
+Set to `true` to enroll, `false` to disenroll. Omit to take no action.
+
+This controls enrollment of **existing** accounts only.
+The `DlzMacieProps.autoEnable` setting separately controls whether
+**new** accounts joining the organization are auto-enabled by AWS.
+
+Only takes effect when `macie.enabled` is `true` at the organization level.
 
 ---
 
@@ -19441,6 +19964,65 @@ public readonly hybridMode: boolean;
 OPTIONAL - Select `true` to use both IAM and Lake Formation for data access, or `false` to use Lake Formation only.
 
 Defaults to `false`.
+
+---
+
+### DlzMacieProps <a name="DlzMacieProps" id="aws-data-landing-zone.DlzMacieProps"></a>
+
+Organization-level Macie configuration.
+
+When specified on `DataLandingZoneProps`, configures Macie at the organization level
+and delegates administration to the security audit account.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzMacieProps.Initializer"></a>
+
+```typescript
+import { DlzMacieProps } from 'aws-data-landing-zone'
+
+const dlzMacieProps: DlzMacieProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzMacieProps.property.autoEnable">autoEnable</a></code> | <code>boolean</code> | Auto-enable Macie for new organization member accounts. |
+| <code><a href="#aws-data-landing-zone.DlzMacieProps.property.enabled">enabled</a></code> | <code>boolean</code> | Master switch for Macie. |
+
+---
+
+##### `autoEnable`<sup>Optional</sup> <a name="autoEnable" id="aws-data-landing-zone.DlzMacieProps.property.autoEnable"></a>
+
+```typescript
+public readonly autoEnable: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Auto-enable Macie for new organization member accounts.
+
+When true, new accounts joining the org are automatically enabled by AWS.
+Existing accounts must be explicitly enrolled via `macieEnabled: true` on `DLzAccount`.
+Maps directly to the Macie `UpdateOrganizationConfiguration` API `autoEnable` boolean.
+
+---
+
+##### `enabled`<sup>Optional</sup> <a name="enabled" id="aws-data-landing-zone.DlzMacieProps.property.enabled"></a>
+
+```typescript
+public readonly enabled: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Master switch for Macie.
+
+When false, no Macie constructs are created
+(delegated admin, org config, member enrollment are all skipped).
+Note: omitting `macie` entirely from `DataLandingZoneProps` also means
+no Macie — this flag is for explicitly disabling when the config block exists.
 
 ---
 
@@ -21659,6 +22241,169 @@ const logStacks: LogStacks = { ... }
 ```
 
 
+### MacieDelegatedAdminProps <a name="MacieDelegatedAdminProps" id="aws-data-landing-zone.MacieDelegatedAdminProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.MacieDelegatedAdminProps.Initializer"></a>
+
+```typescript
+import { MacieDelegatedAdminProps } from 'aws-data-landing-zone'
+
+const macieDelegatedAdminProps: MacieDelegatedAdminProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdminProps.property.auditAccountId">auditAccountId</a></code> | <code>string</code> | The account ID to designate as the Macie delegated administrator. |
+| <code><a href="#aws-data-landing-zone.MacieDelegatedAdminProps.property.managementAccountId">managementAccountId</a></code> | <code>string</code> | The management account ID. |
+
+---
+
+##### `auditAccountId`<sup>Required</sup> <a name="auditAccountId" id="aws-data-landing-zone.MacieDelegatedAdminProps.property.auditAccountId"></a>
+
+```typescript
+public readonly auditAccountId: string;
+```
+
+- *Type:* string
+
+The account ID to designate as the Macie delegated administrator.
+
+---
+
+##### `managementAccountId`<sup>Required</sup> <a name="managementAccountId" id="aws-data-landing-zone.MacieDelegatedAdminProps.property.managementAccountId"></a>
+
+```typescript
+public readonly managementAccountId: string;
+```
+
+- *Type:* string
+
+The management account ID.
+
+Used to scope IAM policy resources.
+
+---
+
+### MacieEnrollAccount <a name="MacieEnrollAccount" id="aws-data-landing-zone.MacieEnrollAccount"></a>
+
+Account details for Macie enrollment.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.MacieEnrollAccount.Initializer"></a>
+
+```typescript
+import { MacieEnrollAccount } from 'aws-data-landing-zone'
+
+const macieEnrollAccount: MacieEnrollAccount = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieEnrollAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MacieEnrollAccount.property.email">email</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.MacieEnrollAccount.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `email`<sup>Required</sup> <a name="email" id="aws-data-landing-zone.MacieEnrollAccount.property.email"></a>
+
+```typescript
+public readonly email: string;
+```
+
+- *Type:* string
+
+---
+
+### MacieMembersProps <a name="MacieMembersProps" id="aws-data-landing-zone.MacieMembersProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.MacieMembersProps.Initializer"></a>
+
+```typescript
+import { MacieMembersProps } from 'aws-data-landing-zone'
+
+const macieMembersProps: MacieMembersProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieMembersProps.property.disenrollAccountIds">disenrollAccountIds</a></code> | <code>string[]</code> | Account IDs to disenroll from Macie via DisassociateMember + DeleteMember. |
+| <code><a href="#aws-data-landing-zone.MacieMembersProps.property.enrollAccounts">enrollAccounts</a></code> | <code><a href="#aws-data-landing-zone.MacieEnrollAccount">MacieEnrollAccount</a>[]</code> | Accounts to explicitly enroll in Macie via CreateMember. |
+
+---
+
+##### `disenrollAccountIds`<sup>Optional</sup> <a name="disenrollAccountIds" id="aws-data-landing-zone.MacieMembersProps.property.disenrollAccountIds"></a>
+
+```typescript
+public readonly disenrollAccountIds: string[];
+```
+
+- *Type:* string[]
+
+Account IDs to disenroll from Macie via DisassociateMember + DeleteMember.
+
+---
+
+##### `enrollAccounts`<sup>Optional</sup> <a name="enrollAccounts" id="aws-data-landing-zone.MacieMembersProps.property.enrollAccounts"></a>
+
+```typescript
+public readonly enrollAccounts: MacieEnrollAccount[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.MacieEnrollAccount">MacieEnrollAccount</a>[]
+
+Accounts to explicitly enroll in Macie via CreateMember.
+
+Used when existing accounts need explicit enrollment.
+
+---
+
+### MacieOrgConfigProps <a name="MacieOrgConfigProps" id="aws-data-landing-zone.MacieOrgConfigProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.MacieOrgConfigProps.Initializer"></a>
+
+```typescript
+import { MacieOrgConfigProps } from 'aws-data-landing-zone'
+
+const macieOrgConfigProps: MacieOrgConfigProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.MacieOrgConfigProps.property.autoEnable">autoEnable</a></code> | <code>boolean</code> | Auto-enable Macie for new organization member accounts. |
+
+---
+
+##### `autoEnable`<sup>Required</sup> <a name="autoEnable" id="aws-data-landing-zone.MacieOrgConfigProps.property.autoEnable"></a>
+
+```typescript
+public readonly autoEnable: boolean;
+```
+
+- *Type:* boolean
+
+Auto-enable Macie for new organization member accounts.
+
+Maps directly to the Macie API `autoEnable` boolean.
+
+---
+
 ### ManagementGlobalStackProps <a name="ManagementGlobalStackProps" id="aws-data-landing-zone.ManagementGlobalStackProps"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.ManagementGlobalStackProps.Initializer"></a>
@@ -23772,6 +24517,7 @@ new Defaults()
 | <code><a href="#aws-data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.guardDutyFeatures">guardDutyFeatures</a></code> | Default GuardDuty features. |
 | <code><a href="#aws-data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
+| <code><a href="#aws-data-landing-zone.Defaults.macieConfig">macieConfig</a></code> | Default Macie configuration. |
 | <code><a href="#aws-data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.vpcClassB3Private3Public">vpcClassB3Private3Public</a></code> | Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets. |
@@ -23856,6 +24602,18 @@ Defaults.iamIdentityCenterPermissionSets()
 ```
 
 Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets.
+
+##### `macieConfig` <a name="macieConfig" id="aws-data-landing-zone.Defaults.macieConfig"></a>
+
+```typescript
+import { Defaults } from 'aws-data-landing-zone'
+
+Defaults.macieConfig()
+```
+
+Default Macie configuration.
+
+Auto-enable for new members is disabled.
 
 ##### `mandatoryTags` <a name="mandatoryTags" id="aws-data-landing-zone.Defaults.mandatoryTags"></a>
 
@@ -25352,7 +26110,7 @@ Optional parameters for the control.
 
 ### IReportResource <a name="IReportResource" id="aws-data-landing-zone.IReportResource"></a>
 
-- *Implemented By:* <a href="#aws-data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#aws-data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#aws-data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin">GuardDutyDelegatedAdmin</a>, <a href="#aws-data-landing-zone.GuardDutyMemberFeatures">GuardDutyMemberFeatures</a>, <a href="#aws-data-landing-zone.GuardDutyOrgConfig">GuardDutyOrgConfig</a>, <a href="#aws-data-landing-zone.IamAccountAlias">IamAccountAlias</a>, <a href="#aws-data-landing-zone.IamPasswordPolicy">IamPasswordPolicy</a>, <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
+- *Implemented By:* <a href="#aws-data-landing-zone.DlzControlTowerEnabledControl">DlzControlTowerEnabledControl</a>, <a href="#aws-data-landing-zone.DlzServiceControlPolicy">DlzServiceControlPolicy</a>, <a href="#aws-data-landing-zone.DlzTagPolicy">DlzTagPolicy</a>, <a href="#aws-data-landing-zone.GuardDutyDelegatedAdmin">GuardDutyDelegatedAdmin</a>, <a href="#aws-data-landing-zone.GuardDutyMemberFeatures">GuardDutyMemberFeatures</a>, <a href="#aws-data-landing-zone.GuardDutyOrgConfig">GuardDutyOrgConfig</a>, <a href="#aws-data-landing-zone.IamAccountAlias">IamAccountAlias</a>, <a href="#aws-data-landing-zone.IamPasswordPolicy">IamPasswordPolicy</a>, <a href="#aws-data-landing-zone.MacieDelegatedAdmin">MacieDelegatedAdmin</a>, <a href="#aws-data-landing-zone.MacieMembers">MacieMembers</a>, <a href="#aws-data-landing-zone.MacieOrgConfig">MacieOrgConfig</a>, <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
 
 Behavioral, used with Inheritance.
 
@@ -25884,6 +26642,8 @@ Hyderabad No Control Tower SecurityHub Standard support.
 | <code><a href="#aws-data-landing-zone.ReportType.IAM_USER_GROUP">IAM_USER_GROUP</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.GUARDDUTY_DELEGATED_ADMIN">GUARDDUTY_DELEGATED_ADMIN</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.GUARDDUTY">GUARDDUTY</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.MACIE_DELEGATED_ADMIN">MACIE_DELEGATED_ADMIN</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.MACIE">MACIE</a></code> | *No description.* |
 
 ---
 
@@ -25953,6 +26713,16 @@ Hyderabad No Control Tower SecurityHub Standard support.
 
 
 ##### `GUARDDUTY` <a name="GUARDDUTY" id="aws-data-landing-zone.ReportType.GUARDDUTY"></a>
+
+---
+
+
+##### `MACIE_DELEGATED_ADMIN` <a name="MACIE_DELEGATED_ADMIN" id="aws-data-landing-zone.ReportType.MACIE_DELEGATED_ADMIN"></a>
+
+---
+
+
+##### `MACIE` <a name="MACIE" id="aws-data-landing-zone.ReportType.MACIE"></a>
 
 ---
 
