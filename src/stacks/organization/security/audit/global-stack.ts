@@ -8,6 +8,8 @@ import { AccountChatbots, DlzStack } from '../../../../constructs';
 import { GuardDutyMemberFeatures, GuardDutyMemberFeatureGroup } from '../../../../constructs/dlz-guardduty/guardduty-member-features';
 import { GuardDutyOrgConfig } from '../../../../constructs/dlz-guardduty/guardduty-org-config';
 import { mapFeaturesToCfn, mergeFeatures } from '../../../../constructs/dlz-guardduty/guardduty-types';
+import { MacieMembers } from '../../../../constructs/dlz-macie/macie-members';
+import { MacieOrgConfig } from '../../../../constructs/dlz-macie/macie-org-config';
 import { DlzStackProps } from '../../../../constructs/dlz-stack/index';
 
 import { DataLandingZoneProps } from '../../../../data-landing-zone-types';
@@ -23,6 +25,10 @@ export class AuditGlobalStack extends DlzStack {
 
     if (this.props.guardDuty) {
       this.guardDuty();
+    }
+
+    if (this.props.macie && this.props.macie.enabled !== false) {
+      this.macie();
     }
   }
 
@@ -171,6 +177,53 @@ export class AuditGlobalStack extends DlzStack {
           enrollAccounts: enrollAccounts.length > 0 ? enrollAccounts : undefined,
           disenrollAccountIds: disenrollAccountIds.length > 0 ? disenrollAccountIds : undefined,
           memberFeatureGroups,
+        });
+      members.node.addDependency(orgConfig);
+
+      Report.addReportForAccountRegion(
+        'audit',
+        this.props.regions.global,
+        members.reportResource,
+      );
+    }
+  }
+
+  /**
+   * Macie organization configuration and member enrollment in the delegated admin (audit) account.
+   */
+  private macie() {
+    const macieProps = this.props.macie!;
+    const autoEnable = macieProps.autoEnable ?? false;
+
+    // Org config: enables Macie session, configures auto-enable for new members
+    const orgConfig = new MacieOrgConfig(this, this.resourceName('macie-org-config'), {
+      autoEnable,
+    });
+    Report.addReportForAccountRegion(
+      'audit',
+      this.props.regions.global,
+      orgConfig.reportResource,
+    );
+
+    // Member enrollment: only accounts with macieEnabled === true are enrolled.
+    // autoEnable controls the AWS API for new accounts joining the org,
+    // but explicit enrollment of existing accounts always requires macieEnabled: true.
+    // Accounts with macieEnabled === false are disenrolled.
+    const workloadAccounts = this.props.organization.ous.workloads.accounts;
+
+    const enrollAccounts = workloadAccounts
+      .filter(a => a.macieEnabled === true)
+      .map(a => ({ accountId: a.accountId, email: a.email ?? 'noreply@example.com' }));
+
+    const disenrollAccountIds = workloadAccounts
+      .filter(a => a.macieEnabled === false)
+      .map(a => a.accountId);
+
+    if (enrollAccounts.length > 0 || disenrollAccountIds.length > 0) {
+      const members = new MacieMembers(this,
+        this.resourceName('macie-members'), {
+          enrollAccounts: enrollAccounts.length > 0 ? enrollAccounts : undefined,
+          disenrollAccountIds: disenrollAccountIds.length > 0 ? disenrollAccountIds : undefined,
         });
       members.node.addDependency(orgConfig);
 

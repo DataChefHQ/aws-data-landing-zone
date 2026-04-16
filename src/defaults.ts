@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { DlzBudgetProps } from './constructs/dlz-budget';
 import { DlzGuardDutyFeaturesProps } from './constructs/dlz-guardduty/guardduty-types';
+import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 
@@ -158,6 +159,16 @@ export class Defaults {
   }
 
   /**
+   * Default Macie configuration. Auto-enable for new members is disabled.
+   */
+  public static macieConfig(): DlzMacieProps {
+    return {
+      enabled: true,
+      autoEnable: false,
+    };
+  }
+
+  /**
    * Control Tower Controls applied to all the OUs in the organization
    */
   public static rootControls(): DlzControlTowerStandardControls[] {
@@ -234,6 +245,10 @@ export class PropsOrDefaults {
 
   public static getGuardDutyFeatures(props: DataLandingZoneProps): DlzGuardDutyFeaturesProps {
     return props.guardDuty?.features ?? Defaults.guardDutyFeatures();
+  }
+
+  public static getMacieConfig(props: DataLandingZoneProps): DlzMacieProps {
+    return props.macie ?? Defaults.macieConfig();
   }
 }
 

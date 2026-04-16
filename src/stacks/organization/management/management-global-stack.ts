@@ -7,6 +7,7 @@ import {
   IDlzControlTowerControl,
 } from '../../../constructs/dlz-control-tower-control';
 import { GuardDutyDelegatedAdmin } from '../../../constructs/dlz-guardduty';
+import { MacieDelegatedAdmin } from '../../../constructs/dlz-macie';
 import {
   AccountChatbots,
   DlzBudget,
@@ -46,6 +47,10 @@ export class ManagementGlobalStack extends DlzStack {
 
     if (this.props.guardDuty) {
       this.guardDuty();
+    }
+
+    if (this.props.macie && this.props.macie.enabled !== false) {
+      this.macie();
     }
 
     if (this.props.deploymentPlatform?.gitHub) {
@@ -282,6 +287,23 @@ export class ManagementGlobalStack extends DlzStack {
       'management',
       this.props.regions.global,
       guardDutyAdmin.reportResource,
+    );
+  }
+
+  /**
+   * Macie organization enablement and delegated admin designation
+   */
+  private macie() {
+    const auditAccountId = this.props.organization.ous.security.accounts.audit.accountId;
+    const managementAccountId = this.props.organization.root.accounts.management.accountId;
+    const macieAdmin = new MacieDelegatedAdmin(this, this.resourceName('macie-delegated-admin'), {
+      managementAccountId,
+      auditAccountId,
+    });
+    Report.addReportForAccountRegion(
+      'management',
+      this.props.regions.global,
+      macieAdmin.reportResource,
     );
   }
 

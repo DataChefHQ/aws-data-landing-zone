@@ -138,6 +138,11 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/client-macie2",
+      "version": "^3.1030.0",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-organizations",
       "version": "^3.1030.0",
       "type": "bundled"
