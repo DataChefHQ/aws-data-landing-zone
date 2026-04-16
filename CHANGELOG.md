@@ -2,6 +2,64 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2026-04-16
+
+### Chores
+
+- Self mutation
+
+- Self mutation
+
+### Documentation
+
+- Updated README.md with new GuardDuty configuration options
+
+### Features
+
+- Release 0.3.0
+
+- Introduced GuardDuty constructs for org-wide security setup
+
+- **deps:** Introduced AWS Macie constructs for admin and org config
+
+
+## [0.2.5] - 2026-04-13
+
+### Features
+
+- Introduced Node.js 22 and AWS CDK 2.248.0 updates
+
+
+## [0.2.4] - 2026-04-13
+
+### CI/CD
+
+- **workflows:** Introduced GitHub Actions for snapshot diff comments
+
+- **workflows:** Introduced API compatibility check for backward support
+
+
+## [0.2.3] - 2026-04-13
+
+### Chores
+
+- **deps:** Upgrade dependencies
+
+
+## [0.2.2] - 2026-04-10
+
+### Chores
+
+- **deps:** Upgrade dependencies
+
+
+## [0.2.1] - 2026-04-09
+
+### Documentation
+
+- Documented release 0.2.0 with breaking changes and features
+
+
 ## [0.2.0] - 2026-04-09
 
 ### ⚠️ Breaking Changes
