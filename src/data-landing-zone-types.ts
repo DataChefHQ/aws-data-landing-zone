@@ -22,6 +22,7 @@ import {
   SlackChannel,
 } from './constructs';
 import { DlzGuardDutyFeaturesProps, DlzGuardDutyProps } from './constructs/dlz-guardduty/guardduty-types';
+import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
 import { AuditGlobalStack, ManagementGlobalStack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
@@ -472,6 +473,18 @@ export interface DLzAccount {
    * Only takes effect when `guardDuty` is enabled at the organization level.
    */
   readonly guardDutyFeatures?: DlzGuardDutyFeaturesProps;
+
+  /**
+   * Explicitly enroll this existing account in Macie via CreateMember.
+   * Set to `true` to enroll, `false` to disenroll. Omit to take no action.
+   *
+   * This controls enrollment of **existing** accounts only.
+   * The `DlzMacieProps.autoEnable` setting separately controls whether
+   * **new** accounts joining the organization are auto-enabled by AWS.
+   *
+   * Only takes effect when `macie.enabled` is `true` at the organization level.
+   */
+  readonly macieEnabled?: boolean;
 }
 
 export interface DLzAccountSuspended {
@@ -781,6 +794,13 @@ export interface DataLandingZoneProps {
    * a GuardDuty detector created and organization-wide auto-enable configured.
    */
   readonly guardDuty?: DlzGuardDutyProps;
+
+  /**
+   * Macie configuration for the organization.
+   * When specified, enables Macie at the organization level and delegates
+   * administration to the security audit account.
+   */
+  readonly macie?: DlzMacieProps;
 
   readonly budgets: DlzBudgetProps[];
 

@@ -60,6 +60,15 @@
         },
         {
           "spawn": "bundle:constructs/dlz-guardduty/lambda/guardduty-org-config"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-macie/lambda/macie-delegated-admin"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-macie/lambda/macie-org-config"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-macie/lambda/macie-members"
         }
       ]
     },
@@ -114,6 +123,60 @@
       "steps": [
         {
           "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-macie/lambda/macie-delegated-admin": {
+      "name": "bundle:constructs/dlz-macie/lambda/macie-delegated-admin",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-delegated-admin/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-delegated-admin/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-macie/lambda/macie-delegated-admin:watch": {
+      "name": "bundle:constructs/dlz-macie/lambda/macie-delegated-admin:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-delegated-admin/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-delegated-admin/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-macie/lambda/macie-members": {
+      "name": "bundle:constructs/dlz-macie/lambda/macie-members",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-members/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-members/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-members/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-macie/lambda/macie-members:watch": {
+      "name": "bundle:constructs/dlz-macie/lambda/macie-members:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-members/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-members/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-members/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-macie/lambda/macie-org-config": {
+      "name": "bundle:constructs/dlz-macie/lambda/macie-org-config",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-org-config/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-org-config/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-macie/lambda/macie-org-config:watch": {
+      "name": "bundle:constructs/dlz-macie/lambda/macie-org-config:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-org-config/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-org-config/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
@@ -419,7 +482,7 @@
           "exec": "npm install"
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-guardduty @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-organizations @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
+          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-guardduty @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-macie2 @aws-sdk/client-organizations @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"

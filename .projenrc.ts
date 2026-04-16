@@ -62,6 +62,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-iam@^3.1030.0',
     '@aws-sdk/client-cloudformation@^3.1030.0',
     '@aws-sdk/client-guardduty@^3.1030.0',
+    '@aws-sdk/client-macie2@^3.1030.0',
     '@aws-sdk/client-organizations@^3.1030.0',
     'js-yaml@^4.1',
     '@types/js-yaml',
@@ -101,6 +102,24 @@ project.bundler.addBundle('./src/constructs/dlz-guardduty/lambda/guardduty-membe
   externals: ['aws-sdk'],
 });
 project.bundler.addBundle('./src/constructs/dlz-guardduty/lambda/guardduty-org-config/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-delegated-admin/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-org-config/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-members/', {
   platform: 'node',
   target: 'node22',
   sourcemap: true,
