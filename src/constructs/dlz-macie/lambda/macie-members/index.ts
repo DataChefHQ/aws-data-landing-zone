@@ -83,7 +83,8 @@ async function disenrollAccounts(accountIds: string[]): Promise<void> {
     try {
       await macieClient.send(new GetMemberCommand({ id: accountId }));
     } catch (error: any) {
-      if (error.name === 'ResourceNotFoundException' || error.__type === 'ResourceNotFoundException') {
+      if (error.name === 'ResourceNotFoundException' || error.__type === 'ResourceNotFoundException'
+        || error.name === 'ValidationException' || error.__type === 'ValidationException') {
         console.log(`Account ${accountId} is not a member, skipping disenrollment`);
         continue;
       }
@@ -93,18 +94,36 @@ async function disenrollAccounts(accountIds: string[]): Promise<void> {
     console.log(`Disenrolling account ${accountId}...`);
 
     // Step 1: Disassociate — breaks the admin-member relationship
+    // May throw ValidationException if the account was never explicitly associated
+    // (e.g., auto-enabled by org config but not enrolled via CreateMember).
     console.log(`Calling DisassociateMember for ${accountId}...`);
-    await macieClient.send(new DisassociateMemberCommand({
-      id: accountId,
-    }));
-    console.log(`DisassociateMember completed for ${accountId}`);
+    try {
+      await macieClient.send(new DisassociateMemberCommand({
+        id: accountId,
+      }));
+      console.log(`DisassociateMember completed for ${accountId}`);
+    } catch (error: any) {
+      if (error.name === 'ValidationException' || error.__type === 'ValidationException') {
+        console.log(`Account ${accountId} is not an associated member, skipping disassociation`);
+      } else {
+        throw error;
+      }
+    }
 
     // Step 2: Delete — removes from member list
     console.log(`Calling DeleteMember for ${accountId}...`);
-    await macieClient.send(new DeleteMemberCommand({
-      id: accountId,
-    }));
-    console.log(`DeleteMember completed for ${accountId}`);
+    try {
+      await macieClient.send(new DeleteMemberCommand({
+        id: accountId,
+      }));
+      console.log(`DeleteMember completed for ${accountId}`);
+    } catch (error: any) {
+      if (error.name === 'ValidationException' || error.__type === 'ValidationException') {
+        console.log(`Account ${accountId} is not a member, skipping deletion`);
+      } else {
+        throw error;
+      }
+    }
   }
 }
 
