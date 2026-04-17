@@ -40,7 +40,8 @@ async function enrollAccounts(accounts: EnrollAccount[]): Promise<void> {
       console.log(`Account ${account.accountId} already exists with status: ${existing.relationshipStatus}`);
       continue;
     } catch (error: any) {
-      if (error.name === 'ResourceNotFoundException' || error.__type === 'ResourceNotFoundException') {
+      if (error.name === 'ResourceNotFoundException' || error.__type === 'ResourceNotFoundException'
+        || error.name === 'ValidationException' || error.__type === 'ValidationException') {
         console.log(`Account ${account.accountId} is not a member, creating...`);
       } else {
         throw error;
@@ -103,7 +104,8 @@ async function disenrollAccounts(accountIds: string[]): Promise<void> {
       }));
       console.log(`DisassociateMember completed for ${accountId}`);
     } catch (error: any) {
-      if (error.name === 'ValidationException' || error.__type === 'ValidationException') {
+      if (error.name === 'ValidationException' || error.__type === 'ValidationException'
+        || error.name === 'ResourceNotFoundException' || error.__type === 'ResourceNotFoundException') {
         console.log(`Account ${accountId} is not an associated member, skipping disassociation`);
       } else {
         throw error;
@@ -118,7 +120,8 @@ async function disenrollAccounts(accountIds: string[]): Promise<void> {
       }));
       console.log(`DeleteMember completed for ${accountId}`);
     } catch (error: any) {
-      if (error.name === 'ValidationException' || error.__type === 'ValidationException') {
+      if (error.name === 'ValidationException' || error.__type === 'ValidationException'
+        || error.name === 'ResourceNotFoundException' || error.__type === 'ResourceNotFoundException') {
         console.log(`Account ${accountId} is not a member, skipping deletion`);
       } else {
         throw error;
