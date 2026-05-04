@@ -1,0 +1,284 @@
+---
+title: Service Control Policies
+description: Service Control Policies (SCPs)
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+[Service Control Policies (SCPs)](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html)
+define the maximum permissions available to identities in member accounts. The Data Landing Zone composes SCPs from
+three additive tiers and ships a library of vetted preset statements you can drop in.
+
+## Composition model
+
+SCPs in DLZ are composed from three tiers. All tiers are **additive only** — a tier cannot weaken or remove
+statements from a tier above it.
+
+| Tier              | Applies to                | Configured via                                          |
+|-------------------|---------------------------|---------------------------------------------------------|
+| Org baseline      | Every workload account    | `scpBaselineStatements` (or `denyServiceList`)          |
+| Per-account-type  | All accounts of one type  | `scpStatementsByAccountType.{development \| production}` |
+| Per-account       | One specific account      | `DLzAccount.scpStatements`                              |
+
+The mandatory-tags SCP is always appended after the org baseline and cannot be opted out of.
+
+```mermaid
+flowchart LR
+    A[Org Baseline] --> B[Per-Account-Type]
+    B --> C[Per-Account]
+    C --> D[Mandatory Tags]
+    D --> E[Final SCP applied to account]
+```
+
+:::note
+AWS Organizations limits each target to **5 attached SCPs**, with a maximum body size of **5120 bytes per policy**.
+DLZ validates these limits at synthesis time and fails fast with a clear error.
+:::
+
+## SCP preset library
+
+DLZ ships a library of preset statements covering common deny patterns. Each preset returns an
+`iam.PolicyStatement` you can compose into any tier. Presets exempt the Control Tower execution role automatically
+where required.
+
+| Preset                                                | Purpose                                                                  |
+|-------------------------------------------------------|--------------------------------------------------------------------------|
+| `ScpDenyActionsOutsideRegions`                        | Deny regional API calls outside an allow-list (global services exempt). |
+| `ScpDenyServiceActions`                               | Deny a caller-supplied list of `service:action` strings.                |
+| `ScpDenyDisablingSecurityServices`                    | Block disabling GuardDuty, Macie, Security Hub, Config, CloudTrail, etc. |
+| `ScpDenyLeavingOrganization`                          | Block `organizations:LeaveOrganization`.                                |
+| `ScpDenyRootUserActions`                              | Block actions performed by the account root user.                       |
+| `ScpDenyRootCredentialsManagementInMemberAccounts`    | Block management of root credentials in member accounts.                |
+| `ScpDenyIamWithoutPermissionsBoundary`                | Require a permissions boundary on all IAM principals.                   |
+| `ScpDenyS3PublicAccessBypass`                         | Block bypassing S3 Block Public Access settings.                        |
+| `ScpDenyS3ObjectLockAndRetention`                     | Block tampering with S3 Object Lock and retention.                      |
+| `ScpDenyBackupVaultLock`                              | Block tampering with AWS Backup Vault Lock.                             |
+| `ScpDenyGlacierVaultLock`                             | Block tampering with S3 Glacier Vault Lock.                             |
+| `ScpDenyMarketplaceSubscriptions`                     | Block AWS Marketplace subscription changes.                             |
+| `ScpDenyDomainRegistrations`                          | Block Route53 domain registrations and transfers.                       |
+| `ScpDenyDedicatedInfraAndSubscriptions`               | Block dedicated hosts, capacity reservations, and similar commitments.  |
+| `ScpDenyReservedCapacityPurchases`                    | Block purchasing reserved capacity (EC2 RIs, etc.).                     |
+| `ScpDenySavingsPlanPurchases`                         | Block purchasing Savings Plans.                                         |
+| `ScpDenyBedrockProvisionedThroughput`                 | Block creating Bedrock Provisioned Throughput.                          |
+| `ScpDenyCfnStacksWithoutStandardTags`                 | Require mandatory tags on CloudFormation stacks (always appended).      |
+
+## Defining a baseline
+
+Use `scpBaselineStatements` for full control over the org baseline. Compose it from presets and your own statements.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import {
+      DataLandingZone,
+      ScpDenyActionsOutsideRegions,
+      ScpDenyDisablingSecurityServices,
+      ScpDenyLeavingOrganization,
+      ScpDenyRootUserActions,
+      ScpDenyServiceActions,
+    } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      scpBaselineStatements: [
+        ScpDenyActionsOutsideRegions.statement(['eu-west-1', 'eu-central-1']),
+        ScpDenyDisablingSecurityServices.statement(),
+        ScpDenyLeavingOrganization.statement(),
+        ScpDenyRootUserActions.statement(),
+        ScpDenyServiceActions.statement(['ecs:*', 'workspaces:*']),
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        scp_baseline_statements=[
+            dlz.ScpDenyActionsOutsideRegions.statement(["eu-west-1", "eu-central-1"]),
+            dlz.ScpDenyDisablingSecurityServices.statement(),
+            dlz.ScpDenyLeavingOrganization.statement(),
+            dlz.ScpDenyRootUserActions.statement(),
+            dlz.ScpDenyServiceActions.statement(["ecs:*", "workspaces:*"]),
+        ],
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Layering by account type
+
+Apply additional restrictions to all accounts of one type via `scpStatementsByAccountType`. For example, prevent
+production accounts from purchasing long-term commitments while leaving development accounts unrestricted:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {
+      DataLandingZone,
+      ScpDenyReservedCapacityPurchases,
+      ScpDenySavingsPlanPurchases,
+    } from 'aws-data-landing-zone';
+
+    const dlz = new DataLandingZone(app, {
+      scpStatementsByAccountType: {
+        production: [
+          ScpDenyReservedCapacityPurchases.statement(),
+          ScpDenySavingsPlanPurchases.statement(),
+        ],
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    dlz.DataLandingZone(app,
+        scp_statements_by_account_type={
+            "production": [
+                dlz.ScpDenyReservedCapacityPurchases.statement(),
+                dlz.ScpDenySavingsPlanPurchases.statement(),
+            ],
+        },
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Per-account extras
+
+Use `scpStatements` on a `DLzAccount` for one-off restrictions that only apply to a single account.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import * as iam from 'aws-cdk-lib/aws-iam';
+
+    const dlz = new DataLandingZone(app, {
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [
+              {
+                name: 'data-prod',
+                type: DlzAccountType.PRODUCTION,
+                scpStatements: [
+                  new iam.PolicyStatement({
+                    sid: 'DenyDynamoDBDelete',
+                    effect: iam.Effect.DENY,
+                    actions: ['dynamodb:DeleteTable'],
+                    resources: ['*'],
+                  }),
+                ],
+                ...
+              },
+            ],
+          },
+          ...
+        },
+        ...
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    from aws_cdk import aws_iam as iam
+
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name="data-prod",
+                            type=dlz.DlzAccountType.PRODUCTION,
+                            scp_statements=[
+                                iam.PolicyStatement(
+                                    sid="DenyDynamoDBDelete",
+                                    effect=iam.Effect.DENY,
+                                    actions=["dynamodb:DeleteTable"],
+                                    resources=["*"],
+                                ),
+                            ],
+                            ...
+                        ),
+                    ],
+                ),
+                ...
+            ),
+            ...
+        ),
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Service Deny List (legacy)
+
+Before the preset library was introduced, the `denyServiceList` property accepted a flat list of `service:action`
+strings to deny in the org baseline. It is still supported for the simple case but is **deprecated** in favor of
+`scpBaselineStatements` with `ScpDenyServiceActions`.
+
+`denyServiceList` and `scpBaselineStatements` cannot be used together — DLZ throws at synthesis time if both are set.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import { DataLandingZone, Defaults } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      denyServiceList: [
+        ...Defaults.denyServiceList(),
+        'ecs:*',
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        deny_service_list=[
+            *dlz.Defaults.deny_service_list(),
+            "ecs:*"
+        ],
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+The `Defaults.denyServiceList()` helper returns the conservative starter list. See the source
+[here](https://github.com/DataChefHQ/aws-data-landing-zone/blob/main/src/defaults.ts).
+
+## Validation
+
+DLZ validates each account's resolved SCP at synthesis time and fails with a clear error if:
+
+- the resolved policy is empty (AWS rejects empty policies)
+- more than 5 SCPs would be attached to the account
+- the policy body exceeds 5120 bytes
+
+This catches misconfiguration before any CloudFormation deployment runs.
+
+## API References
+- [DataLandingZoneProps.scpBaselineStatements](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.scpBaselineStatements)
+- [DataLandingZoneProps.scpStatementsByAccountType](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.scpStatementsByAccountType)
+- [DataLandingZoneProps.denyServiceList](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList)
+- [DLzAccount.scpStatements](/reference/api/#aws-data-landing-zone.DLzAccount.property.scpStatements)
+- [ScpStatementsByAccountType](/reference/api/#aws-data-landing-zone.ScpStatementsByAccountType)

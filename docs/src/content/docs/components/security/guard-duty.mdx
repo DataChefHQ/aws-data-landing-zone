@@ -1,0 +1,197 @@
+---
+title: GuardDuty
+description: GuardDuty
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone enables [Amazon GuardDuty](https://docs.aws.amazon.com/guardduty/) at the organization level
+and delegates administration to the security audit account. The audit account becomes the single pane of glass for
+findings across the entire organization.
+
+When `guardDuty` is set on `DataLandingZoneProps`, DLZ:
+
+- delegates GuardDuty administration from the management account to the audit account
+- creates the GuardDuty detector in the audit account
+- configures organization-wide auto-enable behavior
+- enrols member accounts according to `autoEnableOrgMembers` and per-account `guardDutyEnabled` flags
+
+Findings flow through the standard DLZ notification path: **GuardDuty → Security Hub → EventBridge → SNS → Slack/Email**.
+No additional notification plumbing is required — see the [Security Hub](/components/security/security-hub) page for
+filtering by severity and workflow status.
+
+:::note
+Basic GuardDuty monitoring (CloudTrail management events, VPC Flow Logs, DNS query logs) is always active when the
+detector is enabled. The flags under `features` enable **additional** protection plans on top of the baseline.
+:::
+
+## Enabling GuardDuty at the organization level
+
+The minimal configuration delegates administration and creates the detector, but does not enrol any members:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      guardDuty: {
+        autoEnableOrgMembers: 'ALL',
+        features: {
+          s3DataEvents: true,
+          eksAuditLogs: true,
+          ebsMalwareProtection: true,
+          rdsLoginEvents: true,
+          lambdaNetworkLogs: true,
+          runtimeMonitoring: true,
+        },
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        guard_duty={
+            "auto_enable_org_members": "ALL",
+            "features": {
+                "s3_data_events": True,
+                "eks_audit_logs": True,
+                "ebs_malware_protection": True,
+                "rds_login_events": True,
+                "lambda_network_logs": True,
+                "runtime_monitoring": True,
+            },
+        },
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+### Auto-enable behavior
+
+`autoEnableOrgMembers` controls which member accounts AWS auto-enrols into the delegated administrator's GuardDuty:
+
+| Value    | Behavior                                                                                  |
+|----------|-------------------------------------------------------------------------------------------|
+| `'ALL'`  | All existing and new member accounts are auto-enrolled. Per-account flags are not needed. |
+| `'NEW'`  | Only new accounts joining the org are auto-enrolled. Existing accounts must opt in.       |
+| `'NONE'` | No auto-enrolment. Each account opts in via `guardDutyEnabled: true`.                     |
+
+When `autoEnableOrgMembers` is `'NEW'` or `'NONE'`, set `guardDutyEnabled: true` on the relevant `DLzAccount` entries
+to enrol existing accounts.
+
+## Per-account feature overrides
+
+The org-level `features` set the **mandatory floor** applied across the organization. Individual accounts can opt in
+to additional features via `DLzAccount.guardDutyFeatures`. The merge is OR-only — accounts cannot disable an
+org-level feature.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      guardDuty: {
+        autoEnableOrgMembers: 'NEW',
+        features: {
+          s3DataEvents: true,
+        },
+      },
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [
+              {
+                name: 'data-prod',
+                type: DlzAccountType.PRODUCTION,
+                guardDutyEnabled: true,
+                guardDutyFeatures: {
+                  eksAuditLogs: true,
+                  runtimeMonitoring: true,
+                },
+                ...
+              },
+            ],
+          },
+          ...
+        },
+        ...
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        guard_duty={
+            "auto_enable_org_members": "NEW",
+            "features": {
+                "s3_data_events": True,
+            },
+        },
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name="data-prod",
+                            type=dlz.DlzAccountType.PRODUCTION,
+                            guard_duty_enabled=True,
+                            guard_duty_features={
+                                "eks_audit_logs": True,
+                                "runtime_monitoring": True,
+                            },
+                            ...
+                        ),
+                    ],
+                ),
+                ...
+            ),
+            ...
+        ),
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Available features
+
+All features default to `false`. Enable explicitly per the protection plans you intend to operate.
+
+| Feature                | Description                                                                              |
+|------------------------|------------------------------------------------------------------------------------------|
+| `s3DataEvents`         | Monitor S3 data access events for threat detection.                                      |
+| `eksAuditLogs`         | Monitor Kubernetes audit logs for EKS clusters.                                          |
+| `ebsMalwareProtection` | Scan EBS volumes for malware when GuardDuty detects suspicious behavior on EC2.          |
+| `rdsLoginEvents`       | Monitor RDS login activity for anomalous access patterns.                                |
+| `lambdaNetworkLogs`    | Monitor Lambda function network activity for threats.                                    |
+| `runtimeMonitoring`    | Runtime monitoring for EC2, ECS, and EKS workloads.                                      |
+
+## Defaults
+
+`Defaults.guardDutyFeatures()` returns the conservative baseline: every additional feature disabled. Use it as a
+starting point and explicitly opt in to the features you want.
+
+## API References
+- [DlzGuardDutyProps](/reference/api/#aws-data-landing-zone.DlzGuardDutyProps)
+- [DlzGuardDutyFeaturesProps](/reference/api/#aws-data-landing-zone.DlzGuardDutyFeaturesProps)
+- [DataLandingZoneProps.guardDuty](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.guardDuty)
+- [DLzAccount.guardDutyEnabled](/reference/api/#aws-data-landing-zone.DLzAccount.property.guardDutyEnabled)
+- [DLzAccount.guardDutyFeatures](/reference/api/#aws-data-landing-zone.DLzAccount.property.guardDutyFeatures)

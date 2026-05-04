@@ -109,11 +109,11 @@ export default defineConfig({
                         items: [
                             { label: 'SecurityHub',  slug: 'components/security/security-hub'},
                             { label: 'Control Tower Controls',  slug: 'components/security/control-tower-controls'},
-                            { label: 'Service Deny Lists',  slug: 'components/security/service-deny-list'}, // Change to SCPs when we support them externally and make the deny list a subheading
+                            { label: 'Service Control Policies',  slug: 'components/security/scps'},
                             { label: 'IAM Permission Boundary',  slug: 'components/security/iam-permission-boundary'},
+                            { label: 'GuardDuty',  slug: 'components/security/guard-duty'},
+                            { label: 'Macie',  slug: 'components/security/macie'},
                             // { label: 'AWS Config',  slug: 'introduction'},
-                            // { label: 'AWS Guard Duty',  slug: 'introduction'},
-                            // { label: 'AWS Macie',  slug: 'introduction'},
                         ]
                     },
                     {

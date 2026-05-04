@@ -1,0 +1,161 @@
+---
+title: Macie
+description: Macie
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The Data Landing Zone enables [Amazon Macie](https://docs.aws.amazon.com/macie/) at the organization level and
+delegates administration to the security audit account. Macie discovers and classifies sensitive data (PII, secrets,
+credentials) in S3 buckets and surfaces findings centrally.
+
+When `macie` is set on `DataLandingZoneProps`, DLZ:
+
+- delegates Macie administration from the management account to the audit account
+- creates the Macie session in the audit account
+- configures organization-wide auto-enable behavior for new accounts
+- enrols existing accounts via `CreateMember` based on per-account `macieEnabled` flags
+
+Findings flow through the standard DLZ notification path: **Macie → Security Hub → EventBridge → SNS → Slack/Email**.
+See the [Security Hub](/components/security/security-hub) page for filtering by severity and workflow status.
+
+:::caution
+Macie classification jobs incur cost based on the volume of data scanned. Enable thoughtfully — start with a narrow
+scope of accounts before rolling out organization-wide.
+:::
+
+## Enabling Macie at the organization level
+
+The minimal configuration delegates administration and creates the Macie session in the audit account. By default,
+new accounts joining the organization are **not** auto-enabled, and existing accounts are not enrolled.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      macie: {
+        enabled: true,
+        autoEnable: true,
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        macie={
+            "enabled": True,
+            "auto_enable": True,
+        },
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+### Configuration options
+
+| Option       | Default | Behavior                                                                                                  |
+|--------------|---------|-----------------------------------------------------------------------------------------------------------|
+| `enabled`    | `true`  | Master switch. When `false`, no Macie constructs are created. Omitting the `macie` block also disables it. |
+| `autoEnable` | `false` | When `true`, new accounts joining the organization are automatically enabled by AWS. Existing accounts are not affected. |
+
+## Enrolling existing accounts
+
+`autoEnable` only covers **new** accounts. To enrol existing accounts, set `macieEnabled` on the relevant `DLzAccount`
+entries. Set it to `false` to disenrol an account, or omit it to leave the current state unchanged.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    const dlz = new DataLandingZone(app, {
+      macie: {
+        enabled: true,
+        autoEnable: true,
+      },
+      organization: {
+        ous: {
+          workloads: {
+            accounts: [
+              {
+                name: 'data-prod',
+                type: DlzAccountType.PRODUCTION,
+                macieEnabled: true,
+                ...
+              },
+              {
+                name: 'sandbox',
+                type: DlzAccountType.DEVELOP,
+                macieEnabled: false,
+                ...
+              },
+            ],
+          },
+          ...
+        },
+        ...
+      },
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        macie={
+            "enabled": True,
+            "auto_enable": True,
+        },
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    accounts=[
+                        dlz.DLzAccount(
+                            name="data-prod",
+                            type=dlz.DlzAccountType.PRODUCTION,
+                            macie_enabled=True,
+                            ...
+                        ),
+                        dlz.DLzAccount(
+                            name="sandbox",
+                            type=dlz.DlzAccountType.DEVELOP,
+                            macie_enabled=False,
+                            ...
+                        ),
+                    ],
+                ),
+                ...
+            ),
+            ...
+        ),
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Defaults
+
+`Defaults.macieConfig()` returns `{ enabled: true, autoEnable: false }` — Macie is on at the org level when the
+config block is present, but auto-enrolment of new accounts is opt-in.
+
+## API References
+- [DlzMacieProps](/reference/api/#aws-data-landing-zone.DlzMacieProps)
+- [DataLandingZoneProps.macie](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.macie)
+- [DLzAccount.macieEnabled](/reference/api/#aws-data-landing-zone.DLzAccount.property.macieEnabled)
