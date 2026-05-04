@@ -51,6 +51,7 @@ const configBase: DataLandingZoneProps = {
   },
   denyServiceList: [
     ...Defaults.denyServiceList(),
+    'eks:*',
     'ecs:*',
   ],
   mandatoryTags: {
@@ -399,6 +400,14 @@ const configBase: DataLandingZoneProps = {
             name: 'project-1-production',
             accountId: '234567890123',
             type: DlzAccountType.PRODUCTION,
+            scpStatements: [
+              new iam.PolicyStatement({
+                sid: 'DenyDeletingProject1ProductionData',
+                effect: iam.Effect.DENY,
+                actions: ['s3:DeleteBucket'],
+                resources: ['arn:aws:s3:::project-1-production-*'],
+              }),
+            ],
             vpcs: [
               {
                 name: 'default',

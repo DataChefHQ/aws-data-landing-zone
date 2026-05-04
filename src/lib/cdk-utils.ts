@@ -26,8 +26,9 @@ export function limitCfnExecutions(constructs: Construct[], max: number): void {
  * Set dependencies between resources in the current chunk and resources in the previous chunk.
  */
 function setDependencies(currentChunk: Construct[], previousChunk: Construct[]): void {
+  const sortedPrevious = [...previousChunk].sort((a, b) => a.node.id.localeCompare(b.node.id));
   for (const resource of currentChunk) {
-    for (const previousChunkResource of previousChunk) {
+    for (const previousChunkResource of sortedPrevious) {
       resource.node.addDependency(previousChunkResource);
     }
   }

@@ -1,6 +1,7 @@
 import * as assert from 'assert';
 import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as organizations from 'aws-cdk-lib/aws-organizations';
 import { Construct } from 'constructs';
 import {
   DlzControlTowerEnabledControl,
@@ -15,7 +16,12 @@ import {
   DlzStack,
   DlzStackProps, SlackChannel,
 } from '../../../constructs/index';
-import { DlzServiceControlPolicy } from '../../../constructs/organization-policies/index';
+import {
+  DlzServiceControlPolicy,
+  ScpDenyIamWithoutPermissionsBoundary,
+  ScpDenyServiceActions,
+  ScpMerge,
+} from '../../../constructs/organization-policies/index';
 import { DlzTagPolicy } from '../../../constructs/organization-policies/tag-policy';
 import {
   DataLandingZoneProps,
@@ -23,6 +29,7 @@ import {
   GlobalVariables,
   Ou,
   Region,
+  ScpStatementsByAccountType,
 } from '../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../defaults';
 import { limitCfnExecutions } from '../../../lib/cdk-utils';
@@ -68,7 +75,7 @@ export class ManagementGlobalStack extends DlzStack {
         name: 'IamPolicyPermissionBoundaryPolicy',
         description: 'Deny all IAM policy creation/modification unless permissions boundary is applied',
         targetIds: [ouId],
-        statements: DlzServiceControlPolicy.denyIamPolicyActionStatements(),
+        statements: ScpDenyIamWithoutPermissionsBoundary.statements(),
       });
       Report.addReportForOuAccountRegions(
         this.props.organization.ous.workloads,
@@ -128,75 +135,33 @@ export class ManagementGlobalStack extends DlzStack {
     limitCfnExecutions(enabledControls, 10);
   }
 
-  /**
-   * Service Control Policies and Tag Policies applied at the account level to enable customization per account
-   */
+  /** Per-account SCPs and tag policies. Tiers: baseline -> account-type -> per-account (additive). */
   workloadAccountsOrgPolicies() {
-    const denyService = PropsOrDefaults.getDenyServiceList(this.props);
     const tags = PropsOrDefaults.getOrganizationTags(this.props);
+    const baselineStatements = PropsOrDefaults.getScpBaseline(this.props);
+    const accountTypeStatements = this.resolveScpStatementsByAccountType(this.props.scpStatementsByAccountType);
 
-    const commonStatements = [
-      DlzServiceControlPolicy.denyServiceActionStatements(denyService),
-      DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags),
-    ];
+    const sortedAccounts = [...this.props.organization.ous.workloads.accounts]
+      .sort((a, b) => a.name.localeCompare(b.name));
 
-    const orgPolicies: Construct[] = [];
-    // ============================================================================================
-    // ======================================= DEVELOPMENT ========================================
-    // ============================================================================================
+    const previousPolicies: organizations.CfnPolicy[] = [];
 
-    const developAccounts = this.props.organization.ous.workloads.accounts
-      .filter(account => account.type === DlzAccountType.DEVELOP);
-    for (const dlzAccount of developAccounts) {
-      const dlzScpDevelop = new DlzServiceControlPolicy(this,
+    for (const dlzAccount of sortedAccounts) {
+      const statements = ScpMerge.resolve({
+        baseline: baselineStatements,
+        accountTypeExtras: accountTypeStatements[dlzAccount.type] ?? [],
+        accountExtras: dlzAccount.scpStatements ?? [],
+      });
+      ScpMerge.validate(dlzAccount.name, statements, 1);
+
+      const dlzScp = new DlzServiceControlPolicy(this,
         this.resourceName(`scp-${dlzAccount.name}-account`), {
           name: this.resourceName(`scp-${dlzAccount.name}-account`),
           description: `SCP statements applied to the ${dlzAccount.name} account`,
           targetIds: [dlzAccount.accountId],
-          statements: [
-            ...commonStatements,
-          ],
+          statements: statements,
         });
-      const dlzTagPolicyDevelop = new DlzTagPolicy(this,
-        this.resourceName(`tag-policy-${dlzAccount.name}-account`), {
-          name: this.resourceName(`tag-policy-${dlzAccount.name}-account`),
-          description: `Tag policy for the ${dlzAccount.name} account`,
-          targetIds: [dlzAccount.accountId],
-          policyTags: tags,
-        });
-      Report.addReportForAccountRegion(
-        dlzAccount.name,
-        '*',
-        dlzScpDevelop.reportResource,
-      );
-      Report.addReportForAccountRegion(
-        dlzAccount.name,
-        '*',
-        dlzTagPolicyDevelop.reportResource,
-      );
-
-      orgPolicies.push(dlzScpDevelop.policy);
-      orgPolicies.push(dlzTagPolicyDevelop.policy);
-    }
-
-
-    // ============================================================================================
-    // ======================================== PRODUCTION ========================================
-    // ============================================================================================
-
-    const prodAccounts = this.props.organization.ous.workloads.accounts
-      .filter(account => account.type === DlzAccountType.PRODUCTION);
-    for (const dlzAccount of prodAccounts) {
-      const dlzScpProd = new DlzServiceControlPolicy(this,
-        this.resourceName(`scp-${dlzAccount.name}-account`), {
-          name: this.resourceName(`scp-${dlzAccount.name}-account`),
-          description: `SCP statements applied to the ${dlzAccount.name} account`,
-          targetIds: [dlzAccount.accountId],
-          statements: [
-            ...commonStatements,
-          ],
-        });
-      const dlzTagPolicyProduction = new DlzTagPolicy(this,
+      const dlzTagPolicy = new DlzTagPolicy(this,
         this.resourceName(`tag-policy-${dlzAccount.name}-account`), {
           name: this.resourceName(`tag-policy-${dlzAccount.name}-account`),
           description: `Tag policy for the ${dlzAccount.name} account`,
@@ -204,22 +169,25 @@ export class ManagementGlobalStack extends DlzStack {
           policyTags: tags,
         });
 
-      Report.addReportForAccountRegion(
-        dlzAccount.name,
-        '*',
-        dlzScpProd.reportResource,
-      );
-      Report.addReportForAccountRegion(
-        dlzAccount.name,
-        '*',
-        dlzTagPolicyProduction.reportResource,
-      );
+      Report.addReportForAccountRegion(dlzAccount.name, '*', dlzScp.reportResource);
+      Report.addReportForAccountRegion(dlzAccount.name, '*', dlzTagPolicy.reportResource);
 
-      orgPolicies.push(dlzScpProd.policy);
-      orgPolicies.push(dlzTagPolicyProduction.policy);
+      for (const prev of previousPolicies) {
+        dlzScp.policy.node.addDependency(prev);
+        dlzTagPolicy.policy.node.addDependency(prev);
+      }
+      previousPolicies.length = 0;
+      previousPolicies.push(dlzScp.policy, dlzTagPolicy.policy);
     }
+  }
 
-    limitCfnExecutions(orgPolicies, 8);
+  private resolveScpStatementsByAccountType(
+    config: ScpStatementsByAccountType | undefined,
+  ): Record<DlzAccountType, iam.PolicyStatement[]> {
+    return {
+      [DlzAccountType.DEVELOP]: config?.development ?? [],
+      [DlzAccountType.PRODUCTION]: config?.production ?? [],
+    };
   }
 
   /**
@@ -234,7 +202,7 @@ export class ManagementGlobalStack extends DlzStack {
           this.props.organization.ous.suspended.ouId,
         ],
         statements: [
-          DlzServiceControlPolicy.denyServiceActionStatements(['*']),
+          ScpDenyServiceActions.statement(['*']),
         ],
       });
   }
