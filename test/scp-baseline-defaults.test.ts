@@ -7,6 +7,8 @@ const baseProps: Pick<DataLandingZoneProps, 'mandatoryTags'> = {
     owner: undefined,
     project: undefined,
     environment: undefined,
+    costCenter: undefined,
+    domain: undefined,
   },
 };
 

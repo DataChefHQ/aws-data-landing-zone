@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "2117b4ad04c32b33fc5452cee2a34eeefe53623e71536b76868cffe0f80f843f.zip",
+          "S3Key": "fedd5a3c54c8407c36608e5731e2f2de1501916765373d67dec18e2d1ff352e5.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "a502a1db5332ac69a3f1343f4e7025c6a0022c7a646557301e3294ac1cb4d5d7.zip",
+          "S3Key": "8c20743e438c1b71eae624d0fd907f58d93b5ee8dc039cdf6bf99714090bf64c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -226,6 +226,14 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
         "State": "ENABLED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -253,6 +261,14 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "DisplayName": "dlz-global-sh-notification-notify-high-topic",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -323,6 +339,14 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
         "State": "ENABLED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -350,6 +374,14 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "DisplayName": "dlz-global-sh-notification-notify-resolved-topic",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -510,6 +542,14 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
         "SessionDuration": "PT12H",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -535,6 +575,14 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
         "Name": "ReadOnlyAccess",
         "SessionDuration": "PT12H",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -643,6 +691,14 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
         "Name": "inline-permission-set-read-only-s3",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -668,6 +724,14 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
         "Name": "longer-read-only",
         "SessionDuration": "PT12H",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -998,6 +1062,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1055,6 +1127,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ENCRYPTED_VOLUMES",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1075,6 +1155,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ENCRYPTED_VOLUMES",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1097,6 +1185,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1117,6 +1213,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1139,6 +1243,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1159,6 +1271,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1181,6 +1301,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1201,6 +1329,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_SNAPSHOTS_PUBLIC_PROHIBITED",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1223,6 +1359,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_STORAGE_ENCRYPTED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1243,6 +1387,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RDS_STORAGE_ENCRYPTED",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1277,6 +1429,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICTED_SSH",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1309,6 +1469,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICTED_SSH",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1343,6 +1511,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1375,6 +1551,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER_ACCESS_KEYS",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1409,6 +1593,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1441,6 +1633,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_RESTRICT_ROOT_USER",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1475,6 +1675,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ROOT_ACCOUNT_MFA_ENABLED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1507,6 +1715,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_ROOT_ACCOUNT_MFA_ENABLED",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1541,6 +1757,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1573,6 +1797,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_READ_PROHIBITED",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1607,6 +1839,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1640,6 +1880,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/AWS-GR_S3_BUCKET_PUBLIC_WRITE_PROHIBITED",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1672,6 +1920,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "ControlIdentifier": "arn:aws:controltower:eu-west-1::control/KRZOMDMWLCLU",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -1807,6 +2063,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -1862,6 +2126,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
     "dlzglobalbudgetbackendtopicCBB89597": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -2098,6 +2370,14 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "RoleName": "dlz-global-git-hub-deploy-role",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -2171,9 +2451,11 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
               "Action": "cloudformation:CreateStack",
               "Condition": {
                 "Null": {
-                  "aws:RequestTag/Cost Center": [
+                  "aws:RequestTag/CostCenter": [
+                    "dlz",
                     "test",
                   ],
+                  "aws:RequestTag/Domain": true,
                   "aws:RequestTag/Environment": [
                     "dlz",
                     "development",
@@ -2228,9 +2510,11 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
               "Action": "cloudformation:CreateStack",
               "Condition": {
                 "Null": {
-                  "aws:RequestTag/Cost Center": [
+                  "aws:RequestTag/CostCenter": [
+                    "dlz",
                     "test",
                   ],
+                  "aws:RequestTag/Domain": true,
                   "aws:RequestTag/Environment": [
                     "dlz",
                     "development",
@@ -2296,7 +2580,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Content": {
           "tags": {
-            "Cost Center": {
+            "CostCenter": {
               "enforced_for": {
                 "@@assign": [
                   "appmesh:*",
@@ -2355,12 +2639,75 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                 ],
               },
               "tag_key": {
-                "@@assign": "Cost Center",
+                "@@assign": "CostCenter",
               },
               "tag_value": {
                 "@@assign": [
+                  "dlz",
                   "test",
                 ],
+              },
+            },
+            "Domain": {
+              "enforced_for": {
+                "@@assign": [
+                  "appmesh:*",
+                  "athena:*",
+                  "acm:*",
+                  "cloudfront:*",
+                  "cloudtrail:*",
+                  "cloudwatch:*",
+                  "codebuild:*",
+                  "codecommit:*",
+                  "codepipeline:*",
+                  "cognito-identity:*",
+                  "cognito-idp:*",
+                  "comprehend:*",
+                  "config:*",
+                  "dms:*",
+                  "directconnect:*",
+                  "dynamodb:*",
+                  "elasticfilesystem:*",
+                  "events:*",
+                  "elasticloadbalancing:*",
+                  "fsx:*",
+                  "iotanalytics:*",
+                  "iotevents:*",
+                  "kms:*",
+                  "kinesisanalytics:*",
+                  "firehose:*",
+                  "lambda:*",
+                  "redshift:*",
+                  "ram:*",
+                  "resource-groups:*",
+                  "route53resolver:*",
+                  "secretsmanager:*",
+                  "states:*",
+                  "storagegateway:*",
+                  "workspaces:*",
+                  "backup:backup-plan",
+                  "batch:job",
+                  "logs:log-group",
+                  "ec2:elastic-ip",
+                  "ec2:instance",
+                  "ec2:vpc",
+                  "ec2:security-group",
+                  "ecr:repository",
+                  "ecs:service",
+                  "eks:cluster",
+                  "es:domain",
+                  "elasticmapreduce:cluster",
+                  "elasticache:cluster",
+                  "iam:policy",
+                  "network-firewall:firewall",
+                  "rds:secgrp",
+                  "s3:bucket",
+                  "sns:topic",
+                  "sqs:queue",
+                ],
+              },
+              "tag_key": {
+                "@@assign": "Domain",
               },
             },
             "Environment": {
@@ -2576,7 +2923,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Content": {
           "tags": {
-            "Cost Center": {
+            "CostCenter": {
               "enforced_for": {
                 "@@assign": [
                   "appmesh:*",
@@ -2635,12 +2982,75 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                 ],
               },
               "tag_key": {
-                "@@assign": "Cost Center",
+                "@@assign": "CostCenter",
               },
               "tag_value": {
                 "@@assign": [
+                  "dlz",
                   "test",
                 ],
+              },
+            },
+            "Domain": {
+              "enforced_for": {
+                "@@assign": [
+                  "appmesh:*",
+                  "athena:*",
+                  "acm:*",
+                  "cloudfront:*",
+                  "cloudtrail:*",
+                  "cloudwatch:*",
+                  "codebuild:*",
+                  "codecommit:*",
+                  "codepipeline:*",
+                  "cognito-identity:*",
+                  "cognito-idp:*",
+                  "comprehend:*",
+                  "config:*",
+                  "dms:*",
+                  "directconnect:*",
+                  "dynamodb:*",
+                  "elasticfilesystem:*",
+                  "events:*",
+                  "elasticloadbalancing:*",
+                  "fsx:*",
+                  "iotanalytics:*",
+                  "iotevents:*",
+                  "kms:*",
+                  "kinesisanalytics:*",
+                  "firehose:*",
+                  "lambda:*",
+                  "redshift:*",
+                  "ram:*",
+                  "resource-groups:*",
+                  "route53resolver:*",
+                  "secretsmanager:*",
+                  "states:*",
+                  "storagegateway:*",
+                  "workspaces:*",
+                  "backup:backup-plan",
+                  "batch:job",
+                  "logs:log-group",
+                  "ec2:elastic-ip",
+                  "ec2:instance",
+                  "ec2:vpc",
+                  "ec2:security-group",
+                  "ecr:repository",
+                  "ecs:service",
+                  "eks:cluster",
+                  "es:domain",
+                  "elasticmapreduce:cluster",
+                  "elasticache:cluster",
+                  "iam:policy",
+                  "network-firewall:firewall",
+                  "rds:secgrp",
+                  "s3:bucket",
+                  "sns:topic",
+                  "sqs:queue",
+                ],
+              },
+              "tag_key": {
+                "@@assign": "Domain",
               },
             },
             "Environment": {
@@ -2932,6 +3342,8 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase1Sta
       "Properties": {
         "Name": "/dlz/networking/vpc-peering-role-arn--381491899779-234567890123",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -2989,6 +3401,14 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase1Sta
         ],
         "RoleName": "dlz-ncp1-global-vpc-peering-role-for-project-1-development",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -3065,6 +3485,14 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
         "Runtime": "nodejs22.x",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -3110,6 +3538,14 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
           },
         ],
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -3250,6 +3686,8 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/peer/project-1-production.us-east-1.default/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -3281,6 +3719,14 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
           ],
         },
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -3406,6 +3852,14 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
         "Runtime": "nodejs22.x",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -3451,6 +3905,14 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
           },
         ],
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -3704,6 +4166,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "Runtime": "nodejs22.x",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -3749,6 +4219,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
         ],
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -3939,6 +4417,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "RoleName": "TestRole",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -3957,6 +4443,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     "IamUserjanedoeCDF9D3E3": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -3985,6 +4479,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
         ],
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4089,6 +4591,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         },
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4149,6 +4659,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "RoleName": "dlz-global-bastion-default-role",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4171,6 +4689,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "SecurityGroupEgress": [],
         "SecurityGroupIngress": [],
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4215,6 +4741,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/bastion/default/security-group/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4233,6 +4761,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/sns/default-notification/arn",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4248,6 +4778,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "DisplayName": "dlz-global-default-notification-topic",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4283,8 +4821,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "tag2Key": "Project",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "Cost Center",
-          "tag4Value": "test",
+          "tag4Key": "CostCenter",
+          "tag4Value": "dlz,test",
+          "tag5Key": "Domain",
         },
         "Source": {
           "Owner": "AWS",
@@ -4331,6 +4870,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "RoleName": "dlz-global-dlz-ssm-cross-account-assume-role",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4350,6 +4897,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "CidrBlock": "10.1.0.0/16",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4385,6 +4940,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4408,6 +4971,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4426,6 +4991,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4444,6 +5011,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private.private-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4462,6 +5031,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private.private-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4480,6 +5051,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.private.private-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4498,6 +5071,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4516,6 +5091,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public.public-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4534,6 +5111,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public.public-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4552,6 +5131,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.eu-west-1.default.public.public-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -4569,6 +5150,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     "vpcprivate": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4597,6 +5186,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.1.0.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4637,6 +5234,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "CidrBlock": "10.1.32.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4675,6 +5280,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "AvailabilityZone": "us-east-1c",
         "CidrBlock": "10.1.64.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4742,6 +5355,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         "SourceDestCheck": false,
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4776,6 +5397,14 @@ sudo service iptables save",
       "Properties": {
         "Domain": "vpc",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4861,6 +5490,14 @@ sudo service iptables save",
         ],
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4885,6 +5522,14 @@ sudo service iptables save",
     "vpcpublic": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4913,6 +5558,14 @@ sudo service iptables save",
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.1.96.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -4953,6 +5606,14 @@ sudo service iptables save",
         "CidrBlock": "10.1.128.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -4991,6 +5652,14 @@ sudo service iptables save",
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.1.160.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5088,6 +5757,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/sns/default-notification/arn",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5103,6 +5774,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "DisplayName": "dlz-global-default-notification-topic",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5128,8 +5807,9 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "tag2Key": "Project",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "Cost Center",
-          "tag4Value": "test",
+          "tag4Key": "CostCenter",
+          "tag4Value": "dlz,test",
+          "tag5Key": "Domain",
         },
         "Source": {
           "Owner": "AWS",
@@ -5176,6 +5856,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "RoleName": "dlz-global-dlz-ssm-cross-account-assume-role",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -5195,6 +5883,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "CidrBlock": "10.3.0.0/16",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5230,6 +5926,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -5253,6 +5957,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5271,6 +5977,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5289,6 +5997,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private.private-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5307,6 +6017,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private.private-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5325,6 +6037,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.private.private-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5343,6 +6057,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5361,6 +6077,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public.public-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5379,6 +6097,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public.public-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5397,6 +6117,8 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.eu-west-1.default.public.public-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -5414,6 +6136,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     "vpcprivate": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5442,6 +6172,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.3.0.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5482,6 +6220,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "CidrBlock": "10.3.32.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -5520,6 +6266,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "AvailabilityZone": "us-east-1c",
         "CidrBlock": "10.3.64.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5575,6 +6329,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         },
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -5598,6 +6360,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Domain": "vpc",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5656,6 +6426,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -5683,6 +6461,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.3.96.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5723,6 +6509,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "CidrBlock": "10.3.128.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -5761,6 +6555,14 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.3.160.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -5972,6 +6774,14 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
         "Runtime": "nodejs22.x",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -6017,6 +6827,14 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
           },
         ],
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6216,8 +7034,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "tag2Key": "Project",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "Cost Center",
-          "tag4Value": "test",
+          "tag4Key": "CostCenter",
+          "tag4Value": "dlz,test",
+          "tag5Key": "Domain",
         },
         "Source": {
           "Owner": "AWS",
@@ -6230,6 +7049,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/iam/permission-boundary-policy/arn",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6243,6 +7064,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "CidrBlock": "10.0.0.0/16",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6267,6 +7096,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6285,6 +7116,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6303,6 +7136,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private.private-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6321,6 +7156,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private.private-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6339,6 +7176,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.private.private-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6357,6 +7196,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6375,6 +7216,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public.public-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6393,6 +7236,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public.public-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6411,6 +7256,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-development.us-east-1.default.public.public-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6428,6 +7275,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
     "vpcprivate": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6456,6 +7311,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.0.0.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6496,6 +7359,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "CidrBlock": "10.0.32.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -6535,6 +7406,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "CidrBlock": "10.0.64.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -6572,6 +7451,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -6599,6 +7486,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.0.96.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6639,6 +7534,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "CidrBlock": "10.0.128.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -6677,6 +7580,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.0.160.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6760,8 +7671,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "tag2Key": "Project",
           "tag3Key": "Environment",
           "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "Cost Center",
-          "tag4Value": "test",
+          "tag4Key": "CostCenter",
+          "tag4Value": "dlz,test",
+          "tag5Key": "Domain",
         },
         "Source": {
           "Owner": "AWS",
@@ -6774,6 +7686,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/iam/permission-boundary-policy/arn",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6787,6 +7701,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "CidrBlock": "10.2.0.0/16",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -6811,6 +7733,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6829,6 +7753,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6847,6 +7773,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private.private-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6865,6 +7793,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private.private-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6883,6 +7813,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.private.private-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6901,6 +7833,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6919,6 +7853,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public.public-1/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6937,6 +7873,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public.public-2/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6955,6 +7893,8 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Name": "/dlz/networking-entity/vpc/project-1-production.us-east-1.default.public.public-3/id",
         "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
           "Environment": "dlz",
           "Owner": "infra",
           "Project": "dlz",
@@ -6972,6 +7912,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
     "vpcprivate": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -7000,6 +7948,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.2.0.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -7040,6 +7996,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "CidrBlock": "10.2.32.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -7079,6 +8043,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "CidrBlock": "10.2.64.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -7116,6 +8088,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
       "Properties": {
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -7143,6 +8123,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.2.96.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",
@@ -7183,6 +8171,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "CidrBlock": "10.2.128.0/19",
         "Tags": [
           {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
             "Key": "Environment",
             "Value": "dlz",
           },
@@ -7221,6 +8217,14 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
         "AvailabilityZone": "us-east-1a",
         "CidrBlock": "10.2.160.0/19",
         "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
           {
             "Key": "Environment",
             "Value": "dlz",

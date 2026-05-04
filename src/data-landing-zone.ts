@@ -241,6 +241,8 @@ export class DataLandingZone {
     Tags.of(app).add('Owner', 'infra', { excludeResourceTypes: excludeResourceTypes });
     Tags.of(app).add('Project', 'dlz', { excludeResourceTypes: excludeResourceTypes });
     Tags.of(app).add('Environment', 'dlz', { excludeResourceTypes: excludeResourceTypes });
+    Tags.of(app).add('CostCenter', 'dlz', { excludeResourceTypes: excludeResourceTypes });
+    Tags.of(app).add('Domain', 'foundation', { excludeResourceTypes: excludeResourceTypes });
 
     if (this.props.printReport !== false) {
       Report.printConsoleReport();

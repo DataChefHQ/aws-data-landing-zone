@@ -58,13 +58,10 @@ const configBase: DataLandingZoneProps = {
     owner: [],
     project: undefined,
     environment: ['development', 'staging', 'production'],
+    costCenter: ['test'],
+    domain: undefined,
   },
-  additionalMandatoryTags: [
-    {
-      name: 'Cost Center',
-      values: ['test'],
-    },
-  ],
+  additionalMandatoryTags: [],
   budgets: [
     // ...Defaults.budgets(100, 20, subscribers),
     { name: 'budget-high', amount: 1_000, subscribers },

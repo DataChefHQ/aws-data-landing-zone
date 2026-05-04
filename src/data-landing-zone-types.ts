@@ -499,6 +499,30 @@ export interface DLzAccount {
    * @default - no additional statements
    */
   readonly scpStatements?: PolicyStatement[];
+
+  /**
+   * Cost center identifier for this account. Populates the `CostCenter` tag for resources
+   * tagged via `Tags.of()` and feeds `DlzAccountBudgets` cost-center roll-ups.
+   *
+   * Part of FinOps Layer 2 (Attribution).
+   */
+  readonly costCenter?: string;
+
+  /**
+   * Data domain for this account. Populates the `Domain` tag.
+   *
+   * Foundation does not enforce values; the data platform overlay may constrain to data-lake domains.
+   * Part of FinOps Layer 2 (Attribution).
+   */
+  readonly domain?: 'raw' | 'curated' | 'serving' | 'inference';
+
+  /**
+   * Monthly budget cap in USD for this account. Consumed by `DlzAccountBudgets` to create
+   * a per-account `DlzBudget` filtered to this account's `LinkedAccount`.
+   *
+   * Part of FinOps Layer 3 (Guardrails).
+   */
+  readonly monthlyBudget?: number;
 }
 
 export interface DLzAccountSuspended {
@@ -575,6 +599,24 @@ export interface MandatoryTags {
    * still enforces the tag presence but does not enforce the value.
    */
   readonly environment: string[] | undefined;
+
+  /**
+   * The values of the mandatory `CostCenter` tag that all resources must have. Specifying an empty array or undefined
+   * still enforces the tag presence but does not enforce the value.
+   *
+   * Used by FinOps tooling for chargeback / showback. Part of FinOps Layer 2 (Attribution).
+   */
+  readonly costCenter: string[] | undefined;
+
+  /**
+   * The values of the mandatory `Domain` tag that all resources must have. Specifying an empty array or undefined
+   * still enforces the tag presence but does not enforce the value.
+   *
+   * Foundation enforces presence only. The data platform overlay may later constrain values to
+   * `['raw', 'curated', 'serving', 'inference']` via a value-restricted tag policy.
+   * Part of FinOps Layer 2 (Attribution).
+   */
+  readonly domain: string[] | undefined;
 }
 
 export interface SecurityHubNotificationProps {
@@ -776,6 +818,8 @@ export interface DataLandingZoneProps {
    * - Owner, the team responsible for the resource
    * - Project, the project the resource is part of
    * - Environment, the environment the resource is part of
+   * - CostCenter, the finance cost center for chargeback (FinOps Layer 2)
+   * - Domain, the data domain — foundation enforces presence; platform overlay may constrain values
    *
    * It creates:
    * 1. A tag policy in the organization
@@ -786,6 +830,8 @@ export interface DataLandingZoneProps {
    * - Owner: infra
    * - Project: dlz
    * - Environment: dlz
+   * - CostCenter: dlz
+   * - Domain: foundation
    *
    * @default Defaults.mandatoryTags()
    */
@@ -797,6 +843,8 @@ export interface DataLandingZoneProps {
    * - Owner: [infra]
    * - Project: [dlz]
    * - Environment: [dlz]
+   * - CostCenter: [dlz]
+   * - Domain: [foundation]
    */
   readonly mandatoryTags: MandatoryTags;
 

@@ -139,6 +139,18 @@ export class Defaults {
         'dlz',
         ...props.mandatoryTags.environment,
       ] : undefined,
+    }, {
+      name: 'CostCenter',
+      values: props.mandatoryTags.costCenter && props.mandatoryTags.costCenter.length > 0 ? [
+        'dlz',
+        ...props.mandatoryTags.costCenter,
+      ] : undefined,
+    }, {
+      name: 'Domain',
+      values: props.mandatoryTags.domain && props.mandatoryTags.domain.length > 0 ? [
+        'foundation',
+        ...props.mandatoryTags.domain,
+      ] : undefined,
     }];
   }
 
