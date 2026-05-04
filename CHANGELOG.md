@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.4] - 2026-05-01
+
+### Chores
+
+- **deps:** Upgrade dependencies
+
+- Self mutation
+
+
+## [0.3.3] - 2026-04-17
+
+### Bug Fixes
+
+- **dlz-macie:** Resolved exceptions in account enrollment logic
+
+
+## [0.3.2] - 2026-04-17
+
+### Bug Fixes
+
+- **dlz-macie:** Handled ValidationException in disenrollment process
+
+### Documentation
+
+- Documented changes in CHANGELOG.md to reflect recent updates
+
+
 ## [0.3.1] - 2026-04-16
 
 ### Chores

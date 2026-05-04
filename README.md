@@ -61,10 +61,28 @@ const dlz = new DataLandingZone(app, {
       emails: ['you@org.com'],
     }),
   ],
-  denyServiceList: [
-    ...Defaults.denyServiceList(),
-    'ecs:*',
-  ],
+  denyServiceList: ['ecs:*'],
+  // For full control over the deny-services baseline, use scpBaselineStatements
+  // instead. Cannot be combined with denyServiceList. Mandatory-tags SCP is
+  // always appended after these statements.
+  // scpBaselineStatements: [
+  //   ScpDenyRootUserActions.statement(),
+  //   ScpDenyLeavingOrganization.statement(),
+  // ],
+  // SCP statements applied to every workload account of a given type, layered on
+  // top of the org-wide baseline (deny-services + mandatory-tags SCP).
+  // Merge order: baseline -> account-type -> per-account. Additive only.
+  scpStatementsByAccountType: {
+    development: [
+      ScpDenyReservedCapacityPurchases.statement(),
+      ScpDenySavingsPlanPurchases.statement(),
+    ],
+    production: [
+      ScpDenyDisablingSecurityServices.statement(),
+      ScpDenyRootUserActions.statement(),
+      ScpDenyLeavingOrganization.statement(),
+    ],
+  },
   guardDuty: {
     autoEnableOrgMembers: 'NEW', // Can be ALL, NEW or NONE, Default is NONE
   },
@@ -91,6 +109,15 @@ const dlz = new DataLandingZone(app, {
               eksAuditLogs: true,
               rdsLoginEvents: true,
             },
+            // Per-account SCP statements layered on top of the org-wide baseline.
+            // Additive only: cannot weaken the deny-services baseline or the mandatory-tags SCP.
+            // Use the importable presets in `scp-presets/` for common controls,
+            // or write your own iam.PolicyStatement instances.
+            scpStatements: [
+              ScpDenyDisablingSecurityServices.statement(),
+              ScpDenyRootUserActions.statement(),
+              ScpDenyActionsOutsideRegions.statement(['eu-west-1', 'us-east-1']),
+            ],
             ...
           },
 
@@ -165,10 +192,28 @@ dlz.DataLandingZone(app,
             emails=["you@org.com"],
         ),
     ],
-    deny_service_list=[
-        *dlz.Defaults.deny_service_list(),
-        "ecs:*"
-    ],
+    deny_service_list=["ecs:*"],
+    # For full control over the deny-services baseline, use scp_baseline_statements
+    # instead. Cannot be combined with deny_service_list. Mandatory-tags SCP is
+    # always appended after these statements.
+    # scp_baseline_statements=[
+    #     dlz.ScpDenyRootUserActions.statement(),
+    #     dlz.ScpDenyLeavingOrganization.statement(),
+    # ],
+    # SCP statements applied to every workload account of a given type, layered on
+    # top of the org-wide baseline (deny-services + mandatory-tags SCP).
+    # Merge order: baseline -> account-type -> per-account. Additive only.
+    scp_statements_by_account_type=dlz.ScpStatementsByAccountType(
+        development=[
+            dlz.ScpDenyReservedCapacityPurchases.statement(),
+            dlz.ScpDenySavingsPlanPurchases.statement(),
+        ],
+        production=[
+            dlz.ScpDenyDisablingSecurityServices.statement(),
+            dlz.ScpDenyRootUserActions.statement(),
+            dlz.ScpDenyLeavingOrganization.statement(),
+        ],
+    ),
     organization=dlz.DLzOrganization(
         organization_id='o-0f5h921gk9',
         root=dlz.RootOptions(
@@ -201,7 +246,16 @@ dlz.DataLandingZone(app,
                             rds_login_events=False,
                             lambda_network_logs=False,
                             runtime_monitoring=False,
-                        )
+                        ),
+                        # Per-account SCP statements layered on top of the org-wide baseline.
+                        # Additive only: cannot weaken the deny-services baseline or the mandatory-tags SCP.
+                        # Use the importable presets in `scp-presets/` for common controls,
+                        # or write your own iam.PolicyStatement instances.
+                        scp_statements=[
+                            dlz.ScpDenyDisablingSecurityServices.statement(),
+                            dlz.ScpDenyRootUserActions.statement(),
+                            dlz.ScpDenyActionsOutsideRegions.statement(['eu-west-1', 'us-east-1']),
+                        ],
                     ),
                 ],
             ),
@@ -300,6 +354,75 @@ The DLZ adheres to the following principles:
     - General settings, like admins, version and setting hybrid iam mode
     - Create **Tags** and specify their permissions for use within the same account and when sharing to other accounts.
     - Optionally, set **Tag Permissions** on Tags. This is usually out of scope for DLZ, but can be configured.
+
+## Service Control Policy presets
+
+DLZ ships a library of importable SCP presets under `src/constructs/organization-policies/scp-presets/` that you can attach to any account via `DLzAccount.scpStatements`, or to every account of a given type via `DataLandingZoneProps.scpStatementsByAccountType`. Each preset is one file, one class, one `static statement()` method.
+
+Statements are merged additively in the order: org-wide baseline → per-account-type → per-account. Deeper tiers can add deny rules but cannot weaken broader tiers.
+
+TypeScript:
+
+```ts
+scpStatementsByAccountType: {
+  production: [
+    ScpDenyDisablingSecurityServices.statement(),
+    ScpDenyRootUserActions.statement(),
+  ],
+  development: [
+    ScpDenyReservedCapacityPurchases.statement(),
+  ],
+}
+```
+
+Python:
+
+```python
+scp_statements_by_account_type=dlz.ScpStatementsByAccountType(
+    production=[
+        dlz.ScpDenyDisablingSecurityServices.statement(),
+        dlz.ScpDenyRootUserActions.statement(),
+    ],
+    development=[
+        dlz.ScpDenyReservedCapacityPurchases.statement(),
+    ],
+)
+```
+
+**Risk legend:**
+- 🟢 Low risk — typically safe to attach as-is.
+- 🟡 Medium risk — has a common gotcha; read the `@remarks` before attaching.
+- 🔴 High risk — easy to break legitimate workloads; attach only after deliberate review and a break-glass plan.
+
+**Foundation presets** (used internally by DLZ to build the org-wide baseline; importable for custom stacks):
+
+| Preset | What it denies | Risk |
+|---|---|---|
+| `ScpDenyServiceActions(serviceActions)` | A caller-supplied list of service actions across all resources. Backs `DataLandingZoneProps.denyServiceList` (and the default deny-services portion of `scpBaselineStatements`). | 🟢 |
+| `ScpDenyCfnStacksWithoutStandardTags(tags)` | `cloudformation:CreateStack` unless every required tag is present. Backs the mandatory-tags SCP. | 🟡 |
+| `ScpDenyIamWithoutPermissionsBoundary` | Creating/modifying IAM users or roles unless the `IamPolicyPermissionBoundaryPolicy` boundary is attached (4 statements). Pairs with `iamPolicyPermissionBoundary` prop. | 🟡 |
+
+**Opt-in CCoE presets** (attach to `DLzAccount.scpStatements` as needed):
+
+| Preset | What it denies | Risk |
+|---|---|---|
+| `ScpDenyLeavingOrganization` | `organizations:LeaveOrganization` from the member account. | 🟢 |
+| `ScpDenyRootCredentialsManagementInMemberAccounts` | Direct member-account root use, while permitting AWS-Organizations centralized root sessions (`aws:AssumedRoot`). | 🟢 |
+| `ScpDenyBedrockProvisionedThroughput` | Creation/modification of Bedrock provisioned model throughput (committed capacity). On-demand inference still works. | 🟢 |
+| `ScpDenyDedicatedInfraAndSubscriptions` | Outposts, Snowball clusters, Shield Advanced subscriptions, and ACM Private CA. | 🟢 |
+| `ScpDenyRootUserActions` | All actions performed by the account root user. | 🟡 |
+| `ScpDenySavingsPlanPurchases` | Creation of Savings Plans (1- or 3-year compute spend commitments). | 🟡 |
+| `ScpDenyReservedCapacityPurchases` | Reserved Instance and reserved-capacity purchases across EC2/RDS/DynamoDB/ElastiCache/Redshift/OpenSearch. | 🟡 |
+| `ScpDenyMarketplaceSubscriptions` | AWS Marketplace product subscriptions and agreement-approval acceptance. | 🟡 |
+| `ScpDenyDomainRegistrations` | Route 53 domain registrations, **renewals**, and transfers. | 🟡 |
+| `ScpDenyS3PublicAccessBypass` | Disabling or removing S3 Block Public Access at the account or bucket level. | 🟡 |
+| `ScpDenyDisablingSecurityServices` | Disabling/deleting CloudTrail, AWS Config, GuardDuty, Security Hub, or Macie. Only `AWSControlTowerExecution` is exempted. | 🟡 |
+| `ScpDenyS3ObjectLockAndRetention` | S3 (and S3 Object Lambda) object retention, legal-hold, governance bypass, and bucket Object Lock configuration. **Also blocks legitimate WORM/compliance use.** | 🔴 |
+| `ScpDenyGlacierVaultLock` | Initiating or completing a Glacier Vault Lock policy. **Also blocks compliance immutability.** | 🔴 |
+| `ScpDenyBackupVaultLock` | Enabling AWS Backup Vault Lock. **Also blocks ransomware-resistant backups.** | 🔴 |
+| `ScpDenyActionsOutsideRegions(allowedRegions)` | All regional API calls outside an explicit allow-list, exempting AWS global services. **Highest blast radius — a wrong region list denies every regional API call.** | 🔴 |
+
+> **Note on the AWS 5120-byte SCP body limit:** combining all 15 presets at once exceeds the quota by a few hundred bytes. Pick a subset; `ScpDenyActionsOutsideRegions` alone is ~1500 bytes. The merge step (`ScpMerge.validate`) catches over-budget combinations at synth time.
 
 ## How it works
 

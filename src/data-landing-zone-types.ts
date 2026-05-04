@@ -206,6 +206,14 @@ export enum DlzAccountType {
   PRODUCTION = 'production',
 }
 
+/** Additional SCP statements per `DlzAccountType`, layered between the org baseline and per-account extras. Additive only. */
+export interface ScpStatementsByAccountType {
+  /** @default - no statements */
+  readonly development?: PolicyStatement[];
+  /** @default - no statements */
+  readonly production?: PolicyStatement[];
+}
+
 export interface DLzManagementAccount {
   readonly accountId: string;
 }
@@ -485,6 +493,12 @@ export interface DLzAccount {
    * Only takes effect when `macie.enabled` is `true` at the organization level.
    */
   readonly macieEnabled?: boolean;
+
+  /**
+   * Additional per-account SCP statements layered on top of the org baseline and account-type tier. Additive only.
+   * @default - no additional statements
+   */
+  readonly scpStatements?: PolicyStatement[];
 }
 
 export interface DLzAccountSuspended {
@@ -729,11 +743,31 @@ export interface DataLandingZoneProps {
   readonly iamIdentityCenter?: IamIdentityCenterProps;
 
   /**
-   * List of services to deny in the organization SCP. If not specified, the default defined by
+   * List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services.
    *
-   * @default DataLandingZone.defaultDenyServiceList()
+   * Cannot be used together with `scpBaselineStatements`.
+   *
+   * @deprecated Use `scpBaselineStatements` for full control over the deny-services baseline. This field
+   * remains supported for the simple "deny these service actions" case.
+   * @default Defaults.denyServiceList() (empty list)
    */
   readonly denyServiceList?: string[];
+
+  /**
+   * Replaces the deny-services portion of the org SCP baseline applied to every workload account.
+   * The mandatory-tags SCP is always appended after these statements and cannot be opted out of.
+   *
+   * Cannot be used together with `denyServiceList`.
+   *
+   * @default - default baseline derived from `denyServiceList`
+   */
+  readonly scpBaselineStatements?: PolicyStatement[];
+
+  /**
+   * Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras. Additive only.
+   * @default - no per-account-type statements
+   */
+  readonly scpStatementsByAccountType?: ScpStatementsByAccountType;
 
   /**
    * List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort.

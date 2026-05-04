@@ -7764,7 +7764,7 @@ new ManagementGlobalStack(scope: Construct, stackProps: ManagementGlobalStackPro
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
-| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Service Control Policies and Tag Policies applied at the account level to enable customization per account. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Per-account SCPs and tag policies. |
 
 ---
 
@@ -8259,7 +8259,9 @@ Service Control Policies and Tag Policies  applied at the OU level because we wo
 public workloadAccountsOrgPolicies(): void
 ```
 
-Service Control Policies and Tag Policies applied at the account level to enable customization per account.
+Per-account SCPs and tag policies.
+
+Tiers: baseline -> account-type -> per-account (additive).
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -18454,7 +18456,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#aws-data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.guardDuty">guardDuty</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyProps">DlzGuardDutyProps</a></code> | GuardDuty configuration for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
@@ -18464,6 +18466,8 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.printDeploymentOrder">printDeploymentOrder</a></code> | <code>boolean</code> | Print the deployment order to the console. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.printReport">printReport</a></code> | <code>boolean</code> | Print the report grouped by account, type and aggregated regions to the console. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.scpBaselineStatements">scpBaselineStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Replaces the deny-services portion of the org SCP baseline applied to every workload account. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.scpStatementsByAccountType">scpStatementsByAccountType</a></code> | <code><a href="#aws-data-landing-zone.ScpStatementsByAccountType">ScpStatementsByAccountType</a></code> | Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras. |
 
 ---
 
@@ -18586,18 +18590,21 @@ acts as the fallback.
 
 ---
 
-##### `denyServiceList`<sup>Optional</sup> <a name="denyServiceList" id="aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList"></a>
+##### ~~`denyServiceList`~~<sup>Optional</sup> <a name="denyServiceList" id="aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList"></a>
+
+- *Deprecated:* Use `scpBaselineStatements` for full control over the deny-services baseline. This field
+remains supported for the simple "deny these service actions" case.
 
 ```typescript
 public readonly denyServiceList: string[];
 ```
 
 - *Type:* string[]
-- *Default:* DataLandingZone.defaultDenyServiceList()
+- *Default:* Defaults.denyServiceList() (empty list)
 
-List of services to deny in the organization SCP.
+List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services.
 
-If not specified, the default defined by
+Cannot be used together with `scpBaselineStatements`.
 
 ---
 
@@ -18715,6 +18722,38 @@ Save the raw report items and the reports grouped by account to a `./.dlz-report
 
 ---
 
+##### `scpBaselineStatements`<sup>Optional</sup> <a name="scpBaselineStatements" id="aws-data-landing-zone.DataLandingZoneProps.property.scpBaselineStatements"></a>
+
+```typescript
+public readonly scpBaselineStatements: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Default:* default baseline derived from `denyServiceList`
+
+Replaces the deny-services portion of the org SCP baseline applied to every workload account.
+
+The mandatory-tags SCP is always appended after these statements and cannot be opted out of.
+
+Cannot be used together with `denyServiceList`.
+
+---
+
+##### `scpStatementsByAccountType`<sup>Optional</sup> <a name="scpStatementsByAccountType" id="aws-data-landing-zone.DataLandingZoneProps.property.scpStatementsByAccountType"></a>
+
+```typescript
+public readonly scpStatementsByAccountType: ScpStatementsByAccountType;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.ScpStatementsByAccountType">ScpStatementsByAccountType</a>
+- *Default:* no per-account-type statements
+
+Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras.
+
+Additive only.
+
+---
+
 ### DeploymentPlatform <a name="DeploymentPlatform" id="aws-data-landing-zone.DeploymentPlatform"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DeploymentPlatform.Initializer"></a>
@@ -18795,6 +18834,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.iam">iam</a></code> | <code><a href="#aws-data-landing-zone.DLzIamProps">DLzIamProps</a></code> | IAM configuration for the account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.lakeFormation">lakeFormation</a></code> | <code><a href="#aws-data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>[]</code> | LakeFormation settings and tags. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.macieEnabled">macieEnabled</a></code> | <code>boolean</code> | Explicitly enroll this existing account in Macie via CreateMember. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.scpStatements">scpStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Additional per-account SCP statements layered on top of the org baseline and account-type tier. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#aws-data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
@@ -18936,6 +18976,21 @@ The `DlzMacieProps.autoEnable` setting separately controls whether
 **new** accounts joining the organization are auto-enabled by AWS.
 
 Only takes effect when `macie.enabled` is `true` at the organization level.
+
+---
+
+##### `scpStatements`<sup>Optional</sup> <a name="scpStatements" id="aws-data-landing-zone.DLzAccount.property.scpStatements"></a>
+
+```typescript
+public readonly scpStatements: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Default:* no additional statements
+
+Additional per-account SCP statements layered on top of the org baseline and account-type tier.
+
+Additive only.
 
 ---
 
@@ -23495,6 +23550,57 @@ public readonly externalLink: string;
 
 ---
 
+### ResolveScpInput <a name="ResolveScpInput" id="aws-data-landing-zone.ResolveScpInput"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.ResolveScpInput.Initializer"></a>
+
+```typescript
+import { ResolveScpInput } from 'aws-data-landing-zone'
+
+const resolveScpInput: ResolveScpInput = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ResolveScpInput.property.accountExtras">accountExtras</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ResolveScpInput.property.baseline">baseline</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ResolveScpInput.property.accountTypeExtras">accountTypeExtras</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+
+---
+
+##### `accountExtras`<sup>Required</sup> <a name="accountExtras" id="aws-data-landing-zone.ResolveScpInput.property.accountExtras"></a>
+
+```typescript
+public readonly accountExtras: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+
+---
+
+##### `baseline`<sup>Required</sup> <a name="baseline" id="aws-data-landing-zone.ResolveScpInput.property.baseline"></a>
+
+```typescript
+public readonly baseline: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+
+---
+
+##### `accountTypeExtras`<sup>Optional</sup> <a name="accountTypeExtras" id="aws-data-landing-zone.ResolveScpInput.property.accountTypeExtras"></a>
+
+```typescript
+public readonly accountTypeExtras: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Default:* no per-account-type statements
+
+---
+
 ### RootOptions <a name="RootOptions" id="aws-data-landing-zone.RootOptions"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.RootOptions.Initializer"></a>
@@ -23533,6 +23639,51 @@ public readonly controls: DlzControlTowerStandardControls[];
 - *Type:* <a href="#aws-data-landing-zone.DlzControlTowerStandardControls">DlzControlTowerStandardControls</a>[]
 
 Control Tower Controls applied to all the OUs in the organization.
+
+---
+
+### ScpStatementsByAccountType <a name="ScpStatementsByAccountType" id="aws-data-landing-zone.ScpStatementsByAccountType"></a>
+
+Additional SCP statements per `DlzAccountType`, layered between the org baseline and per-account extras.
+
+Additive only.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.ScpStatementsByAccountType.Initializer"></a>
+
+```typescript
+import { ScpStatementsByAccountType } from 'aws-data-landing-zone'
+
+const scpStatementsByAccountType: ScpStatementsByAccountType = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpStatementsByAccountType.property.development">development</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ScpStatementsByAccountType.property.production">production</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | *No description.* |
+
+---
+
+##### `development`<sup>Optional</sup> <a name="development" id="aws-data-landing-zone.ScpStatementsByAccountType.property.development"></a>
+
+```typescript
+public readonly development: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Default:* no statements
+
+---
+
+##### `production`<sup>Optional</sup> <a name="production" id="aws-data-landing-zone.ScpStatementsByAccountType.property.production"></a>
+
+```typescript
+public readonly production: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+- *Default:* no statements
 
 ---
 
@@ -24073,6 +24224,40 @@ public readonly slackChatBots: {[ key: string ]: SlackChannelConfiguration};
 ---
 
 
+### ControlTowerExemption <a name="ControlTowerExemption" id="aws-data-landing-zone.ControlTowerExemption"></a>
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ControlTowerExemption.Initializer"></a>
+
+```typescript
+import { ControlTowerExemption } from 'aws-data-landing-zone'
+
+new ControlTowerExemption()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ControlTowerExemption.arnNotLike">arnNotLike</a></code> | *No description.* |
+
+---
+
+##### `arnNotLike` <a name="arnNotLike" id="aws-data-landing-zone.ControlTowerExemption.arnNotLike"></a>
+
+```typescript
+import { ControlTowerExemption } from 'aws-data-landing-zone'
+
+ControlTowerExemption.arnNotLike()
+```
+
+
+
 ### DataLandingZone <a name="DataLandingZone" id="aws-data-landing-zone.DataLandingZone"></a>
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.DataLandingZone.Initializer"></a>
@@ -24572,6 +24757,8 @@ Defaults.denyServiceList()
 
 * List of services that are denied in the organization.
 
+Empty by default — opt in to deny services.
+
 ##### `guardDutyFeatures` <a name="guardDutyFeatures" id="aws-data-landing-zone.Defaults.guardDutyFeatures"></a>
 
 ```typescript
@@ -24999,51 +25186,6 @@ new DlzServiceControlPolicy(scope: Construct, id: string, props: DlzServiceContr
 ---
 
 
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags">denyCfnStacksWithoutStandardTags</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzServiceControlPolicy.denyIamPolicyActionStatements">denyIamPolicyActionStatements</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements">denyServiceActionStatements</a></code> | *No description.* |
-
----
-
-##### `denyCfnStacksWithoutStandardTags` <a name="denyCfnStacksWithoutStandardTags" id="aws-data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags"></a>
-
-```typescript
-import { DlzServiceControlPolicy } from 'aws-data-landing-zone'
-
-DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags(tags: DlzTag[])
-```
-
-###### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.DlzServiceControlPolicy.denyCfnStacksWithoutStandardTags.parameter.tags"></a>
-
-- *Type:* <a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]
-
----
-
-##### `denyIamPolicyActionStatements` <a name="denyIamPolicyActionStatements" id="aws-data-landing-zone.DlzServiceControlPolicy.denyIamPolicyActionStatements"></a>
-
-```typescript
-import { DlzServiceControlPolicy } from 'aws-data-landing-zone'
-
-DlzServiceControlPolicy.denyIamPolicyActionStatements()
-```
-
-##### `denyServiceActionStatements` <a name="denyServiceActionStatements" id="aws-data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements"></a>
-
-```typescript
-import { DlzServiceControlPolicy } from 'aws-data-landing-zone'
-
-DlzServiceControlPolicy.denyServiceActionStatements(serviceActions: string[])
-```
-
-###### `serviceActions`<sup>Required</sup> <a name="serviceActions" id="aws-data-landing-zone.DlzServiceControlPolicy.denyServiceActionStatements.parameter.serviceActions"></a>
-
-- *Type:* string[]
-
----
 
 #### Properties <a name="Properties" id="Properties"></a>
 
@@ -25780,6 +25922,794 @@ public readonly reports: ReportItem[];
 - *Type:* <a href="#aws-data-landing-zone.ReportItem">ReportItem</a>[]
 
 ---
+
+
+### ScpDenyActionsOutsideRegions <a name="ScpDenyActionsOutsideRegions" id="aws-data-landing-zone.ScpDenyActionsOutsideRegions"></a>
+
+Denies regional API calls outside `allowedRegions`, with global-services exempted.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyActionsOutsideRegions.Initializer"></a>
+
+```typescript
+import { ScpDenyActionsOutsideRegions } from 'aws-data-landing-zone'
+
+new ScpDenyActionsOutsideRegions()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyActionsOutsideRegions.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyActionsOutsideRegions.statement"></a>
+
+```typescript
+import { ScpDenyActionsOutsideRegions } from 'aws-data-landing-zone'
+
+ScpDenyActionsOutsideRegions.statement(allowedRegions: string[])
+```
+
+###### `allowedRegions`<sup>Required</sup> <a name="allowedRegions" id="aws-data-landing-zone.ScpDenyActionsOutsideRegions.statement.parameter.allowedRegions"></a>
+
+- *Type:* string[]
+
+---
+
+
+
+### ScpDenyBackupVaultLock <a name="ScpDenyBackupVaultLock" id="aws-data-landing-zone.ScpDenyBackupVaultLock"></a>
+
+Denies enabling AWS Backup Vault Lock.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyBackupVaultLock.Initializer"></a>
+
+```typescript
+import { ScpDenyBackupVaultLock } from 'aws-data-landing-zone'
+
+new ScpDenyBackupVaultLock()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyBackupVaultLock.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyBackupVaultLock.statement"></a>
+
+```typescript
+import { ScpDenyBackupVaultLock } from 'aws-data-landing-zone'
+
+ScpDenyBackupVaultLock.statement()
+```
+
+
+
+### ScpDenyBedrockProvisionedThroughput <a name="ScpDenyBedrockProvisionedThroughput" id="aws-data-landing-zone.ScpDenyBedrockProvisionedThroughput"></a>
+
+Denies Bedrock provisioned model throughput (on-demand inference still works).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyBedrockProvisionedThroughput.Initializer"></a>
+
+```typescript
+import { ScpDenyBedrockProvisionedThroughput } from 'aws-data-landing-zone'
+
+new ScpDenyBedrockProvisionedThroughput()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyBedrockProvisionedThroughput.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyBedrockProvisionedThroughput.statement"></a>
+
+```typescript
+import { ScpDenyBedrockProvisionedThroughput } from 'aws-data-landing-zone'
+
+ScpDenyBedrockProvisionedThroughput.statement()
+```
+
+
+
+### ScpDenyCfnStacksWithoutStandardTags <a name="ScpDenyCfnStacksWithoutStandardTags" id="aws-data-landing-zone.ScpDenyCfnStacksWithoutStandardTags"></a>
+
+Denies CloudFormation stack creation unless required tags are present (and match values, if constrained).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyCfnStacksWithoutStandardTags.Initializer"></a>
+
+```typescript
+import { ScpDenyCfnStacksWithoutStandardTags } from 'aws-data-landing-zone'
+
+new ScpDenyCfnStacksWithoutStandardTags()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyCfnStacksWithoutStandardTags.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyCfnStacksWithoutStandardTags.statement"></a>
+
+```typescript
+import { ScpDenyCfnStacksWithoutStandardTags } from 'aws-data-landing-zone'
+
+ScpDenyCfnStacksWithoutStandardTags.statement(tags: DlzTag[])
+```
+
+###### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.ScpDenyCfnStacksWithoutStandardTags.statement.parameter.tags"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]
+
+---
+
+
+
+### ScpDenyDedicatedInfraAndSubscriptions <a name="ScpDenyDedicatedInfraAndSubscriptions" id="aws-data-landing-zone.ScpDenyDedicatedInfraAndSubscriptions"></a>
+
+Denies Outposts, Snowball, Shield Advanced, and ACM Private CA provisioning.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyDedicatedInfraAndSubscriptions.Initializer"></a>
+
+```typescript
+import { ScpDenyDedicatedInfraAndSubscriptions } from 'aws-data-landing-zone'
+
+new ScpDenyDedicatedInfraAndSubscriptions()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyDedicatedInfraAndSubscriptions.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyDedicatedInfraAndSubscriptions.statement"></a>
+
+```typescript
+import { ScpDenyDedicatedInfraAndSubscriptions } from 'aws-data-landing-zone'
+
+ScpDenyDedicatedInfraAndSubscriptions.statement()
+```
+
+
+
+### ScpDenyDisablingSecurityServices <a name="ScpDenyDisablingSecurityServices" id="aws-data-landing-zone.ScpDenyDisablingSecurityServices"></a>
+
+Denies disabling/deleting CloudTrail, Config, GuardDuty, Security Hub, or Macie.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyDisablingSecurityServices.Initializer"></a>
+
+```typescript
+import { ScpDenyDisablingSecurityServices } from 'aws-data-landing-zone'
+
+new ScpDenyDisablingSecurityServices()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyDisablingSecurityServices.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyDisablingSecurityServices.statement"></a>
+
+```typescript
+import { ScpDenyDisablingSecurityServices } from 'aws-data-landing-zone'
+
+ScpDenyDisablingSecurityServices.statement()
+```
+
+
+
+### ScpDenyDomainRegistrations <a name="ScpDenyDomainRegistrations" id="aws-data-landing-zone.ScpDenyDomainRegistrations"></a>
+
+Denies Route 53 domain registrations, renewals, and transfers.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyDomainRegistrations.Initializer"></a>
+
+```typescript
+import { ScpDenyDomainRegistrations } from 'aws-data-landing-zone'
+
+new ScpDenyDomainRegistrations()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyDomainRegistrations.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyDomainRegistrations.statement"></a>
+
+```typescript
+import { ScpDenyDomainRegistrations } from 'aws-data-landing-zone'
+
+ScpDenyDomainRegistrations.statement()
+```
+
+
+
+### ScpDenyGlacierVaultLock <a name="ScpDenyGlacierVaultLock" id="aws-data-landing-zone.ScpDenyGlacierVaultLock"></a>
+
+Denies S3 Glacier Vault Lock initiation/completion.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyGlacierVaultLock.Initializer"></a>
+
+```typescript
+import { ScpDenyGlacierVaultLock } from 'aws-data-landing-zone'
+
+new ScpDenyGlacierVaultLock()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyGlacierVaultLock.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyGlacierVaultLock.statement"></a>
+
+```typescript
+import { ScpDenyGlacierVaultLock } from 'aws-data-landing-zone'
+
+ScpDenyGlacierVaultLock.statement()
+```
+
+
+
+### ScpDenyIamWithoutPermissionsBoundary <a name="ScpDenyIamWithoutPermissionsBoundary" id="aws-data-landing-zone.ScpDenyIamWithoutPermissionsBoundary"></a>
+
+Enforces the `IamPolicyPermissionBoundaryPolicy` boundary across IAM create/update/delete.
+
+Requires `iamPolicyPermissionBoundary` to be configured.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyIamWithoutPermissionsBoundary.Initializer"></a>
+
+```typescript
+import { ScpDenyIamWithoutPermissionsBoundary } from 'aws-data-landing-zone'
+
+new ScpDenyIamWithoutPermissionsBoundary()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyIamWithoutPermissionsBoundary.statements">statements</a></code> | *No description.* |
+
+---
+
+##### `statements` <a name="statements" id="aws-data-landing-zone.ScpDenyIamWithoutPermissionsBoundary.statements"></a>
+
+```typescript
+import { ScpDenyIamWithoutPermissionsBoundary } from 'aws-data-landing-zone'
+
+ScpDenyIamWithoutPermissionsBoundary.statements()
+```
+
+
+
+### ScpDenyLeavingOrganization <a name="ScpDenyLeavingOrganization" id="aws-data-landing-zone.ScpDenyLeavingOrganization"></a>
+
+Denies a member account from leaving the AWS Organization.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyLeavingOrganization.Initializer"></a>
+
+```typescript
+import { ScpDenyLeavingOrganization } from 'aws-data-landing-zone'
+
+new ScpDenyLeavingOrganization()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyLeavingOrganization.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyLeavingOrganization.statement"></a>
+
+```typescript
+import { ScpDenyLeavingOrganization } from 'aws-data-landing-zone'
+
+ScpDenyLeavingOrganization.statement()
+```
+
+
+
+### ScpDenyMarketplaceSubscriptions <a name="ScpDenyMarketplaceSubscriptions" id="aws-data-landing-zone.ScpDenyMarketplaceSubscriptions"></a>
+
+Denies AWS Marketplace subscriptions and agreement approvals.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyMarketplaceSubscriptions.Initializer"></a>
+
+```typescript
+import { ScpDenyMarketplaceSubscriptions } from 'aws-data-landing-zone'
+
+new ScpDenyMarketplaceSubscriptions()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyMarketplaceSubscriptions.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyMarketplaceSubscriptions.statement"></a>
+
+```typescript
+import { ScpDenyMarketplaceSubscriptions } from 'aws-data-landing-zone'
+
+ScpDenyMarketplaceSubscriptions.statement()
+```
+
+
+
+### ScpDenyReservedCapacityPurchases <a name="ScpDenyReservedCapacityPurchases" id="aws-data-landing-zone.ScpDenyReservedCapacityPurchases"></a>
+
+Denies Reserved Instance / reserved-capacity purchases (EC2, RDS, DynamoDB, ElastiCache, Redshift, OpenSearch).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyReservedCapacityPurchases.Initializer"></a>
+
+```typescript
+import { ScpDenyReservedCapacityPurchases } from 'aws-data-landing-zone'
+
+new ScpDenyReservedCapacityPurchases()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyReservedCapacityPurchases.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyReservedCapacityPurchases.statement"></a>
+
+```typescript
+import { ScpDenyReservedCapacityPurchases } from 'aws-data-landing-zone'
+
+ScpDenyReservedCapacityPurchases.statement()
+```
+
+
+
+### ScpDenyRootCredentialsManagementInMemberAccounts <a name="ScpDenyRootCredentialsManagementInMemberAccounts" id="aws-data-landing-zone.ScpDenyRootCredentialsManagementInMemberAccounts"></a>
+
+Denies member-account root actions while allowing AWS Organizations centralized-root sessions (`aws:AssumedRoot`).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyRootCredentialsManagementInMemberAccounts.Initializer"></a>
+
+```typescript
+import { ScpDenyRootCredentialsManagementInMemberAccounts } from 'aws-data-landing-zone'
+
+new ScpDenyRootCredentialsManagementInMemberAccounts()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyRootCredentialsManagementInMemberAccounts.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyRootCredentialsManagementInMemberAccounts.statement"></a>
+
+```typescript
+import { ScpDenyRootCredentialsManagementInMemberAccounts } from 'aws-data-landing-zone'
+
+ScpDenyRootCredentialsManagementInMemberAccounts.statement()
+```
+
+
+
+### ScpDenyRootUserActions <a name="ScpDenyRootUserActions" id="aws-data-landing-zone.ScpDenyRootUserActions"></a>
+
+Denies all root-user actions.
+
+Plan a break-glass detach procedure before attaching.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyRootUserActions.Initializer"></a>
+
+```typescript
+import { ScpDenyRootUserActions } from 'aws-data-landing-zone'
+
+new ScpDenyRootUserActions()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyRootUserActions.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyRootUserActions.statement"></a>
+
+```typescript
+import { ScpDenyRootUserActions } from 'aws-data-landing-zone'
+
+ScpDenyRootUserActions.statement()
+```
+
+
+
+### ScpDenyS3ObjectLockAndRetention <a name="ScpDenyS3ObjectLockAndRetention" id="aws-data-landing-zone.ScpDenyS3ObjectLockAndRetention"></a>
+
+Denies S3 Object Lock, retention, legal-hold, and governance-bypass actions.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyS3ObjectLockAndRetention.Initializer"></a>
+
+```typescript
+import { ScpDenyS3ObjectLockAndRetention } from 'aws-data-landing-zone'
+
+new ScpDenyS3ObjectLockAndRetention()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyS3ObjectLockAndRetention.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyS3ObjectLockAndRetention.statement"></a>
+
+```typescript
+import { ScpDenyS3ObjectLockAndRetention } from 'aws-data-landing-zone'
+
+ScpDenyS3ObjectLockAndRetention.statement()
+```
+
+
+
+### ScpDenyS3PublicAccessBypass <a name="ScpDenyS3PublicAccessBypass" id="aws-data-landing-zone.ScpDenyS3PublicAccessBypass"></a>
+
+Denies disabling/removing S3 Block Public Access at the account or bucket level.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyS3PublicAccessBypass.Initializer"></a>
+
+```typescript
+import { ScpDenyS3PublicAccessBypass } from 'aws-data-landing-zone'
+
+new ScpDenyS3PublicAccessBypass()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyS3PublicAccessBypass.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyS3PublicAccessBypass.statement"></a>
+
+```typescript
+import { ScpDenyS3PublicAccessBypass } from 'aws-data-landing-zone'
+
+ScpDenyS3PublicAccessBypass.statement()
+```
+
+
+
+### ScpDenySavingsPlanPurchases <a name="ScpDenySavingsPlanPurchases" id="aws-data-landing-zone.ScpDenySavingsPlanPurchases"></a>
+
+Denies Savings Plan creation.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenySavingsPlanPurchases.Initializer"></a>
+
+```typescript
+import { ScpDenySavingsPlanPurchases } from 'aws-data-landing-zone'
+
+new ScpDenySavingsPlanPurchases()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenySavingsPlanPurchases.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenySavingsPlanPurchases.statement"></a>
+
+```typescript
+import { ScpDenySavingsPlanPurchases } from 'aws-data-landing-zone'
+
+ScpDenySavingsPlanPurchases.statement()
+```
+
+
+
+### ScpDenyServiceActions <a name="ScpDenyServiceActions" id="aws-data-landing-zone.ScpDenyServiceActions"></a>
+
+Denies a caller-supplied list of service actions (e.g. `['eks:*', 'ecs:*']`).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyServiceActions.Initializer"></a>
+
+```typescript
+import { ScpDenyServiceActions } from 'aws-data-landing-zone'
+
+new ScpDenyServiceActions()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyServiceActions.statement">statement</a></code> | *No description.* |
+
+---
+
+##### `statement` <a name="statement" id="aws-data-landing-zone.ScpDenyServiceActions.statement"></a>
+
+```typescript
+import { ScpDenyServiceActions } from 'aws-data-landing-zone'
+
+ScpDenyServiceActions.statement(serviceActions: string[])
+```
+
+###### `serviceActions`<sup>Required</sup> <a name="serviceActions" id="aws-data-landing-zone.ScpDenyServiceActions.statement.parameter.serviceActions"></a>
+
+- *Type:* string[]
+
+---
+
+
+
+### ScpLimits <a name="ScpLimits" id="aws-data-landing-zone.ScpLimits"></a>
+
+AWS Organizations service quotas for SCPs.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpLimits.Initializer"></a>
+
+```typescript
+import { ScpLimits } from 'aws-data-landing-zone'
+
+new ScpLimits()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpLimits.property.MAX_BODY_SIZE">MAX_BODY_SIZE</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ScpLimits.property.MAX_PER_TARGET">MAX_PER_TARGET</a></code> | <code>number</code> | *No description.* |
+
+---
+
+##### `MAX_BODY_SIZE`<sup>Required</sup> <a name="MAX_BODY_SIZE" id="aws-data-landing-zone.ScpLimits.property.MAX_BODY_SIZE"></a>
+
+```typescript
+public readonly MAX_BODY_SIZE: number;
+```
+
+- *Type:* number
+
+---
+
+##### `MAX_PER_TARGET`<sup>Required</sup> <a name="MAX_PER_TARGET" id="aws-data-landing-zone.ScpLimits.property.MAX_PER_TARGET"></a>
+
+```typescript
+public readonly MAX_PER_TARGET: number;
+```
+
+- *Type:* number
+
+---
+
+### ScpMerge <a name="ScpMerge" id="aws-data-landing-zone.ScpMerge"></a>
+
+Merges SCP statements: baseline -> account-type -> per-account (additive only).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpMerge.Initializer"></a>
+
+```typescript
+import { ScpMerge } from 'aws-data-landing-zone'
+
+new ScpMerge()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpMerge.resolve">resolve</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ScpMerge.validate">validate</a></code> | *No description.* |
+
+---
+
+##### `resolve` <a name="resolve" id="aws-data-landing-zone.ScpMerge.resolve"></a>
+
+```typescript
+import { ScpMerge } from 'aws-data-landing-zone'
+
+ScpMerge.resolve(input: ResolveScpInput)
+```
+
+###### `input`<sup>Required</sup> <a name="input" id="aws-data-landing-zone.ScpMerge.resolve.parameter.input"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ResolveScpInput">ResolveScpInput</a>
+
+---
+
+##### `validate` <a name="validate" id="aws-data-landing-zone.ScpMerge.validate"></a>
+
+```typescript
+import { ScpMerge } from 'aws-data-landing-zone'
+
+ScpMerge.validate(accountName: string, statements: PolicyStatement[], attachmentCount: number)
+```
+
+###### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.ScpMerge.validate.parameter.accountName"></a>
+
+- *Type:* string
+
+---
+
+###### `statements`<sup>Required</sup> <a name="statements" id="aws-data-landing-zone.ScpMerge.validate.parameter.statements"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+
+---
+
+###### `attachmentCount`<sup>Required</sup> <a name="attachmentCount" id="aws-data-landing-zone.ScpMerge.validate.parameter.attachmentCount"></a>
+
+- *Type:* number
+
+---
+
 
 
 ### Scripts <a name="Scripts" id="aws-data-landing-zone.Scripts"></a>
