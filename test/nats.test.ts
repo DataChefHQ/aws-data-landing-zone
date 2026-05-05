@@ -28,7 +28,6 @@ const configBase: DataLandingZoneProps = {
     costCenter: [],
     domain: [],
   },
-  budgets: [],
   securityHubNotifications: [],
   organization: {
     organizationId: 'o-05ev6vk6fa',

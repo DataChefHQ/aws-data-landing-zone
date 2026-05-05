@@ -17,3 +17,4 @@ export * from './deny-s3-object-lock-and-retention';
 export * from './deny-s3-public-access-bypass';
 export * from './deny-savings-plan-purchases';
 export * from './deny-service-actions';
+export * from './finops-account-baseline';

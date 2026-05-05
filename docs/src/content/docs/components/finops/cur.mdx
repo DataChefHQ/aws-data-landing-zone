@@ -1,0 +1,294 @@
+---
+title: CUR (Cost and Usage Report 2.0)
+description: Cross-account CUR 2.0 delivery to a dedicated FinOps account
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The `cur` prop enables CUR 2.0 (BCM Data Exports) cost-data delivery into a dedicated
+FinOps account. The export definition is created in the management account; the S3
+bucket and Glue catalog are created in the FinOps account. AWS Billing writes Parquet
+files directly cross-account — no DLZ-managed copy job.
+
+CUR 2.0 only — never the legacy CUR 1.0. If a CUR 1.0 export already exists in the
+management account, DLZ does not touch it; the new 2.0 export deploys alongside.
+
+## Prerequisites
+
+1. A dedicated FinOps account provisioned manually in AWS Organizations, under a
+   Shared Services OU.
+2. The account ID + email under `org.ous.sharedServices.accounts.finOps`.
+
+If `cur` is set without `org.ous.sharedServices.accounts.finOps`, synth fails with an
+actionable error.
+
+## Minimal example
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App } from 'aws-cdk-lib';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+    new DataLandingZone(app, {
+      organization: {
+        // ...root, security, workloads, suspended as before...
+        ous: {
+          // ...
+          sharedServices: {
+            ouId: 'ou-xxxx-yyyyyyyy',
+            accounts: {
+              finOps: { accountId: '123456789012' },
+            },
+          },
+        },
+      },
+      finOps: {
+        cur: {},  // sensible defaults for everything
+      },
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            # ...root, security, workloads, suspended as before...
+            ous=dlz.OrgOus(
+                # ...
+                shared_services=dlz.OrgOuSharedServices(
+                    ou_id="ou-xxxx-yyyyyyyy",
+                    accounts=dlz.OrgOuSharedServicesAccounts(
+                        fin_ops=dlz.DLzFinOpsAccount(account_id="123456789012"),
+                    ),
+                ),
+            ),
+        ),
+        fin_ops=dlz.DlzFinOpsProps(
+            cur=dlz.DlzCurProps(),  # sensible defaults for everything
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+That's it. With defaults the construct deploys:
+
+- A `bcm-data-exports.CfnExport` named `dlz-cur-2` in the management account, in
+  `us-east-1` (forced by the API).
+- An S3 bucket named `dlz-cur-{finOpsAccountId}-us-east-1` in the FinOps account, with
+  the bucket policy scoped to `aws:SourceAccount = <management>` and
+  `aws:SourceArn = arn:aws:bcm-data-exports:us-east-1:<management>:export/dlz-cur-2`.
+- A Glue database `dlz_cur_2` and a daily crawler at `06:00 UTC`.
+- A custom resource that activates the 5 mandatory tags (`Owner`, `Project`,
+  `Environment`, `CostCenter`, `Domain`) as Cost Allocation Tags.
+
+## Tuning the export
+
+Every prop is optional. Defaults match FinOps best practice (Parquet, hourly,
+resource-level, split cost allocation data on, idempotent overwrite).
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      cur: {
+        exportName: 'acme-cur-2',          // default: 'dlz-cur-2'
+        bucketNamePrefix: 'acme-cur',       // default: 'dlz-cur'
+        glueDatabaseName: 'acme_cur',       // default: 'dlz_cur_2'
+        activateCostAllocationTags: true,   // default: true
+        exportConfig: {
+          timeGranularity: 'HOURLY',                    // 'HOURLY' | 'DAILY' | 'MONTHLY'
+          format: 'PARQUET',                            // 'PARQUET' | 'TEXT_OR_CSV'
+          compression: 'PARQUET',                       // 'PARQUET' | 'GZIP'
+          includeResources: true,                       // per-resource attribution
+          includeSplitCostAllocationData: true,         // shared-services allocation
+          includeManualDiscountCompatibility: false,    // private pricing only
+          overwriteBehavior: 'OVERWRITE_REPORT',        // idempotent
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        cur=dlz.DlzCurProps(
+            export_name="acme-cur-2",            # default: "dlz-cur-2"
+            bucket_name_prefix="acme-cur",       # default: "dlz-cur"
+            glue_database_name="acme_cur",       # default: "dlz_cur_2"
+            activate_cost_allocation_tags=True,  # default: True
+            export_config=dlz.DlzCurExportConfig(
+                time_granularity="HOURLY",                       # "HOURLY" | "DAILY" | "MONTHLY"
+                format="PARQUET",                                # "PARQUET" | "TEXT_OR_CSV"
+                compression="PARQUET",                           # "PARQUET" | "GZIP"
+                include_resources=True,                          # per-resource attribution
+                include_split_cost_allocation_data=True,         # shared-services allocation
+                include_manual_discount_compatibility=False,     # private pricing only
+                overwrite_behavior="OVERWRITE_REPORT",           # idempotent
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Tuning the data plane
+
+Encryption, lifecycle, access logging, additional read principals, and the Glue crawler
+schedule are all configurable.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      cur: {
+        dataPlaneConfig: {
+          encryption: {},                         // SSE-S3 (default); set { kmsKeyArn: '...' } for SSE-KMS
+          versioning: true,
+          accessLogging: true,
+          glueCrawlerSchedule: 'cron(0 6 * * ? *)',
+          additionalReadAccountIds: ['111111111111', '222222222222'],
+          lifecycle: {
+            enabled: true,
+            transitionToInfrequentAccessDays: 90,
+            transitionToGlacierDays: 365,
+            expirationDays: 2555,                 // ~7 years; 0 to disable expiration
+          },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        cur=dlz.DlzCurProps(
+            data_plane_config=dlz.DlzCurDataPlaneConfig(
+                encryption=dlz.DlzCurBucketEncryption(),  # SSE-S3 (default); set kms_key_arn="..." for SSE-KMS
+                versioning=True,
+                access_logging=True,
+                glue_crawler_schedule="cron(0 6 * * ? *)",
+                additional_read_account_ids=["111111111111", "222222222222"],
+                lifecycle=dlz.DlzCurLifecycleConfig(
+                    enabled=True,
+                    transition_to_infrequent_access_days=90,
+                    transition_to_glacier_days=365,
+                    expiration_days=2555,  # ~7 years; 0 to disable expiration
+                ),
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+### Disabling lifecycle (testing only)
+
+For sandbox / testing deployments, set `lifecycle.enabled: false` to keep every object
+in S3 Standard with no expiration. The construct emits a synth-time warning so prod
+deployments don't ship like this by accident.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      cur: {
+        dataPlaneConfig: {
+          lifecycle: { enabled: false },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        cur=dlz.DlzCurProps(
+            data_plane_config=dlz.DlzCurDataPlaneConfig(
+                lifecycle=dlz.DlzCurLifecycleConfig(enabled=False),
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Multi-region (data residency)
+
+The export definition is forced to `us-east-1` (BCM Data Exports is a us-east-1-only
+API), but the destination bucket can live in any region. Set `destinationRegion` to
+keep cost data in the same regulatory boundary as the workloads it describes.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      cur: {
+        destinationRegion: 'eu-central-1',
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        cur=dlz.DlzCurProps(
+            destination_region="eu-central-1",
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+When `destinationRegion` differs from `us-east-1`:
+
+- The Glue crawler is auto-pinned to the same region (Glue can't crawl S3 cross-region).
+- A synth-time warning reminds you that downstream Athena / QuickSight / FinOps tooling
+  must also deploy in that region, and that consumers in other regions pay cross-region
+  S3 GET egress.
+
+## SSE-KMS (compliance-driven deployments)
+
+Default encryption is SSE-S3 (when `encryption` is omitted or `kmsKeyArn` is unset) to
+sidestep cross-account KMS key-policy work. Pass an existing CMK ARN to opt into SSE-KMS
+— the construct adds `billingreports.amazonaws.com` to the key policy automatically.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      cur: {
+        dataPlaneConfig: {
+          encryption: { kmsKeyArn: 'arn:aws:kms:us-east-1:123456789012:key/abcd...' },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        cur=dlz.DlzCurProps(
+            data_plane_config=dlz.DlzCurDataPlaneConfig(
+                encryption=dlz.DlzCurBucketEncryption(
+                    kms_key_arn="arn:aws:kms:us-east-1:123456789012:key/abcd...",
+                ),
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## What is NOT configurable (security-critical)
+
+- Bucket policy `aws:SourceAccount` and `aws:SourceArn` are always derived from the
+  management account ID and the export ARN. Exposing them would let a misconfiguration
+  accept writes from any payer.
+- The service principal allowed to write is always `billingreports.amazonaws.com`.
+- `BlockPublicAccess` is always `BLOCK_ALL`.

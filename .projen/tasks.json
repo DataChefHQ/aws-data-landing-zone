@@ -69,6 +69,27 @@
         },
         {
           "spawn": "bundle:constructs/dlz-macie/lambda/macie-members"
+        },
+        {
+          "spawn": "bundle:constructs/dlz-cur/lambda/cur-tag-activation"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-cur/lambda/cur-tag-activation": {
+      "name": "bundle:constructs/dlz-cur/lambda/cur-tag-activation",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-cur/lambda/cur-tag-activation/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-cur/lambda/cur-tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-cur/lambda/cur-tag-activation/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-cur/lambda/cur-tag-activation:watch": {
+      "name": "bundle:constructs/dlz-cur/lambda/cur-tag-activation:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-cur/lambda/cur-tag-activation/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-cur/lambda/cur-tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-cur/lambda/cur-tag-activation/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },

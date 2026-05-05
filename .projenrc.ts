@@ -125,6 +125,12 @@ project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-members/', {
   sourcemap: true,
   externals: ['aws-sdk'],
 });
+project.bundler.addBundle('./src/constructs/dlz-cur/lambda/cur-tag-activation/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
 
 project.eslint!.addRules({
   'no-bitwise': 'off',

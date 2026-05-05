@@ -7,6 +7,9 @@ import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../../constructs/dlz-control-tower-control';
+import { DlzAccountBudgets } from '../../../constructs/dlz-account-budgets';
+import { DlzCostAnomalyDetection } from '../../../constructs/dlz-cost-anomaly-detection';
+import { DLZ_CUR_DEFAULTS, DlzCurExport } from '../../../constructs/dlz-cur';
 import { GuardDutyDelegatedAdmin } from '../../../constructs/dlz-guardduty';
 import { MacieDelegatedAdmin } from '../../../constructs/dlz-macie';
 import {
@@ -20,6 +23,7 @@ import {
   DlzServiceControlPolicy,
   ScpDenyIamWithoutPermissionsBoundary,
   ScpDenyServiceActions,
+  ScpFinOpsAccountBaseline,
   ScpMerge,
 } from '../../../constructs/organization-policies/index';
 import { DlzTagPolicy } from '../../../constructs/organization-policies/tag-policy';
@@ -50,7 +54,25 @@ export class ManagementGlobalStack extends DlzStack {
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
 
-    this.budgets();
+    if (this.props.organization.ous.sharedServices?.accounts.finOps) {
+      this.finOpsAccountHardening();
+    }
+
+    if (this.props.finOps?.budgets && this.props.finOps.budgets.length > 0) {
+      this.budgets();
+    }
+
+    if (this.props.finOps?.accountBudgets) {
+      this.accountBudgets();
+    }
+
+    if (this.props.finOps?.costAnomalyDetection) {
+      this.costAnomalyDetection();
+    }
+
+    if (this.props.finOps?.cur) {
+      this.curExport();
+    }
 
     if (this.props.guardDuty) {
       this.guardDuty();
@@ -208,7 +230,8 @@ export class ManagementGlobalStack extends DlzStack {
   }
 
   budgets() {
-    const budgetSlackChannels: SlackChannel[] = this.props.budgets
+    const budgets = this.props.finOps!.budgets!;
+    const budgetSlackChannels: SlackChannel[] = budgets
       .filter(budget => budget.subscribers.slacks)
       .flatMap(budget => budget.subscribers.slacks!);
 
@@ -236,7 +259,7 @@ export class ManagementGlobalStack extends DlzStack {
       }
     }
 
-    for (const budget of this.props.budgets) {
+    for (const budget of budgets) {
       new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget, this.stackProps.globalVariables.budgetSnsCache);
     }
   }
@@ -318,6 +341,74 @@ export class ManagementGlobalStack extends DlzStack {
       description: 'Arn for AWS IAM role with Github oidc auth',
       exportName: this.resourceName('git-hub-deploy-role'),
     });
+  }
+
+  /**
+   * Hardening baseline applied to the dedicated FinOps account. Auto-attached when
+   * `org.ous.sharedServices.accounts.finOps` is configured. Composes the static baseline
+   * with any per-account `scpStatements` declared on `DLzFinOpsAccount` (additive only).
+   */
+  private finOpsAccountHardening() {
+    const finOpsAccount = this.props.organization.ous.sharedServices!.accounts.finOps!;
+    const accountExtras = finOpsAccount.scpStatements ?? [];
+    const dlzScp = new DlzServiceControlPolicy(this, this.resourceName('scp-finops-account-baseline'), {
+      name: this.resourceName('scp-finops-account-baseline'),
+      description: 'Hardening baseline for the FinOps account: deny compute/data services, network primitives, IAM users, org-integrity actions',
+      targetIds: [finOpsAccount.accountId],
+      statements: [
+        ...ScpFinOpsAccountBaseline.statements(),
+        ...accountExtras,
+      ],
+    });
+    Report.addReportForAccountRegion('finops', '*', dlzScp.reportResource);
+  }
+
+  /** Per-account / per-cost-center budgets composed from `DlzBudget`. */
+  private accountBudgets() {
+    new DlzAccountBudgets(
+      this,
+      this.resourceName('account-budgets'),
+      this.props.finOps!.accountBudgets!,
+      this.props.organization.ous.workloads.accounts,
+      this.stackProps.globalVariables.budgetSnsCache,
+    );
+  }
+
+  /** Cost Anomaly Detection monitors + subscriptions, sharing SNS topics with budgets. */
+  private costAnomalyDetection() {
+    new DlzCostAnomalyDetection(
+      this,
+      this.resourceName('cost-anomaly-detection'),
+      this.props.finOps!.costAnomalyDetection!,
+      this.stackProps.globalVariables.budgetSnsCache,
+    );
+  }
+
+  /**
+   * CUR 2.0 export definition (BCM Data Exports). Writes cross-account into the FinOps
+   * account's bucket — the bucket itself is provisioned by `FinOpsGlobalStack`.
+   */
+  private curExport() {
+    const cur = this.props.finOps!.cur!;
+    const finOpsAccountId = this.props.organization.ous.sharedServices!.accounts.finOps!.accountId;
+    const destinationRegion = cur.destinationRegion ?? DLZ_CUR_DEFAULTS.destinationRegion;
+    const exportName = cur.exportName ?? DLZ_CUR_DEFAULTS.exportName;
+    const bucketName = `${cur.bucketNamePrefix ?? DLZ_CUR_DEFAULTS.bucketNamePrefix}-${finOpsAccountId}-${destinationRegion}`;
+
+    const tagKeys = this.collectMandatoryTagKeys();
+
+    new DlzCurExport(this, this.resourceName('cur-export'), {
+      destinationBucketArn: `arn:aws:s3:::${bucketName}`,
+      destinationPrefix: exportName,
+      exportName,
+      costAllocationTagKeys: cur.activateCostAllocationTags === false ? [] : tagKeys,
+      exportConfig: cur.exportConfig,
+    });
+  }
+
+  private collectMandatoryTagKeys(): string[] {
+    const baseline = PropsOrDefaults.getOrganizationTags(this.props);
+    return baseline.map(t => t.name);
   }
 
 }

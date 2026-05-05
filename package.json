@@ -9,6 +9,8 @@
     "build": "projen build",
     "bump": "projen bump",
     "bundle": "projen bundle",
+    "bundle:constructs/dlz-cur/lambda/cur-tag-activation": "projen bundle:constructs/dlz-cur/lambda/cur-tag-activation",
+    "bundle:constructs/dlz-cur/lambda/cur-tag-activation:watch": "projen bundle:constructs/dlz-cur/lambda/cur-tag-activation:watch",
     "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin": "projen bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin",
     "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin:watch": "projen bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin:watch",
     "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features": "projen bundle:constructs/dlz-guardduty/lambda/guardduty-member-features",

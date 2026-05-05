@@ -21,9 +21,12 @@ import {
   NetworkAddress,
   SlackChannel,
 } from './constructs';
+import { DlzAccountBudgetsProps } from './constructs/dlz-account-budgets/account-budgets-types';
+import { DlzCostAnomalyDetectionProps } from './constructs/dlz-cost-anomaly-detection/cost-anomaly-detection-types';
+import { DlzCurProps } from './constructs/dlz-cur/cur-types';
 import { DlzGuardDutyFeaturesProps, DlzGuardDutyProps } from './constructs/dlz-guardduty/guardduty-types';
 import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
-import { AuditGlobalStack, ManagementGlobalStack } from './stacks';
+import { AuditGlobalStack, FinOpsGlobalStack, ManagementGlobalStack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
 } from './stacks/organization/management/management-global-iam-identity-center-stack';
@@ -216,6 +219,27 @@ export interface ScpStatementsByAccountType {
 
 export interface DLzManagementAccount {
   readonly accountId: string;
+}
+
+/**
+ * FinOps account record. Extends `DLzManagementAccount` with FinOps-specific knobs.
+ *
+ * The auto-attached `ScpFinOpsAccountBaseline` SCP applies regardless. Use
+ * `scpStatements` to layer additional, deployment-specific SCP statements on top
+ * (additive only — composes with the baseline rather than replacing it).
+ */
+export interface DLzFinOpsAccount extends DLzManagementAccount {
+  /**
+   * Additional per-account SCP statements layered on top of the auto-attached
+   * `ScpFinOpsAccountBaseline`. Additive only.
+   *
+   * Use this to add deployment-specific deny rules, or to add back specific actions
+   * the baseline denies that a particular deployment needs (e.g. enabling Lambda for
+   * a small data-prep workflow).
+   *
+   * @default - no additional statements
+   */
+  readonly scpStatements?: PolicyStatement[];
 }
 
 export interface DLzIamUserGroup {
@@ -560,10 +584,42 @@ export interface OrgOuSuspended {
   readonly accounts?: DLzAccountSuspended[];
 }
 
+export interface OrgOuSharedServicesAccounts {
+  /**
+   * Dedicated FinOps account for CUR cost-data delivery and isolated cost-data read access.
+   * Optional — set to enable FinOps capabilities (e.g. `cur`).
+   */
+  readonly finOps?: DLzFinOpsAccount;
+}
+
+/**
+ * Shared Services OU — a parent for accounts that exist to serve the wider organization
+ * but are not themselves workloads, security, or governance baselines (FinOps today,
+ * additional shared accounts in the future).
+ *
+ * The OU is optional — DLZ deploys without it. Provision it when you need any of its
+ * member capabilities (e.g. CUR cost-data delivery via the FinOps account).
+ *
+ * Constructs that need a specific account here (e.g. CUR data plane → FinOps account) will
+ * fail at synth with an actionable error if they are configured but the corresponding
+ * account is absent. Anomaly detection and account budgets do NOT require this OU — they
+ * only use the management account.
+ */
+export interface OrgOuSharedServices {
+  readonly ouId: string;
+  readonly accounts: OrgOuSharedServicesAccounts;
+}
+
 export interface OrgOus {
   readonly security: OrgOuSecurity;
   readonly workloads: OrgOuWorkloads;
   readonly suspended: OrgOuSuspended;
+  /**
+   * Optional Shared Services OU. Set to enable shared-services capabilities such as
+   * FinOps cost-data delivery (CUR) via the dedicated FinOps account.
+   * @default - not configured; shared-services capabilities (e.g. CUR) cannot be enabled
+   */
+  readonly sharedServices?: OrgOuSharedServices;
 }
 
 export interface RootOptions {
@@ -884,13 +940,65 @@ export interface DataLandingZoneProps {
    */
   readonly macie?: DlzMacieProps;
 
-  readonly budgets: DlzBudgetProps[];
-
   readonly securityHubNotifications: SecurityHubNotification[];
 
   readonly deploymentPlatform?: DeploymentPlatform;
 
   readonly network?: Network;
+
+  /**
+   * FinOps capabilities. Groups all cost-management features:
+   *
+   * - `budgets` — org/account-wide budget alerts (always-on root budget set).
+   * - `accountBudgets` — per-account / per-cost-center budgets composed over workload accounts.
+   * - `costAnomalyDetection` — Cost Anomaly Detection monitors + subscriptions.
+   * - `cur` — CUR 2.0 cost-data delivery to the dedicated FinOps account.
+   *
+   * `cur` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
+   * capabilities are independent of the Shared Services OU and only use the management
+   * account.
+   *
+   * @default - no FinOps capabilities enabled
+   */
+  readonly finOps?: DlzFinOpsProps;
+}
+
+/**
+ * FinOps capability bundle. Each member is independently optional; provide only what the
+ * deployment needs.
+ */
+export interface DlzFinOpsProps {
+  /**
+   * Org/account-wide budget alerts. Provisions `DlzBudget` entries in the management
+   * account.
+   */
+  readonly budgets?: DlzBudgetProps[];
+
+  /**
+   * Per-account / per-cost-center budgets. Composes the existing `DlzBudget` primitive,
+   * iterating workload accounts and creating a budget for each that sets `monthlyBudget`.
+   *
+   * Independent of the Shared Services OU — uses only the management account.
+   */
+  readonly accountBudgets?: DlzAccountBudgetsProps;
+
+  /**
+   * AWS Cost Anomaly Detection. Provisions monitors + subscriptions in the management
+   * account. Reuses the existing `budgetSnsCache` so anomaly notifications and budget
+   * alerts can share an SNS topic per subscriber set.
+   *
+   * Independent of the Shared Services OU — uses only the management account.
+   */
+  readonly costAnomalyDetection?: DlzCostAnomalyDetectionProps;
+
+  /**
+   * CUR 2.0 cost-data delivery. Provisions a BCM Data Exports definition in the management
+   * account that writes Parquet directly into a bucket in the FinOps account.
+   *
+   * Requires `org.ous.sharedServices.accounts.finOps` to be configured. Validation fails
+   * fast at synth otherwise.
+   */
+  readonly cur?: DlzCurProps;
 }
 
 export interface ManagementStacks {
@@ -906,6 +1014,10 @@ export interface LogStacks {
 export interface AuditStacks {
   readonly global: AuditGlobalStack;
   // readonly regional: AuditRegionalStack[];
+}
+
+export interface FinOpsStacks {
+  readonly global: FinOpsGlobalStack;
 }
 
 export interface GlobalVariablesNcp1 {

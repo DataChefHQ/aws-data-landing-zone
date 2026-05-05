@@ -7,12 +7,14 @@ import {
   AuditStacks,
   DataLandingZoneProps,
   DLzAccount,
+  FinOpsStacks,
   ForceNoPythonArgumentLifting,
   GlobalVariables,
   LogStacks, ManagementStacks,
 } from './data-landing-zone-types';
+import { Logger } from './lib/logger';
 import { Report } from './lib/report';
-import { ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
+import { FinOpsGlobalStack, ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
 } from './stacks/organization/management/management-global-iam-identity-center-stack';
@@ -160,6 +162,65 @@ function validations(props: DataLandingZoneProps) {
       );
     }
   }
+
+  /* FinOps */
+  validateLegacyRootFinOpsProps(props);
+  validateFinOpsConfig(props);
+}
+
+/**
+ * Guard against the pre-grouping config shape where `budgets`, `accountBudgets`,
+ * `costAnomalyDetection`, and `cur` lived directly on `DataLandingZoneProps`. They now
+ * live under `finOps`. TypeScript cannot catch this for callers using `as any` or stale
+ * generated bindings, so check at runtime and fail fast with a migration message.
+ */
+function validateLegacyRootFinOpsProps(props: DataLandingZoneProps) {
+  const legacy = props as unknown as Record<string, unknown>;
+  const moved: string[] = [];
+  if (legacy.budgets !== undefined) moved.push('budgets');
+  if (legacy.accountBudgets !== undefined) moved.push('accountBudgets');
+  if (legacy.costAnomalyDetection !== undefined) moved.push('costAnomalyDetection');
+  if (legacy.cur !== undefined) moved.push('cur');
+  if (moved.length === 0) return;
+
+  throw new Error(
+    `[FinOps] The following props moved under 'finOps': ${moved.join(', ')}. ` +
+    `Update your config: replace top-level '${moved[0]}: ...' with 'finOps: { ${moved[0]}: ... }'. ` +
+    'See docs/components/finops for the new shape.',
+  );
+}
+
+function validateFinOpsConfig(props: DataLandingZoneProps) {
+  const finOpsAccountConfigured = !!props.organization.ous.sharedServices?.accounts.finOps;
+  const curConfigured = !!props.finOps?.cur;
+
+  if (curConfigured && !finOpsAccountConfigured) {
+    throw new Error(
+      "'finOps.cur' requires 'org.ous.sharedServices.accounts.finOps' to be configured. " +
+      'Provision a FinOps account in AWS Organizations and add it under ' +
+      "org.ous.sharedServices.accounts.finOps, or remove 'finOps.cur'.",
+    );
+  }
+
+  if (finOpsAccountConfigured && !curConfigured) {
+    Logger.log(
+      "[FinOps] Info: 'org.ous.sharedServices.accounts.finOps' is configured but no FinOps " +
+      'capabilities (CUR) are enabled. The account is provisioned but dormant. Configure ' +
+      "'finOps.cur' to start delivering cost data.",
+    );
+  }
+
+  if (curConfigured) {
+    const destinationRegion = props.finOps!.cur!.destinationRegion ?? 'us-east-1';
+    if (destinationRegion !== 'us-east-1') {
+      Logger.log(
+        `[FinOps] Warning: cur.destinationRegion='${destinationRegion}'. The CUR export is forced to us-east-1 ` +
+        '(BCM Data Exports is a us-east-1-only API), but the destination bucket lives in your chosen region. ' +
+        'Glue + Athena + downstream tooling must deploy in the same region as the bucket. Cross-region S3 GETs ' +
+        'by consumers in other regions are not free.',
+      );
+    }
+  }
 }
 
 export class DataLandingZone {
@@ -170,6 +231,7 @@ export class DataLandingZone {
   public managementStacks!: ManagementStacks;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
+  public finOpsStacks?: FinOpsStacks;
 
   public workloadGlobalStacks: WorkloadGlobalStack[] = [];
   public workloadRegionalStacks: WorkloadRegionalStack[] = [];
@@ -214,6 +276,9 @@ export class DataLandingZone {
 
     this.pipeline = new CdkExpressPipeline();
 
+    if (this.props.organization.ous.sharedServices?.accounts.finOps) {
+      this.finOpsStacks = this.stageFinOps();
+    }
     this.managementStacks = this.stageManagement();
     this.auditStacks = this.stageAudit();
     this.logStacks = this.stageLog();
@@ -356,6 +421,33 @@ export class DataLandingZone {
     return {
       global: auditGlobalStack,
     } satisfies AuditStacks;
+  };
+
+  /**
+   * FinOps account global stack — only synthesized when
+   * `org.ous.sharedServices.accounts.finOps` is set. Wave-ordered before the management wave
+   * so the destination bucket exists before the management-side `bcm-data-exports.CfnExport`
+   * is created.
+   */
+  private stageFinOps() {
+    const ou = 'shared-services';
+    const account = 'finops';
+    const finOpsAccount = this.props.organization.ous.sharedServices!.accounts.finOps!;
+    const destinationRegion = this.props.finOps?.cur?.destinationRegion ?? this.props.regions.global;
+
+    const wave = this.pipeline.addWave('shared-services--finops--global');
+    const stage = wave.addStage('global');
+    const global = new FinOpsGlobalStack(this.app, {
+      stage,
+      name: { ou, account, stack: 'global', region: destinationRegion },
+      env: {
+        account: finOpsAccount.accountId,
+        region: destinationRegion,
+      },
+    },
+    this.props);
+
+    return { global } satisfies FinOpsStacks;
   };
 
   private stageWorkloadGlobalStacks() {

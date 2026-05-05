@@ -132,6 +132,16 @@ export default defineConfig({
                         ]
                     },
                     {
+                        label: 'FinOps',
+                        items: [
+                            { label: 'Overview',  slug: 'components/finops'},
+                            { label: 'CUR (Cost and Usage Report 2.0)',  slug: 'components/finops/cur'},
+                            { label: 'Cost Anomaly Detection',  slug: 'components/finops/cost-anomaly-detection'},
+                            { label: 'Account Budgets',  slug: 'components/finops/account-budgets'},
+                            { label: 'FinOps Account Hardening',  slug: 'components/finops/finops-account-baseline'},
+                        ]
+                    },
+                    {
                         label: 'Build System',
                         items: [
                             { label: 'Deployment Order',  slug: 'components/build-system/deployment-order'},

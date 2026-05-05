@@ -76,10 +76,22 @@ async function workloadAccounts(props: DataLandingZoneProps, bootstrapRoleName: 
     await Promise.all(regionBootStrapPromises);
   }
 }
+async function finOps(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
+  const finOpsAccount = props.organization.ous.sharedServices?.accounts.finOps;
+  if (!finOpsAccount) return;
+  await synthOnce(props);
+
+  const regionBootStrapPromises = [];
+  for (let region of DlzAllRegions(props.regions)) {
+    regionBootStrapPromises.push(bootstrapChildAccount(props, bootstrapRoleName, finOpsAccount.accountId, region));
+  }
+  await Promise.all(regionBootStrapPromises);
+}
 
 export async function all(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   await management(props);
   await log(props, bootstrapRoleName);
   await audit(props, bootstrapRoleName);
   await workloadAccounts(props, bootstrapRoleName);
+  await finOps(props, bootstrapRoleName);
 }

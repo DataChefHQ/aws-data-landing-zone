@@ -1,0 +1,122 @@
+---
+title: FinOps Account Hardening
+description: ScpFinOpsAccountBaseline — auto-applied SCP for the FinOps account
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+When `org.ous.sharedServices.accounts.finOps` is set, the `ScpFinOpsAccountBaseline` SCP
+is auto-attached to the FinOps account. No extra config required.
+
+The FinOps account exists for one purpose — hold CUR Parquet data, the Glue catalog
+over it, and (future) Athena queries. The baseline SCP enforces that scope so the
+account cannot drift into a workload account by accident or be abused as a privilege hop.
+
+## What it denies
+
+| Category | Examples |
+|---|---|
+| Compute / data services | EC2 instances, RDS, SageMaker, Bedrock, ECS, EKS, EMR, Redshift, OpenSearch, Kinesis, MSK, Step Functions, AppRunner, Lightsail, WorkSpaces, AppStream, CodeBuild / CodeDeploy / CodePipeline |
+| Network primitives | `ec2:CreateVpc`, `CreateInternetGateway`, `AttachInternetGateway`, `CreateNatGateway`, `CreateTransitGateway`, `CreateTransitGatewayVpcAttachment`, `CreateVpcPeeringConnection`, `CreateClientVpnEndpoint` |
+| IAM identity creation | `iam:CreateUser`, `CreateAccessKey`, `CreateLoginProfile`, `CreateServiceSpecificCredential` |
+| Org integrity | `organizations:LeaveOrganization`, `CloseAccount`, `DeletePolicy`, `DetachPolicy`, `DisablePolicyType`, `cloudtrail:DeleteTrail` / `StopLogging` / `UpdateTrail`, GuardDuty / Macie disassociation, `config:DeleteConfigurationRecorder` / `StopConfigurationRecorder` |
+
+`AWSControlTowerExecution` is exempted in every statement so Control Tower can keep
+managing the account.
+
+## Why no VPC?
+
+Glue and Athena run on AWS-managed infrastructure. The CUR data plane needs no VPC. If
+a future consumer needs private connectivity (e.g. private QuickSight access), the
+preset's `denyNetworkPrimitives` does NOT block `ec2:CreateVpcEndpoint` — VPC endpoints
+to `s3` and `glue` remain possible.
+
+## Why deny IAM users?
+
+Humans access the account via SSO / IAM Identity Center. Long-lived IAM users are an
+anti-pattern in shared accounts; eliminating them removes a credential-leak class.
+
+## Tuning the deny list
+
+The default deny list lives in `ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES`.
+Override it with `ScpFinOpsAccountBaseline.statements({ deniedServices: [...] })` if a
+deployment needs a narrower or wider set — e.g. to allow Lambda development for a small
+data-prep workflow.
+
+The default deny list is intentionally strict and is not configurable through
+`DataLandingZoneProps`. If a deployment needs to add back specific actions or layer
+extra denies, declare them on the FinOps account record via `scpStatements` — the
+construct composes them on top of the baseline (additive only; you cannot remove a
+baseline `Deny` by adding an `Allow`, since SCP `Deny` always wins).
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import * as iam from 'aws-cdk-lib/aws-iam';
+
+    organization: {
+      // ...
+      ous: {
+        // ...
+        sharedServices: {
+          ouId: 'ou-xxxx-yyyyyyyy',
+          accounts: {
+            finOps: {
+              accountId: '123456789012',
+              scpStatements: [
+                // Extra deployment-specific deny: block any cross-region replication
+                new iam.PolicyStatement({
+                  effect: iam.Effect.DENY,
+                  actions: ['s3:PutBucketReplication'],
+                  resources: ['*'],
+                }),
+              ],
+            },
+          },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    from aws_cdk import aws_iam as iam
+
+    organization=dlz.DLzOrganization(
+        # ...
+        ous=dlz.OrgOus(
+            # ...
+            shared_services=dlz.OrgOuSharedServices(
+                ou_id="ou-xxxx-yyyyyyyy",
+                accounts=dlz.OrgOuSharedServicesAccounts(
+                    fin_ops=dlz.DLzFinOpsAccount(
+                        account_id="123456789012",
+                        scp_statements=[
+                            # Extra deployment-specific deny: block any cross-region replication
+                            iam.PolicyStatement(
+                                effect=iam.Effect.DENY,
+                                actions=["s3:PutBucketReplication"],
+                                resources=["*"],
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Region lockdown
+
+The baseline does not ship a region lockdown today — the `cur.destinationRegion`
+construct already validates the destination, and adding a region SCP that conflicts
+with `cur.destinationRegion` would be a footgun. If you need a hard region lockdown on
+the FinOps account, compose `ScpDenyActionsOutsideRegions.statement([...])` from the
+existing preset library and attach it via the per-account SCP slot.
+
+## Inherited observability
+
+GuardDuty, Macie, Security Hub, CloudTrail org trail, AWS Config — all auto-enroll the
+FinOps account through the existing delegated-admin patterns. No FinOps-specific
+plumbing required.
