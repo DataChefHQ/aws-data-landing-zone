@@ -1,9 +1,9 @@
 ---
 title: Data Landing Zone
-description: The Data Landing Zone (DLZ) is a CDK Construct designed to create a landing zone tailored for supporting and enabling AI, data-driven, data mesh, and cloud projects.
+description: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and FinOps baked in — not bolted on.
 template: splash
 hero:
-  tagline: The Data Landing Zone (DLZ) is a CDK Construct designed to create a landing zone tailored for supporting and enabling AI, data-driven, data mesh, and cloud projects.
+  tagline: An opinionated AWS landing zone for AI and data workloads — with security, privacy, and FinOps baked in, not bolted on.
   image:
     light: ../../assets/data_landing_zone_logo.png
     dark: ../../assets/data_landing_zone_logo-white.png
@@ -18,29 +18,41 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+<h2>A pattern we keep seeing</h2>
+<p>
+Every time a transformative technology arrives — cloud in 2010, big data in 2014, AI in 2023 —
+the same two governance gaps appear in the same order. <strong>Privacy</strong> gets addressed
+first, because regulation provides the forcing function. <strong>FinOps</strong> gets addressed
+last, and usually too late — only after a billing shock forces the conversation. By then, the
+workloads, the habits, and the architecture are already set. Remediation is painful.
+</p>
 
-<h2>Why do you need a Data Landing Zone?</h2>
-  <p>
-  Setting up your AWS environment without a Landing Zone can be an overwhelming and time-consuming process. Without the
-  right foundation in place, you'll face unnecessary complexity and delays. Managing multiple AWS accounts,
-  implementing security best practices, and ensuring compliance will require a deep level of expertise and
-  effort.
-  <br/>
-  Here's why a properly implemented Landing Zone is essential for accelerating your cloud journey:
+<p>
+98% of FinOps practitioners now manage AI spend — up from 31% in 2024. Average monthly AI
+spend is projected at ~$85K in 2025, a 36% year-over-year increase. Yet only 51% of teams
+feel confident measuring AI ROI.
+</p>
+
+<p>
+This is the precise failure mode the Data Landing Zone is engineered to prevent.
+</p>
+
+<h2>Three actors, one platform</h2>
+<p>
+Most data platforms optimise for one stakeholder, tolerate the second, and ignore the third.
+The DLZ is designed to make all three genuinely happy at the same time.
 </p>
 
 <div class="container" style="margin-bottom: 2rem;">
   <div class="column">
-    <p><strong>👩‍💻 Expert Knowledge:</strong> To build a robust, scalable AWS environment, you need expertise in areas such as cloud architecture, IAM, networking, and cost optimization. A Landing Zone provides the necessary tools, templates, and automation, removing the need for constant, high-level expertise.</p>
+    <p><strong>💰 CFO &amp; Finance:</strong> Cost controls are not bolted on after the fact. Every workload is financially observable from day one. Budgets and guardrails are provisioned as code. No end-of-month surprises, no manual reconciliation, clear chargeback lines.</p>
 
-    <p><strong>📈 Scalability:</strong> As your business grows, your cloud environment needs to grow with it. A Landing Zone ensures scalability and flexibility to meet future needs without compromising performance or security.</p>
+    <p><strong>📋 Compliance Office:</strong> Built with a compliance mindset from the ground up. GDPR alignment, data classification, access control, and audit trails are DLZ defaults — not workload-level responsibilities. Regulators find what they expect to find.</p>
   </div>
   <div class="column">
-    <p><strong>⚡ Reduce Time To Market:</strong> A well-architected Landing Zone streamlines account setup, networking, and security, ensuring a faster, more reliable deployment. Leaving you to focus on your Applications and not the cloud itself.</p>
+    <p><strong>👩‍💻 Engineers:</strong> Built by engineers, for engineers. Developer experience is a first-class priority. Engineers don't cut tickets begging a CCoE to unblock them. Productivity is not sacrificed on the altar of governance.</p>
 
-    <p><strong>🔧 Reduced Complexity:</strong> With pre-configured guardrails and best practices, you avoid reinventing the wheel each time a new service or account is needed.</p>
-
-    <p><strong>🔒 Security and Compliance:</strong> Landing Zones integrate security measures based on the AWS Well-Architected Framework, ensuring your environment is aligned with best practices for security, compliance, and risk management.</p>
+    <p><strong>🧭 Design principle:</strong> Governance should be the path of least resistance, not an obstacle course. An engineer using the DLZ should find it easier to do the right thing than to bypass it — not because we block them, but because we made the right thing the default.</p>
   </div>
 </div>
 
@@ -49,24 +61,21 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
 	<Card title="Accelerator" icon="rocket">
-    The Data Landing Zone creates a landing zone tailored for supporting and enabling AI, data-driven, data mesh, and cloud projects.
+    A landing zone tailored for AI, data-driven, data mesh, and cloud projects — so teams can experiment fast without building governance from scratch.
 	</Card>
-  <Card title="Landing Zone" icon="add-document">
-    The Data Landing Zone is first and foremost a Landing Zone. Taking care of the basics like security and
-    networking so you can focus on your data and AI related projects.
+  <Card title="Knowledge baked in" icon="add-document">
+    Operational experience, regulatory awareness, and cost discipline are encoded directly in the platform. They travel with every workload built on top of it.
   </Card>
   <Card title="All-in-one CDK component" icon="pencil">
-		A CDK construct published in Typescript and Python to orchestrate AWS accounts and all the resources needed
-    for a Data Landing Zone.
+		A CDK construct published in TypeScript and Python that orchestrates AWS accounts and the resources needed for a multi-account data platform.
 	</Card>
-	<Card title="Industry standards & Best practices" icon="setting">
-		The DLZ follows the Well-Architected Framework for best practices on implementing a multi-account strategy to ensure that your projects
-    are secure and compliant.
+	<Card title="FinOps as a first-class pillar" icon="seti:db">
+    Mandatory cost-allocation tags enforced at deploy time. Budgets and anomaly controls as code. CUR centralised in a dedicated FinOps account. An LLM gateway that blocks token spend before it reaches the model. Runaway spend is caught before the invoice arrives.
 	</Card>
-  <Card title="Ease of Use" icon="heart">
-    Simple enough for Data Engineers to use independently, yet flexible and customizable for Cloud Engineers to fine-tune and optimize.
+	<Card title="Standards &amp; best practices" icon="setting">
+		Aligned with the AWS Well-Architected Framework for multi-account strategy, security, and compliance.
+	</Card>
+  <Card title="Ease of use" icon="heart">
+    Simple enough for Data Engineers to use independently, yet flexible and customisable for Cloud Engineers to fine-tune and optimise.
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-		Learn more by reading the [documentation](/introduction).
-	</Card>
 </CardGrid>
