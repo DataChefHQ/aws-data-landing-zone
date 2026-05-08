@@ -1,9 +1,9 @@
 ---
 title: Data Landing Zone
-description: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and FinOps baked in — not bolted on.
+description: An opinionated AWS landing zone for AI and data workloads. Security, privacy, and FinOps baked in from day one.
 template: splash
 hero:
-  tagline: An opinionated AWS landing zone for AI and data workloads — with security, privacy, and FinOps baked in, not bolted on.
+  tagline: An opinionated AWS landing zone for AI and data workloads. Security, privacy, and FinOps baked in from day one.
   image:
     light: ../../assets/data_landing_zone_logo.png
     dark: ../../assets/data_landing_zone_logo-white.png
@@ -18,50 +18,126 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<h2>A pattern we keep seeing</h2>
+<h2>The problem</h2>
 <p>
-Every time a transformative technology arrives — cloud in 2010, big data in 2014, AI in 2023 —
-the same two governance gaps appear in the same order. <strong>Privacy</strong> gets addressed
-first, because regulation provides the forcing function. <strong>FinOps</strong> gets addressed
-last, and usually too late — only after a billing shock forces the conversation. By then, the
-workloads, the habits, and the architecture are already set. Remediation is painful.
+Cloud bills double overnight. Privacy audits land badly. Engineers ship slower because every
+workload reinvents the same governance from scratch. By the time anyone notices, the workloads,
+the habits, and the architecture are already set, and remediation is painful.
 </p>
 
 <p>
-98% of FinOps practitioners now manage AI spend — up from 31% in 2024. Average monthly AI
-spend is projected at ~$85K in 2025, a 36% year-over-year increase. Yet only 51% of teams
-feel confident measuring AI ROI.
+This pattern repeats with every transformative technology. Privacy gets addressed first because
+regulation forces the conversation. FinOps gets addressed last, after a billing shock. AI is
+the latest cycle. The numbers tell the story.
 </p>
 
-<p>
-This is the precise failure mode the Data Landing Zone is engineered to prevent.
-</p>
-
-<h2>Three actors, one platform</h2>
-<p>
-Most data platforms optimise for one stakeholder, tolerate the second, and ignore the third.
-The DLZ is designed to make all three genuinely happy at the same time.
-</p>
-
-<div class="container" style="margin-bottom: 2rem;">
-  <div class="column">
-    <p><strong>💰 CFO &amp; Finance:</strong> Cost controls are not bolted on after the fact. Every workload is financially observable from day one. Budgets and guardrails are provisioned as code. No end-of-month surprises, no manual reconciliation, clear chargeback lines.</p>
-
-    <p><strong>📋 Compliance Office:</strong> Built with a compliance mindset from the ground up. GDPR alignment, data classification, access control, and audit trails are DLZ defaults — not workload-level responsibilities. Regulators find what they expect to find.</p>
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-number">98%</div>
+    <div class="stat-label">of FinOps practitioners now manage AI spend, up from 31% in 2024</div>
   </div>
-  <div class="column">
-    <p><strong>👩‍💻 Engineers:</strong> Built by engineers, for engineers. Developer experience is a first-class priority. Engineers don't cut tickets begging a CCoE to unblock them. Productivity is not sacrificed on the altar of governance.</p>
-
-    <p><strong>🧭 Design principle:</strong> Governance should be the path of least resistance, not an obstacle course. An engineer using the DLZ should find it easier to do the right thing than to bypass it — not because we block them, but because we made the right thing the default.</p>
+  <div class="stat-card">
+    <div class="stat-number">$85K</div>
+    <div class="stat-label">average monthly AI spend in 2025, a 36% YoY increase</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">51%</div>
+    <div class="stat-label">of teams feel confident measuring AI ROI</div>
   </div>
 </div>
 
+<p>
+The Data Landing Zone is engineered to prevent this failure mode before the first workload lands.
+</p>
+
+<h2>Built for three stakeholders at once</h2>
+<p>
+Most data platforms optimise for one stakeholder, tolerate the second, and ignore the third. The
+DLZ is designed to make all three genuinely happy at the same time.
+</p>
+
+<div class="actor-grid">
+  <div class="actor-card">
+    <div class="actor-icon">💰</div>
+    <h3>CFO &amp; Finance</h3>
+    <p>
+    Cost controls are not bolted on after the fact. Every workload is financially observable from
+    day one. Budgets and guardrails are provisioned as code. No end-of-month surprises, no manual
+    reconciliation, clear chargeback lines.
+    </p>
+  </div>
+  <div class="actor-card">
+    <div class="actor-icon">📋</div>
+    <h3>Compliance Office</h3>
+    <p>
+    Built with a compliance mindset from the ground up. GDPR alignment, data classification,
+    access control, and audit trails are DLZ defaults, not workload-level responsibilities.
+    Regulators find what they expect to find.
+    </p>
+  </div>
+  <div class="actor-card">
+    <div class="actor-icon">👩‍💻</div>
+    <h3>Engineers</h3>
+    <p>
+    Built by engineers, for engineers. Developer experience is a first-class priority. Engineers
+    don't cut tickets begging a CCoE to unblock them. Productivity is not sacrificed on the altar
+    of governance.
+    </p>
+  </div>
+</div>
+
+<blockquote class="design-principle">
+<strong>Design principle.</strong> Governance should be the path of least resistance. An engineer
+using the DLZ should find it easier to do the right thing than to bypass it. Not because we block
+them, but because we made the right thing the default.
+</blockquote>
+
+<h2>How the DLZ delivers on FinOps</h2>
+<p>
+FinOps is the pillar that most consistently gets left behind. In the DLZ it doesn't. The
+capability is delivered in four layers, each building on the one below.
+</p>
+
+<div class="layers-grid">
+  <div class="layer-card">
+    <div class="layer-number">01</div>
+    <h3>Instrumentation</h3>
+    <p>
+    Every service emits cost and usage data in a consistent, queryable form. CUR 2.0 is the master
+    ledger, centralised in a dedicated FinOps account and queryable from Athena.
+    </p>
+  </div>
+  <div class="layer-card">
+    <div class="layer-number">02</div>
+    <h3>Attribution</h3>
+    <p>
+    A mandatory tag set is enforced at deploy time through tag policies, SCPs, and DLZ validation.
+    Resources that cannot be attributed to an owner do not deploy to production.
+    </p>
+  </div>
+  <div class="layer-card">
+    <div class="layer-number">03</div>
+    <h3>Guardrails</h3>
+    <p>
+    Soft alerts at threshold, hard blocks at limit. An LLM gateway enforces per-team and
+    per-project token caps in real time, blocking requests before the model ever sees them.
+    </p>
+  </div>
+  <div class="layer-card">
+    <div class="layer-number">04</div>
+    <h3>Reporting</h3>
+    <p>
+    Dashboards for engineers, product owners, and finance. Cost-per-unit-of-work makes
+    optimisation conversations concrete: cost per inference, per document, per query.
+    </p>
+  </div>
+</div>
 
 ## What is the Data Landing Zone?
 
 <CardGrid stagger>
 	<Card title="Accelerator" icon="rocket">
-    A landing zone tailored for AI, data-driven, data mesh, and cloud projects — so teams can experiment fast without building governance from scratch.
+    A landing zone tailored for AI, data-driven, data mesh, and cloud projects, so teams can experiment fast without building governance from scratch.
 	</Card>
   <Card title="Knowledge baked in" icon="add-document">
     Operational experience, regulatory awareness, and cost discipline are encoded directly in the platform. They travel with every workload built on top of it.
@@ -70,7 +146,7 @@ The DLZ is designed to make all three genuinely happy at the same time.
 		A CDK construct published in TypeScript and Python that orchestrates AWS accounts and the resources needed for a multi-account data platform.
 	</Card>
 	<Card title="FinOps as a first-class pillar" icon="seti:db">
-    Mandatory cost-allocation tags enforced at deploy time. Budgets and anomaly controls as code. CUR centralised in a dedicated FinOps account. An LLM gateway that blocks token spend before it reaches the model. Runaway spend is caught before the invoice arrives.
+    Mandatory cost-allocation tags enforced at deploy time. Budgets and anomaly controls as code. CUR centralised in a dedicated FinOps account. An LLM gateway that blocks token spend before it reaches the model.
 	</Card>
 	<Card title="Standards &amp; best practices" icon="setting">
 		Aligned with the AWS Well-Architected Framework for multi-account strategy, security, and compliance.

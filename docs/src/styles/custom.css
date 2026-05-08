@@ -32,3 +32,139 @@ th, td {
         flex-direction: column; /* Stacks columns vertically on small screens */
     }
 }
+
+/* Stats grid — large standalone numbers for the landing page */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+.stat-card {
+    padding: 1.75rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: var(--sl-color-gray-6, transparent);
+    text-align: left;
+}
+
+.stat-number {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--sl-color-accent-high, var(--sl-color-text-accent));
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--sl-color-gray-2);
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Actor cards — three stakeholder cards */
+.actor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin: 2rem 0;
+}
+
+.actor-card {
+    padding: 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: var(--sl-color-gray-6, transparent);
+}
+
+.actor-card h3 {
+    margin: 0.5rem 0 0.75rem !important;
+    font-size: 1.15rem;
+}
+
+.actor-card p {
+    margin: 0 !important;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.actor-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+@media (max-width: 900px) {
+    .actor-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Design principle callout */
+.design-principle {
+    margin: 2rem 0 !important;
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid var(--sl-color-accent, var(--sl-color-text-accent));
+    background: var(--sl-color-gray-6, transparent);
+    border-radius: 0 0.4rem 0.4rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.design-principle p {
+    margin: 0 !important;
+}
+
+/* Four-layer FinOps grid */
+.layers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.layer-card {
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: var(--sl-color-gray-6, transparent);
+    position: relative;
+}
+
+.layer-number {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-accent-high, var(--sl-color-text-accent));
+    margin-bottom: 0.5rem;
+}
+
+.layer-card h3 {
+    margin: 0 0 0.75rem !important;
+    font-size: 1.1rem;
+}
+
+.layer-card p {
+    margin: 0 !important;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+    .layers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .layers-grid {
+        grid-template-columns: 1fr;
+    }
+}
