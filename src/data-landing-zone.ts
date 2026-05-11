@@ -1,6 +1,7 @@
 import { Annotations, App, Tags } from 'aws-cdk-lib';
 import { CdkExpressPipeline } from 'cdk-express-pipeline';
 import { DlzAccountNetworks } from './constructs';
+import { DLZ_CUR_DEFAULTS } from './constructs/dlz-cur';
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import {
@@ -12,7 +13,6 @@ import {
   GlobalVariables,
   LogStacks, ManagementStacks,
 } from './data-landing-zone-types';
-import { DLZ_CUR_DEFAULTS } from './constructs/dlz-cur';
 import { validateFinOpsConfig, validateLegacyRootFinOpsProps } from './lib/finops-validation';
 import { Report } from './lib/report';
 import { FinOpsGlobalStack, ManagementCurExportStack, ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
