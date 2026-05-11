@@ -229,3 +229,64 @@ th, td {
         grid-template-columns: 1fr;
     }
 }
+
+/* Balance triangle — hero visual showing DevEx / Finance / Compliance equilibrium */
+.balance-triangle {
+    width: 100%;
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+.balance-triangle svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.bt-edge {
+    fill: none;
+    stroke: var(--sl-color-gray-3);
+    stroke-width: 2;
+    opacity: 0.7;
+}
+
+.bt-dash {
+    stroke: var(--sl-color-gray-4);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 6;
+    opacity: 0.55;
+}
+
+.bt-vertex {
+    fill: var(--sl-color-white);
+    stroke: var(--sl-color-gray-5);
+    stroke-width: 1;
+}
+
+.bt-check {
+    fill: none;
+    stroke: var(--sl-color-white);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.bt-label {
+    fill: var(--sl-color-white);
+    font-size: 28px;
+    font-weight: 500;
+    font-family: var(--sl-font);
+}
+
+:root[data-theme='light'] .bt-vertex {
+    fill: var(--sl-color-gray-1);
+    stroke: var(--sl-color-gray-4);
+}
+
+:root[data-theme='light'] .bt-label {
+    fill: var(--sl-color-gray-1);
+}
+
+:root[data-theme='light'] .bt-check {
+    stroke: var(--sl-color-white);
+}

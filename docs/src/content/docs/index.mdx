@@ -5,8 +5,29 @@ template: splash
 hero:
   tagline: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
   image:
-    light: ../../assets/data_landing_zone_logo.png
-    dark: ../../assets/data_landing_zone_logo-white.png
+    html: |
+      <div class="balance-triangle" role="img" aria-label="A triangle balancing DevEx, Finance, and Compliance, with the Data Landing Zone at the centre.">
+        <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="dlz-center-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#e85a5a" />
+              <stop offset="100%" stop-color="#6b5fc9" />
+            </linearGradient>
+          </defs>
+          <line x1="300" y1="320" x2="300" y2="100" class="bt-dash" />
+          <line x1="300" y1="320" x2="100" y2="440" class="bt-dash" />
+          <line x1="300" y1="320" x2="500" y2="440" class="bt-dash" />
+          <polygon points="300,100 100,440 500,440" class="bt-edge" />
+          <circle cx="300" cy="100" r="12" class="bt-vertex" />
+          <circle cx="100" cy="440" r="12" class="bt-vertex" />
+          <circle cx="500" cy="440" r="12" class="bt-vertex" />
+          <circle cx="300" cy="320" r="34" fill="url(#dlz-center-grad)" />
+          <path d="M 283 320 L 295 333 L 318 308" class="bt-check" />
+          <text x="300" y="65" text-anchor="middle" class="bt-label">DevEx</text>
+          <text x="100" y="490" text-anchor="middle" class="bt-label">Finance</text>
+          <text x="500" y="490" text-anchor="middle" class="bt-label">Compliance</text>
+        </svg>
+      </div>
   actions:
     - text: Introduction
       link: /introduction
