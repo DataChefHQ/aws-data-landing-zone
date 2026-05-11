@@ -75,6 +75,52 @@ th, td {
     }
 }
 
+/* Market callout — pullquote with attribution */
+.market-callout {
+    position: relative;
+    margin: 3rem auto !important;
+    padding: 2.25rem 2rem 1.75rem;
+    max-width: 52rem;
+    text-align: center;
+    background: var(--sl-color-gray-6, transparent);
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.market-callout::before {
+    content: "\201C";
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 5rem;
+    line-height: 0.4;
+    color: var(--sl-color-accent-high, var(--sl-color-text-accent));
+    opacity: 0.5;
+    margin-bottom: 0.75rem;
+}
+
+.market-callout p {
+    font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--sl-color-white);
+    margin: 0 !important;
+}
+
+.market-callout .stat-highlight {
+    color: var(--sl-color-accent-high, var(--sl-color-text-accent));
+    font-style: normal;
+    font-weight: 700;
+}
+
+.market-callout cite {
+    display: block;
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--sl-color-gray-3);
+    letter-spacing: 0.02em;
+}
+
 /* Actor cards — three stakeholder cards */
 .actor-grid {
     display: grid;

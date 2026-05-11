@@ -1,9 +1,9 @@
 ---
 title: Data Landing Zone
-description: An opinionated AWS landing zone for AI and data workloads. Security, privacy, and FinOps baked in from day one.
+description: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
 template: splash
 hero:
-  tagline: An opinionated AWS landing zone for AI and data workloads. Security, privacy, and FinOps baked in from day one.
+  tagline: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
   image:
     light: ../../assets/data_landing_zone_logo.png
     dark: ../../assets/data_landing_zone_logo-white.png
@@ -20,40 +20,30 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <h2>The problem</h2>
 <p>
-Cloud bills double overnight. Privacy audits land badly. Engineers ship slower because every
-workload reinvents the same governance from scratch. By the time anyone notices, the workloads,
-the habits, and the architecture are already set, and remediation is painful.
+Cloud bills double overnight. Privacy audits land badly. Every workload reinvents the same
+governance, and engineers ship slower for it. By the time anyone notices the pattern, the
+architecture has already hardened around it, and remediation means changing things teams now
+depend on.
 </p>
 
 <p>
-This pattern repeats with every transformative technology. Privacy gets addressed first because
-regulation forces the conversation. FinOps gets addressed last, after a billing shock. AI is
-next, and this time the spend is moving faster than the regulation. The numbers tell the story.
+The order is predictable. Privacy gets addressed first because regulation forces the
+conversation. FinOps gets addressed last, after the first billing shock. AI is now landing in
+the same sequence, except the spend curve is steeper than the regulatory one.
 </p>
 
-<div class="stats-grid">
-  <div class="stat-card">
-    <div class="stat-number">98%</div>
-    <div class="stat-label">of FinOps practitioners now manage AI spend, up from 31% in 2024</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">$85K</div>
-    <div class="stat-label">average monthly AI spend in 2025, a 36% YoY increase</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">51%</div>
-    <div class="stat-label">of teams feel confident measuring AI ROI</div>
-  </div>
-</div>
+<blockquote class="market-callout">
+<p>"Surveyed companies reported average monthly AI budgets rising <span class="stat-highlight">36%</span> in 2025, with only <span class="stat-highlight">51%</span> confident they can measure the ROI of that spend."</p>
+<cite>— CloudZero, <em>The State of AI Costs</em>, May 2025</cite>
+</blockquote>
 
 <p>
-The Data Landing Zone is engineered to prevent this failure mode before the first workload lands.
+The Data Landing Zone closes these gaps before the first workload lands.
 </p>
 
 <h2>Built for three stakeholders at once</h2>
 <p>
-Most data platforms optimise for one stakeholder, tolerate the second, and ignore the third. The
-DLZ is designed to make all three genuinely happy at the same time.
+Data platforms usually pick one of these audiences to serve well. The DLZ aims to serve all three.
 </p>
 
 <div class="actor-grid">
@@ -61,41 +51,43 @@ DLZ is designed to make all three genuinely happy at the same time.
     <div class="actor-icon">💰</div>
     <h3>CFO &amp; Finance</h3>
     <p>
-    Cost controls are not bolted on after the fact. Every workload is financially observable from
-    day one. Budgets and guardrails are provisioned as code. No end-of-month surprises, no manual
-    reconciliation, clear chargeback lines.
+    Cost attribution is part of provisioning. Budgets and anomaly alerts ship as code alongside
+    the workload they monitor, and every resource carries the tags needed to roll spend up to a
+    team, product, or environment. Chargeback becomes a query rather than a reconciliation
+    project.
     </p>
   </div>
   <div class="actor-card">
     <div class="actor-icon">📋</div>
     <h3>Compliance Office</h3>
     <p>
-    Built with a compliance mindset from the ground up. GDPR alignment, data classification,
-    access control, and audit trails are DLZ defaults, not workload-level responsibilities.
-    Regulators find what they expect to find.
+    The controls regulators look for are owned by the platform: GDPR alignment, data
+    classification, access logging, audit trails. When an audit lands, the evidence is already
+    in the same place it was last quarter.
     </p>
   </div>
   <div class="actor-card">
     <div class="actor-icon">👩‍💻</div>
     <h3>Engineers</h3>
     <p>
-    Built by engineers, for engineers. Developer experience is a first-class priority. Engineers
-    don't cut tickets begging a CCoE to unblock them. Productivity is not sacrificed on the altar
-    of governance.
+    Engineers get a paved road. Common requests like a new account, a new pipeline, or access
+    to a dataset resolve through self-service against guardrails the platform already enforces.
+    Policy is checked at deploy and audit time, so PRs don't run into governance walls in the
+    middle of code review.
     </p>
   </div>
 </div>
 
 <blockquote class="design-principle">
-<strong>Design principle.</strong> Governance should be the path of least resistance. An engineer
-using the DLZ should find it easier to do the right thing than to bypass it. Not because we block
-them, but because we made the right thing the default.
+<strong>Design principle.</strong> The compliant path should be the convenient one. When
+following policy is the fastest way to ship, engineers do it by default, and working around it
+stops being worth the effort.
 </blockquote>
 
 <h2>How the DLZ delivers on FinOps</h2>
 <p>
-FinOps is the pillar that most consistently gets left behind. In the DLZ it doesn't. The
-capability is delivered in four layers, each building on the one below.
+FinOps tends to arrive last, after the first billing shock makes it urgent. The DLZ ships the
+cost-management capability ready to use, in four layers.
 </p>
 
 <div class="layers-grid">
@@ -103,32 +95,35 @@ capability is delivered in four layers, each building on the one below.
     <div class="layer-number">01</div>
     <h3>Instrumentation</h3>
     <p>
-    Every service emits cost and usage data in a consistent, queryable form. CUR 2.0 is the master
-    ledger, centralised in a dedicated FinOps account and queryable from Athena.
+    Every service emits cost and usage data in a consistent form. CUR 2.0 is the system of
+    record, written to a dedicated FinOps account and queryable from Athena.
     </p>
   </div>
   <div class="layer-card">
     <div class="layer-number">02</div>
     <h3>Attribution</h3>
     <p>
-    A mandatory tag set is enforced at deploy time through tag policies, SCPs, and DLZ validation.
-    Resources that cannot be attributed to an owner do not deploy to production.
+    A mandatory tag set is enforced at deploy time. Tag policies, SCPs, and DLZ-side validation
+    all check it before a resource ships. Anything that can't be attributed to an owner doesn't
+    reach production.
     </p>
   </div>
   <div class="layer-card">
     <div class="layer-number">03</div>
     <h3>Guardrails</h3>
     <p>
-    Soft alerts at threshold, hard blocks at limit. An LLM gateway enforces per-team and
-    per-project token caps in real time, blocking requests before the model ever sees them.
+    Budgets alert when usage approaches the threshold and stop spend when it crosses the limit.
+    An LLM gateway applies per-team and per-project token caps in real time, so a runaway agent
+    burns minutes of budget rather than days.
     </p>
   </div>
   <div class="layer-card">
     <div class="layer-number">04</div>
     <h3>Reporting</h3>
     <p>
-    Dashboards for engineers, product owners, and finance. Cost-per-unit-of-work makes
-    optimisation conversations concrete: cost per inference, per document, per query.
+    Each role gets the view it needs: engineers see service-level burn, product owners see
+    feature cost, finance sees the chargeback rollup. Cost-per-unit-of-work (dollars per
+    inference, per document, per query) turns "we should optimise" into a number.
     </p>
   </div>
 </div>
@@ -139,19 +134,19 @@ capability is delivered in four layers, each building on the one below.
 	<Card title="Accelerator" icon="rocket">
     A landing zone tailored for AI, data-driven, data mesh, and cloud projects, so teams can experiment fast without building governance from scratch.
 	</Card>
-  <Card title="Knowledge baked in" icon="add-document">
-    Operational experience, regulatory awareness, and cost discipline are encoded directly in the platform. They travel with every workload built on top of it.
+  <Card title="Lessons in the defaults" icon="add-document">
+    Years of operational lessons about regulators, billing, and incident response are encoded as defaults in the platform. New workloads inherit them without anyone having to remember to apply them.
   </Card>
   <Card title="All-in-one CDK component" icon="pencil">
 		A CDK construct published in TypeScript and Python that orchestrates AWS accounts and the resources needed for a multi-account data platform.
 	</Card>
-	<Card title="FinOps as a first-class pillar" icon="seti:db">
+	<Card title="FinOps as a platform concern" icon="seti:db">
     Mandatory cost-allocation tags enforced at deploy time. Budgets and anomaly controls as code. CUR centralised in a dedicated FinOps account. An LLM gateway that blocks token spend before it reaches the model.
 	</Card>
 	<Card title="Standards &amp; best practices" icon="setting">
 		Aligned with the AWS Well-Architected Framework for multi-account strategy, security, and compliance.
 	</Card>
   <Card title="Ease of use" icon="heart">
-    Simple enough for Data Engineers to use independently, yet flexible and customisable for Cloud Engineers to fine-tune and optimise.
+    Data engineers can deploy it using the defaults. Cloud engineers can customise the parts their organisation needs to fine-tune.
   </Card>
 </CardGrid>
