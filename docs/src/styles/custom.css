@@ -39,14 +39,19 @@ th, td {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin: 2.5rem 0;
+    align-items: stretch;
 }
 
-.stat-card {
+.stats-grid > .stat-card {
     padding: 1.75rem 1.5rem;
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.5rem;
     background: var(--sl-color-gray-6, transparent);
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 0;
 }
 
 .stat-number {
@@ -76,13 +81,18 @@ th, td {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
     margin: 2rem 0;
+    align-items: stretch;
 }
 
-.actor-card {
+.actor-grid > .actor-card {
     padding: 1.5rem;
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.5rem;
     background: var(--sl-color-gray-6, transparent);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 0;
 }
 
 .actor-card h3 {
@@ -128,14 +138,19 @@ th, td {
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     margin: 2rem 0;
+    align-items: stretch;
 }
 
-.layer-card {
+.layers-grid > .layer-card {
     padding: 1.5rem 1.25rem;
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.5rem;
     background: var(--sl-color-gray-6, transparent);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 0;
 }
 
 .layer-number {
