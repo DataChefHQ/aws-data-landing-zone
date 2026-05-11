@@ -4,145 +4,42 @@ description: AWS Cost Anomaly Detection monitors and subscriptions
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
-The `costAnomalyDetection` prop provisions one or more AWS Cost Anomaly Detection
-monitors in the management account, plus a subscription that routes notifications
-through the existing `AccountChatbots` Slack/email channels.
+`finOps.costAnomalyDetection` provisions Anomaly Monitors in the management account,
+routing notifications through Slack/email via the existing `AccountChatbots`
+infrastructure. Reuses the `budgetSnsCache` so monitors and budgets can share an SNS topic.
 
-Reuses the existing `budgetSnsCache`, so a deployment that already has matching budget
-subscribers gets a single SNS topic for both budget alerts and anomaly notifications.
+## Monitor types
 
-Independent of the FinOps OU — only uses the management account.
+| Field | Watches | Use |
+|---|---|---|
+| `dimension: 'SERVICE'` | every AWS service | broadest, lowest noise — recommended starting point |
+| `dimension: 'LINKED_ACCOUNT'` | every account | per-account anomalies |
+| `tagKey: 'CostCenter'` | resources by tag | cost-center / project anomalies |
 
-## Per-service monitor (broadest, lowest noise)
+`dimension` and `tagKey` are mutually exclusive on a single monitor.
 
-The default `dimension: 'SERVICE'` watches every AWS service for unusual spend
-patterns. Recommended starting point.
+## Example
 
 <DualCode>
   <Fragment slot="ts">
     ```ts
-    import { App } from 'aws-cdk-lib';
-    import { DataLandingZone } from 'aws-data-landing-zone';
-
-    const app = new App();
-    new DataLandingZone(app, {
-      // ...
-      finOps: {
-        costAnomalyDetection: {
-          monitors: [
-            {
-              name: 'aws-services-anomaly',
-              dimension: 'SERVICE',
-              thresholdUsd: 100,
-              frequency: 'IMMEDIATE',
-              subscribers: {
-                snsTopicName: 'finops-alerts',  // shared with budgets
-                emails: ['finops@acme.com'],
-                slacks: [{
-                  slackChannelConfigurationName: 'finops-alerts',
-                  slackWorkspaceId: 'T01XXXXXXX',
-                  slackChannelId: 'C01XXXXXXX',
-                }],
-              },
+    finOps: {
+      costAnomalyDetection: {
+        monitors: [
+          {
+            name: 'aws-services',
+            dimension: 'SERVICE',
+            thresholdUsd: 100,
+            subscribers: {
+              snsTopicName: 'finops-alerts',
+              emails: ['finops@acme.com'],
             },
-          ],
-        },
-      },
-    });
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    import aws_cdk as cdk
-    import aws_data_landing_zone as dlz
-
-    app = cdk.App()
-    dlz.DataLandingZone(app,
-        # ...
-        fin_ops=dlz.DlzFinOpsProps(
-            cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
-                monitors=[
-                    dlz.DlzCostAnomalyMonitorProps(
-                        name="aws-services-anomaly",
-                        dimension="SERVICE",
-                        threshold_usd=100,
-                        frequency="IMMEDIATE",
-                        subscribers=dlz.BudgetSubscribers(
-                            sns_topic_name="finops-alerts",  # shared with budgets
-                            emails=["finops@acme.com"],
-                            slacks=[
-                                dlz.SlackChannel(
-                                    slack_channel_configuration_name="finops-alerts",
-                                    slack_workspace_id="T01XXXXXXX",
-                                    slack_channel_id="C01XXXXXXX",
-                                ),
-                            ],
-                        ),
-                    ),
-                ],
-            ),
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
-
-## Per-account monitor
-
-Use `dimension: 'LINKED_ACCOUNT'` to watch every account for unusual spend.
-
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      costAnomalyDetection: {
-        monitors: [
-          {
-            name: 'per-account-anomaly',
-            dimension: 'LINKED_ACCOUNT',
-            thresholdUsd: 50,
-            subscribers: { /* ... */ },
           },
-        ],
-      },
-    }
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    fin_ops=dlz.DlzFinOpsProps(
-        cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
-            monitors=[
-                dlz.DlzCostAnomalyMonitorProps(
-                    name="per-account-anomaly",
-                    dimension="LINKED_ACCOUNT",
-                    threshold_usd=50,
-                    subscribers=...,  # ...
-                ),
-            ],
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
-
-## Per-tag monitor (e.g. CostCenter)
-
-Set `tagKey` (and omit `dimension`) to monitor anomalies grouped by a cost-allocation
-tag. Useful for watching individual cost centers or projects without provisioning a
-monitor per value.
-
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      costAnomalyDetection: {
-        monitors: [
           {
-            name: 'cost-center-anomaly',
+            name: 'cost-centers',
             tagKey: 'CostCenter',
             thresholdUsd: 200,
-            subscribers: { /* ... */ },
+            subscribers: { snsTopicName: 'finops-alerts' },
           },
         ],
       },
@@ -155,10 +52,19 @@ monitor per value.
         cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
             monitors=[
                 dlz.DlzCostAnomalyMonitorProps(
-                    name="cost-center-anomaly",
+                    name="aws-services",
+                    dimension="SERVICE",
+                    threshold_usd=100,
+                    subscribers=dlz.BudgetSubscribers(
+                        sns_topic_name="finops-alerts",
+                        emails=["finops@acme.com"],
+                    ),
+                ),
+                dlz.DlzCostAnomalyMonitorProps(
+                    name="cost-centers",
                     tag_key="CostCenter",
                     threshold_usd=200,
-                    subscribers=...,  # ...
+                    subscribers=dlz.BudgetSubscribers(sns_topic_name="finops-alerts"),
                 ),
             ],
         ),
@@ -171,45 +77,6 @@ monitor per value.
 
 | Value | Channel | Use |
 |---|---|---|
-| `IMMEDIATE` | SNS | Real-time alerts; pair with Slack for fast triage |
-| `DAILY` | Email summary | Daily digest of anomalies |
-| `WEEKLY` | Email summary | Weekly review cadence |
-
-`IMMEDIATE` is the construct's default and the recommended starting point.
-
-## Multiple monitors
-
-Mix and match dimensions in a single deployment. Each monitor produces its own
-`CfnAnomalyMonitor` and `CfnAnomalySubscription`.
-
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      costAnomalyDetection: {
-        monitors: [
-          { name: 'svc-anomaly', dimension: 'SERVICE', thresholdUsd: 100, subscribers: { /* ... */ } },
-          { name: 'acct-anomaly', dimension: 'LINKED_ACCOUNT', thresholdUsd: 50, subscribers: { /* ... */ } },
-          { name: 'cc-anomaly', tagKey: 'CostCenter', thresholdUsd: 200, subscribers: { /* ... */ } },
-        ],
-      },
-    }
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    fin_ops=dlz.DlzFinOpsProps(
-        cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
-            monitors=[
-                dlz.DlzCostAnomalyMonitorProps(name="svc-anomaly", dimension="SERVICE", threshold_usd=100, subscribers=...),
-                dlz.DlzCostAnomalyMonitorProps(name="acct-anomaly", dimension="LINKED_ACCOUNT", threshold_usd=50, subscribers=...),
-                dlz.DlzCostAnomalyMonitorProps(name="cc-anomaly", tag_key="CostCenter", threshold_usd=200, subscribers=...),
-            ],
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
-
-`dimension` and `tagKey` are mutually exclusive on a single monitor — setting both
-throws at synth.
+| `IMMEDIATE` (default) | SNS | real-time alerts |
+| `DAILY` | email | daily digest |
+| `WEEKLY` | email | weekly review |

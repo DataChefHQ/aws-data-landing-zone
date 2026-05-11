@@ -18,11 +18,6 @@ export type HandlerResponse = undefined | {
   NoEcho?: boolean;
 };
 
-/**
- * Returns the user-defined tag keys that are currently `Inactive` in Cost Explorer.
- * `UpdateCostAllocationTagsStatus` is idempotent — re-activating an already-active tag
- * is a no-op — so we filter mostly to keep the request payload small and the logs honest.
- */
 async function inactiveOf(requested: string[]): Promise<string[]> {
   console.log('Listing current cost allocation tag status...');
   const inactive = new Set<string>(requested);
@@ -56,8 +51,7 @@ export const handler = async (
     };
 
     if (event.RequestType === 'Delete') {
-      // Do not deactivate tags on stack delete — they may be in use by other things.
-      console.log('Delete is a no-op (tags are not deactivated to avoid disrupting consumers).');
+      // No-op on delete: tags may be in use by consumers outside this stack.
       return response;
     }
 

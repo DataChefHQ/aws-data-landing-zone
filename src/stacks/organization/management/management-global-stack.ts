@@ -3,13 +3,12 @@ import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as organizations from 'aws-cdk-lib/aws-organizations';
 import { Construct } from 'constructs';
+import { DlzAccountBudgets } from '../../../constructs/dlz-account-budgets';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../../constructs/dlz-control-tower-control';
-import { DlzAccountBudgets } from '../../../constructs/dlz-account-budgets';
 import { DlzCostAnomalyDetection } from '../../../constructs/dlz-cost-anomaly-detection';
-import { DLZ_CUR_DEFAULTS, DlzCurExport } from '../../../constructs/dlz-cur';
 import { GuardDutyDelegatedAdmin } from '../../../constructs/dlz-guardduty';
 import { MacieDelegatedAdmin } from '../../../constructs/dlz-macie';
 import {
@@ -68,10 +67,6 @@ export class ManagementGlobalStack extends DlzStack {
 
     if (this.props.finOps?.costAnomalyDetection) {
       this.costAnomalyDetection();
-    }
-
-    if (this.props.finOps?.cur) {
-      this.curExport();
     }
 
     if (this.props.guardDuty) {
@@ -343,11 +338,7 @@ export class ManagementGlobalStack extends DlzStack {
     });
   }
 
-  /**
-   * Hardening baseline applied to the dedicated FinOps account. Auto-attached when
-   * `org.ous.sharedServices.accounts.finOps` is configured. Composes the static baseline
-   * with any per-account `scpStatements` declared on `DLzFinOpsAccount` (additive only).
-   */
+  /** Auto-attaches `ScpFinOpsAccountBaseline` + per-account `scpStatements` (additive). */
   private finOpsAccountHardening() {
     const finOpsAccount = this.props.organization.ous.sharedServices!.accounts.finOps!;
     const accountExtras = finOpsAccount.scpStatements ?? [];
@@ -363,7 +354,6 @@ export class ManagementGlobalStack extends DlzStack {
     Report.addReportForAccountRegion('finops', '*', dlzScp.reportResource);
   }
 
-  /** Per-account / per-cost-center budgets composed from `DlzBudget`. */
   private accountBudgets() {
     new DlzAccountBudgets(
       this,
@@ -374,7 +364,6 @@ export class ManagementGlobalStack extends DlzStack {
     );
   }
 
-  /** Cost Anomaly Detection monitors + subscriptions, sharing SNS topics with budgets. */
   private costAnomalyDetection() {
     new DlzCostAnomalyDetection(
       this,
@@ -382,33 +371,6 @@ export class ManagementGlobalStack extends DlzStack {
       this.props.finOps!.costAnomalyDetection!,
       this.stackProps.globalVariables.budgetSnsCache,
     );
-  }
-
-  /**
-   * CUR 2.0 export definition (BCM Data Exports). Writes cross-account into the FinOps
-   * account's bucket — the bucket itself is provisioned by `FinOpsGlobalStack`.
-   */
-  private curExport() {
-    const cur = this.props.finOps!.cur!;
-    const finOpsAccountId = this.props.organization.ous.sharedServices!.accounts.finOps!.accountId;
-    const destinationRegion = cur.destinationRegion ?? DLZ_CUR_DEFAULTS.destinationRegion;
-    const exportName = cur.exportName ?? DLZ_CUR_DEFAULTS.exportName;
-    const bucketName = `${cur.bucketNamePrefix ?? DLZ_CUR_DEFAULTS.bucketNamePrefix}-${finOpsAccountId}-${destinationRegion}`;
-
-    const tagKeys = this.collectMandatoryTagKeys();
-
-    new DlzCurExport(this, this.resourceName('cur-export'), {
-      destinationBucketArn: `arn:aws:s3:::${bucketName}`,
-      destinationPrefix: exportName,
-      exportName,
-      costAllocationTagKeys: cur.activateCostAllocationTags === false ? [] : tagKeys,
-      exportConfig: cur.exportConfig,
-    });
-  }
-
-  private collectMandatoryTagKeys(): string[] {
-    const baseline = PropsOrDefaults.getOrganizationTags(this.props);
-    return baseline.map(t => t.name);
   }
 
 }

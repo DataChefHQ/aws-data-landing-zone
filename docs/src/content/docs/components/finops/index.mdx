@@ -1,128 +1,67 @@
 ---
 title: FinOps
-description: Cost and usage instrumentation, attribution, and guardrails
+description: Cost instrumentation, attribution, and guardrails
 ---
 
-The Data Landing Zone ships an opinionated FinOps capability covering three of the four
-layers from the FinOps reference model:
+DLZ ships an opinionated FinOps capability under the top-level `finOps` prop:
 
-All capabilities are grouped under the top-level [`finOps`](#) prop on
-`DataLandingZoneProps`:
+| Prop | What you get |
+|---|---|
+| [`finOps.cur`](/components/finops/cur) | CUR 2.0 cost-data delivery into a dedicated FinOps account |
+| [`finOps.budgets`](/components/account-management/budgets) | Org-level / tag-filtered budget alerts |
+| [`finOps.accountBudgets`](/components/finops/account-budgets) | Per-account and per-cost-center budgets |
+| [`finOps.costAnomalyDetection`](/components/finops/cost-anomaly-detection) | Cost Anomaly Detection monitors |
+| `finOps.accountTags` | Override the FinOps stack's self-tagging defaults |
 
-- **Layer 1 — Instrumentation**: CUR 2.0 cost-data delivery via
-  [`finOps.cur`](/components/finops/cur).
-- **Layer 2 — Attribution**: Mandatory tags (`Owner`, `Project`, `Environment`, `CostCenter`,
-  `Domain`) enforced by tag policy + SCP, applied app-wide via `Tags.of()`.
-- **Layer 3 — Guardrails**: Org-wide budget alerts via `finOps.budgets`, per-account and
-  per-cost-center budgets via [`finOps.accountBudgets`](/components/finops/account-budgets),
-  and Cost Anomaly Detection via
-  [`finOps.costAnomalyDetection`](/components/finops/cost-anomaly-detection).
+When `org.ous.sharedServices.accounts.finOps` is configured,
+[`ScpFinOpsAccountBaseline`](/components/finops/finops-account-baseline) is
+auto-attached to keep the account scoped to its purpose.
 
-Layer 4 (dashboards / chargeback / optimization recommendations) is intentionally out of
-scope — DLZ delivers raw CUR data into the FinOps account and downstream visualization
-belongs in a separate layer.
+Mandatory tags (`Owner`, `Project`, `Environment`, `CostCenter`, `Domain`) are enforced
+by tag policy + SCP and applied app-wide. `CostCenter` and `Domain` populate from
+`DLzAccount.costCenter` / `DLzAccount.domain`; `finOps.cur` activates them as
+Cost Allocation Tags automatically.
 
-## Where things land
+Out of scope: dashboards, chargeback, optimization recommendations. DLZ delivers raw
+cost data; downstream visualization is a separate layer.
 
-The control plane (CUR export definition, Budgets, Anomaly Detection) lives in the
-**management account** because BCM Data Exports / Budgets / Cost Explorer are payer-only
-APIs. The data plane (CUR S3 bucket + Glue catalog) lives in a dedicated **FinOps account**
-so cost-data consumers (finance, eng leads, BI tools) never need management-account access.
+## Extras (opt-in, not deployed by DLZ)
+
+| Extra | What it is |
+|---|---|
+| [CUDOS / CID dashboards](/components/finops/cudos) | AWS Cloud Intelligence Dashboards on top of the DLZ CUR data. Documents how to deploy them and what they cost. |
+
+## Architecture
+
+The control plane (CUR export, Budgets, Anomaly Monitors) lives in the management
+account because BCM Data Exports / Budgets / Cost Explorer are payer-only APIs. The
+data plane (CUR S3 bucket + Glue catalog) lives in a dedicated FinOps account so
+consumers (finance, eng leads, BI tools) never need management-account access.
 
 ```mermaid
 flowchart LR
-    subgraph mgmt["Management account (control plane)"]
-        direction TB
-        cfn[bcm-data-exports.CfnExport]
+    subgraph mgmt["Management account"]
+        cfn[BCM Data Exports]
         budgets[Budgets]
         anomaly[Anomaly Monitors]
     end
-
-    subgraph finops["FinOps account (data plane)"]
-        direction TB
-        s3[(S3 bucket<br/>CUR Parquet)]
-        glue[Glue DB + Crawler]
-        readers([SSO read access<br/>finance / eng / BI])
-        glue --> s3
+    subgraph finops["FinOps account"]
+        s3[(S3 + Glue)]
+        readers([SSO read access])
         readers --> s3
-        readers --> glue
     end
-
-    billing(["AWS Billing service<br/>billingreports.amazonaws.com"])
-
-    cfn -- defines export --> billing
-    billing == direct cross-account write<br/>(AWS-managed, no copy job) ==> s3
-
-    classDef mgmtStyle fill:#fde2e4,stroke:#b23a48,color:#000
-    classDef finopsStyle fill:#cce5ff,stroke:#1f4e79,color:#000
-    classDef billingStyle fill:#fff3b0,stroke:#a07b00,color:#000
-    class cfn,budgets,anomaly mgmtStyle
-    class s3,glue,readers finopsStyle
-    class billing billingStyle
+    cfn ==> s3
 ```
 
-There is no copy job — AWS Billing writes Parquet files directly into the FinOps-account
-bucket on the export schedule.
+AWS Billing writes Parquet files directly to the FinOps bucket — no DLZ-managed copy job.
 
-## Adoption paths
+## Adoption modes
 
-Three coherent modes, gated by which props are set:
-
-### 1. No FinOps
-
-Omit everything. Zero footprint.
-
-### 2. Guardrails only
-
-Set `finOps.accountBudgets` and/or `finOps.costAnomalyDetection` without
-`org.ous.sharedServices`. Lightweight entry point — no extra account, no S3, no Glue.
-Notifications route through the existing `AccountChatbots` Slack/email infrastructure.
-
-### 3. Full FinOps
-
-Provision a dedicated FinOps account in AWS Organizations under a Shared Services OU,
-declare it under `org.ous.sharedServices.accounts.finOps`, and set `finOps.cur` plus the
-guardrail props. Cost data delivered to the dedicated account; downstream FinOps tooling
-reads from there.
-
-## Account hardening
-
-When `org.ous.sharedServices.accounts.finOps` is set, the `ScpFinOpsAccountBaseline` SCP
-is auto-attached to the FinOps account. It denies:
-
-- Compute / data services (EC2 instances, RDS, SageMaker, Bedrock, ECS, EKS, EMR, Redshift, etc.)
-- Network primitives (VPC, IGW, NAT, TGW creation)
-- IAM user / access-key / login-profile creation (humans access via SSO only)
-- Org-integrity actions (`LeaveOrganization`, `CloseAccount`, disabling CloudTrail / GuardDuty / Macie / Config)
-
-Glue and Athena run on AWS-managed infrastructure, so no VPC is needed for the in-scope
-use cases. Override the denied-services list with
-`ScpFinOpsAccountBaseline.statements({ deniedServices: [...] })` if a deployment needs a
-narrower or wider deny set.
-
-## Mandatory tags
-
-The DLZ already enforces five mandatory tags on every resource via tag policy, SCP, and
-`Tags.of()` defaults:
-
-| Tag | DLZ default | Purpose |
+| Mode | Set | What it does |
 |---|---|---|
-| `Owner` | `infra` | Team responsible for the resource |
-| `Project` | `dlz` | Project the resource belongs to |
-| `Environment` | `dlz` | dev / staging / prod |
-| `CostCenter` | `dlz` | Finance cost center for chargeback |
-| `Domain` | `foundation` | Data domain — foundation enforces presence; platform overlay may constrain values |
+| Off | nothing | Zero footprint |
+| Guardrails only | `finOps.accountBudgets`, `finOps.costAnomalyDetection` | Budgets + anomaly alerts; no FinOps account needed |
+| Full | + `org.ous.sharedServices.accounts.finOps` and `finOps.cur` | Adds CUR 2.0 cost-data delivery |
 
-These tag keys are also activated as Cost Allocation Tags in the Billing console
-(automatically by the CUR control plane) so they appear in CUR data and downstream
-chargeback rolls up correctly.
-
-## Validation
-
-Synth-time checks fail fast with actionable messages:
-
-- `finOps.cur` set without `org.ous.sharedServices.accounts.finOps` → synth error
-- `org.ous.sharedServices.accounts.finOps` set without any FinOps capability → info log ("provisioned but dormant")
-- `finOps.cur.destinationRegion` not `us-east-1` → warning (Glue + Athena must run in the same region)
-- `finOps.cur.dataPlaneConfig.lifecycle.expirationDays` between 1 and 394 → synth error (minimum 395 for YoY comparisons)
-- Legacy top-level `budgets` / `accountBudgets` / `costAnomalyDetection` / `cur` → synth error with migration message (move under `finOps`)
+When the FinOps account is configured, [`ScpFinOpsAccountBaseline`](/components/finops/finops-account-baseline) is auto-applied
+to keep the account scoped to its purpose.

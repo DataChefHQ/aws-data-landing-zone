@@ -26,7 +26,7 @@ import { DlzCostAnomalyDetectionProps } from './constructs/dlz-cost-anomaly-dete
 import { DlzCurProps } from './constructs/dlz-cur/cur-types';
 import { DlzGuardDutyFeaturesProps, DlzGuardDutyProps } from './constructs/dlz-guardduty/guardduty-types';
 import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
-import { AuditGlobalStack, FinOpsGlobalStack, ManagementGlobalStack } from './stacks';
+import { AuditGlobalStack, FinOpsGlobalStack, ManagementCurExportStack, ManagementGlobalStack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
 } from './stacks/organization/management/management-global-iam-identity-center-stack';
@@ -999,11 +999,36 @@ export interface DlzFinOpsProps {
    * fast at synth otherwise.
    */
   readonly cur?: DlzCurProps;
+
+  /**
+   * Override the tag values applied by the FinOps stack to its own resources. Defaults
+   * categorize the FinOps account as production-grade DLZ infrastructure; override when
+   * the operator's taxonomy differs.
+   */
+  readonly accountTags?: DlzFinOpsAccountTags;
+}
+
+/**
+ * Operator-configurable tag overrides for the FinOps account stack. Defaults applied
+ * when omitted.
+ */
+export interface DlzFinOpsAccountTags {
+  /** @default 'infra' */
+  readonly owner?: string;
+  /** @default 'dlz' */
+  readonly project?: string;
+  /** @default DlzAccountType.PRODUCTION ('production') */
+  readonly environment?: string;
+  /** @default 'dlz' */
+  readonly costCenter?: string;
+  /** @default 'foundation' */
+  readonly domain?: string;
 }
 
 export interface ManagementStacks {
   readonly global: ManagementGlobalStack;
   readonly globalIamIdentityCenter?: ManagementGlobalIamIdentityCenterStack;
+  readonly curExport?: ManagementCurExportStack;
 }
 
 export interface LogStacks {

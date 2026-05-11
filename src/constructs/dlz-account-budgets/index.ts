@@ -6,15 +6,8 @@ import { DlzBudget } from '../dlz-budget';
 export * from './account-budgets-types';
 
 /**
- * Per-account and per-cost-center budgets.
- *
- * Iterates the workload accounts and:
- *   - For each account with `monthlyBudget` set, creates a `DlzBudget` filtered to that
- *     account via the `LinkedAccount` cost filter (carried as a tag on the AWS Budget itself).
- *   - When `perCostCenterRollup` is enabled, also creates one roll-up budget per unique
- *     `CostCenter` value, summing across accounts that share the value.
- *
- * Composes the existing `DlzBudget` primitive — does not introduce a new budget shape.
+ * Per-account budgets (filtered by `LinkedAccount`) and optional per-cost-center
+ * roll-up budgets. Composes the `DlzBudget` primitive.
  */
 export class DlzAccountBudgets extends Construct {
 

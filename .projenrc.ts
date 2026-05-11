@@ -56,6 +56,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   bundledDeps: [
     '@aws-sdk/client-sts@^3.1030.0',
     '@aws-sdk/credential-providers@^3.1030.0',
+    '@aws-sdk/client-bcm-data-exports@^3.1030.0',
     '@aws-sdk/client-cost-explorer@^3.1030.0',
     '@aws-sdk/client-identitystore@^3.1030.0',
     '@aws-sdk/client-sso-admin@^3.1030.0',
@@ -126,6 +127,12 @@ project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-members/', {
   externals: ['aws-sdk'],
 });
 project.bundler.addBundle('./src/constructs/dlz-cur/lambda/cur-tag-activation/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-cur/lambda/cur-export-manager/', {
   platform: 'node',
   target: 'node22',
   sourcemap: true,

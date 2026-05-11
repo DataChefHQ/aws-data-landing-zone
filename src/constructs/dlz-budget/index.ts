@@ -23,11 +23,8 @@ export interface DlzBudgetProps {
   readonly subscribers: BudgetSubscribers;
 }
 
-// Cache for SNS topics to avoid creating multiple topics for the same subscribers
-
 export class DlzBudget {
   public readonly cfnBudget: budgets.CfnBudget;
-
 
   constructor(scope: Construct, id: string, props: DlzBudgetProps, budgetSnsCache: Record<string, GlobalVariablesBudgetSnsCacheRecord>) {
 
@@ -70,13 +67,11 @@ export class DlzBudget {
       notificationTopic = budgetSnsCache[props.subscribers.snsTopicName].topic;
 
       if (props.subscribers?.emails) {
-        // If there are new emails not already subscribed, add them
         for (const emailSub of props.subscribers.emails) {
           if (!budgetSnsCache[props.subscribers.snsTopicName].subscribers.emails?.includes(emailSub)) {
             budgetSnsCache[props.subscribers.snsTopicName].topic.addSubscription(new subscriptions.EmailSubscription(emailSub));
           }
         }
-        // Also update the cache that we have added them
         budgetSnsCache[props.subscribers.snsTopicName] = {
           topic: budgetSnsCache[props.subscribers.snsTopicName].topic,
           subscribers: {
@@ -90,7 +85,6 @@ export class DlzBudget {
       }
 
       if (props.subscribers?.slacks) {
-        // If there are new slack channels not already subscribed, add them
         for (const slackSub of props.subscribers.slacks) {
           const exists = budgetSnsCache[props.subscribers.snsTopicName].subscribers.slacks?.find(slack =>
             slack.slackChannelId === slackSub.slackChannelId && slack.slackWorkspaceId === slackSub.slackWorkspaceId,
@@ -100,7 +94,6 @@ export class DlzBudget {
             slackChannel.addNotificationTopic(budgetSnsCache[props.subscribers.snsTopicName].topic);
           }
         }
-        // Also update the cache that we have added them
         budgetSnsCache[props.subscribers.snsTopicName] = {
           topic: budgetSnsCache[props.subscribers.snsTopicName].topic,
           subscribers: {

@@ -1,8 +1,14 @@
 ---
 title: Budgets
-description: Budgets
+description: Org-level AWS Budgets via finOps.budgets
 ---
 import DualCode from '../../../../components/DualCode.astro';
+
+:::tip
+Budgets, Cost Anomaly Detection, CUR, and the FinOps account hardening live under the
+[`finOps`](/components/finops) prop. Per-account / per-cost-center budgets have a
+dedicated page: [Account Budgets](/components/finops/account-budgets).
+:::
 
 AWS Budgets provides tools to monitor and control costs by setting custom spending thresholds. You can create monthly
 budgets, specifying the budget amount and filtering resources based on their tags.
@@ -33,19 +39,21 @@ specified Slack channel and email address once the budget exceeds $100.
 
     const app = new App();
     const dlz = new DataLandingZone(app, {
-      budgets: [
-        {
-          name: 'backend',
-          forTags: {
-            owner: 'backend',
+      finOps: {
+        budgets: [
+          {
+            name: 'backend',
+            forTags: {
+              owner: 'backend',
+            },
+            amount: 100,
+            subscribers: {
+              slack: [slackBudgetNotifications],
+              emails: ['you@org.com'],
+            },
           },
-          amount: 100,
-          subscribers: {
-            slack: [slackBudgetNotifications],
-            emails: ['you@org.com'],
-          },
-        },
-      ],
+        ],
+      },
      ...
     });
     ```
@@ -63,19 +71,19 @@ specified Slack channel and email address once the budget exceeds $100.
 
     app = cdk.App()
     dlz.DataLandingZone(app,
-            budgets=[
-                {
-                    "name": "backend",
-                    "for_tags": {
-                        "owner": "backend",
-                    },
-                    "amount": 100,
-                    "subscribers": {
-                        "slacks": [slack_budget_notifications],
-                        "emails": ["you@org.com"],
-                    },
-                },
-            ],
+            fin_ops=dlz.DlzFinOpsProps(
+                budgets=[
+                    dlz.DlzBudgetProps(
+                        name="backend",
+                        for_tags={"owner": "backend"},
+                        amount=100,
+                        subscribers=dlz.BudgetSubscribers(
+                            slacks=[slack_budget_notifications],
+                            emails=["you@org.com"],
+                        ),
+                    ),
+                ],
+            ),
         ...
     )
     ```
@@ -106,11 +114,13 @@ To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
 
     const app = new App();
     const dlz = new DataLandingZone(app, {
-      budgets: [
-        ...Defaults.budgets(100, 20, subscribers),
-        { name: 'budget-high', amount: 1_000, subscribers },
-        { name: 'budget-high-1', amount: 2_000, subscribers },
-      ],
+      finOps: {
+        budgets: [
+          ...Defaults.budgets(100, 20, subscribers),
+          { name: 'budget-high', amount: 1_000, subscribers },
+          { name: 'budget-high-1', amount: 2_000, subscribers },
+        ],
+      },
      ...
     });
     ```
@@ -136,11 +146,13 @@ To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
 
     app = cdk.App()
     dlz.DataLandingZone(app,
-            budgets=[
-                *dlz.Defaults.budgets(org_total=500, infra_dlz=20, subscribers=budget_subscribers),
-                dlz.DlzBudgetProps(name="budget-high", amount=1_000, subscribers=budget_subscribers),
-                dlz.DlzBudgetProps(name="budget-high-1", amount=2_000, subscribers=budget_subscribers)
-            ],
+            fin_ops=dlz.DlzFinOpsProps(
+                budgets=[
+                    *dlz.Defaults.budgets(org_total=500, infra_dlz=20, subscribers=budget_subscribers),
+                    dlz.DlzBudgetProps(name="budget-high", amount=1_000, subscribers=budget_subscribers),
+                    dlz.DlzBudgetProps(name="budget-high-1", amount=2_000, subscribers=budget_subscribers),
+                ],
+            ),
         ...
     )
     ```
@@ -169,12 +181,14 @@ resources. Notifications are sent to the specified Slack channel and email addre
 
     const app = new App();
     const dlz = new DataLandingZone(app, {
-      budgets: [
-        ...Defaults.budgets(100, 20, {
-          slack: slackBudgetNotifications,
-          emails: ['you@org.com'],
-        }),
-      ],
+      finOps: {
+        budgets: [
+          ...Defaults.budgets(100, 20, {
+            slack: slackBudgetNotifications,
+            emails: ['you@org.com'],
+          }),
+        ],
+      },
      ...
     });
     ```
@@ -192,14 +206,16 @@ resources. Notifications are sent to the specified Slack channel and email addre
 
     app = cdk.App()
     dlz.DataLandingZone(app,
-            budgets=[
-                *dlz.Defaults.budgets(
-                    100,
-                    20,
-                    slack=slack_budget_notifications,
-                    emails=["you@org.com"],
-                ),
-            ],
+            fin_ops=dlz.DlzFinOpsProps(
+                budgets=[
+                    *dlz.Defaults.budgets(
+                        100,
+                        20,
+                        slack=slack_budget_notifications,
+                        emails=["you@org.com"],
+                    ),
+                ],
+            ),
         ...
     )
 

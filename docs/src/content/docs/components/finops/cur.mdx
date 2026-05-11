@@ -4,111 +4,145 @@ description: Cross-account CUR 2.0 delivery to a dedicated FinOps account
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
-The `cur` prop enables CUR 2.0 (BCM Data Exports) cost-data delivery into a dedicated
-FinOps account. The export definition is created in the management account; the S3
-bucket and Glue catalog are created in the FinOps account. AWS Billing writes Parquet
-files directly cross-account — no DLZ-managed copy job.
-
-CUR 2.0 only — never the legacy CUR 1.0. If a CUR 1.0 export already exists in the
-management account, DLZ does not touch it; the new 2.0 export deploys alongside.
+Delivers CUR 2.0 cost data to a dedicated FinOps account. Export lives in the
+management account; bucket and Glue catalog live in the FinOps account. AWS Billing
+writes Parquet files cross-account.
 
 ## Prerequisites
 
-1. A dedicated FinOps account provisioned manually in AWS Organizations, under a
-   Shared Services OU.
-2. The account ID + email under `org.ous.sharedServices.accounts.finOps`.
-
-If `cur` is set without `org.ous.sharedServices.accounts.finOps`, synth fails with an
-actionable error.
+A FinOps account configured under `org.ous.sharedServices.accounts.finOps`. Everything
+else is handled by `dlz bootstrap`.
 
 ## Minimal example
 
 <DualCode>
   <Fragment slot="ts">
     ```ts
-    import { App } from 'aws-cdk-lib';
-    import { DataLandingZone } from 'aws-data-landing-zone';
-
-    const app = new App();
     new DataLandingZone(app, {
       organization: {
-        // ...root, security, workloads, suspended as before...
         ous: {
-          // ...
           sharedServices: {
-            ouId: 'ou-xxxx-yyyyyyyy',
-            accounts: {
-              finOps: { accountId: '123456789012' },
-            },
+            ouId: 'ou-xxxx',
+            accounts: { finOps: { accountId: '123...' } },
           },
         },
       },
-      finOps: {
-        cur: {},  // sensible defaults for everything
-      },
+      finOps: { cur: {} },
     });
     ```
   </Fragment>
   <Fragment slot="python">
     ```python
-    import aws_cdk as cdk
-    import aws_data_landing_zone as dlz
-
-    app = cdk.App()
     dlz.DataLandingZone(app,
         organization=dlz.DLzOrganization(
-            # ...root, security, workloads, suspended as before...
             ous=dlz.OrgOus(
-                # ...
                 shared_services=dlz.OrgOuSharedServices(
-                    ou_id="ou-xxxx-yyyyyyyy",
+                    ou_id="ou-xxxx",
                     accounts=dlz.OrgOuSharedServicesAccounts(
-                        fin_ops=dlz.DLzFinOpsAccount(account_id="123456789012"),
+                        fin_ops=dlz.DLzFinOpsAccount(account_id="123..."),
                     ),
                 ),
             ),
         ),
-        fin_ops=dlz.DlzFinOpsProps(
-            cur=dlz.DlzCurProps(),  # sensible defaults for everything
+        fin_ops=dlz.DlzFinOpsProps(cur=dlz.DlzCurProps()),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+You get:
+
+- BCM Data Exports CUR 2.0 export in the management account (us-east-1).
+- S3 bucket `dlz-cur-{finOpsAccountId}-{destinationRegion}` in the FinOps account.
+- Glue database `dlz_cur_2` and a daily crawler at 06:00 UTC.
+- Athena workgroup `dlz-cur` with a dedicated query-results bucket so queries
+  run from day-1 without the "set up a query result location" prompt.
+- The 5 mandatory tags activated as Cost Allocation Tags.
+
+## Feature flags
+
+Each `include*Data` flag toggles an `INCLUDE_*` table property. The construct
+auto-extends the SELECT column list — no manual SQL editing.
+
+| Flag | Default | Adds | Available |
+|---|---|---|---|
+| `includeResources` | `true` | `line_item_resource_id` | always |
+| `includeSplitCostAllocationData` | `true` | `split_line_item_*` | always |
+| `includeCapacityReservationData` | `false` | 3 `capacity_reservation_*` columns | from 2025-11-01 |
+| `includeIamPrincipalData` | `false` | `line_item_iam_principal` (Bedrock) | from 2026-04-08 |
+
+## Customizing columns
+
+Set `exportConfig.queryColumns` to your own list (falls back to
+`DLZ_CUR_DEFAULT_QUERY_COLUMNS` when unset). Flag-driven columns are appended automatically.
+
+To extend the defaults, spread them:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { DLZ_CUR_DEFAULT_QUERY_COLUMNS } from 'aws-data-landing-zone';
+
+    finOps: {
+      cur: {
+        exportConfig: {
+          queryColumns: [...DLZ_CUR_DEFAULT_QUERY_COLUMNS, 'some_new_column'],
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    from aws_data_landing_zone import DLZ_CUR_DEFAULT_QUERY_COLUMNS
+
+    fin_ops=dlz.DlzFinOpsProps(
+        cur=dlz.DlzCurProps(
+            export_config=dlz.DlzCurExportConfig(
+                query_columns=[*DLZ_CUR_DEFAULT_QUERY_COLUMNS, "some_new_column"],
+            ),
         ),
     )
     ```
   </Fragment>
 </DualCode>
 
-That's it. With defaults the construct deploys:
+For a non-trivial projection / filter / aggregation, set `exportConfig.queryStatement`
+to the full SQL. That fully bypasses column composition (you own the SQL).
 
-- A `bcm-data-exports.CfnExport` named `dlz-cur-2` in the management account, in
-  `us-east-1` (forced by the API).
-- An S3 bucket named `dlz-cur-{finOpsAccountId}-us-east-1` in the FinOps account, with
-  the bucket policy scoped to `aws:SourceAccount = <management>` and
-  `aws:SourceArn = arn:aws:bcm-data-exports:us-east-1:<management>:export/dlz-cur-2`.
-- A Glue database `dlz_cur_2` and a daily crawler at `06:00 UTC`.
-- A custom resource that activates the 5 mandatory tags (`Owner`, `Project`,
-  `Environment`, `CostCenter`, `Domain`) as Cost Allocation Tags.
+## Tuning
 
-## Tuning the export
-
-Every prop is optional. Defaults match FinOps best practice (Parquet, hourly,
-resource-level, split cost allocation data on, idempotent overwrite).
+Every prop is optional.
 
 <DualCode>
   <Fragment slot="ts">
     ```ts
     finOps: {
       cur: {
-        exportName: 'acme-cur-2',          // default: 'dlz-cur-2'
-        bucketNamePrefix: 'acme-cur',       // default: 'dlz-cur'
-        glueDatabaseName: 'acme_cur',       // default: 'dlz_cur_2'
-        activateCostAllocationTags: true,   // default: true
+        exportName: 'acme-cur-2',
+        destinationPrefix: '',                  // default '' — see "S3 path layout" below
+        bucketNamePrefix: 'acme-cur',
+        glueDatabaseName: 'acme_cur',
+        destinationRegion: 'eu-west-1',         // default 'us-east-1'
+        activateCostAllocationTags: true,
         exportConfig: {
-          timeGranularity: 'HOURLY',                    // 'HOURLY' | 'DAILY' | 'MONTHLY'
-          format: 'PARQUET',                            // 'PARQUET' | 'TEXT_OR_CSV'
-          compression: 'PARQUET',                       // 'PARQUET' | 'GZIP'
-          includeResources: true,                       // per-resource attribution
-          includeSplitCostAllocationData: true,         // shared-services allocation
-          includeManualDiscountCompatibility: false,    // private pricing only
-          overwriteBehavior: 'OVERWRITE_REPORT',        // idempotent
+          timeGranularity: 'HOURLY',            // 'HOURLY' | 'DAILY' | 'MONTHLY'
+          format: 'PARQUET',                    // 'PARQUET' | 'TEXT_OR_CSV'
+          compression: 'PARQUET',
+          overwriteBehavior: 'OVERWRITE_REPORT',
+        },
+        dataPlaneConfig: {
+          encryption: {},                       // SSE-S3; pass kmsKeyArn for SSE-KMS
+          versioning: true,
+          accessLogging: true,
+          glueCrawlerSchedule: 'cron(0 6 * * ? *)',
+          additionalReadAccountIds: ['111...'],
+          lifecycle: {
+            enabled: true,
+            transitionToInfrequentAccessDays: 90,
+            transitionToGlacierDays: 365,
+            expirationDays: 2555,               // 0 to disable expiration
+          },
         },
       },
     }
@@ -118,18 +152,28 @@ resource-level, split cost allocation data on, idempotent overwrite).
     ```python
     fin_ops=dlz.DlzFinOpsProps(
         cur=dlz.DlzCurProps(
-            export_name="acme-cur-2",            # default: "dlz-cur-2"
-            bucket_name_prefix="acme-cur",       # default: "dlz-cur"
-            glue_database_name="acme_cur",       # default: "dlz_cur_2"
-            activate_cost_allocation_tags=True,  # default: True
+            export_name="acme-cur-2",
+            bucket_name_prefix="acme-cur",
+            glue_database_name="acme_cur",
+            destination_region="eu-west-1",
             export_config=dlz.DlzCurExportConfig(
-                time_granularity="HOURLY",                       # "HOURLY" | "DAILY" | "MONTHLY"
-                format="PARQUET",                                # "PARQUET" | "TEXT_OR_CSV"
-                compression="PARQUET",                           # "PARQUET" | "GZIP"
-                include_resources=True,                          # per-resource attribution
-                include_split_cost_allocation_data=True,         # shared-services allocation
-                include_manual_discount_compatibility=False,     # private pricing only
-                overwrite_behavior="OVERWRITE_REPORT",           # idempotent
+                time_granularity="HOURLY",
+                format="PARQUET",
+                compression="PARQUET",
+                overwrite_behavior="OVERWRITE_REPORT",
+            ),
+            data_plane_config=dlz.DlzCurDataPlaneConfig(
+                encryption=dlz.DlzCurBucketEncryption(),
+                versioning=True,
+                access_logging=True,
+                glue_crawler_schedule="cron(0 6 * * ? *)",
+                additional_read_account_ids=["111..."],
+                lifecycle=dlz.DlzCurLifecycleConfig(
+                    enabled=True,
+                    transition_to_infrequent_access_days=90,
+                    transition_to_glacier_days=365,
+                    expiration_days=2555,
+                ),
             ),
         ),
     )
@@ -137,10 +181,59 @@ resource-level, split cost allocation data on, idempotent overwrite).
   </Fragment>
 </DualCode>
 
-## Tuning the data plane
+### S3 path layout
 
-Encryption, lifecycle, access logging, additional read principals, and the Glue crawler
-schedule are all configurable.
+BCM Data Exports always lays files out as
+`<bucket>/<destinationPrefix>/<exportName>/{data,metadata}/BILLING_PERIOD=YYYY-MM/...`.
+DLZ defaults `destinationPrefix` to empty so the layout collapses to
+`<bucket>/<exportName>/{data,metadata}/...` — clean, no doubled folders, no
+mental overhead.
+
+| `destinationPrefix` | `exportName` | Resulting S3 path |
+|---|---|---|
+| `''` (default) | `dlz-cur-2` (default) | `<bucket>/dlz-cur-2/{data,metadata}/...` |
+| `''` (default) | `acme-cur` | `<bucket>/acme-cur/{data,metadata}/...` |
+| `'reports'` | `dlz-cur-2` | `<bucket>/reports/dlz-cur-2/{data,metadata}/...` |
+| `'team-a'` | `team-a-cur` | `<bucket>/team-a/team-a-cur/{data,metadata}/...` |
+
+Set `destinationPrefix` only when you need to host multiple exports in one
+bucket under separate folders.
+
+### Multi-region
+
+The export resource is always pinned to us-east-1; only the bucket moves via
+`destinationRegion`. The Glue crawler auto-pins to the bucket's region.
+
+### Sandbox lifecycle
+
+`dataPlaneConfig.lifecycle.enabled: false` keeps every object in S3 Standard forever.
+The construct emits a synth-time warning — don't ship this to prod.
+
+### SSE-KMS
+
+Default is SSE-S3. To use a CMK, set `dataPlaneConfig.encryption.kmsKeyArn` and grant
+`bcm-data-exports.amazonaws.com` `kms:GenerateDataKey*` and `kms:Decrypt` on the key.
+DLZ does not mutate KMS key policies.
+
+## Athena workgroup
+
+DLZ ships an Athena workgroup (`dlz-cur` by default) and a dedicated
+query-results bucket so Athena works in the FinOps account without manual
+setup. Without it, the AWS console blocks every first query with
+`Before you run your first query, you need to set up a query result location in Amazon S3`.
+
+What you get:
+
+- Workgroup with `EnforceWorkGroupConfiguration: true` — users cannot override
+  the result location or encryption client-side.
+- Dedicated results bucket `dlz-cur-athena-results-{accountId}-{region}` with
+  BPA, SSL-only access, and a 30-day expiration on results (results are scratch
+  data — keeping them indefinitely is just cost).
+- Encryption mirrors the CUR data bucket (SSE-S3 by default; SSE-KMS with the
+  same key when `dataPlaneConfig.encryption.kmsKeyArn` is set).
+- Athena engine v3.
+
+### Tuning
 
 <DualCode>
   <Fragment slot="ts">
@@ -148,16 +241,13 @@ schedule are all configurable.
     finOps: {
       cur: {
         dataPlaneConfig: {
-          encryption: {},                         // SSE-S3 (default); set { kmsKeyArn: '...' } for SSE-KMS
-          versioning: true,
-          accessLogging: true,
-          glueCrawlerSchedule: 'cron(0 6 * * ? *)',
-          additionalReadAccountIds: ['111111111111', '222222222222'],
-          lifecycle: {
-            enabled: true,
-            transitionToInfrequentAccessDays: 90,
-            transitionToGlacierDays: 365,
-            expirationDays: 2555,                 // ~7 years; 0 to disable expiration
+          athena: {
+            workgroupName: 'acme-cur',
+            resultsBucketNamePrefix: 'acme-athena-results',
+            resultsExpirationDays: 7,
+            engineVersion: 3,                         // 2 | 3
+            publishCloudWatchMetrics: true,
+            bytesScannedCutoffPerQuery: 10_737_418_240, // 10 GiB cap, opt-in
           },
         },
       },
@@ -169,16 +259,13 @@ schedule are all configurable.
     fin_ops=dlz.DlzFinOpsProps(
         cur=dlz.DlzCurProps(
             data_plane_config=dlz.DlzCurDataPlaneConfig(
-                encryption=dlz.DlzCurBucketEncryption(),  # SSE-S3 (default); set kms_key_arn="..." for SSE-KMS
-                versioning=True,
-                access_logging=True,
-                glue_crawler_schedule="cron(0 6 * * ? *)",
-                additional_read_account_ids=["111111111111", "222222222222"],
-                lifecycle=dlz.DlzCurLifecycleConfig(
-                    enabled=True,
-                    transition_to_infrequent_access_days=90,
-                    transition_to_glacier_days=365,
-                    expiration_days=2555,  # ~7 years; 0 to disable expiration
+                athena=dlz.DlzCurAthenaConfig(
+                    workgroup_name="acme-cur",
+                    results_bucket_name_prefix="acme-athena-results",
+                    results_expiration_days=7,
+                    engine_version=3,
+                    publish_cloud_watch_metrics=True,
+                    bytes_scanned_cutoff_per_query=10_737_418_240,
                 ),
             ),
         ),
@@ -187,108 +274,58 @@ schedule are all configurable.
   </Fragment>
 </DualCode>
 
-### Disabling lifecycle (testing only)
+### Opting out
 
-For sandbox / testing deployments, set `lifecycle.enabled: false` to keep every object
-in S3 Standard with no expiration. The construct emits a synth-time warning so prod
-deployments don't ship like this by accident.
+If you already run a central Athena workgroup elsewhere, set
+`dataPlaneConfig.athena.enabled: false`. No workgroup or results bucket is
+created; you wire your own consumers at the Glue catalog.
 
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      cur: {
-        dataPlaneConfig: {
-          lifecycle: { enabled: false },
-        },
-      },
-    }
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    fin_ops=dlz.DlzFinOpsProps(
-        cur=dlz.DlzCurProps(
-            data_plane_config=dlz.DlzCurDataPlaneConfig(
-                lifecycle=dlz.DlzCurLifecycleConfig(enabled=False),
-            ),
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
+## Updating the export
 
-## Multi-region (data residency)
+The BCM export is owned by a custom resource that calls `UpdateExport` for in-place
+changes and falls back to `DeleteExport` + `CreateExport` for changes BCM can't apply
+in place. The export name is stable across updates, so the S3 path
+(`s3://<bucket>/<exportName>/...`) doesn't move and Glue/Athena consumers see a stable
+location.
 
-The export definition is forced to `us-east-1` (BCM Data Exports is a us-east-1-only
-API), but the destination bucket can live in any region. Set `destinationRegion` to
-keep cost data in the same regulatory boundary as the workloads it describes.
+There's a few seconds of delivery downtime during a fall-back replace; existing data
+is unaffected.
 
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      cur: {
-        destinationRegion: 'eu-central-1',
-      },
-    }
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    fin_ops=dlz.DlzFinOpsProps(
-        cur=dlz.DlzCurProps(
-            destination_region="eu-central-1",
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
+## Exported SSM parameters
 
-When `destinationRegion` differs from `us-east-1`:
+The CUR data plane writes its state to SSM Parameter Store under
+`/dlz/finops/cur/` in the FinOps account. Downstream tooling (CUDOS, Vantage,
+Looker, custom dashboards) reads these instead of hard-coding names.
 
-- The Glue crawler is auto-pinned to the same region (Glue can't crawl S3 cross-region).
-- A synth-time warning reminds you that downstream Athena / QuickSight / FinOps tooling
-  must also deploy in that region, and that consumers in other regions pay cross-region
-  S3 GET egress.
+| Parameter | Example value |
+|---|---|
+| `/dlz/finops/cur/glue-database-name` | `dlz_cur_2` |
+| `/dlz/finops/cur/cur-bucket-name` | `dlz-cur-{accountId}-{region}` |
+| `/dlz/finops/cur/cur-destination-prefix` | `(none)` (or your `finOps.cur.destinationPrefix` if set) |
+| `/dlz/finops/cur/cur-export-name` | `dlz-cur-2` |
+| `/dlz/finops/cur/cur-data-path` | `dlz-cur-2` (or `<prefix>/dlz-cur-2` when prefix is set) |
+| `/dlz/finops/cur/destination-region` | `us-east-1` |
+| `/dlz/finops/cur/athena-workgroup-name` | `dlz-cur` |
+| `/dlz/finops/cur/athena-results-bucket-name` | `dlz-cur-athena-results-{accountId}-{region}` |
 
-## SSE-KMS (compliance-driven deployments)
+The Athena entries are only written when `dataPlaneConfig.athena.enabled !== false`.
 
-Default encryption is SSE-S3 (when `encryption` is omitted or `kmsKeyArn` is unset) to
-sidestep cross-account KMS key-policy work. Pass an existing CMK ARN to opt into SSE-KMS
-— the construct adds `billingreports.amazonaws.com` to the key policy automatically.
+Reading from a shell:
 
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      cur: {
-        dataPlaneConfig: {
-          encryption: { kmsKeyArn: 'arn:aws:kms:us-east-1:123456789012:key/abcd...' },
-        },
-      },
-    }
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    fin_ops=dlz.DlzFinOpsProps(
-        cur=dlz.DlzCurProps(
-            data_plane_config=dlz.DlzCurDataPlaneConfig(
-                encryption=dlz.DlzCurBucketEncryption(
-                    kms_key_arn="arn:aws:kms:us-east-1:123456789012:key/abcd...",
-                ),
-            ),
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
+```bash
+aws ssm get-parameter --name /dlz/finops/cur/glue-database-name \
+  --query Parameter.Value --output text
+# → dlz_cur_2
+```
 
-## What is NOT configurable (security-critical)
+For an external CUDOS / CID deploy, see the
+[CUDOS extras page](/components/finops/cudos) for ready-to-paste snippets that
+pull these into `cid-cmd` and the AWS CFN template.
 
-- Bucket policy `aws:SourceAccount` and `aws:SourceArn` are always derived from the
-  management account ID and the export ARN. Exposing them would let a misconfiguration
-  accept writes from any payer.
-- The service principal allowed to write is always `billingreports.amazonaws.com`.
-- `BlockPublicAccess` is always `BLOCK_ALL`.
+## Locked down
+
+- Service principal: always `bcm-data-exports.amazonaws.com`.
+- Bucket policy `aws:SourceAccount` and `aws:SourceArn` (`ArnLike` wildcard scoped to
+  the management account).
+- `BlockPublicAccess: BLOCK_ALL`.
+- BCM export region: `us-east-1`.

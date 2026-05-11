@@ -98,9 +98,11 @@ below, we define a single development account.
         project: ['ALLOWED_VALUES'],
         environment: ['ALLOWED_VALUES'],
       },
-      budgets: [
-        ...Defaults.budgets(100, 20, {}),
-      ],
+      finOps: {
+        budgets: [
+          ...Defaults.budgets(100, 20, {}),
+        ],
+      },
       securityHubNotifications: [
       ],
       organization: {
@@ -157,7 +159,9 @@ below, we define a single development account.
           "project": ["ALLOWED_VALUES"],
           "environment": ["ALLOWED_VALUES"],
       },
-      budgets=Defaults.budgets(100, 20),
+      fin_ops=dlz.DlzFinOpsProps(
+          budgets=dlz.Defaults.budgets(100, 20),
+      ),
       security_hub_notifications=[],
       organization={
           "organization_id": "OrganizationID",

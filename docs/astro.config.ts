@@ -139,6 +139,7 @@ export default defineConfig({
                             { label: 'Cost Anomaly Detection',  slug: 'components/finops/cost-anomaly-detection'},
                             { label: 'Account Budgets',  slug: 'components/finops/account-budgets'},
                             { label: 'FinOps Account Hardening',  slug: 'components/finops/finops-account-baseline'},
+                            { label: 'CUDOS / CID dashboards (extra)',  slug: 'components/finops/cudos'},
                         ]
                     },
                     {

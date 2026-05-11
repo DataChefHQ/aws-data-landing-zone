@@ -6,15 +6,13 @@ import { Construct } from 'constructs';
 import { DlzAnomalyMonitorProps, DlzCostAnomalyDetectionProps } from './cost-anomaly-detection-types';
 import { GlobalVariablesBudgetSnsCacheRecord } from '../../data-landing-zone-types';
 import { AccountChatbots } from '../account-chatbots';
+import { BudgetSubscribers } from '../dlz-budget';
 
 export * from './cost-anomaly-detection-types';
 
 /**
- * AWS Cost Anomaly Detection — provisions one `CfnAnomalyMonitor` + `CfnAnomalySubscription`
- * per configured monitor. Lives in the management/payer account.
- *
- * Reuses the existing `budgetSnsCache` so a deployment that already has matching budget
- * subscribers gets a single SNS topic for both budget alerts and anomaly notifications.
+ * Cost Anomaly Detection — one `CfnAnomalyMonitor` + `CfnAnomalySubscription` per
+ * configured monitor. Reuses `budgetSnsCache` so anomaly + budget alerts can share an SNS topic.
  */
 export class DlzCostAnomalyDetection extends Construct {
 
@@ -69,14 +67,9 @@ export class DlzCostAnomalyDetection extends Construct {
     });
   }
 
-  /**
-   * Reuse `budgetSnsCache` so anomaly notifications and budget alerts can share one SNS
-   * topic per subscriber set. Cost Anomaly Detection requires permission for
-   * `costalerts.amazonaws.com` on the topic — granted in addition to the budget service principal.
-   */
   private resolveTopic(
     monitorName: string,
-    subscribers: { snsTopicName?: string; emails?: string[]; slacks?: any[] },
+    subscribers: BudgetSubscribers,
     budgetSnsCache: Record<string, GlobalVariablesBudgetSnsCacheRecord>,
   ): sns.Topic {
     const topicName = subscribers.snsTopicName ?? `${monitorName}-topic`;

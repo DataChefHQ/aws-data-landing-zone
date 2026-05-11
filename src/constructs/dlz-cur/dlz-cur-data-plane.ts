@@ -1,51 +1,55 @@
-import { Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Duration, RemovalPolicy, Stack } from 'aws-cdk-lib';
 import * as glue from 'aws-cdk-lib/aws-glue';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as kms from 'aws-cdk-lib/aws-kms';
 import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import {
   DLZ_CUR_DEFAULTS,
   DlzCurDataPlaneConfig,
   DlzCurLifecycleConfig,
 } from './cur-types';
+import { DlzCurAthena } from './dlz-cur-athena';
+import { SSM_PARAMETERS_DLZ } from '../../stacks/organization/constants';
 
 export interface DlzCurDataPlaneProps {
-  /** Account ID hosting the management/payer account — used to scope the bucket policy. */
+  /** Used to scope the bucket policy via aws:SourceAccount / aws:SourceArn. */
   readonly managementAccountId: string;
-
-  /** Export name — used to derive the BCM Data Exports `aws:SourceArn` condition. */
-  readonly exportName: string;
-
-  /** Region the CUR S3 bucket lives in. The Glue crawler is auto-pinned to this region. */
   readonly destinationRegion: string;
-
-  /** Bucket-name prefix; full name is `{prefix}-{accountId}-{region}`. */
+  /** Bucket name is `{prefix}-{accountId}-{region}`. */
   readonly bucketNamePrefix: string;
-
-  /** S3 prefix under which CUR files are written. */
-  readonly destinationPrefix: string;
-
-  /** Glue database name. */
+  /**
+   * Optional S3 path segment prepended in front of the export name. BCM's layout
+   * is `<bucket>/<destinationPrefix>/<exportName>/{data,metadata}/...`.
+   * @default '' (flat layout; data lives directly under <exportName>/)
+   */
+  readonly destinationPrefix?: string;
+  /** Export name — also the inner S3 path segment BCM writes under. */
+  readonly exportName: string;
   readonly glueDatabaseName: string;
-
-  /** Data-plane (S3 + Glue) tuning. */
   readonly dataPlaneConfig?: DlzCurDataPlaneConfig;
 }
 
 /**
- * S3 + Glue resources that hold and catalog the CUR Parquet data. Lives in the FinOps
- * account (or whatever account `org.ous.sharedServices.accounts.finOps.accountId` points to).
- *
- * AWS Billing writes Parquet files directly into the bucket on the export schedule. There
- * is no DLZ-managed copy job — the bucket policy grants `billingreports.amazonaws.com`
- * scoped to the management account + the specific export ARN.
+ * S3 + Glue resources holding and cataloging CUR Parquet data. Lives in the FinOps
+ * account; AWS Billing writes directly into the bucket via `bcm-data-exports.amazonaws.com`.
  */
 export class DlzCurDataPlane extends Construct {
 
   public readonly bucket: s3.Bucket;
   public readonly glueDatabase: glue.CfnDatabase;
   public readonly glueCrawler: glue.CfnCrawler;
+  public readonly athena?: DlzCurAthena;
+
+  /** Resolved bucket name (string, not a CDK token). */
+  public readonly curBucketName: string;
+  public readonly curDestinationPrefix: string;
+  public readonly curExportName: string;
+  /** `<prefix>/<exportName>` or just `<exportName>` when prefix is empty. */
+  public readonly curDataPath: string;
+  public readonly curDestinationRegion: string;
+  public readonly glueDatabaseName: string;
 
   constructor(scope: Construct, id: string, props: DlzCurDataPlaneProps) {
     super(scope, id);
@@ -63,6 +67,14 @@ export class DlzCurDataPlane extends Construct {
     }
 
     const bucketName = `${props.bucketNamePrefix}-${this.synthesizeAccountSuffix(scope)}-${props.destinationRegion}`;
+    const destinationPrefix = props.destinationPrefix ?? DLZ_CUR_DEFAULTS.destinationPrefix;
+    const dataPath = destinationPrefix === '' ? props.exportName : `${destinationPrefix}/${props.exportName}`;
+    this.curBucketName = bucketName;
+    this.curDestinationPrefix = destinationPrefix;
+    this.curExportName = props.exportName;
+    this.curDataPath = dataPath;
+    this.curDestinationRegion = props.destinationRegion;
+    this.glueDatabaseName = props.glueDatabaseName;
 
     const encryption = this.resolveEncryption(dpCfg);
 
@@ -77,16 +89,36 @@ export class DlzCurDataPlane extends Construct {
       lifecycleRules: lifecycleEnabled ? this.lifecycleRules(lifecycleCfg) : [],
     });
 
+    // BCM's CreateExport validation reads the bucket policy + ACL before it accepts
+    // the export, so PutObject on objects + GetBucket* on the bucket are both required.
     this.bucket.addToResourcePolicy(new iam.PolicyStatement({
-      sid: 'AllowBillingReportsCurDelivery',
+      sid: 'EnableAWSDataExportsToWriteToS3',
       effect: iam.Effect.ALLOW,
-      principals: [new iam.ServicePrincipal('billingreports.amazonaws.com')],
-      actions: ['s3:PutObject', 's3:GetBucketAcl', 's3:GetBucketPolicy'],
-      resources: [this.bucket.bucketArn, this.bucket.arnForObjects('*')],
+      principals: [new iam.ServicePrincipal('bcm-data-exports.amazonaws.com')],
+      actions: ['s3:PutObject'],
+      resources: [this.bucket.arnForObjects('*')],
       conditions: {
+        ArnLike: {
+          'aws:SourceArn': `arn:aws:bcm-data-exports:${DLZ_CUR_DEFAULTS.exportRegion}:${props.managementAccountId}:export/*`,
+        },
         StringEquals: {
           'aws:SourceAccount': props.managementAccountId,
-          'aws:SourceArn': this.exportArn(props.managementAccountId, props.exportName),
+        },
+      },
+    }));
+
+    this.bucket.addToResourcePolicy(new iam.PolicyStatement({
+      sid: 'EnableAWSDataExportsToReadBucketMetadata',
+      effect: iam.Effect.ALLOW,
+      principals: [new iam.ServicePrincipal('bcm-data-exports.amazonaws.com')],
+      actions: ['s3:GetBucketAcl', 's3:GetBucketPolicy'],
+      resources: [this.bucket.bucketArn],
+      conditions: {
+        ArnLike: {
+          'aws:SourceArn': `arn:aws:bcm-data-exports:${DLZ_CUR_DEFAULTS.exportRegion}:${props.managementAccountId}:export/*`,
+        },
+        StringEquals: {
+          'aws:SourceAccount': props.managementAccountId,
         },
       },
     }));
@@ -115,12 +147,15 @@ export class DlzCurDataPlane extends Construct {
     });
     this.bucket.grantRead(crawlerRole);
 
+    // Exclude metadata/ + JSON so the crawler doesn't create a second `cur_metadata` table
+    // alongside the Parquet data table.
     this.glueCrawler = new glue.CfnCrawler(this, 'cur-glue-crawler', {
       role: crawlerRole.roleArn,
       databaseName: props.glueDatabaseName,
       targets: {
         s3Targets: [{
-          path: `s3://${this.bucket.bucketName}/${props.destinationPrefix}/`,
+          path: `s3://${bucketName}/${dataPath}/`,
+          exclusions: ['metadata/**', '**.json', '**_$folder$'],
         }],
       },
       schedule: {
@@ -131,21 +166,63 @@ export class DlzCurDataPlane extends Construct {
         Version: 1.0,
         CrawlerOutput: {
           Partitions: { AddOrUpdateBehavior: 'InheritFromTable' },
+          // MergeNewColumns so downstream views survive new optional CUR columns over time.
+          Tables: { AddOrUpdateBehavior: 'MergeNewColumns' },
         },
       }),
     });
     this.glueCrawler.addDependency(this.glueDatabase);
+
+    if (dpCfg.athena?.enabled !== false) {
+      this.athena = new DlzCurAthena(this, 'athena', {
+        accountId: this.synthesizeAccountSuffix(scope),
+        region: props.destinationRegion,
+        encryption,
+        config: dpCfg.athena,
+      });
+    }
+
+    this.exportSsmParameters();
+  }
+
+  /** Publishes data-plane state under `/dlz/finops/cur/` for downstream consumers. */
+  private exportSsmParameters() {
+    const prefix = SSM_PARAMETERS_DLZ.FINOPS_CUR_PREFIX;
+    new ssm.StringParameter(this, 'ssm-glue-database-name', {
+      parameterName: `${prefix}glue-database-name`,
+      stringValue: this.glueDatabaseName,
+      description: 'DLZ FinOps CUR — Glue database name',
+    });
+    new ssm.StringParameter(this, 'ssm-cur-bucket-name', {
+      parameterName: `${prefix}cur-bucket-name`,
+      stringValue: this.curBucketName,
+      description: 'DLZ FinOps CUR — S3 bucket holding CUR Parquet data',
+    });
+    new ssm.StringParameter(this, 'ssm-cur-destination-prefix', {
+      parameterName: `${prefix}cur-destination-prefix`,
+      // SSM rejects empty values; sentinel `(none)` means "no prefix configured".
+      stringValue: this.curDestinationPrefix === '' ? '(none)' : this.curDestinationPrefix,
+      description: 'DLZ FinOps CUR — optional S3 path prefix (or "(none)" when unset)',
+    });
+    new ssm.StringParameter(this, 'ssm-cur-export-name', {
+      parameterName: `${prefix}cur-export-name`,
+      stringValue: this.curExportName,
+      description: 'DLZ FinOps CUR — export name (also the inner S3 path segment)',
+    });
+    new ssm.StringParameter(this, 'ssm-cur-data-path', {
+      parameterName: `${prefix}cur-data-path`,
+      stringValue: this.curDataPath,
+      description: 'DLZ FinOps CUR — relative path inside the bucket where CUR data lives',
+    });
+    new ssm.StringParameter(this, 'ssm-cur-destination-region', {
+      parameterName: `${prefix}destination-region`,
+      stringValue: this.curDestinationRegion,
+      description: 'DLZ FinOps CUR — region of the CUR bucket',
+    });
   }
 
   private synthesizeAccountSuffix(scope: Construct): string {
-    // CDK's account token resolves at deploy time; the bucket-name suffix needs a
-    // synth-time string. Walking up to the stack lets us read the account from the env.
-    const stack = scope.node.scopes.find(s => 'account' in (s as any))?.node.scope as any;
-    return (stack?.account ?? scope.node.tryGetContext('finopsAccountId') ?? 'unknown').toString();
-  }
-
-  private exportArn(managementAccountId: string, exportName: string): string {
-    return `arn:aws:bcm-data-exports:${DLZ_CUR_DEFAULTS.exportRegion}:${managementAccountId}:export/${exportName}`;
+    return Stack.of(scope).account;
   }
 
   private lifecycleRules(cfg: DlzCurLifecycleConfig): s3.LifecycleRule[] {

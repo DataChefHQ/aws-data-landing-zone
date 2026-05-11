@@ -38,14 +38,25 @@ async function synthOnce(props: DataLandingZoneProps) {
 
 async function management(props: DataLandingZoneProps) {
   await synthOnce(props);
-  await runCommand('cdk', [
-    'bootstrap',
-    '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess',
-    `--profile ${props.localProfile}`,
-    tags,
-    `aws://${props.organization.root.accounts.management.accountId}/${props.regions.global}`,
-    '--app cdk.out',
-  ].join(' '));
+
+  const managementAccountId = props.organization.root.accounts.management.accountId;
+  const managementRegions = new Set<string>([props.regions.global]);
+
+  // CUR's BCM Data Exports resource is us-east-1-only.
+  if (props.finOps?.cur) {
+    managementRegions.add('us-east-1');
+  }
+
+  for (const region of managementRegions) {
+    await runCommand('cdk', [
+      'bootstrap',
+      '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess',
+      `--profile ${props.localProfile}`,
+      tags,
+      `aws://${managementAccountId}/${region}`,
+      '--app cdk.out',
+    ].join(' '));
+  }
 }
 async function log(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   await synthOnce(props);

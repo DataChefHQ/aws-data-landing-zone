@@ -9,28 +9,20 @@ export interface ScpFinOpsAccountBaselineOptions {
 }
 
 /**
- * Hardening baseline for the dedicated FinOps account.
+ * Hardening baseline for the dedicated FinOps account. Locks the account to its
+ * single purpose (CUR data + Glue catalog + Athena) so it can't drift into a
+ * workload account or be abused as a privilege hop.
  *
- * The FinOps account exists to hold CUR Parquet data, the Glue catalog over it, and
- * (future) Athena queries — nothing else. This preset locks the account to that surface
- * so it cannot drift into a workload account by accident or be abused as a privilege hop.
- *
- * Statements layered onto the account via the existing 3-tier SCP composition model:
- *   1. Deny compute / data services (no workloads run here).
- *   2. Deny VPC / IGW / NAT / TGW creation (FinOps tooling runs on AWS-managed infra).
- *   3. Deny IAM user / access-key / login-profile creation (humans access via SSO only).
- *   4. Deny org-integrity actions (LeaveOrganization, CloseAccount, disabling CloudTrail / GuardDuty / Macie / Config).
- *   5. Deny actions outside the allowed regions.
- *
- * AWSControlTowerExecution is exempted in every statement so Control Tower can keep
- * managing the account.
+ * Denies: compute/data services, network primitives, IAM user creation, and
+ * org-integrity actions (LeaveOrganization, CloseAccount, disabling CloudTrail /
+ * GuardDuty / Macie / Config). `AWSControlTowerExecution` is exempted in every
+ * statement so Control Tower keeps managing the account.
  */
 export class ScpFinOpsAccountBaseline {
 
   /**
-   * Compute / data services that should never run in the FinOps account. Lambda is
-   * intentionally allowed because CDK custom resources need it; further IAM scoping
-   * happens via permission boundaries, not SCPs here.
+   * Compute / data services denied by default. Lambda is intentionally allowed —
+   * CDK custom resources need it; tighten via permission boundaries, not SCPs.
    */
   public static readonly DEFAULT_DENIED_SERVICES: string[] = [
     'ec2:RunInstances',
@@ -58,10 +50,6 @@ export class ScpFinOpsAccountBaseline {
     'codepipeline:*',
   ];
 
-  /**
-   * Network primitives that should never be created in the FinOps account. Glue and
-   * Athena run on AWS-managed infrastructure; no VPC needed for the in-scope use cases.
-   */
   public static denyNetworkPrimitives(): iam.PolicyStatement {
     return new iam.PolicyStatement({
       sid: 'FinOpsDenyNetworkPrimitives',
@@ -81,10 +69,6 @@ export class ScpFinOpsAccountBaseline {
     });
   }
 
-  /**
-   * IAM users / access keys / login profiles cannot be created. Humans access the
-   * account via SSO / IAM Identity Center only.
-   */
   public static denyIamUserCreation(): iam.PolicyStatement {
     return new iam.PolicyStatement({
       sid: 'FinOpsDenyIamUserCreation',
@@ -100,10 +84,6 @@ export class ScpFinOpsAccountBaseline {
     });
   }
 
-  /**
-   * Org-integrity guard. Prevents the FinOps account from leaving the organization or
-   * disabling the security baseline that the rest of DLZ relies on.
-   */
   public static denyOrgIntegrityActions(): iam.PolicyStatement {
     return new iam.PolicyStatement({
       sid: 'FinOpsDenyOrgIntegrity',
@@ -132,9 +112,6 @@ export class ScpFinOpsAccountBaseline {
     });
   }
 
-  /**
-   * Returns the full set of statements applied to the FinOps account.
-   */
   public static statements(options: ScpFinOpsAccountBaselineOptions = {}): iam.PolicyStatement[] {
     const services = options.deniedServices ?? this.DEFAULT_DENIED_SERVICES;
     return [

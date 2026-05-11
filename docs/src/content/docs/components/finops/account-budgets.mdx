@@ -1,53 +1,29 @@
 ---
 title: Account Budgets
-description: Per-account and per-cost-center AWS Budgets composed from DlzBudget
+description: Per-account and per-cost-center AWS Budgets
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
-The `accountBudgets` prop iterates the workload accounts and provisions one AWS Budget
-per account that sets `monthlyBudget`, plus optional roll-up budgets per unique
-`CostCenter` value. Composes the existing `DlzBudget` primitive — no new budget shape.
+Set `monthlyBudget` on a workload account, and `accountBudgets` creates an AWS Budget
+filtered to that account. Optionally roll up budgets per `CostCenter`.
 
-Lives in the management account. Independent of the FinOps OU — only uses the
-management account.
+Lives in the management account.
 
 ## Per-account budgets
-
-Set `monthlyBudget` (USD) on any workload account in the org config. `accountBudgets`
-picks them up automatically and creates a budget filtered to that account's
-`LinkedAccount` cost dimension.
 
 <DualCode>
   <Fragment slot="ts">
     ```ts
-    import { App } from 'aws-cdk-lib';
-    import { DataLandingZone, DlzAccountType } from 'aws-data-landing-zone';
-
-    const app = new App();
     new DataLandingZone(app, {
       organization: {
-        // ...
         ous: {
-          // ...
           workloads: {
-            ouId: 'ou-xxxx-yyyyyyyy',
+            ouId: 'ou-xxxx',
             accounts: [
-              {
-                accountId: '111111111111',
-                name: 'analytics-dev',
-                type: DlzAccountType.DEVELOP,
-                costCenter: 'analytics',
-                domain: 'curated',
-                monthlyBudget: 500,
-              },
-              {
-                accountId: '222222222222',
-                name: 'analytics-prod',
-                type: DlzAccountType.PRODUCTION,
-                costCenter: 'analytics',
-                domain: 'serving',
-                monthlyBudget: 5000,
-              },
+              { accountId: '111...', name: 'analytics-dev', type: DlzAccountType.DEVELOP,
+                costCenter: 'analytics', domain: 'curated', monthlyBudget: 500 },
+              { accountId: '222...', name: 'analytics-prod', type: DlzAccountType.PRODUCTION,
+                costCenter: 'analytics', domain: 'serving', monthlyBudget: 5000 },
             ],
           },
         },
@@ -55,13 +31,8 @@ picks them up automatically and creates a budget filtered to that account's
       finOps: {
         accountBudgets: {
           defaultSubscribers: {
-            snsTopicName: 'finops-budget-alerts',
+            snsTopicName: 'finops-alerts',
             emails: ['finops@acme.com'],
-            slacks: [{
-              slackChannelConfigurationName: 'finops-alerts',
-              slackWorkspaceId: 'T01XXXXXXX',
-              slackChannelId: 'C01XXXXXXX',
-            }],
           },
         },
       },
@@ -70,34 +41,18 @@ picks them up automatically and creates a budget filtered to that account's
   </Fragment>
   <Fragment slot="python">
     ```python
-    import aws_cdk as cdk
-    import aws_data_landing_zone as dlz
-
-    app = cdk.App()
     dlz.DataLandingZone(app,
         organization=dlz.DLzOrganization(
-            # ...
             ous=dlz.OrgOus(
-                # ...
                 workloads=dlz.OrgOuWorkloads(
-                    ou_id="ou-xxxx-yyyyyyyy",
+                    ou_id="ou-xxxx",
                     accounts=[
-                        dlz.DLzAccount(
-                            account_id="111111111111",
-                            name="analytics-dev",
-                            type=dlz.DlzAccountType.DEVELOP,
-                            cost_center="analytics",
-                            domain="curated",
-                            monthly_budget=500,
-                        ),
-                        dlz.DLzAccount(
-                            account_id="222222222222",
-                            name="analytics-prod",
-                            type=dlz.DlzAccountType.PRODUCTION,
-                            cost_center="analytics",
-                            domain="serving",
-                            monthly_budget=5000,
-                        ),
+                        dlz.DLzAccount(account_id="111...", name="analytics-dev",
+                            type=dlz.DlzAccountType.DEVELOP, cost_center="analytics",
+                            domain="curated", monthly_budget=500),
+                        dlz.DLzAccount(account_id="222...", name="analytics-prod",
+                            type=dlz.DlzAccountType.PRODUCTION, cost_center="analytics",
+                            domain="serving", monthly_budget=5000),
                     ],
                 ),
             ),
@@ -105,15 +60,8 @@ picks them up automatically and creates a budget filtered to that account's
         fin_ops=dlz.DlzFinOpsProps(
             account_budgets=dlz.DlzAccountBudgetsProps(
                 default_subscribers=dlz.BudgetSubscribers(
-                    sns_topic_name="finops-budget-alerts",
+                    sns_topic_name="finops-alerts",
                     emails=["finops@acme.com"],
-                    slacks=[
-                        dlz.SlackChannel(
-                            slack_channel_configuration_name="finops-alerts",
-                            slack_workspace_id="T01XXXXXXX",
-                            slack_channel_id="C01XXXXXXX",
-                        ),
-                    ],
                 ),
             ),
         ),
@@ -122,117 +70,34 @@ picks them up automatically and creates a budget filtered to that account's
   </Fragment>
 </DualCode>
 
-This produces:
+Produces:
 
-- `dlz-account-analytics-dev` — $500 budget filtered to account `111111111111`
-- `dlz-account-analytics-prod` — $5,000 budget filtered to account `222222222222`
+- `dlz-account-analytics-dev` — $500 budget filtered to `111...`
+- `dlz-account-analytics-prod` — $5,000 budget filtered to `222...`
 
-Each budget alerts at 80% actual and 100% forecasted (the underlying `DlzBudget` defaults).
+Budgets alert at 80% actual and 100% forecasted (the underlying `DlzBudget` defaults).
 
 ## Per-cost-center roll-ups
 
-Enable `perCostCenterRollup` to also create a budget per unique `CostCenter` value,
-summing across all accounts that share the value. Useful for finance to track total
-spend by cost center without summing per-account budgets manually.
+Set `perCostCenterRollup: true` to also create one budget per unique `CostCenter` value:
 
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    finOps: {
-      accountBudgets: {
-        defaultSubscribers: { /* ... */ },
-        perCostCenterRollup: true,
-      },
-    }
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    fin_ops=dlz.DlzFinOpsProps(
-        account_budgets=dlz.DlzAccountBudgetsProps(
-            default_subscribers=...,  # ...
-            per_cost_center_rollup=True,
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
+```ts
+finOps: {
+  accountBudgets: {
+    defaultSubscribers: { /* ... */ },
+    perCostCenterRollup: true,
+  },
+}
+```
 
-With the two accounts above (both `costCenter: 'analytics'`) this also produces:
+With the two accounts above this also produces:
 
 - `dlz-costcenter-analytics` — $5,500 budget filtered to `CostCenter = analytics`
 
-The cost-center filter relies on the `CostCenter` cost-allocation tag being active. The
-`cur` construct activates it automatically; if you're using `accountBudgets` without
-`cur`, activate it manually in the Billing console (one-click) or via the CLI.
+The `CostCenter` cost-allocation tag must be active. `finOps.cur` activates it
+automatically; without `cur`, activate it once in the Billing console.
 
 ## Sharing SNS topics with anomaly detection
 
-Use the same `snsTopicName` across `finOps.accountBudgets`, `finOps.costAnomalyDetection`,
-and `finOps.budgets` — DLZ deduplicates and reuses one SNS topic + subscription set
-across all of them.
-
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    const sharedSubscribers = {
-      snsTopicName: 'finops-alerts',
-      emails: ['finops@acme.com'],
-      slacks: [/* ... */],
-    };
-
-    new DataLandingZone(app, {
-      // ...
-      finOps: {
-        budgets: [
-          { name: 'org-total', amount: 50000, subscribers: sharedSubscribers },
-        ],
-        accountBudgets: { defaultSubscribers: sharedSubscribers },
-        costAnomalyDetection: {
-          monitors: [{
-            name: 'svc-anomaly',
-            dimension: 'SERVICE',
-            thresholdUsd: 100,
-            subscribers: sharedSubscribers,
-          }],
-        },
-      },
-    });
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    shared_subscribers = dlz.BudgetSubscribers(
-        sns_topic_name="finops-alerts",
-        emails=["finops@acme.com"],
-        slacks=[...],
-    )
-
-    dlz.DataLandingZone(app,
-        # ...
-        fin_ops=dlz.DlzFinOpsProps(
-            budgets=[
-                dlz.DlzBudgetProps(name="org-total", amount=50000, subscribers=shared_subscribers),
-            ],
-            account_budgets=dlz.DlzAccountBudgetsProps(default_subscribers=shared_subscribers),
-            cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
-                monitors=[
-                    dlz.DlzCostAnomalyMonitorProps(
-                        name="svc-anomaly",
-                        dimension="SERVICE",
-                        threshold_usd=100,
-                        subscribers=shared_subscribers,
-                    ),
-                ],
-            ),
-        ),
-    )
-    ```
-  </Fragment>
-</DualCode>
-
-## Why `monthlyBudget` lives on the account
-
-Putting the budget cap on `DLzAccount` means the budget travels with the account
-declaration — when an account is added or removed from the org config, its budget
-follows automatically. No separate "budgets" config to keep in sync with the account list.
+Use the same `snsTopicName` across `accountBudgets`, `costAnomalyDetection`, and
+`budgets` — DLZ deduplicates and reuses one topic + subscription set.
