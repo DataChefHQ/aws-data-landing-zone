@@ -31,19 +31,123 @@ Here's why a properly implemented Landing Zone is essential for accelerating you
 - **🔧 Reduced Complexity:** With pre-configured guardrails and best practices, you avoid reinventing the wheel each time a new service or account is needed.
 - **🔒 Security and Compliance:** Landing Zones integrate security measures based on the AWS Well-Architected Framework, ensuring your environment is aligned with best practices for security, compliance, and risk management.
 
+## The vision: governance as the path of least resistance
+
+When a new technology paradigm goes mainstream, organisations consistently deprioritise two
+concerns in the race to enable experimentation: **FinOps** and **Privacy**. Privacy benefits
+from an external forcing function — regulators, fines, GDPR. FinOps has no such forcing
+function. There is no FinOps regulator. The consequence is invisible until it is very visible:
+a cloud invoice that is two, three, or five times what was budgeted.
+
+The DLZ encodes operational experience, regulatory awareness, and cost discipline directly
+into the platform — programmatically, so that knowledge travels with every workload built on
+top of it. The latest standards and best practices for security, privacy, and FinOps come off
+the shelf, because they're already in the platform.
+
+The DLZ is designed to make three distinct actors genuinely happy at the same time:
+
+- **CFO & Finance** — Cost controls are not bolted on after the fact. Every workload is financially observable from day one. Budgets and guardrails are provisioned as code.
+- **Compliance Office** — Built with a compliance mindset from the ground up. GDPR alignment, data classification, access control, and audit trails are DLZ defaults, not workload-level responsibilities.
+- **Engineers** — Developer experience is a first-class priority. Productivity is not sacrificed on the altar of governance.
+
+> **Design principle:** Governance should be the path of least resistance, not an obstacle course.
+> An engineer using the DLZ should find it easier to do the right thing than to bypass it — not
+> because we block them, but because we made the right thing the default.
+
+## FinOps as a first-class pillar
+
+FinOps is the pillar that most consistently gets left behind. In the DLZ it isn't. Every
+data and AI workload running on the platform is **financially observable**, **attributable
+to a team or product**, **bounded by a configurable guardrail**, and **connected to the
+value it generates**. No manual reconciliation. No end-of-month surprises.
+
+The capability is delivered in four layers, each building on the one below.
+
+### Layer 1 — Instrumentation
+
+Every service emits cost and usage data in a consistent, queryable form. AWS Cost and Usage
+Report (CUR 2.0) is the master ledger, centralised in a dedicated FinOps account, catalogued
+in Glue, and queryable from Athena.
+
+- **LLM / Bedrock** — Inference costs are attributed to the calling IAM principal so spend can be split by product or team.
+- **Storage** — Every storage resource is tagged at creation. Cost visibility at the data domain level (raw, curated, serving) is a requirement, not an optimisation.
+- **ETL and compute** — Job-level cost attribution, not just cluster- or application-level.
+- **Shared services** — Resources shared across teams carry a proportional allocation so every euro lands on an owner.
+
+### Layer 2 — Attribution
+
+Tags are the connective tissue between AWS resource costs and your organisational structure.
+The DLZ enforces a mandatory tag set at deploy time — not retrofitted, not by convention.
+Resources that cannot be attributed to an owner do not deploy to production.
+
+| Tag | Purpose |
+| --- | --- |
+| `team` | Owning team |
+| `project` | Workload or product identifier |
+| `env` | Environment (dev / staging / prod) |
+| `domain` | Data domain (raw / curated / serving / inference) |
+| `cost-center` | Finance cost centre for chargeback |
+
+Enforcement layers compose: Organization Tag Policy, SCP at deploy time, AWS Config rule for
+detection, and the DLZ's own validation before synthesis.
+
+### Layer 3 — Guardrails
+
+Visibility without action is just a dashboard. The DLZ ships two guardrail types:
+
+- **Soft guardrails** — Alert when a threshold is crossed (e.g. 80% of budget). Used for early warning.
+- **Hard guardrails** — Block the workload or request when a limit is reached. Used for absolute caps.
+
+Budget guardrails are defined per team and per project, committed as code in the DLZ
+repository, and applied automatically. **LLM inference gets special handling**: an LLM
+gateway enforces per-team and per-project token-spend caps in real time, blocking requests
+before they reach the model when a limit is exceeded — because AWS budget alerts alone are
+not fast enough for token-priced workloads. Anomaly detection runs on every major service
+category to catch unexpected spend before the billing cycle closes, not after.
+
+### Layer 4 — Reporting
+
+The reporting layer serves three audiences: engineers (cost impact of their code), product
+owners (cost-centre accountability), and finance (reliable monthly actuals).
+
+- **Platform cost overview** — Total DLZ spend over time, broken down by service and team. Refreshed daily.
+- **Team showback** — Per-team spend versus budget with trend, available to team leads without filing a ticket.
+- **LLM spend detail** — Per-model, per-team, per-project token usage and cost.
+- **Anomaly log** — A running record of threshold breaches and anomaly detections, with resolution status.
+
+The most useful metric is **cost-per-unit-of-work**: the ratio of spend to a meaningful
+business outcome. For a data and AI platform the relevant units are inferences, documents
+processed, GBs processed, and queries run. Once unit economics are visible, optimisation
+conversations become concrete rather than abstract.
+
+### Non-negotiables
+
+These are not suggestions. They are constraints the DLZ satisfies from day one:
+
+1. **Tag enforcement before production.** No production workload deploys without the mandatory tag set. Enforced by the platform, not relied upon by convention.
+2. **Cost signals are centralised.** Every service's cost data flows into a single queryable store. Siloed billing views are not acceptable.
+3. **Guardrails are code.** Budget limits live in the repository alongside the infrastructure they govern. Reviewed, versioned, and deployed the same way.
+4. **Engineers are not blocked by governance.** If a governance requirement prevents an engineer from doing their job, that's a DLZ design failure — not an engineer problem.
+
+See [Tagging](/components/account-management/tagging) for the mandatory tag set and how it
+is enforced, and [Budgets](/components/account-management/budgets) for budget guardrails as
+code.
+
 
 ## Key Features
 
 Notable features of the DLZ include:
 
-- A CDK construct that can be used in TS and Python
+- A CDK construct that can be used in TypeScript and Python.
 - Opinionated but configurable and extendable. Each stack and nested component can be extended if needed.
-- Leverages AWS Control Tower. Works with existing or new AWS Control Tower setups.
+- Leverages AWS Control Tower. Works with existing or new Control Tower setups.
 - Suitable for greenfield projects or integration with existing AWS resources.
-- Deployable using any build systems like GitHub, GitLab, Jenkins, or locally.
-- Generates compliance reports, reporting the Control Tower Standards, SecurityHub controls, Config Rules and
-- Service Control Policies enabled in each account.
+- Deployable from any build system — GitHub, GitLab, Jenkins, or locally.
+- Generates compliance reports covering Control Tower Standards, Security Hub controls, AWS Config rules, and Service Control Policies enabled in each account.
 - Implements an internal wave- and stage-based deployment strategy for dependency management.
+- **FinOps baked in**: CUR 2.0 centralised in a dedicated FinOps account, mandatory cost-allocation tags enforced at deploy time, budgets and anomaly detection as code, and an LLM gateway with per-team token-spend caps.
+- **Compliance by default**: GDPR alignment, data classification, audit trails, and least-privilege baselines ship with the platform — not as workload-level homework.
+- **Engineer-friendly governance**: Defaults and automation, not bureaucratic checkpoints. Guardrails accelerate good engineering rather than obstruct it.
 - Includes helper scripts and Standard Operating Procedures (SOPs) for routine tasks.
 - Accompanied by comprehensive documentation.
 
@@ -241,18 +345,23 @@ The DLZ adheres to the following principles:
 
 1. Opinionated but configurable defaults to suit diverse needs.
 2. High levels of automation with manual SOPs where needed.
-3. Simplicity and ease of understanding over complexity
+3. Simplicity and ease of understanding over complexity.
 4. Focused scope, limited to Landing Zone responsibilities.
+5. Governance as the path of least resistance — the right thing is the default.
+6. CFO, Compliance, and Engineers are all first-class stakeholders.
 
 ## Integrated AWS Services
 
 - **AWS Organizations:** Seamless multi-account management.
-- **AWS Budgets:** Track spending by tags with notifications via Slack, Teams, or email.
-- **Service Control Policies (SCPs):** Manage service deny lists.
+- **AWS Budgets:** Per-team and per-project budgets defined as code, with soft alerts at 80% and hard actions at 100%. Notifications via Slack, Teams, or email.
+- **AWS Cost and Usage Report (CUR 2.0):** Centralised in a dedicated FinOps account with a Glue catalog and Athena workgroup — the master ledger for all cost queries.
+- **AWS Cost Anomaly Detection:** Active across major service categories to catch unexpected spend patterns before the billing cycle closes.
+- **Cost Allocation Tags:** Mandatory tag set (`team`, `project`, `env`, `domain`, `cost-center`) activated automatically and enforced at deploy time.
+- **LLM Gateway:** Per-team and per-project token-spend caps, with real-time blocking before requests reach the model. Required because token-based costs spike non-linearly.
+- **Service Control Policies (SCPs):** Manage service deny lists; enforce tag presence at deploy time.
 - **Tag Policies:** Enforce resource tagging for spend tracking and ownership.
 - **Control Tower Controls:** Opinionated defaults for preventive, detective, and proactive standards.
-- **AWS Security Hub** and **AWS Config:** Additional standards not covered by Control Tower. Notifications are
-  delivered via Slack, Teams, or email
+- **AWS Security Hub** and **AWS Config:** Additional standards not covered by Control Tower. Notifications delivered via Slack, Teams, or email.
 - **Network Management:**
   - Non-overlapping **VPCs** across accounts.
   - **NAT Gateways** or instances for outbound private access.
