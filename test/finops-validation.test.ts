@@ -125,11 +125,11 @@ describe('validateFinOpsConfig — uniqueness', () => {
       finOps: {
         dataExports: {
           exports: {
-            standard: { exportType: 'STANDARD_CUR_2_0' },
+            'standard': { exportType: 'STANDARD_CUR_2_0' },
             'focus-1-0': { exportType: 'FOCUS_1_2' },
             'focus-1-2': { exportType: 'FOCUS_1_2' },
-            cor: { exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS' },
-            carbon: { exportType: 'CARBON_EMISSIONS' },
+            'cor': { exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS' },
+            'carbon': { exportType: 'CARBON_EMISSIONS' },
           },
         },
       },

@@ -27658,7 +27658,7 @@ const managementStacks: ManagementStacks = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementStacks.property.global">global</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalStack">ManagementGlobalStack</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStacks.property.curExport">curExport</a></code> | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack">ManagementDataExportsStack</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementStacks.property.dataExports">dataExports</a></code> | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack">ManagementDataExportsStack</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementStacks.property.globalIamIdentityCenter">globalIamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack">ManagementGlobalIamIdentityCenterStack</a></code> | *No description.* |
 
 ---
@@ -27673,10 +27673,10 @@ public readonly global: ManagementGlobalStack;
 
 ---
 
-##### `curExport`<sup>Optional</sup> <a name="curExport" id="aws-data-landing-zone.ManagementStacks.property.curExport"></a>
+##### `dataExports`<sup>Optional</sup> <a name="dataExports" id="aws-data-landing-zone.ManagementStacks.property.dataExports"></a>
 
 ```typescript
-public readonly curExport: ManagementDataExportsStack;
+public readonly dataExports: ManagementDataExportsStack;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.ManagementDataExportsStack">ManagementDataExportsStack</a>

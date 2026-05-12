@@ -159,7 +159,7 @@ function rejectMismatchedOutputPair(entryId: string, entry: DlzDataExportEntry):
   if (!valid) {
     throw new Error(
       `[FinOps] 'finOps.dataExports.exports.${entryId}.output': format='${output.format}' is incompatible with compression='${output.compression}'. ` +
-      "BCM Data Exports only accepts PARQUET+PARQUET or TEXT_OR_CSV+GZIP. Pick one of those pairs (or omit `compression` to default it).",
+      'BCM Data Exports only accepts PARQUET+PARQUET or TEXT_OR_CSV+GZIP. Pick one of those pairs (or omit `compression` to default it).',
     );
   }
 }
@@ -188,7 +188,7 @@ function rejectLegacyCurProp(finOps: unknown): void {
   if (f.cur === undefined) return;
   throw new Error(
     "[FinOps] 'finOps.cur' was renamed to 'finOps.dataExports' (the construct now covers " +
-    "CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions). " +
+    'CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions). ' +
     "Rename the prop: replace 'finOps: { cur: { ... } }' with 'finOps: { dataExports: { ... } }'.",
   );
 }
