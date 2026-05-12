@@ -23,10 +23,10 @@ import {
 } from './constructs';
 import { DlzAccountBudgetsProps } from './constructs/dlz-account-budgets/account-budgets-types';
 import { DlzCostAnomalyDetectionProps } from './constructs/dlz-cost-anomaly-detection/cost-anomaly-detection-types';
-import { DlzCurProps } from './constructs/dlz-cur/cur-types';
+import { DlzDataExportsProps } from './constructs/dlz-data-exports/data-exports-types';
 import { DlzGuardDutyFeaturesProps, DlzGuardDutyProps } from './constructs/dlz-guardduty/guardduty-types';
 import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
-import { AuditGlobalStack, FinOpsGlobalStack, ManagementCurExportStack, ManagementGlobalStack } from './stacks';
+import { AuditGlobalStack, FinOpsGlobalStack, ManagementDataExportsStack, ManagementGlobalStack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
 } from './stacks/organization/management/management-global-iam-identity-center-stack';
@@ -952,9 +952,9 @@ export interface DataLandingZoneProps {
    * - `budgets` — org/account-wide budget alerts (always-on root budget set).
    * - `accountBudgets` — per-account / per-cost-center budgets composed over workload accounts.
    * - `costAnomalyDetection` — Cost Anomaly Detection monitors + subscriptions.
-   * - `cur` — CUR 2.0 cost-data delivery to the dedicated FinOps account.
+   * - `dataExports` — BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon Emissions) into the dedicated FinOps account.
    *
-   * `cur` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
+   * `dataExports` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
    * capabilities are independent of the Shared Services OU and only use the management
    * account.
    *
@@ -992,13 +992,13 @@ export interface DlzFinOpsProps {
   readonly costAnomalyDetection?: DlzCostAnomalyDetectionProps;
 
   /**
-   * CUR 2.0 cost-data delivery. Provisions a BCM Data Exports definition in the management
-   * account that writes Parquet directly into a bucket in the FinOps account.
+   * BCM Data Exports — CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations,
+   * and Carbon Emissions delivery into a dedicated FinOps account.
    *
-   * Requires `org.ous.sharedServices.accounts.finOps` to be configured. Validation fails
-   * fast at synth otherwise.
+   * Requires `org.ous.sharedServices.accounts.finOps` to be configured.
+   * Validation fails fast at synth otherwise.
    */
-  readonly cur?: DlzCurProps;
+  readonly dataExports?: DlzDataExportsProps;
 
   /**
    * Override the tag values applied by the FinOps stack to its own resources. Defaults
@@ -1028,7 +1028,7 @@ export interface DlzFinOpsAccountTags {
 export interface ManagementStacks {
   readonly global: ManagementGlobalStack;
   readonly globalIamIdentityCenter?: ManagementGlobalIamIdentityCenterStack;
-  readonly curExport?: ManagementCurExportStack;
+  readonly dataExports?: ManagementDataExportsStack;
 }
 
 export interface LogStacks {

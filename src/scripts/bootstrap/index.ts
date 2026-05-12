@@ -43,7 +43,7 @@ async function management(props: DataLandingZoneProps) {
   const managementRegions = new Set<string>([props.regions.global]);
 
   // CUR's BCM Data Exports resource is us-east-1-only.
-  if (props.finOps?.cur) {
+  if (props.finOps?.dataExports) {
     managementRegions.add('us-east-1');
   }
 

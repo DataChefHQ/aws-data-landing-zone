@@ -1,0 +1,796 @@
+---
+title: BCM Data Exports
+description: Cost, FinOps, and sustainability data delivery to a dedicated FinOps account via BCM Data Exports
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+DLZ provisions one or more BCM Data Exports definitions in the management
+account, all writing into a single S3 bucket in the FinOps account. One Glue
+database catalogs every export as a separate table; one Athena workgroup
+queries them all.
+
+The top-level prop is still called `finOps.dataExports` for operator familiarity, but
+the construct now covers four export types — not just CUR. They share the
+bucket, Glue database, and crawler; each appears as a distinct table.
+
+| `exportType` | BCM table | Purpose |
+|---|---|---|
+| `STANDARD_CUR_2_0` | `COST_AND_USAGE_REPORT` | Detailed line-item billing data; the workhorse |
+| `FOCUS_1_2` | `FOCUS_1_2_AWS` | FinOps Foundation FOCUS 1.2 spec (current; supersedes 1.0) |
+| `COST_OPTIMIZATION_RECOMMENDATIONS` | `COST_OPTIMIZATION_RECOMMENDATIONS` | Point-in-time recommendations from Cost Optimization Hub |
+| `CARBON_EMISSIONS` | `CARBON_EMISSIONS` | Customer Carbon Footprint Tool data |
+
+## Prerequisites
+
+A FinOps account configured under `org.ous.sharedServices.accounts.finOps`.
+Everything else is handled by `dlz bootstrap`.
+
+**If you plan to enable a `COST_OPTIMIZATION_RECOMMENDATIONS` export**, you
+need two one-time opt-ins from the management account in `us-east-1`. DLZ
+can't automate these reliably — they require `iam:CreateServiceLinkedRole`
+on first call, which the BCM Lambda role doesn't have. Run these from a
+shell that's assumed into the management account:
+
+```bash
+# AWS Compute Optimizer — COH's upstream data source for EC2/EBS/Lambda recs
+aws compute-optimizer update-enrollment-status \
+  --status Active --include-member-accounts \
+  --region us-east-1
+
+# Cost Optimization Hub — the recommendation aggregator BCM's COR export reads
+aws cost-optimization-hub update-enrollment-status \
+  --status Active --include-member-accounts \
+  --region us-east-1
+```
+
+(The console "Opt in" buttons do the same thing and work in many accounts —
+but the CLI is more reliable across account configurations.)
+
+**Then wait 24–48 hours before deploying a COR export.** Compute Optimizer
+needs that long to complete its initial scan and produce recommendations.
+BCM rejects `CreateExport` for COR if Cost Optimization Hub has zero
+recommendations, with the misleading message
+`This account is unable to create an export against this Table`.
+
+Verify recommendations exist before deploying COR:
+
+```bash
+aws cost-optimization-hub list-recommendations --region us-east-1 --max-results 1 \
+  --query 'length(items)' --output text
+# 0 → still warming up, wait longer
+# >0 → ready, safe to deploy the COR export
+```
+
+DLZ emits a synth-time reminder whenever a COR export is configured, so you
+won't forget the opt-in. The 24–48h warm-up is on the operator to verify.
+
+## Quick start — single CUR 2.0 export
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    new DataLandingZone(app, {
+      organization: { /* ... */ },
+      finOps: {
+        dataExports: {
+          exports: {
+            standard: { exportType: 'STANDARD_CUR_2_0' },
+          },
+        },
+      },
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    dlz.DataLandingZone(app,
+        organization=...,
+        fin_ops=dlz.DlzFinOpsProps(
+            data_exports=dlz.DlzDataExportsProps(
+                exports={
+                    "standard": dlz.DlzStandardCur20Export(
+                        export_type="STANDARD_CUR_2_0",
+                    ),
+                },
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+You get:
+
+- BCM Data Exports CUR 2.0 export in the management account (us-east-1)
+- S3 bucket `dlz-finops-{finOpsAccountId}-{destinationRegion}` in the FinOps account
+- Glue database `dlz_finops` with a table `finops_standard`
+- Daily Glue crawler at 06:00 UTC across every export's S3 path
+- Athena workgroup `dlz-finops` with a dedicated query-results bucket
+- The 5 mandatory tags activated as Cost Allocation Tags
+
+## Recommended: enable all four
+
+Use this as a baseline when you want full coverage — billing, FinOps-spec
+comparable data, optimization recommendations, and sustainability.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      dataExports: {
+        exports: {
+          standard: {
+            exportType: 'STANDARD_CUR_2_0',
+            config: {
+              includeCapacityReservationData: true,  // data live since 2025-11-01
+              includeIamPrincipalData: true,         // Bedrock caller-identity, live since 2026-04-08
+            },
+          },
+          'focus-1-2': {
+            exportType: 'FOCUS_1_2',
+            config: { timeGranularity: 'DAILY' },
+          },
+          'cost-opt-recs': {
+            exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS',
+            // omit `includeAllRecommendations` to dedupe to the best recommendation per resource
+          },
+          carbon: { exportType: 'CARBON_EMISSIONS' },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        data_exports=dlz.DlzDataExportsProps(
+            exports={
+                "standard": dlz.DlzStandardCur20Export(
+                    export_type="STANDARD_CUR_2_0",
+                    config=dlz.DlzStandardCur20Config(
+                        include_capacity_reservation_data=True,
+                        include_iam_principal_data=True,
+                    ),
+                ),
+                "focus-1-2": dlz.DlzFocus12Export(
+                    export_type="FOCUS_1_2",
+                    config=dlz.DlzFocus12Config(time_granularity="DAILY"),
+                ),
+                "cost-opt-recs": dlz.DlzCorExport(
+                    export_type="COST_OPTIMIZATION_RECOMMENDATIONS",
+                ),
+                "carbon": dlz.DlzCarbonEmissionsExport(
+                    export_type="CARBON_EMISSIONS",
+                ),
+            },
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+That's it. You get four Glue tables under `dlz_finops`:
+
+- `finops_standard` — line-item billing
+- `finops_focus_1_2` — FOCUS 1.2 (with InvoiceId, capacity-reservation, commitment-discount columns)
+- `finops_cost_opt_recs` — Cost Optimization Hub recommendations, savings-deduped
+- `finops_carbon` — monthly carbon emissions per account/region/service
+
+Each export name defaults to `dlz-<id>`, Glue table name to `finops_<id>` (snake-cased).
+
+### Cost note
+
+Each export bills storage independently. CUR 2.0 hourly with resources is the
+largest; Carbon Emissions is monthly and tiny. The shared Glue crawler runs
+once a day for all four (~$4.40/month) regardless of how many exports you
+enable.
+
+## Per-type configuration
+
+### STANDARD_CUR_2_0
+
+Detailed line-item billing data. The richest schema with the largest set of
+table-level toggles.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      dataExports: {
+        exports: {
+          standard: {
+            exportType: 'STANDARD_CUR_2_0',
+            config: {
+              timeGranularity: 'HOURLY',
+              includeResources: true,
+              includeSplitCostAllocationData: true,
+              includeCapacityReservationData: true,
+              includeIamPrincipalData: true,
+            },
+          },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        data_exports=dlz.DlzDataExportsProps(
+            exports={
+                "standard": dlz.DlzStandardCur20Export(
+                    export_type="STANDARD_CUR_2_0",
+                    config=dlz.DlzStandardCur20Config(
+                        time_granularity="HOURLY",
+                        include_resources=True,
+                        include_split_cost_allocation_data=True,
+                        include_capacity_reservation_data=True,
+                        include_iam_principal_data=True,
+                    ),
+                ),
+            },
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+`DlzStandardCur20Config` knobs:
+
+| Field | Default | Purpose |
+|---|---|---|
+| `timeGranularity` | `'HOURLY'` | `HOURLY` / `DAILY` / `MONTHLY` |
+| `includeResources` | `true` | Adds `line_item_resource_id` |
+| `includeSplitCostAllocationData` | `true` | Adds `split_line_item_*` (ECS/EKS pod allocation) |
+| `includeCapacityReservationData` | `false` | Adds 3 `capacity_reservation_*` columns; data populates from 2025-11-01 |
+| `includeIamPrincipalData` | `false` | Adds `line_item_iam_principal` (Bedrock); data populates from 2026-04-08 |
+| `includeManualDiscountCompatibility` | `false` | Removes `discount` / `discount_total_discount` (for Discount Automation enrollees) |
+| `queryColumns` | full spec | Override the projected column list |
+| `queryStatement` | derived | Full SQL override; `SELECT *` is rejected by BCM |
+
+To extend the default columns instead of replacing them, spread the constant:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD } from 'aws-data-landing-zone';
+
+    config: {
+      queryColumns: [...DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD, 'my_extra_column'],
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    from aws_data_landing_zone import DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD
+
+    config=dlz.DlzStandardCur20Config(
+        query_columns=[*DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD, "my_extra_column"],
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+Flag-driven columns (capacity reservation, IAM principal) are appended
+automatically — no need to add them manually when you set the flag.
+
+### FOCUS_1_2
+
+Current FOCUS spec; supersedes 1.0. Adds user-controllable `TIME_GRANULARITY`.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      dataExports: {
+        exports: {
+          'focus-1-2': {
+            exportType: 'FOCUS_1_2',
+            config: { timeGranularity: 'DAILY' },
+          },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        data_exports=dlz.DlzDataExportsProps(
+            exports={
+                "focus-1-2": dlz.DlzFocus12Export(
+                    export_type="FOCUS_1_2",
+                    config=dlz.DlzFocus12Config(time_granularity="DAILY"),
+                ),
+            },
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+`DlzFocus12Config` knobs:
+
+| Field | Default | Purpose |
+|---|---|---|
+| `timeGranularity` | `'DAILY'` | `HOURLY` / `DAILY` / `MONTHLY` |
+| `queryColumns` | `DLZ_FOCUS_1_2_DEFAULT_QUERY_COLUMNS` | |
+| `queryStatement` | derived | Full SQL override |
+
+FOCUS 1.2 drops `x_CostCategories` and `x_UsageType` from the AWS proprietary
+columns and adds `InvoiceId`, capacity-reservation columns,
+commitment-discount quantity columns, and SKU columns vs 1.0.
+
+### COST_OPTIMIZATION_RECOMMENDATIONS
+
+Point-in-time snapshots from Cost Optimization Hub, not time-series.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      dataExports: {
+        exports: {
+          'cost-opt-recs': {
+            exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS',
+            config: {
+              includeAllRecommendations: false,  // dedupe to best per resource
+            },
+          },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        data_exports=dlz.DlzDataExportsProps(
+            exports={
+                "cost-opt-recs": dlz.DlzCorExport(
+                    export_type="COST_OPTIMIZATION_RECOMMENDATIONS",
+                    config=dlz.DlzCorConfig(
+                        include_all_recommendations=False,
+                    ),
+                ),
+            },
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+`DlzCorConfig` knobs:
+
+| Field | Default | Purpose |
+|---|---|---|
+| `includeAllRecommendations` | `false` | `false` dedupes to the highest-savings recommendation per resource (e.g. "Terminate" wins over "Rightsize") |
+| `filter` | none | Scope to specific account ids, resource types, action types, etc. |
+| `queryColumns` | `DLZ_COR_DEFAULT_QUERY_COLUMNS` | |
+| `queryStatement` | derived | Full SQL override |
+
+Filter example:
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    'cost-opt-recs': {
+      exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS',
+      config: {
+        includeAllRecommendations: false,
+        filter: {
+          accountIds: ['111122223333', '444455556666'],
+          resourceTypes: ['Ec2Instance', 'RdsDbInstance'],
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    "cost-opt-recs": dlz.DlzCorExport(
+        export_type="COST_OPTIMIZATION_RECOMMENDATIONS",
+        config=dlz.DlzCorConfig(
+            include_all_recommendations=False,
+            filter=dlz.DlzCorFilter(
+                account_ids=["111122223333", "444455556666"],
+                resource_types=["Ec2Instance", "RdsDbInstance"],
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+The filter is JSON-serialized into BCM's `TableConfigurations.FILTER` for you;
+pass a typed object, not a string.
+
+### CARBON_EMISSIONS
+
+Customer Carbon Footprint Tool data. Zero configurable table properties.
+Refreshes monthly in practice; data starts 2022-01.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      dataExports: {
+        exports: {
+          carbon: { exportType: 'CARBON_EMISSIONS' },
+        },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        data_exports=dlz.DlzDataExportsProps(
+            exports={
+                "carbon": dlz.DlzCarbonEmissionsExport(
+                    export_type="CARBON_EMISSIONS",
+                ),
+            },
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+The only `DlzCarbonEmissionsConfig` overrides are `queryColumns` /
+`queryStatement`.
+
+`DLZ_CARBON_EMISSIONS_DEFAULT_QUERY_COLUMNS` covers account, region,
+usage_period, service_name, and the three `total_mtco2e*` columns.
+
+The data-export-manager Lambda is granted
+`sustainability:GetCarbonFootprintSummary` automatically — required by BCM at
+CreateExport time for this export type.
+
+## S3 path layout
+
+BCM writes each export at
+`<bucket>/<destinationPrefix>/<exportName>/{data,metadata}/...`. With the
+defaults, `destinationPrefix` is empty so each export gets its own top-level
+folder:
+
+```
+s3://dlz-finops-<acct>-<region>/
+├── dlz-standard/{data,metadata}/...
+├── dlz-focus-1-2/{data,metadata}/...
+├── dlz-cost-opt-recs/{data,metadata}/...
+└── dlz-carbon/{data,metadata}/...
+```
+
+Each entry's `<destinationPrefix>/<exportName>` path, `exportName`, and Glue
+table name must be unique within the map — DLZ validates this at synth.
+
+## Top-level tuning
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      dataExports: {
+        destinationRegion: 'eu-west-1',          // default 'us-east-1'
+        bucketNamePrefix: 'acme-finops',         // default 'dlz-finops'
+        activateCostAllocationTags: true,        // default true
+        dataPlaneConfig: {
+          encryption: {},                        // SSE-S3; pass kmsKeyArn for SSE-KMS
+          versioning: true,
+          accessLogging: true,
+          glueDatabaseName: 'acme_finops',         // default 'dlz_finops'
+          glueCrawlerSchedule: 'cron(0 6 * * ? *)',
+          additionalReadAccountIds: ['111...'],
+          lifecycle: {
+            enabled: true,
+            transitionToInfrequentAccessDays: 90,
+            transitionToGlacierDays: 365,
+            expirationDays: 2555,                // 0 to disable expiration
+          },
+        },
+        exports: { /* ... */ },
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        data_exports=dlz.DlzDataExportsProps(
+            destination_region="eu-west-1",
+            bucket_name_prefix="acme-cur",
+            activate_cost_allocation_tags=True,
+            data_plane_config=dlz.DlzDataExportsDataPlaneConfig(
+                encryption=dlz.DlzDataExportsBucketEncryption(),
+                versioning=True,
+                access_logging=True,
+                glue_database_name="acme_finops",
+                glue_crawler_schedule="cron(0 6 * * ? *)",
+                additional_read_account_ids=["111..."],
+                lifecycle=dlz.DlzDataExportsLifecycleConfig(
+                    enabled=True,
+                    transition_to_infrequent_access_days=90,
+                    transition_to_glacier_days=365,
+                    expiration_days=2555,
+                ),
+            ),
+            exports={ ... },
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Per-entry overrides
+
+Most users don't need these — defaults derive cleanly from the map key — but
+they're there if you do.
+
+| Field | Default | Purpose |
+|---|---|---|
+| `exportName` | `dlz-<id>` | BCM export name; must be unique in the bucket |
+| `destinationPrefix` | `''` | S3 path segment in front of `exportName` |
+| `glueTableName` | `finops_<id>` | Table name in the shared Glue DB |
+| `output.format` | `'PARQUET'` | `'PARQUET'` or `'TEXT_OR_CSV'` |
+| `output.compression` | matches format | `'PARQUET'` with PARQUET, `'GZIP'` with TEXT_OR_CSV |
+| `overwriteBehavior` | `'OVERWRITE_REPORT'` | or `'CREATE_NEW_REPORT'` |
+
+DLZ validates the format/compression pair at synth — `PARQUET`+`GZIP` is
+rejected with a clear error instead of failing at deploy time.
+
+## Multi-region
+
+The BCM export resource is always pinned to `us-east-1` (BCM Data Exports is a
+us-east-1-only API). Only the destination bucket moves via `destinationRegion`.
+The Glue crawler auto-pins to the bucket's region. Cross-region S3 GETs by
+Athena consumers in other regions are not free — DLZ logs a warning at synth
+when `destinationRegion !== 'us-east-1'`.
+
+## SSE-KMS
+
+Default is SSE-S3. To use a CMK, set `dataPlaneConfig.encryption.kmsKeyArn`
+and grant `bcm-data-exports.amazonaws.com` `kms:GenerateDataKey*` and
+`kms:Decrypt` on the key. DLZ does not mutate KMS key policies.
+
+## Athena workgroup
+
+DLZ ships an Athena workgroup (`dlz-finops` by default) and a dedicated
+query-results bucket so Athena works in the FinOps account without manual
+setup. Without it, the AWS console blocks every first query with the "set up a
+query result location in Amazon S3" prompt.
+
+- Workgroup with `EnforceWorkGroupConfiguration: true` — users can't override
+  the result location or encryption client-side
+- Results bucket `dlz-finops-athena-results-{accountId}-{region}` with BPA,
+  SSL-only access, 30-day expiration (results are scratch data)
+- Encryption mirrors the shared data bucket
+- Athena engine v3
+
+Cross-table joins across exports are straightforward since they share the same
+Glue database:
+
+```sql
+SELECT s.line_item_unblended_cost, f.EffectiveCost
+FROM dlz_finops.finops_standard s
+JOIN dlz_finops.finops_focus_1_2 f
+  ON f.BillingPeriodStart = date_trunc('month', s.line_item_usage_start_date)
+WHERE s.line_item_usage_start_date >= date '2026-01-01';
+```
+
+### Tuning
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    dataPlaneConfig: {
+      athena: {
+        workgroupName: 'acme-cur',
+        resultsBucketNamePrefix: 'acme-athena-results',
+        resultsExpirationDays: 7,
+        engineVersion: 3,                            // 2 | 3
+        publishCloudWatchMetrics: true,
+        bytesScannedCutoffPerQuery: 10_737_418_240,  // 10 GiB cap, opt-in
+        recursiveDeleteOption: true,                 // default; flip to false to force manual query cleanup before rename
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    data_plane_config=dlz.DlzDataExportsDataPlaneConfig(
+        athena=dlz.DlzDataExportsAthenaConfig(
+            workgroup_name="acme-cur",
+            results_bucket_name_prefix="acme-athena-results",
+            results_expiration_days=7,
+            engine_version=3,
+            publish_cloud_watch_metrics=True,
+            bytes_scanned_cutoff_per_query=10_737_418_240,
+            recursive_delete_option=True,
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+`recursiveDeleteOption` defaults to `true` so workgroup-name changes can
+delete the old workgroup even if it contains named queries. Set `false` only
+when you save important queries directly in the DLZ workgroup and want to
+be forced to export them manually before a rename. **Note:** this flag is
+only consulted at *delete* time, using the value that was deployed — if you
+flip it to `true` and immediately try to rename the workgroup in the same
+deploy, the old workgroup's deployed value still applies. Flip first, deploy,
+then rename in a subsequent deploy.
+
+### Opting out
+
+If you already run a central Athena workgroup elsewhere, set
+`dataPlaneConfig.athena.enabled: false`. No workgroup or results bucket is
+created; wire your own consumers at the Glue catalog directly.
+
+## Updating exports
+
+Each export is owned by a custom resource that calls `UpdateExport` for
+in-place changes and falls back to `DeleteExport` + `CreateExport` for changes
+BCM can't apply in place. The export name stays stable across updates, so the
+S3 path (`s3://<bucket>/<exportName>/...`) doesn't move and Glue/Athena
+consumers see a stable location.
+
+A fall-back replace has a few seconds of delivery downtime; existing data is
+unaffected.
+
+## Sandbox lifecycle
+
+`dataPlaneConfig.lifecycle.enabled: false` keeps every object in S3 Standard
+forever. The construct emits a synth-time warning — don't ship this to
+production.
+
+## Exported SSM parameters
+
+Shared params under `/dlz/finops/`:
+
+| Parameter | Example value |
+|---|---|
+| `/dlz/finops/data-bucket-name` | `dlz-finops-{accountId}-{region}` |
+| `/dlz/finops/destination-region` | `us-east-1` |
+| `/dlz/finops/glue-database-name` | `dlz_finops` |
+| `/dlz/finops/athena-workgroup-name` | `dlz-finops` |
+| `/dlz/finops/athena-results-bucket-name` | `dlz-finops-athena-results-{accountId}-{region}` |
+
+Per-export params under `/dlz/finops/exports/<id>/`:
+
+| Parameter | Example value |
+|---|---|
+| `.../<id>/export-type` | `STANDARD_CUR_2_0` |
+| `.../<id>/export-name` | `dlz-standard` |
+| `.../<id>/destination-prefix` | `(none)` (or the configured prefix) |
+| `.../<id>/data-path` | `dlz-standard` (or `<prefix>/dlz-standard` when prefix is set) |
+| `.../<id>/glue-table-name` | `finops_standard` |
+
+The Athena entries are only written when `dataPlaneConfig.athena.enabled !== false`.
+
+Reading from a shell:
+
+```bash
+aws ssm get-parameter --name /dlz/finops/glue-database-name \
+  --query Parameter.Value --output text
+# → dlz_finops
+
+aws ssm get-parameter --name /dlz/finops/exports/standard/glue-table-name \
+  --query Parameter.Value --output text
+# → finops_standard
+```
+
+For an external CUDOS / CID deploy, see the
+[CUDOS extras page](/components/finops/cudos) for ready-to-paste snippets.
+
+## Troubleshooting
+
+### `CreateExport` fails with "This account is unable to create an export against this Table" (COR exports)
+
+The message is misleading — it surfaces for three distinct cases, only one
+of which is actually "not enrolled":
+
+1. **You haven't opted in to Cost Optimization Hub at all.** Run the CLI
+   command from the prerequisites section above (the console "Opt in" button
+   can fail in some account configurations; the CLI is more reliable).
+2. **You haven't opted in to Compute Optimizer.** COH's recommendations
+   depend on Compute Optimizer's underlying scan. Both opt-ins are required.
+3. **You opted in correctly but Compute Optimizer hasn't finished its
+   initial scan.** Initial scans take 24–48 hours. Until COH has at least
+   one recommendation, BCM rejects `CreateExport` with this same error.
+
+Diagnostic:
+
+```bash
+# Are both services enrolled?
+aws compute-optimizer get-enrollment-status --region us-east-1
+aws cost-optimization-hub list-enrollment-statuses --region us-east-1
+
+# Does COH actually have recommendations yet?
+aws cost-optimization-hub list-recommendations --region us-east-1 --max-results 1 \
+  --query 'length(items)' --output text
+# 0  → still warming up; wait longer (up to 48h after CO enrollment)
+# >0 → safe to deploy the COR export now
+```
+
+Once `list-recommendations` returns a non-zero count, deploy the COR export
+and `CreateExport` will accept.
+
+### `CreateExport` fails with "Cannot create duplicate export name"
+
+BCM has a leftover export from a previous attempt under the same Name. List
++ delete the orphans:
+
+```bash
+aws bcm-data-exports list-exports --region us-east-1 \
+  --query 'Exports[].[ExportName,ExportArn]' --output table
+for arn in $(aws bcm-data-exports list-exports --region us-east-1 --query 'Exports[].ExportArn' --output text); do
+  aws bcm-data-exports delete-export --export-arn "$arn" --region us-east-1
+done
+```
+
+This usually happens after a partial-rollback cycle. The S3 Parquet data in
+the FinOps bucket is preserved by `RemovalPolicy.RETAIN`; only the BCM
+export metadata gets deleted, so re-creating with the same name resumes
+writing to the same S3 path.
+
+### Stack is stuck in `UPDATE_ROLLBACK_FAILED`
+
+CFN rolled back a failed deploy but couldn't delete some custom resource
+because the Lambda code reverted during rollback. Skip the failing resources
+to recover:
+
+```bash
+aws cloudformation describe-stack-resources --stack-name dlz-data-exports --region us-east-1 \
+  --query "StackResources[?ResourceStatus=='DELETE_FAILED' || ResourceStatus=='CREATE_FAILED'].LogicalResourceId" \
+  --output text
+# Pass the printed IDs to continue-update-rollback:
+aws cloudformation continue-update-rollback \
+  --stack-name dlz-data-exports --region us-east-1 \
+  --resources-to-skip <ids>
+aws cloudformation wait stack-update-rollback-complete --stack-name dlz-data-exports --region us-east-1
+```
+
+Then clean up any orphaned BCM exports (see above) and redeploy.
+
+### Glue tables don't exist yet after a successful deploy
+
+The Glue crawler runs daily at 06:00 UTC by default. If you just deployed
+and want to verify the pipeline end-to-end, trigger the crawler manually
+from the FinOps account:
+
+```bash
+# From the FinOps account
+aws glue list-crawlers --region <destinationRegion>
+aws glue start-crawler --name <crawler-name> --region <destinationRegion>
+# Wait until State=READY (~1-3 min), then:
+aws glue get-tables --database-name dlz_finops --region <destinationRegion> \
+  --query 'TableList[].Name' --output text
+```
+
+You can also tune `dataPlaneConfig.glueCrawlerSchedule` to run more
+frequently if 06:00 UTC isn't fresh enough for your use case (`cron(0 */4 * * ? *)`
+for every 4 hours, etc. — keep in mind each crawler run has a 10-minute
+minimum billing).
+
+### Stale CFN state vs. real AWS state (custom resource drift)
+
+CFN custom resources don't detect drift — if you manually delete a BCM
+export that CFN tracks, the next deploy won't notice. Symptoms: CFN reports
+the resource as `CREATE_COMPLETE` but `aws bcm-data-exports list-exports`
+doesn't show it. Recovery: remove the entry from your config, deploy,
+re-add the entry, deploy again. The remove-deploy-readd sequence guarantees
+real DELETE + CREATE events that exercise the Lambda's safe paths.
+
+## Locked down
+
+- Service principal: always `bcm-data-exports.amazonaws.com`
+- Bucket policy `aws:SourceAccount` and `aws:SourceArn` (`ArnLike` wildcard
+  scoped to the management account, covering every export in the map)
+- `BlockPublicAccess: BLOCK_ALL`
+- BCM export region: `us-east-1`
+- The data-export-manager Lambda's IAM policy is locked when the first export
+  instance creates the shared provider; it includes every action any export
+  type might need (BCM + Cost Explorer + `sustainability:GetCarbonFootprintSummary`
+  + `cost-optimization-hub:*` reads)

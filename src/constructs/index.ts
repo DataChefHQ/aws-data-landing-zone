@@ -12,4 +12,4 @@ export * from './dlz-guardduty';
 export * from './dlz-macie';
 export * from './dlz-cost-anomaly-detection';
 export * from './dlz-account-budgets';
-export * from './dlz-cur';
+export * from './dlz-data-exports';

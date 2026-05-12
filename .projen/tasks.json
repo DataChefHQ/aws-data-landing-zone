@@ -71,46 +71,46 @@
           "spawn": "bundle:constructs/dlz-macie/lambda/macie-members"
         },
         {
-          "spawn": "bundle:constructs/dlz-cur/lambda/cur-tag-activation"
+          "spawn": "bundle:constructs/dlz-data-exports/lambda/tag-activation"
         },
         {
-          "spawn": "bundle:constructs/dlz-cur/lambda/cur-export-manager"
+          "spawn": "bundle:constructs/dlz-data-exports/lambda/data-export-manager"
         }
       ]
     },
-    "bundle:constructs/dlz-cur/lambda/cur-export-manager": {
-      "name": "bundle:constructs/dlz-cur/lambda/cur-export-manager",
-      "description": "Create a JavaScript bundle from ./src/constructs/dlz-cur/lambda/cur-export-manager/",
+    "bundle:constructs/dlz-data-exports/lambda/data-export-manager": {
+      "name": "bundle:constructs/dlz-data-exports/lambda/data-export-manager",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/data-export-manager/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-cur/lambda/cur-export-manager/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-cur/lambda/cur-export-manager/index.js\" --external:aws-sdk --sourcemap"
+          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/data-export-manager/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/data-export-manager/index.js\" --external:aws-sdk --sourcemap"
         }
       ]
     },
-    "bundle:constructs/dlz-cur/lambda/cur-export-manager:watch": {
-      "name": "bundle:constructs/dlz-cur/lambda/cur-export-manager:watch",
-      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-cur/lambda/cur-export-manager/",
+    "bundle:constructs/dlz-data-exports/lambda/data-export-manager:watch": {
+      "name": "bundle:constructs/dlz-data-exports/lambda/data-export-manager:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/data-export-manager/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-cur/lambda/cur-export-manager/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-cur/lambda/cur-export-manager/index.js\" --external:aws-sdk --sourcemap --watch"
+          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/data-export-manager/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/data-export-manager/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
-    "bundle:constructs/dlz-cur/lambda/cur-tag-activation": {
-      "name": "bundle:constructs/dlz-cur/lambda/cur-tag-activation",
-      "description": "Create a JavaScript bundle from ./src/constructs/dlz-cur/lambda/cur-tag-activation/",
+    "bundle:constructs/dlz-data-exports/lambda/tag-activation": {
+      "name": "bundle:constructs/dlz-data-exports/lambda/tag-activation",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/tag-activation/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-cur/lambda/cur-tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-cur/lambda/cur-tag-activation/index.js\" --external:aws-sdk --sourcemap"
+          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/tag-activation/index.js\" --external:aws-sdk --sourcemap"
         }
       ]
     },
-    "bundle:constructs/dlz-cur/lambda/cur-tag-activation:watch": {
-      "name": "bundle:constructs/dlz-cur/lambda/cur-tag-activation:watch",
-      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-cur/lambda/cur-tag-activation/",
+    "bundle:constructs/dlz-data-exports/lambda/tag-activation:watch": {
+      "name": "bundle:constructs/dlz-data-exports/lambda/tag-activation:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/tag-activation/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-cur/lambda/cur-tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-cur/lambda/cur-tag-activation/index.js\" --external:aws-sdk --sourcemap --watch"
+          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/tag-activation/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },

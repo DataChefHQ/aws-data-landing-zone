@@ -5,7 +5,7 @@ export const SSM_PARAMETER_DLZ_PREFIX = '/dlz';
 export const SSM_PARAMETERS_DLZ = {
   NETWORKING_ENTITY_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/networking-entity/`,
   NETWORKING_VPC_PEERING_ROLE_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/networking/vpc-peering-role-arn--`,
-  FINOPS_CUR_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/finops/cur/`,
+  FINOPS_PREFIX: `${SSM_PARAMETER_DLZ_PREFIX}/finops/`,
 };
 
 

@@ -1,7 +1,7 @@
 import { Annotations, App, Tags } from 'aws-cdk-lib';
 import { CdkExpressPipeline } from 'cdk-express-pipeline';
 import { DlzAccountNetworks } from './constructs';
-import { DLZ_CUR_DEFAULTS } from './constructs/dlz-cur';
+import { DLZ_DATA_EXPORTS_DEFAULTS } from './constructs/dlz-data-exports';
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import {
@@ -15,7 +15,7 @@ import {
 } from './data-landing-zone-types';
 import { validateFinOpsConfig, validateLegacyRootFinOpsProps } from './lib/finops-validation';
 import { Report } from './lib/report';
-import { FinOpsGlobalStack, ManagementCurExportStack, ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
+import { FinOpsGlobalStack, ManagementDataExportsStack, ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
 } from './stacks/organization/management/management-global-iam-identity-center-stack';
@@ -291,13 +291,13 @@ export class DataLandingZone {
       this.props);
     }
 
-    let curExport: ManagementCurExportStack | undefined = undefined;
-    if (this.props.finOps?.cur) {
-      const curExportWave = this.pipeline.addWave('root--cur-export');
-      const curExportStage = curExportWave.addStage('management-cur-export');
-      curExport = new ManagementCurExportStack(this.app, {
-        stage: curExportStage,
-        name: { ou: 'root', account: 'management', stack: 'cur-export', region: 'us-east-1' },
+    let dataExportsStack: ManagementDataExportsStack | undefined = undefined;
+    if (this.props.finOps?.dataExports) {
+      const wave = this.pipeline.addWave('root--data-exports');
+      const stage = wave.addStage('management-data-exports');
+      dataExportsStack = new ManagementDataExportsStack(this.app, {
+        stage,
+        name: { ou: 'root', account: 'management', stack: 'data-exports', region: 'us-east-1' },
         env: {
           account: this.props.organization.root.accounts.management.accountId,
           region: 'us-east-1',
@@ -309,7 +309,7 @@ export class DataLandingZone {
     const ret: ManagementStacks = {
       global,
       globalIamIdentityCenter,
-      curExport,
+      dataExports: dataExportsStack,
     };
     return ret;
   };
@@ -399,8 +399,8 @@ export class DataLandingZone {
     // (which itself defaults to us-east-1, aligning with BCM Data Exports' export region).
     // When CUR isn't configured, the stack only applies tags and any region works — fall
     // back to regions.global.
-    const destinationRegion = this.props.finOps?.cur
-      ? (this.props.finOps.cur.destinationRegion ?? DLZ_CUR_DEFAULTS.destinationRegion)
+    const destinationRegion = this.props.finOps?.dataExports
+      ? (this.props.finOps.dataExports.destinationRegion ?? DLZ_DATA_EXPORTS_DEFAULTS.destinationRegion)
       : this.props.regions.global;
 
     const wave = this.pipeline.addWave('shared-services--finops--global');

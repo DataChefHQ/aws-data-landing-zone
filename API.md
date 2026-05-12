@@ -2347,7 +2347,202 @@ The tree node.
 ---
 
 
-### DlzCurAthena <a name="DlzCurAthena" id="aws-data-landing-zone.DlzCurAthena"></a>
+### DlzDataExport <a name="DlzDataExport" id="aws-data-landing-zone.DlzDataExport"></a>
+
+BCM rejects duplicate export names on Replacement, so the Lambda handler owns the lifecycle and falls back to delete-then-create when UpdateExport can't apply a change in place.
+
+The custom-resource provider is shared across every instance; the first
+construct locks the provider's IAM policy, so we grant every action any of
+the five export types might need up front (including
+`sustainability:GetCarbonFootprintSummary` for CARBON_EMISSIONS).
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExport.Initializer"></a>
+
+```typescript
+import { DlzDataExport } from 'aws-data-landing-zone'
+
+new DlzDataExport(scope: Construct, id: string, props: DlzDataExportProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportProps">DlzDataExportProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzDataExport.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzDataExport.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzDataExport.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportProps">DlzDataExportProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-data-landing-zone.DlzDataExport.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-data-landing-zone.DlzDataExport.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzDataExport.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.fetchExportManagerCodeDirectory">fetchExportManagerCodeDirectory</a></code> | *No description.* |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzDataExport.isConstruct"></a>
+
+```typescript
+import { DlzDataExport } from 'aws-data-landing-zone'
+
+DlzDataExport.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzDataExport.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `fetchExportManagerCodeDirectory` <a name="fetchExportManagerCodeDirectory" id="aws-data-landing-zone.DlzDataExport.fetchExportManagerCodeDirectory"></a>
+
+```typescript
+import { DlzDataExport } from 'aws-data-landing-zone'
+
+DlzDataExport.fetchExportManagerCodeDirectory()
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.property.exportArn">exportArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.property.resolvedDataPath">resolvedDataPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.property.resolvedDestinationPrefix">resolvedDestinationPrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExport.property.resolvedExportName">resolvedExportName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzDataExport.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `exportArn`<sup>Required</sup> <a name="exportArn" id="aws-data-landing-zone.DlzDataExport.property.exportArn"></a>
+
+```typescript
+public readonly exportArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `resolvedDataPath`<sup>Required</sup> <a name="resolvedDataPath" id="aws-data-landing-zone.DlzDataExport.property.resolvedDataPath"></a>
+
+```typescript
+public readonly resolvedDataPath: string;
+```
+
+- *Type:* string
+
+---
+
+##### `resolvedDestinationPrefix`<sup>Required</sup> <a name="resolvedDestinationPrefix" id="aws-data-landing-zone.DlzDataExport.property.resolvedDestinationPrefix"></a>
+
+```typescript
+public readonly resolvedDestinationPrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `resolvedExportName`<sup>Required</sup> <a name="resolvedExportName" id="aws-data-landing-zone.DlzDataExport.property.resolvedExportName"></a>
+
+```typescript
+public readonly resolvedExportName: string;
+```
+
+- *Type:* string
+
+---
+
+
+### DlzDataExportsAthena <a name="DlzDataExportsAthena" id="aws-data-landing-zone.DlzDataExportsAthena"></a>
 
 Athena workgroup + query-results bucket for the DLZ CUR data plane.
 
@@ -2358,37 +2553,37 @@ result location" prompt.
 `EnforceWorkGroupConfiguration: true` so users can't override the result
 location or encryption client-side.
 
-#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzCurAthena.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExportsAthena.Initializer"></a>
 
 ```typescript
-import { DlzCurAthena } from 'aws-data-landing-zone'
+import { DlzDataExportsAthena } from 'aws-data-landing-zone'
 
-new DlzCurAthena(scope: Construct, id: string, props: DlzCurAthenaProps)
+new DlzDataExportsAthena(scope: Construct, id: string, props: DlzDataExportsAthenaProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzCurAthenaProps">DlzCurAthenaProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps">DlzDataExportsAthenaProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzCurAthena.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzDataExportsAthena.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzCurAthena.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzDataExportsAthena.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzCurAthena.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzDataExportsAthena.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#aws-data-landing-zone.DlzCurAthenaProps">DlzCurAthenaProps</a>
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsAthenaProps">DlzDataExportsAthenaProps</a>
 
 ---
 
@@ -2396,12 +2591,12 @@ new DlzCurAthena(scope: Construct, id: string, props: DlzCurAthenaProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
-##### `toString` <a name="toString" id="aws-data-landing-zone.DlzCurAthena.toString"></a>
+##### `toString` <a name="toString" id="aws-data-landing-zone.DlzDataExportsAthena.toString"></a>
 
 ```typescript
 public toString(): string
@@ -2409,7 +2604,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `with` <a name="with" id="aws-data-landing-zone.DlzCurAthena.with"></a>
+##### `with` <a name="with" id="aws-data-landing-zone.DlzDataExportsAthena.with"></a>
 
 ```typescript
 public with(mixins: ...IMixin[]): IConstruct
@@ -2422,7 +2617,7 @@ start of the call, so constructs added by a mixin will not be visited.
 Use multiple `with()` calls if subsequent mixins should apply to added
 constructs.
 
-###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzCurAthena.with.parameter.mixins"></a>
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzDataExportsAthena.with.parameter.mixins"></a>
 
 - *Type:* ...constructs.IMixin[]
 
@@ -2434,16 +2629,16 @@ The mixins to apply.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzCurAthena.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzDataExportsAthena.isConstruct"></a>
 
 ```typescript
-import { DlzCurAthena } from 'aws-data-landing-zone'
+import { DlzDataExportsAthena } from 'aws-data-landing-zone'
 
-DlzCurAthena.isConstruct(x: any)
+DlzDataExportsAthena.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
@@ -2462,7 +2657,7 @@ library can be accidentally installed, and `instanceof` will behave
 unpredictably. It is safest to avoid using `instanceof`, and using
 this type-testing method instead.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzCurAthena.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzDataExportsAthena.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -2474,15 +2669,15 @@ Any object.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.property.resultsBucket">resultsBucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.property.resultsBucketName">resultsBucketName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.property.workgroup">workgroup</a></code> | <code>aws-cdk-lib.aws_athena.CfnWorkGroup</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthena.property.workgroupName">workgroupName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.property.resultsBucket">resultsBucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.property.resultsBucketName">resultsBucketName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.property.workgroup">workgroup</a></code> | <code>aws-cdk-lib.aws_athena.CfnWorkGroup</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthena.property.workgroupName">workgroupName</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzCurAthena.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzDataExportsAthena.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -2494,7 +2689,7 @@ The tree node.
 
 ---
 
-##### `resultsBucket`<sup>Required</sup> <a name="resultsBucket" id="aws-data-landing-zone.DlzCurAthena.property.resultsBucket"></a>
+##### `resultsBucket`<sup>Required</sup> <a name="resultsBucket" id="aws-data-landing-zone.DlzDataExportsAthena.property.resultsBucket"></a>
 
 ```typescript
 public readonly resultsBucket: Bucket;
@@ -2504,7 +2699,7 @@ public readonly resultsBucket: Bucket;
 
 ---
 
-##### `resultsBucketName`<sup>Required</sup> <a name="resultsBucketName" id="aws-data-landing-zone.DlzCurAthena.property.resultsBucketName"></a>
+##### `resultsBucketName`<sup>Required</sup> <a name="resultsBucketName" id="aws-data-landing-zone.DlzDataExportsAthena.property.resultsBucketName"></a>
 
 ```typescript
 public readonly resultsBucketName: string;
@@ -2514,7 +2709,7 @@ public readonly resultsBucketName: string;
 
 ---
 
-##### `workgroup`<sup>Required</sup> <a name="workgroup" id="aws-data-landing-zone.DlzCurAthena.property.workgroup"></a>
+##### `workgroup`<sup>Required</sup> <a name="workgroup" id="aws-data-landing-zone.DlzDataExportsAthena.property.workgroup"></a>
 
 ```typescript
 public readonly workgroup: CfnWorkGroup;
@@ -2524,7 +2719,7 @@ public readonly workgroup: CfnWorkGroup;
 
 ---
 
-##### `workgroupName`<sup>Required</sup> <a name="workgroupName" id="aws-data-landing-zone.DlzCurAthena.property.workgroupName"></a>
+##### `workgroupName`<sup>Required</sup> <a name="workgroupName" id="aws-data-landing-zone.DlzDataExportsAthena.property.workgroupName"></a>
 
 ```typescript
 public readonly workgroupName: string;
@@ -2535,44 +2730,45 @@ public readonly workgroupName: string;
 ---
 
 
-### DlzCurDataPlane <a name="DlzCurDataPlane" id="aws-data-landing-zone.DlzCurDataPlane"></a>
+### DlzDataExportsDataPlane <a name="DlzDataExportsDataPlane" id="aws-data-landing-zone.DlzDataExportsDataPlane"></a>
 
-S3 + Glue resources holding and cataloging CUR Parquet data.
+One shared S3 bucket and one shared Glue database hold every configured export.
 
-Lives in the FinOps
-account; AWS Billing writes directly into the bucket via `bcm-data-exports.amazonaws.com`.
+The crawler uses one `S3Targets` entry per export, producing one
+table per export in the same database — ~5x cheaper than per-export
+crawlers and no Athena downside.
 
-#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzCurDataPlane.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExportsDataPlane.Initializer"></a>
 
 ```typescript
-import { DlzCurDataPlane } from 'aws-data-landing-zone'
+import { DlzDataExportsDataPlane } from 'aws-data-landing-zone'
 
-new DlzCurDataPlane(scope: Construct, id: string, props: DlzCurDataPlaneProps)
+new DlzDataExportsDataPlane(scope: Construct, id: string, props: DlzDataExportsDataPlaneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps">DlzCurDataPlaneProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps">DlzDataExportsDataPlaneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzCurDataPlane.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzDataExportsDataPlane.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzCurDataPlane.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzDataExportsDataPlane.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzCurDataPlane.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzDataExportsDataPlane.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#aws-data-landing-zone.DlzCurDataPlaneProps">DlzCurDataPlaneProps</a>
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps">DlzDataExportsDataPlaneProps</a>
 
 ---
 
@@ -2580,12 +2776,12 @@ new DlzCurDataPlane(scope: Construct, id: string, props: DlzCurDataPlaneProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
-##### `toString` <a name="toString" id="aws-data-landing-zone.DlzCurDataPlane.toString"></a>
+##### `toString` <a name="toString" id="aws-data-landing-zone.DlzDataExportsDataPlane.toString"></a>
 
 ```typescript
 public toString(): string
@@ -2593,7 +2789,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `with` <a name="with" id="aws-data-landing-zone.DlzCurDataPlane.with"></a>
+##### `with` <a name="with" id="aws-data-landing-zone.DlzDataExportsDataPlane.with"></a>
 
 ```typescript
 public with(mixins: ...IMixin[]): IConstruct
@@ -2606,7 +2802,7 @@ start of the call, so constructs added by a mixin will not be visited.
 Use multiple `with()` calls if subsequent mixins should apply to added
 constructs.
 
-###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzCurDataPlane.with.parameter.mixins"></a>
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzDataExportsDataPlane.with.parameter.mixins"></a>
 
 - *Type:* ...constructs.IMixin[]
 
@@ -2618,16 +2814,16 @@ The mixins to apply.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzCurDataPlane.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzDataExportsDataPlane.isConstruct"></a>
 
 ```typescript
-import { DlzCurDataPlane } from 'aws-data-landing-zone'
+import { DlzDataExportsDataPlane } from 'aws-data-landing-zone'
 
-DlzCurDataPlane.isConstruct(x: any)
+DlzDataExportsDataPlane.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
@@ -2646,7 +2842,7 @@ library can be accidentally installed, and `instanceof` will behave
 unpredictably. It is safest to avoid using `instanceof`, and using
 this type-testing method instead.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzCurDataPlane.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzDataExportsDataPlane.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -2658,21 +2854,18 @@ Any object.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.curBucketName">curBucketName</a></code> | <code>string</code> | Resolved bucket name (string, not a CDK token). |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.curDataPath">curDataPath</a></code> | <code>string</code> | `<prefix>/<exportName>` or just `<exportName>` when prefix is empty. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.curDestinationPrefix">curDestinationPrefix</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.curDestinationRegion">curDestinationRegion</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.curExportName">curExportName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.glueCrawler">glueCrawler</a></code> | <code>aws-cdk-lib.aws_glue.CfnCrawler</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.glueDatabase">glueDatabase</a></code> | <code>aws-cdk-lib.aws_glue.CfnDatabase</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.glueDatabaseName">glueDatabaseName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlane.property.athena">athena</a></code> | <code><a href="#aws-data-landing-zone.DlzCurAthena">DlzCurAthena</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.curBucketName">curBucketName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.curDestinationRegion">curDestinationRegion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.glueCrawler">glueCrawler</a></code> | <code>aws-cdk-lib.aws_glue.CfnCrawler</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.glueDatabase">glueDatabase</a></code> | <code>aws-cdk-lib.aws_glue.CfnDatabase</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.glueDatabaseName">glueDatabaseName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlane.property.athena">athena</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthena">DlzDataExportsAthena</a></code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzCurDataPlane.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -2684,7 +2877,7 @@ The tree node.
 
 ---
 
-##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-data-landing-zone.DlzCurDataPlane.property.bucket"></a>
+##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.bucket"></a>
 
 ```typescript
 public readonly bucket: Bucket;
@@ -2694,7 +2887,7 @@ public readonly bucket: Bucket;
 
 ---
 
-##### `curBucketName`<sup>Required</sup> <a name="curBucketName" id="aws-data-landing-zone.DlzCurDataPlane.property.curBucketName"></a>
+##### `curBucketName`<sup>Required</sup> <a name="curBucketName" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.curBucketName"></a>
 
 ```typescript
 public readonly curBucketName: string;
@@ -2702,33 +2895,9 @@ public readonly curBucketName: string;
 
 - *Type:* string
 
-Resolved bucket name (string, not a CDK token).
-
 ---
 
-##### `curDataPath`<sup>Required</sup> <a name="curDataPath" id="aws-data-landing-zone.DlzCurDataPlane.property.curDataPath"></a>
-
-```typescript
-public readonly curDataPath: string;
-```
-
-- *Type:* string
-
-`<prefix>/<exportName>` or just `<exportName>` when prefix is empty.
-
----
-
-##### `curDestinationPrefix`<sup>Required</sup> <a name="curDestinationPrefix" id="aws-data-landing-zone.DlzCurDataPlane.property.curDestinationPrefix"></a>
-
-```typescript
-public readonly curDestinationPrefix: string;
-```
-
-- *Type:* string
-
----
-
-##### `curDestinationRegion`<sup>Required</sup> <a name="curDestinationRegion" id="aws-data-landing-zone.DlzCurDataPlane.property.curDestinationRegion"></a>
+##### `curDestinationRegion`<sup>Required</sup> <a name="curDestinationRegion" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.curDestinationRegion"></a>
 
 ```typescript
 public readonly curDestinationRegion: string;
@@ -2738,17 +2907,7 @@ public readonly curDestinationRegion: string;
 
 ---
 
-##### `curExportName`<sup>Required</sup> <a name="curExportName" id="aws-data-landing-zone.DlzCurDataPlane.property.curExportName"></a>
-
-```typescript
-public readonly curExportName: string;
-```
-
-- *Type:* string
-
----
-
-##### `glueCrawler`<sup>Required</sup> <a name="glueCrawler" id="aws-data-landing-zone.DlzCurDataPlane.property.glueCrawler"></a>
+##### `glueCrawler`<sup>Required</sup> <a name="glueCrawler" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.glueCrawler"></a>
 
 ```typescript
 public readonly glueCrawler: CfnCrawler;
@@ -2758,7 +2917,7 @@ public readonly glueCrawler: CfnCrawler;
 
 ---
 
-##### `glueDatabase`<sup>Required</sup> <a name="glueDatabase" id="aws-data-landing-zone.DlzCurDataPlane.property.glueDatabase"></a>
+##### `glueDatabase`<sup>Required</sup> <a name="glueDatabase" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.glueDatabase"></a>
 
 ```typescript
 public readonly glueDatabase: CfnDatabase;
@@ -2768,7 +2927,7 @@ public readonly glueDatabase: CfnDatabase;
 
 ---
 
-##### `glueDatabaseName`<sup>Required</sup> <a name="glueDatabaseName" id="aws-data-landing-zone.DlzCurDataPlane.property.glueDatabaseName"></a>
+##### `glueDatabaseName`<sup>Required</sup> <a name="glueDatabaseName" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.glueDatabaseName"></a>
 
 ```typescript
 public readonly glueDatabaseName: string;
@@ -2778,57 +2937,55 @@ public readonly glueDatabaseName: string;
 
 ---
 
-##### `athena`<sup>Optional</sup> <a name="athena" id="aws-data-landing-zone.DlzCurDataPlane.property.athena"></a>
+##### `athena`<sup>Optional</sup> <a name="athena" id="aws-data-landing-zone.DlzDataExportsDataPlane.property.athena"></a>
 
 ```typescript
-public readonly athena: DlzCurAthena;
+public readonly athena: DlzDataExportsAthena;
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.DlzCurAthena">DlzCurAthena</a>
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsAthena">DlzDataExportsAthena</a>
 
 ---
 
 
-### DlzCurExport <a name="DlzCurExport" id="aws-data-landing-zone.DlzCurExport"></a>
+### DlzDataExportsTagActivation <a name="DlzDataExportsTagActivation" id="aws-data-landing-zone.DlzDataExportsTagActivation"></a>
 
-CUR 2.0 export. Lives in the management/payer account; AWS Billing writes Parquet files cross-account into the FinOps-account bucket on the export schedule.
+Activates Cost Allocation Tags via `ce:UpdateCostAllocationTagsStatus`.
 
-Backed by a custom resource rather than `bcm.CfnExport`: BCM rejects duplicate
-export names on Replacement, so the Lambda owns the lifecycle and falls back to
-delete-then-create when UpdateExport can't apply a change in place. This keeps the
-export name stable across config changes — and so the S3 path stays stable too.
+Org-wide; the Lambda is idempotent and no-ops on delete because the tags
+may be in use by consumers outside this stack.
 
-#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzCurExport.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExportsTagActivation.Initializer"></a>
 
 ```typescript
-import { DlzCurExport } from 'aws-data-landing-zone'
+import { DlzDataExportsTagActivation } from 'aws-data-landing-zone'
 
-new DlzCurExport(scope: Construct, id: string, props: DlzCurExportProps)
+new DlzDataExportsTagActivation(scope: Construct, id: string, props: DlzDataExportsTagActivationProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzCurExportProps">DlzCurExportProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivationProps">DlzDataExportsTagActivationProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzCurExport.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzDataExportsTagActivation.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzCurExport.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzDataExportsTagActivation.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzCurExport.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzDataExportsTagActivation.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#aws-data-landing-zone.DlzCurExportProps">DlzCurExportProps</a>
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsTagActivationProps">DlzDataExportsTagActivationProps</a>
 
 ---
 
@@ -2836,12 +2993,12 @@ new DlzCurExport(scope: Construct, id: string, props: DlzCurExportProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
-##### `toString` <a name="toString" id="aws-data-landing-zone.DlzCurExport.toString"></a>
+##### `toString` <a name="toString" id="aws-data-landing-zone.DlzDataExportsTagActivation.toString"></a>
 
 ```typescript
 public toString(): string
@@ -2849,7 +3006,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `with` <a name="with" id="aws-data-landing-zone.DlzCurExport.with"></a>
+##### `with` <a name="with" id="aws-data-landing-zone.DlzDataExportsTagActivation.with"></a>
 
 ```typescript
 public with(mixins: ...IMixin[]): IConstruct
@@ -2862,7 +3019,7 @@ start of the call, so constructs added by a mixin will not be visited.
 Use multiple `with()` calls if subsequent mixins should apply to added
 constructs.
 
-###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzCurExport.with.parameter.mixins"></a>
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.DlzDataExportsTagActivation.with.parameter.mixins"></a>
 
 - *Type:* ...constructs.IMixin[]
 
@@ -2874,18 +3031,17 @@ The mixins to apply.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.fetchExportManagerCodeDirectory">fetchExportManagerCodeDirectory</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.fetchTagActivationCodeDirectory">fetchTagActivationCodeDirectory</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.fetchTagActivationCodeDirectory">fetchTagActivationCodeDirectory</a></code> | *No description.* |
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzCurExport.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.DlzDataExportsTagActivation.isConstruct"></a>
 
 ```typescript
-import { DlzCurExport } from 'aws-data-landing-zone'
+import { DlzDataExportsTagActivation } from 'aws-data-landing-zone'
 
-DlzCurExport.isConstruct(x: any)
+DlzDataExportsTagActivation.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
@@ -2904,7 +3060,7 @@ library can be accidentally installed, and `instanceof` will behave
 unpredictably. It is safest to avoid using `instanceof`, and using
 this type-testing method instead.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzCurExport.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.DlzDataExportsTagActivation.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -2912,32 +3068,23 @@ Any object.
 
 ---
 
-##### `fetchExportManagerCodeDirectory` <a name="fetchExportManagerCodeDirectory" id="aws-data-landing-zone.DlzCurExport.fetchExportManagerCodeDirectory"></a>
+##### `fetchTagActivationCodeDirectory` <a name="fetchTagActivationCodeDirectory" id="aws-data-landing-zone.DlzDataExportsTagActivation.fetchTagActivationCodeDirectory"></a>
 
 ```typescript
-import { DlzCurExport } from 'aws-data-landing-zone'
+import { DlzDataExportsTagActivation } from 'aws-data-landing-zone'
 
-DlzCurExport.fetchExportManagerCodeDirectory()
-```
-
-##### `fetchTagActivationCodeDirectory` <a name="fetchTagActivationCodeDirectory" id="aws-data-landing-zone.DlzCurExport.fetchTagActivationCodeDirectory"></a>
-
-```typescript
-import { DlzCurExport } from 'aws-data-landing-zone'
-
-DlzCurExport.fetchTagActivationCodeDirectory()
+DlzDataExportsTagActivation.fetchTagActivationCodeDirectory()
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-data-landing-zone.DlzCurExport.property.exportArn">exportArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivation.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzCurExport.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.DlzDataExportsTagActivation.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -2946,16 +3093,6 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
-
----
-
-##### `exportArn`<sup>Required</sup> <a name="exportArn" id="aws-data-landing-zone.DlzCurExport.property.exportArn"></a>
-
-```typescript
-public readonly exportArn: string;
-```
-
-- *Type:* string
 
 ---
 
@@ -3978,11 +4115,7 @@ public readonly accountName: string;
 
 ### FinOpsGlobalStack <a name="FinOpsGlobalStack" id="aws-data-landing-zone.FinOpsGlobalStack"></a>
 
-FinOps-account global stack.
-
-Hosts the CUR data-plane (S3 + Glue) when `finOps.cur`
-is configured. Wave-ordered before the management wave so the bucket exists before
-the BCM export points at it.
+Wave-ordered before the management wave so the bucket exists when BCM creates exports.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.FinOpsGlobalStack.Initializer"></a>
 
@@ -8617,42 +8750,41 @@ public readonly reportResource: ReportResource;
 ---
 
 
-### ManagementCurExportStack <a name="ManagementCurExportStack" id="aws-data-landing-zone.ManagementCurExportStack"></a>
+### ManagementDataExportsStack <a name="ManagementDataExportsStack" id="aws-data-landing-zone.ManagementDataExportsStack"></a>
 
-Management-account stack pinned to us-east-1 for the BCM Data Exports CUR resource.
+BCM Data Exports is us-east-1-only;
 
-`AWS::BCMDataExports::Export` only exists in us-east-1; the destination bucket can
-live anywhere.
+the stack is pinned there.
 
-#### Initializers <a name="Initializers" id="aws-data-landing-zone.ManagementCurExportStack.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ManagementDataExportsStack.Initializer"></a>
 
 ```typescript
-import { ManagementCurExportStack } from 'aws-data-landing-zone'
+import { ManagementDataExportsStack } from 'aws-data-landing-zone'
 
-new ManagementCurExportStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
+new ManagementDataExportsStack(scope: Construct, stackProps: DlzStackProps, props: DataLandingZoneProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.Initializer.parameter.stackProps">stackProps</a></code> | <code><a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.ManagementCurExportStack.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.ManagementDataExportsStack.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `stackProps`<sup>Required</sup> <a name="stackProps" id="aws-data-landing-zone.ManagementCurExportStack.Initializer.parameter.stackProps"></a>
+##### `stackProps`<sup>Required</sup> <a name="stackProps" id="aws-data-landing-zone.ManagementDataExportsStack.Initializer.parameter.stackProps"></a>
 
 - *Type:* <a href="#aws-data-landing-zone.DlzStackProps">DlzStackProps</a>
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.ManagementCurExportStack.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.ManagementDataExportsStack.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#aws-data-landing-zone.DataLandingZoneProps">DataLandingZoneProps</a>
 
@@ -8662,31 +8794,31 @@ new ManagementCurExportStack(scope: Construct, stackProps: DlzStackProps, props:
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.with">with</a></code> | Applies one or more mixins to this construct. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.removeStackTag">removeStackTag</a></code> | Remove a stack tag. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.exportValue">exportValue</a></code> | Create a CloudFormation Export for a string value. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.formatArn">formatArn</a></code> | Creates an ARN from components. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.getLogicalId">getLogicalId</a></code> | Allocates a stack-unique CloudFormation-compatible logical identity for a specific resource. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.regionalFact">regionalFact</a></code> | Look up a fact value for the given fact for the region of this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.removeStackTag">removeStackTag</a></code> | Remove a stack tag. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.renameLogicalId">renameLogicalId</a></code> | Rename a generated logical identities. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.reportMissingContextKey">reportMissingContextKey</a></code> | Indicate that a context key was expected. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.resolve">resolve</a></code> | Resolve a tokenized value in the context of the current stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.splitArn">splitArn</a></code> | Splits the provided ARN into its components. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.toJsonString">toJsonString</a></code> | Convert an object, potentially containing tokens, to a JSON string. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.toYamlString">toYamlString</a></code> | Convert an object, potentially containing tokens, to a YAML string. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addExpressDependency">addExpressDependency</a></code> | Only use to create dependencies between Stacks in Waves and Stages for building the Pipeline, where having cyclic dependencies is not possible. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.expressDependencies">expressDependencies</a></code> | The ExpressStack dependencies of the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.resourceName">resourceName</a></code> | Create unique ResourceNames. |
 
 ---
 
-##### `toString` <a name="toString" id="aws-data-landing-zone.ManagementCurExportStack.toString"></a>
+##### `toString` <a name="toString" id="aws-data-landing-zone.ManagementDataExportsStack.toString"></a>
 
 ```typescript
 public toString(): string
@@ -8694,7 +8826,7 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `with` <a name="with" id="aws-data-landing-zone.ManagementCurExportStack.with"></a>
+##### `with` <a name="with" id="aws-data-landing-zone.ManagementDataExportsStack.with"></a>
 
 ```typescript
 public with(mixins: ...IMixin[]): IConstruct
@@ -8707,13 +8839,13 @@ start of the call, so constructs added by a mixin will not be visited.
 Use multiple `with()` calls if subsequent mixins should apply to added
 constructs.
 
-###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.ManagementCurExportStack.with.parameter.mixins"></a>
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-data-landing-zone.ManagementDataExportsStack.with.parameter.mixins"></a>
 
 - *Type:* ...constructs.IMixin[]
 
 ---
 
-##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementCurExportStack.addDependency"></a>
+##### `addDependency` <a name="addDependency" id="aws-data-landing-zone.ManagementDataExportsStack.addDependency"></a>
 
 ```typescript
 public addDependency(target: Stack, reason?: string): void
@@ -8724,19 +8856,19 @@ Use `addDependency` for dependencies between stacks in an ExpressStage.
 Otherwise, use `addExpressDependency`
 to construct the Pipeline of stacks between Waves and Stages.
 
-###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementCurExportStack.addDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementDataExportsStack.addDependency.parameter.target"></a>
 
 - *Type:* aws-cdk-lib.Stack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementCurExportStack.addDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementDataExportsStack.addDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `addMetadata` <a name="addMetadata" id="aws-data-landing-zone.ManagementCurExportStack.addMetadata"></a>
+##### `addMetadata` <a name="addMetadata" id="aws-data-landing-zone.ManagementDataExportsStack.addMetadata"></a>
 
 ```typescript
 public addMetadata(key: string, value: any): void
@@ -8748,19 +8880,19 @@ These get translated to the Metadata section of the generated template.
 
 > [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html)
 
-###### `key`<sup>Required</sup> <a name="key" id="aws-data-landing-zone.ManagementCurExportStack.addMetadata.parameter.key"></a>
+###### `key`<sup>Required</sup> <a name="key" id="aws-data-landing-zone.ManagementDataExportsStack.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementCurExportStack.addMetadata.parameter.value"></a>
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementDataExportsStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
 
 ---
 
-##### `addStackTag` <a name="addStackTag" id="aws-data-landing-zone.ManagementCurExportStack.addStackTag"></a>
+##### `addStackTag` <a name="addStackTag" id="aws-data-landing-zone.ManagementDataExportsStack.addStackTag"></a>
 
 ```typescript
 public addStackTag(tagName: string, tagValue: string): void
@@ -8770,19 +8902,19 @@ Configure a stack tag.
 
 At deploy time, CloudFormation will automatically apply all stack tags to all resources in the stack.
 
-###### `tagName`<sup>Required</sup> <a name="tagName" id="aws-data-landing-zone.ManagementCurExportStack.addStackTag.parameter.tagName"></a>
+###### `tagName`<sup>Required</sup> <a name="tagName" id="aws-data-landing-zone.ManagementDataExportsStack.addStackTag.parameter.tagName"></a>
 
 - *Type:* string
 
 ---
 
-###### `tagValue`<sup>Required</sup> <a name="tagValue" id="aws-data-landing-zone.ManagementCurExportStack.addStackTag.parameter.tagValue"></a>
+###### `tagValue`<sup>Required</sup> <a name="tagValue" id="aws-data-landing-zone.ManagementDataExportsStack.addStackTag.parameter.tagValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `addTransform` <a name="addTransform" id="aws-data-landing-zone.ManagementCurExportStack.addTransform"></a>
+##### `addTransform` <a name="addTransform" id="aws-data-landing-zone.ManagementDataExportsStack.addTransform"></a>
 
 ```typescript
 public addTransform(transform: string): void
@@ -8803,7 +8935,7 @@ stack.addTransform('AWS::Serverless-2016-10-31')
 ```
 
 
-###### `transform`<sup>Required</sup> <a name="transform" id="aws-data-landing-zone.ManagementCurExportStack.addTransform.parameter.transform"></a>
+###### `transform`<sup>Required</sup> <a name="transform" id="aws-data-landing-zone.ManagementDataExportsStack.addTransform.parameter.transform"></a>
 
 - *Type:* string
 
@@ -8811,7 +8943,7 @@ The transform to add.
 
 ---
 
-##### `exportStringListValue` <a name="exportStringListValue" id="aws-data-landing-zone.ManagementCurExportStack.exportStringListValue"></a>
+##### `exportStringListValue` <a name="exportStringListValue" id="aws-data-landing-zone.ManagementDataExportsStack.exportStringListValue"></a>
 
 ```typescript
 public exportStringListValue(exportedValue: any, options?: ExportValueOptions): string[]
@@ -8837,19 +8969,19 @@ the resource and the manual export.
 
 See `exportValue` for an example of this process.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementCurExportStack.exportStringListValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementDataExportsStack.exportStringListValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementCurExportStack.exportStringListValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementDataExportsStack.exportStringListValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `exportValue` <a name="exportValue" id="aws-data-landing-zone.ManagementCurExportStack.exportValue"></a>
+##### `exportValue` <a name="exportValue" id="aws-data-landing-zone.ManagementDataExportsStack.exportValue"></a>
 
 ```typescript
 public exportValue(exportedValue: any, options?: ExportValueOptions): string
@@ -8863,19 +8995,19 @@ If you don’t supply a value for name, the value you’re exporting must be a R
 
 One of the uses for this method is to remove the relationship between two Stacks established by automatic cross-stack references. It will temporarily ensure that the CloudFormation Export still exists while you remove the reference from the consuming stack. After that, you can remove the resource and the manual export.
 
-###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementCurExportStack.exportValue.parameter.exportedValue"></a>
+###### `exportedValue`<sup>Required</sup> <a name="exportedValue" id="aws-data-landing-zone.ManagementDataExportsStack.exportValue.parameter.exportedValue"></a>
 
 - *Type:* any
 
 ---
 
-###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementCurExportStack.exportValue.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ManagementDataExportsStack.exportValue.parameter.options"></a>
 
 - *Type:* aws-cdk-lib.ExportValueOptions
 
 ---
 
-##### `formatArn` <a name="formatArn" id="aws-data-landing-zone.ManagementCurExportStack.formatArn"></a>
+##### `formatArn` <a name="formatArn" id="aws-data-landing-zone.ManagementDataExportsStack.formatArn"></a>
 
 ```typescript
 public formatArn(components: ArnComponents): string
@@ -8897,13 +9029,13 @@ The required ARN pieces that are omitted will be taken from the stack that
 the 'scope' is attached to. If all ARN pieces are supplied, the supplied scope
 can be 'undefined'.
 
-###### `components`<sup>Required</sup> <a name="components" id="aws-data-landing-zone.ManagementCurExportStack.formatArn.parameter.components"></a>
+###### `components`<sup>Required</sup> <a name="components" id="aws-data-landing-zone.ManagementDataExportsStack.formatArn.parameter.components"></a>
 
 - *Type:* aws-cdk-lib.ArnComponents
 
 ---
 
-##### `getLogicalId` <a name="getLogicalId" id="aws-data-landing-zone.ManagementCurExportStack.getLogicalId"></a>
+##### `getLogicalId` <a name="getLogicalId" id="aws-data-landing-zone.ManagementDataExportsStack.getLogicalId"></a>
 
 ```typescript
 public getLogicalId(element: CfnElement): string
@@ -8919,7 +9051,7 @@ This method uses the protected method `allocateLogicalId` to render the
 logical ID for an element. To modify the naming scheme, extend the `Stack`
 class and override this method.
 
-###### `element`<sup>Required</sup> <a name="element" id="aws-data-landing-zone.ManagementCurExportStack.getLogicalId.parameter.element"></a>
+###### `element`<sup>Required</sup> <a name="element" id="aws-data-landing-zone.ManagementDataExportsStack.getLogicalId.parameter.element"></a>
 
 - *Type:* aws-cdk-lib.CfnElement
 
@@ -8927,7 +9059,7 @@ The CloudFormation element for which a logical identity is needed.
 
 ---
 
-##### `regionalFact` <a name="regionalFact" id="aws-data-landing-zone.ManagementCurExportStack.regionalFact"></a>
+##### `regionalFact` <a name="regionalFact" id="aws-data-landing-zone.ManagementDataExportsStack.regionalFact"></a>
 
 ```typescript
 public regionalFact(factName: string, defaultValue?: string): string
@@ -8951,19 +9083,19 @@ not have to worry about regional facts.
 If `defaultValue` is not given, it is an error if the fact is unknown for
 the given region.
 
-###### `factName`<sup>Required</sup> <a name="factName" id="aws-data-landing-zone.ManagementCurExportStack.regionalFact.parameter.factName"></a>
+###### `factName`<sup>Required</sup> <a name="factName" id="aws-data-landing-zone.ManagementDataExportsStack.regionalFact.parameter.factName"></a>
 
 - *Type:* string
 
 ---
 
-###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="aws-data-landing-zone.ManagementCurExportStack.regionalFact.parameter.defaultValue"></a>
+###### `defaultValue`<sup>Optional</sup> <a name="defaultValue" id="aws-data-landing-zone.ManagementDataExportsStack.regionalFact.parameter.defaultValue"></a>
 
 - *Type:* string
 
 ---
 
-##### `removeStackTag` <a name="removeStackTag" id="aws-data-landing-zone.ManagementCurExportStack.removeStackTag"></a>
+##### `removeStackTag` <a name="removeStackTag" id="aws-data-landing-zone.ManagementDataExportsStack.removeStackTag"></a>
 
 ```typescript
 public removeStackTag(tagName: string): void
@@ -8973,13 +9105,13 @@ Remove a stack tag.
 
 At deploy time, CloudFormation will automatically apply all stack tags to all resources in the stack.
 
-###### `tagName`<sup>Required</sup> <a name="tagName" id="aws-data-landing-zone.ManagementCurExportStack.removeStackTag.parameter.tagName"></a>
+###### `tagName`<sup>Required</sup> <a name="tagName" id="aws-data-landing-zone.ManagementDataExportsStack.removeStackTag.parameter.tagName"></a>
 
 - *Type:* string
 
 ---
 
-##### `renameLogicalId` <a name="renameLogicalId" id="aws-data-landing-zone.ManagementCurExportStack.renameLogicalId"></a>
+##### `renameLogicalId` <a name="renameLogicalId" id="aws-data-landing-zone.ManagementDataExportsStack.renameLogicalId"></a>
 
 ```typescript
 public renameLogicalId(oldId: string, newId: string): void
@@ -8990,19 +9122,19 @@ Rename a generated logical identities.
 To modify the naming scheme strategy, extend the `Stack` class and
 override the `allocateLogicalId` method.
 
-###### `oldId`<sup>Required</sup> <a name="oldId" id="aws-data-landing-zone.ManagementCurExportStack.renameLogicalId.parameter.oldId"></a>
+###### `oldId`<sup>Required</sup> <a name="oldId" id="aws-data-landing-zone.ManagementDataExportsStack.renameLogicalId.parameter.oldId"></a>
 
 - *Type:* string
 
 ---
 
-###### `newId`<sup>Required</sup> <a name="newId" id="aws-data-landing-zone.ManagementCurExportStack.renameLogicalId.parameter.newId"></a>
+###### `newId`<sup>Required</sup> <a name="newId" id="aws-data-landing-zone.ManagementDataExportsStack.renameLogicalId.parameter.newId"></a>
 
 - *Type:* string
 
 ---
 
-##### `reportMissingContextKey` <a name="reportMissingContextKey" id="aws-data-landing-zone.ManagementCurExportStack.reportMissingContextKey"></a>
+##### `reportMissingContextKey` <a name="reportMissingContextKey" id="aws-data-landing-zone.ManagementDataExportsStack.reportMissingContextKey"></a>
 
 ```typescript
 public reportMissingContextKey(report: MissingContext): void
@@ -9013,7 +9145,7 @@ Indicate that a context key was expected.
 Contains instructions which will be emitted into the cloud assembly on how
 the key should be supplied.
 
-###### `report`<sup>Required</sup> <a name="report" id="aws-data-landing-zone.ManagementCurExportStack.reportMissingContextKey.parameter.report"></a>
+###### `report`<sup>Required</sup> <a name="report" id="aws-data-landing-zone.ManagementDataExportsStack.reportMissingContextKey.parameter.report"></a>
 
 - *Type:* aws-cdk-lib.cloud_assembly_schema.MissingContext
 
@@ -9021,7 +9153,7 @@ The set of parameters needed to obtain the context.
 
 ---
 
-##### `resolve` <a name="resolve" id="aws-data-landing-zone.ManagementCurExportStack.resolve"></a>
+##### `resolve` <a name="resolve" id="aws-data-landing-zone.ManagementDataExportsStack.resolve"></a>
 
 ```typescript
 public resolve(obj: any): any
@@ -9029,13 +9161,13 @@ public resolve(obj: any): any
 
 Resolve a tokenized value in the context of the current stack.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementCurExportStack.resolve.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementDataExportsStack.resolve.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `splitArn` <a name="splitArn" id="aws-data-landing-zone.ManagementCurExportStack.splitArn"></a>
+##### `splitArn` <a name="splitArn" id="aws-data-landing-zone.ManagementDataExportsStack.splitArn"></a>
 
 ```typescript
 public splitArn(arn: string, arnFormat: ArnFormat): ArnComponents
@@ -9048,7 +9180,7 @@ and a Token representing a dynamic CloudFormation expression
 (in which case the returned components will also be dynamic CloudFormation expressions,
 encoded as Tokens).
 
-###### `arn`<sup>Required</sup> <a name="arn" id="aws-data-landing-zone.ManagementCurExportStack.splitArn.parameter.arn"></a>
+###### `arn`<sup>Required</sup> <a name="arn" id="aws-data-landing-zone.ManagementDataExportsStack.splitArn.parameter.arn"></a>
 
 - *Type:* string
 
@@ -9056,7 +9188,7 @@ the ARN to split into its components.
 
 ---
 
-###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="aws-data-landing-zone.ManagementCurExportStack.splitArn.parameter.arnFormat"></a>
+###### `arnFormat`<sup>Required</sup> <a name="arnFormat" id="aws-data-landing-zone.ManagementDataExportsStack.splitArn.parameter.arnFormat"></a>
 
 - *Type:* aws-cdk-lib.ArnFormat
 
@@ -9064,7 +9196,7 @@ the expected format of 'arn' - depends on what format the service 'arn' represen
 
 ---
 
-##### `toJsonString` <a name="toJsonString" id="aws-data-landing-zone.ManagementCurExportStack.toJsonString"></a>
+##### `toJsonString` <a name="toJsonString" id="aws-data-landing-zone.ManagementDataExportsStack.toJsonString"></a>
 
 ```typescript
 public toJsonString(obj: any, space?: number): string
@@ -9072,19 +9204,19 @@ public toJsonString(obj: any, space?: number): string
 
 Convert an object, potentially containing tokens, to a JSON string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementCurExportStack.toJsonString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementDataExportsStack.toJsonString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-###### `space`<sup>Optional</sup> <a name="space" id="aws-data-landing-zone.ManagementCurExportStack.toJsonString.parameter.space"></a>
+###### `space`<sup>Optional</sup> <a name="space" id="aws-data-landing-zone.ManagementDataExportsStack.toJsonString.parameter.space"></a>
 
 - *Type:* number
 
 ---
 
-##### `toYamlString` <a name="toYamlString" id="aws-data-landing-zone.ManagementCurExportStack.toYamlString"></a>
+##### `toYamlString` <a name="toYamlString" id="aws-data-landing-zone.ManagementDataExportsStack.toYamlString"></a>
 
 ```typescript
 public toYamlString(obj: any): string
@@ -9092,13 +9224,13 @@ public toYamlString(obj: any): string
 
 Convert an object, potentially containing tokens, to a YAML string.
 
-###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementCurExportStack.toYamlString.parameter.obj"></a>
+###### `obj`<sup>Required</sup> <a name="obj" id="aws-data-landing-zone.ManagementDataExportsStack.toYamlString.parameter.obj"></a>
 
 - *Type:* any
 
 ---
 
-##### `addExpressDependency` <a name="addExpressDependency" id="aws-data-landing-zone.ManagementCurExportStack.addExpressDependency"></a>
+##### `addExpressDependency` <a name="addExpressDependency" id="aws-data-landing-zone.ManagementDataExportsStack.addExpressDependency"></a>
 
 ```typescript
 public addExpressDependency(target: ExpressStack, reason?: string): void
@@ -9109,19 +9241,19 @@ Only use to create dependencies between Stacks in Waves and Stages for building 
 If the `addExpressDependency` is used outside the Pipeline construction,
 it will not be safe. Use `addDependency` to create stack dependency within the same Stage.
 
-###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementCurExportStack.addExpressDependency.parameter.target"></a>
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementDataExportsStack.addExpressDependency.parameter.target"></a>
 
 - *Type:* cdk-express-pipeline.ExpressStack
 
 ---
 
-###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementCurExportStack.addExpressDependency.parameter.reason"></a>
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementDataExportsStack.addExpressDependency.parameter.reason"></a>
 
 - *Type:* string
 
 ---
 
-##### `expressDependencies` <a name="expressDependencies" id="aws-data-landing-zone.ManagementCurExportStack.expressDependencies"></a>
+##### `expressDependencies` <a name="expressDependencies" id="aws-data-landing-zone.ManagementDataExportsStack.expressDependencies"></a>
 
 ```typescript
 public expressDependencies(): ExpressStack[]
@@ -9129,7 +9261,7 @@ public expressDependencies(): ExpressStack[]
 
 The ExpressStack dependencies of the stack.
 
-##### `resourceName` <a name="resourceName" id="aws-data-landing-zone.ManagementCurExportStack.resourceName"></a>
+##### `resourceName` <a name="resourceName" id="aws-data-landing-zone.ManagementDataExportsStack.resourceName"></a>
 
 ```typescript
 public resourceName(resourceId: string): string
@@ -9137,7 +9269,7 @@ public resourceName(resourceId: string): string
 
 Create unique ResourceNames.
 
-###### `resourceId`<sup>Required</sup> <a name="resourceId" id="aws-data-landing-zone.ManagementCurExportStack.resourceName.parameter.resourceId"></a>
+###### `resourceId`<sup>Required</sup> <a name="resourceId" id="aws-data-landing-zone.ManagementDataExportsStack.resourceName.parameter.resourceId"></a>
 
 - *Type:* string
 
@@ -9147,18 +9279,18 @@ Create unique ResourceNames.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.ManagementCurExportStack.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="aws-data-landing-zone.ManagementDataExportsStack.isConstruct"></a>
 
 ```typescript
-import { ManagementCurExportStack } from 'aws-data-landing-zone'
+import { ManagementDataExportsStack } from 'aws-data-landing-zone'
 
-ManagementCurExportStack.isConstruct(x: any)
+ManagementDataExportsStack.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
@@ -9177,7 +9309,7 @@ library can be accidentally installed, and `instanceof` will behave
 unpredictably. It is safest to avoid using `instanceof`, and using
 this type-testing method instead.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementCurExportStack.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementDataExportsStack.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -9185,30 +9317,30 @@ Any object.
 
 ---
 
-##### `isStack` <a name="isStack" id="aws-data-landing-zone.ManagementCurExportStack.isStack"></a>
+##### `isStack` <a name="isStack" id="aws-data-landing-zone.ManagementDataExportsStack.isStack"></a>
 
 ```typescript
-import { ManagementCurExportStack } from 'aws-data-landing-zone'
+import { ManagementDataExportsStack } from 'aws-data-landing-zone'
 
-ManagementCurExportStack.isStack(x: any)
+ManagementDataExportsStack.isStack(x: any)
 ```
 
 Return whether the given object is a Stack.
 
 We do attribute detection since we can't reliably use 'instanceof'.
 
-###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementCurExportStack.isStack.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="aws-data-landing-zone.ManagementDataExportsStack.isStack.parameter.x"></a>
 
 - *Type:* any
 
 ---
 
-##### `of` <a name="of" id="aws-data-landing-zone.ManagementCurExportStack.of"></a>
+##### `of` <a name="of" id="aws-data-landing-zone.ManagementDataExportsStack.of"></a>
 
 ```typescript
-import { ManagementCurExportStack } from 'aws-data-landing-zone'
+import { ManagementDataExportsStack } from 'aws-data-landing-zone'
 
-ManagementCurExportStack.of(construct: IConstruct)
+ManagementDataExportsStack.of(construct: IConstruct)
 ```
 
 Looks up the first stack scope in which `construct` is defined.
@@ -9217,7 +9349,7 @@ Fails if there is no stack up the tree.
 
 Will return the closest containing `Stack` or `NestedStack`.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="aws-data-landing-zone.ManagementCurExportStack.of.parameter.construct"></a>
+###### `construct`<sup>Required</sup> <a name="construct" id="aws-data-landing-zone.ManagementDataExportsStack.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
 
@@ -9229,36 +9361,36 @@ The construct to start the search from.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this Stack deploys to. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to its parent. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns its parent stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementCurExportStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.account">account</a></code> | <code>string</code> | The AWS account into which this stack will be deployed. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.artifactId">artifactId</a></code> | <code>string</code> | The ID of the cloud assembly artifact for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.availabilityZones">availabilityZones</a></code> | <code>string[]</code> | Returns the list of AZs that are available in the AWS environment (account/region) associated with this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.bundlingRequired">bundlingRequired</a></code> | <code>boolean</code> | Indicates whether the stack requires bundling or not. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.dependencies">dependencies</a></code> | <code>aws-cdk-lib.Stack[]</code> | Return the stacks this stack depends on. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this Stack deploys to. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.environment">environment</a></code> | <code>string</code> | The environment coordinates in which this stack is deployed. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.nested">nested</a></code> | <code>boolean</code> | Indicates if this is a nested stack, in which case `parentStack` will include a reference to its parent. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.notificationArns">notificationArns</a></code> | <code>string[]</code> | Returns the list of notification Amazon Resource Names (ARNs) for the current stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.partition">partition</a></code> | <code>string</code> | The partition in which this stack is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.region">region</a></code> | <code>string</code> | The AWS region into which this stack will be deployed (e.g. `us-west-2`). |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.stackId">stackId</a></code> | <code>string</code> | The ID of the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.stackName">stackName</a></code> | <code>string</code> | The concrete CloudFormation physical stack name. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tags to be applied to the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.templateFile">templateFile</a></code> | <code>string</code> | The name of the CloudFormation template file emitted to the output directory during synthesis. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.templateOptions">templateOptions</a></code> | <code>aws-cdk-lib.ITemplateOptions</code> | Options for CloudFormation template (like version, transform, description). |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.urlSuffix">urlSuffix</a></code> | <code>string</code> | The Amazon domain suffix for the region in which this stack is defined. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.nestedStackParent">nestedStackParent</a></code> | <code>aws-cdk-lib.Stack</code> | If this is a nested stack, returns its parent stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.nestedStackResource">nestedStackResource</a></code> | <code>aws-cdk-lib.CfnResource</code> | If this is a nested stack, this represents its `AWS::CloudFormation::Stack` resource. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.id">id</a></code> | <code>string</code> | The stack identifier which is a combination of the wave, stage and stack id. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.stage">stage</a></code> | <code>cdk-express-pipeline.ExpressStage</code> | The stage that the stack belongs to. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.property.accountName">accountName</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.ManagementCurExportStack.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="aws-data-landing-zone.ManagementDataExportsStack.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -9270,7 +9402,7 @@ The tree node.
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="aws-data-landing-zone.ManagementCurExportStack.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="aws-data-landing-zone.ManagementDataExportsStack.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -9299,7 +9431,7 @@ implement some other account-agnostic behavior.
 
 ---
 
-##### `artifactId`<sup>Required</sup> <a name="artifactId" id="aws-data-landing-zone.ManagementCurExportStack.property.artifactId"></a>
+##### `artifactId`<sup>Required</sup> <a name="artifactId" id="aws-data-landing-zone.ManagementDataExportsStack.property.artifactId"></a>
 
 ```typescript
 public readonly artifactId: string;
@@ -9311,7 +9443,7 @@ The ID of the cloud assembly artifact for this stack.
 
 ---
 
-##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="aws-data-landing-zone.ManagementCurExportStack.property.availabilityZones"></a>
+##### `availabilityZones`<sup>Required</sup> <a name="availabilityZones" id="aws-data-landing-zone.ManagementDataExportsStack.property.availabilityZones"></a>
 
 ```typescript
 public readonly availabilityZones: string[];
@@ -9334,7 +9466,7 @@ To specify a different strategy for selecting availability zones override this m
 
 ---
 
-##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="aws-data-landing-zone.ManagementCurExportStack.property.bundlingRequired"></a>
+##### `bundlingRequired`<sup>Required</sup> <a name="bundlingRequired" id="aws-data-landing-zone.ManagementDataExportsStack.property.bundlingRequired"></a>
 
 ```typescript
 public readonly bundlingRequired: boolean;
@@ -9346,7 +9478,7 @@ Indicates whether the stack requires bundling or not.
 
 ---
 
-##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementCurExportStack.property.dependencies"></a>
+##### `dependencies`<sup>Required</sup> <a name="dependencies" id="aws-data-landing-zone.ManagementDataExportsStack.property.dependencies"></a>
 
 ```typescript
 public readonly dependencies: Stack[];
@@ -9358,7 +9490,7 @@ Return the stacks this stack depends on.
 
 ---
 
-##### `env`<sup>Required</sup> <a name="env" id="aws-data-landing-zone.ManagementCurExportStack.property.env"></a>
+##### `env`<sup>Required</sup> <a name="env" id="aws-data-landing-zone.ManagementDataExportsStack.property.env"></a>
 
 ```typescript
 public readonly env: ResourceEnvironment;
@@ -9370,7 +9502,7 @@ The environment this Stack deploys to.
 
 ---
 
-##### `environment`<sup>Required</sup> <a name="environment" id="aws-data-landing-zone.ManagementCurExportStack.property.environment"></a>
+##### `environment`<sup>Required</sup> <a name="environment" id="aws-data-landing-zone.ManagementDataExportsStack.property.environment"></a>
 
 ```typescript
 public readonly environment: string;
@@ -9394,7 +9526,7 @@ region/account-agnostic.
 
 ---
 
-##### `nested`<sup>Required</sup> <a name="nested" id="aws-data-landing-zone.ManagementCurExportStack.property.nested"></a>
+##### `nested`<sup>Required</sup> <a name="nested" id="aws-data-landing-zone.ManagementDataExportsStack.property.nested"></a>
 
 ```typescript
 public readonly nested: boolean;
@@ -9406,7 +9538,7 @@ Indicates if this is a nested stack, in which case `parentStack` will include a 
 
 ---
 
-##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="aws-data-landing-zone.ManagementCurExportStack.property.notificationArns"></a>
+##### `notificationArns`<sup>Required</sup> <a name="notificationArns" id="aws-data-landing-zone.ManagementDataExportsStack.property.notificationArns"></a>
 
 ```typescript
 public readonly notificationArns: string[];
@@ -9418,7 +9550,7 @@ Returns the list of notification Amazon Resource Names (ARNs) for the current st
 
 ---
 
-##### `partition`<sup>Required</sup> <a name="partition" id="aws-data-landing-zone.ManagementCurExportStack.property.partition"></a>
+##### `partition`<sup>Required</sup> <a name="partition" id="aws-data-landing-zone.ManagementDataExportsStack.property.partition"></a>
 
 ```typescript
 public readonly partition: string;
@@ -9430,7 +9562,7 @@ The partition in which this stack is defined.
 
 ---
 
-##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.ManagementCurExportStack.property.region"></a>
+##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.ManagementDataExportsStack.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -9459,7 +9591,7 @@ implement some other region-agnostic behavior.
 
 ---
 
-##### `stackId`<sup>Required</sup> <a name="stackId" id="aws-data-landing-zone.ManagementCurExportStack.property.stackId"></a>
+##### `stackId`<sup>Required</sup> <a name="stackId" id="aws-data-landing-zone.ManagementDataExportsStack.property.stackId"></a>
 
 ```typescript
 public readonly stackId: string;
@@ -9479,7 +9611,7 @@ The ID of the stack.
 ```
 
 
-##### `stackName`<sup>Required</sup> <a name="stackName" id="aws-data-landing-zone.ManagementCurExportStack.property.stackName"></a>
+##### `stackName`<sup>Required</sup> <a name="stackName" id="aws-data-landing-zone.ManagementDataExportsStack.property.stackName"></a>
 
 ```typescript
 public readonly stackName: string;
@@ -9500,7 +9632,7 @@ you can use `Aws.STACK_NAME` directly.
 
 ---
 
-##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="aws-data-landing-zone.ManagementCurExportStack.property.synthesizer"></a>
+##### `synthesizer`<sup>Required</sup> <a name="synthesizer" id="aws-data-landing-zone.ManagementDataExportsStack.property.synthesizer"></a>
 
 ```typescript
 public readonly synthesizer: IStackSynthesizer;
@@ -9512,7 +9644,7 @@ Synthesis method for this stack.
 
 ---
 
-##### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.ManagementCurExportStack.property.tags"></a>
+##### `tags`<sup>Required</sup> <a name="tags" id="aws-data-landing-zone.ManagementDataExportsStack.property.tags"></a>
 
 ```typescript
 public readonly tags: TagManager;
@@ -9524,7 +9656,7 @@ Tags to be applied to the stack.
 
 ---
 
-##### `templateFile`<sup>Required</sup> <a name="templateFile" id="aws-data-landing-zone.ManagementCurExportStack.property.templateFile"></a>
+##### `templateFile`<sup>Required</sup> <a name="templateFile" id="aws-data-landing-zone.ManagementDataExportsStack.property.templateFile"></a>
 
 ```typescript
 public readonly templateFile: string;
@@ -9538,7 +9670,7 @@ Example value: `MyStack.template.json`
 
 ---
 
-##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="aws-data-landing-zone.ManagementCurExportStack.property.templateOptions"></a>
+##### `templateOptions`<sup>Required</sup> <a name="templateOptions" id="aws-data-landing-zone.ManagementDataExportsStack.property.templateOptions"></a>
 
 ```typescript
 public readonly templateOptions: ITemplateOptions;
@@ -9550,7 +9682,7 @@ Options for CloudFormation template (like version, transform, description).
 
 ---
 
-##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="aws-data-landing-zone.ManagementCurExportStack.property.urlSuffix"></a>
+##### `urlSuffix`<sup>Required</sup> <a name="urlSuffix" id="aws-data-landing-zone.ManagementDataExportsStack.property.urlSuffix"></a>
 
 ```typescript
 public readonly urlSuffix: string;
@@ -9562,7 +9694,7 @@ The Amazon domain suffix for the region in which this stack is defined.
 
 ---
 
-##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="aws-data-landing-zone.ManagementCurExportStack.property.nestedStackParent"></a>
+##### `nestedStackParent`<sup>Optional</sup> <a name="nestedStackParent" id="aws-data-landing-zone.ManagementDataExportsStack.property.nestedStackParent"></a>
 
 ```typescript
 public readonly nestedStackParent: Stack;
@@ -9574,7 +9706,7 @@ If this is a nested stack, returns its parent stack.
 
 ---
 
-##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="aws-data-landing-zone.ManagementCurExportStack.property.nestedStackResource"></a>
+##### `nestedStackResource`<sup>Optional</sup> <a name="nestedStackResource" id="aws-data-landing-zone.ManagementDataExportsStack.property.nestedStackResource"></a>
 
 ```typescript
 public readonly nestedStackResource: CfnResource;
@@ -9588,7 +9720,7 @@ If this is a nested stack, this represents its `AWS::CloudFormation::Stack` reso
 
 ---
 
-##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="aws-data-landing-zone.ManagementCurExportStack.property.terminationProtection"></a>
+##### `terminationProtection`<sup>Required</sup> <a name="terminationProtection" id="aws-data-landing-zone.ManagementDataExportsStack.property.terminationProtection"></a>
 
 ```typescript
 public readonly terminationProtection: boolean;
@@ -9600,7 +9732,7 @@ Whether termination protection is enabled for this stack.
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.ManagementCurExportStack.property.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.ManagementDataExportsStack.property.id"></a>
 
 ```typescript
 public readonly id: string;
@@ -9612,7 +9744,7 @@ The stack identifier which is a combination of the wave, stage and stack id.
 
 ---
 
-##### `stage`<sup>Required</sup> <a name="stage" id="aws-data-landing-zone.ManagementCurExportStack.property.stage"></a>
+##### `stage`<sup>Required</sup> <a name="stage" id="aws-data-landing-zone.ManagementDataExportsStack.property.stage"></a>
 
 ```typescript
 public readonly stage: ExpressStage;
@@ -9624,7 +9756,7 @@ The stage that the stack belongs to.
 
 ---
 
-##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.ManagementCurExportStack.property.accountId"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.ManagementDataExportsStack.property.accountId"></a>
 
 ```typescript
 public readonly accountId: string;
@@ -9634,7 +9766,7 @@ public readonly accountId: string;
 
 ---
 
-##### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.ManagementCurExportStack.property.accountName"></a>
+##### `accountName`<sup>Required</sup> <a name="accountName" id="aws-data-landing-zone.ManagementDataExportsStack.property.accountName"></a>
 
 ```typescript
 public readonly accountName: string;
@@ -21597,9 +21729,9 @@ FinOps capabilities. Groups all cost-management features:.
 `budgets` — org/account-wide budget alerts (always-on root budget set).
 - `accountBudgets` — per-account / per-cost-center budgets composed over workload accounts.
 - `costAnomalyDetection` — Cost Anomaly Detection monitors + subscriptions.
-- `cur` — CUR 2.0 cost-data delivery to the dedicated FinOps account.
+- `dataExports` — BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon Emissions) into the dedicated FinOps account.
 
-`cur` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
+`dataExports` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
 capabilities are independent of the Shared Services OU and only use the management
 account.
 
@@ -22325,6 +22457,139 @@ public readonly forTags: {[ key: string ]: string};
 
 ---
 
+### DlzCarbonEmissionsConfig <a name="DlzCarbonEmissionsConfig" id="aws-data-landing-zone.DlzCarbonEmissionsConfig"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCarbonEmissionsConfig.Initializer"></a>
+
+```typescript
+import { DlzCarbonEmissionsConfig } from 'aws-data-landing-zone'
+
+const dlzCarbonEmissionsConfig: DlzCarbonEmissionsConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsConfig.property.queryColumns">queryColumns</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsConfig.property.queryStatement">queryStatement</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `queryColumns`<sup>Optional</sup> <a name="queryColumns" id="aws-data-landing-zone.DlzCarbonEmissionsConfig.property.queryColumns"></a>
+
+```typescript
+public readonly queryColumns: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `queryStatement`<sup>Optional</sup> <a name="queryStatement" id="aws-data-landing-zone.DlzCarbonEmissionsConfig.property.queryStatement"></a>
+
+```typescript
+public readonly queryStatement: string;
+```
+
+- *Type:* string
+
+---
+
+### DlzCarbonEmissionsExport <a name="DlzCarbonEmissionsExport" id="aws-data-landing-zone.DlzCarbonEmissionsExport"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCarbonEmissionsExport.Initializer"></a>
+
+```typescript
+import { DlzCarbonEmissionsExport } from 'aws-data-landing-zone'
+
+const dlzCarbonEmissionsExport: DlzCarbonEmissionsExport = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.exportType">exportType</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsConfig">DlzCarbonEmissionsConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.exportName">exportName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.glueTableName">glueTableName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.output">output</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCarbonEmissionsExport.property.overwriteBehavior">overwriteBehavior</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `exportType`<sup>Required</sup> <a name="exportType" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.exportType"></a>
+
+```typescript
+public readonly exportType: string;
+```
+
+- *Type:* string
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.config"></a>
+
+```typescript
+public readonly config: DlzCarbonEmissionsConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzCarbonEmissionsConfig">DlzCarbonEmissionsConfig</a>
+
+---
+
+##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.destinationPrefix"></a>
+
+```typescript
+public readonly destinationPrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `exportName`<sup>Optional</sup> <a name="exportName" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.exportName"></a>
+
+```typescript
+public readonly exportName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `glueTableName`<sup>Optional</sup> <a name="glueTableName" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.glueTableName"></a>
+
+```typescript
+public readonly glueTableName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `output`<sup>Optional</sup> <a name="output" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.output"></a>
+
+```typescript
+public readonly output: DlzDataExportOutputConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a>
+
+---
+
+##### `overwriteBehavior`<sup>Optional</sup> <a name="overwriteBehavior" id="aws-data-landing-zone.DlzCarbonEmissionsExport.property.overwriteBehavior"></a>
+
+```typescript
+public readonly overwriteBehavior: string;
+```
+
+- *Type:* string
+
+---
+
 ### DlzControlTowerControlIdNameProps <a name="DlzControlTowerControlIdNameProps" id="aws-data-landing-zone.DlzControlTowerControlIdNameProps"></a>
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Do not export any of the controls in the folders, they do not conform to JSII, class names are snake case caps and the controlIdName properties are also snake case caps. This will cause the JSII build to fail. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -22449,6 +22714,309 @@ public readonly tags: CfnTag[];
 
 ---
 
+### DlzCorConfig <a name="DlzCorConfig" id="aws-data-landing-zone.DlzCorConfig"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCorConfig.Initializer"></a>
+
+```typescript
+import { DlzCorConfig } from 'aws-data-landing-zone'
+
+const dlzCorConfig: DlzCorConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzCorConfig.property.filter">filter</a></code> | <code><a href="#aws-data-landing-zone.DlzCorFilter">DlzCorFilter</a></code> | Serialized to JSON and embedded under `TableConfigurations.FILTER`. |
+| <code><a href="#aws-data-landing-zone.DlzCorConfig.property.includeAllRecommendations">includeAllRecommendations</a></code> | <code>boolean</code> | `false` dedupes to highest-savings recommendation per resource. |
+| <code><a href="#aws-data-landing-zone.DlzCorConfig.property.queryColumns">queryColumns</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorConfig.property.queryStatement">queryStatement</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `filter`<sup>Optional</sup> <a name="filter" id="aws-data-landing-zone.DlzCorConfig.property.filter"></a>
+
+```typescript
+public readonly filter: DlzCorFilter;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzCorFilter">DlzCorFilter</a>
+
+Serialized to JSON and embedded under `TableConfigurations.FILTER`.
+
+---
+
+##### `includeAllRecommendations`<sup>Optional</sup> <a name="includeAllRecommendations" id="aws-data-landing-zone.DlzCorConfig.property.includeAllRecommendations"></a>
+
+```typescript
+public readonly includeAllRecommendations: boolean;
+```
+
+- *Type:* boolean
+
+`false` dedupes to highest-savings recommendation per resource.
+
+---
+
+##### `queryColumns`<sup>Optional</sup> <a name="queryColumns" id="aws-data-landing-zone.DlzCorConfig.property.queryColumns"></a>
+
+```typescript
+public readonly queryColumns: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `queryStatement`<sup>Optional</sup> <a name="queryStatement" id="aws-data-landing-zone.DlzCorConfig.property.queryStatement"></a>
+
+```typescript
+public readonly queryStatement: string;
+```
+
+- *Type:* string
+
+---
+
+### DlzCorExport <a name="DlzCorExport" id="aws-data-landing-zone.DlzCorExport"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCorExport.Initializer"></a>
+
+```typescript
+import { DlzCorExport } from 'aws-data-landing-zone'
+
+const dlzCorExport: DlzCorExport = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.exportType">exportType</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzCorConfig">DlzCorConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.exportName">exportName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.glueTableName">glueTableName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.output">output</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorExport.property.overwriteBehavior">overwriteBehavior</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `exportType`<sup>Required</sup> <a name="exportType" id="aws-data-landing-zone.DlzCorExport.property.exportType"></a>
+
+```typescript
+public readonly exportType: string;
+```
+
+- *Type:* string
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="aws-data-landing-zone.DlzCorExport.property.config"></a>
+
+```typescript
+public readonly config: DlzCorConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzCorConfig">DlzCorConfig</a>
+
+---
+
+##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzCorExport.property.destinationPrefix"></a>
+
+```typescript
+public readonly destinationPrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `exportName`<sup>Optional</sup> <a name="exportName" id="aws-data-landing-zone.DlzCorExport.property.exportName"></a>
+
+```typescript
+public readonly exportName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `glueTableName`<sup>Optional</sup> <a name="glueTableName" id="aws-data-landing-zone.DlzCorExport.property.glueTableName"></a>
+
+```typescript
+public readonly glueTableName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `output`<sup>Optional</sup> <a name="output" id="aws-data-landing-zone.DlzCorExport.property.output"></a>
+
+```typescript
+public readonly output: DlzDataExportOutputConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a>
+
+---
+
+##### `overwriteBehavior`<sup>Optional</sup> <a name="overwriteBehavior" id="aws-data-landing-zone.DlzCorExport.property.overwriteBehavior"></a>
+
+```typescript
+public readonly overwriteBehavior: string;
+```
+
+- *Type:* string
+
+---
+
+### DlzCorFilter <a name="DlzCorFilter" id="aws-data-landing-zone.DlzCorFilter"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCorFilter.Initializer"></a>
+
+```typescript
+import { DlzCorFilter } from 'aws-data-landing-zone'
+
+const dlzCorFilter: DlzCorFilter = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.accountIds">accountIds</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.actionTypes">actionTypes</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.implementationEfforts">implementationEfforts</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.recommendationIds">recommendationIds</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.resourceTypes">resourceTypes</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.restartNeeded">restartNeeded</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.rollbackPossible">rollbackPossible</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilter.property.tags">tags</a></code> | <code><a href="#aws-data-landing-zone.DlzCorFilterTag">DlzCorFilterTag</a>[]</code> | *No description.* |
+
+---
+
+##### `accountIds`<sup>Optional</sup> <a name="accountIds" id="aws-data-landing-zone.DlzCorFilter.property.accountIds"></a>
+
+```typescript
+public readonly accountIds: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `actionTypes`<sup>Optional</sup> <a name="actionTypes" id="aws-data-landing-zone.DlzCorFilter.property.actionTypes"></a>
+
+```typescript
+public readonly actionTypes: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `implementationEfforts`<sup>Optional</sup> <a name="implementationEfforts" id="aws-data-landing-zone.DlzCorFilter.property.implementationEfforts"></a>
+
+```typescript
+public readonly implementationEfforts: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `recommendationIds`<sup>Optional</sup> <a name="recommendationIds" id="aws-data-landing-zone.DlzCorFilter.property.recommendationIds"></a>
+
+```typescript
+public readonly recommendationIds: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `resourceTypes`<sup>Optional</sup> <a name="resourceTypes" id="aws-data-landing-zone.DlzCorFilter.property.resourceTypes"></a>
+
+```typescript
+public readonly resourceTypes: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `restartNeeded`<sup>Optional</sup> <a name="restartNeeded" id="aws-data-landing-zone.DlzCorFilter.property.restartNeeded"></a>
+
+```typescript
+public readonly restartNeeded: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `rollbackPossible`<sup>Optional</sup> <a name="rollbackPossible" id="aws-data-landing-zone.DlzCorFilter.property.rollbackPossible"></a>
+
+```typescript
+public readonly rollbackPossible: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="aws-data-landing-zone.DlzCorFilter.property.tags"></a>
+
+```typescript
+public readonly tags: DlzCorFilterTag[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzCorFilterTag">DlzCorFilterTag</a>[]
+
+---
+
+### DlzCorFilterTag <a name="DlzCorFilterTag" id="aws-data-landing-zone.DlzCorFilterTag"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCorFilterTag.Initializer"></a>
+
+```typescript
+import { DlzCorFilterTag } from 'aws-data-landing-zone'
+
+const dlzCorFilterTag: DlzCorFilterTag = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzCorFilterTag.property.key">key</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzCorFilterTag.property.values">values</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `key`<sup>Required</sup> <a name="key" id="aws-data-landing-zone.DlzCorFilterTag.property.key"></a>
+
+```typescript
+public readonly key: string;
+```
+
+- *Type:* string
+
+---
+
+##### `values`<sup>Required</sup> <a name="values" id="aws-data-landing-zone.DlzCorFilterTag.property.values"></a>
+
+```typescript
+public readonly values: string[];
+```
+
+- *Type:* string[]
+
+---
+
 ### DlzCostAnomalyDetectionProps <a name="DlzCostAnomalyDetectionProps" id="aws-data-landing-zone.DlzCostAnomalyDetectionProps"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCostAnomalyDetectionProps.Initializer"></a>
@@ -22477,675 +23045,73 @@ public readonly monitors: DlzAnomalyMonitorProps[];
 
 ---
 
-### DlzCurAthenaConfig <a name="DlzCurAthenaConfig" id="aws-data-landing-zone.DlzCurAthenaConfig"></a>
+### DlzDataExportOutputConfig <a name="DlzDataExportOutputConfig" id="aws-data-landing-zone.DlzDataExportOutputConfig"></a>
 
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurAthenaConfig.Initializer"></a>
+BCM only accepts paired PARQUET+PARQUET or TEXT_OR_CSV+GZIP.
+
+JSII can't
+express the pairing as a discriminated union; enforced in `validateFinOpsConfig`.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportOutputConfig.Initializer"></a>
 
 ```typescript
-import { DlzCurAthenaConfig } from 'aws-data-landing-zone'
+import { DlzDataExportOutputConfig } from 'aws-data-landing-zone'
 
-const dlzCurAthenaConfig: DlzCurAthenaConfig = { ... }
+const dlzDataExportOutputConfig: DlzDataExportOutputConfig = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.bytesScannedCutoffPerQuery">bytesScannedCutoffPerQuery</a></code> | <code>number</code> | Per-query bytes-scanned limit. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.enabled">enabled</a></code> | <code>boolean</code> | When `false`, no workgroup or results bucket is created. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.engineVersion">engineVersion</a></code> | <code>number</code> | Athena engine version. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.publishCloudWatchMetrics">publishCloudWatchMetrics</a></code> | <code>boolean</code> | Publish per-query CloudWatch metrics for the workgroup. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.resultsBucketNamePrefix">resultsBucketNamePrefix</a></code> | <code>string</code> | Bucket name is `{prefix}-{finOpsAccountId}-{destinationRegion}`. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.resultsExpirationDays">resultsExpirationDays</a></code> | <code>number</code> | Days before query results expire. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig.property.workgroupName">workgroupName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportOutputConfig.property.compression">compression</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportOutputConfig.property.format">format</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `bytesScannedCutoffPerQuery`<sup>Optional</sup> <a name="bytesScannedCutoffPerQuery" id="aws-data-landing-zone.DlzCurAthenaConfig.property.bytesScannedCutoffPerQuery"></a>
-
-```typescript
-public readonly bytesScannedCutoffPerQuery: number;
-```
-
-- *Type:* number
-- *Default:* no limit
-
-Per-query bytes-scanned limit.
-
-Athena cancels queries scanning more bytes
-than this — useful as a runaway-cost guardrail. Min 10 MB enforced by
-Athena. Omit for no limit.
-
----
-
-##### `enabled`<sup>Optional</sup> <a name="enabled" id="aws-data-landing-zone.DlzCurAthenaConfig.property.enabled"></a>
-
-```typescript
-public readonly enabled: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-When `false`, no workgroup or results bucket is created.
-
-Operators that
-already run a central Athena workgroup can opt out and point downstream
-tooling at their own results location.
-
----
-
-##### `engineVersion`<sup>Optional</sup> <a name="engineVersion" id="aws-data-landing-zone.DlzCurAthenaConfig.property.engineVersion"></a>
-
-```typescript
-public readonly engineVersion: number;
-```
-
-- *Type:* number
-- *Default:* 3
-
-Athena engine version.
-
-v3 is the current default and supports more
-Parquet / Iceberg features than v2.
-
----
-
-##### `publishCloudWatchMetrics`<sup>Optional</sup> <a name="publishCloudWatchMetrics" id="aws-data-landing-zone.DlzCurAthenaConfig.property.publishCloudWatchMetrics"></a>
-
-```typescript
-public readonly publishCloudWatchMetrics: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Publish per-query CloudWatch metrics for the workgroup.
-
----
-
-##### `resultsBucketNamePrefix`<sup>Optional</sup> <a name="resultsBucketNamePrefix" id="aws-data-landing-zone.DlzCurAthenaConfig.property.resultsBucketNamePrefix"></a>
-
-```typescript
-public readonly resultsBucketNamePrefix: string;
-```
-
-- *Type:* string
-- *Default:* 'dlz-cur-athena-results'
-
-Bucket name is `{prefix}-{finOpsAccountId}-{destinationRegion}`.
-
----
-
-##### `resultsExpirationDays`<sup>Optional</sup> <a name="resultsExpirationDays" id="aws-data-landing-zone.DlzCurAthenaConfig.property.resultsExpirationDays"></a>
-
-```typescript
-public readonly resultsExpirationDays: number;
-```
-
-- *Type:* number
-- *Default:* 30
-
-Days before query results expire.
-
-`0` keeps results forever (don't — they
-accumulate and aren't useful past a few days). Min 1.
-
----
-
-##### `workgroupName`<sup>Optional</sup> <a name="workgroupName" id="aws-data-landing-zone.DlzCurAthenaConfig.property.workgroupName"></a>
-
-```typescript
-public readonly workgroupName: string;
-```
-
-- *Type:* string
-- *Default:* 'dlz-cur'
-
----
-
-### DlzCurAthenaProps <a name="DlzCurAthenaProps" id="aws-data-landing-zone.DlzCurAthenaProps"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurAthenaProps.Initializer"></a>
-
-```typescript
-import { DlzCurAthenaProps } from 'aws-data-landing-zone'
-
-const dlzCurAthenaProps: DlzCurAthenaProps = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaProps.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaProps.property.encryption">encryption</a></code> | <code><a href="#aws-data-landing-zone.DlzCurAthenaResolvedEncryption">DlzCurAthenaResolvedEncryption</a></code> | Resolved by the data plane so encryption stays consistent with the CUR bucket. |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaProps.property.region">region</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaProps.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig">DlzCurAthenaConfig</a></code> | *No description.* |
-
----
-
-##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.DlzCurAthenaProps.property.accountId"></a>
-
-```typescript
-public readonly accountId: string;
-```
-
-- *Type:* string
-
----
-
-##### `encryption`<sup>Required</sup> <a name="encryption" id="aws-data-landing-zone.DlzCurAthenaProps.property.encryption"></a>
-
-```typescript
-public readonly encryption: DlzCurAthenaResolvedEncryption;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurAthenaResolvedEncryption">DlzCurAthenaResolvedEncryption</a>
-
-Resolved by the data plane so encryption stays consistent with the CUR bucket.
-
----
-
-##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.DlzCurAthenaProps.property.region"></a>
-
-```typescript
-public readonly region: string;
-```
-
-- *Type:* string
-
----
-
-##### `config`<sup>Optional</sup> <a name="config" id="aws-data-landing-zone.DlzCurAthenaProps.property.config"></a>
-
-```typescript
-public readonly config: DlzCurAthenaConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurAthenaConfig">DlzCurAthenaConfig</a>
-
----
-
-### DlzCurAthenaResolvedEncryption <a name="DlzCurAthenaResolvedEncryption" id="aws-data-landing-zone.DlzCurAthenaResolvedEncryption"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurAthenaResolvedEncryption.Initializer"></a>
-
-```typescript
-import { DlzCurAthenaResolvedEncryption } from 'aws-data-landing-zone'
-
-const dlzCurAthenaResolvedEncryption: DlzCurAthenaResolvedEncryption = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaResolvedEncryption.property.kind">kind</a></code> | <code>aws-cdk-lib.aws_s3.BucketEncryption</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurAthenaResolvedEncryption.property.key">key</a></code> | <code>aws-cdk-lib.aws_kms.IKey</code> | *No description.* |
-
----
-
-##### `kind`<sup>Required</sup> <a name="kind" id="aws-data-landing-zone.DlzCurAthenaResolvedEncryption.property.kind"></a>
-
-```typescript
-public readonly kind: BucketEncryption;
-```
-
-- *Type:* aws-cdk-lib.aws_s3.BucketEncryption
-
----
-
-##### `key`<sup>Optional</sup> <a name="key" id="aws-data-landing-zone.DlzCurAthenaResolvedEncryption.property.key"></a>
-
-```typescript
-public readonly key: IKey;
-```
-
-- *Type:* aws-cdk-lib.aws_kms.IKey
-
----
-
-### DlzCurBucketEncryption <a name="DlzCurBucketEncryption" id="aws-data-landing-zone.DlzCurBucketEncryption"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurBucketEncryption.Initializer"></a>
-
-```typescript
-import { DlzCurBucketEncryption } from 'aws-data-landing-zone'
-
-const dlzCurBucketEncryption: DlzCurBucketEncryption = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurBucketEncryption.property.kmsKeyArn">kmsKeyArn</a></code> | <code>string</code> | KMS key ARN for SSE-KMS. |
-
----
-
-##### `kmsKeyArn`<sup>Optional</sup> <a name="kmsKeyArn" id="aws-data-landing-zone.DlzCurBucketEncryption.property.kmsKeyArn"></a>
-
-```typescript
-public readonly kmsKeyArn: string;
-```
-
-- *Type:* string
-
-KMS key ARN for SSE-KMS.
-
-Omit for SSE-S3 (default; avoids cross-account KMS
-key-policy work). When set, ensure the key policy grants
-`bcm-data-exports.amazonaws.com` `kms:GenerateDataKey*` and `kms:Decrypt`.
-
----
-
-### DlzCurDataPlaneConfig <a name="DlzCurDataPlaneConfig" id="aws-data-landing-zone.DlzCurDataPlaneConfig"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurDataPlaneConfig.Initializer"></a>
-
-```typescript
-import { DlzCurDataPlaneConfig } from 'aws-data-landing-zone'
-
-const dlzCurDataPlaneConfig: DlzCurDataPlaneConfig = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.accessLogging">accessLogging</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.additionalReadAccountIds">additionalReadAccountIds</a></code> | <code>string[]</code> | Extra accounts granted `s3:GetObject` and `s3:ListBucket` on the CUR data. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.athena">athena</a></code> | <code><a href="#aws-data-landing-zone.DlzCurAthenaConfig">DlzCurAthenaConfig</a></code> | Athena workgroup + query-results bucket. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.encryption">encryption</a></code> | <code><a href="#aws-data-landing-zone.DlzCurBucketEncryption">DlzCurBucketEncryption</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.glueCrawlerSchedule">glueCrawlerSchedule</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.lifecycle">lifecycle</a></code> | <code><a href="#aws-data-landing-zone.DlzCurLifecycleConfig">DlzCurLifecycleConfig</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig.property.versioning">versioning</a></code> | <code>boolean</code> | *No description.* |
-
----
-
-##### `accessLogging`<sup>Optional</sup> <a name="accessLogging" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.accessLogging"></a>
-
-```typescript
-public readonly accessLogging: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
----
-
-##### `additionalReadAccountIds`<sup>Optional</sup> <a name="additionalReadAccountIds" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.additionalReadAccountIds"></a>
-
-```typescript
-public readonly additionalReadAccountIds: string[];
-```
-
-- *Type:* string[]
-- *Default:* []
-
-Extra accounts granted `s3:GetObject` and `s3:ListBucket` on the CUR data.
-
----
-
-##### `athena`<sup>Optional</sup> <a name="athena" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.athena"></a>
-
-```typescript
-public readonly athena: DlzCurAthenaConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurAthenaConfig">DlzCurAthenaConfig</a>
-- *Default:* enabled with sane defaults
-
-Athena workgroup + query-results bucket.
-
-Without this, AWS Athena prompts
-users to "set up a query result location in Amazon S3" before any query
-runs — DLZ ships the workgroup so consumers can query CUR data day-1.
-
----
-
-##### `encryption`<sup>Optional</sup> <a name="encryption" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.encryption"></a>
-
-```typescript
-public readonly encryption: DlzCurBucketEncryption;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurBucketEncryption">DlzCurBucketEncryption</a>
-- *Default:* SSE-S3
-
----
-
-##### `glueCrawlerSchedule`<sup>Optional</sup> <a name="glueCrawlerSchedule" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.glueCrawlerSchedule"></a>
-
-```typescript
-public readonly glueCrawlerSchedule: string;
-```
-
-- *Type:* string
-- *Default:* 'cron(0 6 * * ? *)'
-
----
-
-##### `lifecycle`<sup>Optional</sup> <a name="lifecycle" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.lifecycle"></a>
-
-```typescript
-public readonly lifecycle: DlzCurLifecycleConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurLifecycleConfig">DlzCurLifecycleConfig</a>
-
----
-
-##### `versioning`<sup>Optional</sup> <a name="versioning" id="aws-data-landing-zone.DlzCurDataPlaneConfig.property.versioning"></a>
-
-```typescript
-public readonly versioning: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
----
-
-### DlzCurDataPlaneProps <a name="DlzCurDataPlaneProps" id="aws-data-landing-zone.DlzCurDataPlaneProps"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurDataPlaneProps.Initializer"></a>
-
-```typescript
-import { DlzCurDataPlaneProps } from 'aws-data-landing-zone'
-
-const dlzCurDataPlaneProps: DlzCurDataPlaneProps = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.bucketNamePrefix">bucketNamePrefix</a></code> | <code>string</code> | Bucket name is `{prefix}-{accountId}-{region}`. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.destinationRegion">destinationRegion</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.exportName">exportName</a></code> | <code>string</code> | Export name — also the inner S3 path segment BCM writes under. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.glueDatabaseName">glueDatabaseName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.managementAccountId">managementAccountId</a></code> | <code>string</code> | Used to scope the bucket policy via aws:SourceAccount / aws:SourceArn. |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.dataPlaneConfig">dataPlaneConfig</a></code> | <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig">DlzCurDataPlaneConfig</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurDataPlaneProps.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | Optional S3 path segment prepended in front of the export name. |
-
----
-
-##### `bucketNamePrefix`<sup>Required</sup> <a name="bucketNamePrefix" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.bucketNamePrefix"></a>
-
-```typescript
-public readonly bucketNamePrefix: string;
-```
-
-- *Type:* string
-
-Bucket name is `{prefix}-{accountId}-{region}`.
-
----
-
-##### `destinationRegion`<sup>Required</sup> <a name="destinationRegion" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.destinationRegion"></a>
-
-```typescript
-public readonly destinationRegion: string;
-```
-
-- *Type:* string
-
----
-
-##### `exportName`<sup>Required</sup> <a name="exportName" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.exportName"></a>
-
-```typescript
-public readonly exportName: string;
-```
-
-- *Type:* string
-
-Export name — also the inner S3 path segment BCM writes under.
-
----
-
-##### `glueDatabaseName`<sup>Required</sup> <a name="glueDatabaseName" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.glueDatabaseName"></a>
-
-```typescript
-public readonly glueDatabaseName: string;
-```
-
-- *Type:* string
-
----
-
-##### `managementAccountId`<sup>Required</sup> <a name="managementAccountId" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.managementAccountId"></a>
-
-```typescript
-public readonly managementAccountId: string;
-```
-
-- *Type:* string
-
-Used to scope the bucket policy via aws:SourceAccount / aws:SourceArn.
-
----
-
-##### `dataPlaneConfig`<sup>Optional</sup> <a name="dataPlaneConfig" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.dataPlaneConfig"></a>
-
-```typescript
-public readonly dataPlaneConfig: DlzCurDataPlaneConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurDataPlaneConfig">DlzCurDataPlaneConfig</a>
-
----
-
-##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzCurDataPlaneProps.property.destinationPrefix"></a>
-
-```typescript
-public readonly destinationPrefix: string;
-```
-
-- *Type:* string
-- *Default:* '' (flat layout; data lives directly under <exportName>/)
-
-Optional S3 path segment prepended in front of the export name.
-
-BCM's layout
-is `<bucket>/<destinationPrefix>/<exportName>/{data,metadata}/...`.
-
----
-
-### DlzCurExportConfig <a name="DlzCurExportConfig" id="aws-data-landing-zone.DlzCurExportConfig"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurExportConfig.Initializer"></a>
-
-```typescript
-import { DlzCurExportConfig } from 'aws-data-landing-zone'
-
-const dlzCurExportConfig: DlzCurExportConfig = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.compression">compression</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.format">format</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.includeCapacityReservationData">includeCapacityReservationData</a></code> | <code>boolean</code> | Adds 3 `capacity_reservation_*` columns. |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.includeIamPrincipalData">includeIamPrincipalData</a></code> | <code>boolean</code> | Adds the `line_item_iam_principal` column (Bedrock caller-identity allocation). |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.includeResources">includeResources</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.includeSplitCostAllocationData">includeSplitCostAllocationData</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.overwriteBehavior">overwriteBehavior</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.queryColumns">queryColumns</a></code> | <code>string[]</code> | Columns to project. |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.queryStatement">queryStatement</a></code> | <code>string</code> | Full SQL override. |
-| <code><a href="#aws-data-landing-zone.DlzCurExportConfig.property.timeGranularity">timeGranularity</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `compression`<sup>Optional</sup> <a name="compression" id="aws-data-landing-zone.DlzCurExportConfig.property.compression"></a>
+##### `compression`<sup>Optional</sup> <a name="compression" id="aws-data-landing-zone.DlzDataExportOutputConfig.property.compression"></a>
 
 ```typescript
 public readonly compression: string;
 ```
 
 - *Type:* string
-- *Default:* 'PARQUET'
 
 ---
 
-##### `format`<sup>Optional</sup> <a name="format" id="aws-data-landing-zone.DlzCurExportConfig.property.format"></a>
+##### `format`<sup>Optional</sup> <a name="format" id="aws-data-landing-zone.DlzDataExportOutputConfig.property.format"></a>
 
 ```typescript
 public readonly format: string;
 ```
 
 - *Type:* string
-- *Default:* 'PARQUET'
 
 ---
 
-##### `includeCapacityReservationData`<sup>Optional</sup> <a name="includeCapacityReservationData" id="aws-data-landing-zone.DlzCurExportConfig.property.includeCapacityReservationData"></a>
+### DlzDataExportProps <a name="DlzDataExportProps" id="aws-data-landing-zone.DlzDataExportProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportProps.Initializer"></a>
 
 ```typescript
-public readonly includeCapacityReservationData: boolean;
-```
+import { DlzDataExportProps } from 'aws-data-landing-zone'
 
-- *Type:* boolean
-- *Default:* false
-
-Adds 3 `capacity_reservation_*` columns.
-
-Data populates from 2025-11-01.
-
----
-
-##### `includeIamPrincipalData`<sup>Optional</sup> <a name="includeIamPrincipalData" id="aws-data-landing-zone.DlzCurExportConfig.property.includeIamPrincipalData"></a>
-
-```typescript
-public readonly includeIamPrincipalData: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Adds the `line_item_iam_principal` column (Bedrock caller-identity allocation).
-
-Data populates from 2026-04-08.
-
----
-
-##### `includeResources`<sup>Optional</sup> <a name="includeResources" id="aws-data-landing-zone.DlzCurExportConfig.property.includeResources"></a>
-
-```typescript
-public readonly includeResources: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
----
-
-##### `includeSplitCostAllocationData`<sup>Optional</sup> <a name="includeSplitCostAllocationData" id="aws-data-landing-zone.DlzCurExportConfig.property.includeSplitCostAllocationData"></a>
-
-```typescript
-public readonly includeSplitCostAllocationData: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
----
-
-##### `overwriteBehavior`<sup>Optional</sup> <a name="overwriteBehavior" id="aws-data-landing-zone.DlzCurExportConfig.property.overwriteBehavior"></a>
-
-```typescript
-public readonly overwriteBehavior: string;
-```
-
-- *Type:* string
-- *Default:* 'OVERWRITE_REPORT'
-
----
-
-##### `queryColumns`<sup>Optional</sup> <a name="queryColumns" id="aws-data-landing-zone.DlzCurExportConfig.property.queryColumns"></a>
-
-```typescript
-public readonly queryColumns: string[];
-```
-
-- *Type:* string[]
-
-Columns to project.
-
-Falls back to {@link DLZ_CUR_DEFAULT_QUERY_COLUMNS} when undefined
-or empty. To extend the defaults, spread them: `[...DLZ_CUR_DEFAULT_QUERY_COLUMNS, 'foo']`.
-Flag-driven columns are appended automatically.
-
----
-
-##### `queryStatement`<sup>Optional</sup> <a name="queryStatement" id="aws-data-landing-zone.DlzCurExportConfig.property.queryStatement"></a>
-
-```typescript
-public readonly queryStatement: string;
-```
-
-- *Type:* string
-
-Full SQL override.
-
-Use when you need a non-trivial projection / filter / aggregation.
-BCM does not support `SELECT *`. When set, `queryColumns` and flag-driven extensions
-are ignored — you own the full SQL.
-
----
-
-##### `timeGranularity`<sup>Optional</sup> <a name="timeGranularity" id="aws-data-landing-zone.DlzCurExportConfig.property.timeGranularity"></a>
-
-```typescript
-public readonly timeGranularity: string;
-```
-
-- *Type:* string
-- *Default:* 'HOURLY'
-
----
-
-### DlzCurExportProps <a name="DlzCurExportProps" id="aws-data-landing-zone.DlzCurExportProps"></a>
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurExportProps.Initializer"></a>
-
-```typescript
-import { DlzCurExportProps } from 'aws-data-landing-zone'
-
-const dlzCurExportProps: DlzCurExportProps = { ... }
+const dlzDataExportProps: DlzDataExportProps = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.costAllocationTagKeys">costAllocationTagKeys</a></code> | <code>string[]</code> | Pass `[]` to skip cost-allocation-tag activation. |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.destinationBucketArn">destinationBucketArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.destinationBucketOwnerAccountId">destinationBucketOwnerAccountId</a></code> | <code>string</code> | Required for cross-account delivery; |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.destinationBucketRegion">destinationBucketRegion</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | Optional S3 path segment prepended in front of the export name. |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.exportConfig">exportConfig</a></code> | <code><a href="#aws-data-landing-zone.DlzCurExportConfig">DlzCurExportConfig</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurExportProps.property.exportName">exportName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportProps.property.destinationBucketArn">destinationBucketArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportProps.property.destinationBucketOwnerAccountId">destinationBucketOwnerAccountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportProps.property.destinationBucketRegion">destinationBucketRegion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportProps.property.entry">entry</a></code> | <code><a href="#aws-data-landing-zone.DlzStandardCur20Export">DlzStandardCur20Export</a> \| <a href="#aws-data-landing-zone.DlzFocus12Export">DlzFocus12Export</a> \| <a href="#aws-data-landing-zone.DlzCorExport">DlzCorExport</a> \| <a href="#aws-data-landing-zone.DlzCarbonEmissionsExport">DlzCarbonEmissionsExport</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportProps.property.entryId">entryId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `costAllocationTagKeys`<sup>Required</sup> <a name="costAllocationTagKeys" id="aws-data-landing-zone.DlzCurExportProps.property.costAllocationTagKeys"></a>
-
-```typescript
-public readonly costAllocationTagKeys: string[];
-```
-
-- *Type:* string[]
-
-Pass `[]` to skip cost-allocation-tag activation.
-
----
-
-##### `destinationBucketArn`<sup>Required</sup> <a name="destinationBucketArn" id="aws-data-landing-zone.DlzCurExportProps.property.destinationBucketArn"></a>
+##### `destinationBucketArn`<sup>Required</sup> <a name="destinationBucketArn" id="aws-data-landing-zone.DlzDataExportProps.property.destinationBucketArn"></a>
 
 ```typescript
 public readonly destinationBucketArn: string;
@@ -23155,7 +23121,7 @@ public readonly destinationBucketArn: string;
 
 ---
 
-##### `destinationBucketOwnerAccountId`<sup>Required</sup> <a name="destinationBucketOwnerAccountId" id="aws-data-landing-zone.DlzCurExportProps.property.destinationBucketOwnerAccountId"></a>
+##### `destinationBucketOwnerAccountId`<sup>Required</sup> <a name="destinationBucketOwnerAccountId" id="aws-data-landing-zone.DlzDataExportProps.property.destinationBucketOwnerAccountId"></a>
 
 ```typescript
 public readonly destinationBucketOwnerAccountId: string;
@@ -23163,13 +23129,9 @@ public readonly destinationBucketOwnerAccountId: string;
 
 - *Type:* string
 
-Required for cross-account delivery;
-
-BCM validates bucket ownership.
-
 ---
 
-##### `destinationBucketRegion`<sup>Required</sup> <a name="destinationBucketRegion" id="aws-data-landing-zone.DlzCurExportProps.property.destinationBucketRegion"></a>
+##### `destinationBucketRegion`<sup>Required</sup> <a name="destinationBucketRegion" id="aws-data-landing-zone.DlzDataExportProps.property.destinationBucketRegion"></a>
 
 ```typescript
 public readonly destinationBucketRegion: string;
@@ -23179,244 +23141,623 @@ public readonly destinationBucketRegion: string;
 
 ---
 
-##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzCurExportProps.property.destinationPrefix"></a>
+##### `entry`<sup>Required</sup> <a name="entry" id="aws-data-landing-zone.DlzDataExportProps.property.entry"></a>
 
 ```typescript
-public readonly destinationPrefix: string;
+public readonly entry: DlzStandardCur20Export | DlzFocus12Export | DlzCorExport | DlzCarbonEmissionsExport;
 ```
 
-- *Type:* string
-- *Default:* '' (flat layout; data lives directly under <exportName>/)
-
-Optional S3 path segment prepended in front of the export name.
-
-BCM's layout
-is `<bucket>/<destinationPrefix>/<exportName>/{data,metadata}/...`.
+- *Type:* <a href="#aws-data-landing-zone.DlzStandardCur20Export">DlzStandardCur20Export</a> | <a href="#aws-data-landing-zone.DlzFocus12Export">DlzFocus12Export</a> | <a href="#aws-data-landing-zone.DlzCorExport">DlzCorExport</a> | <a href="#aws-data-landing-zone.DlzCarbonEmissionsExport">DlzCarbonEmissionsExport</a>
 
 ---
 
-##### `exportConfig`<sup>Optional</sup> <a name="exportConfig" id="aws-data-landing-zone.DlzCurExportProps.property.exportConfig"></a>
+##### `entryId`<sup>Required</sup> <a name="entryId" id="aws-data-landing-zone.DlzDataExportProps.property.entryId"></a>
 
 ```typescript
-public readonly exportConfig: DlzCurExportConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurExportConfig">DlzCurExportConfig</a>
-
----
-
-##### `exportName`<sup>Optional</sup> <a name="exportName" id="aws-data-landing-zone.DlzCurExportProps.property.exportName"></a>
-
-```typescript
-public readonly exportName: string;
+public readonly entryId: string;
 ```
 
 - *Type:* string
 
 ---
 
-### DlzCurLifecycleConfig <a name="DlzCurLifecycleConfig" id="aws-data-landing-zone.DlzCurLifecycleConfig"></a>
+### DlzDataExportsAthenaConfig <a name="DlzDataExportsAthenaConfig" id="aws-data-landing-zone.DlzDataExportsAthenaConfig"></a>
 
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurLifecycleConfig.Initializer"></a>
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.Initializer"></a>
 
 ```typescript
-import { DlzCurLifecycleConfig } from 'aws-data-landing-zone'
+import { DlzDataExportsAthenaConfig } from 'aws-data-landing-zone'
 
-const dlzCurLifecycleConfig: DlzCurLifecycleConfig = { ... }
+const dlzDataExportsAthenaConfig: DlzDataExportsAthenaConfig = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurLifecycleConfig.property.enabled">enabled</a></code> | <code>boolean</code> | Master switch. |
-| <code><a href="#aws-data-landing-zone.DlzCurLifecycleConfig.property.expirationDays">expirationDays</a></code> | <code>number</code> | Object expiration. |
-| <code><a href="#aws-data-landing-zone.DlzCurLifecycleConfig.property.transitionToGlacierDays">transitionToGlacierDays</a></code> | <code>number</code> | Glacier Instant Retrieval — still queryable by Athena. |
-| <code><a href="#aws-data-landing-zone.DlzCurLifecycleConfig.property.transitionToInfrequentAccessDays">transitionToInfrequentAccessDays</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.bytesScannedCutoffPerQuery">bytesScannedCutoffPerQuery</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.enabled">enabled</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.engineVersion">engineVersion</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.publishCloudWatchMetrics">publishCloudWatchMetrics</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.recursiveDeleteOption">recursiveDeleteOption</a></code> | <code>boolean</code> | Cascade-delete named queries when the workgroup is deleted (including the Replace triggered by a workgroup-name change). |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.resultsBucketNamePrefix">resultsBucketNamePrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.resultsExpirationDays">resultsExpirationDays</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.workgroupName">workgroupName</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `enabled`<sup>Optional</sup> <a name="enabled" id="aws-data-landing-zone.DlzCurLifecycleConfig.property.enabled"></a>
+##### `bytesScannedCutoffPerQuery`<sup>Optional</sup> <a name="bytesScannedCutoffPerQuery" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.bytesScannedCutoffPerQuery"></a>
+
+```typescript
+public readonly bytesScannedCutoffPerQuery: number;
+```
+
+- *Type:* number
+
+---
+
+##### `enabled`<sup>Optional</sup> <a name="enabled" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.enabled"></a>
 
 ```typescript
 public readonly enabled: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
-
-Master switch.
-
-`false` keeps every object in S3 Standard indefinitely — sandbox only;
-the construct emits a synth-time warning so prod doesn't ship without retention.
 
 ---
 
-##### `expirationDays`<sup>Optional</sup> <a name="expirationDays" id="aws-data-landing-zone.DlzCurLifecycleConfig.property.expirationDays"></a>
+##### `engineVersion`<sup>Optional</sup> <a name="engineVersion" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.engineVersion"></a>
 
 ```typescript
-public readonly expirationDays: number;
+public readonly engineVersion: number;
 ```
 
 - *Type:* number
-- *Default:* 2555 (~7 years)
-
-Object expiration.
-
-`0` keeps objects forever (transitions still apply).
-Minimum 395 enforced when non-zero so YoY comparisons stay possible.
 
 ---
 
-##### `transitionToGlacierDays`<sup>Optional</sup> <a name="transitionToGlacierDays" id="aws-data-landing-zone.DlzCurLifecycleConfig.property.transitionToGlacierDays"></a>
+##### `publishCloudWatchMetrics`<sup>Optional</sup> <a name="publishCloudWatchMetrics" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.publishCloudWatchMetrics"></a>
 
 ```typescript
-public readonly transitionToGlacierDays: number;
+public readonly publishCloudWatchMetrics: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `recursiveDeleteOption`<sup>Optional</sup> <a name="recursiveDeleteOption" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.recursiveDeleteOption"></a>
+
+```typescript
+public readonly recursiveDeleteOption: boolean;
+```
+
+- *Type:* boolean
+
+Cascade-delete named queries when the workgroup is deleted (including the Replace triggered by a workgroup-name change).
+
+Default is `true` so
+renames stay hands-off. Set `false` only if you save important queries
+directly in this workgroup and want to be forced to export them
+manually before a rename.
+
+---
+
+##### `resultsBucketNamePrefix`<sup>Optional</sup> <a name="resultsBucketNamePrefix" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.resultsBucketNamePrefix"></a>
+
+```typescript
+public readonly resultsBucketNamePrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `resultsExpirationDays`<sup>Optional</sup> <a name="resultsExpirationDays" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.resultsExpirationDays"></a>
+
+```typescript
+public readonly resultsExpirationDays: number;
 ```
 
 - *Type:* number
-- *Default:* 365
-
-Glacier Instant Retrieval — still queryable by Athena.
 
 ---
 
-##### `transitionToInfrequentAccessDays`<sup>Optional</sup> <a name="transitionToInfrequentAccessDays" id="aws-data-landing-zone.DlzCurLifecycleConfig.property.transitionToInfrequentAccessDays"></a>
+##### `workgroupName`<sup>Optional</sup> <a name="workgroupName" id="aws-data-landing-zone.DlzDataExportsAthenaConfig.property.workgroupName"></a>
 
 ```typescript
-public readonly transitionToInfrequentAccessDays: number;
+public readonly workgroupName: string;
 ```
 
-- *Type:* number
-- *Default:* 90
+- *Type:* string
 
 ---
 
-### DlzCurProps <a name="DlzCurProps" id="aws-data-landing-zone.DlzCurProps"></a>
+### DlzDataExportsAthenaProps <a name="DlzDataExportsAthenaProps" id="aws-data-landing-zone.DlzDataExportsAthenaProps"></a>
 
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzCurProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsAthenaProps.Initializer"></a>
 
 ```typescript
-import { DlzCurProps } from 'aws-data-landing-zone'
+import { DlzDataExportsAthenaProps } from 'aws-data-landing-zone'
 
-const dlzCurProps: DlzCurProps = { ... }
+const dlzDataExportsAthenaProps: DlzDataExportsAthenaProps = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.activateCostAllocationTags">activateCostAllocationTags</a></code> | <code>boolean</code> | Activate the 5 mandatory tags (plus any `additionalMandatoryTags`) as Cost Allocation Tags. |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.bucketNamePrefix">bucketNamePrefix</a></code> | <code>string</code> | Bucket name is `{prefix}-{finOpsAccountId}-{destinationRegion}`. |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.dataPlaneConfig">dataPlaneConfig</a></code> | <code><a href="#aws-data-landing-zone.DlzCurDataPlaneConfig">DlzCurDataPlaneConfig</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | Optional S3 path segment prepended in front of the export name. |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.destinationRegion">destinationRegion</a></code> | <code>string</code> | Destination S3 bucket region. |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.exportConfig">exportConfig</a></code> | <code><a href="#aws-data-landing-zone.DlzCurExportConfig">DlzCurExportConfig</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.exportName">exportName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzCurProps.property.glueDatabaseName">glueDatabaseName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.encryption">encryption</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption">DlzDataExportsAthenaResolvedEncryption</a></code> | Resolved by the data plane so encryption stays consistent with the CUR bucket. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.region">region</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a></code> | *No description.* |
 
 ---
 
-##### `activateCostAllocationTags`<sup>Optional</sup> <a name="activateCostAllocationTags" id="aws-data-landing-zone.DlzCurProps.property.activateCostAllocationTags"></a>
+##### `accountId`<sup>Required</sup> <a name="accountId" id="aws-data-landing-zone.DlzDataExportsAthenaProps.property.accountId"></a>
 
 ```typescript
-public readonly activateCostAllocationTags: boolean;
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `encryption`<sup>Required</sup> <a name="encryption" id="aws-data-landing-zone.DlzDataExportsAthenaProps.property.encryption"></a>
+
+```typescript
+public readonly encryption: DlzDataExportsAthenaResolvedEncryption;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption">DlzDataExportsAthenaResolvedEncryption</a>
+
+Resolved by the data plane so encryption stays consistent with the CUR bucket.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="aws-data-landing-zone.DlzDataExportsAthenaProps.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="aws-data-landing-zone.DlzDataExportsAthenaProps.property.config"></a>
+
+```typescript
+public readonly config: DlzDataExportsAthenaConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a>
+
+---
+
+### DlzDataExportsAthenaResolvedEncryption <a name="DlzDataExportsAthenaResolvedEncryption" id="aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption.Initializer"></a>
+
+```typescript
+import { DlzDataExportsAthenaResolvedEncryption } from 'aws-data-landing-zone'
+
+const dlzDataExportsAthenaResolvedEncryption: DlzDataExportsAthenaResolvedEncryption = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption.property.kind">kind</a></code> | <code>aws-cdk-lib.aws_s3.BucketEncryption</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption.property.key">key</a></code> | <code>aws-cdk-lib.aws_kms.IKey</code> | *No description.* |
+
+---
+
+##### `kind`<sup>Required</sup> <a name="kind" id="aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption.property.kind"></a>
+
+```typescript
+public readonly kind: BucketEncryption;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.BucketEncryption
+
+---
+
+##### `key`<sup>Optional</sup> <a name="key" id="aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption.property.key"></a>
+
+```typescript
+public readonly key: IKey;
+```
+
+- *Type:* aws-cdk-lib.aws_kms.IKey
+
+---
+
+### DlzDataExportsBucketEncryption <a name="DlzDataExportsBucketEncryption" id="aws-data-landing-zone.DlzDataExportsBucketEncryption"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsBucketEncryption.Initializer"></a>
+
+```typescript
+import { DlzDataExportsBucketEncryption } from 'aws-data-landing-zone'
+
+const dlzDataExportsBucketEncryption: DlzDataExportsBucketEncryption = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsBucketEncryption.property.kmsKeyArn">kmsKeyArn</a></code> | <code>string</code> | SSE-KMS key ARN. |
+
+---
+
+##### `kmsKeyArn`<sup>Optional</sup> <a name="kmsKeyArn" id="aws-data-landing-zone.DlzDataExportsBucketEncryption.property.kmsKeyArn"></a>
+
+```typescript
+public readonly kmsKeyArn: string;
+```
+
+- *Type:* string
+
+SSE-KMS key ARN.
+
+Omit for SSE-S3. Key policy must allow `bcm-data-exports.amazonaws.com`.
+
+---
+
+### DlzDataExportsDataPlaneConfig <a name="DlzDataExportsDataPlaneConfig" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.Initializer"></a>
+
+```typescript
+import { DlzDataExportsDataPlaneConfig } from 'aws-data-landing-zone'
+
+const dlzDataExportsDataPlaneConfig: DlzDataExportsDataPlaneConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.accessLogging">accessLogging</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.additionalReadAccountIds">additionalReadAccountIds</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.athena">athena</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.encryption">encryption</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsBucketEncryption">DlzDataExportsBucketEncryption</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.glueCrawlerSchedule">glueCrawlerSchedule</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.glueDatabaseName">glueDatabaseName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.lifecycle">lifecycle</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsLifecycleConfig">DlzDataExportsLifecycleConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.versioning">versioning</a></code> | <code>boolean</code> | *No description.* |
+
+---
+
+##### `accessLogging`<sup>Optional</sup> <a name="accessLogging" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.accessLogging"></a>
+
+```typescript
+public readonly accessLogging: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
-
-Activate the 5 mandatory tags (plus any `additionalMandatoryTags`) as Cost Allocation Tags.
 
 ---
 
-##### `bucketNamePrefix`<sup>Optional</sup> <a name="bucketNamePrefix" id="aws-data-landing-zone.DlzCurProps.property.bucketNamePrefix"></a>
+##### `additionalReadAccountIds`<sup>Optional</sup> <a name="additionalReadAccountIds" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.additionalReadAccountIds"></a>
 
 ```typescript
-public readonly bucketNamePrefix: string;
+public readonly additionalReadAccountIds: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `athena`<sup>Optional</sup> <a name="athena" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.athena"></a>
+
+```typescript
+public readonly athena: DlzDataExportsAthenaConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a>
+
+---
+
+##### `encryption`<sup>Optional</sup> <a name="encryption" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.encryption"></a>
+
+```typescript
+public readonly encryption: DlzDataExportsBucketEncryption;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsBucketEncryption">DlzDataExportsBucketEncryption</a>
+
+---
+
+##### `glueCrawlerSchedule`<sup>Optional</sup> <a name="glueCrawlerSchedule" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.glueCrawlerSchedule"></a>
+
+```typescript
+public readonly glueCrawlerSchedule: string;
 ```
 
 - *Type:* string
-- *Default:* 'dlz-cur'
-
-Bucket name is `{prefix}-{finOpsAccountId}-{destinationRegion}`.
 
 ---
 
-##### `dataPlaneConfig`<sup>Optional</sup> <a name="dataPlaneConfig" id="aws-data-landing-zone.DlzCurProps.property.dataPlaneConfig"></a>
-
-```typescript
-public readonly dataPlaneConfig: DlzCurDataPlaneConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurDataPlaneConfig">DlzCurDataPlaneConfig</a>
-
----
-
-##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzCurProps.property.destinationPrefix"></a>
-
-```typescript
-public readonly destinationPrefix: string;
-```
-
-- *Type:* string
-- *Default:* '' (no prefix; flat layout)
-
-Optional S3 path segment prepended in front of the export name.
-
-BCM's layout
-is `<bucket>/<destinationPrefix>/<exportName>/{data,metadata}/...`. Default
-is empty, giving the flat `<bucket>/<exportName>/{data,metadata}/...` layout.
-Set this only if you need the bucket to host multiple exports under separate
-folders.
-
----
-
-##### `destinationRegion`<sup>Optional</sup> <a name="destinationRegion" id="aws-data-landing-zone.DlzCurProps.property.destinationRegion"></a>
-
-```typescript
-public readonly destinationRegion: string;
-```
-
-- *Type:* string
-- *Default:* 'us-east-1'
-
-Destination S3 bucket region.
-
-The export resource itself is always pinned to
-`us-east-1` (BCM Data Exports is a us-east-1-only API); only the bucket moves.
-
----
-
-##### `exportConfig`<sup>Optional</sup> <a name="exportConfig" id="aws-data-landing-zone.DlzCurProps.property.exportConfig"></a>
-
-```typescript
-public readonly exportConfig: DlzCurExportConfig;
-```
-
-- *Type:* <a href="#aws-data-landing-zone.DlzCurExportConfig">DlzCurExportConfig</a>
-
----
-
-##### `exportName`<sup>Optional</sup> <a name="exportName" id="aws-data-landing-zone.DlzCurProps.property.exportName"></a>
-
-```typescript
-public readonly exportName: string;
-```
-
-- *Type:* string
-- *Default:* 'dlz-cur-2'
-
----
-
-##### `glueDatabaseName`<sup>Optional</sup> <a name="glueDatabaseName" id="aws-data-landing-zone.DlzCurProps.property.glueDatabaseName"></a>
+##### `glueDatabaseName`<sup>Optional</sup> <a name="glueDatabaseName" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.glueDatabaseName"></a>
 
 ```typescript
 public readonly glueDatabaseName: string;
 ```
 
 - *Type:* string
-- *Default:* 'dlz_cur_2'
+
+---
+
+##### `lifecycle`<sup>Optional</sup> <a name="lifecycle" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.lifecycle"></a>
+
+```typescript
+public readonly lifecycle: DlzDataExportsLifecycleConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsLifecycleConfig">DlzDataExportsLifecycleConfig</a>
+
+---
+
+##### `versioning`<sup>Optional</sup> <a name="versioning" id="aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.versioning"></a>
+
+```typescript
+public readonly versioning: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+### DlzDataExportsDataPlaneProps <a name="DlzDataExportsDataPlaneProps" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps.Initializer"></a>
+
+```typescript
+import { DlzDataExportsDataPlaneProps } from 'aws-data-landing-zone'
+
+const dlzDataExportsDataPlaneProps: DlzDataExportsDataPlaneProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.bucketNamePrefix">bucketNamePrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.destinationRegion">destinationRegion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.exports">exports</a></code> | <code>{[ key: string ]: <a href="#aws-data-landing-zone.DlzStandardCur20Export">DlzStandardCur20Export</a> \| <a href="#aws-data-landing-zone.DlzFocus12Export">DlzFocus12Export</a> \| <a href="#aws-data-landing-zone.DlzCorExport">DlzCorExport</a> \| <a href="#aws-data-landing-zone.DlzCarbonEmissionsExport">DlzCarbonEmissionsExport</a>}</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.managementAccountId">managementAccountId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.dataPlaneConfig">dataPlaneConfig</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig">DlzDataExportsDataPlaneConfig</a></code> | *No description.* |
+
+---
+
+##### `bucketNamePrefix`<sup>Required</sup> <a name="bucketNamePrefix" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.bucketNamePrefix"></a>
+
+```typescript
+public readonly bucketNamePrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `destinationRegion`<sup>Required</sup> <a name="destinationRegion" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.destinationRegion"></a>
+
+```typescript
+public readonly destinationRegion: string;
+```
+
+- *Type:* string
+
+---
+
+##### `exports`<sup>Required</sup> <a name="exports" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.exports"></a>
+
+```typescript
+public readonly exports: {[ key: string ]: DlzStandardCur20Export | DlzFocus12Export | DlzCorExport | DlzCarbonEmissionsExport};
+```
+
+- *Type:* {[ key: string ]: <a href="#aws-data-landing-zone.DlzStandardCur20Export">DlzStandardCur20Export</a> | <a href="#aws-data-landing-zone.DlzFocus12Export">DlzFocus12Export</a> | <a href="#aws-data-landing-zone.DlzCorExport">DlzCorExport</a> | <a href="#aws-data-landing-zone.DlzCarbonEmissionsExport">DlzCarbonEmissionsExport</a>}
+
+---
+
+##### `managementAccountId`<sup>Required</sup> <a name="managementAccountId" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.managementAccountId"></a>
+
+```typescript
+public readonly managementAccountId: string;
+```
+
+- *Type:* string
+
+---
+
+##### `dataPlaneConfig`<sup>Optional</sup> <a name="dataPlaneConfig" id="aws-data-landing-zone.DlzDataExportsDataPlaneProps.property.dataPlaneConfig"></a>
+
+```typescript
+public readonly dataPlaneConfig: DlzDataExportsDataPlaneConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig">DlzDataExportsDataPlaneConfig</a>
+
+---
+
+### DlzDataExportsLifecycleConfig <a name="DlzDataExportsLifecycleConfig" id="aws-data-landing-zone.DlzDataExportsLifecycleConfig"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsLifecycleConfig.Initializer"></a>
+
+```typescript
+import { DlzDataExportsLifecycleConfig } from 'aws-data-landing-zone'
+
+const dlzDataExportsLifecycleConfig: DlzDataExportsLifecycleConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.enabled">enabled</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.expirationDays">expirationDays</a></code> | <code>number</code> | `0` keeps objects forever; |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.transitionToGlacierDays">transitionToGlacierDays</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.transitionToInfrequentAccessDays">transitionToInfrequentAccessDays</a></code> | <code>number</code> | *No description.* |
+
+---
+
+##### `enabled`<sup>Optional</sup> <a name="enabled" id="aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.enabled"></a>
+
+```typescript
+public readonly enabled: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `expirationDays`<sup>Optional</sup> <a name="expirationDays" id="aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.expirationDays"></a>
+
+```typescript
+public readonly expirationDays: number;
+```
+
+- *Type:* number
+
+`0` keeps objects forever;
+
+minimum 395 enforced when non-zero (YoY comparisons).
+
+---
+
+##### `transitionToGlacierDays`<sup>Optional</sup> <a name="transitionToGlacierDays" id="aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.transitionToGlacierDays"></a>
+
+```typescript
+public readonly transitionToGlacierDays: number;
+```
+
+- *Type:* number
+
+---
+
+##### `transitionToInfrequentAccessDays`<sup>Optional</sup> <a name="transitionToInfrequentAccessDays" id="aws-data-landing-zone.DlzDataExportsLifecycleConfig.property.transitionToInfrequentAccessDays"></a>
+
+```typescript
+public readonly transitionToInfrequentAccessDays: number;
+```
+
+- *Type:* number
+
+---
+
+### DlzDataExportsProps <a name="DlzDataExportsProps" id="aws-data-landing-zone.DlzDataExportsProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsProps.Initializer"></a>
+
+```typescript
+import { DlzDataExportsProps } from 'aws-data-landing-zone'
+
+const dlzDataExportsProps: DlzDataExportsProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsProps.property.exports">exports</a></code> | <code>{[ key: string ]: <a href="#aws-data-landing-zone.DlzStandardCur20Export">DlzStandardCur20Export</a> \| <a href="#aws-data-landing-zone.DlzFocus12Export">DlzFocus12Export</a> \| <a href="#aws-data-landing-zone.DlzCorExport">DlzCorExport</a> \| <a href="#aws-data-landing-zone.DlzCarbonEmissionsExport">DlzCarbonEmissionsExport</a>}</code> | Keyed map of exports. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsProps.property.activateCostAllocationTags">activateCostAllocationTags</a></code> | <code>boolean</code> | One-shot org-wide toggle; |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsProps.property.bucketNamePrefix">bucketNamePrefix</a></code> | <code>string</code> | Bucket name is `{prefix}-{finOpsAccountId}-{destinationRegion}`. |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsProps.property.dataPlaneConfig">dataPlaneConfig</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig">DlzDataExportsDataPlaneConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsProps.property.destinationRegion">destinationRegion</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `exports`<sup>Required</sup> <a name="exports" id="aws-data-landing-zone.DlzDataExportsProps.property.exports"></a>
+
+```typescript
+public readonly exports: {[ key: string ]: DlzStandardCur20Export | DlzFocus12Export | DlzCorExport | DlzCarbonEmissionsExport};
+```
+
+- *Type:* {[ key: string ]: <a href="#aws-data-landing-zone.DlzStandardCur20Export">DlzStandardCur20Export</a> | <a href="#aws-data-landing-zone.DlzFocus12Export">DlzFocus12Export</a> | <a href="#aws-data-landing-zone.DlzCorExport">DlzCorExport</a> | <a href="#aws-data-landing-zone.DlzCarbonEmissionsExport">DlzCarbonEmissionsExport</a>}
+
+Keyed map of exports.
+
+All entries land in one shared S3 bucket and one
+shared Glue database. Resolved export names, destination paths, and Glue
+table names must each be unique within the map.
+
+---
+
+##### `activateCostAllocationTags`<sup>Optional</sup> <a name="activateCostAllocationTags" id="aws-data-landing-zone.DlzDataExportsProps.property.activateCostAllocationTags"></a>
+
+```typescript
+public readonly activateCostAllocationTags: boolean;
+```
+
+- *Type:* boolean
+
+One-shot org-wide toggle;
+
+runs once at the management-stack level.
+
+---
+
+##### `bucketNamePrefix`<sup>Optional</sup> <a name="bucketNamePrefix" id="aws-data-landing-zone.DlzDataExportsProps.property.bucketNamePrefix"></a>
+
+```typescript
+public readonly bucketNamePrefix: string;
+```
+
+- *Type:* string
+
+Bucket name is `{prefix}-{finOpsAccountId}-{destinationRegion}`.
+
+---
+
+##### `dataPlaneConfig`<sup>Optional</sup> <a name="dataPlaneConfig" id="aws-data-landing-zone.DlzDataExportsProps.property.dataPlaneConfig"></a>
+
+```typescript
+public readonly dataPlaneConfig: DlzDataExportsDataPlaneConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig">DlzDataExportsDataPlaneConfig</a>
+
+---
+
+##### `destinationRegion`<sup>Optional</sup> <a name="destinationRegion" id="aws-data-landing-zone.DlzDataExportsProps.property.destinationRegion"></a>
+
+```typescript
+public readonly destinationRegion: string;
+```
+
+- *Type:* string
+
+---
+
+### DlzDataExportsTagActivationProps <a name="DlzDataExportsTagActivationProps" id="aws-data-landing-zone.DlzDataExportsTagActivationProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzDataExportsTagActivationProps.Initializer"></a>
+
+```typescript
+import { DlzDataExportsTagActivationProps } from 'aws-data-landing-zone'
+
+const dlzDataExportsTagActivationProps: DlzDataExportsTagActivationProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsTagActivationProps.property.tagKeys">tagKeys</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `tagKeys`<sup>Required</sup> <a name="tagKeys" id="aws-data-landing-zone.DlzDataExportsTagActivationProps.property.tagKeys"></a>
+
+```typescript
+public readonly tagKeys: string[];
+```
+
+- *Type:* string[]
 
 ---
 
@@ -23577,7 +23918,7 @@ const dlzFinOpsProps: DlzFinOpsProps = { ... }
 | <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.accountTags">accountTags</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags">DlzFinOpsAccountTags</a></code> | Override the tag values applied by the FinOps stack to its own resources. |
 | <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.budgets">budgets</a></code> | <code><a href="#aws-data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]</code> | Org/account-wide budget alerts. |
 | <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.costAnomalyDetection">costAnomalyDetection</a></code> | <code><a href="#aws-data-landing-zone.DlzCostAnomalyDetectionProps">DlzCostAnomalyDetectionProps</a></code> | AWS Cost Anomaly Detection. |
-| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.cur">cur</a></code> | <code><a href="#aws-data-landing-zone.DlzCurProps">DlzCurProps</a></code> | CUR 2.0 cost-data delivery. Provisions a BCM Data Exports definition in the management account that writes Parquet directly into a bucket in the FinOps account. |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.dataExports">dataExports</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsProps">DlzDataExportsProps</a></code> | BCM Data Exports — CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions delivery into a dedicated FinOps account. |
 
 ---
 
@@ -23647,18 +23988,162 @@ Independent of the Shared Services OU — uses only the management account.
 
 ---
 
-##### `cur`<sup>Optional</sup> <a name="cur" id="aws-data-landing-zone.DlzFinOpsProps.property.cur"></a>
+##### `dataExports`<sup>Optional</sup> <a name="dataExports" id="aws-data-landing-zone.DlzFinOpsProps.property.dataExports"></a>
 
 ```typescript
-public readonly cur: DlzCurProps;
+public readonly dataExports: DlzDataExportsProps;
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.DlzCurProps">DlzCurProps</a>
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportsProps">DlzDataExportsProps</a>
 
-CUR 2.0 cost-data delivery. Provisions a BCM Data Exports definition in the management account that writes Parquet directly into a bucket in the FinOps account.
+BCM Data Exports — CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions delivery into a dedicated FinOps account.
 
-Requires `org.ous.sharedServices.accounts.finOps` to be configured. Validation fails
-fast at synth otherwise.
+Requires `org.ous.sharedServices.accounts.finOps` to be configured.
+Validation fails fast at synth otherwise.
+
+---
+
+### DlzFocus12Config <a name="DlzFocus12Config" id="aws-data-landing-zone.DlzFocus12Config"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzFocus12Config.Initializer"></a>
+
+```typescript
+import { DlzFocus12Config } from 'aws-data-landing-zone'
+
+const dlzFocus12Config: DlzFocus12Config = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Config.property.queryColumns">queryColumns</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Config.property.queryStatement">queryStatement</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Config.property.timeGranularity">timeGranularity</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `queryColumns`<sup>Optional</sup> <a name="queryColumns" id="aws-data-landing-zone.DlzFocus12Config.property.queryColumns"></a>
+
+```typescript
+public readonly queryColumns: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `queryStatement`<sup>Optional</sup> <a name="queryStatement" id="aws-data-landing-zone.DlzFocus12Config.property.queryStatement"></a>
+
+```typescript
+public readonly queryStatement: string;
+```
+
+- *Type:* string
+
+---
+
+##### `timeGranularity`<sup>Optional</sup> <a name="timeGranularity" id="aws-data-landing-zone.DlzFocus12Config.property.timeGranularity"></a>
+
+```typescript
+public readonly timeGranularity: string;
+```
+
+- *Type:* string
+
+---
+
+### DlzFocus12Export <a name="DlzFocus12Export" id="aws-data-landing-zone.DlzFocus12Export"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzFocus12Export.Initializer"></a>
+
+```typescript
+import { DlzFocus12Export } from 'aws-data-landing-zone'
+
+const dlzFocus12Export: DlzFocus12Export = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.exportType">exportType</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzFocus12Config">DlzFocus12Config</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.exportName">exportName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.glueTableName">glueTableName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.output">output</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFocus12Export.property.overwriteBehavior">overwriteBehavior</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `exportType`<sup>Required</sup> <a name="exportType" id="aws-data-landing-zone.DlzFocus12Export.property.exportType"></a>
+
+```typescript
+public readonly exportType: string;
+```
+
+- *Type:* string
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="aws-data-landing-zone.DlzFocus12Export.property.config"></a>
+
+```typescript
+public readonly config: DlzFocus12Config;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzFocus12Config">DlzFocus12Config</a>
+
+---
+
+##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzFocus12Export.property.destinationPrefix"></a>
+
+```typescript
+public readonly destinationPrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `exportName`<sup>Optional</sup> <a name="exportName" id="aws-data-landing-zone.DlzFocus12Export.property.exportName"></a>
+
+```typescript
+public readonly exportName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `glueTableName`<sup>Optional</sup> <a name="glueTableName" id="aws-data-landing-zone.DlzFocus12Export.property.glueTableName"></a>
+
+```typescript
+public readonly glueTableName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `output`<sup>Optional</sup> <a name="output" id="aws-data-landing-zone.DlzFocus12Export.property.output"></a>
+
+```typescript
+public readonly output: DlzDataExportOutputConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a>
+
+---
+
+##### `overwriteBehavior`<sup>Optional</sup> <a name="overwriteBehavior" id="aws-data-landing-zone.DlzFocus12Export.property.overwriteBehavior"></a>
+
+```typescript
+public readonly overwriteBehavior: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -24812,6 +25297,221 @@ public readonly stage: ExpressStage;
 ```
 
 - *Type:* cdk-express-pipeline.ExpressStage
+
+---
+
+### DlzStandardCur20Config <a name="DlzStandardCur20Config" id="aws-data-landing-zone.DlzStandardCur20Config"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzStandardCur20Config.Initializer"></a>
+
+```typescript
+import { DlzStandardCur20Config } from 'aws-data-landing-zone'
+
+const dlzStandardCur20Config: DlzStandardCur20Config = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.includeCapacityReservationData">includeCapacityReservationData</a></code> | <code>boolean</code> | Adds `capacity_reservation_*` columns. |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.includeIamPrincipalData">includeIamPrincipalData</a></code> | <code>boolean</code> | Adds `line_item_iam_principal`. |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.includeManualDiscountCompatibility">includeManualDiscountCompatibility</a></code> | <code>boolean</code> | Removes `discount` / `discount_total_discount`; |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.includeResources">includeResources</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.includeSplitCostAllocationData">includeSplitCostAllocationData</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.queryColumns">queryColumns</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.queryStatement">queryStatement</a></code> | <code>string</code> | Full SQL override. |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Config.property.timeGranularity">timeGranularity</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `includeCapacityReservationData`<sup>Optional</sup> <a name="includeCapacityReservationData" id="aws-data-landing-zone.DlzStandardCur20Config.property.includeCapacityReservationData"></a>
+
+```typescript
+public readonly includeCapacityReservationData: boolean;
+```
+
+- *Type:* boolean
+
+Adds `capacity_reservation_*` columns.
+
+Data populates from 2025-11-01.
+
+---
+
+##### `includeIamPrincipalData`<sup>Optional</sup> <a name="includeIamPrincipalData" id="aws-data-landing-zone.DlzStandardCur20Config.property.includeIamPrincipalData"></a>
+
+```typescript
+public readonly includeIamPrincipalData: boolean;
+```
+
+- *Type:* boolean
+
+Adds `line_item_iam_principal`.
+
+Data populates from 2026-04-08.
+
+---
+
+##### `includeManualDiscountCompatibility`<sup>Optional</sup> <a name="includeManualDiscountCompatibility" id="aws-data-landing-zone.DlzStandardCur20Config.property.includeManualDiscountCompatibility"></a>
+
+```typescript
+public readonly includeManualDiscountCompatibility: boolean;
+```
+
+- *Type:* boolean
+
+Removes `discount` / `discount_total_discount`;
+
+only relevant under Discount Automation.
+
+---
+
+##### `includeResources`<sup>Optional</sup> <a name="includeResources" id="aws-data-landing-zone.DlzStandardCur20Config.property.includeResources"></a>
+
+```typescript
+public readonly includeResources: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `includeSplitCostAllocationData`<sup>Optional</sup> <a name="includeSplitCostAllocationData" id="aws-data-landing-zone.DlzStandardCur20Config.property.includeSplitCostAllocationData"></a>
+
+```typescript
+public readonly includeSplitCostAllocationData: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `queryColumns`<sup>Optional</sup> <a name="queryColumns" id="aws-data-landing-zone.DlzStandardCur20Config.property.queryColumns"></a>
+
+```typescript
+public readonly queryColumns: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `queryStatement`<sup>Optional</sup> <a name="queryStatement" id="aws-data-landing-zone.DlzStandardCur20Config.property.queryStatement"></a>
+
+```typescript
+public readonly queryStatement: string;
+```
+
+- *Type:* string
+
+Full SQL override.
+
+`SELECT *` is rejected by BCM.
+
+---
+
+##### `timeGranularity`<sup>Optional</sup> <a name="timeGranularity" id="aws-data-landing-zone.DlzStandardCur20Config.property.timeGranularity"></a>
+
+```typescript
+public readonly timeGranularity: string;
+```
+
+- *Type:* string
+
+---
+
+### DlzStandardCur20Export <a name="DlzStandardCur20Export" id="aws-data-landing-zone.DlzStandardCur20Export"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzStandardCur20Export.Initializer"></a>
+
+```typescript
+import { DlzStandardCur20Export } from 'aws-data-landing-zone'
+
+const dlzStandardCur20Export: DlzStandardCur20Export = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.exportType">exportType</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzStandardCur20Config">DlzStandardCur20Config</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.destinationPrefix">destinationPrefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.exportName">exportName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.glueTableName">glueTableName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.output">output</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzStandardCur20Export.property.overwriteBehavior">overwriteBehavior</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `exportType`<sup>Required</sup> <a name="exportType" id="aws-data-landing-zone.DlzStandardCur20Export.property.exportType"></a>
+
+```typescript
+public readonly exportType: string;
+```
+
+- *Type:* string
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="aws-data-landing-zone.DlzStandardCur20Export.property.config"></a>
+
+```typescript
+public readonly config: DlzStandardCur20Config;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzStandardCur20Config">DlzStandardCur20Config</a>
+
+---
+
+##### `destinationPrefix`<sup>Optional</sup> <a name="destinationPrefix" id="aws-data-landing-zone.DlzStandardCur20Export.property.destinationPrefix"></a>
+
+```typescript
+public readonly destinationPrefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `exportName`<sup>Optional</sup> <a name="exportName" id="aws-data-landing-zone.DlzStandardCur20Export.property.exportName"></a>
+
+```typescript
+public readonly exportName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `glueTableName`<sup>Optional</sup> <a name="glueTableName" id="aws-data-landing-zone.DlzStandardCur20Export.property.glueTableName"></a>
+
+```typescript
+public readonly glueTableName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `output`<sup>Optional</sup> <a name="output" id="aws-data-landing-zone.DlzStandardCur20Export.property.output"></a>
+
+```typescript
+public readonly output: DlzDataExportOutputConfig;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzDataExportOutputConfig">DlzDataExportOutputConfig</a>
+
+---
+
+##### `overwriteBehavior`<sup>Optional</sup> <a name="overwriteBehavior" id="aws-data-landing-zone.DlzStandardCur20Export.property.overwriteBehavior"></a>
+
+```typescript
+public readonly overwriteBehavior: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -26954,7 +27654,7 @@ const managementStacks: ManagementStacks = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementStacks.property.global">global</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalStack">ManagementGlobalStack</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.ManagementStacks.property.curExport">curExport</a></code> | <code><a href="#aws-data-landing-zone.ManagementCurExportStack">ManagementCurExportStack</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ManagementStacks.property.curExport">curExport</a></code> | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack">ManagementDataExportsStack</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementStacks.property.globalIamIdentityCenter">globalIamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack">ManagementGlobalIamIdentityCenterStack</a></code> | *No description.* |
 
 ---
@@ -26972,10 +27672,10 @@ public readonly global: ManagementGlobalStack;
 ##### `curExport`<sup>Optional</sup> <a name="curExport" id="aws-data-landing-zone.ManagementStacks.property.curExport"></a>
 
 ```typescript
-public readonly curExport: ManagementCurExportStack;
+public readonly curExport: ManagementDataExportsStack;
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.ManagementCurExportStack">ManagementCurExportStack</a>
+- *Type:* <a href="#aws-data-landing-zone.ManagementDataExportsStack">ManagementDataExportsStack</a>
 
 ---
 

@@ -126,13 +126,13 @@ project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-members/', {
   sourcemap: true,
   externals: ['aws-sdk'],
 });
-project.bundler.addBundle('./src/constructs/dlz-cur/lambda/cur-tag-activation/', {
+project.bundler.addBundle('./src/constructs/dlz-data-exports/lambda/tag-activation/', {
   platform: 'node',
   target: 'node22',
   sourcemap: true,
   externals: ['aws-sdk'],
 });
-project.bundler.addBundle('./src/constructs/dlz-cur/lambda/cur-export-manager/', {
+project.bundler.addBundle('./src/constructs/dlz-data-exports/lambda/data-export-manager/', {
   platform: 'node',
   target: 'node22',
   sourcemap: true,

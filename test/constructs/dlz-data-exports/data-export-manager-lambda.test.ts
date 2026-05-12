@@ -11,7 +11,7 @@ import {
   CloudFormationCustomResourceDeleteEvent,
   CloudFormationCustomResourceUpdateEvent,
 } from 'aws-lambda';
-import { handler } from '../../../src/constructs/dlz-cur/lambda/cur-export-manager';
+import { handler } from '../../../src/constructs/dlz-data-exports/lambda/data-export-manager';
 
 jest.mock('@aws-sdk/client-bcm-data-exports', () => {
   const actual = jest.requireActual('@aws-sdk/client-bcm-data-exports');
@@ -23,7 +23,7 @@ BCMDataExportsClient.prototype.send = mockSend as any;
 
 const baseProps = {
   ServiceToken: 'test',
-  Name: 'dlz-cur-2',
+  Name: 'dlz-finops-test',
   Description: 'desc',
   QueryStatement: 'SELECT line_item_unblended_cost FROM COST_AND_USAGE_REPORT',
   TableConfigurations: JSON.stringify({ COST_AND_USAGE_REPORT: { TIME_GRANULARITY: 'HOURLY' } }),
@@ -33,7 +33,7 @@ const baseProps = {
 
 const baseEvent = {
   ServiceToken: 'test',
-  ResourceType: 'Custom::DlzCurExport',
+  ResourceType: 'Custom::DlzDataExport',
   StackId: 'test-stack',
   RequestId: 'test-request',
   LogicalResourceId: 'test-logical',
@@ -49,23 +49,23 @@ const createEvent: CloudFormationCustomResourceCreateEvent = {
 const updateEvent: CloudFormationCustomResourceUpdateEvent = {
   ...baseEvent,
   RequestType: 'Update',
-  PhysicalResourceId: 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-cur-2',
+  PhysicalResourceId: 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-finops-test',
   OldResourceProperties: baseProps,
 };
 
 const deleteEvent: CloudFormationCustomResourceDeleteEvent = {
   ...baseEvent,
   RequestType: 'Delete',
-  PhysicalResourceId: 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-cur-2',
+  PhysicalResourceId: 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-finops-test',
 };
 
-describe('cur-export-manager Lambda', () => {
+describe('data-export-manager Lambda', () => {
   beforeEach(() => {
     mockSend.mockReset();
   });
 
   test('Create calls CreateExport and returns the ARN', async () => {
-    const arn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-cur-2';
+    const arn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-finops-test';
     mockSend.mockResolvedValueOnce({ ExportArn: arn });
 
     const response = await handler(createEvent);
@@ -93,9 +93,9 @@ describe('cur-export-manager Lambda', () => {
   test('Update with different name deletes old and creates new', async () => {
     const renamed: CloudFormationCustomResourceUpdateEvent = {
       ...updateEvent,
-      ResourceProperties: { ...baseProps, Name: 'dlz-cur-2-renamed' },
+      ResourceProperties: { ...baseProps, Name: 'dlz-finops-test-renamed' },
     };
-    const newArn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-cur-2-renamed';
+    const newArn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-finops-test-renamed';
     mockSend
       .mockResolvedValueOnce({}) // DeleteExport
       .mockResolvedValueOnce({ ExportArn: newArn }); // CreateExport
@@ -113,7 +113,7 @@ describe('cur-export-manager Lambda', () => {
       Message: 'cannot update in place',
       $metadata: {},
     });
-    const newArn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-cur-2';
+    const newArn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-finops-test';
     mockSend
       .mockRejectedValueOnce(validationErr) // UpdateExport rejects
       .mockResolvedValueOnce({}) // DeleteExport
@@ -135,7 +135,7 @@ describe('cur-export-manager Lambda', () => {
       ResourceType: 'export',
       $metadata: {},
     });
-    const newArn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-cur-2';
+    const newArn = 'arn:aws:bcm-data-exports:us-east-1:111111111111:export/dlz-finops-test';
     mockSend
       .mockRejectedValueOnce(notFound) // UpdateExport - not found
       .mockResolvedValueOnce({ ExportArn: newArn }); // CreateExport

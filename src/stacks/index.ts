@@ -1,6 +1,6 @@
 export * from './organization/management/management-global-stack';
 export * from './organization/management/management-global-iam-identity-center-stack';
-export * from './organization/management/management-cur-export-stack';
+export * from './organization/management/management-data-exports-stack';
 export * from './organization/security/log/global-stack';
 export * from './organization/security/log/regional-stack';
 export * from './organization/security/audit/global-stack';

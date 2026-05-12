@@ -1,6 +1,6 @@
 ---
 title: CUDOS / CID dashboards (extra)
-description: AWS Cloud Intelligence Dashboards on top of the DLZ CUR data — opt-in, not part of core DLZ
+description: AWS Cloud Intelligence Dashboards on top of DLZ Data Exports — opt-in, not part of core DLZ
 ---
 
 import { Aside } from '@astrojs/starlight/components';
@@ -38,36 +38,42 @@ internal portals). Bundling CUDOS into DLZ would:
 
 ## What DLZ provides for CUDOS
 
-When `finOps.cur` is configured, DLZ delivers everything the CUDOS deployment
-template needs as inputs:
+When `finOps.dataExports` is configured with a `STANDARD_CUR_2_0` entry in
+`exports`, DLZ delivers everything the CUDOS deployment template needs:
 
 | What CUDOS needs | What DLZ provisions | Where to find it |
 |---|---|---|
-| CUR 2.0 in Parquet | `dlz-cur-{finOpsAccountId}-{region}` S3 bucket | FinOps account |
-| Glue database | `dlz_cur_2` (configurable via `glueDatabaseName`) | FinOps account |
-| Glue crawler | Daily at 06:00 UTC (configurable) | FinOps account |
-| Athena workgroup + results bucket | `dlz-cur` workgroup, results bucket with 30-day expiration ([details](/components/finops/cur#athena-workgroup)) | FinOps account |
-| Required CUR columns | `includeResources`, `includeSplitCostAllocationData` default to `true` | [`finOps.cur.exportConfig`](/components/finops/cur#feature-flags) |
+| CUR 2.0 in Parquet | Shared `dlz-finops-{finOpsAccountId}-{region}` bucket; `finops_standard` Glue table | FinOps account |
+| Glue database | `dlz_finops` (configurable via `dataPlaneConfig.glueDatabaseName`) | FinOps account |
+| Glue crawler | Daily at 06:00 UTC (configurable); crawls all configured export tables | FinOps account |
+| Athena workgroup + results bucket | `dlz-finops` workgroup, results bucket with 30-day expiration ([details](/components/finops/data-exports#athena-workgroup)) | FinOps account |
+| Required CUR columns | `includeResources`, `includeSplitCostAllocationData` default to `true` | [`finOps.dataExports.exports.<id>.config`](/components/finops/data-exports#standard_cur_2_0) |
+
+The bucket and Glue database are **shared across all configured export
+types** — FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions
+appear as additional tables (`finops_focus_1_2`, `finops_cost_opt_recs`,
+`finops_carbon`) in the same database. CUDOS itself only consumes the CUR
+2.0 table; other tools (custom Athena views, BI tools) can join across them.
 
 ## Deploying CUDOS against DLZ
 
-CUDOS is deployed in the **FinOps account**, where the CUR data and Glue catalog
+CUDOS is deployed in the **FinOps account**, where the data and Glue catalog
 live. Two paths:
 
 ### Pulling DLZ values from SSM
 
-Both deployment paths take the same DLZ-owned inputs (Glue database, CUR
+Both deployment paths take the same DLZ-owned inputs (Glue database, data
 bucket, Athena workgroup). DLZ writes them to SSM Parameter Store under
-`/dlz/finops/cur/` in the FinOps account — see
-[Exported SSM parameters](/components/finops/cur#exported-ssm-parameters) for
+`/dlz/finops/` in the FinOps account — see
+[Exported SSM parameters](/components/finops/data-exports#exported-ssm-parameters) for
 the full list.
 
 A small shell snippet to load them once, used by both paths below:
 
 ```bash
-DB=$(aws ssm get-parameter --name /dlz/finops/cur/glue-database-name --query Parameter.Value --output text)
-WG=$(aws ssm get-parameter --name /dlz/finops/cur/athena-workgroup-name --query Parameter.Value --output text)
-RESULTS=$(aws ssm get-parameter --name /dlz/finops/cur/athena-results-bucket-name --query Parameter.Value --output text)
+DB=$(aws ssm get-parameter --name /dlz/finops/glue-database-name --query Parameter.Value --output text)
+WG=$(aws ssm get-parameter --name /dlz/finops/athena-workgroup-name --query Parameter.Value --output text)
+RESULTS=$(aws ssm get-parameter --name /dlz/finops/athena-results-bucket-name --query Parameter.Value --output text)
 ```
 
 ### Path 1 — `cid-cmd` CLI (recommended by AWS)
@@ -111,10 +117,10 @@ shows the ones DLZ owns:
 
 | Parameter | DLZ source (SSM) |
 |---|---|
-| `DatabaseName` | `/dlz/finops/cur/glue-database-name` |
-| `AthenaWorkgroup` | `/dlz/finops/cur/athena-workgroup-name` |
-| `AthenaQueryResultsBucket` | `/dlz/finops/cur/athena-results-bucket-name` |
-| `CurTableName` | auto-discovered if omitted; otherwise `aws glue get-tables --database-name $DB` |
+| `DatabaseName` | `/dlz/finops/glue-database-name` |
+| `AthenaWorkgroup` | `/dlz/finops/athena-workgroup-name` |
+| `AthenaQueryResultsBucket` | `/dlz/finops/athena-results-bucket-name` |
+| `CurTableName` | `/dlz/finops/exports/standard/glue-table-name` (or `aws glue get-tables --database-name $DB`) |
 | `QuickSightUser` | you (DLZ does not manage QuickSight users) |
 
 Updates require redeploying the template. For most teams the CLI is easier.
@@ -180,11 +186,11 @@ CUDOS runs many SQL queries per refresh (one per view). Cost is driven by:
 ### Other AWS line items — small
 
 - [S3 pricing](https://aws.amazon.com/s3/pricing/) — GETs from Athena scans
-  against the CUR bucket. Usually negligible at CUR-data scale.
+  against the shared data bucket. Usually negligible at CUR-data scale.
 - [Lambda pricing](https://aws.amazon.com/lambda/pricing/) — the CUDOS view
   manager runs briefly per refresh. Typically a few cents.
 - [Glue pricing](https://aws.amazon.com/glue/pricing/) — DLZ already runs the
-  CUR crawler; CUDOS adds nothing.
+  shared crawler; CUDOS adds nothing.
 - [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/) — log
   ingestion / retention for the workgroup metrics if enabled.
 
@@ -238,3 +244,8 @@ DLZ stops at the data. CUDOS — and any other BI/visualization layer — is you
 choice and your operational responsibility. DLZ keeps the inputs CUDOS needs
 stable (bucket name, Glue DB name, CUR column set, Athena workgroup) so deploying
 CUDOS against DLZ is a parameter-passing exercise, not an integration project.
+
+The DLZ-owned inputs CUDOS depends on are stable across renames thanks to
+construct-id pinning on the Glue database (any future rename forces a clean
+CFN Replacement instead of an in-place Update that AWS Glue's API doesn't
+support).

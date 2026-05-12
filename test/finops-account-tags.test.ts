@@ -22,7 +22,8 @@ const synth = (accountTags?: DlzFinOpsAccountTags) => {
       },
     },
     finOps: {
-      cur: {}, // ensure the data-plane bucket synthesizes so Tags propagate to a taggable resource
+      // Ensures the data-plane bucket synthesizes so Tags propagate to a taggable resource.
+      dataExports: { exports: { standard: { exportType: 'STANDARD_CUR_2_0' } } },
       accountTags,
     },
   } as unknown as DataLandingZoneProps;

@@ -1,28 +1,27 @@
 import { App, Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
-import { DlzCurDataPlane, DlzCurDataPlaneProps } from '../../../src/constructs/dlz-cur/dlz-cur-data-plane';
+import { DlzDataExportsDataPlane, DlzDataExportsDataPlaneProps } from '../../../src/constructs/dlz-data-exports/dlz-data-exports-data-plane';
 
-const baseProps: DlzCurDataPlaneProps = {
+const baseProps: DlzDataExportsDataPlaneProps = {
   managementAccountId: '999999999999',
   destinationRegion: 'us-east-1',
-  bucketNamePrefix: 'dlz-cur',
-  exportName: 'dlz-cur-2',
-  glueDatabaseName: 'dlz_cur_2',
+  bucketNamePrefix: 'dlz-finops',
+  exports: { standard: { exportType: 'STANDARD_CUR_2_0' } },
 };
 
-const synth = (props: DlzCurDataPlaneProps) => {
+const synth = (props: DlzDataExportsDataPlaneProps) => {
   const app = new App();
   const stack = new Stack(app, 'TestStack', { env: { account: '111111111111', region: 'us-east-1' } });
-  new DlzCurDataPlane(stack, 'TestDataPlane', props);
+  new DlzDataExportsDataPlane(stack, 'TestDataPlane', props);
   return Template.fromStack(stack);
 };
 
-describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
+describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
 
   test('creates the workgroup with sane defaults when athena is unset', () => {
     const t = synth(baseProps);
     t.hasResourceProperties('AWS::Athena::WorkGroup', {
-      Name: 'dlz-cur',
+      Name: 'dlz-finops',
       State: 'ENABLED',
       WorkGroupConfiguration: Match.objectLike({
         EnforceWorkGroupConfiguration: true,
@@ -38,7 +37,7 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
     t.hasResourceProperties('AWS::Athena::WorkGroup', {
       WorkGroupConfiguration: Match.objectLike({
         ResultConfiguration: Match.objectLike({
-          OutputLocation: Match.stringLikeRegexp('^s3://dlz-cur-athena-results-111111111111-us-east-1/'),
+          OutputLocation: Match.stringLikeRegexp('^s3://dlz-finops-athena-results-111111111111-us-east-1/'),
           EncryptionConfiguration: { EncryptionOption: 'SSE_S3' },
         }),
       }),
@@ -48,7 +47,7 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
   test('creates the results bucket with BPA, no versioning, and short expiration', () => {
     const t = synth(baseProps);
     t.hasResourceProperties('AWS::S3::Bucket', {
-      BucketName: 'dlz-cur-athena-results-111111111111-us-east-1',
+      BucketName: 'dlz-finops-athena-results-111111111111-us-east-1',
       PublicAccessBlockConfiguration: {
         BlockPublicAcls: true,
         BlockPublicPolicy: true,
@@ -58,7 +57,7 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
       LifecycleConfiguration: {
         Rules: Match.arrayWith([
           Match.objectLike({
-            Id: 'dlz-cur-athena-results-expiration',
+            Id: 'dlz-finops-athena-results-expiration',
             ExpirationInDays: 30,
             Status: 'Enabled',
           }),
@@ -75,7 +74,7 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
     t.resourceCountIs('AWS::Athena::WorkGroup', 0);
     const buckets = t.findResources('AWS::S3::Bucket');
     const names = Object.values(buckets).map((b: any) => b.Properties?.BucketName);
-    expect(names).not.toContain('dlz-cur-athena-results-111111111111-us-east-1');
+    expect(names).not.toContain('dlz-finops-athena-results-111111111111-us-east-1');
   });
 
   test('overrides workgroup name, prefix, and engine version', () => {
@@ -127,7 +126,7 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
       dataPlaneConfig: { athena: { resultsExpirationDays: 7 } },
     });
     t.hasResourceProperties('AWS::S3::Bucket', {
-      BucketName: 'dlz-cur-athena-results-111111111111-us-east-1',
+      BucketName: 'dlz-finops-athena-results-111111111111-us-east-1',
       LifecycleConfiguration: {
         Rules: Match.arrayWith([
           Match.objectLike({ ExpirationInDays: 7 }),
@@ -148,12 +147,12 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
   test('exports the workgroup + results bucket names as SSM parameters', () => {
     const t = synth(baseProps);
     t.hasResourceProperties('AWS::SSM::Parameter', {
-      Name: '/dlz/finops/cur/athena-workgroup-name',
-      Value: 'dlz-cur',
+      Name: '/dlz/finops/athena-workgroup-name',
+      Value: 'dlz-finops',
     });
     t.hasResourceProperties('AWS::SSM::Parameter', {
-      Name: '/dlz/finops/cur/athena-results-bucket-name',
-      Value: 'dlz-cur-athena-results-111111111111-us-east-1',
+      Name: '/dlz/finops/athena-results-bucket-name',
+      Value: 'dlz-finops-athena-results-111111111111-us-east-1',
     });
   });
 
@@ -164,8 +163,8 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
     });
     const params = t.findResources('AWS::SSM::Parameter');
     const names = Object.values(params).map((p: any) => p.Properties?.Name);
-    expect(names).not.toContain('/dlz/finops/cur/athena-workgroup-name');
-    expect(names).not.toContain('/dlz/finops/cur/athena-results-bucket-name');
+    expect(names).not.toContain('/dlz/finops/athena-workgroup-name');
+    expect(names).not.toContain('/dlz/finops/athena-results-bucket-name');
   });
 
   test('mirrors SSE-KMS encryption from the data bucket onto results + workgroup', () => {
@@ -186,7 +185,7 @@ describe('DlzCurAthena (composed by DlzCurDataPlane)', () => {
       }),
     });
     t.hasResourceProperties('AWS::S3::Bucket', {
-      BucketName: 'dlz-cur-athena-results-111111111111-us-east-1',
+      BucketName: 'dlz-finops-athena-results-111111111111-us-east-1',
       BucketEncryption: {
         ServerSideEncryptionConfiguration: Match.arrayWith([
           Match.objectLike({

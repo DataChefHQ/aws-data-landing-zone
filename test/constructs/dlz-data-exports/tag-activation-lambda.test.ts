@@ -7,7 +7,7 @@ import {
   CloudFormationCustomResourceCreateEvent,
   CloudFormationCustomResourceDeleteEvent,
 } from 'aws-lambda';
-import { handler } from '../../../src/constructs/dlz-cur/lambda/cur-tag-activation';
+import { handler } from '../../../src/constructs/dlz-data-exports/lambda/tag-activation';
 
 // Preserve Command constructors so the tests can inspect command.input.
 jest.mock('@aws-sdk/client-cost-explorer', () => {
@@ -20,7 +20,7 @@ CostExplorerClient.prototype.send = mockSend as any;
 
 const baseEvent = {
   ServiceToken: 'test',
-  ResourceType: 'Custom::DlzCurTagActivation',
+  ResourceType: 'Custom::DlzDataExportsTagActivation',
   StackId: 'test-stack',
   RequestId: 'test-request',
   LogicalResourceId: 'test-logical',
@@ -43,7 +43,7 @@ const deleteEvent: CloudFormationCustomResourceDeleteEvent = {
   PhysicalResourceId: 'test-id',
 };
 
-describe('cur-tag-activation Lambda', () => {
+describe('tag-activation Lambda', () => {
   beforeEach(() => {
     mockSend.mockReset();
   });

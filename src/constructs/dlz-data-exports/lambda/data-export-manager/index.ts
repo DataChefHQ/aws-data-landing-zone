@@ -28,11 +28,21 @@ async function createExport(input: ExportInput): Promise<string> {
 }
 
 async function deleteExportSafe(arn: string): Promise<void> {
+  // Rollback DELETE after a failed CREATE: CFN passes the logical-id placeholder
+  // instead of a real ARN. Skip the API call so BCM doesn't reject it.
+  if (!arn.startsWith('arn:')) {
+    console.log(`Skipping DeleteExport — PhysicalResourceId '${arn}' is not a BCM ARN (likely a failed-CREATE rollback).`);
+    return;
+  }
   try {
     await client.send(new DeleteExportCommand({ ExportArn: arn }));
   } catch (err) {
     if (err instanceof ResourceNotFoundException) {
       console.log('Export already gone; treating delete as no-op.');
+      return;
+    }
+    if (err instanceof ValidationException) {
+      console.log(`DeleteExport ValidationException — treating as no-op. ${err.message}`);
       return;
     }
     throw err;
