@@ -271,68 +271,18 @@ main:has(.dlz-hero) > .content-panel:first-child {
     margin-bottom: 1.75rem;
 }
 
-.dlz-origins-title {
-    font-size: 1.05rem;
-    font-weight: 600;
+.dlz-hero-lede {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.55;
     color: var(--sl-color-white);
     margin: 0 0 1.25rem !important;
 }
 
-.dlz-origins-link {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-.dlz-origins-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem !important;
-}
-
-.dlz-origins-list li {
-    position: relative;
-    padding: 0 0 1.1rem 1.6rem;
-    margin: 0 0 1.1rem;
-    font-size: 0.98rem;
-    line-height: 1.55;
-    color: var(--sl-color-gray-2);
-    border-bottom: 1px solid var(--sl-color-gray-5);
-}
-
-.dlz-origins-list li:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.dlz-origins-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.55rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #e85a5a;
-}
-
-.dlz-conviction {
-    margin-bottom: 2rem;
+.dlz-hero-body {
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.65;
     color: var(--sl-color-gray-2);
-}
-
-.dlz-conviction-lines {
-    margin: 0 0 0.75rem;
-}
-
-.dlz-conviction-punch {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    font-weight: 600;
-    color: var(--sl-color-white);
-    line-height: 1.3;
+    margin: 0 0 2rem !important;
 }
 
 .dlz-accent {
