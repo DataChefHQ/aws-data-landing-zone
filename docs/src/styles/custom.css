@@ -230,6 +230,179 @@ th, td {
     }
 }
 
+/* Custom hero — replaces the splash template hero so the full vision block fits above the fold */
+/* Suppress the splash auto-rendered <h1 id="_top">{title}</h1> when our custom hero is present */
+main:has(.dlz-hero) > .content-panel:first-child {
+    display: none;
+}
+
+.dlz-hero {
+    margin: -1rem calc(50% - 50vw) 3rem;
+    padding: 1rem clamp(1.25rem, 4vw, 3rem) 2.5rem;
+}
+
+.dlz-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    max-width: 84rem;
+    margin: 0 auto;
+}
+
+.dlz-hero-text {
+    min-width: 0;
+}
+
+.dlz-hero-title {
+    font-size: clamp(1.75rem, 3.6vw, 2.9rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--sl-color-white);
+    margin: 0 0 1.75rem !important;
+}
+
+.dlz-hero-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--sl-color-gray-5);
+    opacity: 0.6;
+    margin-bottom: 1.75rem;
+}
+
+.dlz-origins-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+    margin: 0 0 1.25rem !important;
+}
+
+.dlz-origins-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.dlz-origins-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem !important;
+}
+
+.dlz-origins-list li {
+    position: relative;
+    padding: 0 0 1.1rem 1.6rem;
+    margin: 0 0 1.1rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--sl-color-gray-2);
+    border-bottom: 1px solid var(--sl-color-gray-5);
+}
+
+.dlz-origins-list li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.dlz-origins-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e85a5a;
+}
+
+.dlz-conviction {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--sl-color-gray-2);
+}
+
+.dlz-conviction-lines {
+    margin: 0 0 0.75rem;
+}
+
+.dlz-conviction-punch {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    line-height: 1.3;
+}
+
+.dlz-accent {
+    color: #e85a5a;
+    font-weight: 500;
+}
+
+.dlz-hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.dlz-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.dlz-cta-primary {
+    background: var(--sl-color-accent, #e85a5a);
+    color: var(--sl-color-white) !important;
+}
+
+.dlz-cta-primary:hover {
+    opacity: 0.9;
+}
+
+.dlz-cta-ghost {
+    background: transparent;
+    color: var(--sl-color-white) !important;
+    border: 1px solid var(--sl-color-gray-5);
+}
+
+.dlz-cta-ghost:hover {
+    background: var(--sl-color-gray-6);
+}
+
+.dlz-hero-visual {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.dlz-hero-visual .balance-triangle {
+    width: 100%;
+    max-width: 34rem;
+}
+
+@media (max-width: 900px) {
+    .dlz-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .dlz-hero-visual {
+        order: -1;
+    }
+
+    .dlz-hero-visual .balance-triangle {
+        max-width: 22rem;
+    }
+}
+
 /* Balance triangle — hero visual showing DevEx / Finance / Compliance equilibrium */
 .balance-triangle {
     width: 100%;

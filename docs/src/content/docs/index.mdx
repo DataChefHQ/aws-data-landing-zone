@@ -2,10 +2,30 @@
 title: Data Landing Zone
 description: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
 template: splash
-hero:
-  tagline: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
-  image:
-    html: |
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<section class="dlz-hero">
+  <div class="dlz-hero-grid">
+    <div class="dlz-hero-text">
+      <h1 class="dlz-hero-title">Built not for the past,<br/>but for an AI-first future.</h1>
+      <div class="dlz-hero-rule"></div>
+      <h2 class="dlz-origins-title">The Origins of <a href="https://datachef.co" class="dlz-origins-link">DataChef DLZ</a></h2>
+      <ul class="dlz-origins-list">
+        <li>Most landing zones over-optimise for one corner, the other two suffer.</li>
+        <li>We saw this repeatedly across large AWS environments with hundreds of AWS accounts.</li>
+      </ul>
+      <div class="dlz-conviction">
+        <div class="dlz-conviction-lines">Finance wants <span class="dlz-accent">control</span>.<br/>Compliance wants <span class="dlz-accent">certainty</span>.<br/>Engineers want <span class="dlz-accent">speed</span>.<br/>Everyone told us to pick one.</div>
+        <div class="dlz-conviction-punch">We didn't.</div>
+      </div>
+      <div class="dlz-hero-actions">
+        <a href="/introduction" class="dlz-cta dlz-cta-primary">Introduction <span aria-hidden="true">→</span></a>
+        <a href="/getting-started" class="dlz-cta dlz-cta-ghost">Get Started</a>
+      </div>
+    </div>
+    <div class="dlz-hero-visual">
       <div class="balance-triangle" role="img" aria-label="A triangle balancing DevEx, Finance, and Compliance, with the Data Landing Zone at the centre.">
         <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -28,16 +48,9 @@ hero:
           <text x="500" y="490" text-anchor="middle" class="bt-label">Compliance</text>
         </svg>
       </div>
-  actions:
-    - text: Introduction
-      link: /introduction
-      icon: right-arrow
-    - text: Get Started
-      link: /getting-started
-      variant: minimal
----
-
-import { Card, CardGrid } from '@astrojs/starlight/components';
+    </div>
+  </div>
+</section>
 
 <h2>The problem</h2>
 <p>
