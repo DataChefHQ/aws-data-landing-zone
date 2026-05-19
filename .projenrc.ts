@@ -4,7 +4,7 @@ import { ArrowParens, TrailingComma } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'DataChefHQ',
   authorAddress: 'hi@datachef.co',
-  cdkVersion: '2.255.0',
+  cdkVersion: '2.253.1',
   defaultReleaseBranch: 'main',
   constructsVersion: '10.6.0',
   cdkVersionPinning: false,
