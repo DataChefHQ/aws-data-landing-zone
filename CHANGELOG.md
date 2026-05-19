@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Chores
+
+- **deps:** Upgrade dependencies ([#136](https://github.com/DataChefHQ/aws-data-landing-zone/pull/136)) ([#136](https://github.com/DataChefHQ/aws-data-landing-zone/pull/136))
+
+- **deps:** Updated AWS SDK to 3.1049.0 and jest-junit to ^16
+
+- Upgrade aws-cdk-lib to 2.255.0 and update CI workflows
+
+- **deps:** Added missing dependencies in package-lock.json
+
+- **deps:** Downgraded aws-cdk-lib for version compatibility
+
+
+## [0.5.0] - 2026-05-19
+
+### ⚠️ Breaking Changes
+
+- FinOps implementation ([#140](https://github.com/DataChefHQ/aws-data-landing-zone/pull/140))
+
+### Documentation
+
+- **content/components:** Documented GuardDuty, SCP and Macie integration
+
+- **content:** Reframe landing and intro around FinOps vision ([#139](https://github.com/DataChefHQ/aws-data-landing-zone/pull/139)) ([#139](https://github.com/DataChefHQ/aws-data-landing-zone/pull/139))
+
+### Features
+
+- FinOps implementation ([#140](https://github.com/DataChefHQ/aws-data-landing-zone/pull/140)) ([#140](https://github.com/DataChefHQ/aws-data-landing-zone/pull/140))
+
+
+## [0.4.0] - 2026-05-04
+
+### ⚠️ Breaking Changes
+
+- Add SCP preset library and 3-tier composition model ([#137](https://github.com/DataChefHQ/aws-data-landing-zone/pull/137))
+
+### Features
+
+- **scp:** Add SCP preset library and 3-tier composition model ([#137](https://github.com/DataChefHQ/aws-data-landing-zone/pull/137)) ([#137](https://github.com/DataChefHQ/aws-data-landing-zone/pull/137))
+
+
 ## [0.3.4] - 2026-05-01
 
 ### Chores
