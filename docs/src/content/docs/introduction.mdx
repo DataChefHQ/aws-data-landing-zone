@@ -174,12 +174,14 @@ approvals in production environments.
         global: Region.EU_WEST_1,
         regional: [Region.US_EAST_1],
       },
-      budgets: [
-        ...Defaults.budgets(100, 20, {
-          slack: slackBudgetNotifications,
-          emails: ['you@org.com'],
-        }),
-      ],
+      finOps: {
+        budgets: [
+          ...Defaults.budgets(100, 20, {
+            slack: slackBudgetNotifications,
+            emails: ['you@org.com'],
+          }),
+        ],
+      },
       denyServiceList: [
         ...Defaults.denyServiceList(),
         'ecs:*',
@@ -250,14 +252,16 @@ approvals in production environments.
             global_=dlz.Region.EU_WEST_1,
             regional=[dlz.Region.US_EAST_1],
         ),
-        budgets=[
-            *dlz.Defaults.budgets(
-                100,
-                20,
-                slack=slack_budget_notifications,
-                emails=["you@org.com"],
-            ),
-        ],
+        fin_ops=dlz.DlzFinOpsProps(
+            budgets=[
+                *dlz.Defaults.budgets(
+                    100,
+                    20,
+                    slack=slack_budget_notifications,
+                    emails=["you@org.com"],
+                ),
+            ],
+        ),
         deny_service_list=[
             *dlz.Defaults.deny_service_list(),
             "ecs:*"

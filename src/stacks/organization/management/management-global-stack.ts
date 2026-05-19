@@ -3,10 +3,12 @@ import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as organizations from 'aws-cdk-lib/aws-organizations';
 import { Construct } from 'constructs';
+import { DlzAccountBudgets } from '../../../constructs/dlz-account-budgets';
 import {
   DlzControlTowerEnabledControl,
   IDlzControlTowerControl,
 } from '../../../constructs/dlz-control-tower-control';
+import { DlzCostAnomalyDetection } from '../../../constructs/dlz-cost-anomaly-detection';
 import { GuardDutyDelegatedAdmin } from '../../../constructs/dlz-guardduty';
 import { MacieDelegatedAdmin } from '../../../constructs/dlz-macie';
 import {
@@ -20,6 +22,7 @@ import {
   DlzServiceControlPolicy,
   ScpDenyIamWithoutPermissionsBoundary,
   ScpDenyServiceActions,
+  ScpFinOpsAccountBaseline,
   ScpMerge,
 } from '../../../constructs/organization-policies/index';
 import { DlzTagPolicy } from '../../../constructs/organization-policies/tag-policy';
@@ -50,7 +53,21 @@ export class ManagementGlobalStack extends DlzStack {
     this.workloadAccountsOrgPolicies();
     this.suspendedOuPolicies();
 
-    this.budgets();
+    if (this.props.organization.ous.sharedServices?.accounts.finOps) {
+      this.finOpsAccountHardening();
+    }
+
+    if (this.props.finOps?.budgets && this.props.finOps.budgets.length > 0) {
+      this.budgets();
+    }
+
+    if (this.props.finOps?.accountBudgets) {
+      this.accountBudgets();
+    }
+
+    if (this.props.finOps?.costAnomalyDetection) {
+      this.costAnomalyDetection();
+    }
 
     if (this.props.guardDuty) {
       this.guardDuty();
@@ -208,7 +225,8 @@ export class ManagementGlobalStack extends DlzStack {
   }
 
   budgets() {
-    const budgetSlackChannels: SlackChannel[] = this.props.budgets
+    const budgets = this.props.finOps!.budgets!;
+    const budgetSlackChannels: SlackChannel[] = budgets
       .filter(budget => budget.subscribers.slacks)
       .flatMap(budget => budget.subscribers.slacks!);
 
@@ -236,7 +254,7 @@ export class ManagementGlobalStack extends DlzStack {
       }
     }
 
-    for (const budget of this.props.budgets) {
+    for (const budget of budgets) {
       new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget, this.stackProps.globalVariables.budgetSnsCache);
     }
   }
@@ -318,6 +336,41 @@ export class ManagementGlobalStack extends DlzStack {
       description: 'Arn for AWS IAM role with Github oidc auth',
       exportName: this.resourceName('git-hub-deploy-role'),
     });
+  }
+
+  /** Auto-attaches `ScpFinOpsAccountBaseline` + per-account `scpStatements` (additive). */
+  private finOpsAccountHardening() {
+    const finOpsAccount = this.props.organization.ous.sharedServices!.accounts.finOps!;
+    const accountExtras = finOpsAccount.scpStatements ?? [];
+    const dlzScp = new DlzServiceControlPolicy(this, this.resourceName('scp-finops-account-baseline'), {
+      name: this.resourceName('scp-finops-account-baseline'),
+      description: 'Hardening baseline for the FinOps account: deny compute/data services, network primitives, IAM users, org-integrity actions',
+      targetIds: [finOpsAccount.accountId],
+      statements: [
+        ...ScpFinOpsAccountBaseline.statements(),
+        ...accountExtras,
+      ],
+    });
+    Report.addReportForAccountRegion('finops', '*', dlzScp.reportResource);
+  }
+
+  private accountBudgets() {
+    new DlzAccountBudgets(
+      this,
+      this.resourceName('account-budgets'),
+      this.props.finOps!.accountBudgets!,
+      this.props.organization.ous.workloads.accounts,
+      this.stackProps.globalVariables.budgetSnsCache,
+    );
+  }
+
+  private costAnomalyDetection() {
+    new DlzCostAnomalyDetection(
+      this,
+      this.resourceName('cost-anomaly-detection'),
+      this.props.finOps!.costAnomalyDetection!,
+      this.stackProps.globalVariables.budgetSnsCache,
+    );
   }
 
 }

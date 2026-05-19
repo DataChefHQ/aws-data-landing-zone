@@ -1,18 +1,21 @@
 import { Annotations, App, Tags } from 'aws-cdk-lib';
 import { CdkExpressPipeline } from 'cdk-express-pipeline';
 import { DlzAccountNetworks } from './constructs';
+import { DLZ_DATA_EXPORTS_DEFAULTS } from './constructs/dlz-data-exports';
 import { DlzSsmReaderStackCache } from './constructs/dlz-ssm-reader/dlz-ssm-reader-stack-cache';
 import { NetworkAddress } from './constructs/dlz-vpc/network-address';
 import {
   AuditStacks,
   DataLandingZoneProps,
   DLzAccount,
+  FinOpsStacks,
   ForceNoPythonArgumentLifting,
   GlobalVariables,
   LogStacks, ManagementStacks,
 } from './data-landing-zone-types';
+import { validateFinOpsConfig, validateLegacyRootFinOpsProps } from './lib/finops-validation';
 import { Report } from './lib/report';
-import { ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
+import { FinOpsGlobalStack, ManagementDataExportsStack, ManagementGlobalStack, WorkloadGlobalNetworkConnectionsPhase1Stack } from './stacks';
 import {
   ManagementGlobalIamIdentityCenterStack,
 } from './stacks/organization/management/management-global-iam-identity-center-stack';
@@ -160,6 +163,10 @@ function validations(props: DataLandingZoneProps) {
       );
     }
   }
+
+  /* FinOps */
+  validateLegacyRootFinOpsProps(props);
+  validateFinOpsConfig(props);
 }
 
 export class DataLandingZone {
@@ -170,6 +177,7 @@ export class DataLandingZone {
   public managementStacks!: ManagementStacks;
   public logStacks!: LogStacks;
   public auditStacks!: AuditStacks;
+  public finOpsStacks?: FinOpsStacks;
 
   public workloadGlobalStacks: WorkloadGlobalStack[] = [];
   public workloadRegionalStacks: WorkloadRegionalStack[] = [];
@@ -214,6 +222,9 @@ export class DataLandingZone {
 
     this.pipeline = new CdkExpressPipeline();
 
+    if (this.props.organization.ous.sharedServices?.accounts.finOps) {
+      this.finOpsStacks = this.stageFinOps();
+    }
     this.managementStacks = this.stageManagement();
     this.auditStacks = this.stageAudit();
     this.logStacks = this.stageLog();
@@ -241,6 +252,8 @@ export class DataLandingZone {
     Tags.of(app).add('Owner', 'infra', { excludeResourceTypes: excludeResourceTypes });
     Tags.of(app).add('Project', 'dlz', { excludeResourceTypes: excludeResourceTypes });
     Tags.of(app).add('Environment', 'dlz', { excludeResourceTypes: excludeResourceTypes });
+    Tags.of(app).add('CostCenter', 'dlz', { excludeResourceTypes: excludeResourceTypes });
+    Tags.of(app).add('Domain', 'foundation', { excludeResourceTypes: excludeResourceTypes });
 
     if (this.props.printReport !== false) {
       Report.printConsoleReport();
@@ -278,9 +291,25 @@ export class DataLandingZone {
       this.props);
     }
 
+    let dataExportsStack: ManagementDataExportsStack | undefined = undefined;
+    if (this.props.finOps?.dataExports) {
+      const wave = this.pipeline.addWave('root--data-exports');
+      const stage = wave.addStage('management-data-exports');
+      dataExportsStack = new ManagementDataExportsStack(this.app, {
+        stage,
+        name: { ou: 'root', account: 'management', stack: 'data-exports', region: 'us-east-1' },
+        env: {
+          account: this.props.organization.root.accounts.management.accountId,
+          region: 'us-east-1',
+        },
+      },
+      this.props);
+    }
+
     const ret: ManagementStacks = {
       global,
       globalIamIdentityCenter,
+      dataExports: dataExportsStack,
     };
     return ret;
   };
@@ -354,6 +383,39 @@ export class DataLandingZone {
     return {
       global: auditGlobalStack,
     } satisfies AuditStacks;
+  };
+
+  /**
+   * FinOps account global stack — only synthesized when
+   * `org.ous.sharedServices.accounts.finOps` is set. Wave-ordered before the management wave
+   * so the destination bucket exists before the management-side `bcm-data-exports.CfnExport`
+   * is created.
+   */
+  private stageFinOps() {
+    const ou = 'shared-services';
+    const account = 'finops';
+    const finOpsAccount = this.props.organization.ous.sharedServices!.accounts.finOps!;
+    // When CUR is configured the stack region must match the data-plane bucket region
+    // (which itself defaults to us-east-1, aligning with BCM Data Exports' export region).
+    // When CUR isn't configured, the stack only applies tags and any region works — fall
+    // back to regions.global.
+    const destinationRegion = this.props.finOps?.dataExports
+      ? (this.props.finOps.dataExports.destinationRegion ?? DLZ_DATA_EXPORTS_DEFAULTS.destinationRegion)
+      : this.props.regions.global;
+
+    const wave = this.pipeline.addWave('shared-services--finops--global');
+    const stage = wave.addStage('global');
+    const global = new FinOpsGlobalStack(this.app, {
+      stage,
+      name: { ou, account, stack: 'global', region: destinationRegion },
+      env: {
+        account: finOpsAccount.accountId,
+        region: destinationRegion,
+      },
+    },
+    this.props);
+
+    return { global } satisfies FinOpsStacks;
   };
 
   private stageWorkloadGlobalStacks() {

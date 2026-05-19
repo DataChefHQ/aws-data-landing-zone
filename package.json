@@ -9,6 +9,10 @@
     "build": "projen build",
     "bump": "projen bump",
     "bundle": "projen bundle",
+    "bundle:constructs/dlz-data-exports/lambda/data-export-manager": "projen bundle:constructs/dlz-data-exports/lambda/data-export-manager",
+    "bundle:constructs/dlz-data-exports/lambda/data-export-manager:watch": "projen bundle:constructs/dlz-data-exports/lambda/data-export-manager:watch",
+    "bundle:constructs/dlz-data-exports/lambda/tag-activation": "projen bundle:constructs/dlz-data-exports/lambda/tag-activation",
+    "bundle:constructs/dlz-data-exports/lambda/tag-activation:watch": "projen bundle:constructs/dlz-data-exports/lambda/tag-activation:watch",
     "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin": "projen bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin",
     "bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin:watch": "projen bundle:constructs/dlz-guardduty/lambda/guardduty-delegated-admin:watch",
     "bundle:constructs/dlz-guardduty/lambda/guardduty-member-features": "projen bundle:constructs/dlz-guardduty/lambda/guardduty-member-features",
@@ -89,6 +93,7 @@
     "constructs": "^10.6.0"
   },
   "dependencies": {
+    "@aws-sdk/client-bcm-data-exports": "^3.1030.0",
     "@aws-sdk/client-cloudformation": "^3.1030.0",
     "@aws-sdk/client-cost-explorer": "^3.1030.0",
     "@aws-sdk/client-guardduty": "^3.1030.0",
@@ -105,6 +110,7 @@
     "table": "^6.9.0"
   },
   "bundledDependencies": [
+    "@aws-sdk/client-bcm-data-exports",
     "@aws-sdk/client-cloudformation",
     "@aws-sdk/client-cost-explorer",
     "@aws-sdk/client-guardduty",

@@ -58,42 +58,41 @@ const configBase: DataLandingZoneProps = {
     owner: [],
     project: undefined,
     environment: ['development', 'staging', 'production'],
+    costCenter: ['test'],
+    domain: undefined,
   },
-  additionalMandatoryTags: [
-    {
-      name: 'Cost Center',
-      values: ['test'],
-    },
-  ],
-  budgets: [
-    // ...Defaults.budgets(100, 20, subscribers),
-    { name: 'budget-high', amount: 1_000, subscribers },
-    { name: 'budget-high-1', amount: 2_000, subscribers },
-    {
-      name: 'backend',
-      forTags: {
-        owner: 'backend',
+  additionalMandatoryTags: [],
+  finOps: {
+    budgets: [
+      // ...Defaults.budgets(100, 20, subscribers),
+      { name: 'budget-high', amount: 1_000, subscribers },
+      { name: 'budget-high-1', amount: 2_000, subscribers },
+      {
+        name: 'backend',
+        forTags: {
+          owner: 'backend',
+        },
+        amount: 100,
+        subscribers: {
+          slacks: [slackBudgetNotifications],
+          emails: ['rehan+dc-budget--backend@datachef.co'],
+        },
       },
-      amount: 100,
-      subscribers: {
-        slacks: [slackBudgetNotifications],
-        emails: ['rehan+dc-budget--backend@datachef.co'],
+      {
+        name: 'backend-accounting-internal-development',
+        forTags: {
+          owner: 'backend',
+          project: 'accounting-internal',
+          environment: 'development',
+        },
+        amount: 100,
+        subscribers: {
+          slacks: [slackBudgetNotifications],
+          emails: ['rehan+dc-budget--backend-accounting-internal-development@datachef.co'],
+        },
       },
-    },
-    {
-      name: 'backend-accounting-internal-development',
-      forTags: {
-        owner: 'backend',
-        project: 'accounting-internal',
-        environment: 'development',
-      },
-      amount: 100,
-      subscribers: {
-        slacks: [slackBudgetNotifications],
-        emails: ['rehan+dc-budget--backend-accounting-internal-development@datachef.co'],
-      },
-    },
-  ],
+    ],
+  },
   guardDuty: {
     autoEnableOrgMembers: 'ALL',
   },

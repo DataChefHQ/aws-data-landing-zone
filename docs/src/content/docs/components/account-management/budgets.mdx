@@ -1,24 +1,30 @@
 ---
 title: Budgets
-description: Budgets
+description: Org-level AWS Budgets via finOps.budgets
 ---
 import DualCode from '../../../../components/DualCode.astro';
 
-AWS Budgets provides tools to monitor and control costs by setting custom spending thresholds. You can create monthly
-budgets, specifying the budget amount and filtering resources based on their tags.
-
-:::caution
-Tags used for budget filters must be activated as Cost Allocation Tags in your account settings. See
-[Activate Cost Allocation Tags](/components/account-management/tagging#activate-cost-allocation-tags) for details.
+:::tip
+Budgets, Cost Anomaly Detection, Data Exports, and the FinOps account hardening live
+under the [`finOps`](/components/finops) prop. Per-account / per-cost-center budgets
+have a dedicated page: [Account Budgets](/components/finops/account-budgets).
 :::
 
-Budget notifications are sent via Amazon SNS, which can be configured for the following delivery methods:
-- **Email**: Each email address must confirm the notification opt-in the first time it is deployed.
-- **Slack**: Notifications are sent to a designated Slack channel. The Slack workspace must be linked to the Management
-Account. For setup details, see the SOP [AWS Chatbot and Slack Integration](/sop/account-setup#aws-chatbot-and-slack-integration).
+`finOps.budgets` creates monthly AWS Budgets in the management account, scoped by tag, with
+SNS notifications.
 
-Below is an example of creating a budget for resources tagged with `Owner: backend`. Notifications will be sent to a
-specified Slack channel and email address once the budget exceeds $100.
+:::caution
+Tags used in budget filters must be activated as Cost Allocation Tags first. See
+[Activate Cost Allocation Tags](/components/account-management/tagging#activate-cost-allocation-tags).
+:::
+
+Notifications go through SNS. Two delivery options:
+
+- Email — each address confirms the SNS subscription on first deploy.
+- Slack — the workspace must be linked to the management account. See
+  [AWS Chatbot and Slack Integration](/sop/account-setup#aws-chatbot-and-slack-integration).
+
+Example: a $100 budget for resources tagged `Owner: backend`, alerting to Slack and email.
 <DualCode>
   <Fragment slot="ts">
     ```ts
@@ -33,19 +39,21 @@ specified Slack channel and email address once the budget exceeds $100.
 
     const app = new App();
     const dlz = new DataLandingZone(app, {
-      budgets: [
-        {
-          name: 'backend',
-          forTags: {
-            owner: 'backend',
+      finOps: {
+        budgets: [
+          {
+            name: 'backend',
+            forTags: {
+              owner: 'backend',
+            },
+            amount: 100,
+            subscribers: {
+              slacks: [slackBudgetNotifications],
+              emails: ['you@org.com'],
+            },
           },
-          amount: 100,
-          subscribers: {
-            slack: [slackBudgetNotifications],
-            emails: ['you@org.com'],
-          },
-        },
-      ],
+        ],
+      },
      ...
     });
     ```
@@ -63,19 +71,19 @@ specified Slack channel and email address once the budget exceeds $100.
 
     app = cdk.App()
     dlz.DataLandingZone(app,
-            budgets=[
-                {
-                    "name": "backend",
-                    "for_tags": {
-                        "owner": "backend",
-                    },
-                    "amount": 100,
-                    "subscribers": {
-                        "slacks": [slack_budget_notifications],
-                        "emails": ["you@org.com"],
-                    },
-                },
-            ],
+            fin_ops=dlz.DlzFinOpsProps(
+                budgets=[
+                    dlz.DlzBudgetProps(
+                        name="backend",
+                        for_tags={"owner": "backend"},
+                        amount=100,
+                        subscribers=dlz.BudgetSubscribers(
+                            slacks=[slack_budget_notifications],
+                            emails=["you@org.com"],
+                        ),
+                    ),
+                ],
+            ),
         ...
     )
     ```
@@ -84,9 +92,9 @@ specified Slack channel and email address once the budget exceeds $100.
 
 ## Reusing the same SNS Topic
 
-Each budget creates a unique SNS topic with the name `${budget.name}-topic`. If multiple budgets share the same
-subscribers, you can use a single SNS topic to reduce the number of resources and subscription confirmations.
-To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
+By default each budget gets its own SNS topic named `${budget.name}-topic`. If several
+budgets share the same subscribers, set `snsTopicName` on `BudgetSubscribers` to point them at
+a single topic — fewer resources, fewer subscription confirmations.
 
 <DualCode>
   <Fragment slot="ts">
@@ -106,11 +114,13 @@ To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
 
     const app = new App();
     const dlz = new DataLandingZone(app, {
-      budgets: [
-        ...Defaults.budgets(100, 20, subscribers),
-        { name: 'budget-high', amount: 1_000, subscribers },
-        { name: 'budget-high-1', amount: 2_000, subscribers },
-      ],
+      finOps: {
+        budgets: [
+          ...Defaults.budgets(100, 20, subscribers),
+          { name: 'budget-high', amount: 1_000, subscribers },
+          { name: 'budget-high-1', amount: 2_000, subscribers },
+        ],
+      },
      ...
     });
     ```
@@ -136,11 +146,13 @@ To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
 
     app = cdk.App()
     dlz.DataLandingZone(app,
-            budgets=[
-                *dlz.Defaults.budgets(org_total=500, infra_dlz=20, subscribers=budget_subscribers),
-                dlz.DlzBudgetProps(name="budget-high", amount=1_000, subscribers=budget_subscribers),
-                dlz.DlzBudgetProps(name="budget-high-1", amount=2_000, subscribers=budget_subscribers)
-            ],
+            fin_ops=dlz.DlzFinOpsProps(
+                budgets=[
+                    *dlz.Defaults.budgets(org_total=500, infra_dlz=20, subscribers=budget_subscribers),
+                    dlz.DlzBudgetProps(name="budget-high", amount=1_000, subscribers=budget_subscribers),
+                    dlz.DlzBudgetProps(name="budget-high-1", amount=2_000, subscribers=budget_subscribers),
+                ],
+            ),
         ...
     )
     ```
@@ -149,12 +161,12 @@ To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
 
 ## Defaults
 
-The construct provides two default budgets available via `Defaults.budgets`. These include:
-- **Organizational Budget**: Covers all resources across all AWS accounts.
-- **DLZ Resources Budget**: Tracks resources created by DLZ, filtered by the tags `Owner: 'infra'` and `Project: 'dlz'`.
+`Defaults.budgets(orgTotal, dlzTotal, subscribers)` returns two budgets:
 
-The example below demonstrates creating a $100 budget for the entire organization and a $20 budget for DLZ-managed
-resources. Notifications are sent to the specified Slack channel and email address.
+- An org-wide budget covering every account.
+- A DLZ-resources budget filtered to `Owner: 'infra'` and `Project: 'dlz'`.
+
+Below, a $100 org budget and a $20 DLZ budget, both alerting to the same Slack channel and email.
 <DualCode>
   <Fragment slot="ts">
     ```ts
@@ -169,12 +181,14 @@ resources. Notifications are sent to the specified Slack channel and email addre
 
     const app = new App();
     const dlz = new DataLandingZone(app, {
-      budgets: [
-        ...Defaults.budgets(100, 20, {
-          slack: slackBudgetNotifications,
-          emails: ['you@org.com'],
-        }),
-      ],
+      finOps: {
+        budgets: [
+          ...Defaults.budgets(100, 20, {
+            slacks: [slackBudgetNotifications],
+            emails: ['you@org.com'],
+          }),
+        ],
+      },
      ...
     });
     ```
@@ -192,14 +206,18 @@ resources. Notifications are sent to the specified Slack channel and email addre
 
     app = cdk.App()
     dlz.DataLandingZone(app,
-            budgets=[
-                *dlz.Defaults.budgets(
-                    100,
-                    20,
-                    slack=slack_budget_notifications,
-                    emails=["you@org.com"],
-                ),
-            ],
+            fin_ops=dlz.DlzFinOpsProps(
+                budgets=[
+                    *dlz.Defaults.budgets(
+                        100,
+                        20,
+                        dlz.BudgetSubscribers(
+                            slacks=[slack_budget_notifications],
+                            emails=["you@org.com"],
+                        ),
+                    ),
+                ],
+            ),
         ...
     )
 

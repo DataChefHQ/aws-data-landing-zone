@@ -1,0 +1,103 @@
+---
+title: Account Budgets
+description: Per-account and per-cost-center AWS Budgets
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+Set `monthlyBudget` on a workload account, and `accountBudgets` creates an AWS Budget
+filtered to that account. Optionally roll up budgets per `CostCenter`.
+
+Lives in the management account.
+
+## Per-account budgets
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    new DataLandingZone(app, {
+      organization: {
+        ous: {
+          workloads: {
+            ouId: 'ou-xxxx',
+            accounts: [
+              { accountId: '111...', name: 'analytics-dev', type: DlzAccountType.DEVELOP,
+                costCenter: 'analytics', domain: 'curated', monthlyBudget: 500 },
+              { accountId: '222...', name: 'analytics-prod', type: DlzAccountType.PRODUCTION,
+                costCenter: 'analytics', domain: 'serving', monthlyBudget: 5000 },
+            ],
+          },
+        },
+      },
+      finOps: {
+        accountBudgets: {
+          defaultSubscribers: {
+            snsTopicName: 'finops-alerts',
+            emails: ['finops@acme.com'],
+          },
+        },
+      },
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    dlz.DataLandingZone(app,
+        organization=dlz.DLzOrganization(
+            ous=dlz.OrgOus(
+                workloads=dlz.OrgOuWorkloads(
+                    ou_id="ou-xxxx",
+                    accounts=[
+                        dlz.DLzAccount(account_id="111...", name="analytics-dev",
+                            type=dlz.DlzAccountType.DEVELOP, cost_center="analytics",
+                            domain="curated", monthly_budget=500),
+                        dlz.DLzAccount(account_id="222...", name="analytics-prod",
+                            type=dlz.DlzAccountType.PRODUCTION, cost_center="analytics",
+                            domain="serving", monthly_budget=5000),
+                    ],
+                ),
+            ),
+        ),
+        fin_ops=dlz.DlzFinOpsProps(
+            account_budgets=dlz.DlzAccountBudgetsProps(
+                default_subscribers=dlz.BudgetSubscribers(
+                    sns_topic_name="finops-alerts",
+                    emails=["finops@acme.com"],
+                ),
+            ),
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+Produces:
+
+- `dlz-account-analytics-dev` — $500 budget filtered to `111...`
+- `dlz-account-analytics-prod` — $5,000 budget filtered to `222...`
+
+Budgets alert at 80% actual and 100% forecasted (the underlying `DlzBudget` defaults).
+
+## Per-cost-center roll-ups
+
+Set `perCostCenterRollup: true` to also create one budget per unique `CostCenter` value:
+
+```ts
+finOps: {
+  accountBudgets: {
+    defaultSubscribers: { /* ... */ },
+    perCostCenterRollup: true,
+  },
+}
+```
+
+With the two accounts above this also produces:
+
+- `dlz-costcenter-analytics` — $5,500 budget filtered to `CostCenter = analytics`
+
+The `CostCenter` cost-allocation tag must be active. `finOps.dataExports` activates it
+automatically; without `dataExports`, activate it once in the Billing console.
+
+## Sharing SNS topics with anomaly detection
+
+Use the same `snsTopicName` across `accountBudgets`, `costAnomalyDetection`, and
+`budgets` — DLZ deduplicates and reuses one topic + subscription set.

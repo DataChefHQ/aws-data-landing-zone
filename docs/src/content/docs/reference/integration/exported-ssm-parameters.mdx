@@ -16,7 +16,29 @@ organization's ability to adopt other IaC tools across different projects.
 [CDK Client](cdk-client), which provides a thin, type-safe wrapper to fetch these SSM Parameters.
 :::
 
-### List of Exported SSM Parameters
+## Where the parameters live
+
+Parameters are **not** all in the management account. Each construct writes
+into the account whose resources it owns:
+
+| Prefix | Account | Region |
+|---|---|---|
+| `/dlz/networking-entity/*` | The workload account hosting the VPC / bastion. | The VPC's region (per-VPC `region`). |
+| `/dlz/networking/vpc-peering-role-arn--*` | The workload account on the source side of the peering. | `regions.global`. |
+| `/dlz/finops/*` | The FinOps account (`org.ous.sharedServices.accounts.finOps`). | `finOps.dataExports.destinationRegion` (default `us-east-1`). |
+| `/dlz/identity-center/*` | The management account (`org.root.accounts.management`). | `regions.global`. |
+
+For cross-account reads, the calling principal needs `ssm:GetParameter` /
+`ssm:GetParameters` / `ssm:GetParametersByPath` against the right
+`arn:aws:ssm:<region>:<accountId>:parameter/dlz/...` ARN. DLZ does not
+attach resource policies to its SSM parameters — assume a read-only role
+in the owning account instead (the DLZ `dlz-global-dlz-ssm-cross-account-assume-role`
+covers the common cases).
+
+## Networking entity parameters
+
+**Lives in:** the workload account that hosts each VPC, in that VPC's region.
+There is one set per VPC.
 
 - [/dlz/networking-entity/vpc/\<account-name\>.\<region\>.\<vpc-name\>/id](/components/networking/vpcs#exported-ssm-parameters):
 The VPC ID.
@@ -26,3 +48,75 @@ The Route Table ID, one for each route table created in the VPC.
 The Subnet ID, one for each subnet created in the route tables.
 - [/dlz/networking-entity/bastion/\<bastion-name\>/security-group/id](/components/networking/bastion-hosts#exported-ssm-parameters):
 The security group ID of the bastion host.
+
+## FinOps parameters
+
+**Lives in:** the FinOps account (`org.ous.sharedServices.accounts.finOps.accountId`),
+in `finOps.dataExports.destinationRegion` (default `us-east-1`). Written
+exactly once by `FinOpsGlobalStack`. Required IAM:
+`ssm:GetParameter*` on `arn:aws:ssm:<destinationRegion>:<finOpsAccountId>:parameter/dlz/finops/*`.
+
+- [/dlz/finops/finops-account-id](/components/finops/data-exports#exported-ssm-parameters):
+The AWS account ID of the FinOps account that hosts the data bucket, Glue catalog, and Athena workgroup.
+- [/dlz/finops/management-account-id](/components/finops/data-exports#exported-ssm-parameters):
+The AWS account ID of the management account that delivers the BCM data exports.
+- [/dlz/finops/destination-region](/components/finops/data-exports#exported-ssm-parameters):
+The region of the shared data bucket, Glue catalog, and Athena workgroup. Cross-region readers should target this region.
+- [/dlz/finops/data-bucket-name](/components/finops/data-exports#exported-ssm-parameters):
+The shared S3 bucket holding Parquet data for every configured BCM export.
+- [/dlz/finops/data-bucket-arn](/components/finops/data-exports#exported-ssm-parameters):
+ARN of the shared data bucket. Use when granting cross-account read access.
+- [/dlz/finops/data-bucket-encryption-type](/components/finops/data-exports#exported-ssm-parameters):
+Encryption mode of the data bucket — `SSE_S3` or `SSE_KMS`.
+- [/dlz/finops/data-bucket-kms-key-arn](/components/finops/data-exports#exported-ssm-parameters):
+ARN of the CMK encrypting the data bucket. **Only written when `data-bucket-encryption-type` is `SSE_KMS`** — readers must `kms:Decrypt` against this key.
+- [/dlz/finops/glue-database-name](/components/finops/data-exports#exported-ssm-parameters):
+The Glue database cataloging every export as a separate table (FinOps account).
+- [/dlz/finops/glue-crawler-name](/components/finops/data-exports#exported-ssm-parameters):
+Name of the Glue crawler that maintains the catalog. Use to trigger ad-hoc runs via `glue:StartCrawler`.
+- [/dlz/finops/glue-crawler-schedule](/components/finops/data-exports#exported-ssm-parameters):
+Cron expression the crawler runs on (default `cron(0 6 * * ? *)`).
+- [/dlz/finops/athena-workgroup-name](/components/finops/data-exports#exported-ssm-parameters):
+The Athena workgroup to query the data with.
+- [/dlz/finops/athena-workgroup-arn](/components/finops/data-exports#exported-ssm-parameters):
+ARN of the Athena workgroup. Use when granting `athena:StartQueryExecution` to cross-account principals.
+- [/dlz/finops/athena-results-bucket-name](/components/finops/data-exports#exported-ssm-parameters):
+The S3 bucket where Athena query results land.
+- [/dlz/finops/athena-results-bucket-arn](/components/finops/data-exports#exported-ssm-parameters):
+ARN of the Athena results bucket — needed for cross-account write grants.
+- [/dlz/finops/export-ids](/components/finops/data-exports#exported-ssm-parameters):
+`StringList` manifest of every configured export ID. Read this once instead of paging `ssm:GetParametersByPath /dlz/finops/exports/`.
+- [/dlz/finops/exports/\<id\>/export-type](/components/finops/data-exports#exported-ssm-parameters):
+Per-export discriminator (`STANDARD_CUR_2_0` / `FOCUS_1_2` / `COST_OPTIMIZATION_RECOMMENDATIONS` / `CARBON_EMISSIONS`).
+- [/dlz/finops/exports/\<id\>/export-name](/components/finops/data-exports#exported-ssm-parameters):
+Per-export BCM export name — also the inner S3 path segment BCM writes under.
+- [/dlz/finops/exports/\<id\>/destination-prefix](/components/finops/data-exports#exported-ssm-parameters):
+Per-export optional path prefix under the bucket; `(none)` when unset (default).
+- [/dlz/finops/exports/\<id\>/data-path](/components/finops/data-exports#exported-ssm-parameters):
+Per-export relative path inside the bucket (`<exportName>` or `<prefix>/<exportName>`).
+- [/dlz/finops/exports/\<id\>/s3-uri](/components/finops/data-exports#exported-ssm-parameters):
+Per-export fully-qualified `s3://` URI to the export's data — paste directly into Athena `LOCATION` or external tools.
+- [/dlz/finops/exports/\<id\>/glue-table-name](/components/finops/data-exports#exported-ssm-parameters):
+Per-export Glue table name (within the shared Glue database).
+
+## IAM Identity Center parameters
+
+**Lives in:** the management account (`org.root.accounts.management.accountId`),
+in `regions.global`. Written by `ManagementGlobalIamIdentityCenterStack`.
+Required IAM:
+`ssm:GetParameter*` on `arn:aws:ssm:<globalRegion>:<managementAccountId>:parameter/dlz/identity-center/*`.
+
+- [/dlz/identity-center/instance-arn](/components/identity/iam-identity-center#exported-ssm-parameters):
+ARN of the IAM Identity Center instance DLZ was configured against.
+- [/dlz/identity-center/instance-id](/components/identity/iam-identity-center#exported-ssm-parameters):
+IAM Identity Center instance ID (the suffix of `instance-arn`).
+- [/dlz/identity-center/store-id](/components/identity/iam-identity-center#exported-ssm-parameters):
+Identity Store ID — required for any `identitystore:*` API call.
+- [/dlz/identity-center/group-names](/components/identity/iam-identity-center#exported-ssm-parameters):
+`StringList` manifest of every Identity Center group display name DLZ provisioned. Read this once instead of paging `identitystore:ListGroups`.
+- [/dlz/identity-center/groups/\<name\>/id](/components/identity/iam-identity-center#exported-ssm-parameters):
+Per-group resolved Identity Center `GroupId`, keyed by the group display name from `group-names`.
+- [/dlz/identity-center/permission-set-names](/components/identity/iam-identity-center#exported-ssm-parameters):
+`StringList` manifest of every permission set name DLZ provisioned.
+- [/dlz/identity-center/permission-sets/\<name\>/arn](/components/identity/iam-identity-center#exported-ssm-parameters):
+Per-permission-set ARN, keyed by the permission set name from `permission-set-names`. Feed straight into `sso-admin:CreateAccountAssignment` or `AWS::QuickSight::RoleMembership`.

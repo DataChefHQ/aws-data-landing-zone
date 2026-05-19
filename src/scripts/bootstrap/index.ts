@@ -38,14 +38,25 @@ async function synthOnce(props: DataLandingZoneProps) {
 
 async function management(props: DataLandingZoneProps) {
   await synthOnce(props);
-  await runCommand('cdk', [
-    'bootstrap',
-    '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess',
-    `--profile ${props.localProfile}`,
-    tags,
-    `aws://${props.organization.root.accounts.management.accountId}/${props.regions.global}`,
-    '--app cdk.out',
-  ].join(' '));
+
+  const managementAccountId = props.organization.root.accounts.management.accountId;
+  const managementRegions = new Set<string>([props.regions.global]);
+
+  // CUR's BCM Data Exports resource is us-east-1-only.
+  if (props.finOps?.dataExports) {
+    managementRegions.add('us-east-1');
+  }
+
+  for (const region of managementRegions) {
+    await runCommand('cdk', [
+      'bootstrap',
+      '--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess',
+      `--profile ${props.localProfile}`,
+      tags,
+      `aws://${managementAccountId}/${region}`,
+      '--app cdk.out',
+    ].join(' '));
+  }
 }
 async function log(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   await synthOnce(props);
@@ -76,10 +87,22 @@ async function workloadAccounts(props: DataLandingZoneProps, bootstrapRoleName: 
     await Promise.all(regionBootStrapPromises);
   }
 }
+async function finOps(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
+  const finOpsAccount = props.organization.ous.sharedServices?.accounts.finOps;
+  if (!finOpsAccount) return;
+  await synthOnce(props);
+
+  const regionBootStrapPromises = [];
+  for (let region of DlzAllRegions(props.regions)) {
+    regionBootStrapPromises.push(bootstrapChildAccount(props, bootstrapRoleName, finOpsAccount.accountId, region));
+  }
+  await Promise.all(regionBootStrapPromises);
+}
 
 export async function all(props: DataLandingZoneProps, bootstrapRoleName: string = 'AWSControlTowerExecution') {
   await management(props);
   await log(props, bootstrapRoleName);
   await audit(props, bootstrapRoleName);
   await workloadAccounts(props, bootstrapRoleName);
+  await finOps(props, bootstrapRoleName);
 }

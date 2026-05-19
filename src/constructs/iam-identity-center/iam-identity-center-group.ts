@@ -28,6 +28,8 @@ export interface IamIdentityCenterGroupUser {
  */
 export class IamIdentityCenterGroup extends Construct {
 
+  public readonly groupId: string;
+
   constructor(scope: Construct, id: string, props: IamIdentityCenterGroupProps) {
     super(scope, id);
 
@@ -41,6 +43,7 @@ export class IamIdentityCenterGroup extends Construct {
         description: description,
         identityStoreId,
       });
+    this.groupId = group.attrGroupId;
 
     for (const user of users) {
       const membership = new identitystore.CfnGroupMembership(

@@ -132,6 +132,19 @@ export default defineConfig({
                         ]
                     },
                     {
+                        label: 'FinOps',
+                        items: [
+                            { label: 'Overview',  slug: 'components/finops'},
+                            { label: 'BCM Data Exports',  slug: 'components/finops/data-exports'},
+                            { label: 'Cost Anomaly Detection',  slug: 'components/finops/cost-anomaly-detection'},
+                            { label: 'Account Budgets',  slug: 'components/finops/account-budgets'},
+                            { label: 'FinOps Account Tags',  slug: 'components/finops/account-tags'},
+                            { label: 'FinOps Account Hardening',  slug: 'components/finops/finops-account-baseline'},
+                            { label: 'CID dashboards (CUDOS, Sustainability, more)',  slug: 'components/finops/cid-dashboards'},
+                            { label: 'QuickSight setup for CID',  slug: 'components/finops/quicksight-setup'},
+                        ]
+                    },
+                    {
                         label: 'Build System',
                         items: [
                             { label: 'Deployment Order',  slug: 'components/build-system/deployment-order'},

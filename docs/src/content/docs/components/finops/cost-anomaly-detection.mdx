@@ -1,0 +1,82 @@
+---
+title: Cost Anomaly Detection
+description: AWS Cost Anomaly Detection monitors and subscriptions
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+`finOps.costAnomalyDetection` provisions Anomaly Monitors in the management account,
+routing notifications through Slack/email via the existing `AccountChatbots`
+infrastructure. Reuses the `budgetSnsCache` so monitors and budgets can share an SNS topic.
+
+## Monitor types
+
+| Field | Watches | Use |
+|---|---|---|
+| `dimension: 'SERVICE'` | every AWS service | broadest, lowest noise — recommended starting point |
+| `dimension: 'LINKED_ACCOUNT'` | every account | per-account anomalies |
+| `tagKey: 'CostCenter'` | resources by tag | cost-center / project anomalies |
+
+`dimension` and `tagKey` are mutually exclusive on a single monitor.
+
+## Example
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      costAnomalyDetection: {
+        monitors: [
+          {
+            name: 'aws-services',
+            dimension: 'SERVICE',
+            thresholdUsd: 100,
+            subscribers: {
+              snsTopicName: 'finops-alerts',
+              emails: ['finops@acme.com'],
+            },
+          },
+          {
+            name: 'cost-centers',
+            tagKey: 'CostCenter',
+            thresholdUsd: 200,
+            subscribers: { snsTopicName: 'finops-alerts' },
+          },
+        ],
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
+            monitors=[
+                dlz.DlzAnomalyMonitorProps(
+                    name="aws-services",
+                    dimension="SERVICE",
+                    threshold_usd=100,
+                    subscribers=dlz.BudgetSubscribers(
+                        sns_topic_name="finops-alerts",
+                        emails=["finops@acme.com"],
+                    ),
+                ),
+                dlz.DlzAnomalyMonitorProps(
+                    name="cost-centers",
+                    tag_key="CostCenter",
+                    threshold_usd=200,
+                    subscribers=dlz.BudgetSubscribers(sns_topic_name="finops-alerts"),
+                ),
+            ],
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+## Notification frequency
+
+| Value | Channel | Use |
+|---|---|---|
+| `IMMEDIATE` (default) | SNS | real-time alerts |
+| `DAILY` | email | daily digest |
+| `WEEKLY` | email | weekly review |
