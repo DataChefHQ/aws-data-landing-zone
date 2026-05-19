@@ -156,6 +156,17 @@ describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
     });
   });
 
+  test('exports workgroup + results bucket ARNs', () => {
+    const t = synth(baseProps);
+    t.hasResourceProperties('AWS::SSM::Parameter', { Name: '/dlz/finops/athena-workgroup-arn' });
+    t.hasResourceProperties('AWS::SSM::Parameter', { Name: '/dlz/finops/athena-results-bucket-arn' });
+    const params = Object.values(t.findResources('AWS::SSM::Parameter')) as any[];
+    const wgArn = params.find(p => p.Properties.Name === '/dlz/finops/athena-workgroup-arn');
+    expect(wgArn.Properties.Value['Fn::Join'][1]).toEqual(
+      expect.arrayContaining(['arn:', expect.stringContaining(':athena:us-east-1:111111111111:workgroup/dlz-finops')]),
+    );
+  });
+
   test('skips Athena SSM exports when athena.enabled is false', () => {
     const t = synth({
       ...baseProps,
@@ -164,7 +175,9 @@ describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
     const params = t.findResources('AWS::SSM::Parameter');
     const names = Object.values(params).map((p: any) => p.Properties?.Name);
     expect(names).not.toContain('/dlz/finops/athena-workgroup-name');
+    expect(names).not.toContain('/dlz/finops/athena-workgroup-arn');
     expect(names).not.toContain('/dlz/finops/athena-results-bucket-name');
+    expect(names).not.toContain('/dlz/finops/athena-results-bucket-arn');
   });
 
   test('mirrors SSE-KMS encryption from the data bucket onto results + workgroup', () => {

@@ -41,10 +41,28 @@ aws compute-optimizer update-enrollment-status \
 aws cost-optimization-hub update-enrollment-status \
   --status Active --include-member-accounts \
   --region us-east-1
+
+# COH: let the payer see org-wide, discount-adjusted recommendations.
+# Default after opt-in is `None`, which makes COR exports fail at CreateExport.
+aws cost-optimization-hub update-preferences --region us-east-1 \
+  --member-account-discount-visibility All \
+  --savings-estimation-mode AfterDiscounts
+
+# Service-linked role that lets BCM Data Exports read COH data. The
+# Data Exports console flow creates it automatically (one-click); the API
+# path doesn't. Without this SLR every COR `CreateExport` fails with the
+# same misleading "unable to create an export against this Table" error.
+aws iam create-service-linked-role \
+  --aws-service-name bcm-data-exports.amazonaws.com || \
+aws iam create-service-linked-role \
+  --aws-service-name cost-optimization-hub.bcm-data-exports.amazonaws.com
 ```
 
 (The console "Opt in" buttons do the same thing and work in many accounts —
-but the CLI is more reliable across account configurations.)
+but the CLI is more reliable across account configurations. For the SLR
+specifically, the Data Exports console **Create export → Cost Optimization
+Recommendations** flow shows a "Create service-linked role" button — that
+fallback works in accounts where the CLI form rejects the template name.)
 
 **Then wait 24–48 hours before deploying a COR export.** Compute Optimizer
 needs that long to complete its initial scan and produce recommendations.
@@ -248,24 +266,22 @@ table-level toggles.
 | `queryColumns` | full spec | Override the projected column list |
 | `queryStatement` | derived | Full SQL override; `SELECT *` is rejected by BCM |
 
-To extend the default columns instead of replacing them, spread the constant:
+To extend the default columns instead of replacing them, spread `Defaults.standardCurQueryColumns()`:
 
 <DualCode>
   <Fragment slot="ts">
     ```ts
-    import { DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD } from 'aws-data-landing-zone';
+    import { Defaults } from 'aws-data-landing-zone';
 
     config: {
-      queryColumns: [...DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD, 'my_extra_column'],
+      queryColumns: [...Defaults.standardCurQueryColumns(), 'my_extra_column'],
     }
     ```
   </Fragment>
   <Fragment slot="python">
     ```python
-    from aws_data_landing_zone import DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD
-
     config=dlz.DlzStandardCur20Config(
-        query_columns=[*DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD, "my_extra_column"],
+        query_columns=[*dlz.Defaults.standard_cur_query_columns(), "my_extra_column"],
     )
     ```
   </Fragment>
@@ -314,7 +330,7 @@ Current FOCUS spec; supersedes 1.0. Adds user-controllable `TIME_GRANULARITY`.
 | Field | Default | Purpose |
 |---|---|---|
 | `timeGranularity` | `'DAILY'` | `HOURLY` / `DAILY` / `MONTHLY` |
-| `queryColumns` | `DLZ_FOCUS_1_2_DEFAULT_QUERY_COLUMNS` | |
+| `queryColumns` | `Defaults.focus12QueryColumns()` | |
 | `queryStatement` | derived | Full SQL override |
 
 FOCUS 1.2 drops `x_CostCategories` and `x_UsageType` from the AWS proprietary
@@ -364,9 +380,9 @@ Point-in-time snapshots from Cost Optimization Hub, not time-series.
 
 | Field | Default | Purpose |
 |---|---|---|
-| `includeAllRecommendations` | `false` | `false` dedupes to the highest-savings recommendation per resource (e.g. "Terminate" wins over "Rightsize") |
+| `includeAllRecommendations` | `false` | `false` dedupes to the highest-savings recommendation per resource (e.g. "Terminate" wins over "Rightsize"); `true` keeps every variant. Has no effect on the column set — BCM COR's schema is fixed. |
 | `filter` | none | Scope to specific account ids, resource types, action types, etc. |
-| `queryColumns` | `DLZ_COR_DEFAULT_QUERY_COLUMNS` | |
+| `queryColumns` | `Defaults.corQueryColumns()` | BCM COR has a fixed 25-column schema; the only useful change is a narrower projection. Adding columns not in the dictionary fails `CreateExport` with `ValidationException`. |
 | `queryStatement` | derived | Full SQL override |
 
 Filter example:
@@ -440,7 +456,7 @@ Refreshes monthly in practice; data starts 2022-01.
 The only `DlzCarbonEmissionsConfig` overrides are `queryColumns` /
 `queryStatement`.
 
-`DLZ_CARBON_EMISSIONS_DEFAULT_QUERY_COLUMNS` covers account, region,
+`Defaults.carbonEmissionsQueryColumns()` covers account, region,
 usage_period, service_name, and the three `total_mtco2e*` columns.
 
 The data-export-manager Lambda is granted
@@ -647,48 +663,58 @@ production.
 
 ## Exported SSM parameters
 
-Shared params under `/dlz/finops/`:
+`FinOpsGlobalStack` writes a parameter for every configured export plus the
+shared bucket/Glue/Athena identifiers to SSM, in the **FinOps account**
+(`org.ous.sharedServices.accounts.finOps.accountId`), in
+**`finOps.dataExports.destinationRegion`** (default `us-east-1`), under
+`/dlz/finops/`. Downstream stacks and external automation read these
+instead of threading account IDs, ARNs, and per-export attributes through
+configuration.
 
-| Parameter | Example value |
-|---|---|
-| `/dlz/finops/data-bucket-name` | `dlz-finops-{accountId}-{region}` |
-| `/dlz/finops/destination-region` | `us-east-1` |
-| `/dlz/finops/glue-database-name` | `dlz_finops` |
-| `/dlz/finops/athena-workgroup-name` | `dlz-finops` |
-| `/dlz/finops/athena-results-bucket-name` | `dlz-finops-athena-results-{accountId}-{region}` |
+See [Integration → Exported SSM Parameters → FinOps](/reference/integration/exported-ssm-parameters#finops-parameters)
+for the canonical list and the IAM scopes required to read it across
+accounts. Athena parameters are only written when
+`dataPlaneConfig.athena.enabled !== false`; the per-export entries are
+written for every ID in `/dlz/finops/export-ids`.
 
-Per-export params under `/dlz/finops/exports/<id>/`:
-
-| Parameter | Example value |
-|---|---|
-| `.../<id>/export-type` | `STANDARD_CUR_2_0` |
-| `.../<id>/export-name` | `dlz-standard` |
-| `.../<id>/destination-prefix` | `(none)` (or the configured prefix) |
-| `.../<id>/data-path` | `dlz-standard` (or `<prefix>/dlz-standard` when prefix is set) |
-| `.../<id>/glue-table-name` | `finops_standard` |
-
-The Athena entries are only written when `dataPlaneConfig.athena.enabled !== false`.
-
-Reading from a shell:
+Example enumeration of every export → Glue table name in one shell loop.
+Works in bash, zsh, and POSIX sh:
 
 ```bash
-aws ssm get-parameter --name /dlz/finops/glue-database-name \
-  --query Parameter.Value --output text
-# → dlz_finops
+export REGION=us-east-1   # whatever finOps.dataExports.destinationRegion is
 
-aws ssm get-parameter --name /dlz/finops/exports/standard/glue-table-name \
-  --query Parameter.Value --output text
-# → finops_standard
+aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/export-ids \
+  --query Parameter.Value --output text | tr ',' '\n' | \
+while IFS= read -r ID; do
+  [ -z "$ID" ] && continue
+  TABLE=$(aws ssm get-parameter --region "$REGION" \
+    --name "/dlz/finops/exports/$ID/glue-table-name" \
+    --query Parameter.Value --output text 2>/dev/null) \
+    || TABLE="(missing)"
+  printf '%-16s → %s\n' "$ID" "$TABLE"
+done
 ```
 
-For an external CUDOS / CID deploy, see the
-[CUDOS extras page](/components/finops/cudos) for ready-to-paste snippets.
+### When to read which
+
+Task-oriented quick reference — pick the parameter that matches the job:
+
+| If you need to... | Read |
+|---|---|
+| Write IAM policies in another account scoping bucket or workgroup access | `data-bucket-arn`, `athena-workgroup-arn`, `athena-results-bucket-arn` (the partition is baked in) |
+| Grant `kms:Decrypt` to a cross-account QuickSight or Athena consumer | `data-bucket-encryption-type` first. If it returns `SSE_KMS`, then `data-bucket-kms-key-arn`. |
+| Kick the Glue crawler manually | `glue-crawler-name`, then `aws glue start-crawler --name <name>`. Skip `aws glue list-crawlers`. |
+| Paste an S3 location into an Athena `LOCATION` clause, a Glue table, or `aws s3 ls` | The per-export `s3-uri` |
+
+For an external CUDOS or CID deploy, the
+[CID dashboards page](/components/finops/cid-dashboards) has copy-pasteable snippets.
 
 ## Troubleshooting
 
 ### `CreateExport` fails with "This account is unable to create an export against this Table" (COR exports)
 
-The message is misleading — it surfaces for three distinct cases, only one
+The message is misleading — it surfaces for five distinct cases, only one
 of which is actually "not enrolled":
 
 1. **You haven't opted in to Cost Optimization Hub at all.** Run the CLI
@@ -699,6 +725,15 @@ of which is actually "not enrolled":
 3. **You opted in correctly but Compute Optimizer hasn't finished its
    initial scan.** Initial scans take 24–48 hours. Until COH has at least
    one recommendation, BCM rejects `CreateExport` with this same error.
+4. **COH `memberAccountDiscountVisibility` is `None`.** The payer needs
+   visibility into member-account discount-adjusted recommendations to export
+   org-wide COR data. Default after CLI opt-in is `None`; the export will fail
+   with the same misleading error until it is set to `All`.
+5. **The BCM Data Exports → COH service-linked role doesn't exist.** The
+   console export-creation flow has a one-click button that creates it
+   (`Create service-linked role`); the API/CLI path doesn't trigger
+   creation. Without this SLR every `CreateExport` for COR fails. Create
+   it via CLI or click through the Data Exports console once.
 
 Diagnostic:
 
@@ -712,10 +747,23 @@ aws cost-optimization-hub list-recommendations --region us-east-1 --max-results 
   --query 'length(items)' --output text
 # 0  → still warming up; wait longer (up to 48h after CO enrollment)
 # >0 → safe to deploy the COR export now
+
+# Is member-account visibility enabled?
+aws cost-optimization-hub get-preferences --region us-east-1
+# memberAccountDiscountVisibility must be "All", not "None"
 ```
 
-Once `list-recommendations` returns a non-zero count, deploy the COR export
-and `CreateExport` will accept.
+If `memberAccountDiscountVisibility` is `None`, set it once at the org level:
+
+```bash
+aws cost-optimization-hub update-preferences --region us-east-1 \
+  --member-account-discount-visibility All \
+  --savings-estimation-mode AfterDiscounts
+```
+
+Once `list-recommendations` returns a non-zero count and
+`memberAccountDiscountVisibility=All`, deploy the COR export and
+`CreateExport` will accept.
 
 ### `CreateExport` fails with "Cannot create duplicate export name"
 

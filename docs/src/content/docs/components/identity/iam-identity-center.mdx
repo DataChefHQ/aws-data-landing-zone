@@ -33,117 +33,116 @@ The example below assigns the `AdministratorAccess` permission set (created by
 <DualCode>
   <Fragment slot="ts">
     ```ts
-    import {App} from 'aws-cdk-lib';
-    import { DataLandingZone } from 'aws-data-landing-zone';
+    import { App } from 'aws-cdk-lib';
+    import * as iam from 'aws-cdk-lib/aws-iam';
+    import { DataLandingZone, Defaults } from 'aws-data-landing-zone';
 
     const app = new App();
-    const dlz = new DataLandingZone(app, {
-      iamIdentityCenter: {
-      arn: 'IdentityCenterARN',
-      id: 'IdentityCenterID',
-      storeId: 'StoreID',
-      users: [
-        {
-          userName: 'you@org.com',
-          name: 'Name',
-          surname: 'LastName',
-        },
-      ],
-      permissionSets: [
-        // Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets
-        ...Defaults.iamIdentityCenterPermissionSets(),
-        // Create custom permission sets from managed policies
-        {
-          name: 'power-user-permission-set',
-          managedPolicyArns: ['arn:aws:iam::aws:policy/PowerUserAccess']
-        },
-        // Create a custom permission sets from inline policies
-        {
-          name: 's3-only-access',
-          inlinePolicyDocument: new iam.PolicyDocument({
-            statements: [
-              new iam.PolicyStatement({
-                actions: ['s3:GetObject'],
-                resources: ['arn:aws:s3:::mybucket/*'],
-              })
-            ]
-          }),
-        }
-      ],
-      accessGroups: [
-        {
-          name: 'admin-access-group',
-          accountNames: ['*'], // All accounts
-          // accountNames: ['project-1-*'], // All accounts starting with `project-1-`
-          // accountNames: ['root', 'development', 'production'], // Specific accounts
-          userNames: [
-            'you@org.com',
-          ],
-          permissionSetName: 'AdministratorAccess',
-        },
-      ],
-    },
-    });
-    ````
 
+    new DataLandingZone(app, {
+      // ... other DLZ props (regions, mandatoryTags, organization, ...)
+      iamIdentityCenter: {
+        arn: 'IdentityCenterARN',
+        id: 'IdentityCenterID',
+        storeId: 'StoreID',
+        users: [
+          {
+            userName: 'you@org.com',
+            name: 'Name',
+            surname: 'LastName',
+          },
+        ],
+        permissionSets: [
+          // Provides the AWS managed policies `AdministratorAccess` and `ReadOnlyAccess` as permission sets
+          ...Defaults.iamIdentityCenterPermissionSets(),
+          // Create a custom permission set from a managed policy
+          {
+            name: 'power-user-permission-set',
+            managedPolicyArns: ['arn:aws:iam::aws:policy/PowerUserAccess'],
+          },
+          // Create a custom permission set from an inline policy
+          {
+            name: 's3-only-access',
+            inlinePolicyDocument: new iam.PolicyDocument({
+              statements: [
+                new iam.PolicyStatement({
+                  actions: ['s3:GetObject'],
+                  resources: ['arn:aws:s3:::mybucket/*'],
+                }),
+              ],
+            }),
+          },
+        ],
+        accessGroups: [
+          {
+            name: 'admin-access-group',
+            accountNames: ['*'], // All accounts
+            // accountNames: ['project-1-*'],              // All accounts starting with `project-1-`
+            // accountNames: ['root', 'development'],      // Specific accounts
+            userNames: ['you@org.com'],
+            permissionSetName: 'AdministratorAccess',
+          },
+        ],
+      },
+    });
+    ```
   </Fragment>
   <Fragment slot="python">
     ```python
     import aws_cdk as cdk
     import aws_data_landing_zone as dlz
-    from aws_cdk.aws_iam import (PolicyDocument, Effect, PolicyStatement)
+    from aws_cdk.aws_iam import PolicyDocument, PolicyStatement, Effect
 
     app = cdk.App()
+
     dlz.DataLandingZone(app,
-        ...
-        organization=dlz.DLzOrganization(
-            iam_identity_center={
-            "arn": "IdentityCenterARN",
-            "id": "IdentityCenterID",
-            "store_id": "StoreID",
-            "users": [
-                {
-                    "user_name": "you@org.com",
-                    "name": "Name",
-                    "surname": "LastName",
-                },
+        # ... other DLZ props (regions, mandatory_tags, organization, ...)
+        iam_identity_center=dlz.IamIdentityCenterProps(
+            arn="IdentityCenterARN",
+            id="IdentityCenterID",
+            store_id="StoreID",
+            users=[
+                dlz.IdentityStoreUserProps(
+                    user_name="you@org.com",
+                    name="Name",
+                    surname="LastName",
+                ),
             ],
-            "permission_sets": [
+            permission_sets=[
                 # Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets
-                *Defaults.iam_identity_center_permission_sets(),
-                # Create custom permission sets from managed policies
-                {
-                    name: 'power-user-permission-set',
-                    managed_policy_arns: ['arn:aws:iam::aws:policy/PowerUserAccess']
-                },
-                # Create a custom permission sets from inline policies
-                {
-                    name: 's3-only-access',
-                    inline_policy_document: PolicyDocument(
+                *dlz.Defaults.iam_identity_center_permission_sets(),
+                # Create a custom permission set from a managed policy
+                dlz.IamIdentityCenterPermissionSetProps(
+                    name="power-user-permission-set",
+                    managed_policy_arns=["arn:aws:iam::aws:policy/PowerUserAccess"],
+                ),
+                # Create a custom permission set from an inline policy
+                dlz.IamIdentityCenterPermissionSetProps(
+                    name="s3-only-access",
+                    inline_policy_document=PolicyDocument(
                         statements=[
                             PolicyStatement(
                                 effect=Effect.ALLOW,
                                 actions=["s3:*"],
-                                resources=["*"]
-                            )
-                        ]
-                    )
-                }
+                                resources=["*"],
+                            ),
+                        ],
+                    ),
+                ),
             ],
-            "access_groups": [
-                {
-                    "name": "admin-access-group",
-                    "account_names": ["*"], # All accounts
-                    # accountNames: ['project-1-*'], # All accounts starting with `project-1-`
-                    # accountNames: ['root', 'development', 'production'], # Specific accounts
-                    "user_names": ["you@org.com"],
-                    "permission_set_name": "AdministratorAccess",
-                },
+            access_groups=[
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="admin-access-group",
+                    account_names=["*"],  # All accounts
+                    # account_names=["project-1-*"],            # All accounts starting with `project-1-`
+                    # account_names=["root", "development"],    # Specific accounts
+                    user_names=["you@org.com"],
+                    permission_set_name="AdministratorAccess",
+                ),
             ],
-        },
         ),
     )
-  ````
+    ```
   </Fragment>
 </DualCode>
 
@@ -155,6 +154,74 @@ The example below assigns the `AdministratorAccess` permission set (created by
 The `Defaults.iamIdentityCenterPermissionSets` function creates two permission sets:
 - `AdministratorAccess`: Using the AWS managed policy `AdministratorAccess`
 - `ReadOnlyAccess`: Using the AWS managed policy `ReadOnlyAccess`
+
+## Restricting a permission set to specific accounts
+
+By default, a permission set defined in `permissionSets` can be referenced by
+any access group and assigned to any account. To pin a permission set to a
+specific set of accounts (and fail synth if anyone tries to assign it
+elsewhere), set `allowedAccountNames`:
+
+```ts
+permissionSets: [
+  {
+    name: 'FinOpsQuickSightConsole',
+    managedPolicyArns: ['arn:aws:iam::aws:policy/ReadOnlyAccess'],
+    // Synth fails if any access group resolves this permission set to an
+    // account outside this list — wildcard expansion is checked too.
+    allowedAccountNames: ['finOps'],
+  },
+],
+```
+
+The check runs after wildcard expansion, so `accountNames: ['*']` against a
+restricted permission set fails too. Useful for any permission set tied to
+account-specific resources (a single-tenant data plane, a billing account,
+etc.) where assigning it elsewhere would be either a no-op or a foot-gun.
+
+## Exported SSM parameters
+
+When `iamIdentityCenter` is configured, DLZ writes the instance identity
+plus one parameter per group and permission set to SSM, in the **management
+account**, in **`regions.global`**, under `/dlz/identity-center/`. Downstream
+stacks and external automation read these instead of threading IDs through
+configuration or paging `sso-admin`/`identitystore` APIs.
+
+See [Integration → Exported SSM Parameters → IAM Identity Center](/reference/integration/exported-ssm-parameters#iam-identity-center-parameters)
+for the canonical list and the IAM scopes required to read it across
+accounts. The manifest parameters (`group-names`, `permission-set-names`)
+are skipped when no groups or permission sets are configured; everything
+else is always written.
+
+Example enumeration of every group → GroupId in one shell loop. Works in
+bash, zsh, and POSIX sh:
+
+```bash
+export REGION=eu-west-1   # whatever regions.global resolves to
+
+aws ssm get-parameter --region "$REGION" \
+  --name /dlz/identity-center/group-names \
+  --query Parameter.Value --output text | tr ',' '\n' | \
+while IFS= read -r NAME; do
+  [ -z "$NAME" ] && continue
+  ID=$(aws ssm get-parameter --region "$REGION" \
+    --name "/dlz/identity-center/groups/$NAME/id" \
+    --query Parameter.Value --output text 2>/dev/null) \
+    || ID="(missing)"
+  printf '%s\t%s\n' "$NAME" "$ID"
+done
+```
+
+`tr ',' '\n'` splits the comma-separated StringList into one name per
+line, and `while IFS= read -r NAME` iterates them safely regardless of
+shell or special characters in the name. `2>/dev/null || ID="(missing)"`
+keeps the loop going if a single lookup fails, so you can spot which
+specific name (if any) has a problem.
+
+These values feed directly into other DLZ docs that wire up Identity
+Center groups — e.g. the
+[QuickSight setup](/components/finops/quicksight-setup#create-the-identity-center-groups-in-dlz-first)
+step that maps Identity Center groups to QuickSight roles.
 
 ## API References
 - [IamIdentityCenterProps](/reference/api/#aws-data-landing-zone.IamIdentityCenterProps)

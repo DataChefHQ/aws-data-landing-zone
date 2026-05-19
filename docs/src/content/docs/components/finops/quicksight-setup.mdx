@@ -1,0 +1,768 @@
+---
+title: QuickSight setup for CID dashboards
+description: One-time QuickSight Enterprise enablement in the FinOps account before deploying CUDOS / CID
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import DualCode from '../../../../components/DualCode.astro';
+
+<Aside type="caution" title="Not deployed by DLZ">
+QuickSight is not provisioned by DLZ. It's a paid AWS service with its own
+lifecycle, identity model, and per-user billing. This page walks through the
+one-time setup in the FinOps account so the
+[CID dashboards](/components/finops/cid-dashboards) have something to deploy
+against.
+</Aside>
+
+QuickSight runs in the FinOps account, in the same region as the FinOps S3
+bucket (`destinationRegion` in `finOps.dataExports`, default `us-east-1`).
+Cross-region SPICE refresh works but is meaningfully more expensive, so keep
+everything in one region unless you have a reason not to.
+
+<Aside type="tip" title="Deploy DLZ first">
+If you'll be using IAM Identity Center (the recommended option in Step 1),
+deploy DLZ with the `iamIdentityCenter.accessGroups` block from
+[Step 3 below](#create-the-identity-center-groups-in-dlz-first) **before**
+running the QuickSight signup wizard. The signup form asks for Identity
+Center group names verbatim, and they have to exist first.
+</Aside>
+
+## Prerequisites in DLZ
+
+Before starting, make sure:
+
+- `org.ous.sharedServices.accounts.finOps` is configured and the account is
+  bootstrapped.
+- `finOps.dataExports` is deployed with at least one
+  [`STANDARD_CUR_2_0`](/components/finops/data-exports#standard_cur_2_0)
+  export running.
+- The Glue crawler has run at least once.
+- You can sign into the FinOps account through IAM Identity Center with
+  administrative permissions.
+
+## Discover the values you'll need
+
+Every setting QuickSight asks for is written to SSM by `finOps.dataExports`
+when it deploys ([see the full parameter list](/components/finops/data-exports#exported-ssm-parameters)).
+
+**Where the parameters live**: the FinOps account
+(`org.ous.sharedServices.accounts.finOps.accountId`), in `destinationRegion`
+(default `us-east-1`), under `/dlz/finops/`. Run this from a shell assumed
+into that account:
+
+```bash
+export REGION=us-east-1   # or your finOps.dataExports.destinationRegion
+
+# Identity
+ACCOUNT=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/finops-account-id --query Parameter.Value --output text)
+REGION=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/destination-region --query Parameter.Value --output text)
+
+# Data buckets
+BUCKET=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/data-bucket-name --query Parameter.Value --output text)
+RESULTS=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/athena-results-bucket-name --query Parameter.Value --output text)
+ENCRYPTION=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/data-bucket-encryption-type --query Parameter.Value --output text)
+KMS_KEY_ARN=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/data-bucket-kms-key-arn --query Parameter.Value --output text 2>/dev/null || echo "")
+
+# Glue + Athena
+DB=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/glue-database-name --query Parameter.Value --output text)
+CRAWLER=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/glue-crawler-name --query Parameter.Value --output text)
+WG=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/athena-workgroup-name --query Parameter.Value --output text)
+
+# List every configured export (single call, no parameter-path paging)
+EXPORT_IDS=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/export-ids --query Parameter.Value --output text)
+
+# Confirm the Glue crawler has produced at least one table
+aws glue get-tables --database-name "$DB" --region "$REGION" \
+  --query 'TableList[].Name' --output text
+```
+
+If no tables are listed yet, the crawler hasn't run since the bucket got
+its first data. Kick it manually — no `list-crawlers` lookup needed:
+
+```bash
+aws glue start-crawler --name "$CRAWLER" --region "$REGION"
+```
+
+Sanity-check the values:
+
+```bash
+printf 'region=%s\naccount=%s\nbucket=%s\nresults=%s\nencryption=%s\nkms_key=%s\ndatabase=%s\ncrawler=%s\nworkgroup=%s\nexports=%s\n' \
+  "$REGION" "$ACCOUNT" "$BUCKET" "$RESULTS" "$ENCRYPTION" "$KMS_KEY_ARN" "$DB" "$CRAWLER" "$WG" "$EXPORT_IDS"
+```
+
+Keep the shell open — the rest of this guide refers back to these variables.
+
+## Step 1 — Subscribe to QuickSight Enterprise
+
+QuickSight has account-level subscriptions. Each AWS account is either
+subscribed or not.
+
+1. Sign into the **FinOps account** through IAM Identity Center, assuming an
+   admin role.
+2. Open the QuickSight console:
+   `https://quicksight.aws.amazon.com/sn/start`
+3. Click **Sign up for QuickSight**.
+4. Choose **Enterprise** (not Standard — Standard doesn't support row-level
+   security, theming, or the API surface CUDOS depends on).
+5. Pick the **authentication method**. Recommended:
+   - **Use IAM Identity Center** if you already manage SSO through Identity
+     Center (the DLZ default). Users and groups sync automatically.
+   - **Use Role Based Federation (SSO)** if Identity Center isn't an option.
+   - Avoid the "QuickSight-managed users" mode unless you have no SSO at all.
+     It creates a parallel identity store you'll later need to maintain.
+6. Select the **region** — use `$REGION` from the discovery block.
+7. Set the **QuickSight account name**. This becomes part of QuickSight
+   URLs and isn't easy to change — pick something stable
+   (e.g. `acme-finops`).
+8. **Notification email** — alerts about SPICE limits, refresh failures,
+   etc. A team alias is better than an individual.
+9. **QuickSight service role** — accept the default
+   (`aws-quicksight-service-role-v0`). QuickSight creates it on first
+   subscription.
+10. **Initial SPICE capacity** — start small (the bundled allowance per
+    Author is usually enough to begin). You can grow it later.
+11. Confirm.
+
+The first Author seat is included in the subscription. Add more Authors and
+Readers after the subscription is live (Step 3 below).
+
+## Step 2 — Grant QuickSight read access to the FinOps data
+
+QuickSight's service role (`aws-quicksight-service-role-v0`) needs S3
+read on the data bucket and S3 read+write on the Athena results bucket
+that DLZ provisioned. The Athena and Glue permissions are already
+covered by the AWS-managed `AWSQuicksightAthenaAccess` policy auto-attached
+on signup — only S3 needs custom wiring, because that policy's S3 grants
+are scoped to AWS's default `aws-athena-query-results-*` bucket pattern,
+and DLZ's buckets don't match.
+
+Run from a shell assumed into the **FinOps account**:
+
+```bash
+export REGION=us-east-1   # same region as QuickSight / destinationRegion
+
+DATA_BUCKET=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/data-bucket-name --query Parameter.Value --output text)
+RESULTS_BUCKET=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/athena-results-bucket-name --query Parameter.Value --output text)
+
+aws iam put-role-policy \
+  --role-name aws-quicksight-service-role-v0 \
+  --policy-name DlzQuickSightBucketAccess \
+  --policy-document "$(cat <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DataBucketRead",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:ListBucket", "s3:GetBucketLocation"],
+      "Resource": [
+        "arn:aws:s3:::${DATA_BUCKET}",
+        "arn:aws:s3:::${DATA_BUCKET}/*"
+      ]
+    },
+    {
+      "Sid": "AthenaResultsReadWrite",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:AbortMultipartUpload"
+      ],
+      "Resource": [
+        "arn:aws:s3:::${RESULTS_BUCKET}",
+        "arn:aws:s3:::${RESULTS_BUCKET}/*"
+      ]
+    }
+  ]
+}
+EOF
+)"
+```
+
+If `/dlz/finops/data-bucket-encryption-type` returns `SSE_KMS`, the
+service role also needs `kms:Decrypt` and `kms:GenerateDataKey` on the
+data-bucket CMK. Append a statement to the CMK key policy:
+
+```bash
+ENCRYPTION=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/data-bucket-encryption-type --query Parameter.Value --output text)
+
+if [ "$ENCRYPTION" = "SSE_KMS" ]; then
+  ACCOUNT=$(aws ssm get-parameter --region "$REGION" \
+    --name /dlz/finops/finops-account-id --query Parameter.Value --output text)
+  KMS_KEY_ARN=$(aws ssm get-parameter --region "$REGION" \
+    --name /dlz/finops/data-bucket-kms-key-arn --query Parameter.Value --output text)
+  KEY_ID="${KMS_KEY_ARN##*/}"   # strip everything before the last slash
+  QS_ROLE_ARN="arn:aws:iam::${ACCOUNT}:role/service-role/aws-quicksight-service-role-v0"
+
+  # Fetch current key policy, append a statement for QuickSight, put it back.
+  aws kms get-key-policy --region "$REGION" --key-id "$KEY_ID" \
+    --policy-name default --query Policy --output text > /tmp/kms-policy.json
+
+  jq --arg arn "$QS_ROLE_ARN" '
+    .Statement += [{
+      "Sid": "AllowQuickSightServiceRole",
+      "Effect": "Allow",
+      "Principal": { "AWS": $arn },
+      "Action": ["kms:Decrypt", "kms:GenerateDataKey"],
+      "Resource": "*"
+    }]
+  ' /tmp/kms-policy.json > /tmp/kms-policy.updated.json
+
+  aws kms put-key-policy --region "$REGION" --key-id "$KEY_ID" \
+    --policy-name default \
+    --policy "$(cat /tmp/kms-policy.updated.json)"
+fi
+```
+
+The `jq` step is idempotent only by inspection — re-running will append a
+duplicate `AllowQuickSightServiceRole` statement. Run once; verify with:
+
+```bash
+aws kms get-key-policy --region "$REGION" --key-id "$KEY_ID" \
+  --policy-name default --query Policy --output text | jq '.Statement[].Sid'
+```
+
+You should see `AllowQuickSightServiceRole` exactly once.
+
+Verify the inline policy on the role landed:
+
+```bash
+aws iam list-role-policies --role-name aws-quicksight-service-role-v0
+# Expected: "DlzQuickSightBucketAccess" in PolicyNames
+```
+
+## Step 3 — Add Authors and Readers
+
+### The QuickSight role model
+
+QuickSight Enterprise has three base roles. The Pro variants add Amazon Q
+in QuickSight (natural-language Q&A, generative summaries, story creation)
+on top of the same capabilities.
+
+| Role | What it can do | What it cannot do | Typical use |
+|---|---|---|---|
+| **Admin** / `ADMIN_PRO` | Everything Author does, plus manage the QuickSight subscription, SPICE capacity, security & permissions, namespaces, and user roles. | — | Account owner, FinOps lead. Keep the count small. |
+| **Author** / `AUTHOR_PRO` | Connect to data sources, build datasets, create analyses and dashboards, share with Readers, schedule SPICE refreshes. | Manage account-level settings or other users' roles. | The team that builds dashboards. CUDOS / CID needs at least one. |
+| **Reader** / `READER_PRO` | Open shared dashboards, filter, drill, export, subscribe to email reports. | Build or modify any asset. | Everyone who just consumes the dashboards. |
+
+Other things worth knowing before assigning roles:
+
+- **Roles are scoped to the QuickSight account, not per-dashboard.** A
+  Reader is a Reader everywhere in this QuickSight account. Per-dashboard
+  access is controlled separately via dashboard sharing.
+- **Roles cannot be mixed.** A user is exactly one of `ADMIN`, `AUTHOR`,
+  `READER`, or their `_PRO` equivalent at any time.
+- **CUDOS / CID requirements.** At least one Author to own and refresh
+  the dashboards. Readers for consumers. The `--quicksight-user` you
+  pass to `cid-cmd` must resolve to an Author or Admin in this account.
+
+### If you chose IAM Identity Center in Step 1
+
+QuickSight integrates with Identity Center at the **group → role**
+level: you assign an entire Identity Center group to a QuickSight role,
+and group membership in Identity Center then drives who has access.
+Individual users are not managed inside QuickSight.
+
+#### Create the Identity Center groups in DLZ first
+
+The strings QuickSight asks for in the signup screen (Admin / Admin Pro /
+Author / Author Pro / Reader / Reader Pro) are Identity Center group
+**display names**. The groups have to exist before QuickSight can route
+to them. DLZ provisions them via `iamIdentityCenter.accessGroups`.
+
+The `arn` / `id` / `storeId` values that the block below takes can be
+fetched two ways:
+
+- **First-time bootstrap**: call `aws sso-admin list-instances --region
+  <globalRegion>` from the management account. This is the source of
+  truth and works before DLZ has ever been deployed.
+- **After DLZ has run at least once**: the same three values are
+  exported as SSM parameters. Cheaper to read and easier to script.
+
+The SSM parameters live in:
+
+| | |
+|---|---|
+| **Account** | The management account (`org.root.accounts.management.accountId`). |
+| **Region** | `regions.global` (the global region you configured in `DataLandingZoneProps`). |
+| **Path** | `/dlz/identity-center/instance-arn`, `/dlz/identity-center/instance-id`, `/dlz/identity-center/store-id` |
+
+Read them with a shell assumed into the management account:
+
+```bash
+export REGION=eu-central-1   # whatever regions.global resolves to
+
+SSO_ARN=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/identity-center/instance-arn --query Parameter.Value --output text)
+SSO_ID=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/identity-center/instance-id  --query Parameter.Value --output text)
+STORE_ID=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/identity-center/store-id     --query Parameter.Value --output text)
+```
+
+See [Exported SSM parameters](/components/identity/iam-identity-center#exported-ssm-parameters)
+on the IAM Identity Center page for the full reference.
+
+The permission set below grants **only what a QuickSight user might
+need from the AWS Console** for the FinOps account: run Athena queries
+in the DLZ workgroup, read the Glue catalog, read CUR / Athena-result
+S3 objects, and read DLZ-published SSM parameters. QuickSight access
+itself is **not** governed by this permission set. It's governed by
+the QuickSight role you assign to each group at signup time, plus the
+S3 / Athena grants on the QuickSight service role from Step 2.
+
+`iamIdentityCenter` is a top-level prop on `DataLandingZoneProps`. Slot
+it into your existing `new DataLandingZone(app, { ... })` call alongside
+whatever other DLZ config you already have — `regions`, `mandatoryTags`,
+`organization`, `finOps`, and so on.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import { App, Duration } from 'aws-cdk-lib';
+    import * as iam from 'aws-cdk-lib/aws-iam';
+    import { DataLandingZone } from 'aws-data-landing-zone';
+
+    const app = new App();
+
+    new DataLandingZone(app, {
+      // ... your existing regions / mandatoryTags / organization / finOps / etc.
+
+      iamIdentityCenter: {
+        arn: '<sso instance arn>',
+        id: '<sso instance id>',
+        storeId: '<identity store id>',
+
+        users: [
+          { userName: 'finops-lead@example.com', name: 'Pat',  surname: 'Lead'    },
+          { userName: 'analyst@example.com',     name: 'Alex', surname: 'Analyst' },
+          { userName: 'viewer@example.com',      name: 'Sam',  surname: 'Viewer'  },
+        ],
+
+        permissionSets: [
+          {
+            name: 'FinOpsQuickSightConsole',
+            description: 'Console access for QuickSight users: Athena/Glue/S3/SSM read on FinOps data only',
+            sessionDuration: Duration.hours(4),
+            // Synth-time guard: fail if any access group ever tries to assign this
+            // permission set to an account other than 'finOps'. Belt-and-suspenders
+            // alongside the per-group accountNames below.
+            allowedAccountNames: ['finOps'],
+            inlinePolicyDocument: new iam.PolicyDocument({
+              statements: [
+                // Run Athena queries through the DLZ FinOps workgroup
+                new iam.PolicyStatement({
+                  sid: 'AthenaWorkgroupQueries',
+                  actions: [
+                    'athena:GetWorkGroup',
+                    'athena:StartQueryExecution',
+                    'athena:StopQueryExecution',
+                    'athena:GetQueryExecution',
+                    'athena:GetQueryResults',
+                    'athena:GetQueryResultsStream',
+                    'athena:ListQueryExecutions',
+                    'athena:BatchGetQueryExecution',
+                  ],
+                  // Workgroup name defaults to 'dlz-finops'; update if you overrode it.
+                  resources: ['arn:aws:athena:*:*:workgroup/dlz-finops'],
+                }),
+                // Read Glue catalog metadata so console + Athena can resolve tables
+                new iam.PolicyStatement({
+                  sid: 'GlueCatalogRead',
+                  actions: [
+                    'glue:GetDatabase',
+                    'glue:GetDatabases',
+                    'glue:GetTable',
+                    'glue:GetTables',
+                    'glue:GetPartition',
+                    'glue:GetPartitions',
+                    'glue:SearchTables',
+                  ],
+                  resources: ['*'],
+                }),
+                // Read CUR exports + Athena query results
+                new iam.PolicyStatement({
+                  sid: 'FinOpsBucketsRead',
+                  actions: ['s3:GetObject', 's3:ListBucket', 's3:GetBucketLocation'],
+                  resources: [
+                    'arn:aws:s3:::dlz-finops-*',
+                    'arn:aws:s3:::dlz-finops-*/*',
+                  ],
+                }),
+                // Read DLZ-published SSM parameters (FinOps + Identity Center)
+                new iam.PolicyStatement({
+                  sid: 'DlzSsmRead',
+                  actions: ['ssm:GetParameter', 'ssm:GetParameters', 'ssm:GetParametersByPath'],
+                  resources: ['arn:aws:ssm:*:*:parameter/dlz/*'],
+                }),
+              ],
+            }),
+          },
+        ],
+
+        accessGroups: [
+          // Admin tier — at least one is required by the QuickSight signup form.
+          {
+            name: 'dlz-finops-admins-pro',
+            description: 'QuickSight Admin Pro — administers QuickSight and uses Amazon Q in QuickSight',
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: ['finOps'],
+            userNames: [],
+          },
+          {
+            name: 'dlz-finops-admins',
+            description: 'QuickSight Admin — manages subscription, SPICE, namespaces, and user roles',
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: ['finOps'],
+            userNames: ['finops-lead@example.com'],
+          },
+
+          // Author tier — optional; builds dashboards, refreshes SPICE.
+          {
+            name: 'dlz-finops-authors-pro',
+            description: 'QuickSight Author Pro — builds dashboards and uses Amazon Q in QuickSight',
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: ['finOps'],
+            userNames: [],
+          },
+          {
+            name: 'dlz-finops-authors',
+            description: 'QuickSight Author — builds analyses and dashboards, schedules SPICE refreshes',
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: ['finOps'],
+            userNames: ['analyst@example.com'],
+          },
+
+          // Reader tier — optional; consumes dashboards only. The permission set
+          // is effectively unused for readers since they live entirely in the
+          // QuickSight UI, but DLZ requires `permissionSetName` to be set.
+          {
+            name: 'dlz-finops-readers-pro',
+            description: 'QuickSight Reader Pro — consumes dashboards and uses Amazon Q in QuickSight',
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: ['finOps'],
+            userNames: [],
+          },
+          {
+            name: 'dlz-finops-readers',
+            description: 'QuickSight Reader — consumes shared dashboards and subscribes to email reports',
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: ['finOps'],
+            userNames: ['viewer@example.com'],
+          },
+        ],
+      },
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_cdk as cdk
+    from aws_cdk import Duration
+    from aws_cdk.aws_iam import PolicyDocument, PolicyStatement, Effect
+    import aws_data_landing_zone as dlz
+
+    app = cdk.App()
+
+    dlz.DataLandingZone(app,
+        # ... your existing regions / mandatory_tags / organization / fin_ops / etc.
+        iam_identity_center=dlz.IamIdentityCenterProps(
+            arn="<sso instance arn>",
+            id="<sso instance id>",
+            store_id="<identity store id>",
+
+            users=[
+                dlz.IdentityStoreUserProps(user_name="finops-lead@example.com", name="Pat",  surname="Lead"),
+                dlz.IdentityStoreUserProps(user_name="analyst@example.com",     name="Alex", surname="Analyst"),
+                dlz.IdentityStoreUserProps(user_name="viewer@example.com",      name="Sam",  surname="Viewer"),
+            ],
+
+            permission_sets=[
+                dlz.IamIdentityCenterPermissionSetProps(
+                    name="FinOpsQuickSightConsole",
+                    description="Console access for QuickSight users: Athena/Glue/S3/SSM read on FinOps data only",
+                    session_duration=Duration.hours(4),
+                    # Synth-time guard: fail if any access group ever tries to assign this
+                    # permission set to an account other than 'finOps'. Belt-and-suspenders
+                    # alongside the per-group account_names below.
+                    allowed_account_names=["finOps"],
+                    inline_policy_document=PolicyDocument(
+                        statements=[
+                            # Run Athena queries through the DLZ FinOps workgroup
+                            PolicyStatement(
+                                sid="AthenaWorkgroupQueries",
+                                effect=Effect.ALLOW,
+                                actions=[
+                                    "athena:GetWorkGroup",
+                                    "athena:StartQueryExecution",
+                                    "athena:StopQueryExecution",
+                                    "athena:GetQueryExecution",
+                                    "athena:GetQueryResults",
+                                    "athena:GetQueryResultsStream",
+                                    "athena:ListQueryExecutions",
+                                    "athena:BatchGetQueryExecution",
+                                ],
+                                # Workgroup name defaults to 'dlz-finops'; update if you overrode it.
+                                resources=["arn:aws:athena:*:*:workgroup/dlz-finops"],
+                            ),
+                            # Read Glue catalog metadata so console + Athena can resolve tables
+                            PolicyStatement(
+                                sid="GlueCatalogRead",
+                                effect=Effect.ALLOW,
+                                actions=[
+                                    "glue:GetDatabase",
+                                    "glue:GetDatabases",
+                                    "glue:GetTable",
+                                    "glue:GetTables",
+                                    "glue:GetPartition",
+                                    "glue:GetPartitions",
+                                    "glue:SearchTables",
+                                ],
+                                resources=["*"],
+                            ),
+                            # Read CUR exports + Athena query results
+                            PolicyStatement(
+                                sid="FinOpsBucketsRead",
+                                effect=Effect.ALLOW,
+                                actions=["s3:GetObject", "s3:ListBucket", "s3:GetBucketLocation"],
+                                resources=[
+                                    "arn:aws:s3:::dlz-finops-*",
+                                    "arn:aws:s3:::dlz-finops-*/*",
+                                ],
+                            ),
+                            # Read DLZ-published SSM parameters (FinOps + Identity Center)
+                            PolicyStatement(
+                                sid="DlzSsmRead",
+                                effect=Effect.ALLOW,
+                                actions=["ssm:GetParameter", "ssm:GetParameters", "ssm:GetParametersByPath"],
+                                resources=["arn:aws:ssm:*:*:parameter/dlz/*"],
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+
+            access_groups=[
+                # Admin tier — at least one is required by the QuickSight signup form.
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="dlz-finops-admins-pro",
+                    description="QuickSight Admin Pro — administers QuickSight and uses Amazon Q in QuickSight",
+                    permission_set_name="FinOpsQuickSightConsole",
+                    account_names=["finOps"],
+                    user_names=[],
+                ),
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="dlz-finops-admins",
+                    description="QuickSight Admin — manages subscription, SPICE, namespaces, and user roles",
+                    permission_set_name="FinOpsQuickSightConsole",
+                    account_names=["finOps"],
+                    user_names=["finops-lead@example.com"],
+                ),
+
+                # Author tier — optional; builds dashboards, refreshes SPICE.
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="dlz-finops-authors-pro",
+                    description="QuickSight Author Pro — builds dashboards and uses Amazon Q in QuickSight",
+                    permission_set_name="FinOpsQuickSightConsole",
+                    account_names=["finOps"],
+                    user_names=[],
+                ),
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="dlz-finops-authors",
+                    description="QuickSight Author — builds analyses and dashboards, schedules SPICE refreshes",
+                    permission_set_name="FinOpsQuickSightConsole",
+                    account_names=["finOps"],
+                    user_names=["analyst@example.com"],
+                ),
+
+                # Reader tier — optional; consumes dashboards only. The permission set
+                # is effectively unused for readers since they live entirely in the
+                # QuickSight UI, but DLZ requires `permission_set_name` to be set.
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="dlz-finops-readers-pro",
+                    description="QuickSight Reader Pro — consumes dashboards and uses Amazon Q in QuickSight",
+                    permission_set_name="FinOpsQuickSightConsole",
+                    account_names=["finOps"],
+                    user_names=[],
+                ),
+                dlz.IamIdentityCenterAccessGroupProps(
+                    name="dlz-finops-readers",
+                    description="QuickSight Reader — consumes shared dashboards and subscribes to email reports",
+                    permission_set_name="FinOpsQuickSightConsole",
+                    account_names=["finOps"],
+                    user_names=["viewer@example.com"],
+                ),
+            ],
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+Group-to-slot mapping for the signup form:
+
+| Group name (paste into QuickSight signup) | QuickSight slot | Role |
+|---|---|---|
+| `dlz-finops-admins-pro`  | Admin Pro (Enterprise)    | Admin + Amazon Q. |
+| `dlz-finops-admins`      | Admin                     | Required — at least one Admin group must be set. |
+| `dlz-finops-authors-pro` | Author Pro (Enterprise)   | Author + Q. |
+| `dlz-finops-authors`     | Author                    | Builds dashboards, owns SPICE refreshes. |
+| `dlz-finops-readers-pro` | Reader Pro (Professional) | Reader + Q. |
+| `dlz-finops-readers`     | Reader                    | Consumes dashboards. |
+
+Things worth knowing about this shape:
+
+- **DLZ access groups require `permissionSetName` and `accountNames`.**
+  Identity Center groups in DLZ are always tied to at least one AWS
+  account + permission set, so "identity-only" groups aren't possible
+  today. The pragmatic workaround above is the `FinOpsQuickSightConsole`
+  set scoped to the FinOps account — narrow enough that handing it to
+  Readers is harmless, broad enough that Admins/Authors can debug Athena
+  or Glue from the console if QuickSight refuses.
+- **The permission set lands only where access groups send it.** A
+  permission set is inert until an access group references it with an
+  `accountNames` list — that's what creates the `AWS::SSO::Assignment`
+  resources. With every group above using `accountNames: ['finOps']`,
+  `FinOpsQuickSightConsole` is delivered only to the FinOps account, not
+  to `root` / `log` / `audit` / workloads. `allowedAccountNames: ['finOps']`
+  on the permission set adds a synth-time guard: if anyone later writes a
+  group that would land this permission set in a different account, the
+  build fails with `Permission set "FinOpsQuickSightConsole" is restricted
+  to [finOps], but group "..." would assign it to disallowed account(s)`.
+- **Permission set ≠ QuickSight permissions.** The permission set only
+  governs AWS Console access in the FinOps account when a user assumes
+  the SSO role. QuickSight access is controlled by the QuickSight role
+  membership (`ADMIN`, `AUTHOR`, `READER`, or their `_PRO` variants) you
+  map at signup, plus the S3/Athena grants on the QuickSight service
+  role from Step 2. Use `AdministratorAccess` here only if you also want
+  these users to administer the FinOps AWS account — for QuickSight-only
+  users you don't.
+- **Empty `userNames: []` is fine.** The group still gets created; add
+  members later in Identity Center or via a follow-up DLZ deploy. For
+  groups you don't plan to use during evaluation, just omit the entry
+  entirely — only create what you'll actually paste into the form.
+- **The strings you paste into QuickSight are these group display names
+  verbatim** (`dlz-finops-admins`, not the group ID). QuickSight resolves
+  them against Identity Center.
+
+Once DLZ has deployed the groups (see the callout at the top of this page),
+they show up in the QuickSight signup form. The console flow to map them to
+roles:
+
+1. In QuickSight: user icon → **Manage QuickSight** → **Manage users**.
+2. **Assign users and groups**. Pick the Identity Center group(s).
+3. For each group, set the role (`Admin` / `Author` / `Reader`, or the
+   Pro variant if you've enabled Q).
+4. Save.
+
+The same operation as a CLI call, for reference:
+
+```bash
+# Look up the Identity Center group ID
+GROUP_ID=$(aws identitystore list-groups \
+  --identity-store-id "$IDENTITY_STORE_ID" \
+  --query "Groups[?DisplayName=='dlz-finops-authors'].GroupId" \
+  --output text --region "$REGION")
+
+# Assign that group to the AUTHOR role in the default namespace
+aws quicksight create-role-membership \
+  --aws-account-id "$ACCOUNT" \
+  --namespace default \
+  --role AUTHOR \
+  --member-name "$GROUP_ID" \
+  --region "$REGION"
+```
+
+The underlying CloudFormation resource is
+[`AWS::QuickSight::RoleMembership`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-quicksight-rolemembership.html),
+which takes the same `(AwsAccountId, Namespace, Role, MemberName)`
+tuple — relevant if DLZ ever wires this up natively (see below).
+
+Group membership changes in Identity Center propagate to QuickSight
+automatically. Add or remove a person from `dlz-finops-authors` in
+Identity Center and their QuickSight access follows on the next sign-in.
+
+### If you chose Role Based Federation or QuickSight-managed users
+
+The console flow is the same — **Manage users** → **Invite users** —
+but you provide email addresses and QuickSight either sends invitations
+or maps to your federation. Refer to the
+[AWS docs on QuickSight user management](https://docs.aws.amazon.com/quicksight/latest/user/managing-users-enterprise.html)
+for the specifics. The DLZ integration sketch below assumes Identity
+Center; the other modes don't expose group-level role assignment.
+
+## Step 4 — Verify everything before deploying CID
+
+Reusing the variables from the discovery block:
+
+```bash
+# 1. QuickSight subscription exists
+aws quicksight describe-account-subscription \
+  --aws-account-id "$ACCOUNT" --region "$REGION"
+
+# 2. At least one Author identity is registered
+aws quicksight list-users \
+  --aws-account-id "$ACCOUNT" --namespace default --region "$REGION" \
+  --query "UserList[?Role=='ADMIN' || Role=='AUTHOR'].[UserName,Role]" --output table
+
+# 3. QuickSight can reach the DLZ Glue database via the DLZ workgroup
+aws athena start-query-execution \
+  --query-string "SELECT 1" \
+  --work-group "$WG" \
+  --query-execution-context "Database=$DB" \
+  --region "$REGION"
+```
+
+If all three succeed, you're ready to deploy CID with `cid-cmd`. The same
+`$DB`, `$WG`, `$RESULTS` variables feed straight into the
+[CID deployment commands](/components/finops/cid-dashboards#deploying-cid).
+
+## Tips
+
+**Match QuickSight Author identity to the `--quicksight-user` you pass to
+`cid-cmd`.** The CLI uses that identity to own datasets and dashboards. If
+the user doesn't exist or isn't an Author, dashboard deployment fails with
+an opaque permission error.
+
+**Pre-size SPICE if you have a large CUR.** Loading CUR data into SPICE the
+first time can take 30–60 minutes. The Author's bundled allowance fills
+fast — bump SPICE capacity in **Manage QuickSight** → **SPICE capacity**
+before the first refresh if you know the data is bigger than a few GB.
+
+**Disable auto-user-creation** if you're on Identity Center.
+**Manage QuickSight** → **Single sign-on (SSO)** → toggle off
+"Allow new users to be created on first sign-in". Stops people accidentally
+spinning up QuickSight-native users that bypass your SSO.
+
+**Athena workgroup gotcha.** The DLZ workgroup (whatever name `$WG`
+resolves to — `dlz-finops` by default) has
+`EnforceWorkGroupConfiguration: true`, so QuickSight datasets must
+explicitly target it instead of the default workgroup. `cid-cmd` does this
+for you when you pass `--athena-workgroup "$WG"`; if you create a dataset
+manually, set the workgroup at dataset creation.
+
+## Tearing it down
+
+If you ever want to remove QuickSight from the FinOps account:
+
+1. Delete all dashboards, analyses, and datasets through the console (or
+   `aws quicksight delete-dashboard` etc.).
+2. **Manage QuickSight** → **Account settings** → **Unsubscribe**.
+
+Unsubscribing stops the per-user billing but doesn't touch the underlying
+S3 / Glue / Athena resources DLZ manages — those keep running.

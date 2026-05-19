@@ -1,0 +1,74 @@
+---
+title: FinOps Account Tags
+description: Override the default tags applied to the FinOps account stack
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+`finOps.accountTags` controls the values DLZ stamps on every resource in the
+FinOps stack (the dedicated `org.ous.sharedServices.accounts.finOps` account).
+The defaults treat the account as production-grade DLZ infrastructure. Override
+them when your operator taxonomy differs.
+
+These overrides apply only to the FinOps account stack. They don't change the
+App-level mandatory tags, the per-account `DLzAccount.costCenter` / `.domain`
+values, or the tag-policy allowed-values list.
+
+## Defaults
+
+| Tag | Default | Notes |
+|---|---|---|
+| `Owner` | `infra` | Matches the App-level default |
+| `Project` | `dlz` | Matches the App-level default |
+| `Environment` | `production` | From `DlzAccountType.PRODUCTION`. The FinOps account holds production-grade billing data even in a sandbox deployment |
+| `CostCenter` | `dlz` | Matches the App-level default |
+| `Domain` | `foundation` | The FinOps account is foundation, not platform or workload |
+
+If `Environment` is in your `mandatoryTags.environment` allowed-values list,
+make sure `production` (or whatever you set here) is included — otherwise
+synth fails on tag-policy validation.
+
+## Overriding
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    finOps: {
+      accountTags: {
+        owner: 'finops-team',
+        project: 'acme-platform',
+        environment: 'prod',
+        costCenter: 'finance',
+        domain: 'finops',
+      },
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    fin_ops=dlz.DlzFinOpsProps(
+        account_tags=dlz.DlzFinOpsAccountTags(
+            owner="finops-team",
+            project="acme-platform",
+            environment="prod",
+            cost_center="finance",
+            domain="finops",
+        ),
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+Every field is optional — omit the ones you're happy with and DLZ uses the
+default for that tag only.
+
+## When to override
+
+- Your operator taxonomy uses `prod` / `staging` / `dev` instead of
+  `production` / `staging` / `develop` — override `environment` to match.
+- You charge the FinOps account to a finance cost center, not the platform
+  team — override `costCenter`.
+- You distinguish FinOps from foundation in your domain taxonomy — override
+  `domain`.
+
+If you don't have an opinion on any of these, leave `accountTags` out
+entirely. The defaults are safe.

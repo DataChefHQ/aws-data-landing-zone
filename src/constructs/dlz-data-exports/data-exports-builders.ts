@@ -116,15 +116,10 @@ function buildFocus12Properties(entry: DlzFocus12Export): Record<string, string>
 
 function buildCorProperties(entry: DlzCorExport): Record<string, string> {
   const cfg = entry.config ?? {};
-  const props: Record<string, string> = {};
-  if (cfg.includeAllRecommendations !== undefined) {
-    props.INCLUDE_ALL_RECOMMENDATIONS = boolStr(cfg.includeAllRecommendations);
-  }
-  if (cfg.filter) {
-    // BCM accepts FILTER only as a JSON-encoded string.
-    props.FILTER = JSON.stringify(cfg.filter);
-  }
-  return props;
+  return {
+    INCLUDE_ALL_RECOMMENDATIONS: boolStr(cfg.includeAllRecommendations ?? false),
+    FILTER: cfg.filter ? JSON.stringify(cfg.filter) : '{}',
+  };
 }
 
 function boolStr(v: boolean): string {

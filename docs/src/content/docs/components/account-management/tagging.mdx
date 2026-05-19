@@ -25,14 +25,18 @@ to the resources.
 ## Default Mandatory Tags
 
 The mandatory tags all begin with a capital letter, but the underlying code property is lowercase. The mandatory tags are:
-- `Owner` - Identifies the team or individual responsible for the resource.
-- `Project` - Specifies the project to which the resource belongs.
-- `Environment` - Defines the environment of the resource, such as `development`, `staging`, or `production`.
+- `Owner` — Identifies the team or individual responsible for the resource.
+- `Project` — Specifies the project to which the resource belongs.
+- `Environment` — Defines the environment of the resource, such as `development`, `staging`, or `production`.
+- `CostCenter` — Used by FinOps tooling for chargeback / showback.
+- `Domain` — Data-platform domain marker. Foundation enforces presence only; the platform overlay may later constrain values to `raw` / `curated` / `serving` / `inference`.
 
-The DLZ construct will automatically apply the following tags to all resources it creates:
+The DLZ construct automatically applies these defaults to its own resources:
 - `Owner`: `infra`
 - `Project`: `dlz`
 - `Environment`: `dlz`
+- `CostCenter`: `dlz`
+- `Domain`: `foundation`
 
 These tag values can be customized by providing an array of values for each tag in `mandatoryTags`.
 Note that while the code property is lowercase, the tags created will follow the capitalized format outlined above.
@@ -57,6 +61,8 @@ Instead, we include all `:*` actions and focus on "major" services to ensure the
         owner: [],
         project: undefined,
         environment: ['development', 'staging', 'production'],
+        costCenter: [],
+        domain: ['raw', 'curated', 'serving', 'inference'],
       },
      ...
     });
@@ -73,6 +79,8 @@ Instead, we include all `:*` actions and focus on "major" services to ensure the
             "owner": None,
             "project": dlz.ANY_TAG_VALUE,
             "environment": ["development", "staging", "production"],
+            "cost_center": None,
+            "domain": ["raw", "curated", "serving", "inference"],
         },
         ...
     )
@@ -125,9 +133,33 @@ property.
 
 ## Activate Cost Allocation Tags
 
-To activate Cost Allocation Tags, you need to either locally run the `configureCostAllocationTags` script, as
-outlined in [Scripts and Commands](/reference/scripts-commands), or enable them through the AWS Management Console.
-This step is essential for utilizing tags in AWS Cost Explorer and applying them as filters when setting up AWS Budgets.
+When `finOps.dataExports` is configured (with `activateCostAllocationTags !== false`,
+which is the default), DLZ auto-activates every mandatory tag, plus every
+`additionalMandatoryTags` entry, as a cost-allocation tag. A custom resource
+Lambda calls `ce:UpdateCostAllocationTagsStatus` on your behalf, so you don't
+need to run a script or click through the console.
+
+In CUR and the downstream Glue tables they appear as columns prefixed with
+`tag_`, lowercased:
+
+| Mandatory tag | Column in CUR / Glue |
+|---|---|
+| `Owner` | `tag_owner` |
+| `Project` | `tag_project` |
+| `Environment` | `tag_environment` |
+| `CostCenter` | `tag_cost_center` |
+| `Domain` | `tag_domain` |
+
+These are the canonical chargeback / showback dimensions DLZ uses everywhere:
+[budgets](/components/account-management/budgets), [account budgets](/components/finops/account-budgets),
+[cost anomaly detection](/components/finops/cost-anomaly-detection), and
+[CID dashboards](/components/finops/cid-dashboards). When `cid-cmd`
+prompts for which tags to load into datasets, these are the five to pick.
+
+If you do **not** configure `finOps.dataExports`, fall back to the
+[`configureCostAllocationTags` script](/reference/scripts-commands) or
+activate them through the AWS Management Console. They need to be active
+before CUR will populate the `tag_*` columns.
 
 ## API References
 - [MandatoryTags](/reference/api#mandatorytags)

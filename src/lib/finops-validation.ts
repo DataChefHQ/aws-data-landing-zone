@@ -9,7 +9,7 @@ import {
 import { DataLandingZoneProps } from '../data-landing-zone-types';
 import { Logger } from './logger';
 
-/** Pre-grouping props moved under `finOps`; TS can't catch this for `as any` callers. */
+/** Catches the pre-grouping shape on `as any` callers (TS rejects the typed shape). */
 export function validateLegacyRootFinOpsProps(props: DataLandingZoneProps): void {
   const legacy = props as unknown as Record<string, unknown>;
   const moved: string[] = [];
@@ -106,7 +106,7 @@ function validateCurExports(cur: DlzDataExportsProps): void {
 
     const exportName = entry.exportName ?? deriveDefaultExportName(entryId);
     const destinationPrefix = entry.destinationPrefix ?? DLZ_DATA_EXPORTS_DEFAULTS.destinationPrefix;
-    const glueTableName = entry.glueTableName ?? deriveDefaultGlueTableName(entryId);
+    const glueTableName = entry.glueTableName ?? deriveDefaultGlueTableName(exportName);
     const dataPath = buildDataPath(destinationPrefix, exportName);
 
     const priorExportName = seenExportNames.get(exportName);
@@ -170,7 +170,7 @@ function rejectIncompatibleManualDiscount(entryId: string, entry: DlzDataExportE
   if (!cfg?.includeManualDiscountCompatibility) return;
   const cols = cfg.queryColumns;
   if (!cols) return;
-  // The flag removes `discount` / `discount_total_discount` from the schema.
+  // The flag drops these from the schema; projecting them is a synth-time error.
   const forbidden = ['discount', 'discount_total_discount'];
   const offenders = cols.filter(c => forbidden.includes(c));
   if (offenders.length > 0) {

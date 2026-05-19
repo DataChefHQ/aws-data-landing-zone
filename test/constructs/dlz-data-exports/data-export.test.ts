@@ -174,7 +174,7 @@ describe('DlzDataExport — FOCUS_1_2', () => {
 });
 
 describe('DlzDataExport — COST_OPTIMIZATION_RECOMMENDATIONS', () => {
-  test('uses COST_OPTIMIZATION_RECOMMENDATIONS FROM and no defaulted TableConfigurations', () => {
+  test('uses COST_OPTIMIZATION_RECOMMENDATIONS FROM and emits both required TableProperties', () => {
     const t = synth({
       ...sharedBucketProps,
       entryId: 'cor',
@@ -182,7 +182,10 @@ describe('DlzDataExport — COST_OPTIMIZATION_RECOMMENDATIONS', () => {
     });
     const e = findExport(t);
     expect(e.QueryStatement).toMatch(/FROM COST_OPTIMIZATION_RECOMMENDATIONS$/);
-    expect(JSON.parse(e.TableConfigurations).COST_OPTIMIZATION_RECOMMENDATIONS).toEqual({});
+    expect(JSON.parse(e.TableConfigurations).COST_OPTIMIZATION_RECOMMENDATIONS).toEqual({
+      INCLUDE_ALL_RECOMMENDATIONS: 'FALSE',
+      FILTER: '{}',
+    });
   });
 
   test('emits INCLUDE_ALL_RECOMMENDATIONS when set', () => {

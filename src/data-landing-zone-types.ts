@@ -222,21 +222,12 @@ export interface DLzManagementAccount {
 }
 
 /**
- * FinOps account record. Extends `DLzManagementAccount` with FinOps-specific knobs.
- *
- * The auto-attached `ScpFinOpsAccountBaseline` SCP applies regardless. Use
- * `scpStatements` to layer additional, deployment-specific SCP statements on top
- * (additive only — composes with the baseline rather than replacing it).
+ * Dedicated FinOps account. `ScpFinOpsAccountBaseline` is auto-attached; `scpStatements`
+ * layers additional Deny rules on top (additive only).
  */
 export interface DLzFinOpsAccount extends DLzManagementAccount {
   /**
-   * Additional per-account SCP statements layered on top of the auto-attached
-   * `ScpFinOpsAccountBaseline`. Additive only.
-   *
-   * Use this to add deployment-specific deny rules, or to add back specific actions
-   * the baseline denies that a particular deployment needs (e.g. enabling Lambda for
-   * a small data-prep workflow).
-   *
+   * Extra per-account SCP statements appended to `ScpFinOpsAccountBaseline`.
    * @default - no additional statements
    */
   readonly scpStatements?: PolicyStatement[];
@@ -525,26 +516,20 @@ export interface DLzAccount {
   readonly scpStatements?: PolicyStatement[];
 
   /**
-   * Cost center identifier for this account. Populates the `CostCenter` tag for resources
-   * tagged via `Tags.of()` and feeds `DlzAccountBudgets` cost-center roll-ups.
-   *
-   * Part of FinOps Layer 2 (Attribution).
+   * Cost center identifier. Populates the `CostCenter` tag and feeds `DlzAccountBudgets`
+   * cost-center roll-ups.
    */
   readonly costCenter?: string;
 
   /**
-   * Data domain for this account. Populates the `Domain` tag.
-   *
-   * Foundation does not enforce values; the data platform overlay may constrain to data-lake domains.
-   * Part of FinOps Layer 2 (Attribution).
+   * Data domain. Populates the `Domain` tag. Foundation enforces presence only; the
+   * platform overlay may later constrain values.
    */
   readonly domain?: 'raw' | 'curated' | 'serving' | 'inference';
 
   /**
-   * Monthly budget cap in USD for this account. Consumed by `DlzAccountBudgets` to create
-   * a per-account `DlzBudget` filtered to this account's `LinkedAccount`.
-   *
-   * Part of FinOps Layer 3 (Guardrails).
+   * Monthly budget cap in USD. `DlzAccountBudgets` creates a `DlzBudget` filtered to
+   * this account's `LinkedAccount`.
    */
   readonly monthlyBudget?: number;
 }
@@ -585,25 +570,16 @@ export interface OrgOuSuspended {
 }
 
 export interface OrgOuSharedServicesAccounts {
-  /**
-   * Dedicated FinOps account for CUR cost-data delivery and isolated cost-data read access.
-   * Optional — set to enable FinOps capabilities (e.g. `cur`).
-   */
+  /** Dedicated FinOps account hosting the BCM Data Exports bucket, Glue catalog, and Athena workgroup. */
   readonly finOps?: DLzFinOpsAccount;
 }
 
 /**
- * Shared Services OU — a parent for accounts that exist to serve the wider organization
- * but are not themselves workloads, security, or governance baselines (FinOps today,
- * additional shared accounts in the future).
- *
- * The OU is optional — DLZ deploys without it. Provision it when you need any of its
- * member capabilities (e.g. CUR cost-data delivery via the FinOps account).
- *
- * Constructs that need a specific account here (e.g. CUR data plane → FinOps account) will
- * fail at synth with an actionable error if they are configured but the corresponding
- * account is absent. Anomaly detection and account budgets do NOT require this OU — they
- * only use the management account.
+ * Shared Services OU. Optional parent for accounts that serve the wider organization but
+ * are not themselves workloads, security, or governance baselines. Constructs that need a
+ * specific account here (e.g. the CUR data plane needs the FinOps account) fail at synth
+ * with an actionable error when the account is absent. Anomaly detection and account
+ * budgets don't need this OU — they only use the management account.
  */
 export interface OrgOuSharedServices {
   readonly ouId: string;
@@ -615,9 +591,8 @@ export interface OrgOus {
   readonly workloads: OrgOuWorkloads;
   readonly suspended: OrgOuSuspended;
   /**
-   * Optional Shared Services OU. Set to enable shared-services capabilities such as
-   * FinOps cost-data delivery (CUR) via the dedicated FinOps account.
-   * @default - not configured; shared-services capabilities (e.g. CUR) cannot be enabled
+   * Shared Services OU. Required to enable BCM Data Exports (`finOps.dataExports`).
+   * @default - not configured
    */
   readonly sharedServices?: OrgOuSharedServices;
 }
@@ -637,40 +612,19 @@ export interface DLzOrganization {
   readonly ous: OrgOus;
 }
 
+/**
+ * Allowed values for each mandatory tag. An empty array or `undefined` enforces tag
+ * presence only; a non-empty list restricts the value to entries in the list.
+ */
 export interface MandatoryTags {
-  /**
-   * The values of the mandatory `Owner` tag that all resources must have. Specifying an empty array or undefined
-   * still enforces the tag presence but does not enforce the value.
-   */
   readonly owner: string[] | undefined;
-
-  /**
-   * The values of the mandatory `Project` tag that all resources must have. Specifying an empty array or undefined
-   * still enforces the tag presence but does not enforce the value.
-   */
   readonly project: string[] | undefined;
-
-  /**
-   * The values of the mandatory `Environment` tag that all resources must have. Specifying an empty array or undefined
-   * still enforces the tag presence but does not enforce the value.
-   */
   readonly environment: string[] | undefined;
-
-  /**
-   * The values of the mandatory `CostCenter` tag that all resources must have. Specifying an empty array or undefined
-   * still enforces the tag presence but does not enforce the value.
-   *
-   * Used by FinOps tooling for chargeback / showback. Part of FinOps Layer 2 (Attribution).
-   */
+  /** Used by FinOps tooling for chargeback / showback. */
   readonly costCenter: string[] | undefined;
-
   /**
-   * The values of the mandatory `Domain` tag that all resources must have. Specifying an empty array or undefined
-   * still enforces the tag presence but does not enforce the value.
-   *
-   * Foundation enforces presence only. The data platform overlay may later constrain values to
+   * Foundation enforces presence only. The platform overlay may later constrain values to
    * `['raw', 'curated', 'serving', 'inference']` via a value-restricted tag policy.
-   * Part of FinOps Layer 2 (Attribution).
    */
   readonly domain: string[] | undefined;
 }
@@ -868,39 +822,21 @@ export interface DataLandingZoneProps {
   readonly scpStatementsByAccountType?: ScpStatementsByAccountType;
 
   /**
-   * List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort.
+   * Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment,
+   * CostCenter, Domain). Tag policy + SCP + an AWS Config rule enforce presence; tag
+   * support is best-effort because not every AWS resource accepts tags.
    *
-   * Mandatory tags are defined in Defaults.mandatoryTags() which are:
-   * - Owner, the team responsible for the resource
-   * - Project, the project the resource is part of
-   * - Environment, the environment the resource is part of
-   * - CostCenter, the finance cost center for chargeback (FinOps Layer 2)
-   * - Domain, the data domain — foundation enforces presence; platform overlay may constrain values
-   *
-   * It creates:
-   * 1. A tag policy in the organization
-   * 2. An SCP on the organization that all CFN stacks must have these tags when created
-   * 3. An AWS Config rule that checks for these tags on all CFN stacks and resources
-   *
-   * For all stacks created by DLZ the following tags are applied:
-   * - Owner: infra
-   * - Project: dlz
-   * - Environment: dlz
-   * - CostCenter: dlz
-   * - Domain: foundation
+   * DLZ-created stacks are tagged Owner=infra, Project=dlz, Environment=dlz, CostCenter=dlz,
+   * Domain=foundation.
    *
    * @default Defaults.mandatoryTags()
    */
   readonly additionalMandatoryTags?: DlzTag[];
 
   /**
-   * The values of the mandatory tags that all resources must have.
-   * The following values are already specified and used by the DLZ constructs
-   * - Owner: [infra]
-   * - Project: [dlz]
-   * - Environment: [dlz]
-   * - CostCenter: [dlz]
-   * - Domain: [foundation]
+   * Allowed values for the five baseline mandatory tags. DLZ resources use Owner=infra,
+   * Project=dlz, Environment=dlz, CostCenter=dlz, Domain=foundation — leave those in the
+   * allowed-values lists when overriding.
    */
   readonly mandatoryTags: MandatoryTags;
 
@@ -947,15 +883,8 @@ export interface DataLandingZoneProps {
   readonly network?: Network;
 
   /**
-   * FinOps capabilities. Groups all cost-management features:
-   *
-   * - `budgets` — org/account-wide budget alerts (always-on root budget set).
-   * - `accountBudgets` — per-account / per-cost-center budgets composed over workload accounts.
-   * - `costAnomalyDetection` — Cost Anomaly Detection monitors + subscriptions.
-   * - `dataExports` — BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon Emissions) into the dedicated FinOps account.
-   *
-   * `dataExports` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
-   * capabilities are independent of the Shared Services OU and only use the management
+   * Cost-management capabilities. Each member is independently optional. `dataExports`
+   * requires `org.ous.sharedServices.accounts.finOps`; the rest only need the management
    * account.
    *
    * @default - no FinOps capabilities enabled
@@ -963,55 +892,37 @@ export interface DataLandingZoneProps {
   readonly finOps?: DlzFinOpsProps;
 }
 
-/**
- * FinOps capability bundle. Each member is independently optional; provide only what the
- * deployment needs.
- */
 export interface DlzFinOpsProps {
-  /**
-   * Org/account-wide budget alerts. Provisions `DlzBudget` entries in the management
-   * account.
-   */
+  /** Tag-scoped org/account-wide budget alerts in the management account. */
   readonly budgets?: DlzBudgetProps[];
 
   /**
-   * Per-account / per-cost-center budgets. Composes the existing `DlzBudget` primitive,
-   * iterating workload accounts and creating a budget for each that sets `monthlyBudget`.
-   *
-   * Independent of the Shared Services OU — uses only the management account.
+   * Per-account and (optional) per-cost-center roll-up budgets. Iterates workload accounts
+   * with `monthlyBudget` set. Management account only.
    */
   readonly accountBudgets?: DlzAccountBudgetsProps;
 
   /**
-   * AWS Cost Anomaly Detection. Provisions monitors + subscriptions in the management
-   * account. Reuses the existing `budgetSnsCache` so anomaly notifications and budget
-   * alerts can share an SNS topic per subscriber set.
-   *
-   * Independent of the Shared Services OU — uses only the management account.
+   * Cost Anomaly Detection monitors + subscriptions. Reuses `budgetSnsCache` so anomaly
+   * alerts and budgets can share an SNS topic. Management account only.
    */
   readonly costAnomalyDetection?: DlzCostAnomalyDetectionProps;
 
   /**
-   * BCM Data Exports — CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations,
-   * and Carbon Emissions delivery into a dedicated FinOps account.
-   *
-   * Requires `org.ous.sharedServices.accounts.finOps` to be configured.
-   * Validation fails fast at synth otherwise.
+   * BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon
+   * Emissions) into the dedicated FinOps account. Synth fails fast if the FinOps account
+   * is not configured.
    */
   readonly dataExports?: DlzDataExportsProps;
 
   /**
-   * Override the tag values applied by the FinOps stack to its own resources. Defaults
-   * categorize the FinOps account as production-grade DLZ infrastructure; override when
-   * the operator's taxonomy differs.
+   * Tag-value overrides for the FinOps account stack. Defaults treat the account as
+   * production-grade DLZ infrastructure; override when the operator's taxonomy differs.
    */
   readonly accountTags?: DlzFinOpsAccountTags;
 }
 
-/**
- * Operator-configurable tag overrides for the FinOps account stack. Defaults applied
- * when omitted.
- */
+/** Per-tag overrides for the FinOps account stack. Omitted fields fall back to the default. */
 export interface DlzFinOpsAccountTags {
   /** @default 'infra' */
   readonly owner?: string;

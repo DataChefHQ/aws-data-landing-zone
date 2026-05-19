@@ -116,11 +116,9 @@ export interface DlzDataExportsAthenaConfig {
   readonly engineVersion?: 2 | 3;
   readonly publishCloudWatchMetrics?: boolean;
   /**
-   * Cascade-delete named queries when the workgroup is deleted (including
-   * the Replace triggered by a workgroup-name change). Default is `true` so
-   * renames stay hands-off. Set `false` only if you save important queries
-   * directly in this workgroup and want to be forced to export them
-   * manually before a rename.
+   * Cascade-delete named queries on workgroup delete (including the Replace from a
+   * workgroup-name change). Default `true` keeps renames hands-off. Set `false` only if
+   * you save important queries directly in this workgroup.
    */
   readonly recursiveDeleteOption?: boolean;
 }
@@ -446,6 +444,6 @@ export function deriveDefaultExportName(id: string): string {
   return `dlz-${id.replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase()}`;
 }
 
-export function deriveDefaultGlueTableName(id: string): string {
-  return `${DLZ_DATA_EXPORTS_DEFAULTS.glueTablePrefix}${id.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase()}`;
+export function deriveDefaultGlueTableName(exportName: string): string {
+  return `${DLZ_DATA_EXPORTS_DEFAULTS.glueTablePrefix}${exportName.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase()}`;
 }

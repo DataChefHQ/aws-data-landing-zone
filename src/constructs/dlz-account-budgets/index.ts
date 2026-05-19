@@ -7,7 +7,7 @@ export * from './account-budgets-types';
 
 /**
  * Per-account budgets (filtered by `LinkedAccount`) and optional per-cost-center
- * roll-up budgets. Composes the `DlzBudget` primitive.
+ * roll-ups. Composes the `DlzBudget` primitive.
  */
 export class DlzAccountBudgets extends Construct {
 

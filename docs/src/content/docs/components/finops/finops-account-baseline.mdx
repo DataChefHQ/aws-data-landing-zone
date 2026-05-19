@@ -14,15 +14,19 @@ and Athena queries. The SCP enforces that scope.
 
 | Category | Examples |
 |---|---|
-| Compute / data services | EC2, RDS, SageMaker, Bedrock, ECS, EKS, EMR, Redshift, OpenSearch, Kinesis, MSK, Step Functions, AppRunner, Lightsail, WorkSpaces, AppStream, Code* |
+| Compute / data services | `ec2:RunInstances` + `ec2:StartInstances`, RDS, SageMaker, Bedrock, ECS, EKS, EMR, Redshift / Redshift Serverless, OpenSearch / ES, Kinesis, Firehose, MSK, Step Functions, AppRunner, Lightsail, WorkSpaces, AppStream, Code* |
 | Network primitives | VPC / IGW / NAT / TGW / VPC peering / Client VPN creation |
-| IAM identity creation | `CreateUser`, `CreateAccessKey`, `CreateLoginProfile` (humans use SSO) |
+| IAM identity creation | `CreateUser`, `CreateAccessKey`, `CreateLoginProfile`, `CreateServiceSpecificCredential` (humans use SSO) |
 | Org integrity | `LeaveOrganization`, `CloseAccount`, disabling CloudTrail / GuardDuty / Macie / Config |
 
 `AWSControlTowerExecution` is exempted everywhere so Control Tower keeps managing the account.
 
-Glue and Athena run on AWS-managed infrastructure — no VPC needed. `ec2:CreateVpcEndpoint`
-is NOT denied, so VPC endpoints to S3/Glue remain possible.
+EC2 is only denied at the *instance launch* level (`RunInstances` / `StartInstances`).
+Describe calls, EBS, and VPC endpoint creation remain available — Glue and Athena don't
+need a VPC, but `ec2:CreateVpcEndpoint` to S3/Glue is still possible if you want it.
+
+**Lambda is intentionally allowed.** CDK custom resources rely on it. Tighten with
+permission boundaries, not SCPs, if you need to lock Lambda down further.
 
 ## Adding more deny statements
 
@@ -70,5 +74,8 @@ baseline `Deny` with an `Allow`.
   </Fragment>
 </DualCode>
 
-To replace the default deny list entirely (e.g. allow Lambda for a small data-prep
-workflow), use `ScpFinOpsAccountBaseline.statements({ deniedServices: [...] })`.
+To replace the default service deny list entirely (e.g. drop `bedrock:*` so the FinOps
+account can call Bedrock for an internal cost-analysis assistant), use
+`ScpFinOpsAccountBaseline.statements({ deniedServices: [...] })`. This only swaps the
+compute / data services list; the network, IAM-identity, and org-integrity statements
+still apply.

@@ -5,26 +5,26 @@ description: Org-level AWS Budgets via finOps.budgets
 import DualCode from '../../../../components/DualCode.astro';
 
 :::tip
-Budgets, Cost Anomaly Detection, CUR, and the FinOps account hardening live under the
-[`finOps`](/components/finops) prop. Per-account / per-cost-center budgets have a
-dedicated page: [Account Budgets](/components/finops/account-budgets).
+Budgets, Cost Anomaly Detection, Data Exports, and the FinOps account hardening live
+under the [`finOps`](/components/finops) prop. Per-account / per-cost-center budgets
+have a dedicated page: [Account Budgets](/components/finops/account-budgets).
 :::
 
-AWS Budgets provides tools to monitor and control costs by setting custom spending thresholds. You can create monthly
-budgets, specifying the budget amount and filtering resources based on their tags.
+`finOps.budgets` creates monthly AWS Budgets in the management account, scoped by tag, with
+SNS notifications.
 
 :::caution
-Tags used for budget filters must be activated as Cost Allocation Tags in your account settings. See
-[Activate Cost Allocation Tags](/components/account-management/tagging#activate-cost-allocation-tags) for details.
+Tags used in budget filters must be activated as Cost Allocation Tags first. See
+[Activate Cost Allocation Tags](/components/account-management/tagging#activate-cost-allocation-tags).
 :::
 
-Budget notifications are sent via Amazon SNS, which can be configured for the following delivery methods:
-- **Email**: Each email address must confirm the notification opt-in the first time it is deployed.
-- **Slack**: Notifications are sent to a designated Slack channel. The Slack workspace must be linked to the Management
-Account. For setup details, see the SOP [AWS Chatbot and Slack Integration](/sop/account-setup#aws-chatbot-and-slack-integration).
+Notifications go through SNS. Two delivery options:
 
-Below is an example of creating a budget for resources tagged with `Owner: backend`. Notifications will be sent to a
-specified Slack channel and email address once the budget exceeds $100.
+- Email — each address confirms the SNS subscription on first deploy.
+- Slack — the workspace must be linked to the management account. See
+  [AWS Chatbot and Slack Integration](/sop/account-setup#aws-chatbot-and-slack-integration).
+
+Example: a $100 budget for resources tagged `Owner: backend`, alerting to Slack and email.
 <DualCode>
   <Fragment slot="ts">
     ```ts
@@ -48,7 +48,7 @@ specified Slack channel and email address once the budget exceeds $100.
             },
             amount: 100,
             subscribers: {
-              slack: [slackBudgetNotifications],
+              slacks: [slackBudgetNotifications],
               emails: ['you@org.com'],
             },
           },
@@ -92,9 +92,9 @@ specified Slack channel and email address once the budget exceeds $100.
 
 ## Reusing the same SNS Topic
 
-Each budget creates a unique SNS topic with the name `${budget.name}-topic`. If multiple budgets share the same
-subscribers, you can use a single SNS topic to reduce the number of resources and subscription confirmations.
-To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
+By default each budget gets its own SNS topic named `${budget.name}-topic`. If several
+budgets share the same subscribers, set `snsTopicName` on `BudgetSubscribers` to point them at
+a single topic — fewer resources, fewer subscription confirmations.
 
 <DualCode>
   <Fragment slot="ts">
@@ -161,12 +161,12 @@ To do this, set the `snsTopicName` property in `BudgetSubscribers`. For example:
 
 ## Defaults
 
-The construct provides two default budgets available via `Defaults.budgets`. These include:
-- **Organizational Budget**: Covers all resources across all AWS accounts.
-- **DLZ Resources Budget**: Tracks resources created by DLZ, filtered by the tags `Owner: 'infra'` and `Project: 'dlz'`.
+`Defaults.budgets(orgTotal, dlzTotal, subscribers)` returns two budgets:
 
-The example below demonstrates creating a $100 budget for the entire organization and a $20 budget for DLZ-managed
-resources. Notifications are sent to the specified Slack channel and email address.
+- An org-wide budget covering every account.
+- A DLZ-resources budget filtered to `Owner: 'infra'` and `Project: 'dlz'`.
+
+Below, a $100 org budget and a $20 DLZ budget, both alerting to the same Slack channel and email.
 <DualCode>
   <Fragment slot="ts">
     ```ts
@@ -184,7 +184,7 @@ resources. Notifications are sent to the specified Slack channel and email addre
       finOps: {
         budgets: [
           ...Defaults.budgets(100, 20, {
-            slack: slackBudgetNotifications,
+            slacks: [slackBudgetNotifications],
             emails: ['you@org.com'],
           }),
         ],
@@ -211,8 +211,10 @@ resources. Notifications are sent to the specified Slack channel and email addre
                     *dlz.Defaults.budgets(
                         100,
                         20,
-                        slack=slack_budget_notifications,
-                        emails=["you@org.com"],
+                        dlz.BudgetSubscribers(
+                            slacks=[slack_budget_notifications],
+                            emails=["you@org.com"],
+                        ),
                     ),
                 ],
             ),

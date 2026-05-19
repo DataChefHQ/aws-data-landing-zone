@@ -1,0 +1,446 @@
+---
+title: Cloud Intelligence Dashboards (CID)
+description: CUDOS, CID, KPI, FOCUS, COR, and Sustainability dashboards on top of DLZ Data Exports — opt-in, not part of core DLZ
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import DualCode from '../../../../components/DualCode.astro';
+
+<Aside type="caution" title="Opt-in extra — not deployed by DLZ">
+DLZ does **not** ship CID dashboards. Visualization is a separate layer with its
+own QuickSight billing, lifecycle, and update cadence. This page covers how to
+deploy on top of what DLZ already provisions; QuickSight itself is set up via
+[QuickSight setup](/components/finops/quicksight-setup).
+</Aside>
+
+## What CID is
+
+[Cloud Intelligence Dashboards](https://catalog.workshops.aws/awscid/) is an AWS
+Solutions Library bundle of QuickSight dashboards (CUDOS, CID, KPI, FOCUS, Cost
+Optimization Hub, Sustainability, etc.) deployed via the `cid-cmd` Python CLI.
+
+## What DLZ provides
+
+With at least a `STANDARD_CUR_2_0` entry in `finOps.dataExports.exports`, DLZ
+provisions everything CID needs:
+
+| What CID needs | What DLZ provisions | SSM parameter |
+|---|---|---|
+| CUR 2.0 Parquet bucket | `dlz-finops-<account>-<region>` | `/dlz/finops/data-bucket-name` |
+| Glue database | `dlz_finops` | `/dlz/finops/glue-database-name` |
+| Glue crawler (daily) | Auto-named | `/dlz/finops/glue-crawler-name` |
+| Athena workgroup | `dlz-finops` | `/dlz/finops/athena-workgroup-name` |
+| Athena results bucket | `dlz-finops-athena-results-<account>-<region>` | `/dlz/finops/athena-results-bucket-name` |
+| Cost-allocation tags activated | 5 mandatory tags ([Tagging](/components/account-management/tagging#activate-cost-allocation-tags)) | auto-activated by data-exports |
+
+Other DLZ exports (FOCUS 1.2, COR, Carbon) appear as additional tables in the
+same Glue database, and they power the FOCUS, COR, and Sustainability dashboards.
+
+## Prerequisites
+
+Complete [QuickSight setup](/components/finops/quicksight-setup) end-to-end
+first: subscribe to Enterprise, grant the QuickSight service role read on the
+data bucket + write on the Athena results bucket, and assign at least one
+Identity Center user to an `Admin` or `Author` group.
+
+## Deploying CID
+
+Assume into the **FinOps account** before running anything below. That's where
+the data and Glue catalog live.
+
+### 1. Load DLZ inputs from SSM
+
+```bash
+export REGION=us-east-1   # whatever finOps.dataExports.destinationRegion is
+
+DB=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/glue-database-name --query Parameter.Value --output text)
+WG=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/athena-workgroup-name --query Parameter.Value --output text)
+RESULTS=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/athena-results-bucket-name --query Parameter.Value --output text)
+CRAWLER=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/glue-crawler-name --query Parameter.Value --output text)
+ACCOUNT=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/finops-account-id --query Parameter.Value --output text)
+```
+
+If your tables haven't been catalogued yet, kick the crawler:
+
+```bash
+aws glue start-crawler --name "$CRAWLER" --region "$REGION"
+```
+
+### 2. Find your QuickSight Author username
+
+`cid-cmd` needs the exact `UserName` field, not the email:
+
+```bash
+aws quicksight list-users \
+  --aws-account-id "$ACCOUNT" --namespace default --region "$REGION" \
+  --query "UserList[?contains(['ADMIN','AUTHOR','ADMIN_PRO','AUTHOR_PRO'], Role)].[UserName,Role,Email]" \
+  --output table
+```
+
+If empty, no Admin/Author has signed in yet. See
+[QuickSight Step 3](/components/finops/quicksight-setup#step-3--add-authors-and-readers).
+
+### 3. Deploy each dashboard
+
+<Aside type="caution" title="Permissions for the operator running cid-cmd">
+`cid-cmd` runs queries with **your** session credentials (not the QuickSight
+service role) and needs to **create Athena views** in the `dlz_finops`
+database. That's how CUDOS' `summary_view`, `resource_view`, `hourly_view`,
+etc. get built. The scoped `FinOpsQuickSightConsole` permission set in
+[QuickSight setup](/components/finops/quicksight-setup#create-the-identity-center-groups-in-dlz-first)
+is read-only and won't be enough. Assume a broader role for this step.
+`AdministratorAccess` works for an eval; for production, set up a dedicated
+`FinOpsCidDeployer` permission set with Athena `StartQueryExecution` +
+Glue `Create/Update/GetTable*` + S3 read on the data bucket + S3 read/write
+on the Athena results bucket.
+</Aside>
+
+```bash
+pip install --upgrade cid-cmd
+
+cid-cmd deploy \
+  --athena-database "$DB" \
+  --athena-workgroup "$WG" \
+  --cur-version 2 \
+  --quicksight-user <YOUR-QUICKSIGHT-USERNAME> \
+  --dashboard-id cudos-v5
+```
+
+Repeat with a different `--dashboard-id` for each additional dashboard.
+
+### Picking which dashboards
+
+Each export in `finOps.dataExports.exports` unlocks a different set:
+
+| `--dashboard-id` | DLZ export it reads | What it shows |
+|---|---|---|
+| `cudos-v5` | `STANDARD_CUR_2_0` | Flagship cost-and-usage overview |
+| `cost_intelligence_dashboard` | `STANDARD_CUR_2_0` | The original CID — broad overview |
+| `kpi_dashboard` | `STANDARD_CUR_2_0` | One-screen exec summary |
+| `focus-dashboard` | `FOCUS_1_2` | FinOps Foundation format view |
+| `cora` | `COST_OPTIMIZATION_RECOMMENDATIONS` | Cost Optimization Recommended Actions |
+| `sustainability-proxy-metrics` | `CARBON_EMISSIONS` | Carbon emissions and sustainability proxy metrics |
+
+Dashboard IDs are validated against the picker output of `cid-cmd 4.4.11`,
+but AWS occasionally renames them — if `cid-cmd deploy --dashboard-id X`
+errors with "unknown dashboard", run it without `--dashboard-id` and read
+the picker for the current name.
+
+`cid-cmd` has no `list` subcommand. IDs occasionally rename across versions, so
+to see the current catalog, either run `cid-cmd deploy` without `--dashboard-id`
+and read the picker, or browse the upstream
+[resources.yaml](https://github.com/aws-samples/aws-cudos-framework-deployment/blob/main/cid/builtin/core/data/resources.yaml).
+
+**Suggested order**, each step validates a different data path:
+
+1. `cudos-v5`: CUR plumbing end-to-end
+2. `kpi_dashboard`: exec view, same data, cheap to add
+3. `sustainability-proxy-metrics`: Carbon export
+4. `cora`: COR export
+5. `focus-dashboard`: newer format, less mature ecosystem
+
+Skip `trends-dashboard`, `compute-optimizer-dashboard`, and
+`ta-organizational-view` initially. They add SPICE load for marginal value
+or need data exports DLZ doesn't currently provision (Compute Optimizer
+recommendations export, Trusted Advisor org rollup).
+
+### Cost-allocation tag selection
+
+`cid-cmd` will prompt for which cost-allocation tags to add to datasets
+("WARNING: this can affect performance"). Pick **only the 5 DLZ mandatory
+tags** — but the column names differ by dashboard, because CUR and FOCUS
+surface tags differently:
+
+- **CUR-based dashboards** (`cudos-v5`, `cost_intelligence_dashboard`,
+  `kpi_dashboard`, `cora`) read the `finops_dlz_standard` table, where AWS
+  auto-lowercases tag keys. Pick:
+  - `tag_owner`
+  - `tag_project`
+  - `tag_environment`
+  - `tag_cost_center`
+  - `tag_domain`
+- **FOCUS-based dashboards** (`focus-dashboard`) read the
+  `finops_dlz_focus_1_2` table, where the original PascalCase is preserved.
+  Pick:
+  - `tag_Owner`
+  - `tag_Project`
+  - `tag_Environment`
+  - `tag_CostCenter`
+  - `tag_Domain`
+
+These are the same physical tags DLZ applies via `mandatoryTags`, surfaced
+through two schemas. The 5 are auto-activated by `dlz-data-exports` and
+used everywhere else in the platform: budgets, anomaly detection,
+chargeback. See [Mandatory Tags](/components/account-management/tagging#default-mandatory-tags)
+for the enforcement story.
+
+If the FOCUS picker also shows lowercase versions (`tag_owner`,
+`tag_project`, etc.), those are from resources tagged with lowercase keys
+directly — not DLZ-applied. Skip them and clean up the underlying
+resources to match the mandatory PascalCase policy. Add other tags only
+if a specific dashboard you need depends on them. It's easier to grow the
+list than to shrink it (rebuilding datasets to drop a tag is annoying).
+
+### Taxonomy fields selection
+
+A separate `cid-cmd` prompt asks which **taxonomy fields** to add as dashboard
+filters and group-by dimensions. The available list also differs between
+CUR-based and FOCUS-based dashboards.
+
+**For CUR-based dashboards** (`cudos-v5`, `kpi_dashboard`, `cora`, etc.) pick:
+
+- `account_id`
+- `account_name`
+- `parent_account_name` *(if you do OU-level rollups; skip otherwise)*
+- `tag_owner`
+- `tag_project`
+- `tag_environment`
+- `tag_cost_center`
+- `tag_domain`
+
+Skip `payer_account_id` (usually a single value, just clutters filters) and
+`parent_account_id` (redundant — `parent_account_name` is the human-readable
+version).
+
+**For `focus-dashboard`** pick (note PascalCase tags, no account columns —
+FOCUS treats those as core columns shown automatically):
+
+- `regionname`
+- `servicecategory`
+- `pricingcategory`
+- `tag_Owner`
+- `tag_Project`
+- `tag_Environment`
+- `tag_CostCenter`
+- `tag_Domain`
+
+Skip `pricingunit` (too granular — GB-hours, requests, etc.) and
+`pricingcurrency` (almost always USD-only).
+
+Both sets are 8 fields — the cap that keeps SPICE pressure manageable while
+covering every chargeback dimension your data supports.
+
+### Single categorization tag
+
+A few dashboards (`sustainability-proxy-metrics`, some ADVANCED ones) ask
+for a single tag to group everything by:
+
+```
+? [tag] Required parameter: tag (Enter tag name that is used to categorize workloads):
+```
+
+Pick `resource_tags['user_project']` — same physical tag as `tag_project`,
+just accessed through the `resource_tags` struct. `Project` is the
+mandatory tag closest to "workload".
+
+For cost-attributed reporting, pick `resource_tags['user_cost_center']`
+instead. Skip `none` unless your tagging is unreliable; the dashboard
+still works without a workload breakdown.
+
+### CID name aliasing for non-CUR dashboards
+
+Several CID dashboards hardcode the source-table name they expect (CID
+was written against AWS's "canonical" Data Exports schema names: `cur2`,
+`coh`, `carbon`, `focus`, etc.). DLZ names tables based on your export
+ID — `finops_dlz_standard`, `finops_dlz_carbon`, etc. — so cid-cmd's
+`information_schema.columns WHERE table_name = 'X'` lookup returns
+empty for non-CUR dashboards and the deploy fails with messages like
+*"prerequisites for the dashboard are not found"*.
+
+The fix is a thin Athena `VIEW` aliasing the DLZ table to the name
+cid-cmd expects. CUDOS/KPI/CID don't need this — cid-cmd auto-discovers
+the CUR table via `--cur-version 2`.
+
+| Dashboard | View name to create | Source DLZ table |
+|---|---|---|
+| `cora` | `coh` | `/dlz/finops/exports/cost-opt-recs/glue-table-name` (verify with `aws glue get-tables`) |
+| `sustainability-proxy-metrics` | `carbon` | `finops_dlz_carbon` (or the value from `/dlz/finops/exports/carbon/glue-table-name`) |
+
+Reuse `$REGION`, `$WG`, `$DB` from the discovery block in
+[QuickSight setup](/components/finops/quicksight-setup#discover-the-values-youll-need)
+or re-export them with `aws ssm get-parameter`.
+
+**Create the `carbon` view (for `sustainability-proxy-metrics`):**
+
+```bash
+aws athena start-query-execution \
+  --region "$REGION" \
+  --work-group "$WG" \
+  --query-execution-context "Database=$DB" \
+  --query-string 'CREATE OR REPLACE VIEW carbon AS SELECT * FROM "finops_dlz_carbon"'
+```
+
+**Create the `coh` view (for `cora`):**
+
+The `coh` view isn't a pure alias. It adds three columns CID's `cora_view`
+selects that BCM's flat COR table doesn't have. The
+[next section](#cora-needs-the-legacy-coh-wrapper-schema) covers why.
+
+```bash
+COR_TABLE=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/exports/cost-opt-recs/glue-table-name \
+  --query Parameter.Value --output text)
+
+# Confirm the underlying table actually exists before aliasing it:
+aws glue get-table --region "$REGION" --database-name "$DB" --name "$COR_TABLE" \
+  --query 'Table.Name' --output text
+
+aws athena start-query-execution --region "$REGION" --work-group "$WG" \
+  --query-execution-context "Database=$DB" \
+  --query-string "CREATE OR REPLACE VIEW coh AS
+    SELECT
+      *,
+      account_id AS source_account_id,
+      'dlz-cost-opt-recs' AS report_name,
+      CAST(NULL AS varchar) AS data
+    FROM \"$COR_TABLE\""
+```
+
+**Verify either view registered as a `VIRTUAL_VIEW`:**
+
+```bash
+aws glue get-table --region "$REGION" --database-name "$DB" --name carbon \
+  --query 'Table.TableType' --output text
+# Expected: VIRTUAL_VIEW
+```
+
+`SELECT *` makes the view drift-resistant for the underlying columns —
+if a crawler re-run adds a column, the view picks it up without re-applying.
+The `coh` view's three synthesized columns (`source_account_id`,
+`report_name`, `data`) are static; the only thing that breaks either view
+is the crawler renaming the *underlying* table, which is rare in steady state.
+
+The alias view lives in the Glue catalog alongside the DLZ-managed
+tables. DLZ doesn't enumerate views inside the database, so a normal
+`cdk deploy` of your DLZ app **will not** touch or delete it. The view
+only goes away if you `cdk destroy` the FinOps stack (which would drop
+the entire `dlz_finops` database, along with every table and view in
+it), or if you explicitly run `DROP VIEW carbon` / `DROP VIEW coh`.
+
+For `cora` specifically: the COR export takes 24–48h for first delivery
+even when its BCM status is `HEALTHY`. Don't create the `coh` view until
+`/dlz/finops/exports/cost-opt-recs/data-path` contains data and the
+crawler has produced the underlying table. See
+[Data Exports troubleshooting](/components/finops/data-exports#troubleshooting)
+for the COR-prerequisites checklist (SLR, COH enrollment, etc.) if it
+takes longer than 48h.
+
+#### CORA needs the legacy COH wrapper schema
+
+CID's `cora` dashboard was written for the original Cost Optimization Hub
+export. Back then each recommendation came wrapped in `source_account_id`,
+`report_name`, `data`, plus a `date` partition. The auto-generated
+`cora_view` still selects all four.
+
+BCM Data Exports' `COST_OPTIMIZATION_RECOMMENDATIONS` is a newer, flatter
+product. It unpacks the recommendation into typed columns up front and
+drops the wrapper. The 25 BCM COR columns are listed in
+[data-exports-types.ts](https://github.com/datachefco/aws-data-landing-zone/blob/main/src/constructs/dlz-data-exports/data-exports-types.ts#L386).
+Three of CID's wrapper columns (`source_account_id`, `report_name`, `data`)
+aren't in that set. Ask BCM for any of them and `CreateExport` rejects it:
+
+```
+ValidationException: The columns in the query provided are not a subset of
+the table COST_OPTIMIZATION_RECOMMENDATIONS: [source_account_id]
+```
+
+`INCLUDE_ALL_RECOMMENDATIONS` doesn't help, it only controls dedup-to-best
+vs include-all-variants. Adding `source_account_id` to `queryColumns` will
+always fail.
+
+Fix it in the `coh` view. Synthesize the three missing columns there:
+
+```bash
+COR_TABLE=$(aws ssm get-parameter --region "$REGION" \
+  --name /dlz/finops/exports/cost-opt-recs/glue-table-name \
+  --query Parameter.Value --output text)
+
+aws athena start-query-execution --region "$REGION" --work-group "$WG" \
+  --query-execution-context "Database=$DB" \
+  --query-string "CREATE OR REPLACE VIEW coh AS
+    SELECT
+      *,
+      account_id AS source_account_id,
+      'dlz-cost-opt-recs' AS report_name,
+      CAST(NULL AS varchar) AS data
+    FROM \"$COR_TABLE\""
+```
+
+- `date` is already in the view through `SELECT *`. It's a Glue partition column.
+- `source_account_id` doubles as `account_id`. COH never really split them in single-payer mode.
+- `report_name` is a label CID puts in dashboard titles.
+- `data` is `NULL` typed as varchar. Every cora visual reads the flat columns; the legacy STRUCT held nothing extra once unpacked.
+
+Re-run `cid-cmd deploy --dashboard-id cora`. New BCM columns still flow
+into the view through `SELECT *`; the three synthesized columns are the
+only fixed bit.
+
+### CFN-template alternative
+
+[`cid-cfn.yml`](https://github.com/aws-solutions-library-samples/cloud-intelligence-dashboards-framework/blob/main/cfn-templates/cid-cfn.yml)
+deploys the same dashboards via CloudFormation. Most teams find `cid-cmd`
+easier; the template is a fit only if you need everything in one stack.
+
+```bash
+aws cloudformation deploy --template-file cid-cfn.yml --stack-name dlz-cudos \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides DatabaseName="$DB" AthenaWorkgroup="$WG" \
+    AthenaQueryResultsBucket="$RESULTS" \
+    QuickSightUser=<YOUR-QUICKSIGHT-USERNAME>
+```
+
+## When CID is the wrong choice
+
+- You already pay for Vantage, Kubecost, or CloudHealth — they read the same
+  CUR. Don't stack QuickSight on top.
+- The org has standardized on Looker, Tableau, Grafana, or Metabase — point
+  them at the DLZ Glue catalog directly.
+- All you need is per-team showback emails — `finOps.budgets` and
+  `finOps.accountBudgets` already cover that.
+- Your CUR is small and Cost Explorer answers your questions — stay there. It's
+  free.
+
+## Update path
+
+Re-run `cid-cmd update` (or redeploy the CFN template) to pick up new
+dashboards, fixed views, and new CUR columns as AWS ships them. DLZ doesn't
+gate this — your CID update cadence is independent of DLZ releases.
+
+## Troubleshooting
+
+Most CID failures are upstream of CID itself. Common causes:
+
+- **No tables in Glue**: manually trigger the crawler:
+  `aws glue start-crawler --name "$CRAWLER" --region "$REGION"`.
+- **Tables exist but are empty**: check the BCM export is actually running;
+  see [Data Exports troubleshooting](/components/finops/data-exports#troubleshooting).
+- **`DataSource creation failed: Unable to verify/create output bucket`**:
+  the QuickSight service role lacks S3 access to the DLZ-named results
+  bucket. The default `AWSQuicksightAthenaAccess` managed policy only
+  grants S3 on `aws-athena-query-results-*`-pattern buckets, which DLZ's
+  bucket doesn't match. Apply
+  [QuickSight Step 2](/components/finops/quicksight-setup#step-2--grant-quicksight-read-access-to-the-finops-data).
+  Verify with:
+  ```bash
+  aws iam list-role-policies --role-name aws-quicksight-service-role-v0
+  # For each policy, check it contains s3:PutObject on the results bucket ARN.
+  ```
+- **`Can't move forward without full list, please manually create datasets`**
+  with prompts like `DataSetId/Arn for summary_view:`: don't enter dataset
+  IDs. The Athena views (`summary_view`, `resource_view`, `hourly_view`,
+  `cur2_view`, etc.) were created successfully. `aws glue get-tables
+  --database-name "$DB"` should show them. The dataset step failed
+  because the **upstream DataSource creation failed**. Scroll back in
+  the `cid-cmd` output for the real error (almost always the "Unable to
+  verify/create output bucket" failure above). Fix that, hit Ctrl-C,
+  delete the broken datasource when prompted, and re-run. The views
+  are already in place, so it'll complete on the second run.
+- **QuickSight can't query**: confirm the service role can use the
+  `dlz-finops` Athena workgroup. The workgroup has
+  `EnforceWorkGroupConfiguration: true`, so consumers must target it
+  explicitly.

@@ -24,14 +24,11 @@ export interface DlzDataExportProps {
 }
 
 /**
- * BCM rejects duplicate export names on Replacement, so the Lambda handler
- * owns the lifecycle and falls back to delete-then-create when UpdateExport
- * can't apply a change in place.
- *
- * The custom-resource provider is shared across every instance; the first
- * construct locks the provider's IAM policy, so we grant every action any of
- * the five export types might need up front (including
- * `sustainability:GetCarbonFootprintSummary` for CARBON_EMISSIONS).
+ * BCM rejects duplicate export names on Replacement, so the Lambda owns the lifecycle
+ * and falls back to delete-then-create when `UpdateExport` can't apply a change in
+ * place. The custom-resource provider is shared across every instance — the first
+ * construct locks the provider's IAM policy, so the policy below grants every action
+ * any export type may need.
  */
 export class DlzDataExport extends Construct {
 
@@ -64,11 +61,9 @@ export class DlzDataExport extends Construct {
     this.resolvedDestinationPrefix = destinationPrefix;
     this.resolvedDataPath = buildDataPath(destinationPrefix, exportName);
 
-    // Keep this CFN logical-id seed stable across class renames —
-    // changing it produces a new Lambda, changes the ServiceToken on
-    // any existing custom resource, and CFN refuses ("Modifying
-    // service token is not allowed"). Rename the wrapping class
-    // freely; this string is internal-only.
+    // Keep this CFN logical-id seed stable across class renames — changing it produces
+    // a new Lambda, changes the ServiceToken on the existing CustomResource, and CFN
+    // refuses ("Modifying service token is not allowed").
     const provider = CustomResourceProvider.getOrCreateProvider(this, 'Custom::DlzDataExport', {
       useCfnResponseWrapper: true,
       codeDirectory: DlzDataExport.fetchExportManagerCodeDirectory(),
@@ -81,15 +76,14 @@ export class DlzDataExport extends Construct {
           'bcm-data-exports:UpdateExport',
           'bcm-data-exports:DeleteExport',
           'bcm-data-exports:GetExport',
-          // CUR 2.0 path goes through the legacy cur: API internally.
+          // CUR 2.0 goes through the legacy `cur:` API internally.
           'cur:PutReportDefinition',
           'cur:ModifyReportDefinition',
           'cur:DeleteReportDefinition',
           'cur:DescribeReportDefinitions',
-          // Carbon Emissions export — BCM validates caller can read sustainability data.
+          // CARBON_EMISSIONS: BCM validates caller can read sustainability data.
           'sustainability:GetCarbonFootprintSummary',
-          // Cost Optimization Recommendations export — BCM validates caller
-          // can read COH data on CreateExport.
+          // COST_OPTIMIZATION_RECOMMENDATIONS: BCM validates caller can read COH data.
           'cost-optimization-hub:ListRecommendations',
           'cost-optimization-hub:GetRecommendation',
           'cost-optimization-hub:GetPreferences',

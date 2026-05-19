@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "0633663a91ee793b2412f8575a9097c5c087f483849c4d5b372665dbbae6dfbf.zip",
+          "S3Key": "0831b6b309e02555d3bef504b9374685bee4049d98a62d3f61f584d23ae8e339.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "4a61ee82170ca86e46f3a12f4755ee13c4085526734257f71a361ba2eb33dce0.zip",
+          "S3Key": "6abfe914b24e4f95cca5d942c0ab9856214ad7c21f66a107497f33ae09375dbe.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -531,6 +531,39 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
+    "admins": {
+      "Properties": {
+        "Description": "Root account admin access",
+        "DisplayName": "admins",
+        "IdentityStoreId": "identity-store-id",
+      },
+      "Type": "AWS::IdentityStore::Group",
+    },
+    "admins882070149987assignment": {
+      "DependsOn": [
+        "admins",
+        "dlzglobaliamicAdministratorAccess",
+      ],
+      "Properties": {
+        "InstanceArn": "sso-instance-arn",
+        "PermissionSetArn": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicAdministratorAccess",
+            "PermissionSetArn",
+          ],
+        },
+        "PrincipalId": {
+          "Fn::GetAtt": [
+            "admins",
+            "GroupId",
+          ],
+        },
+        "PrincipalType": "GROUP",
+        "TargetId": "882070149987",
+        "TargetType": "AWS_ACCOUNT",
+      },
+      "Type": "AWS::SSO::Assignment",
+    },
     "dlzglobaliamicAdministratorAccess": {
       "Properties": {
         "Description": "Provides the AWS managed policy AdministratorAccess as permission set",
@@ -747,6 +780,321 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
         ],
       },
       "Type": "AWS::SSO::PermissionSet",
+    },
+    "limiteds3read": {
+      "Properties": {
+        "Description": "Limited S3 read access",
+        "DisplayName": "limited-s3-read",
+        "IdentityStoreId": "identity-store-id",
+      },
+      "Type": "AWS::IdentityStore::Group",
+    },
+    "limiteds3read882070149987assignment": {
+      "DependsOn": [
+        "dlzglobaliamicinlinepermissionsetreadonlys3",
+        "limiteds3read",
+      ],
+      "Properties": {
+        "InstanceArn": "sso-instance-arn",
+        "PermissionSetArn": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicinlinepermissionsetreadonlys3",
+            "PermissionSetArn",
+          ],
+        },
+        "PrincipalId": {
+          "Fn::GetAtt": [
+            "limiteds3read",
+            "GroupId",
+          ],
+        },
+        "PrincipalType": "GROUP",
+        "TargetId": "882070149987",
+        "TargetType": "AWS_ACCOUNT",
+      },
+      "Type": "AWS::SSO::Assignment",
+    },
+    "project1admins": {
+      "Properties": {
+        "Description": "Admin access to only project 1 accounts",
+        "DisplayName": "project-1-admins",
+        "IdentityStoreId": "identity-store-id",
+      },
+      "Type": "AWS::IdentityStore::Group",
+    },
+    "project1admins234567890123assignment": {
+      "DependsOn": [
+        "dlzglobaliamicAdministratorAccess",
+        "project1admins",
+      ],
+      "Properties": {
+        "InstanceArn": "sso-instance-arn",
+        "PermissionSetArn": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicAdministratorAccess",
+            "PermissionSetArn",
+          ],
+        },
+        "PrincipalId": {
+          "Fn::GetAtt": [
+            "project1admins",
+            "GroupId",
+          ],
+        },
+        "PrincipalType": "GROUP",
+        "TargetId": "234567890123",
+        "TargetType": "AWS_ACCOUNT",
+      },
+      "Type": "AWS::SSO::Assignment",
+    },
+    "project1admins381491899779assignment": {
+      "DependsOn": [
+        "dlzglobaliamicAdministratorAccess",
+        "project1admins",
+      ],
+      "Properties": {
+        "InstanceArn": "sso-instance-arn",
+        "PermissionSetArn": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicAdministratorAccess",
+            "PermissionSetArn",
+          ],
+        },
+        "PrincipalId": {
+          "Fn::GetAtt": [
+            "project1admins",
+            "GroupId",
+          ],
+        },
+        "PrincipalType": "GROUP",
+        "TargetId": "381491899779",
+        "TargetType": "AWS_ACCOUNT",
+      },
+      "Type": "AWS::SSO::Assignment",
+    },
+    "ssmidentitycentergroupadminsid99CF57BB": {
+      "Properties": {
+        "Description": "Identity Center GroupId for admins",
+        "Name": "/dlz/identity-center/groups/admins/id",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "admins",
+            "GroupId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycentergrouplimiteds3readidFD1A5A28": {
+      "Properties": {
+        "Description": "Identity Center GroupId for limited-s3-read",
+        "Name": "/dlz/identity-center/groups/limited-s3-read/id",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "limiteds3read",
+            "GroupId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycentergroupnamesBD9FB6A1": {
+      "Properties": {
+        "Description": "List of Identity Center group display names provisioned by DLZ",
+        "Name": "/dlz/identity-center/group-names",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "StringList",
+        "Value": "admins,project-1-admins,limited-s3-read",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycentergroupproject1adminsid56D9B884": {
+      "Properties": {
+        "Description": "Identity Center GroupId for project-1-admins",
+        "Name": "/dlz/identity-center/groups/project-1-admins/id",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "project1admins",
+            "GroupId",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterinstancearn4111979A": {
+      "Properties": {
+        "Name": "/dlz/identity-center/instance-arn",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": "sso-instance-arn",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterinstanceidBA33BCBA": {
+      "Properties": {
+        "Name": "/dlz/identity-center/instance-id",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": "sso-instance-id",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterpermissionsetAdministratorAccessarn01CBE3C6": {
+      "Properties": {
+        "Description": "Permission set ARN for AdministratorAccess",
+        "Name": "/dlz/identity-center/permission-sets/AdministratorAccess/arn",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicAdministratorAccess",
+            "PermissionSetArn",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterpermissionsetReadOnlyAccessarn1044BFB8": {
+      "Properties": {
+        "Description": "Permission set ARN for ReadOnlyAccess",
+        "Name": "/dlz/identity-center/permission-sets/ReadOnlyAccess/arn",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicReadOnlyAccess",
+            "PermissionSetArn",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterpermissionsetinlinepermissionsetreadonlys3arn636D9413": {
+      "Properties": {
+        "Description": "Permission set ARN for inline-permission-set-read-only-s3",
+        "Name": "/dlz/identity-center/permission-sets/inline-permission-set-read-only-s3/arn",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "dlzglobaliamicinlinepermissionsetreadonlys3",
+            "PermissionSetArn",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterpermissionsetlongerreadonlyarn4BF2DA62": {
+      "Properties": {
+        "Description": "Permission set ARN for longer-read-only",
+        "Name": "/dlz/identity-center/permission-sets/longer-read-only/arn",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "dlzglobaliamiclongerreadonly",
+            "PermissionSetArn",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterpermissionsetnames18D857B8": {
+      "Properties": {
+        "Description": "List of Identity Center permission set names provisioned by DLZ",
+        "Name": "/dlz/identity-center/permission-set-names",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "StringList",
+        "Value": "AdministratorAccess,ReadOnlyAccess,longer-read-only,inline-permission-set-read-only-s3",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "ssmidentitycenterstoreid1D13D4F7": {
+      "Properties": {
+        "Name": "/dlz/identity-center/store-id",
+        "Tags": {
+          "CostCenter": "dlz",
+          "Domain": "foundation",
+          "Environment": "dlz",
+          "Owner": "infra",
+          "Project": "dlz",
+        },
+        "Type": "String",
+        "Value": "identity-store-id",
+      },
+      "Type": "AWS::SSM::Parameter",
     },
   },
   "Rules": {

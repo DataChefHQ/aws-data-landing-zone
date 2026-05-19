@@ -11,8 +11,9 @@ import { BudgetSubscribers } from '../dlz-budget';
 export * from './cost-anomaly-detection-types';
 
 /**
- * Cost Anomaly Detection — one `CfnAnomalyMonitor` + `CfnAnomalySubscription` per
- * configured monitor. Reuses `budgetSnsCache` so anomaly + budget alerts can share an SNS topic.
+ * Cost Anomaly Detection. One `CfnAnomalyMonitor` + `CfnAnomalySubscription` per
+ * configured monitor; reuses `budgetSnsCache` so anomaly and budget alerts can share an
+ * SNS topic.
  */
 export class DlzCostAnomalyDetection extends Construct {
 

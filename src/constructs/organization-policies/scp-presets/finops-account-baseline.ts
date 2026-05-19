@@ -2,27 +2,23 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import { ControlTowerExemption } from './control-tower-exemption';
 
 export interface ScpFinOpsAccountBaselineOptions {
-  /**
-   * Override the default service deny list (defaults to {@link ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES}).
-   */
+  /** Override the default service deny list ({@link ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES}). */
   readonly deniedServices?: string[];
 }
 
 /**
- * Hardening baseline for the dedicated FinOps account. Locks the account to its
- * single purpose (CUR data + Glue catalog + Athena) so it can't drift into a
- * workload account or be abused as a privilege hop.
- *
- * Denies: compute/data services, network primitives, IAM user creation, and
- * org-integrity actions (LeaveOrganization, CloseAccount, disabling CloudTrail /
- * GuardDuty / Macie / Config). `AWSControlTowerExecution` is exempted in every
- * statement so Control Tower keeps managing the account.
+ * Hardening baseline for the dedicated FinOps account. Keeps the account scoped to its
+ * single purpose (CUR data + Glue catalog + Athena) so it can't drift into a workload
+ * account or be abused as a privilege hop. Denies compute/data services, network
+ * primitives, IAM user creation, and org-integrity actions (LeaveOrganization,
+ * CloseAccount, disabling CloudTrail / GuardDuty / Macie / Config).
+ * `AWSControlTowerExecution` is exempted in every statement.
  */
 export class ScpFinOpsAccountBaseline {
 
   /**
-   * Compute / data services denied by default. Lambda is intentionally allowed —
-   * CDK custom resources need it; tighten via permission boundaries, not SCPs.
+   * Compute / data services denied by default. Lambda is intentionally allowed because
+   * CDK custom resources need it — tighten via permission boundaries, not SCPs.
    */
   public static readonly DEFAULT_DENIED_SERVICES: string[] = [
     'ec2:RunInstances',

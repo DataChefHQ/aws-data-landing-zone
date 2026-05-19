@@ -293,6 +293,333 @@ describe('Access groups', () => {
 });
 
 
+describe('Empty userNames', () => {
+  const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
+  const stack = new TestStack(app, {
+    stage,
+    name: { stack: 'test', region: 'eu-west-1' },
+    env: { account: '123456789012', region: 'us-east-1' },
+  }, {
+    ...configBase,
+    iamIdentityCenter: {
+      id: 'sso-instance-id',
+      storeId: 'identity-store-id',
+      arn: 'arn:aws:sso:::instance/sso-instance-id',
+      permissionSets: [...Defaults.iamIdentityCenterPermissionSets()],
+      users: [{ userName: 'real@example.com', name: 'Real', surname: 'User' }],
+      accessGroups: [
+        {
+          name: 'empty-group',
+          userNames: [],
+          permissionSetName: 'ReadOnlyAccess',
+          accountNames: ['root'],
+        },
+        {
+          name: 'populated-group',
+          userNames: ['real@example.com'],
+          permissionSetName: 'ReadOnlyAccess',
+          accountNames: ['root'],
+        },
+      ],
+    },
+  });
+
+  const template = Template.fromStack(stack);
+
+  test('empty userNames synthesizes group + assignment without memberships', () => {
+    expect(stack.node.metadata.filter(m => m.type === 'aws:cdk:error')).toHaveLength(0);
+
+    template.hasResourceProperties('AWS::IdentityStore::Group', { DisplayName: 'empty-group' });
+    template.hasResourceProperties('AWS::SSO::Assignment', {
+      PrincipalId: { 'Fn::GetAtt': ['emptygroup', 'GroupId'] },
+      TargetId: '882070149987',
+      TargetType: 'AWS_ACCOUNT',
+      PrincipalType: 'GROUP',
+    });
+
+    const memberships = template.findResources('AWS::IdentityStore::GroupMembership');
+    const forEmpty = Object.values(memberships).filter((r: any) =>
+      r.Properties?.GroupId?.['Fn::GetAtt']?.[0] === 'emptygroup',
+    );
+    expect(forEmpty).toHaveLength(0);
+  });
+});
+
+describe('Unresolved userName', () => {
+  const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
+  const stack = new TestStack(app, {
+    stage,
+    name: { stack: 'test', region: 'eu-west-1' },
+    env: { account: '123456789012', region: 'us-east-1' },
+  }, {
+    ...configBase,
+    iamIdentityCenter: {
+      id: 'sso-instance-id',
+      storeId: 'identity-store-id',
+      arn: 'arn:aws:sso:::instance/sso-instance-id',
+      permissionSets: [...Defaults.iamIdentityCenterPermissionSets()],
+      users: [{ userName: 'real@example.com', name: 'Real', surname: 'User' }],
+      accessGroups: [
+        {
+          name: 'typo-group',
+          userNames: ['typoooo@example.com'],
+          permissionSetName: 'ReadOnlyAccess',
+          accountNames: ['root'],
+        },
+      ],
+    },
+  });
+
+  test('errors with the missing userName and group', () => {
+    const errors = stack.node.metadata.filter(m => m.type === 'aws:cdk:error');
+    expect(errors.some(e => /The user typoooo@example.com in group typo-group does not exist/.test(String(e.data)))).toBe(true);
+  });
+});
+
+describe('Permission set allowedAccountNames', () => {
+  function makeStackWithAllowList(groupAccountNames: string[]): TestStack {
+    const app = new App();
+    const pipeline = new CdkExpressPipeline();
+    const wave = pipeline.addWave('wave');
+    const stage = wave.addStage('stage');
+    return new TestStack(app, {
+      stage,
+      name: { stack: 'test', region: 'eu-west-1' },
+      env: { account: '123456789012', region: 'us-east-1' },
+    }, {
+      ...configBase,
+      organization: {
+        ...configBase.organization,
+        ous: {
+          ...configBase.organization.ous,
+          sharedServices: {
+            ouId: 'ou-vh4d-finopsou1',
+            accounts: { finOps: { accountId: '999988887777' } },
+          },
+        },
+      },
+      iamIdentityCenter: {
+        id: 'sso-instance-id',
+        storeId: 'identity-store-id',
+        arn: 'arn:aws:sso:::instance/sso-instance-id',
+        users: [{ userName: 'a@x.com', name: 'A', surname: 'X' }],
+        permissionSets: [
+          {
+            name: 'FinOpsQuickSightConsole',
+            allowedAccountNames: ['finOps'],
+            managedPolicyArns: ['arn:aws:iam::aws:policy/ReadOnlyAccess'],
+          },
+        ],
+        accessGroups: [
+          {
+            name: 'qs-group',
+            userNames: ['a@x.com'],
+            permissionSetName: 'FinOpsQuickSightConsole',
+            accountNames: groupAccountNames,
+          },
+        ],
+      },
+    });
+  }
+
+  test('allows accounts in the allow-list', () => {
+    const stack = makeStackWithAllowList(['finOps']);
+    expect(stack.node.metadata.filter(m => m.type === 'aws:cdk:error')).toHaveLength(0);
+    Template.fromStack(stack).hasResourceProperties('AWS::SSO::Assignment', {
+      TargetId: '999988887777',
+      TargetType: 'AWS_ACCOUNT',
+    });
+  });
+
+  test('rejects account outside the allow-list', () => {
+    const errors = makeStackWithAllowList(['root']).node.metadata.filter(m => m.type === 'aws:cdk:error');
+    expect(errors).toHaveLength(1);
+    expect(errors[0].data).toMatch(/Permission set "FinOpsQuickSightConsole" is restricted/);
+    expect(errors[0].data).toMatch(/disallowed account\(s\): \[root\]/);
+  });
+
+  test('rejects wildcard expansion containing disallowed accounts', () => {
+    const errors = makeStackWithAllowList(['*']).node.metadata.filter(m => m.type === 'aws:cdk:error');
+    expect(errors).toHaveLength(1);
+    expect(errors[0].data).toMatch(/Permission set "FinOpsQuickSightConsole" is restricted to \[finOps\]/);
+  });
+});
+
+describe('Shared services finOps account', () => {
+  const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
+  const stack = new TestStack(app, {
+    stage,
+    name: {
+      stack: 'test',
+      region: 'eu-west-1',
+    },
+    env: {
+      account: '123456789012',
+      region: 'us-east-1',
+    },
+  }, {
+    ...configBase,
+    organization: {
+      ...configBase.organization,
+      ous: {
+        ...configBase.organization.ous,
+        sharedServices: {
+          ouId: 'ou-vh4d-finopsou1',
+          accounts: {
+            finOps: {
+              accountId: '999988887777',
+            },
+          },
+        },
+      },
+    },
+    iamIdentityCenter: {
+      id: 'sso-instance-id',
+      storeId: 'identity-store-id',
+      arn: 'arn:aws:sso:::instance/sso-instance-id',
+      permissionSets: [...Defaults.iamIdentityCenterPermissionSets()],
+      users: [{
+        userName: 'finops-lead@example.com',
+        name: 'Pat',
+        surname: 'Lead',
+      }],
+      accessGroups: [
+        {
+          name: 'dlz-finops-admins',
+          userNames: ['finops-lead@example.com'],
+          permissionSetName: 'AdministratorAccess',
+          accountNames: ['finOps'],
+        },
+      ],
+    },
+  });
+
+  const template = Template.fromStack(stack);
+
+  test('resolves "finOps" to the sharedServices finOps account id', () => {
+    template.hasResourceProperties('AWS::SSO::Assignment', {
+      PrincipalId: { 'Fn::GetAtt': ['dlzfinopsadmins', 'GroupId'] },
+      TargetId: '999988887777',
+      TargetType: 'AWS_ACCOUNT',
+      PrincipalType: 'GROUP',
+    });
+  });
+});
+
+describe('SSM parameters', () => {
+  const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
+  const stack = new TestStack(app, {
+    stage,
+    name: {
+      stack: 'test',
+      region: 'eu-west-1',
+    },
+    env: {
+      account: '123456789012',
+      region: 'us-east-1',
+    },
+  }, {
+    ...configBase,
+    iamIdentityCenter: {
+      id: 'ssoins-abcd1234efgh5678',
+      storeId: 'd-9067abcdef',
+      arn: 'arn:aws:sso:::instance/ssoins-abcd1234efgh5678',
+      users: [{ userName: 'a@x.com', name: 'A', surname: 'X' }],
+      permissionSets: [
+        { name: 'ReadOnly', managedPolicyArns: ['arn:aws:iam::aws:policy/ReadOnlyAccess'] },
+        { name: 'Admin',    managedPolicyArns: ['arn:aws:iam::aws:policy/AdministratorAccess'] },
+      ],
+      accessGroups: [
+        { name: 'group-one', userNames: ['a@x.com'], permissionSetName: 'ReadOnly', accountNames: ['root'] },
+        { name: 'group-two', userNames: [],          permissionSetName: 'Admin',    accountNames: ['root'] },
+      ],
+    },
+  });
+
+  const template = Template.fromStack(stack);
+
+  test('publishes instance, store, group, and permission-set parameters', () => {
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/instance-arn',
+      Value: 'arn:aws:sso:::instance/ssoins-abcd1234efgh5678',
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/instance-id',
+      Value: 'ssoins-abcd1234efgh5678',
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/store-id',
+      Value: 'd-9067abcdef',
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/groups/group-one/id',
+      Value: { 'Fn::GetAtt': ['groupone', 'GroupId'] },
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/groups/group-two/id',
+      Value: { 'Fn::GetAtt': ['grouptwo', 'GroupId'] },
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/group-names',
+      Type: 'StringList',
+      Value: 'group-one,group-two',
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/permission-sets/ReadOnly/arn',
+      Value: { 'Fn::GetAtt': [Match.stringLikeRegexp('ReadOnly'), 'PermissionSetArn'] },
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/permission-sets/Admin/arn',
+      Value: { 'Fn::GetAtt': [Match.stringLikeRegexp('Admin'), 'PermissionSetArn'] },
+    });
+    template.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/identity-center/permission-set-names',
+      Type: 'StringList',
+      Value: 'ReadOnly,Admin',
+    });
+  });
+});
+
+describe('SSM parameters — empty config', () => {
+  const app = new App();
+  const pipeline = new CdkExpressPipeline();
+  const wave = pipeline.addWave('wave');
+  const stage = wave.addStage('stage');
+  const stack = new TestStack(app, {
+    stage,
+    name: { stack: 'test', region: 'eu-west-1' },
+    env: { account: '123456789012', region: 'us-east-1' },
+  }, {
+    ...configBase,
+    iamIdentityCenter: {
+      id: 'ssoins-abcd1234efgh5678',
+      storeId: 'd-9067abcdef',
+      arn: 'arn:aws:sso:::instance/ssoins-abcd1234efgh5678',
+    },
+  });
+
+  const template = Template.fromStack(stack);
+
+  test('skips group-names and permission-set-names manifests', () => {
+    const names = Object.values(template.findResources('AWS::SSM::Parameter'))
+      .map((r: any) => r.Properties?.Name);
+    expect(names).not.toContain('/dlz/identity-center/group-names');
+    expect(names).not.toContain('/dlz/identity-center/permission-set-names');
+  });
+});
+
 describe('IAM Identity Center', () => {
 
   test('iamIdentityCenter function', () => {

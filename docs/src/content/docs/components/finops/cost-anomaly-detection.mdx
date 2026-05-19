@@ -51,7 +51,7 @@ infrastructure. Reuses the `budgetSnsCache` so monitors and budgets can share an
     fin_ops=dlz.DlzFinOpsProps(
         cost_anomaly_detection=dlz.DlzCostAnomalyDetectionProps(
             monitors=[
-                dlz.DlzCostAnomalyMonitorProps(
+                dlz.DlzAnomalyMonitorProps(
                     name="aws-services",
                     dimension="SERVICE",
                     threshold_usd=100,
@@ -60,7 +60,7 @@ infrastructure. Reuses the `budgetSnsCache` so monitors and budgets can share an
                         emails=["finops@acme.com"],
                     ),
                 ),
-                dlz.DlzCostAnomalyMonitorProps(
+                dlz.DlzAnomalyMonitorProps(
                     name="cost-centers",
                     tag_key="CostCenter",
                     threshold_usd=200,

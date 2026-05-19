@@ -8,9 +8,8 @@ export interface DlzDataExportsTagActivationProps {
 }
 
 /**
- * Activates Cost Allocation Tags via `ce:UpdateCostAllocationTagsStatus`.
- * Org-wide; the Lambda is idempotent and no-ops on delete because the tags
- * may be in use by consumers outside this stack.
+ * Activates Cost Allocation Tags via `ce:UpdateCostAllocationTagsStatus`. Idempotent;
+ * Delete is a no-op because the tags may be in use by consumers outside this stack.
  */
 export class DlzDataExportsTagActivation extends Construct {
 
@@ -29,11 +28,9 @@ export class DlzDataExportsTagActivation extends Construct {
       return;
     }
 
-    // Keep this CFN logical-id seed stable across class renames —
-    // changing it produces a new Lambda, changes the ServiceToken on
-    // any existing custom resource, and CFN refuses ("Modifying
-    // service token is not allowed"). Rename the wrapping class
-    // freely; this string is internal-only.
+    // Keep this CFN logical-id seed stable across class renames — changing it produces
+    // a new Lambda, changes the ServiceToken on the existing CustomResource, and CFN
+    // refuses ("Modifying service token is not allowed").
     const provider = CustomResourceProvider.getOrCreateProvider(this, 'Custom::DlzDataExportsTagActivation', {
       useCfnResponseWrapper: true,
       codeDirectory: DlzDataExportsTagActivation.fetchTagActivationCodeDirectory(),

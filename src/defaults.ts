@@ -2,6 +2,12 @@ import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { BudgetSubscribers, DlzControlTowerStandardControls, IamIdentityCenterPermissionSetProps } from './constructs/';
 import { DlzBudgetProps } from './constructs/dlz-budget';
+import {
+  DLZ_CARBON_EMISSIONS_DEFAULT_QUERY_COLUMNS,
+  DLZ_COR_DEFAULT_QUERY_COLUMNS,
+  DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD,
+  DLZ_FOCUS_1_2_DEFAULT_QUERY_COLUMNS,
+} from './constructs/dlz-data-exports/data-exports-types';
 import { DlzGuardDutyFeaturesProps } from './constructs/dlz-guardduty/guardduty-types';
 import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
@@ -209,6 +215,38 @@ export class Defaults {
    * @param subscribers Subscribers for the budget
    * @param _ Ignore this parameter, it is used to force a consistent interface across TS and Python usage
    */
+  /**
+   * Default query-column projection for `STANDARD_CUR_2_0` exports.
+   * jsii-friendly accessor for the underlying `DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD` constant.
+   */
+  public static standardCurQueryColumns(): string[] {
+    return [...DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD];
+  }
+
+  /**
+   * Default query-column projection for `FOCUS_1_2` exports.
+   * jsii-friendly accessor for the underlying `DLZ_FOCUS_1_2_DEFAULT_QUERY_COLUMNS` constant.
+   */
+  public static focus12QueryColumns(): string[] {
+    return [...DLZ_FOCUS_1_2_DEFAULT_QUERY_COLUMNS];
+  }
+
+  /**
+   * Default query-column projection for `COST_OPTIMIZATION_RECOMMENDATIONS` exports.
+   * jsii-friendly accessor for the underlying `DLZ_COR_DEFAULT_QUERY_COLUMNS` constant.
+   */
+  public static corQueryColumns(): string[] {
+    return [...DLZ_COR_DEFAULT_QUERY_COLUMNS];
+  }
+
+  /**
+   * Default query-column projection for `CARBON_EMISSIONS` exports.
+   * jsii-friendly accessor for the underlying `DLZ_CARBON_EMISSIONS_DEFAULT_QUERY_COLUMNS` constant.
+   */
+  public static carbonEmissionsQueryColumns(): string[] {
+    return [...DLZ_CARBON_EMISSIONS_DEFAULT_QUERY_COLUMNS];
+  }
+
   public static budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers,
     _: ForceNoPythonArgumentLifting = {}): DlzBudgetProps[] {
     const defaultTopicName = 'dlz-budget-topic';

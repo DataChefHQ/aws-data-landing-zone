@@ -168,6 +168,70 @@ describe('DlzDataExportsDataPlane — SSM parameters', () => {
       Name: '/dlz/finops/glue-database-name',
       Value: 'dlz_finops',
     });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/finops-account-id',
+      Value: '111111111111',
+    });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/management-account-id',
+      Value: '999999999999',
+    });
+  });
+
+  test('publishes data-bucket-arn + SSE_S3 by default, no kms-key-arn', () => {
+    const t = synth();
+    t.hasResourceProperties('AWS::SSM::Parameter', { Name: '/dlz/finops/data-bucket-arn' });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/data-bucket-encryption-type',
+      Value: 'SSE_S3',
+    });
+    const names = Object.values(t.findResources('AWS::SSM::Parameter')).map((p: any) => p.Properties.Name);
+    expect(names).not.toContain('/dlz/finops/data-bucket-kms-key-arn');
+  });
+
+  test('publishes SSE_KMS + kms-key-arn when CMK configured', () => {
+    const kmsKeyArn = 'arn:aws:kms:us-east-1:111111111111:key/00000000-0000-0000-0000-000000000000';
+    const t = synth({ dataPlaneConfig: { encryption: { kmsKeyArn } } });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/data-bucket-encryption-type',
+      Value: 'SSE_KMS',
+    });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/data-bucket-kms-key-arn',
+      Value: kmsKeyArn,
+    });
+  });
+
+  test('publishes glue-crawler-name + default schedule', () => {
+    const t = synth();
+    t.hasResourceProperties('AWS::SSM::Parameter', { Name: '/dlz/finops/glue-crawler-name' });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/glue-crawler-schedule',
+      Value: 'cron(0 6 * * ? *)',
+    });
+  });
+
+  test('glue-crawler-schedule honors override', () => {
+    const t = synth({ dataPlaneConfig: { glueCrawlerSchedule: 'cron(0 */4 * * ? *)' } });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/glue-crawler-schedule',
+      Value: 'cron(0 */4 * * ? *)',
+    });
+  });
+
+  test('publishes export-ids as StringList', () => {
+    const t = synth({
+      exports: {
+        standard: { exportType: 'STANDARD_CUR_2_0' },
+        'focus-1-2': { exportType: 'FOCUS_1_2' },
+        carbon: { exportType: 'CARBON_EMISSIONS' },
+      },
+    });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/export-ids',
+      Type: 'StringList',
+      Value: 'standard,focus-1-2,carbon',
+    });
   });
 
   test('publishes per-export params at /dlz/finops/exports/<id>/*', () => {
@@ -182,8 +246,17 @@ describe('DlzDataExportsDataPlane — SSM parameters', () => {
       t.hasResourceProperties('AWS::SSM::Parameter', { Name: `/dlz/finops/exports/${id}/export-name` });
       t.hasResourceProperties('AWS::SSM::Parameter', { Name: `/dlz/finops/exports/${id}/destination-prefix` });
       t.hasResourceProperties('AWS::SSM::Parameter', { Name: `/dlz/finops/exports/${id}/data-path` });
+      t.hasResourceProperties('AWS::SSM::Parameter', { Name: `/dlz/finops/exports/${id}/s3-uri` });
       t.hasResourceProperties('AWS::SSM::Parameter', { Name: `/dlz/finops/exports/${id}/glue-table-name` });
     }
+  });
+
+  test('per-export s3-uri = bucket + dataPath with trailing slash', () => {
+    const t = synth();
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/exports/standard/s3-uri',
+      Value: 's3://dlz-finops-111111111111-us-east-1/dlz-standard/',
+    });
   });
 
   test('destination-prefix sentinel "(none)" when prefix is unset', () => {
@@ -191,6 +264,23 @@ describe('DlzDataExportsDataPlane — SSM parameters', () => {
     t.hasResourceProperties('AWS::SSM::Parameter', {
       Name: '/dlz/finops/exports/standard/destination-prefix',
       Value: '(none)',
+    });
+  });
+
+  test('glue-table-name SSM matches crawler-derived name', () => {
+    const t = synth({
+      exports: {
+        'cost-opt-recs': { exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS' },
+        carbon: { exportType: 'CARBON_EMISSIONS' },
+      },
+    });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/exports/cost-opt-recs/glue-table-name',
+      Value: 'finops_dlz_cost_opt_recs',
+    });
+    t.hasResourceProperties('AWS::SSM::Parameter', {
+      Name: '/dlz/finops/exports/carbon/glue-table-name',
+      Value: 'finops_dlz_carbon',
     });
   });
 

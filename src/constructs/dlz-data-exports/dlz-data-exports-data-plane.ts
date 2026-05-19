@@ -34,11 +34,15 @@ interface ResolvedExportPlacement {
   readonly glueTableName: string;
 }
 
+interface ResolvedEncryption {
+  readonly kind: s3.BucketEncryption;
+  readonly key?: kms.IKey;
+}
+
 /**
- * One shared S3 bucket and one shared Glue database hold every configured
- * export. The crawler uses one `S3Targets` entry per export, producing one
- * table per export in the same database — ~5x cheaper than per-export
- * crawlers and no Athena downside.
+ * One shared S3 bucket and one shared Glue database hold every configured export. The
+ * crawler uses one `S3Targets` entry per export, producing one table per export in the
+ * same database — cheaper than per-export crawlers with no Athena downside.
  */
 export class DlzDataExportsDataPlane extends Construct {
 
@@ -51,7 +55,11 @@ export class DlzDataExportsDataPlane extends Construct {
   public readonly curDestinationRegion: string;
   public readonly glueDatabaseName: string;
 
+  private readonly accountId: string;
+  private readonly managementAccountId: string;
   private readonly resolvedExports: readonly ResolvedExportPlacement[];
+  private readonly resolvedEncryption: ResolvedEncryption;
+  private readonly glueCrawlerSchedule: string;
 
   constructor(scope: Construct, id: string, props: DlzDataExportsDataPlaneProps) {
     super(scope, id);
@@ -60,12 +68,13 @@ export class DlzDataExportsDataPlane extends Construct {
     const lifecycleCfg = dpCfg.lifecycle ?? {};
     const lifecycleEnabled = lifecycleCfg.enabled ?? true;
     const accountId = Stack.of(scope).account;
+    this.accountId = accountId;
+    this.managementAccountId = props.managementAccountId;
 
     if (!lifecycleEnabled) {
       // eslint-disable-next-line no-console
       console.warn(
-        '[DlzDataExportsDataPlane] WARNING: lifecycle.enabled=false — no S3 transitions or expirations will be applied. ' +
-        'Intended for testing/sandbox only.',
+        '[DlzDataExportsDataPlane] lifecycle.enabled=false — every object stays in S3 Standard forever. Sandbox only.',
       );
     }
 
@@ -77,6 +86,7 @@ export class DlzDataExportsDataPlane extends Construct {
     this.resolvedExports = resolvePlacements(props.exports);
 
     const encryption = this.resolveEncryption(dpCfg);
+    this.resolvedEncryption = encryption;
 
     this.bucket = new s3.Bucket(this, 'cur-bucket', {
       bucketName,
@@ -89,8 +99,8 @@ export class DlzDataExportsDataPlane extends Construct {
       lifecycleRules: lifecycleEnabled ? this.lifecycleRules(lifecycleCfg) : [],
     });
 
-    // BCM validates bucket policy + ACL at CreateExport, so PutObject on
-    // objects and GetBucket* on the bucket are both required.
+    // BCM validates bucket policy + ACL at CreateExport, so both PutObject on objects
+    // and GetBucket* on the bucket are required.
     this.bucket.addToResourcePolicy(new iam.PolicyStatement({
       sid: 'EnableAWSDataExportsToWriteToS3',
       effect: iam.Effect.ALLOW,
@@ -133,10 +143,9 @@ export class DlzDataExportsDataPlane extends Construct {
       }));
     }
 
-    // Construct id includes the DB name so renaming the database forces a new
-    // CFN logical id (= Replacement). AWS::Glue::Database doesn't support
-    // in-place rename via UpdateDatabase, so an Update on Name fails at deploy
-    // time; a logical-id change makes CFN do delete-old + create-new instead.
+    // Construct id includes the DB name so a rename forces a new CFN logical id (=
+    // Replacement). AWS::Glue::Database has no in-place rename, so Update on Name fails
+    // at deploy; the logical-id change makes CFN do delete-old + create-new instead.
     this.glueDatabase = new glue.CfnDatabase(this, `glue-db-${glueDatabaseName}`, {
       catalogId: accountId,
       databaseInput: {
@@ -156,12 +165,14 @@ export class DlzDataExportsDataPlane extends Construct {
       exclusions: ['metadata/**', '**.json', '**_$folder$'],
     }));
 
+    const glueCrawlerSchedule = dpCfg.glueCrawlerSchedule ?? DLZ_DATA_EXPORTS_DEFAULTS.glueCrawlerSchedule;
+    this.glueCrawlerSchedule = glueCrawlerSchedule;
     this.glueCrawler = new glue.CfnCrawler(this, 'cur-glue-crawler', {
       role: crawlerRole.roleArn,
       databaseName: glueDatabaseName,
       targets: { s3Targets },
       schedule: {
-        scheduleExpression: dpCfg.glueCrawlerSchedule ?? DLZ_DATA_EXPORTS_DEFAULTS.glueCrawlerSchedule,
+        scheduleExpression: glueCrawlerSchedule,
       },
       tablePrefix: DLZ_DATA_EXPORTS_DEFAULTS.glueTablePrefix,
       configuration: JSON.stringify({
@@ -194,13 +205,51 @@ export class DlzDataExportsDataPlane extends Construct {
       parameterName: `${prefix}data-bucket-name`,
       stringValue: this.curBucketName,
     });
+    new ssm.StringParameter(this, 'ssm-data-bucket-arn', {
+      parameterName: `${prefix}data-bucket-arn`,
+      stringValue: this.bucket.bucketArn,
+    });
+    new ssm.StringParameter(this, 'ssm-data-bucket-encryption-type', {
+      parameterName: `${prefix}data-bucket-encryption-type`,
+      stringValue: this.resolvedEncryption.kind === s3.BucketEncryption.KMS ? 'SSE_KMS' : 'SSE_S3',
+    });
+    if (this.resolvedEncryption.key) {
+      new ssm.StringParameter(this, 'ssm-data-bucket-kms-key-arn', {
+        parameterName: `${prefix}data-bucket-kms-key-arn`,
+        stringValue: this.resolvedEncryption.key.keyArn,
+      });
+    }
     new ssm.StringParameter(this, 'ssm-destination-region', {
       parameterName: `${prefix}destination-region`,
       stringValue: this.curDestinationRegion,
     });
+    new ssm.StringParameter(this, 'ssm-finops-account-id', {
+      parameterName: `${prefix}finops-account-id`,
+      stringValue: this.accountId,
+    });
+    new ssm.StringParameter(this, 'ssm-management-account-id', {
+      parameterName: `${prefix}management-account-id`,
+      stringValue: this.managementAccountId,
+    });
     new ssm.StringParameter(this, 'ssm-glue-database-name', {
       parameterName: `${prefix}glue-database-name`,
       stringValue: this.glueDatabaseName,
+    });
+    new ssm.StringParameter(this, 'ssm-glue-crawler-name', {
+      parameterName: `${prefix}glue-crawler-name`,
+      stringValue: this.glueCrawler.ref,
+    });
+    new ssm.StringParameter(this, 'ssm-glue-crawler-schedule', {
+      parameterName: `${prefix}glue-crawler-schedule`,
+      stringValue: this.glueCrawlerSchedule,
+    });
+
+    // Manifest of configured export IDs — readable in one call instead of paging
+    // `ssm:GetParametersByPath /dlz/finops/exports/`. Always non-empty because the data
+    // plane only runs when `finOps.dataExports.exports` has entries.
+    new ssm.StringListParameter(this, 'ssm-export-ids', {
+      parameterName: `${prefix}export-ids`,
+      stringListValue: this.resolvedExports.map(p => p.entryId),
     });
 
     for (const placement of this.resolvedExports) {
@@ -223,6 +272,10 @@ export class DlzDataExportsDataPlane extends Construct {
       new ssm.StringParameter(this, `ssm-data-path-${idSafe}`, {
         parameterName: `${exportPrefix}data-path`,
         stringValue: placement.dataPath,
+      });
+      new ssm.StringParameter(this, `ssm-s3-uri-${idSafe}`, {
+        parameterName: `${exportPrefix}s3-uri`,
+        stringValue: `s3://${this.curBucketName}/${placement.dataPath}/`,
       });
       new ssm.StringParameter(this, `ssm-glue-table-name-${idSafe}`, {
         parameterName: `${exportPrefix}glue-table-name`,
@@ -263,7 +316,7 @@ export class DlzDataExportsDataPlane extends Construct {
     }];
   }
 
-  private resolveEncryption(cfg: DlzDataExportsDataPlaneConfig): { kind: s3.BucketEncryption; key?: kms.IKey } {
+  private resolveEncryption(cfg: DlzDataExportsDataPlaneConfig): ResolvedEncryption {
     const kmsKeyArn = cfg.encryption?.kmsKeyArn;
     if (!kmsKeyArn) {
       return { kind: s3.BucketEncryption.S3_MANAGED };
@@ -279,7 +332,7 @@ function resolvePlacements(exports: { readonly [id: string]: DlzDataExportEntry 
   return Object.entries(exports).map(([entryId, entry]) => {
     const exportName = entry.exportName ?? deriveDefaultExportName(entryId);
     const destinationPrefix = entry.destinationPrefix ?? DLZ_DATA_EXPORTS_DEFAULTS.destinationPrefix;
-    const glueTableName = entry.glueTableName ?? deriveDefaultGlueTableName(entryId);
+    const glueTableName = entry.glueTableName ?? deriveDefaultGlueTableName(exportName);
     return {
       entryId,
       entry,

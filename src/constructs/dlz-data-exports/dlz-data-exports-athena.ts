@@ -1,4 +1,4 @@
-import { Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Duration, RemovalPolicy, Stack } from 'aws-cdk-lib';
 import * as athena from 'aws-cdk-lib/aws-athena';
 import * as kms from 'aws-cdk-lib/aws-kms';
 import * as s3 from 'aws-cdk-lib/aws-s3';
@@ -21,12 +21,10 @@ export interface DlzDataExportsAthenaProps {
 }
 
 /**
- * Athena workgroup + query-results bucket for the DLZ CUR data plane. Without
- * this, the AWS console blocks every first query with the "set up a query
- * result location" prompt.
- *
- * `EnforceWorkGroupConfiguration: true` so users can't override the result
- * location or encryption client-side.
+ * Athena workgroup + query-results bucket for the FinOps data plane. Without it, the
+ * console blocks every first query with the "set up a query result location" prompt.
+ * `EnforceWorkGroupConfiguration: true` so users can't override the result location or
+ * encryption client-side.
  */
 export class DlzDataExportsAthena extends Construct {
 
@@ -43,7 +41,7 @@ export class DlzDataExportsAthena extends Construct {
     if (expirationDays < 1) {
       throw new Error(
         `athena.resultsExpirationDays must be >= 1. Got ${expirationDays}. ` +
-        'Query results are disposable scratch data — keeping them indefinitely accumulates cost without value.',
+        'Query results are scratch data — keeping them indefinitely accumulates S3 cost.',
       );
     }
 
@@ -77,7 +75,7 @@ export class DlzDataExportsAthena extends Construct {
 
     this.workgroup = new athena.CfnWorkGroup(this, 'workgroup', {
       name: this.workgroupName,
-      description: 'DLZ CUR query workgroup — results in the DLZ-managed scratch bucket',
+      description: 'DLZ FinOps query workgroup; results land in the DLZ-managed scratch bucket',
       state: 'ENABLED',
       recursiveDeleteOption: cfg.recursiveDeleteOption ?? DLZ_DATA_EXPORTS_DEFAULTS.athena.recursiveDeleteOption,
       workGroupConfiguration: {
@@ -98,10 +96,26 @@ export class DlzDataExportsAthena extends Construct {
       stringValue: this.workgroupName,
       description: 'DLZ FinOps CUR — Athena workgroup name',
     });
+    new ssm.StringParameter(this, 'ssm-athena-workgroup-arn', {
+      parameterName: `${prefix}athena-workgroup-arn`,
+      stringValue: Stack.of(this).formatArn({
+        service: 'athena',
+        resource: 'workgroup',
+        resourceName: this.workgroupName,
+        account: props.accountId,
+        region: props.region,
+      }),
+      description: 'DLZ FinOps CUR — Athena workgroup ARN (for cross-account IAM)',
+    });
     new ssm.StringParameter(this, 'ssm-athena-results-bucket-name', {
       parameterName: `${prefix}athena-results-bucket-name`,
       stringValue: this.resultsBucketName,
       description: 'DLZ FinOps CUR — Athena query-results bucket',
+    });
+    new ssm.StringParameter(this, 'ssm-athena-results-bucket-arn', {
+      parameterName: `${prefix}athena-results-bucket-arn`,
+      stringValue: this.resultsBucket.bucketArn,
+      description: 'DLZ FinOps CUR — Athena query-results bucket ARN',
     });
   }
 
