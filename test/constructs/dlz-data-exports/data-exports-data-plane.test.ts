@@ -222,9 +222,9 @@ describe('DlzDataExportsDataPlane — SSM parameters', () => {
   test('publishes export-ids as StringList', () => {
     const t = synth({
       exports: {
-        standard: { exportType: 'STANDARD_CUR_2_0' },
+        'standard': { exportType: 'STANDARD_CUR_2_0' },
         'focus-1-2': { exportType: 'FOCUS_1_2' },
-        carbon: { exportType: 'CARBON_EMISSIONS' },
+        'carbon': { exportType: 'CARBON_EMISSIONS' },
       },
     });
     t.hasResourceProperties('AWS::SSM::Parameter', {
@@ -271,7 +271,7 @@ describe('DlzDataExportsDataPlane — SSM parameters', () => {
     const t = synth({
       exports: {
         'cost-opt-recs': { exportType: 'COST_OPTIMIZATION_RECOMMENDATIONS' },
-        carbon: { exportType: 'CARBON_EMISSIONS' },
+        'carbon': { exportType: 'CARBON_EMISSIONS' },
       },
     });
     t.hasResourceProperties('AWS::SSM::Parameter', {

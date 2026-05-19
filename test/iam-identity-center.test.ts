@@ -539,11 +539,11 @@ describe('SSM parameters', () => {
       users: [{ userName: 'a@x.com', name: 'A', surname: 'X' }],
       permissionSets: [
         { name: 'ReadOnly', managedPolicyArns: ['arn:aws:iam::aws:policy/ReadOnlyAccess'] },
-        { name: 'Admin',    managedPolicyArns: ['arn:aws:iam::aws:policy/AdministratorAccess'] },
+        { name: 'Admin', managedPolicyArns: ['arn:aws:iam::aws:policy/AdministratorAccess'] },
       ],
       accessGroups: [
         { name: 'group-one', userNames: ['a@x.com'], permissionSetName: 'ReadOnly', accountNames: ['root'] },
-        { name: 'group-two', userNames: [],          permissionSetName: 'Admin',    accountNames: ['root'] },
+        { name: 'group-two', userNames: [], permissionSetName: 'Admin', accountNames: ['root'] },
       ],
     },
   });

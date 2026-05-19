@@ -180,7 +180,7 @@ export class IamIdentityCenter {
           cdk.Annotations.of(dlzStack).addError(
             `Permission set "${group.permissionSetName}" is restricted to [${allowedAccounts.join(', ')}], ` +
             `but group "${group.name}" would assign it to disallowed account(s): [${[...new Set(offenders)].join(', ')}]. ` +
-            `Either narrow the group's accountNames, or extend allowedAccountNames on the permission set.`,
+            'Either narrow the group\'s accountNames, or extend allowedAccountNames on the permission set.',
           );
         }
       }

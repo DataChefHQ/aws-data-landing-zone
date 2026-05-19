@@ -2050,7 +2050,7 @@ public readonly accountName: string;
 
 ### DlzAccountBudgets <a name="DlzAccountBudgets" id="aws-data-landing-zone.DlzAccountBudgets"></a>
 
-Per-account budgets (filtered by `LinkedAccount`) and optional per-cost-center roll-up budgets.
+Per-account budgets (filtered by `LinkedAccount`) and optional per-cost-center roll-ups.
 
 Composes the `DlzBudget` primitive.
 
@@ -2203,9 +2203,11 @@ The tree node.
 
 ### DlzCostAnomalyDetection <a name="DlzCostAnomalyDetection" id="aws-data-landing-zone.DlzCostAnomalyDetection"></a>
 
-Cost Anomaly Detection — one `CfnAnomalyMonitor` + `CfnAnomalySubscription` per configured monitor.
+Cost Anomaly Detection.
 
-Reuses `budgetSnsCache` so anomaly + budget alerts can share an SNS topic.
+One `CfnAnomalyMonitor` + `CfnAnomalySubscription` per
+configured monitor; reuses `budgetSnsCache` so anomaly and budget alerts can share an
+SNS topic.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzCostAnomalyDetection.Initializer"></a>
 
@@ -2349,12 +2351,11 @@ The tree node.
 
 ### DlzDataExport <a name="DlzDataExport" id="aws-data-landing-zone.DlzDataExport"></a>
 
-BCM rejects duplicate export names on Replacement, so the Lambda handler owns the lifecycle and falls back to delete-then-create when UpdateExport can't apply a change in place.
+BCM rejects duplicate export names on Replacement, so the Lambda owns the lifecycle and falls back to delete-then-create when `UpdateExport` can't apply a change in place.
 
-The custom-resource provider is shared across every instance; the first
-construct locks the provider's IAM policy, so we grant every action any of
-the five export types might need up front (including
-`sustainability:GetCarbonFootprintSummary` for CARBON_EMISSIONS).
+The custom-resource provider is shared across every instance — the first
+construct locks the provider's IAM policy, so the policy below grants every action
+any export type may need.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExport.Initializer"></a>
 
@@ -2544,14 +2545,12 @@ public readonly resolvedExportName: string;
 
 ### DlzDataExportsAthena <a name="DlzDataExportsAthena" id="aws-data-landing-zone.DlzDataExportsAthena"></a>
 
-Athena workgroup + query-results bucket for the DLZ CUR data plane.
+Athena workgroup + query-results bucket for the FinOps data plane.
 
-Without
-this, the AWS console blocks every first query with the "set up a query
-result location" prompt.
-
-`EnforceWorkGroupConfiguration: true` so users can't override the result
-location or encryption client-side.
+Without it, the
+console blocks every first query with the "set up a query result location" prompt.
+`EnforceWorkGroupConfiguration: true` so users can't override the result location or
+encryption client-side.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExportsAthena.Initializer"></a>
 
@@ -2734,9 +2733,9 @@ public readonly workgroupName: string;
 
 One shared S3 bucket and one shared Glue database hold every configured export.
 
-The crawler uses one `S3Targets` entry per export, producing one
-table per export in the same database — ~5x cheaper than per-export
-crawlers and no Athena downside.
+The
+crawler uses one `S3Targets` entry per export, producing one table per export in the
+same database — cheaper than per-export crawlers with no Athena downside.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExportsDataPlane.Initializer"></a>
 
@@ -2952,8 +2951,8 @@ public readonly athena: DlzDataExportsAthena;
 
 Activates Cost Allocation Tags via `ce:UpdateCostAllocationTagsStatus`.
 
-Org-wide; the Lambda is idempotent and no-ops on delete because the tags
-may be in use by consumers outside this stack.
+Idempotent;
+Delete is a no-op because the tags may be in use by consumers outside this stack.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzDataExportsTagActivation.Initializer"></a>
 
@@ -5909,6 +5908,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-data-landing-zone.IamIdentityCenterGroup.property.groupId">groupId</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -5921,6 +5921,16 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+##### `groupId`<sup>Required</sup> <a name="groupId" id="aws-data-landing-zone.IamIdentityCenterGroup.property.groupId"></a>
+
+```typescript
+public readonly groupId: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -21550,15 +21560,15 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.localProfile">localProfile</a></code> | <code>string</code> | The the AWS CLI profile that will be used to run the Scripts. |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.MandatoryTags">MandatoryTags</a></code> | The values of the mandatory tags that all resources must have. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.mandatoryTags">mandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.MandatoryTags">MandatoryTags</a></code> | Allowed values for the five baseline mandatory tags. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#aws-data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#aws-data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#aws-data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Domain). |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a></code> | FinOps capabilities. Groups all cost-management features:. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a></code> | Cost-management capabilities. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.guardDuty">guardDuty</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyProps">DlzGuardDutyProps</a></code> | GuardDuty configuration for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamIdentityCenter">iamIdentityCenter</a></code> | <code><a href="#aws-data-landing-zone.IamIdentityCenterProps">IamIdentityCenterProps</a></code> | IAM Identity Center configuration. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.iamPolicyPermissionBoundary">iamPolicyPermissionBoundary</a></code> | <code><a href="#aws-data-landing-zone.IamPolicyPermissionsBoundaryProps">IamPolicyPermissionsBoundaryProps</a></code> | IAM Policy Permission Boundary. |
@@ -21597,14 +21607,11 @@ public readonly mandatoryTags: MandatoryTags;
 
 - *Type:* <a href="#aws-data-landing-zone.MandatoryTags">MandatoryTags</a>
 
-The values of the mandatory tags that all resources must have.
+Allowed values for the five baseline mandatory tags.
 
-The following values are already specified and used by the DLZ constructs
-- Owner: [infra]
-- Project: [dlz]
-- Environment: [dlz]
-- CostCenter: [dlz]
-- Domain: [foundation]
+DLZ resources use Owner=infra,
+Project=dlz, Environment=dlz, CostCenter=dlz, Domain=foundation — leave those in the
+allowed-values lists when overriding.
 
 ---
 
@@ -21647,26 +21654,13 @@ public readonly additionalMandatoryTags: DlzTag[];
 - *Type:* <a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]
 - *Default:* Defaults.mandatoryTags()
 
-List of additional mandatory tags that all resources must have. Not all resources support tags, this is a best-effort.
+Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Domain).
 
-Mandatory tags are defined in Defaults.mandatoryTags() which are:
-- Owner, the team responsible for the resource
-- Project, the project the resource is part of
-- Environment, the environment the resource is part of
-- CostCenter, the finance cost center for chargeback (FinOps Layer 2)
-- Domain, the data domain — foundation enforces presence; platform overlay may constrain values
+Tag policy + SCP + an AWS Config rule enforce presence; tag
+support is best-effort because not every AWS resource accepts tags.
 
-It creates:
-1. A tag policy in the organization
-2. An SCP on the organization that all CFN stacks must have these tags when created
-3. An AWS Config rule that checks for these tags on all CFN stacks and resources
-
-For all stacks created by DLZ the following tags are applied:
-- Owner: infra
-- Project: dlz
-- Environment: dlz
-- CostCenter: dlz
-- Domain: foundation
+DLZ-created stacks are tagged Owner=infra, Project=dlz, Environment=dlz, CostCenter=dlz,
+Domain=foundation.
 
 ---
 
@@ -21724,15 +21718,10 @@ public readonly finOps: DlzFinOpsProps;
 - *Type:* <a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a>
 - *Default:* no FinOps capabilities enabled
 
-FinOps capabilities. Groups all cost-management features:.
+Cost-management capabilities.
 
-`budgets` — org/account-wide budget alerts (always-on root budget set).
-- `accountBudgets` — per-account / per-cost-center budgets composed over workload accounts.
-- `costAnomalyDetection` — Cost Anomaly Detection monitors + subscriptions.
-- `dataExports` — BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon Emissions) into the dedicated FinOps account.
-
-`dataExports` requires `org.ous.sharedServices.accounts.finOps` to be configured. The other
-capabilities are independent of the Shared Services OU and only use the management
+Each member is independently optional. `dataExports`
+requires `org.ous.sharedServices.accounts.finOps`; the rest only need the management
 account.
 
 ---
@@ -21946,16 +21935,16 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.type">type</a></code> | <code><a href="#aws-data-landing-zone.DlzAccountType">DlzAccountType</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DLzAccount.property.costCenter">costCenter</a></code> | <code>string</code> | Cost center identifier for this account. Populates the `CostCenter` tag for resources tagged via `Tags.of()` and feeds `DlzAccountBudgets` cost-center roll-ups. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.costCenter">costCenter</a></code> | <code>string</code> | Cost center identifier. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notifications settings for the account. |
-| <code><a href="#aws-data-landing-zone.DLzAccount.property.domain">domain</a></code> | <code>string</code> | Data domain for this account. Populates the `Domain` tag. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.domain">domain</a></code> | <code>string</code> | Data domain. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.email">email</a></code> | <code>string</code> | The email address associated with this AWS account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.guardDutyEnabled">guardDutyEnabled</a></code> | <code>boolean</code> | Explicitly enable GuardDuty for this account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.guardDutyFeatures">guardDutyFeatures</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyFeaturesProps">DlzGuardDutyFeaturesProps</a></code> | GuardDuty feature overrides for this account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.iam">iam</a></code> | <code><a href="#aws-data-landing-zone.DLzIamProps">DLzIamProps</a></code> | IAM configuration for the account. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.lakeFormation">lakeFormation</a></code> | <code><a href="#aws-data-landing-zone.DlzLakeFormationProps">DlzLakeFormationProps</a>[]</code> | LakeFormation settings and tags. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.macieEnabled">macieEnabled</a></code> | <code>boolean</code> | Explicitly enroll this existing account in Macie via CreateMember. |
-| <code><a href="#aws-data-landing-zone.DLzAccount.property.monthlyBudget">monthlyBudget</a></code> | <code>number</code> | Monthly budget cap in USD for this account. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.monthlyBudget">monthlyBudget</a></code> | <code>number</code> | Monthly budget cap in USD. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.scpStatements">scpStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Additional per-account SCP statements layered on top of the org baseline and account-type tier. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#aws-data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
@@ -21999,9 +21988,10 @@ public readonly costCenter: string;
 
 - *Type:* string
 
-Cost center identifier for this account. Populates the `CostCenter` tag for resources tagged via `Tags.of()` and feeds `DlzAccountBudgets` cost-center roll-ups.
+Cost center identifier.
 
-Part of FinOps Layer 2 (Attribution).
+Populates the `CostCenter` tag and feeds `DlzAccountBudgets`
+cost-center roll-ups.
 
 ---
 
@@ -22028,10 +22018,10 @@ public readonly domain: string;
 
 - *Type:* string
 
-Data domain for this account. Populates the `Domain` tag.
+Data domain.
 
-Foundation does not enforce values; the data platform overlay may constrain to data-lake domains.
-Part of FinOps Layer 2 (Attribution).
+Populates the `Domain` tag. Foundation enforces presence only; the
+platform overlay may later constrain values.
 
 ---
 
@@ -22138,12 +22128,10 @@ public readonly monthlyBudget: number;
 
 - *Type:* number
 
-Monthly budget cap in USD for this account.
+Monthly budget cap in USD.
 
-Consumed by `DlzAccountBudgets` to create
-a per-account `DlzBudget` filtered to this account's `LinkedAccount`.
-
-Part of FinOps Layer 3 (Guardrails).
+`DlzAccountBudgets` creates a `DlzBudget` filtered to
+this account's `LinkedAccount`.
 
 ---
 
@@ -23179,7 +23167,7 @@ const dlzDataExportsAthenaConfig: DlzDataExportsAthenaConfig = { ... }
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.enabled">enabled</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.engineVersion">engineVersion</a></code> | <code>number</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.publishCloudWatchMetrics">publishCloudWatchMetrics</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.recursiveDeleteOption">recursiveDeleteOption</a></code> | <code>boolean</code> | Cascade-delete named queries when the workgroup is deleted (including the Replace triggered by a workgroup-name change). |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.recursiveDeleteOption">recursiveDeleteOption</a></code> | <code>boolean</code> | Cascade-delete named queries on workgroup delete (including the Replace from a workgroup-name change). |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.resultsBucketNamePrefix">resultsBucketNamePrefix</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.resultsExpirationDays">resultsExpirationDays</a></code> | <code>number</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig.property.workgroupName">workgroupName</a></code> | <code>string</code> | *No description.* |
@@ -23234,12 +23222,10 @@ public readonly recursiveDeleteOption: boolean;
 
 - *Type:* boolean
 
-Cascade-delete named queries when the workgroup is deleted (including the Replace triggered by a workgroup-name change).
+Cascade-delete named queries on workgroup delete (including the Replace from a workgroup-name change).
 
-Default is `true` so
-renames stay hands-off. Set `false` only if you save important queries
-directly in this workgroup and want to be forced to export them
-manually before a rename.
+Default `true` keeps renames hands-off. Set `false` only if
+you save important queries directly in this workgroup.
 
 ---
 
@@ -23763,11 +23749,10 @@ public readonly tagKeys: string[];
 
 ### DLzFinOpsAccount <a name="DLzFinOpsAccount" id="aws-data-landing-zone.DLzFinOpsAccount"></a>
 
-FinOps account record. Extends `DLzManagementAccount` with FinOps-specific knobs.
+Dedicated FinOps account.
 
-The auto-attached `ScpFinOpsAccountBaseline` SCP applies regardless. Use
-`scpStatements` to layer additional, deployment-specific SCP statements on top
-(additive only — composes with the baseline rather than replacing it).
+`ScpFinOpsAccountBaseline` is auto-attached; `scpStatements`
+layers additional Deny rules on top (additive only).
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DLzFinOpsAccount.Initializer"></a>
 
@@ -23782,7 +23767,7 @@ const dLzFinOpsAccount: DLzFinOpsAccount = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.DLzFinOpsAccount.property.accountId">accountId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DLzFinOpsAccount.property.scpStatements">scpStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Additional per-account SCP statements layered on top of the auto-attached `ScpFinOpsAccountBaseline`. Additive only. |
+| <code><a href="#aws-data-landing-zone.DLzFinOpsAccount.property.scpStatements">scpStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Extra per-account SCP statements appended to `ScpFinOpsAccountBaseline`. |
 
 ---
 
@@ -23805,20 +23790,15 @@ public readonly scpStatements: PolicyStatement[];
 - *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
 - *Default:* no additional statements
 
-Additional per-account SCP statements layered on top of the auto-attached `ScpFinOpsAccountBaseline`. Additive only.
-
-Use this to add deployment-specific deny rules, or to add back specific actions
-the baseline denies that a particular deployment needs (e.g. enabling Lambda for
-a small data-prep workflow).
+Extra per-account SCP statements appended to `ScpFinOpsAccountBaseline`.
 
 ---
 
 ### DlzFinOpsAccountTags <a name="DlzFinOpsAccountTags" id="aws-data-landing-zone.DlzFinOpsAccountTags"></a>
 
-Operator-configurable tag overrides for the FinOps account stack.
+Per-tag overrides for the FinOps account stack.
 
-Defaults applied
-when omitted.
+Omitted fields fall back to the default.
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzFinOpsAccountTags.Initializer"></a>
 
@@ -23897,11 +23877,6 @@ public readonly project: string;
 
 ### DlzFinOpsProps <a name="DlzFinOpsProps" id="aws-data-landing-zone.DlzFinOpsProps"></a>
 
-FinOps capability bundle.
-
-Each member is independently optional; provide only what the
-deployment needs.
-
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzFinOpsProps.Initializer"></a>
 
 ```typescript
@@ -23914,11 +23889,11 @@ const dlzFinOpsProps: DlzFinOpsProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.accountBudgets">accountBudgets</a></code> | <code><a href="#aws-data-landing-zone.DlzAccountBudgetsProps">DlzAccountBudgetsProps</a></code> | Per-account / per-cost-center budgets. |
-| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.accountTags">accountTags</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags">DlzFinOpsAccountTags</a></code> | Override the tag values applied by the FinOps stack to its own resources. |
-| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.budgets">budgets</a></code> | <code><a href="#aws-data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]</code> | Org/account-wide budget alerts. |
-| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.costAnomalyDetection">costAnomalyDetection</a></code> | <code><a href="#aws-data-landing-zone.DlzCostAnomalyDetectionProps">DlzCostAnomalyDetectionProps</a></code> | AWS Cost Anomaly Detection. |
-| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.dataExports">dataExports</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsProps">DlzDataExportsProps</a></code> | BCM Data Exports — CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions delivery into a dedicated FinOps account. |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.accountBudgets">accountBudgets</a></code> | <code><a href="#aws-data-landing-zone.DlzAccountBudgetsProps">DlzAccountBudgetsProps</a></code> | Per-account and (optional) per-cost-center roll-up budgets. |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.accountTags">accountTags</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags">DlzFinOpsAccountTags</a></code> | Tag-value overrides for the FinOps account stack. |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.budgets">budgets</a></code> | <code><a href="#aws-data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]</code> | Tag-scoped org/account-wide budget alerts in the management account. |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.costAnomalyDetection">costAnomalyDetection</a></code> | <code><a href="#aws-data-landing-zone.DlzCostAnomalyDetectionProps">DlzCostAnomalyDetectionProps</a></code> | Cost Anomaly Detection monitors + subscriptions. |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsProps.property.dataExports">dataExports</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsProps">DlzDataExportsProps</a></code> | BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon Emissions) into the dedicated FinOps account. Synth fails fast if the FinOps account is not configured. |
 
 ---
 
@@ -23930,12 +23905,10 @@ public readonly accountBudgets: DlzAccountBudgetsProps;
 
 - *Type:* <a href="#aws-data-landing-zone.DlzAccountBudgetsProps">DlzAccountBudgetsProps</a>
 
-Per-account / per-cost-center budgets.
+Per-account and (optional) per-cost-center roll-up budgets.
 
-Composes the existing `DlzBudget` primitive,
-iterating workload accounts and creating a budget for each that sets `monthlyBudget`.
-
-Independent of the Shared Services OU — uses only the management account.
+Iterates workload accounts
+with `monthlyBudget` set. Management account only.
 
 ---
 
@@ -23947,11 +23920,10 @@ public readonly accountTags: DlzFinOpsAccountTags;
 
 - *Type:* <a href="#aws-data-landing-zone.DlzFinOpsAccountTags">DlzFinOpsAccountTags</a>
 
-Override the tag values applied by the FinOps stack to its own resources.
+Tag-value overrides for the FinOps account stack.
 
-Defaults
-categorize the FinOps account as production-grade DLZ infrastructure; override when
-the operator's taxonomy differs.
+Defaults treat the account as
+production-grade DLZ infrastructure; override when the operator's taxonomy differs.
 
 ---
 
@@ -23963,10 +23935,7 @@ public readonly budgets: DlzBudgetProps[];
 
 - *Type:* <a href="#aws-data-landing-zone.DlzBudgetProps">DlzBudgetProps</a>[]
 
-Org/account-wide budget alerts.
-
-Provisions `DlzBudget` entries in the management
-account.
+Tag-scoped org/account-wide budget alerts in the management account.
 
 ---
 
@@ -23978,13 +23947,10 @@ public readonly costAnomalyDetection: DlzCostAnomalyDetectionProps;
 
 - *Type:* <a href="#aws-data-landing-zone.DlzCostAnomalyDetectionProps">DlzCostAnomalyDetectionProps</a>
 
-AWS Cost Anomaly Detection.
+Cost Anomaly Detection monitors + subscriptions.
 
-Provisions monitors + subscriptions in the management
-account. Reuses the existing `budgetSnsCache` so anomaly notifications and budget
-alerts can share an SNS topic per subscriber set.
-
-Independent of the Shared Services OU — uses only the management account.
+Reuses `budgetSnsCache` so anomaly
+alerts and budgets can share an SNS topic. Management account only.
 
 ---
 
@@ -23996,10 +23962,7 @@ public readonly dataExports: DlzDataExportsProps;
 
 - *Type:* <a href="#aws-data-landing-zone.DlzDataExportsProps">DlzDataExportsProps</a>
 
-BCM Data Exports — CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, and Carbon Emissions delivery into a dedicated FinOps account.
-
-Requires `org.ous.sharedServices.accounts.finOps` to be configured.
-Validation fails fast at synth otherwise.
+BCM Data Exports (CUR 2.0, FOCUS 1.2, Cost Optimization Recommendations, Carbon Emissions) into the dedicated FinOps account. Synth fails fast if the FinOps account is not configured.
 
 ---
 
@@ -26634,6 +26597,7 @@ const iamIdentityCenterPermissionSetProps: IamIdentityCenterPermissionSetProps =
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.allowedAccountNames">allowedAccountNames</a></code> | <code>string[]</code> | Pins this permission set to a specific allow-list of accounts. |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.description">description</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.inlinePolicyDocument">inlinePolicyDocument</a></code> | <code>aws-cdk-lib.aws_iam.PolicyDocument</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.managedPolicyArns">managedPolicyArns</a></code> | <code>string[]</code> | *No description.* |
@@ -26649,6 +26613,22 @@ public readonly name: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `allowedAccountNames`<sup>Optional</sup> <a name="allowedAccountNames" id="aws-data-landing-zone.IamIdentityCenterPermissionSetProps.property.allowedAccountNames"></a>
+
+```typescript
+public readonly allowedAccountNames: string[];
+```
+
+- *Type:* string[]
+- *Default:* no restriction; can be assigned to any account
+
+Pins this permission set to a specific allow-list of accounts.
+
+The check
+runs after wildcard expansion, so `accountNames: ['*']` is rejected too.
 
 ---
 
@@ -27691,6 +27671,11 @@ public readonly globalIamIdentityCenter: ManagementGlobalIamIdentityCenterStack;
 
 ### MandatoryTags <a name="MandatoryTags" id="aws-data-landing-zone.MandatoryTags"></a>
 
+Allowed values for each mandatory tag.
+
+An empty array or `undefined` enforces tag
+presence only; a non-empty list restricts the value to entries in the list.
+
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.MandatoryTags.Initializer"></a>
 
 ```typescript
@@ -27703,11 +27688,11 @@ const mandatoryTags: MandatoryTags = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.costCenter">costCenter</a></code> | <code>string[]</code> | The values of the mandatory `CostCenter` tag that all resources must have. |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.domain">domain</a></code> | <code>string[]</code> | The values of the mandatory `Domain` tag that all resources must have. |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | The values of the mandatory `Environment` tag that all resources must have. |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | The values of the mandatory `Owner` tag that all resources must have. |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | The values of the mandatory `Project` tag that all resources must have. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.costCenter">costCenter</a></code> | <code>string[]</code> | Used by FinOps tooling for chargeback / showback. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.domain">domain</a></code> | <code>string[]</code> | Foundation enforces presence only. |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
 
 ---
 
@@ -27719,12 +27704,7 @@ public readonly costCenter: string[];
 
 - *Type:* string[]
 
-The values of the mandatory `CostCenter` tag that all resources must have.
-
-Specifying an empty array or undefined
-still enforces the tag presence but does not enforce the value.
-
-Used by FinOps tooling for chargeback / showback. Part of FinOps Layer 2 (Attribution).
+Used by FinOps tooling for chargeback / showback.
 
 ---
 
@@ -27736,14 +27716,10 @@ public readonly domain: string[];
 
 - *Type:* string[]
 
-The values of the mandatory `Domain` tag that all resources must have.
+Foundation enforces presence only.
 
-Specifying an empty array or undefined
-still enforces the tag presence but does not enforce the value.
-
-Foundation enforces presence only. The data platform overlay may later constrain values to
+The platform overlay may later constrain values to
 `['raw', 'curated', 'serving', 'inference']` via a value-restricted tag policy.
-Part of FinOps Layer 2 (Attribution).
 
 ---
 
@@ -27755,11 +27731,6 @@ public readonly environment: string[];
 
 - *Type:* string[]
 
-The values of the mandatory `Environment` tag that all resources must have.
-
-Specifying an empty array or undefined
-still enforces the tag presence but does not enforce the value.
-
 ---
 
 ##### `owner`<sup>Optional</sup> <a name="owner" id="aws-data-landing-zone.MandatoryTags.property.owner"></a>
@@ -27770,11 +27741,6 @@ public readonly owner: string[];
 
 - *Type:* string[]
 
-The values of the mandatory `Owner` tag that all resources must have.
-
-Specifying an empty array or undefined
-still enforces the tag presence but does not enforce the value.
-
 ---
 
 ##### `project`<sup>Optional</sup> <a name="project" id="aws-data-landing-zone.MandatoryTags.property.project"></a>
@@ -27784,11 +27750,6 @@ public readonly project: string[];
 ```
 
 - *Type:* string[]
-
-The values of the mandatory `Project` tag that all resources must have.
-
-Specifying an empty array or undefined
-still enforces the tag presence but does not enforce the value.
 
 ---
 
@@ -28283,7 +28244,7 @@ const orgOus: OrgOus = { ... }
 | <code><a href="#aws-data-landing-zone.OrgOus.property.security">security</a></code> | <code><a href="#aws-data-landing-zone.OrgOuSecurity">OrgOuSecurity</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.OrgOus.property.suspended">suspended</a></code> | <code><a href="#aws-data-landing-zone.OrgOuSuspended">OrgOuSuspended</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.OrgOus.property.workloads">workloads</a></code> | <code><a href="#aws-data-landing-zone.OrgOuWorkloads">OrgOuWorkloads</a></code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.OrgOus.property.sharedServices">sharedServices</a></code> | <code><a href="#aws-data-landing-zone.OrgOuSharedServices">OrgOuSharedServices</a></code> | Optional Shared Services OU. |
+| <code><a href="#aws-data-landing-zone.OrgOus.property.sharedServices">sharedServices</a></code> | <code><a href="#aws-data-landing-zone.OrgOuSharedServices">OrgOuSharedServices</a></code> | Shared Services OU. |
 
 ---
 
@@ -28324,12 +28285,11 @@ public readonly sharedServices: OrgOuSharedServices;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.OrgOuSharedServices">OrgOuSharedServices</a>
-- *Default:* not configured; shared-services capabilities (e.g. CUR) cannot be enabled
+- *Default:* not configured
 
-Optional Shared Services OU.
+Shared Services OU.
 
-Set to enable shared-services capabilities such as
-FinOps cost-data delivery (CUR) via the dedicated FinOps account.
+Required to enable BCM Data Exports (`finOps.dataExports`).
 
 ---
 
@@ -28413,15 +28373,13 @@ public readonly log: DLzManagementAccount;
 
 ### OrgOuSharedServices <a name="OrgOuSharedServices" id="aws-data-landing-zone.OrgOuSharedServices"></a>
 
-Shared Services OU — a parent for accounts that exist to serve the wider organization but are not themselves workloads, security, or governance baselines (FinOps today, additional shared accounts in the future).
+Shared Services OU.
 
-The OU is optional — DLZ deploys without it. Provision it when you need any of its
-member capabilities (e.g. CUR cost-data delivery via the FinOps account).
-
-Constructs that need a specific account here (e.g. CUR data plane → FinOps account) will
-fail at synth with an actionable error if they are configured but the corresponding
-account is absent. Anomaly detection and account budgets do NOT require this OU — they
-only use the management account.
+Optional parent for accounts that serve the wider organization but
+are not themselves workloads, security, or governance baselines. Constructs that need a
+specific account here (e.g. the CUR data plane needs the FinOps account) fail at synth
+with an actionable error when the account is absent. Anomaly detection and account
+budgets don't need this OU — they only use the management account.
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.OrgOuSharedServices.Initializer"></a>
 
@@ -28474,7 +28432,7 @@ const orgOuSharedServicesAccounts: OrgOuSharedServicesAccounts = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.OrgOuSharedServicesAccounts.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DLzFinOpsAccount">DLzFinOpsAccount</a></code> | Dedicated FinOps account for CUR cost-data delivery and isolated cost-data read access. |
+| <code><a href="#aws-data-landing-zone.OrgOuSharedServicesAccounts.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DLzFinOpsAccount">DLzFinOpsAccount</a></code> | Dedicated FinOps account hosting the BCM Data Exports bucket, Glue catalog, and Athena workgroup. |
 
 ---
 
@@ -28486,9 +28444,7 @@ public readonly finOps: DLzFinOpsAccount;
 
 - *Type:* <a href="#aws-data-landing-zone.DLzFinOpsAccount">DLzFinOpsAccount</a>
 
-Dedicated FinOps account for CUR cost-data delivery and isolated cost-data read access.
-
-Optional — set to enable FinOps capabilities (e.g. `cur`).
+Dedicated FinOps account hosting the BCM Data Exports bucket, Glue catalog, and Athena workgroup.
 
 ---
 
@@ -28926,7 +28882,7 @@ const scpFinOpsAccountBaselineOptions: ScpFinOpsAccountBaselineOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.ScpFinOpsAccountBaselineOptions.property.deniedServices">deniedServices</a></code> | <code>string[]</code> | Override the default service deny list (defaults to {@link ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES}). |
+| <code><a href="#aws-data-landing-zone.ScpFinOpsAccountBaselineOptions.property.deniedServices">deniedServices</a></code> | <code>string[]</code> | Override the default service deny list ({@link ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES}). |
 
 ---
 
@@ -28938,7 +28894,7 @@ public readonly deniedServices: string[];
 
 - *Type:* string[]
 
-Override the default service deny list (defaults to {@link ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES}).
+Override the default service deny list ({@link ScpFinOpsAccountBaseline.DEFAULT_DENIED_SERVICES}).
 
 ---
 
@@ -30005,13 +29961,17 @@ new Defaults()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-data-landing-zone.Defaults.budgets">budgets</a></code> | Budgets for the organization. |
+| <code><a href="#aws-data-landing-zone.Defaults.budgets">budgets</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.Defaults.carbonEmissionsQueryColumns">carbonEmissionsQueryColumns</a></code> | Default query-column projection for `CARBON_EMISSIONS` exports. |
+| <code><a href="#aws-data-landing-zone.Defaults.corQueryColumns">corQueryColumns</a></code> | Default query-column projection for `COST_OPTIMIZATION_RECOMMENDATIONS` exports. |
 | <code><a href="#aws-data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
+| <code><a href="#aws-data-landing-zone.Defaults.focus12QueryColumns">focus12QueryColumns</a></code> | Default query-column projection for `FOCUS_1_2` exports. |
 | <code><a href="#aws-data-landing-zone.Defaults.guardDutyFeatures">guardDutyFeatures</a></code> | Default GuardDuty features. |
 | <code><a href="#aws-data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
 | <code><a href="#aws-data-landing-zone.Defaults.macieConfig">macieConfig</a></code> | Default Macie configuration. |
 | <code><a href="#aws-data-landing-zone.Defaults.mandatoryTags">mandatoryTags</a></code> | * Mandatory tags for the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.rootControls">rootControls</a></code> | Control Tower Controls applied to all the OUs in the organization. |
+| <code><a href="#aws-data-landing-zone.Defaults.standardCurQueryColumns">standardCurQueryColumns</a></code> | Default query-column projection for `STANDARD_CUR_2_0` exports. |
 | <code><a href="#aws-data-landing-zone.Defaults.vpcClassB3Private3Public">vpcClassB3Private3Public</a></code> | Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets. |
 
 ---
@@ -30024,13 +29984,9 @@ import { Defaults } from 'aws-data-landing-zone'
 Defaults.budgets(orgTotal: number, infraDlz: number, subscribers: BudgetSubscribers, _?: ForceNoPythonArgumentLifting)
 ```
 
-Budgets for the organization.
-
 ###### `orgTotal`<sup>Required</sup> <a name="orgTotal" id="aws-data-landing-zone.Defaults.budgets.parameter.orgTotal"></a>
 
 - *Type:* number
-
-Total budget for the organization in USD.
 
 ---
 
@@ -30038,15 +29994,11 @@ Total budget for the organization in USD.
 
 - *Type:* number
 
-Budget for this DLZ project identified by tags Owner=infra, Project=dlz in USD.
-
 ---
 
 ###### `subscribers`<sup>Required</sup> <a name="subscribers" id="aws-data-landing-zone.Defaults.budgets.parameter.subscribers"></a>
 
 - *Type:* <a href="#aws-data-landing-zone.BudgetSubscribers">BudgetSubscribers</a>
-
-Subscribers for the budget.
 
 ---
 
@@ -30054,9 +30006,31 @@ Subscribers for the budget.
 
 - *Type:* <a href="#aws-data-landing-zone.ForceNoPythonArgumentLifting">ForceNoPythonArgumentLifting</a>
 
-Ignore this parameter, it is used to force a consistent interface across TS and Python usage.
-
 ---
+
+##### `carbonEmissionsQueryColumns` <a name="carbonEmissionsQueryColumns" id="aws-data-landing-zone.Defaults.carbonEmissionsQueryColumns"></a>
+
+```typescript
+import { Defaults } from 'aws-data-landing-zone'
+
+Defaults.carbonEmissionsQueryColumns()
+```
+
+Default query-column projection for `CARBON_EMISSIONS` exports.
+
+jsii-friendly accessor for the underlying `DLZ_CARBON_EMISSIONS_DEFAULT_QUERY_COLUMNS` constant.
+
+##### `corQueryColumns` <a name="corQueryColumns" id="aws-data-landing-zone.Defaults.corQueryColumns"></a>
+
+```typescript
+import { Defaults } from 'aws-data-landing-zone'
+
+Defaults.corQueryColumns()
+```
+
+Default query-column projection for `COST_OPTIMIZATION_RECOMMENDATIONS` exports.
+
+jsii-friendly accessor for the underlying `DLZ_COR_DEFAULT_QUERY_COLUMNS` constant.
 
 ##### `denyServiceList` <a name="denyServiceList" id="aws-data-landing-zone.Defaults.denyServiceList"></a>
 
@@ -30069,6 +30043,18 @@ Defaults.denyServiceList()
 * List of services that are denied in the organization.
 
 Empty by default — opt in to deny services.
+
+##### `focus12QueryColumns` <a name="focus12QueryColumns" id="aws-data-landing-zone.Defaults.focus12QueryColumns"></a>
+
+```typescript
+import { Defaults } from 'aws-data-landing-zone'
+
+Defaults.focus12QueryColumns()
+```
+
+Default query-column projection for `FOCUS_1_2` exports.
+
+jsii-friendly accessor for the underlying `DLZ_FOCUS_1_2_DEFAULT_QUERY_COLUMNS` constant.
 
 ##### `guardDutyFeatures` <a name="guardDutyFeatures" id="aws-data-landing-zone.Defaults.guardDutyFeatures"></a>
 
@@ -30134,6 +30120,18 @@ Defaults.rootControls()
 ```
 
 Control Tower Controls applied to all the OUs in the organization.
+
+##### `standardCurQueryColumns` <a name="standardCurQueryColumns" id="aws-data-landing-zone.Defaults.standardCurQueryColumns"></a>
+
+```typescript
+import { Defaults } from 'aws-data-landing-zone'
+
+Defaults.standardCurQueryColumns()
+```
+
+Default query-column projection for `STANDARD_CUR_2_0` exports.
+
+jsii-friendly accessor for the underlying `DLZ_CUR_DEFAULT_QUERY_COLUMNS_STANDARD` constant.
 
 ##### `vpcClassB3Private3Public` <a name="vpcClassB3Private3Public" id="aws-data-landing-zone.Defaults.vpcClassB3Private3Public"></a>
 
@@ -31909,14 +31907,12 @@ ScpDenyServiceActions.statement(serviceActions: string[])
 
 Hardening baseline for the dedicated FinOps account.
 
-Locks the account to its
-single purpose (CUR data + Glue catalog + Athena) so it can't drift into a
-workload account or be abused as a privilege hop.
-
-Denies: compute/data services, network primitives, IAM user creation, and
-org-integrity actions (LeaveOrganization, CloseAccount, disabling CloudTrail /
-GuardDuty / Macie / Config). `AWSControlTowerExecution` is exempted in every
-statement so Control Tower keeps managing the account.
+Keeps the account scoped to its
+single purpose (CUR data + Glue catalog + Athena) so it can't drift into a workload
+account or be abused as a privilege hop. Denies compute/data services, network
+primitives, IAM user creation, and org-integrity actions (LeaveOrganization,
+CloseAccount, disabling CloudTrail / GuardDuty / Macie / Config).
+`AWSControlTowerExecution` is exempted in every statement.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpFinOpsAccountBaseline.Initializer"></a>
 
@@ -32000,8 +31996,8 @@ public readonly DEFAULT_DENIED_SERVICES: string[];
 
 Compute / data services denied by default.
 
-Lambda is intentionally allowed —
-CDK custom resources need it; tighten via permission boundaries, not SCPs.
+Lambda is intentionally allowed because
+CDK custom resources need it — tighten via permission boundaries, not SCPs.
 
 ---
 
