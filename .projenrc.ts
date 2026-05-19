@@ -4,7 +4,7 @@ import { ArrowParens, TrailingComma } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'DataChefHQ',
   authorAddress: 'hi@datachef.co',
-  cdkVersion: '2.248.0',
+  cdkVersion: '2.255.0',
   defaultReleaseBranch: 'main',
   constructsVersion: '10.6.0',
   cdkVersionPinning: false,
@@ -48,10 +48,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: 'aws_data_landing_zone',
   },
   deps: [
-    'cdk-express-pipeline@^1.6.0',
+    'cdk-express-pipeline@2.3.1',
   ],
   peerDeps: [
-    'cdk-express-pipeline@^1.6.0',
+    'cdk-express-pipeline@2.3.1',
   ],
   bundledDeps: [
     '@aws-sdk/client-sts@^3.1049.0',
@@ -69,7 +69,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/js-yaml',
     'table',
   ],
-  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node@^22', 'cdk-express-pipeline@^1.6.0'],
+  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node@^22', 'cdk-express-pipeline@2.3.1'],
   jestOptions: {
     jestConfig: {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring

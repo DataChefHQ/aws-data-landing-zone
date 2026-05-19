@@ -34,7 +34,7 @@
     },
     {
       "name": "cdk-express-pipeline",
-      "version": "^1.6.0",
+      "version": "2.3.1",
       "type": "build"
     },
     {
@@ -69,7 +69,7 @@
     },
     {
       "name": "jest-junit",
-      "version": "^16",
+      "version": "^17",
       "type": "build"
     },
     {
@@ -182,12 +182,12 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.248.0",
+      "version": "^2.255.0",
       "type": "peer"
     },
     {
       "name": "cdk-express-pipeline",
-      "version": "^1.6.0",
+      "version": "2.3.1",
       "type": "peer"
     },
     {
@@ -197,7 +197,7 @@
     },
     {
       "name": "cdk-express-pipeline",
-      "version": "^1.6.0",
+      "version": "2.3.1",
       "type": "runtime"
     }
   ],
