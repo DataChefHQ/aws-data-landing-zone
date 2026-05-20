@@ -795,23 +795,10 @@ export interface DataLandingZoneProps {
   readonly iamIdentityCenter?: IamIdentityCenterProps;
 
   /**
-   * List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services.
-   *
-   * Cannot be used together with `scpBaselineStatements`.
-   *
-   * @deprecated Use `scpBaselineStatements` for full control over the deny-services baseline. This field
-   * remains supported for the simple "deny these service actions" case.
-   * @default Defaults.denyServiceList() (empty list)
-   */
-  readonly denyServiceList?: string[];
-
-  /**
    * Replaces the deny-services portion of the org SCP baseline applied to every workload account.
    * The mandatory-tags SCP is always appended after these statements and cannot be opted out of.
    *
-   * Cannot be used together with `denyServiceList`.
-   *
-   * @default - default baseline derived from `denyServiceList`
+   * @default - only the mandatory-tags SCP is applied
    */
   readonly scpBaselineStatements?: PolicyStatement[];
 

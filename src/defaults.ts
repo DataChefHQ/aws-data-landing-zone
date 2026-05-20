@@ -11,10 +11,7 @@ import {
 import { DlzGuardDutyFeaturesProps } from './constructs/dlz-guardduty/guardduty-types';
 import { DlzMacieProps } from './constructs/dlz-macie/macie-types';
 import { DlzVpcProps } from './constructs/dlz-vpc/dlz-vpc';
-import {
-  ScpDenyCfnStacksWithoutStandardTags,
-  ScpDenyServiceActions,
-} from './constructs/organization-policies';
+import { ScpDenyCfnStacksWithoutStandardTags } from './constructs/organization-policies';
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 
 import { DataLandingZoneProps, ForceNoPythonArgumentLifting, Region } from './data-landing-zone-types';
@@ -32,13 +29,6 @@ export enum IamIdentityPermissionSets {
 }
 
 export class Defaults {
-  /** *
-   * List of services that are denied in the organization. Empty by default — opt in to deny services.
-   */
-  public static denyServiceList(): string[] {
-    return [];
-  }
-
   /**
    * Creates a VPC configuration with 2 route tables, one used as public and the other private, each with 3 subnets.
    * Each subnet has a /19 CIDR block. The VPC CIDR is `10.${thirdOctetMask}.0.0/16`
@@ -286,23 +276,9 @@ export class PropsOrDefaults {
    * Owns conflict detection, deny-list resolution, and the always-appended mandatory-tags SCP.
    */
   public static getScpBaseline(props: DataLandingZoneProps): iam.PolicyStatement[] {
-    if (props.scpBaselineStatements !== undefined && props.denyServiceList !== undefined) {
-      throw new Error(
-        'DataLandingZoneProps: cannot set both `scpBaselineStatements` and `denyServiceList`. ' +
-        '`scpBaselineStatements` replaces the deny-services baseline; remove `denyServiceList`.',
-      );
-    }
-
     const tags = PropsOrDefaults.getOrganizationTags(props);
     const tagsStatement = ScpDenyCfnStacksWithoutStandardTags.statement(tags);
-
-    if (props.scpBaselineStatements !== undefined) {
-      return [...props.scpBaselineStatements, tagsStatement];
-    }
-
-    const denyList = props.denyServiceList ?? Defaults.denyServiceList();
-    const denies = denyList.length > 0 ? [ScpDenyServiceActions.statement(denyList)] : [];
-    return [...denies, tagsStatement];
+    return [...(props.scpBaselineStatements ?? []), tagsStatement];
   }
 
   public static getOrganizationTags(props: DataLandingZoneProps) {
