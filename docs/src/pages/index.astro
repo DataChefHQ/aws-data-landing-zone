@@ -1,0 +1,581 @@
+---
+// No external dependencies — icons are inlined as SVGs
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Landing Zone &mdash; DevEx, Finance, Compliance. Balanced by design.</title>
+  <meta name="description" content="An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team." />
+  <link rel="icon" href="/favicon.png" />
+
+  <meta property="og:title" content="Data Landing Zone" />
+  <meta property="og:description" content="DevEx, Finance, Compliance. Balanced by design." />
+  <meta property="og:image" content="/dlz-dark-og.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script is:inline>
+    (function() {
+      var stored = localStorage.getItem('starlight-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+</head>
+
+<body class="dlz-page">
+
+<header class="dlz-navbar">
+  <div class="dlz-navbar-inner">
+    <div class="dlz-navbar-left">
+      <a href="/" class="dlz-logo-link" aria-label="Data Landing Zone home">
+        <svg class="dlz-logo dlz-logo-light" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ"><g clip-path="url(#dlz-nl)"><path d="M80.9902 26.3561H89.8767V29.6956H76.4054V26.6391L85.2353 13.2809H76.4054V9.94141H89.8767V12.9979L80.9902 26.3561Z" fill="#121B2B"/><path d="M67.9155 26.5542H74.4248V29.6956H63.9534V9.94141H67.9155V26.5542Z" fill="#121B2B"/><path d="M50.5727 9.94141C52.6481 9.94141 54.4688 10.3471 56.0348 11.1584C57.6196 11.9697 58.8366 13.13 59.6856 14.6394C60.5535 16.1299 60.9875 17.8657 60.9875 19.8468C60.9875 21.8279 60.5535 23.5637 59.6856 25.0542C58.8366 26.5259 57.6196 27.6674 56.0348 28.4787C54.4688 29.29 52.6481 29.6956 50.5727 29.6956H43.6672V9.94141H50.5727ZM50.4311 26.3278C52.5066 26.3278 54.1103 25.7617 55.2423 24.6297C56.3744 23.4977 56.9404 21.9034 56.9404 19.8468C56.9404 17.7903 56.3744 16.1865 55.2423 15.0356C54.1103 13.8658 52.5066 13.2809 50.4311 13.2809H47.6293V26.3278H50.4311Z" fill="#121B2B"/><path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FC9934"/><path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="#121B2B"/><path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="#121B2B"/><path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="#121B2B"/><path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="#121B2B"/><path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="#121B2B"/></g><defs><clipPath id="dlz-nl"><rect width="90" height="39.9248" fill="white"/></clipPath></defs></svg>
+        <svg class="dlz-logo dlz-logo-dark" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ"><g clip-path="url(#dlz-nd)"><path d="M80.9901 26.4972H89.8766V29.8367H76.4053V26.7802L85.2352 13.4221H76.4053V10.0825H89.8766V13.139L80.9901 26.4972Z" fill="white"/><path d="M67.9155 26.6953H74.4248V29.8367H63.9534V10.0825H67.9155V26.6953Z" fill="white"/><path d="M50.5725 10.0825C52.6479 10.0825 54.4686 10.4882 56.0346 11.2995C57.6195 12.1108 58.8364 13.2711 59.6854 14.7805C60.5533 16.271 60.9873 18.0068 60.9873 19.9879C60.9873 21.969 60.5533 23.7048 59.6854 25.1953C58.8364 26.667 57.6195 27.8085 56.0346 28.6198C54.4686 29.4311 52.6479 29.8367 50.5725 29.8367H43.667V10.0825H50.5725ZM50.431 26.4689C52.5064 26.4689 54.1101 25.9029 55.2422 24.7708C56.3742 23.6388 56.9402 22.0445 56.9402 19.9879C56.9402 17.9314 56.3742 16.3276 55.2422 15.1767C54.1101 14.0069 52.5064 13.4221 50.431 13.4221H47.6292V26.4689H50.431Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M34.2127 10.0862V11.1632L26.5574 15.551V24.3741L34.2127 28.7618V29.8389L24.7547 35.2995L17.1063 30.9158L9.45794 35.2995L0 29.8389V28.7618L7.65533 24.3741V15.551L0 11.1632V10.0862L9.45822 4.62549L17.1063 9.00914L24.7544 4.62549L34.2127 10.0862ZM9.45102 15.5509V24.374L17.1063 28.7618L24.7617 24.374V15.5509L17.1063 11.1631L9.45102 15.5509Z" fill="#FFC840"/><path d="M17.1064 39.7149L20.9813 37.4939L17.1064 35.2729L13.2314 37.4939L17.1064 39.7149Z" fill="white"/><path d="M0 15.5205L3.87492 17.7415V22.1835L0 24.4045V15.5205Z" fill="white"/><path d="M34.2126 15.5205V24.4045L30.3376 22.1835V17.7415L34.2126 15.5205Z" fill="white"/><path d="M17.1064 4.65145L20.9813 2.43046L17.1064 0.209473L13.2314 2.43046L17.1064 4.65145Z" fill="white"/><path d="M17.1064 15.5205L20.9813 17.7415V22.1835L17.1064 24.4045L13.2314 22.1835V17.7415L17.1064 15.5205Z" fill="white"/></g><defs><clipPath id="dlz-nd"><rect width="90" height="39.9248" fill="white"/></clipPath></defs></svg>
+      </a>
+      <nav class="dlz-nav-links">
+        <a href="/introduction" class="dlz-nav-btn">Introduction</a>
+        <a href="/components/account-management/accounts" class="dlz-nav-btn">Components</a>
+      </nav>
+    </div>
+    <div class="dlz-navbar-right">
+      <div class="dlz-search-bar" role="search" aria-label="Site search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-search-icon" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+        <span class="dlz-search-placeholder">Search</span>
+      </div>
+      <a href="https://github.com/DataChefHQ/aws-data-landing-zone" target="_blank" rel="noopener" class="dlz-icon-btn" aria-label="GitHub repository">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <button id="dlz-theme-toggle" class="dlz-theme-btn" aria-label="Toggle dark mode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-icon-moon" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+        <span class="dlz-theme-label-dark">Dark</span>
+        <span class="dlz-theme-label-light">Light</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="dlz-section" style="z-index:8; position:relative;">
+  <div class="dlz-full-row dlz-border-b">
+    <div class="dlz-container">
+      <div class="dlz-spacer-sm dlz-side-borders"></div>
+    </div>
+  </div>
+  <div class="dlz-full-row">
+    <div class="dlz-container">
+      <div class="dlz-hero-grid dlz-side-borders">
+        <div class="dlz-hero-text">
+          <p class="dlz-eyebrow">Data Landing Zone</p>
+          <h1 class="dlz-hero-title">DevEx, Finance, Compliance.<br />Balanced by design.</h1>
+          <p class="dlz-hero-body">
+            After working across large AWS environments with hundreds of accounts, we saw the same tension again and again:<br />
+            <span class="dlz-highlight">finance</span> wants control, <span class="dlz-highlight">compliance</span> wants certainty, and <span class="dlz-highlight">engineers</span> want speed.
+          </p>
+          <p class="dlz-hero-subline">
+            Everyone told us to pick one.<br />
+            <span class="dlz-highlight dlz-hero-punchline">We didn&rsquo;t.</span>
+          </p>
+          <div class="dlz-hero-ctas">
+            <a href="/introduction" class="dlz-btn-primary">
+              Introduction
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </a>
+            <a href="/getting-started" class="dlz-btn-ghost-hero">Get Started</a>
+          </div>
+        </div>
+        <div class="dlz-hero-panel">
+          <img src="/images/hero-panel-light.png" alt="DevEx, Finance, Compliance balance diagram" class="dlz-hero-diagram dlz-diagram-light" />
+          <img src="/images/hero-panel-dark.png"  alt="DevEx, Finance, Compliance balance diagram" class="dlz-hero-diagram dlz-diagram-dark"  />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-border-t">
+    <div class="dlz-container">
+      <div class="dlz-spacer-xs dlz-side-borders"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-border-t" style="z-index:7; padding: 160px 0;">
+  <div class="dlz-container dlz-px">
+    <div class="dlz-prose-wide">
+      <h2 class="dlz-section-title-lg">The problem</h2>
+      <p class="dlz-body-lg">
+        Cloud bills double overnight. Privacy audits land badly. Every workload reinvents the same governance, and engineers ship slower for it. By the time anyone notices the pattern, the architecture has already hardened around it, and remediation means changing things teams now depend on.
+      </p>
+      <p class="dlz-body-lg" style="margin-top: 0;">
+        The order is predictable. Privacy gets addressed first because regulation forces the conversation. FinOps gets addressed last, after the first billing shock. AI is now landing in the same sequence, except the spend curve is steeper than the regulatory one.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-border-t" style="z-index:6;">
+  <div class="dlz-full-row">
+    <div class="dlz-container">
+      <div class="dlz-quote-box dlz-side-borders">
+        <div class="dlz-quote-inner">
+          <p class="dlz-quote-text">
+            &ldquo;Surveyed companies reported average monthly AI budgets rising <span class="dlz-highlight">36%</span> in 2025, with only <span class="dlz-highlight">51%</span> confident they can measure the ROI of that spend.&rdquo;
+          </p>
+          <div class="dlz-quote-attr">
+            <p class="dlz-quote-source">CloudZero</p>
+            <p class="dlz-quote-subtitle">The State of AI Costs, May 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-accent-border-t" style="z-index:5;">
+  <div class="dlz-full-row">
+    <div class="dlz-container">
+      <div class="dlz-bridge-wrap dlz-side-borders">
+        <p class="dlz-bridge-text">The Data Landing Zone closes these gaps before the first workload lands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-accent-border-t" style="z-index:4;">
+  <div class="dlz-full-row dlz-accent-border-t">
+    <div class="dlz-container">
+      <div class="dlz-spacer-md dlz-accent-side-borders"></div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t" style="padding: 32px 0;">
+    <div class="dlz-container dlz-px">
+      <div class="dlz-section-header">
+        <h2 class="dlz-section-title-xl">Built for three stakeholders at once</h2>
+        <p class="dlz-section-subtitle">Data platforms usually pick one of these audiences to serve well. The DLZ aims to serve all three.</p>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container dlz-px" style="padding-top: 24px; padding-bottom: 24px;">
+      <div class="dlz-three-cols">
+        <div class="dlz-stakeholder-col">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-stake-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 18V6"></path></svg>
+          <h3 class="dlz-stake-title">CFO &amp; Finance</h3>
+          <p class="dlz-stake-desc">Cost attribution is part of provisioning. Budgets and anomaly alerts ship as code alongside the workload they monitor, and every resource carries the tags needed to roll spend up to a team, product, or environment. Chargeback becomes a query rather than a reconciliation project.</p>
+        </div>
+        <div class="dlz-stakeholder-col">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-stake-icon" aria-hidden="true"><path d="M12 7v14"></path><path d="M16 12h2"></path><path d="M16 8h2"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path><path d="M6 12h2"></path><path d="M6 8h2"></path></svg>
+          <h3 class="dlz-stake-title">Compliance Office</h3>
+          <p class="dlz-stake-desc">The controls regulators look for are owned by the platform: GDPR alignment, data classification, access logging, audit trails. When an audit lands, the evidence is already in the same place it was last quarter.</p>
+        </div>
+        <div class="dlz-stakeholder-col">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-stake-icon" aria-hidden="true"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+          <h3 class="dlz-stake-title">Engineers</h3>
+          <p class="dlz-stake-desc">Engineers get a paved road. Common requests like a new account, a new pipeline, or access to a dataset resolve through self-service against guardrails the platform already enforces. Policy is checked at deploy and audit time, so PRs don&rsquo;t run into governance walls in the middle of code review.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t">
+    <div class="dlz-container dlz-px" style="padding-top: 24px; padding-bottom: 24px;">
+      <div class="dlz-design-principle-wrap">
+        <h4 class="dlz-design-principle-label">Design principle.</h4>
+        <p class="dlz-design-principle-text">The compliant path should be the convenient one. When following policy is the fastest way to ship, engineers do it by default, and working around it stops being worth the effort.</p>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t">
+    <div class="dlz-container">
+      <div class="dlz-spacer-md dlz-accent-side-borders"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-accent-border-t dlz-finops-section" style="z-index:3;">
+  <div class="dlz-container dlz-px">
+    <div class="dlz-finops-grid">
+      <div class="dlz-finops-left">
+        <div class="dlz-finops-left-inner">
+          <h2 class="dlz-finops-title">How the DLZ delivers on FinOps</h2>
+          <p class="dlz-finops-subtitle">FinOps tends to arrive last, after the first billing shock makes it urgent. The DLZ ships the cost-management capability ready to use, in four layers.</p>
+          <a href="/introduction" class="dlz-btn-finops">
+            Introduction
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </a>
+        </div>
+      </div>
+      <div class="dlz-finops-right">
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h8"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path d="m3 17 2 2 4-4"></path><path d="m3 7 2 2 4-4"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Instrumentation</h3>
+            <p class="dlz-finops-item-desc">Every service emits cost and usage data in a consistent form. CUR 2.0 is the system of record, written to a dedicated FinOps account and queryable from Athena.</p>
+          </div>
+        </div>
+        <div class="dlz-finops-separator"></div>
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"></path><path d="m9 10 2 2 4-4"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Attribution</h3>
+            <p class="dlz-finops-item-desc">A mandatory tag set is enforced at deploy time. Tag policies, SCPs, and DLZ-side validation all check it before a resource ships. Anything that can&rsquo;t be attributed to an owner doesn&rsquo;t reach production.</p>
+          </div>
+        </div>
+        <div class="dlz-finops-separator"></div>
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Guardrails</h3>
+            <p class="dlz-finops-item-desc">Budgets alert when usage approaches the threshold and stop spend when it crosses the limit. An LLM gateway applies per-team and per-project token caps in real time, so a runaway agent burns minutes of budget rather than days.</p>
+          </div>
+        </div>
+        <div class="dlz-finops-separator"></div>
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Reporting</h3>
+            <p class="dlz-finops-item-desc">Each role gets the view it needs: engineers see service-level burn, product owners see feature cost, finance sees the chargeback rollup. Cost-per-unit-of-work turns &ldquo;we should optimise&rdquo; into a number.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section" style="z-index:2;">
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container">
+      <div class="dlz-spacer-lg dlz-accent-side-borders"></div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t" style="padding: 32px 0 48px;">
+    <div class="dlz-container dlz-px">
+      <h2 class="dlz-section-title-xl">What is the Data Landing Zone?</h2>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container">
+      <div class="dlz-features-grid dlz-accent-side-borders">
+        <div class="dlz-feature-col dlz-feature-col-right-border">
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"></path><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path></svg>
+            <h3 class="dlz-feature-title">Accelerator</h3>
+            <p class="dlz-feature-desc">A landing zone tailored for AI, data-driven, data mesh, and cloud projects, so teams can experiment fast without building governance from scratch.</p>
+          </div>
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            <h3 class="dlz-feature-title">All-in-one CDK component</h3>
+            <p class="dlz-feature-desc">A CDK construct published in TypeScript and Python that orchestrates AWS accounts and the resources needed for a multi-account data platform.</p>
+          </div>
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <h3 class="dlz-feature-title">Standards &amp; best practices</h3>
+            <p class="dlz-feature-desc">Aligned with the AWS Well-Architected Framework for multi-account strategy, security, and compliance.</p>
+          </div>
+        </div>
+        <div class="dlz-feature-col dlz-feature-col-offset">
+          <div class="dlz-feature-item dlz-feature-border-t dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg>
+            <h3 class="dlz-feature-title">Lessons in the defaults</h3>
+            <p class="dlz-feature-desc">Years of operational lessons about regulators, billing, and incident response are encoded as defaults in the platform. New workloads inherit them without anyone having to remember to apply them.</p>
+          </div>
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+            <h3 class="dlz-feature-title">FinOps as a platform concern</h3>
+            <p class="dlz-feature-desc">Mandatory cost-allocation tags enforced at deploy time. Budgets and anomaly controls as code. CUR centralised in a dedicated FinOps account. An LLM gateway that blocks token spend before it reaches the model.</p>
+          </div>
+          <div class="dlz-feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path></svg>
+            <h3 class="dlz-feature-title">Ease of use</h3>
+            <p class="dlz-feature-desc">Data engineers can deploy it using the defaults. Cloud engineers can customise the parts their organisation needs to fine-tune.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container">
+      <div class="dlz-spacer-lg dlz-accent-side-borders"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="dlz-footer dlz-border-t" style="z-index:1;">
+  <div class="dlz-footer-inner">
+    <div class="dlz-footer-top">
+      <a href="/" aria-label="Data Landing Zone home" class="dlz-logo-link">
+        <svg class="dlz-logo dlz-logo-light" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ"><g clip-path="url(#dlz-fl)"><path d="M80.9902 26.3561H89.8767V29.6956H76.4054V26.6391L85.2353 13.2809H76.4054V9.94141H89.8767V12.9979L80.9902 26.3561Z" fill="#121B2B"/><path d="M67.9155 26.5542H74.4248V29.6956H63.9534V9.94141H67.9155V26.5542Z" fill="#121B2B"/><path d="M50.5727 9.94141C52.6481 9.94141 54.4688 10.3471 56.0348 11.1584C57.6196 11.9697 58.8366 13.13 59.6856 14.6394C60.5535 16.1299 60.9875 17.8657 60.9875 19.8468C60.9875 21.8279 60.5535 23.5637 59.6856 25.0542C58.8366 26.5259 57.6196 27.6674 56.0348 28.4787C54.4688 29.29 52.6481 29.6956 50.5727 29.6956H43.6672V9.94141H50.5727ZM50.4311 26.3278C52.5066 26.3278 54.1103 25.7617 55.2423 24.6297C56.3744 23.4977 56.9404 21.9034 56.9404 19.8468C56.9404 17.7903 56.3744 16.1865 55.2423 15.0356C54.1103 13.8658 52.5066 13.2809 50.4311 13.2809H47.6293V26.3278H50.4311Z" fill="#121B2B"/><path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FC9934"/><path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="#121B2B"/><path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="#121B2B"/><path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="#121B2B"/><path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="#121B2B"/><path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="#121B2B"/></g><defs><clipPath id="dlz-fl"><rect width="90" height="39.9248" fill="white"/></clipPath></defs></svg>
+        <svg class="dlz-logo dlz-logo-dark" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ"><g clip-path="url(#dlz-fd)"><path d="M80.9901 26.4972H89.8766V29.8367H76.4053V26.7802L85.2352 13.4221H76.4053V10.0825H89.8766V13.139L80.9901 26.4972Z" fill="white"/><path d="M67.9155 26.6953H74.4248V29.8367H63.9534V10.0825H67.9155V26.6953Z" fill="white"/><path d="M50.5725 10.0825C52.6479 10.0825 54.4686 10.4882 56.0346 11.2995C57.6195 12.1108 58.8364 13.2711 59.6854 14.7805C60.5533 16.271 60.9873 18.0068 60.9873 19.9879C60.9873 21.969 60.5533 23.7048 59.6854 25.1953C58.8364 26.667 57.6195 27.8085 56.0346 28.6198C54.4686 29.4311 52.6479 29.8367 50.5725 29.8367H43.667V10.0825H50.5725ZM50.431 26.4689C52.5064 26.4689 54.1101 25.9029 55.2422 24.7708C56.3742 23.6388 56.9402 22.0445 56.9402 19.9879C56.9402 17.9314 56.3742 16.3276 55.2422 15.1767C54.1101 14.0069 52.5064 13.4221 50.431 13.4221H47.6292V26.4689H50.431Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M34.2127 10.0862V11.1632L26.5574 15.551V24.3741L34.2127 28.7618V29.8389L24.7547 35.2995L17.1063 30.9158L9.45794 35.2995L0 29.8389V28.7618L7.65533 24.3741V15.551L0 11.1632V10.0862L9.45822 4.62549L17.1063 9.00914L24.7544 4.62549L34.2127 10.0862ZM9.45102 15.5509V24.374L17.1063 28.7618L24.7617 24.374V15.5509L17.1063 11.1631L9.45102 15.5509Z" fill="#FFC840"/><path d="M17.1064 39.7149L20.9813 37.4939L17.1064 35.2729L13.2314 37.4939L17.1064 39.7149Z" fill="white"/><path d="M0 15.5205L3.87492 17.7415V22.1835L0 24.4045V15.5205Z" fill="white"/><path d="M34.2126 15.5205V24.4045L30.3376 22.1835V17.7415L34.2126 15.5205Z" fill="white"/><path d="M17.1064 4.65145L20.9813 2.43046L17.1064 0.209473L13.2314 2.43046L17.1064 4.65145Z" fill="white"/><path d="M17.1064 15.5205L20.9813 17.7415V22.1835L17.1064 24.4045L13.2314 22.1835V17.7415L17.1064 15.5205Z" fill="white"/></g><defs><clipPath id="dlz-fd"><rect width="90" height="39.9248" fill="white"/></clipPath></defs></svg>
+      </a>
+      <nav class="dlz-footer-nav">
+        <span class="dlz-footer-link">Home</span>
+        <a href="https://datachef.co/" target="_blank" rel="noopener" class="dlz-footer-link dlz-footer-link-underline">DataChef.co</a>
+      </nav>
+    </div>
+    <div class="dlz-footer-sep"></div>
+    <div class="dlz-footer-bottom">
+      <a href="https://datachef.co/" target="_blank" rel="noopener" aria-label="DataChef">
+        <svg class="dlz-datachef-logo dlz-logo-light" xmlns="http://www.w3.org/2000/svg" width="139" height="24" viewBox="0 0 139 24" fill="none"><g clip-path="url(#dc-fl)"><path d="M50.3232 15.5381C50.3232 19.9007 47.2605 22.9009 42.4968 22.9009H36.9033V8.1748H42.4971C47.2605 8.1748 50.3232 11.1541 50.3232 15.5381ZM42.263 19.7965C45.0064 19.7965 46.6227 18.2442 46.6227 15.5381C46.6227 12.8319 45.0065 11.2375 42.263 11.2375H40.5402V19.7965H42.263Z" fill="#1A237E"/><path d="M56.812 11.0269C58.5772 11.0269 59.8323 11.8238 60.4702 12.8521V11.1953H64.1071V22.9006H60.4702V21.2433C59.8111 22.271 58.5556 23.0681 56.7909 23.0681C53.8985 23.0681 51.5802 20.7188 51.5802 17.0267C51.5802 13.3346 53.8984 11.0269 56.812 11.0269ZM57.8757 14.1525C56.5147 14.1525 55.2806 15.1597 55.2806 17.0264C55.2806 18.893 56.5147 19.9428 57.8757 19.9428C59.2581 19.9428 60.4702 18.9141 60.4702 17.0478C60.4702 15.1815 59.2581 14.1525 57.8757 14.1525Z" fill="#1A237E"/><path d="M67.1853 14.1736H65.7392V11.1951H67.1853V8.34229H70.8222V11.1951H73.2041V14.1736H70.8222V18.8725C70.8222 19.5654 71.1197 19.8584 71.9279 19.8584H73.2253V22.9005H71.3753C68.908 22.9005 67.1853 21.8728 67.1853 18.8307V14.1736Z" fill="#1A237E"/><path d="M79.5478 11.0269C81.3124 11.0269 82.5676 11.8238 83.2058 12.8521V11.1953H86.8424V22.9006H83.2058V21.2433C82.5463 22.271 81.2912 23.0681 79.5266 23.0681C76.634 23.0681 74.3159 20.7188 74.3159 17.0267C74.3159 13.3346 76.634 11.0269 79.5478 11.0269ZM80.611 14.1525C79.25 14.1525 78.0159 15.1597 78.0159 17.0264C78.0159 18.893 79.2493 19.9428 80.611 19.9428C81.9933 19.9428 83.2061 18.9141 83.2061 17.0478C83.2061 15.1815 81.9933 14.1525 80.611 14.1525Z" fill="#1A237E"/><path d="M96.3154 8.00684C99.8678 8.00684 102.547 9.97911 103.398 13.1671H99.3993C98.7826 11.9088 97.6553 11.2792 96.273 11.2792C94.04 11.2792 92.5087 12.9156 92.5087 15.5169C92.5087 18.1182 94.04 19.7545 96.273 19.7545C97.6553 19.7545 98.7826 19.1249 99.3993 17.8664H103.398C102.547 21.0547 99.8674 23.006 96.3154 23.006C91.9132 23.006 88.8081 19.9219 88.8081 15.5169C88.8081 11.1119 91.9132 8.00684 96.3154 8.00684Z" fill="#1A237E"/><path d="M105.352 7.37744H108.989V12.7685C109.711 11.7618 111.009 11.0694 112.647 11.0694C115.347 11.0694 117.155 12.9155 117.155 16.0619V22.9007H113.54V16.5446C113.54 14.9504 112.647 14.0692 111.264 14.0692C109.881 14.0692 108.989 14.9504 108.989 16.5446V22.9007H105.352V7.37744Z" fill="#1A237E"/><path d="M124.804 23.0681C121.316 23.0681 118.806 20.7606 118.806 17.0475C118.806 13.3343 121.273 11.0269 124.804 11.0269C128.271 11.0269 130.717 13.2924 130.717 16.8582C130.716 17.209 130.694 17.5595 130.652 17.9078H122.422C122.55 19.4386 123.506 20.152 124.676 20.152C125.697 20.152 126.272 19.6489 126.569 19.0192H130.44C129.866 21.3065 127.76 23.0681 124.804 23.0681ZM122.443 15.9153H126.994C126.994 14.6351 125.973 13.9013 124.761 13.9013C123.571 13.9013 122.656 14.6145 122.443 15.9153Z" fill="#1A237E"/><path d="M132.807 14.1741H131.489V11.1957H132.807V10.8599C132.807 7.79725 134.722 6.28691 138.337 6.47572V9.5174C136.933 9.43366 136.444 9.85314 136.444 11.0906V11.1957H138.401V14.1741H136.444V22.901H132.807V14.1741Z" fill="#1A237E"/><path d="M25.8315 19.3784V23.069H7.37771V19.3784H25.8315Z" fill="#F44336"/><path d="M11.8975 1.2931C13.6271 0.266395 15.6451-0.166683 17.6437 0.0603858C19.6423 0.287502 21.5123 1.16216 22.9675 2.55085C24.4227 3.93951 25.3835 5.76626 25.7039 7.75204C26.3338 7.50914 27.003 7.38392 27.6781 7.38285C29.1464 7.38285 30.5545 7.96654 31.5928 9.00478C32.631 10.043 33.2147 11.4512 33.2147 12.9194C33.2147 14.3877 32.631 15.7959 31.5928 16.8341C30.5546 17.8722 29.1463 18.4554 27.6781 18.4554H6.45599C5.53961 18.4558 4.63379 18.2609 3.79845 17.8841C2.96303 17.5072 2.21707 16.957 1.61085 16.2697C1.00473 15.5824 0.551896 14.7739 0.282396 13.8981C0.0128969 13.0221-0.0672633 12.0985 0.0477423 11.1893C0.162753 10.28 0.470333 9.4056 0.94944 8.62432C1.42854 7.84312 2.06848 7.17297 2.82667 6.65824C3.58494 6.14346 4.44422 5.79588 5.34717 5.6389C6.25008 5.48194 7.17606 5.51914 8.06353 5.74778C8.82127 3.88445 10.1678 2.31987 11.8975 1.2931Z" fill="#F44336"/><path d="M16.6047 5.76855C18.5156 5.76855 20.065 7.31795 20.065 9.22892C20.065 9.44925 20.0431 9.66455 20.0037 9.87344L26.1304 11.9159C26.4593 11.4088 27.0297 11.073 27.6791 11.073C28.6982 11.0731 29.5244 11.8992 29.5244 12.9183C29.5244 13.9374 28.6981 14.7635 27.6791 14.7636C26.6599 14.7636 25.8338 13.9375 25.8338 12.9183C25.8338 12.8756 25.8372 12.8333 25.84 12.7913L19.7127 10.7489C19.1499 11.8975 17.97 12.6887 16.6047 12.6887C15.1715 12.6886 13.9418 11.8174 13.4165 10.5755L8.52817 11.909C8.52937 11.9379 8.53067 11.9673 8.53067 11.9966C8.53051 13.143 7.60094 14.0722 6.45445 14.0722C5.30805 14.0721 4.3784 13.143 4.37823 11.9966C4.37823 10.8501 5.30795 9.92046 6.45445 9.92037C7.24745 9.92037 7.93638 10.365 8.28601 11.0186L13.175 9.68509C13.1553 9.5358 13.1449 9.38358 13.1449 9.22892C13.1449 7.31797 14.6937 5.76859 16.6047 5.76855Z" fill="white"/></g><defs><clipPath id="dc-fl"><rect width="138.405" height="23.0674" fill="white"/></clipPath></defs></svg>
+        <svg class="dlz-datachef-logo dlz-logo-dark" xmlns="http://www.w3.org/2000/svg" width="139" height="24" viewBox="0 0 139 24" fill="none"><g clip-path="url(#dc-fd)"><path d="M50.3233 15.5381C50.3233 19.9007 47.2606 22.9009 42.4968 22.9009H36.9033V8.1748H42.4972C47.2606 8.1748 50.3233 11.1541 50.3233 15.5381ZM42.263 19.7965C45.0064 19.7965 46.6228 18.2442 46.6228 15.5381C46.6228 12.8319 45.0066 11.2375 42.263 11.2375H40.5403V19.7965H42.263Z" fill="white"/><path d="M56.8121 11.0269C58.5774 11.0269 59.8325 11.8238 60.4703 12.8521V11.1953H64.1072V22.9006H60.4703V21.2433C59.8112 22.271 58.5557 23.0681 56.791 23.0681C53.8986 23.0681 51.5803 20.7188 51.5803 17.0267C51.5803 13.3346 53.8985 11.0269 56.8121 11.0269ZM57.8758 14.1525C56.5148 14.1525 55.2807 15.1597 55.2807 17.0264C55.2807 18.893 56.5148 19.9428 57.8758 19.9428C59.2582 19.9428 60.4703 18.9141 60.4703 17.0478C60.4703 15.1815 59.2582 14.1525 57.8758 14.1525Z" fill="white"/><path d="M67.1854 14.1736H65.7393V11.1951H67.1854V8.34229H70.8223V11.1951H73.2041V14.1736H70.8223V18.8725C70.8223 19.5654 71.1197 19.8584 71.9279 19.8584H73.2253V22.9005H71.3753C68.908 22.9005 67.1854 21.8728 67.1854 18.8307V14.1736Z" fill="white"/><path d="M79.5478 11.0269C81.3125 11.0269 82.5676 11.8238 83.2059 12.8521V11.1953H86.8425V22.9006H83.2059V21.2433C82.5464 22.271 81.2913 23.0681 79.5266 23.0681C76.6341 23.0681 74.3159 20.7188 74.3159 17.0267C74.3159 13.3346 76.6341 11.0269 79.5478 11.0269ZM80.611 14.1525C79.25 14.1525 78.0159 15.1597 78.0159 17.0264C78.0159 18.893 79.2494 19.9428 80.611 19.9428C81.9933 19.9428 83.2061 18.9141 83.2061 17.0478C83.2061 15.1815 81.9933 14.1525 80.611 14.1525Z" fill="white"/><path d="M96.3154 8.00684C99.8678 8.00684 102.547 9.97911 103.398 13.1671H99.3993C98.7826 11.9088 97.6553 11.2792 96.273 11.2792C94.04 11.2792 92.5087 12.9156 92.5087 15.5169C92.5087 18.1182 94.04 19.7545 96.273 19.7545C97.6553 19.7545 98.7826 19.1249 99.3993 17.8664H103.398C102.547 21.0547 99.8674 23.006 96.3154 23.006C91.9132 23.006 88.8081 19.9219 88.8081 15.5169C88.8081 11.1119 91.9132 8.00684 96.3154 8.00684Z" fill="white"/><path d="M105.352 7.37744H108.989V12.7685C109.712 11.7618 111.009 11.0694 112.647 11.0694C115.348 11.0694 117.156 12.9155 117.156 16.0619V22.9007H113.54V16.5446C113.54 14.9504 112.647 14.0692 111.264 14.0692C109.881 14.0692 108.989 14.9504 108.989 16.5446V22.9007H105.352V7.37744Z" fill="white"/><path d="M124.804 23.0681C121.316 23.0681 118.806 20.7606 118.806 17.0475C118.806 13.3343 121.274 11.0269 124.804 11.0269C128.271 11.0269 130.717 13.2924 130.717 16.8582C130.716 17.209 130.694 17.5595 130.653 17.9078H122.422C122.55 19.4386 123.506 20.152 124.676 20.152C125.697 20.152 126.272 19.6489 126.569 19.0192H130.44C129.866 21.3065 127.76 23.0681 124.804 23.0681ZM122.443 15.9153H126.994C126.994 14.6351 125.973 13.9013 124.761 13.9013C123.571 13.9013 122.656 14.6145 122.443 15.9153Z" fill="white"/><path d="M132.807 14.1741H131.489V11.1957H132.807V10.8599C132.807 7.79725 134.722 6.28691 138.337 6.47572V9.5174C136.934 9.43366 136.444 9.85314 136.444 11.0906V11.1957H138.401V14.1741H136.445V22.901H132.807V14.1741Z" fill="white"/><path d="M25.8316 19.3784V23.069H7.37777V19.3784H25.8316Z" fill="#F44336"/><path d="M11.8975 1.2931C13.6272 0.266395 15.6452-0.166683 17.6437 0.0603858C19.6424 0.287502 21.5123 1.16216 22.9676 2.55085C24.4228 3.93951 25.3836 5.76626 25.704 7.75204C26.3339 7.50914 27.0031 7.38392 27.6782 7.38285C29.1465 7.38285 30.5546 7.96654 31.5928 9.00478C32.6311 10.043 33.2148 11.4512 33.2148 12.9194C33.2147 14.3877 32.631 15.7959 31.5928 16.8341C30.5546 17.8722 29.1464 18.4554 27.6782 18.4554H6.45605C5.53967 18.4558 4.63385 18.2609 3.79852 17.8841C2.96309 17.5072 2.21713 16.957 1.61091 16.2697C1.00479 15.5824 0.551957 14.7739 0.282457 13.8981C0.012958 13.0221-0.0672023 12.0985 0.0478033 11.1893C0.162814 10.28 0.470394 9.4056 0.949501 8.62432C1.4286 7.84312 2.06854 7.17297 2.82673 6.65824C3.585 6.14346 4.44428 5.79588 5.34723 5.6389C6.25014 5.48194 7.17612 5.51914 8.06359 5.74778C8.82133 3.88445 10.1678 2.31987 11.8975 1.2931Z" fill="#F44336"/><path d="M16.6046 5.76855C18.5156 5.76855 20.065 7.31795 20.065 9.22892C20.0649 9.44925 20.043 9.66455 20.0036 9.87344L26.1303 11.9159C26.4592 11.4088 27.0296 11.073 27.679 11.073C28.6981 11.0731 29.5243 11.8992 29.5243 12.9183C29.5243 13.9374 28.6981 14.7635 27.679 14.7636C26.6599 14.7636 25.8337 13.9375 25.8337 12.9183C25.8337 12.8756 25.8371 12.8333 25.84 12.7913L19.7127 10.7489C19.1498 11.8975 17.97 12.6887 16.6046 12.6887C15.1714 12.6886 13.9417 11.8174 13.4164 10.5755L8.52811 11.909C8.52931 11.9379 8.53061 11.9673 8.53061 11.9966C8.53045 13.143 7.60087 14.0722 6.45439 14.0722C5.30799 14.0721 4.37834 13.143 4.37817 11.9966C4.37817 10.8501 5.30789 9.92046 6.45439 9.92037C7.24739 9.92037 7.93632 10.365 8.28595 11.0186L13.1749 9.68509C13.1552 9.5358 13.1449 9.38358 13.1449 9.22892C13.1449 7.31797 14.6937 5.76859 16.6046 5.76855Z" fill="white"/></g><defs><clipPath id="dc-fd"><rect width="138.405" height="23.0674" fill="white"/></clipPath></defs></svg>
+      </a>
+      <p class="dlz-copyright">Copyright 2026 &copy; DataChef</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('dlz-theme-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.dataset.theme || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      localStorage.setItem('starlight-theme', next);
+    });
+  }
+</script>
+
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --dlz-bg:        #ffffff;
+    --dlz-fg:        #121b2b;
+    --dlz-border:    #e5eaff;
+    --dlz-accent:    #edf2ff;
+    --dlz-muted:     #9398ae;
+    --dlz-primary:   #f44336;
+    --dlz-highlight: #fc9934;
+    --dlz-popover:   rgba(255,255,255,0.9);
+    --dlz-inv-bg:    #121b2b;
+    --dlz-inv-fg:    #ffffff;
+    --dlz-inv-muted: rgba(255,255,255,0.7);
+    --dlz-inv-sep:   rgba(255,255,255,0.15);
+  }
+
+  :root[data-theme="dark"] {
+    --dlz-bg:        #121b2b;
+    --dlz-fg:        #f5f8fd;
+    --dlz-border:    rgba(255,255,255,0.1);
+    --dlz-accent:    #23293b;
+    --dlz-muted:     #b2b8ce;
+    --dlz-primary:   #f44336;
+    --dlz-highlight: #ffc840;
+    --dlz-popover:   rgba(0,0,0,0.9);
+    --dlz-inv-bg:    #f5f8fd;
+    --dlz-inv-fg:    #121b2b;
+    --dlz-inv-muted: rgba(18,27,43,0.7);
+    --dlz-inv-sep:   rgba(18,27,43,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  .dlz-page {
+    font-family: 'Poppins', sans-serif;
+    background: var(--dlz-bg);
+    color: var(--dlz-fg);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dlz-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--dlz-border);
+    padding: 16px 0;
+  }
+  :root[data-theme="dark"] .dlz-navbar { background: rgba(0,0,0,0.1); }
+
+  .dlz-navbar-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  .dlz-navbar-left { display: flex; align-items: center; gap: 80px; }
+  .dlz-logo-link { display: flex; align-items: center; text-decoration: none; }
+  .dlz-logo { display: block; }
+  .dlz-logo-dark  { display: none; }
+  :root[data-theme="dark"] .dlz-logo-light { display: none; }
+  :root[data-theme="dark"] .dlz-logo-dark  { display: block; }
+
+  .dlz-nav-links { display: flex; gap: 8px; align-items: center; }
+  .dlz-nav-btn { background: transparent; border: none; padding: 8px 16px; height: 40px; border-radius: 12px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--dlz-fg); text-decoration: none; cursor: pointer; display: flex; align-items: center; transition: background 0.15s; }
+  .dlz-nav-btn:hover { background: var(--dlz-accent); }
+  .dlz-navbar-right { display: flex; align-items: center; gap: 20px; }
+
+  .dlz-search-bar { background: var(--dlz-accent); border-radius: 24px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; width: 245px; cursor: text; }
+  .dlz-search-icon { color: var(--dlz-muted); flex-shrink: 0; }
+  .dlz-search-placeholder { font-size: 14px; color: var(--dlz-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+
+  .dlz-icon-btn { background: transparent; border: none; padding: 8px; border-radius: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--dlz-fg); text-decoration: none; cursor: pointer; transition: background 0.15s; }
+  .dlz-icon-btn:hover { background: var(--dlz-accent); }
+
+  .dlz-theme-btn { background: transparent; border: none; padding: 8px 16px; height: 36px; border-radius: 12px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--dlz-fg); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.15s; }
+  .dlz-theme-btn:hover { background: var(--dlz-accent); }
+
+  .dlz-icon-moon { display: block; }
+  .dlz-icon-sun  { display: none; }
+  .dlz-theme-label-dark  { display: block; }
+  .dlz-theme-label-light { display: none; }
+  :root[data-theme="dark"] .dlz-icon-moon { display: none; }
+  :root[data-theme="dark"] .dlz-icon-sun  { display: block; }
+  :root[data-theme="dark"] .dlz-theme-label-dark  { display: none; }
+  :root[data-theme="dark"] .dlz-theme-label-light { display: block; }
+
+  .dlz-section { position: relative; }
+  .dlz-container { max-width: 1280px; margin: 0 auto; width: 100%; }
+  .dlz-px { padding-left: 24px; padding-right: 24px; }
+  .dlz-full-row { display: flex; justify-content: center; width: 100%; padding-left: 24px; padding-right: 24px; }
+
+  .dlz-border-t   { border-top: 1px solid var(--dlz-border); }
+  .dlz-border-b   { border-bottom: 1px solid var(--dlz-border); }
+  .dlz-accent-border-t { border-top: 1px solid var(--dlz-accent); }
+  .dlz-accent-border-b { border-bottom: 1px solid var(--dlz-accent); }
+  .dlz-side-borders { border-left: 1px solid var(--dlz-border); border-right: 1px solid var(--dlz-border); width: 100%; }
+  .dlz-accent-side-borders { border-left: 1px solid var(--dlz-accent); border-right: 1px solid var(--dlz-accent); width: 100%; }
+
+  .dlz-spacer-xs { height: 100px; }
+  .dlz-spacer-sm { height: 140px; }
+  .dlz-spacer-md { height: 170px; }
+  .dlz-spacer-lg { height: 240px; }
+
+  .dlz-hero-grid { display: grid; grid-template-columns: 3fr 2fr; min-height: 477px; }
+  .dlz-hero-text { padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .dlz-eyebrow { font-size: 16px; line-height: 24px; color: var(--dlz-muted); margin: 0; font-weight: 400; }
+  .dlz-hero-title { font-size: 48px; line-height: 60px; font-weight: 600; color: var(--dlz-fg); margin: 0; }
+  .dlz-hero-body { font-size: 16px; line-height: 24px; color: var(--dlz-fg); margin: 0; font-weight: 400; }
+  .dlz-hero-subline { font-size: 16px; line-height: 24px; color: var(--dlz-fg); margin: 0; }
+  .dlz-hero-punchline { font-size: 20px; line-height: 28px; font-weight: 400; }
+  .dlz-highlight { color: var(--dlz-highlight); }
+  .dlz-hero-ctas { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+
+  .dlz-btn-primary { background: var(--dlz-highlight); color: #121b2b; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; height: 56px; padding: 8px 32px; border-radius: 16px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: opacity 0.15s; }
+  .dlz-btn-primary:hover { opacity: 0.9; }
+  .dlz-btn-ghost-hero { background: transparent; color: var(--dlz-fg); font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; height: 56px; padding: 8px 32px; border-radius: 16px; border: none; cursor: pointer; display: inline-flex; align-items: center; text-decoration: none; transition: background 0.15s; }
+  .dlz-btn-ghost-hero:hover { background: var(--dlz-accent); }
+
+  .dlz-hero-panel { border-left: 1px solid var(--dlz-accent); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 477px; }
+  .dlz-hero-diagram { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dlz-diagram-dark  { display: none; }
+  :root[data-theme="dark"] .dlz-diagram-light { display: none; }
+  :root[data-theme="dark"] .dlz-diagram-dark  { display: block; }
+
+  .dlz-prose-wide { max-width: 1280px; }
+  .dlz-section-title-lg { font-size: 48px; line-height: 60px; font-weight: 300; color: var(--dlz-fg); margin: 0 0 20px; }
+  .dlz-body-lg { font-size: 18px; line-height: 28px; color: var(--dlz-fg); font-weight: 400; margin: 0 0 28px; }
+
+  .dlz-quote-box { padding: 64px 0; }
+  .dlz-quote-inner { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; text-align: center; padding: 0 24px; }
+  .dlz-quote-text { font-size: 30px; line-height: 48px; font-weight: 500; color: var(--dlz-fg); margin: 0; }
+  .dlz-quote-attr { display: flex; flex-direction: column; gap: 2px; }
+  .dlz-quote-source { font-size: 16px; line-height: 24px; font-weight: 600; color: var(--dlz-fg); margin: 0; }
+  .dlz-quote-subtitle { font-size: 16px; line-height: 24px; font-weight: 400; color: var(--dlz-muted); margin: 0; }
+
+  .dlz-section-header { max-width: 1280px; }
+  .dlz-section-title-xl { font-size: 48px; line-height: 60px; font-weight: 300; color: var(--dlz-fg); margin: 0 0 16px; }
+  .dlz-section-subtitle { font-size: 18px; line-height: 28px; color: var(--dlz-muted); font-weight: 400; margin: 0; }
+
+  .dlz-three-cols { display: flex; gap: 80px; align-items: flex-start; max-width: 1280px; }
+  .dlz-stakeholder-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .dlz-stake-icon { color: var(--dlz-highlight); flex-shrink: 0; }
+  .dlz-stake-title { font-size: 36px; line-height: 48px; font-weight: 600; color: var(--dlz-fg); margin: 0; }
+  .dlz-stake-desc { font-size: 18px; line-height: 28px; color: var(--dlz-muted); font-weight: 400; margin: 0; }
+  .dlz-design-principle-wrap { max-width: 896px; }
+  .dlz-design-principle-label { font-size: 24px; line-height: 32px; font-weight: 400; color: var(--dlz-fg); margin: 0 0 20px; }
+  .dlz-design-principle-text { font-size: 18px; line-height: 28px; color: var(--dlz-fg); font-weight: 400; margin: 0; }
+
+  .dlz-finops-section { }
+  .dlz-finops-grid { display: flex; gap: 32px; align-items: flex-start; max-width: 1280px; padding: 0 24px; margin: 0 auto; }
+  .dlz-finops-left { flex: 1; position: sticky; top: 80px; padding: 128px 16px; }
+  .dlz-finops-left-inner { display: flex; flex-direction: column; gap: 40px; }
+  .dlz-finops-title { font-size: 48px; line-height: 60px; font-weight: 400; color: var(--dlz-fg); margin: 0; }
+  .dlz-finops-subtitle { font-size: 18px; line-height: 28px; color: var(--dlz-muted); margin: 0; font-weight: 400; }
+  .dlz-btn-finops { background: var(--dlz-fg); color: var(--dlz-bg); font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; height: 56px; padding: 8px 16px; border-radius: 16px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: opacity 0.15s; align-self: flex-start; }
+  .dlz-btn-finops:hover { opacity: 0.9; }
+  .dlz-finops-right { flex: 1; display: flex; flex-direction: column; gap: 48px; padding: 128px 24px; }
+  .dlz-finops-item { display: flex; gap: 16px; align-items: flex-start; }
+  .dlz-finops-item-icon { color: var(--dlz-highlight); flex-shrink: 0; }
+  .dlz-finops-item-text { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .dlz-finops-item-title { font-size: 24px; line-height: 32px; font-weight: 500; color: var(--dlz-fg); margin: 0; }
+  .dlz-finops-item-desc { font-size: 18px; line-height: 28px; color: var(--dlz-muted); font-weight: 400; margin: 0; }
+  .dlz-finops-separator { height: 1px; background: var(--dlz-border); width: 100%; flex-shrink: 0; }
+
+  .dlz-features-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1280px; width: 100%; }
+  .dlz-feature-col { display: flex; flex-direction: column; }
+  .dlz-feature-col-right-border { border-right: 1px solid var(--dlz-accent); }
+  .dlz-feature-col-offset { padding-top: 56px; }
+  .dlz-feature-item { padding: 32px; display: flex; flex-direction: column; gap: 10px; }
+  .dlz-feature-border-t { border-top: 1px solid var(--dlz-accent); }
+  .dlz-feature-border-b { border-bottom: 1px solid var(--dlz-accent); }
+  .dlz-feature-icon { color: var(--dlz-highlight); }
+  .dlz-feature-title { font-size: 30px; line-height: 36px; font-weight: 500; color: var(--dlz-fg); margin: 0; }
+  .dlz-feature-desc { font-size: 18px; line-height: 28px; color: var(--dlz-muted); font-weight: 400; margin: 0; }
+
+  .dlz-footer { background: var(--dlz-bg); padding: 32px 0; }
+  .dlz-footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; gap: 32px; }
+  .dlz-footer-top { display: flex; align-items: center; justify-content: space-between; }
+  .dlz-footer-nav { display: flex; gap: 32px; align-items: center; }
+  .dlz-footer-link { font-size: 16px; line-height: 24px; color: var(--dlz-muted); text-decoration: none; font-weight: 400; }
+  .dlz-footer-link-underline { text-decoration: underline; color: var(--dlz-muted); }
+  .dlz-footer-sep { height: 1px; background: var(--dlz-border); width: 100%; }
+  .dlz-footer-bottom { display: flex; align-items: center; justify-content: space-between; }
+  .dlz-datachef-logo { display: block; }
+  .dlz-datachef-logo.dlz-logo-dark { display: none; }
+  :root[data-theme="dark"] .dlz-datachef-logo.dlz-logo-light { display: none; }
+  :root[data-theme="dark"] .dlz-datachef-logo.dlz-logo-dark  { display: block; }
+  .dlz-copyright { font-size: 16px; line-height: 24px; color: var(--dlz-muted); margin: 0; white-space: nowrap; font-weight: 400; }
+
+  .dlz-bridge-wrap { padding: 192px 24px; display: flex; align-items: center; justify-content: center; }
+  .dlz-bridge-text { font-size: 48px; line-height: 60px; font-weight: 500; color: var(--dlz-fg); text-align: center; max-width: 896px; margin: 0; }
+
+  @media (max-width: 1024px) {
+    .dlz-three-cols { gap: 40px; }
+    .dlz-finops-grid { flex-direction: column; }
+    .dlz-finops-left { position: static; padding: 48px 16px 0; }
+  }
+
+  @media (max-width: 768px) {
+    .dlz-navbar-inner { flex-wrap: wrap; gap: 12px; }
+    .dlz-navbar-left { gap: 24px; flex-wrap: wrap; }
+    .dlz-nav-links { display: none; }
+    .dlz-search-bar { width: 160px; }
+    .dlz-hero-grid { grid-template-columns: 1fr; }
+    .dlz-hero-panel { display: none; }
+    .dlz-hero-title { font-size: 32px; line-height: 42px; }
+    .dlz-hero-text { gap: 12px; }
+    .dlz-section-title-lg, .dlz-section-title-xl { font-size: 32px; line-height: 42px; }
+    .dlz-three-cols { flex-direction: column; gap: 32px; }
+    .dlz-stake-title { font-size: 24px; line-height: 32px; }
+    .dlz-features-grid { grid-template-columns: 1fr; }
+    .dlz-feature-col-right-border { border-right: none; border-bottom: 1px solid var(--dlz-accent); }
+    .dlz-feature-col-offset { padding-top: 0; }
+    .dlz-quote-text { font-size: 20px; line-height: 32px; }
+    .dlz-finops-title { font-size: 32px; line-height: 42px; }
+    .dlz-finops-right { padding: 32px 0; }
+    .dlz-footer-inner { padding: 0 24px; }
+    .dlz-footer-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .dlz-footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .dlz-bridge-text { font-size: 32px; line-height: 42px; font-weight: 500; }
+    .dlz-bridge-wrap { padding: 80px 24px; }
+    .dlz-spacer-sm { height: 64px; }
+    .dlz-spacer-md { height: 80px; }
+    .dlz-spacer-lg { height: 80px; }
+  }
+
+  @media (max-width: 480px) {
+    .dlz-navbar-right { gap: 8px; }
+    .dlz-search-bar { display: none; }
+    .dlz-hero-title { font-size: 28px; line-height: 36px; }
+    .dlz-hero-text { padding: 24px 16px; }
+    .dlz-btn-primary, .dlz-btn-ghost-hero { font-size: 16px; padding: 8px 20px; }
+  }
+</style>

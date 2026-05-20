@@ -54,7 +54,8 @@ export default defineConfig({
     devToolbar: {
         enabled: false,
     },
-    integrations: [starlight({
+    integrations: [
+    starlight({
         title: 'Data Landing Zone',
         favicon: 'favicon.png',
         components: {
@@ -189,7 +190,8 @@ export default defineConfig({
             './src/styles/custom.css',
         ],
         plugins: [starlightImageZoom()],
-    })],
+    })
+    ],
     markdown: {
         rehypePlugins: [[rehypeMermaid, { strategy: "img-png", mermaidConfig: { theme: 'neutral' } }]], // CSS styles do not apply, have to inline
         // rehypePlugins: [ rehypeMermaid ], //For occasional testing, see the SVG component and class names
