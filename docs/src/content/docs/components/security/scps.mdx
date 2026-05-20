@@ -15,7 +15,7 @@ statements from a tier above it.
 
 | Tier              | Applies to                | Configured via                                          |
 |-------------------|---------------------------|---------------------------------------------------------|
-| Org baseline      | Every workload account    | `scpBaselineStatements` (or `denyServiceList`)          |
+| Org baseline      | Every workload account    | `scpBaselineStatements`                                 |
 | Per-account-type  | All accounts of one type  | `scpStatementsByAccountType.{development \| production}` |
 | Per-account       | One specific account      | `DLzAccount.scpStatements`                              |
 
@@ -222,50 +222,6 @@ Use `scpStatements` on a `DLzAccount` for one-off restrictions that only apply t
   </Fragment>
 </DualCode>
 
-## Service Deny List (legacy)
-
-Before the preset library was introduced, the `denyServiceList` property accepted a flat list of `service:action`
-strings to deny in the org baseline. It is still supported for the simple case but is **deprecated** in favor of
-`scpBaselineStatements` with `ScpDenyServiceActions`.
-
-`denyServiceList` and `scpBaselineStatements` cannot be used together — DLZ throws at synthesis time if both are set.
-
-<DualCode>
-  <Fragment slot="ts">
-    ```ts
-    import { App } from 'aws-cdk-lib';
-    import { DataLandingZone, Defaults } from 'aws-data-landing-zone';
-
-    const app = new App();
-    const dlz = new DataLandingZone(app, {
-      denyServiceList: [
-        ...Defaults.denyServiceList(),
-        'ecs:*',
-      ],
-     ...
-    });
-    ```
-  </Fragment>
-  <Fragment slot="python">
-    ```python
-    import aws_cdk as cdk
-    import aws_data_landing_zone as dlz
-
-    app = cdk.App()
-    dlz.DataLandingZone(app,
-        deny_service_list=[
-            *dlz.Defaults.deny_service_list(),
-            "ecs:*"
-        ],
-        ...
-    )
-    ```
-  </Fragment>
-</DualCode>
-
-The `Defaults.denyServiceList()` helper returns the conservative starter list. See the source
-[here](https://github.com/DataChefHQ/aws-data-landing-zone/blob/main/src/defaults.ts).
-
 ## Validation
 
 DLZ validates each account's resolved SCP at synthesis time and fails with a clear error if:
@@ -279,6 +235,5 @@ This catches misconfiguration before any CloudFormation deployment runs.
 ## API References
 - [DataLandingZoneProps.scpBaselineStatements](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.scpBaselineStatements)
 - [DataLandingZoneProps.scpStatementsByAccountType](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.scpStatementsByAccountType)
-- [DataLandingZoneProps.denyServiceList](/reference/api/#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList)
 - [DLzAccount.scpStatements](/reference/api/#aws-data-landing-zone.DLzAccount.property.scpStatements)
 - [ScpStatementsByAccountType](/reference/api/#aws-data-landing-zone.ScpStatementsByAccountType)

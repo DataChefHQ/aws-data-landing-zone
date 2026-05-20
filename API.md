@@ -21566,7 +21566,6 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#aws-data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Domain). |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList">denyServiceList</a></code> | <code>string[]</code> | List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a></code> | Cost-management capabilities. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.guardDuty">guardDuty</a></code> | <code><a href="#aws-data-landing-zone.DlzGuardDutyProps">DlzGuardDutyProps</a></code> | GuardDuty configuration for the organization. |
@@ -21678,24 +21677,6 @@ Allows you to define the
 email notfication settings or slack channel settings. If the account level defaultNotification
 is defined those will be used for the account instead of this defaultNotification which
 acts as the fallback.
-
----
-
-##### ~~`denyServiceList`~~<sup>Optional</sup> <a name="denyServiceList" id="aws-data-landing-zone.DataLandingZoneProps.property.denyServiceList"></a>
-
-- *Deprecated:* Use `scpBaselineStatements` for full control over the deny-services baseline. This field
-remains supported for the simple "deny these service actions" case.
-
-```typescript
-public readonly denyServiceList: string[];
-```
-
-- *Type:* string[]
-- *Default:* Defaults.denyServiceList() (empty list)
-
-List of services to deny in the organization SCP baseline. Empty by default — opt in to deny services.
-
-Cannot be used together with `scpBaselineStatements`.
 
 ---
 
@@ -21837,13 +21818,11 @@ public readonly scpBaselineStatements: PolicyStatement[];
 ```
 
 - *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
-- *Default:* default baseline derived from `denyServiceList`
+- *Default:* only the mandatory-tags SCP is applied
 
 Replaces the deny-services portion of the org SCP baseline applied to every workload account.
 
 The mandatory-tags SCP is always appended after these statements and cannot be opted out of.
-
-Cannot be used together with `denyServiceList`.
 
 ---
 
@@ -29964,7 +29943,6 @@ new Defaults()
 | <code><a href="#aws-data-landing-zone.Defaults.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.Defaults.carbonEmissionsQueryColumns">carbonEmissionsQueryColumns</a></code> | Default query-column projection for `CARBON_EMISSIONS` exports. |
 | <code><a href="#aws-data-landing-zone.Defaults.corQueryColumns">corQueryColumns</a></code> | Default query-column projection for `COST_OPTIMIZATION_RECOMMENDATIONS` exports. |
-| <code><a href="#aws-data-landing-zone.Defaults.denyServiceList">denyServiceList</a></code> | * List of services that are denied in the organization. |
 | <code><a href="#aws-data-landing-zone.Defaults.focus12QueryColumns">focus12QueryColumns</a></code> | Default query-column projection for `FOCUS_1_2` exports. |
 | <code><a href="#aws-data-landing-zone.Defaults.guardDutyFeatures">guardDutyFeatures</a></code> | Default GuardDuty features. |
 | <code><a href="#aws-data-landing-zone.Defaults.iamIdentityCenterPermissionSets">iamIdentityCenterPermissionSets</a></code> | Provides the AWS managed policy `AdministratorAccess` and `ReadOnlyAccess` as permission sets. |
@@ -30031,18 +30009,6 @@ Defaults.corQueryColumns()
 Default query-column projection for `COST_OPTIMIZATION_RECOMMENDATIONS` exports.
 
 jsii-friendly accessor for the underlying `DLZ_COR_DEFAULT_QUERY_COLUMNS` constant.
-
-##### `denyServiceList` <a name="denyServiceList" id="aws-data-landing-zone.Defaults.denyServiceList"></a>
-
-```typescript
-import { Defaults } from 'aws-data-landing-zone'
-
-Defaults.denyServiceList()
-```
-
-* List of services that are denied in the organization.
-
-Empty by default — opt in to deny services.
 
 ##### `focus12QueryColumns` <a name="focus12QueryColumns" id="aws-data-landing-zone.Defaults.focus12QueryColumns"></a>
 
