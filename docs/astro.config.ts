@@ -1,4 +1,3 @@
-import sitemap from '@astrojs/sitemap';
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 import rehypeMermaid from "rehype-mermaid";
@@ -56,7 +55,7 @@ export default defineConfig({
         enabled: false,
     },
     integrations: [
-    sitemap(),
+    { name: '@astrojs/sitemap', hooks: {} },
     starlight({
         title: 'Data Landing Zone',
         favicon: 'favicon.png',

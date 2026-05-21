@@ -12,10 +12,12 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.60.4"
+  },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^5.0.5",
-    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/starlight": "^0.29.2",
     "@astrojs/tailwind": "^6.0.2",
     "@radix-ui/react-slot": "^1.2.4",
