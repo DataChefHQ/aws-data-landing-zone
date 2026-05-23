@@ -72,9 +72,6 @@ export default defineConfig({
         esbuild: {
             include: /\.(tsx?|jsx?)$/,
         },
-        css: {
-            target: ['chrome111', 'firefox113', 'safari15.4', 'edge111'],
-        },
     },
     integrations: [
     // react({ include: ['**/*.tsx', '**/*.jsx'] }),
