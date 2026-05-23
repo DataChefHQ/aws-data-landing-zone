@@ -1,0 +1,145 @@
+---
+// @ts-nocheck — virtual:starlight/* modules have no type declarations
+import Search from 'virtual:starlight/components/Search';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import type { Props } from '@astrojs/starlight/props';
+---
+
+<div class="dlz-docs-navbar sl-flex">
+  <!-- Logo (single SVG — letters use currentColor → color set by theme CSS, hexagon fixed amber) -->
+  <a href="/" class="dlz-docs-logo-link" aria-label="Data Landing Zone home">
+    <svg class="dlz-docs-logo" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ">
+      <g clip-path="url(#dlz-hdr)">
+        <path d="M80.9902 26.3561H89.8767V29.6956H76.4054V26.6391L85.2353 13.2809H76.4054V9.94141H89.8767V12.9979L80.9902 26.3561Z" fill="currentColor"/>
+        <path d="M67.9155 26.5542H74.4248V29.6956H63.9534V9.94141H67.9155V26.5542Z" fill="currentColor"/>
+        <path d="M50.5727 9.94141C52.6481 9.94141 54.4688 10.3471 56.0348 11.1584C57.6196 11.9697 58.8366 13.13 59.6856 14.6394C60.5535 16.1299 60.9875 17.8657 60.9875 19.8468C60.9875 21.8279 60.5535 23.5637 59.6856 25.0542C58.8366 26.5259 57.6196 27.6674 56.0348 28.4787C54.4688 29.29 52.6481 29.6956 50.5727 29.6956H43.6672V9.94141H50.5727ZM50.4311 26.3278C52.5066 26.3278 54.1103 25.7617 55.2423 24.6297C56.3744 23.4977 56.9404 21.9034 56.9404 19.8468C56.9404 17.7903 56.3744 16.1865 55.2423 15.0356C54.1103 13.8658 52.5066 13.2809 50.4311 13.2809H47.6293V26.3278H50.4311Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FFBA3B"/>
+        <path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="currentColor"/>
+        <path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="currentColor"/>
+        <path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="currentColor"/>
+        <path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="currentColor"/>
+        <path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="currentColor"/>
+      </g>
+      <defs><clipPath id="dlz-hdr"><rect width="90" height="39.9248" fill="white"/></clipPath></defs>
+    </svg>
+  </a>
+
+  <!-- Search (centred via flex-grow) -->
+  <div class="dlz-docs-search">
+    <Search {...Astro.props} />
+  </div>
+
+  <!-- Right: GitHub + theme toggle -->
+  <div class="dlz-docs-right sl-flex">
+    <SocialIcons {...Astro.props} />
+    <button id="dlz-docs-theme-toggle" class="dlz-theme-btn" aria-label="Toggle dark mode">
+      <svg class="dlz-theme-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="dlz-theme-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <span class="dlz-theme-label-dark">Light</span>
+      <span class="dlz-theme-label-light">Dark</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .dlz-docs-navbar {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .dlz-docs-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .dlz-docs-logo { display: block; }
+
+  .dlz-docs-search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  /* Override Starlight search to match the landing page pill style */
+  .dlz-docs-search :global(button[data-open-modal]) {
+    background: var(--sl-color-gray-6, #eef2ff);
+    border-radius: 9999px;
+    border: 1px solid var(--sl-color-gray-5);
+    padding: 0.5rem 1rem;
+    font-family: var(--sl-font);
+    font-size: 0.875rem;
+    width: 100%;
+    max-width: 280px;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .dlz-docs-right {
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  /* Style social icon to match landing page icon button */
+  .dlz-docs-right :global(a[rel~='me']) {
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    color: var(--sl-color-text);
+    transition: background 0.15s;
+  }
+  .dlz-docs-right :global(a[rel~='me']:hover) {
+    background: var(--sl-color-gray-6);
+  }
+
+  /* Theme toggle button — matches landing page */
+  .dlz-theme-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    height: 36px;
+    border-radius: 0.75rem;
+    font-family: var(--sl-font);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--sl-color-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.15s;
+  }
+  .dlz-theme-btn:hover {
+    background: var(--sl-color-gray-6);
+  }
+
+  /* Default (dark mode): show moon + "Dark" */
+  .dlz-theme-sun          { display: none; }
+  .dlz-theme-moon         { display: inline-block; }
+  .dlz-theme-label-light  { display: none; }
+  .dlz-theme-label-dark   { display: inline; }
+
+  /* Light mode: show sun + "Light" */
+  :global([data-theme='light']) .dlz-theme-sun         { display: inline-block; }
+  :global([data-theme='light']) .dlz-theme-moon        { display: none; }
+  :global([data-theme='light']) .dlz-theme-label-light { display: inline; }
+  :global([data-theme='light']) .dlz-theme-label-dark  { display: none; }
+</style>
+
+<script>
+  (function () {
+    var btn = document.getElementById('dlz-docs-theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('starlight-theme', next);
+    });
+  })();
+</script>

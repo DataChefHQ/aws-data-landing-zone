@@ -2,10 +2,31 @@
 title: Data Landing Zone
 description: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
 template: splash
-hero:
-  tagline: An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team.
-  image:
-    html: |
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<section class="dlz-hero">
+  <div class="dlz-hero-grid">
+    <div class="dlz-hero-text">
+      <h1 class="dlz-hero-title">DevEx, Finance, Compliance.<br/>Balanced by design.</h1>
+      <div class="dlz-hero-rule"></div>
+      <p class="dlz-hero-lede">
+        Most AWS landing zones over-optimise for one corner. The other two pay for it &mdash; in
+        surprise bills, late audits, or engineers stuck waiting on tickets.
+      </p>
+      <p class="dlz-hero-body">
+        The Data Landing Zone treats <span class="dlz-accent">speed</span>,
+        <span class="dlz-accent">control</span>, and <span class="dlz-accent">certainty</span> as
+        first-class concerns. Every default in the platform is chosen to hold that balance, so
+        the convenient path is also the compliant and accountable one.
+      </p>
+      <div class="dlz-hero-actions">
+        <a href="/introduction" class="dlz-cta dlz-cta-primary">Introduction <span aria-hidden="true">→</span></a>
+        <a href="/getting-started" class="dlz-cta dlz-cta-ghost">Get Started</a>
+      </div>
+    </div>
+    <div class="dlz-hero-visual">
       <div class="balance-triangle" role="img" aria-label="A triangle balancing DevEx, Finance, and Compliance, with the Data Landing Zone at the centre.">
         <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -28,16 +49,9 @@ hero:
           <text x="500" y="490" text-anchor="middle" class="bt-label">Compliance</text>
         </svg>
       </div>
-  actions:
-    - text: Introduction
-      link: /introduction
-      icon: right-arrow
-    - text: Get Started
-      link: /getting-started
-      variant: minimal
----
-
-import { Card, CardGrid } from '@astrojs/starlight/components';
+    </div>
+  </div>
+</section>
 
 <h2>The problem</h2>
 <p>

@@ -1,0 +1,2 @@
+removed:aws-data-landing-zone.Defaults.denyServiceList
+removed:aws-data-landing-zone.DataLandingZoneProps.denyServiceList
