@@ -1,4 +1,6 @@
+import react from '@astrojs/react';
 import starlight from '@astrojs/starlight';
+import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
 import rehypeMermaid from "rehype-mermaid";
 import starlightImageZoom from 'starlight-image-zoom';
@@ -24,6 +26,18 @@ interface HeadConfig {
     content?: string;
 }
 let head: HeadConfig[] = [
+    {
+        tag: 'link',
+        attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    },
+    {
+        tag: 'link',
+        attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
+    },
+    {
+        tag: 'link',
+        attrs: { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap' },
+    },
     {
         tag: 'meta',
         attrs: { property: 'og:image', content: ogUrl },
@@ -54,13 +68,24 @@ export default defineConfig({
     devToolbar: {
         enabled: false,
     },
+    vite: {
+        esbuild: {
+            include: /\.(tsx?|jsx?)$/,
+        },
+        css: {
+            target: ['chrome111', 'firefox113', 'safari15.4', 'edge111'],
+        },
+    },
     integrations: [
+    // react({ include: ['**/*.tsx', '**/*.jsx'] }),
+    // tailwind({ applyBaseStyles: false }),
     { name: '@astrojs/sitemap', hooks: {} },
     starlight({
         title: 'Data Landing Zone',
-        favicon: 'favicon.png',
+        favicon: '/favicon.svg',
         components: {
             Footer: './src/components/Footer.astro',
+            Header: './src/components/Header.astro',
         },
         social: {
             github: 'https://github.com/DataChefHQ/aws-data-landing-zone',

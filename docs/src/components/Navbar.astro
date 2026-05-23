@@ -1,0 +1,77 @@
+---
+interface Props {
+  showNavLinks?: boolean;
+}
+const { showNavLinks = true } = Astro.props;
+---
+
+<header class="dlz-navbar">
+  <div class="dlz-navbar-inner">
+    <div class="dlz-navbar-left">
+      <a href="/" class="dlz-logo-link" aria-label="Data Landing Zone home">
+        <svg class="dlz-logo" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ">
+          <g clip-path="url(#dlz-nav)">
+            <path d="M80.9902 26.3561H89.8767V29.6956H76.4054V26.6391L85.2353 13.2809H76.4054V9.94141H89.8767V12.9979L80.9902 26.3561Z" fill="currentColor"/>
+            <path d="M67.9155 26.5542H74.4248V29.6956H63.9534V9.94141H67.9155V26.5542Z" fill="currentColor"/>
+            <path d="M50.5727 9.94141C52.6481 9.94141 54.4688 10.3471 56.0348 11.1584C57.6196 11.9697 58.8366 13.13 59.6856 14.6394C60.5535 16.1299 60.9875 17.8657 60.9875 19.8468C60.9875 21.8279 60.5535 23.5637 59.6856 25.0542C58.8366 26.5259 57.6196 27.6674 56.0348 28.4787C54.4688 29.29 52.6481 29.6956 50.5727 29.6956H43.6672V9.94141H50.5727ZM50.4311 26.3278C52.5066 26.3278 54.1103 25.7617 55.2423 24.6297C56.3744 23.4977 56.9404 21.9034 56.9404 19.8468C56.9404 17.7903 56.3744 16.1865 55.2423 15.0356C54.1103 13.8658 52.5066 13.2809 50.4311 13.2809H47.6293V26.3278H50.4311Z" fill="currentColor"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FFBA3B"/>
+            <path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="currentColor"/>
+            <path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="currentColor"/>
+            <path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="currentColor"/>
+            <path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="currentColor"/>
+            <path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="currentColor"/>
+          </g>
+          <defs><clipPath id="dlz-nav"><rect width="90" height="39.9248" fill="white"/></clipPath></defs>
+        </svg>
+      </a>
+
+      {showNavLinks && (
+        <nav class="dlz-nav-links">
+          <a href="/introduction" class="dlz-nav-btn">Introduction</a>
+          <a href="/components/account-management/accounts" class="dlz-nav-btn">Components</a>
+        </nav>
+      )}
+    </div>
+
+    <div class="dlz-navbar-right">
+      <div class="dlz-search-bar" role="search" aria-label="Site search">
+        <svg class="dlz-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span class="dlz-search-placeholder">Search</span>
+      </div>
+
+      <a
+        href="https://github.com/DataChefHQ/aws-data-landing-zone"
+        target="_blank"
+        rel="noopener"
+        class="dlz-icon-btn"
+        aria-label="GitHub repository"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+
+      <button
+        id="dlz-theme-toggle"
+        class="dlz-theme-btn"
+        aria-label="Toggle dark mode"
+      >
+        <svg class="dlz-theme-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="dlz-theme-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <span class="dlz-theme-label-dark">Dark</span>
+        <span class="dlz-theme-label-light">Light</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  (function () {
+    var btn = document.getElementById('dlz-theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('starlight-theme', isDark ? 'dark' : 'light');
+    });
+  })();
+</script>

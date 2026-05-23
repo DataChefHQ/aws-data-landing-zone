@@ -1,22 +1,43 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  darkMode: ['selector', ':root[data-theme="dark"]'],
+  darkMode: ['class', ['.dark', '[data-theme="dark"]']],
   theme: {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
       colors: {
-        'dlz-bg':        'var(--dlz-bg)',
-        'dlz-fg':        'var(--dlz-fg)',
-        'dlz-border':    'var(--dlz-border)',
-        'dlz-accent':    'var(--dlz-accent)',
-        'dlz-muted':     'var(--dlz-muted)',
-        'dlz-primary':   'var(--dlz-primary)',
-        'dlz-highlight': 'var(--dlz-highlight)',
-        'dlz-popover':   'var(--dlz-popover)',
-        'dlz-input':     'var(--dlz-input)',
+        background:           'var(--background)',
+        foreground:           'var(--foreground)',
+        border:               'var(--border)',
+        input:                'var(--input)',
+        ring:                 'var(--ring)',
+        primary: {
+          DEFAULT:            'var(--primary)',
+          foreground:         'var(--primary-foreground)',
+        },
+        secondary: {
+          DEFAULT:            'var(--secondary)',
+          foreground:         'var(--secondary-foreground)',
+        },
+        accent: {
+          DEFAULT:            'var(--accent)',
+          foreground:         'var(--accent-foreground)',
+        },
+        muted: {
+          DEFAULT:            'var(--muted)',
+          foreground:         'var(--muted-foreground)',
+        },
+        card: {
+          DEFAULT:            'var(--card)',
+          foreground:         'var(--card-foreground)',
+        },
+        popover: {
+          DEFAULT:            'var(--popover)',
+          foreground:         'var(--popover-foreground)',
+        },
+        destructive:          'var(--destructive)',
       },
       maxWidth: {
         container: '1280px',
