@@ -190,7 +190,7 @@ const { variant } = Astro.props;
       e.stopPropagation();
       var siteSearch = document.querySelector('site-search');
       if (siteSearch) {
-        var openBtn = siteSearch.querySelector('button[data-open-modal]');
+        var openBtn = siteSearch.querySelector('button[data-open-modal]') as HTMLElement | null;
         if (openBtn) {
           openBtn.click();
         }
