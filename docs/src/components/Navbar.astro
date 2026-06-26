@@ -1,4 +1,7 @@
 ---
+// @ts-nocheck — virtual:starlight/* modules have no type declarations in this context
+import SearchBar from './SearchBar.astro';
+import Search from 'virtual:starlight/components/Search';
 interface Props {
   showNavLinks?: boolean;
 }
@@ -34,10 +37,8 @@ const { showNavLinks = true } = Astro.props;
     </div>
 
     <div class="dlz-navbar-right">
-      <div class="dlz-search-bar" role="search" aria-label="Site search">
-        <svg class="dlz-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <span class="dlz-search-placeholder">Search</span>
-      </div>
+      <SearchBar variant="landing" />
+      <span class="dlz-navbar-divider" aria-hidden="true"></span>
 
       <a
         href="https://github.com/DataChefHQ/aws-data-landing-zone"
@@ -62,6 +63,11 @@ const { showNavLinks = true } = Astro.props;
         <span class="dlz-theme-label-light">Light</span>
       </button>
     </div>
+  </div>
+
+  <!-- Hidden search trigger: injects <site-search> so Cmd+K and click work on landing page -->
+  <div style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+    <Search />
   </div>
 </header>
 

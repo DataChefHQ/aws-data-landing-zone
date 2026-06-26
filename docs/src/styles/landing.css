@@ -17,6 +17,23 @@
   --secondary-foreground: oklch(0.978 0.007 260.732);
   --input:                oklch(0.94 0.029 275.154);
   --ring:                 oklch(0.785 0.032 273.53);
+  /* Starlight vars for search dialog — light mode */
+  --sl-color-white:            hsl(224, 10%, 10%);
+  --sl-color-gray-1:           hsl(224, 14%, 16%);
+  --sl-color-gray-2:           hsl(224, 10%, 23%);
+  --sl-color-gray-3:           hsl(224, 7%, 36%);
+  --sl-color-gray-4:           hsl(224, 6%, 56%);
+  --sl-color-gray-5:           hsl(224, 6%, 77%);
+  --sl-color-gray-6:           hsl(224, 20%, 94%);
+  --sl-color-black:            hsl(0, 0%, 100%);
+  --sl-color-accent:           oklch(0.833 0.156 78.070);
+  --sl-color-accent-light:     oklch(0.9 0.12 78.070);
+  --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
+  --sl-shadow-lg:              0px 25px 7px rgba(0,0,0,0.01), 0px 16px 6px hsla(0,0%,0%,0.03), 0px 9px 5px hsla(223,13%,10%,0.08), 0px 4px 4px hsla(0,0%,0%,0.16), 0px 4px 2px hsla(0,0%,0%,0.04);
+  --sl-text-2xs:               0.75rem;
+  --sl-text-sm:                0.875rem;
+  --sl-text-xl:                1.25rem;
+  --__sl-font:                 'Poppins', sans-serif;
 }
 
 .dark {
@@ -38,6 +55,23 @@
   --secondary-foreground: oklch(0.235 0.031 262.556);
   --input:                oklch(1 0 0 / 0.15);
   --ring:                 oklch(0.683 0.033 275.367);
+  /* Starlight vars for search dialog — dark mode */
+  --sl-color-white:            hsl(0, 0%, 100%);
+  --sl-color-gray-1:           hsl(224, 20%, 94%);
+  --sl-color-gray-2:           hsl(224, 6%, 77%);
+  --sl-color-gray-3:           hsl(224, 6%, 56%);
+  --sl-color-gray-4:           hsl(224, 7%, 36%);
+  --sl-color-gray-5:           hsl(224, 10%, 23%);
+  --sl-color-gray-6:           hsl(224, 14%, 16%);
+  --sl-color-black:            hsl(224, 10%, 10%);
+  --sl-color-accent:           oklch(0.833 0.156 78.070);
+  --sl-color-accent-light:     oklch(0.9 0.12 78.070);
+  --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+  --sl-shadow-lg:              0px 25px 7px hsla(0,0%,0%,0.03), 0px 16px 6px hsla(0,0%,0%,0.1), 0px 9px 5px hsla(223,13%,10%,0.33), 0px 4px 4px hsla(0,0%,0%,0.75), 0px 4px 2px hsla(0,0%,0%,0.25);
+  --sl-text-2xs:               0.75rem;
+  --sl-text-sm:                0.875rem;
+  --sl-text-xl:                1.25rem;
+  --__sl-font:                 'Poppins', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -58,13 +92,16 @@ html { scroll-behavior: smooth; }
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background: oklch(1 0 0 / 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: oklch(1 0 0 / 0.75);
   border-bottom: 1px solid var(--border);
   padding: 16px 0;
 }
-.dark .dlz-navbar { background: oklch(0 0 0 / 0.1); }
+.dark .dlz-navbar {
+  background: oklch(0.222 0.034 261.473 / 0.8);
+  border-bottom-color: oklch(1 0 0 / 0.08);
+}
 
 .dlz-navbar-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
 .dlz-navbar-left { display: flex; align-items: center; gap: 80px; }
@@ -77,9 +114,7 @@ html { scroll-behavior: smooth; }
 .dlz-nav-btn:hover { background: var(--accent); }
 .dlz-navbar-right { display: flex; align-items: center; gap: 20px; }
 
-.dlz-search-bar { background: var(--accent); border-radius: 24px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; width: 245px; cursor: text; }
-.dlz-search-icon { color: var(--muted-foreground); flex-shrink: 0; }
-.dlz-search-placeholder { font-size: 14px; color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+.dlz-navbar-divider { display: none; width: 1px; height: 20px; background: var(--foreground); opacity: 0.2; flex-shrink: 0; }
 
 .dlz-icon-btn { background: transparent; border: none; padding: 8px; border-radius: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--foreground); text-decoration: none; cursor: pointer; transition: background 0.15s; }
 .dlz-icon-btn:hover { background: var(--accent); }
@@ -223,7 +258,6 @@ html { scroll-behavior: smooth; }
   .dlz-navbar-inner { flex-wrap: wrap; gap: 12px; }
   .dlz-navbar-left { gap: 24px; flex-wrap: wrap; }
   .dlz-nav-links { display: none; }
-  .dlz-search-bar { width: 160px; }
   .dlz-hero-grid { grid-template-columns: 1fr; min-height: auto; }
   .dlz-hero-panel { border-left: none; border-top: 1px solid var(--accent); min-height: auto; }
   .dlz-hero-diagram { width: 100%; height: auto; object-fit: contain; }
@@ -250,8 +284,8 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 480px) {
-  .dlz-navbar-right { gap: 8px; }
-  .dlz-search-bar { display: none; }
+  .dlz-navbar-right { gap: 4px; }
+  .dlz-navbar-divider { display: block; }
   .dlz-hero-title { font-size: 28px; line-height: 36px; }
   .dlz-hero-text { padding: 24px 16px; }
   .dlz-btn-primary, .dlz-btn-ghost-hero { font-size: 16px; padding: 8px 20px; }
@@ -268,11 +302,6 @@ html { scroll-behavior: smooth; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-
-@keyframes dlz-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
 
 /* Hero section: animate on page load */
 [data-hero-anim] {
@@ -293,21 +322,18 @@ html { scroll-behavior: smooth; }
   transform: translateY(0);
 }
 
-/* Typing target: hidden until JS starts typing */
-[data-typing] {
-  opacity: 0;
-}
-
-/* Blinking cursor used by typing animation */
-.dlz-cursor {
+/* Character blur animation for bridge text */
+.dlz-char {
   display: inline-block;
-  width: 3px;
-  height: 0.85em;
-  background: currentColor;
-  vertical-align: middle;
-  margin-left: 3px;
-  border-radius: 1px;
-  animation: dlz-blink 0.9s step-end infinite;
+  opacity: 0;
+  transform: scale(1.4);
+  filter: blur(6px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out, filter 0.4s ease-out;
+}
+[data-char-anim].in-view .dlz-char {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
 }
 
 /* Mobile: "What is the Data Landing Zone?" feature items slide in from left */
@@ -320,6 +346,5 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   [data-hero-anim] { opacity: 1; transform: none; animation: none; }
   [data-anim]      { opacity: 1; transform: none; transition: none; }
-  [data-typing]    { opacity: 1; }
-  .dlz-cursor      { display: none; }
+  .dlz-char        { opacity: 1; transform: none; filter: none; transition: none; }
 }

@@ -19,6 +19,7 @@ import '../styles/landing.css';
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" />
 
   <script is:inline>
     (function() {
@@ -28,6 +29,189 @@ import '../styles/landing.css';
       document.documentElement.classList.toggle('dark', theme === 'dark');
     })();
   </script>
+
+  <style is:inline>
+    .dlz-balance-tri {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+    .dlz-balance-tri::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 16px 16px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #dlz-tri-main {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: visible;
+    }
+    #dlz-hex-wrap {
+      position: absolute;
+      z-index: 20;
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      touch-action: none;
+      user-select: none;
+      transition: filter 0.35s ease;
+      filter: drop-shadow(0 4px 18px rgba(255,186,59,0.45));
+    }
+    #dlz-hex-wrap:active { cursor: grabbing; }
+    #dlz-tooltip {
+      position: absolute;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -100%) translateY(-18px);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      width: clamp(180px, 32vw, 280px);
+    }
+    #dlz-tooltip.visible {
+      opacity: 1;
+      transform: translate(-50%, -100%) translateY(-26px);
+    }
+    #dlz-tooltip .tt-inner {
+      background: rgba(15, 20, 35, 0.97);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 16px 12px;
+      position: relative;
+      backdrop-filter: blur(8px);
+    }
+    #dlz-tooltip .tt-inner::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid rgba(15,20,35,0.97);
+    }
+    #dlz-tooltip .tt-icon {
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+      text-align: center;
+    }
+    #dlz-tooltip .tt-icon:empty { display: none; margin-bottom: 0; }
+    #dlz-tooltip .tt-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    #dlz-tooltip .tt-body {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.55;
+      text-align: center;
+    }
+    #dlz-tooltip.danger .tt-inner { border-color: rgba(248,113,113,0.3); }
+    #dlz-tooltip.danger .tt-title { color: #f87171; }
+    #dlz-tooltip.happy .tt-inner  { border-color: rgba(245,167,35,0.4); }
+    #dlz-tooltip.happy .tt-title  { color: #FFBA3B; }
+    @media (max-width: 600px) {
+      #dlz-tooltip .tt-body { display: none; }
+      #dlz-tooltip .tt-icon { display: none; }
+    }
+    #dlz-dc-logo {
+      position: absolute;
+      z-index: 15;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+    #dlz-dc-logo .dc-text {
+      font-size: clamp(9px, 1.3vw, 11px);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.9);
+      background: rgba(245,167,35,0.12);
+      border: 1px solid rgba(245,167,35,0.4);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 46px;
+      display: inline-block;
+    }
+    #dlz-hint {
+      position: absolute;
+      bottom: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(10px, 1.4vw, 12px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      pointer-events: none;
+      width: 80%;
+      transition: opacity 0.6s ease;
+    }
+    @keyframes dlz-shake {
+      0%,100% { transform: translate(-50%,-50%) rotate(0deg); }
+      20%      { transform: translate(-50%,-50%) rotate(-4deg); }
+      40%      { transform: translate(-50%,-50%) rotate(4deg); }
+      60%      { transform: translate(-50%,-50%) rotate(-3deg); }
+      80%      { transform: translate(-50%,-50%) rotate(3deg); }
+    }
+    #dlz-hex-wrap.shaking { animation: dlz-shake 0.45s ease; }
+    @keyframes dlz-sweet-pulse {
+      0%, 100% { filter: drop-shadow(0 4px 22px rgba(255,186,59,0.7)); }
+      50%       { filter: drop-shadow(0 4px 36px rgba(255,186,59,1)); }
+    }
+    #dlz-hex-wrap.sweet-anim { animation: dlz-sweet-pulse 1.6s ease-in-out infinite; }
+    #dlz-hex-wrap svg { display: block; }
+
+    /* ── Light mode overrides ── */
+    html:not(.dark) .dlz-balance-tri::before {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px);
+    }
+    html:not(.dark) #dlz-tri-main line {
+      stroke: rgba(0,0,0,0.18) !important;
+    }
+    html:not(.dark) #dlz-tooltip .tt-inner {
+      background: rgba(255,255,255,0.97);
+      border-color: rgba(0,0,0,0.1);
+    }
+    html:not(.dark) #dlz-tooltip .tt-body {
+      color: rgba(0,0,0,0.6);
+    }
+    html:not(.dark) #dlz-tooltip.danger .tt-inner { border-color: rgba(248,113,113,0.4); }
+    html:not(.dark) #dlz-tooltip .tt-inner::after  { border-top-color: rgba(255,255,255,0.97); }
+    html:not(.dark) #dlz-dc-logo .dc-text {
+      color: #7a5200 !important;
+      background: rgba(255,186,59,0.18) !important;
+      border-color: rgba(255,186,59,0.55) !important;
+    }
+    html:not(.dark) #dlz-hint { color: rgba(0,0,0,0.3); }
+    html:not(.dark) #dlz-hex-wrap {
+      filter: drop-shadow(0 4px 18px rgba(200,140,0,0.3));
+    }
+    html:not(.dark) #dlz-hex-wrap svg path[fill="white"] {
+      fill: rgba(20,28,60,0.55) !important;
+    }
+  </style>
 </head>
 
 <body class="dlz-page">
@@ -64,8 +248,66 @@ import '../styles/landing.css';
           </div>
         </div>
         <div class="dlz-hero-panel" data-hero-anim style="animation-delay:0.35s">
-          <img src="/images/hero-panel-light.svg" alt="DevEx, Finance, Compliance balance diagram" class="dlz-hero-diagram dlz-diagram-light" fetchpriority="high" />
-          <img src="/images/hero-panel-dark.svg"  alt="DevEx, Finance, Compliance balance diagram" class="dlz-hero-diagram dlz-diagram-dark"  fetchpriority="high" />
+          <div class="dlz-balance-tri" id="dlz-tri-wrapper">
+
+            <svg id="dlz-tri-main" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <filter id="dlz-glow-happy" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="dlz-glow-danger" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <line x1="350" y1="115" x2="118" y2="555" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+              <line x1="350" y1="115" x2="582" y2="555" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+              <line x1="118" y1="555" x2="582" y2="555" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+              <line id="dlz-d-top"   x1="350" y1="330" x2="350" y2="115" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
+              <line id="dlz-d-left"  x1="350" y1="330" x2="118" y2="555" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
+              <line id="dlz-d-right" x1="350" y1="330" x2="582" y2="555" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
+              <circle id="dlz-node-top"   cx="350" cy="115" r="10" fill="white" opacity="0.92"/>
+              <circle id="dlz-node-left"  cx="118" cy="555" r="10" fill="white" opacity="0.92"/>
+              <circle id="dlz-node-right" cx="582" cy="555" r="10" fill="white" opacity="0.92"/>
+              <text id="dlz-face-top"   x="350" y="68"  text-anchor="middle" font-size="38" style="opacity:0;transition:opacity 0.3s ease">😊</text>
+              <text id="dlz-face-left"  x="90"  y="610" text-anchor="middle" font-size="38" style="opacity:0;transition:opacity 0.3s ease">😊</text>
+              <text id="dlz-face-right" x="618" y="610" text-anchor="middle" font-size="38" style="opacity:0;transition:opacity 0.3s ease">😊</text>
+              <text id="dlz-lbl-top"   x="350" y="88"  text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">DevEx</text>
+              <text id="dlz-lbl-left"  x="80"  y="632" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Finance</text>
+              <text id="dlz-lbl-right" x="628" y="632" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Compliance</text>
+            </svg>
+
+            <div id="dlz-tooltip">
+              <div class="tt-inner">
+                <span class="tt-icon" id="dlz-tt-icon">⚠️</span>
+                <div class="tt-title" id="dlz-tt-title">Warning</div>
+                <div class="tt-body"  id="dlz-tt-body">Something is wrong here.</div>
+              </div>
+            </div>
+
+            <div id="dlz-dc-logo">
+              <div class="dc-text">DataChef DLZ</div>
+            </div>
+
+            <div id="dlz-hex-wrap">
+              <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
+                <polygon id="dlz-hex-poly" points="34,4 62,19 62,49 34,64 6,49 6,19" fill="#1e2235" stroke="rgba(255,186,59,0.35)" stroke-width="1.2"/>
+                <text id="dlz-hex-emoji" x="34" y="46" text-anchor="middle" font-size="32" fill="white" style="opacity:0;transition:opacity 0.2s ease">⚠️</text>
+                <svg id="dlz-hex-icon-svg" x="19" y="16" width="30" height="35" viewBox="0 0 34.2126 39.9248" style="opacity:1;transition:opacity 0.2s ease">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FFBA3B"/>
+                  <path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="white"/>
+                  <path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="white"/>
+                  <path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="white"/>
+                  <path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="white"/>
+                  <path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="white"/>
+                </svg>
+              </svg>
+            </div>
+
+            <div id="dlz-hint">Drag the hexagon — find the balance</div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -113,7 +355,7 @@ import '../styles/landing.css';
   <div class="dlz-full-row">
     <div class="dlz-container">
       <div class="dlz-bridge-wrap">
-        <p class="dlz-bridge-text" data-typing>The Data Landing Zone closes these gaps before the first workload lands.</p>
+        <p class="dlz-bridge-text" data-char-anim>The Data Landing Zone closes these gaps before the first workload lands.</p>
       </div>
     </div>
   </div>
@@ -304,6 +546,263 @@ import '../styles/landing.css';
 
 <script is:inline>
 (function () {
+  var VB = 700;
+  var V = { top: {x:350,y:115}, left: {x:118,y:555}, right: {x:582,y:555} };
+  var CENTER = {
+    x: (V.top.x + V.left.x + V.right.x) / 3,
+    y: (V.top.y + V.left.y + V.right.y) / 3,
+  };
+  var pos = { x: CENTER.x, y: CENTER.y };
+  var dragging = false;
+  var lastState = '';
+  var orbitAngle = 0;
+  var ORBIT_R    = 7;
+  var ORBIT_MS   = 4000;
+
+  var wrapper     = document.getElementById('dlz-tri-wrapper');
+  var hexWrap     = document.getElementById('dlz-hex-wrap');
+  var hexPoly     = document.getElementById('dlz-hex-poly');
+  var hexIconSvg  = document.getElementById('dlz-hex-icon-svg');
+  var hexEmoji    = document.getElementById('dlz-hex-emoji');
+  var dcLogo   = document.getElementById('dlz-dc-logo');
+  var hint     = document.getElementById('dlz-hint');
+  var tooltip  = document.getElementById('dlz-tooltip');
+  var ttIcon   = document.getElementById('dlz-tt-icon');
+  var ttTitle  = document.getElementById('dlz-tt-title');
+  var ttBody   = document.getElementById('dlz-tt-body');
+  var dTop     = document.getElementById('dlz-d-top');
+  var dLeft    = document.getElementById('dlz-d-left');
+  var dRight   = document.getElementById('dlz-d-right');
+  var nodeTop  = document.getElementById('dlz-node-top');
+  var nodeLeft = document.getElementById('dlz-node-left');
+  var nodeRight= document.getElementById('dlz-node-right');
+  var faceTop  = document.getElementById('dlz-face-top');
+  var faceLeft = document.getElementById('dlz-face-left');
+  var faceRight= document.getElementById('dlz-face-right');
+  var lblTop   = document.getElementById('dlz-lbl-top');
+  var lblLeft  = document.getElementById('dlz-lbl-left');
+  var lblRight = document.getElementById('dlz-lbl-right');
+
+  if (!wrapper) return;
+
+  var SCENARIOS = {
+    sweet: {
+      tooltipClass: 'happy', icon: '🎉', title: 'Perfect Balance',
+      body: 'DataChef keeps DevEx, Finance and Compliance aligned. Velocity meets governance meets value.',
+      nodes: {
+        top:   { fill: '#FFBA3B', face: '😊', lblColor: 'rgba(255,255,255,0.88)' },
+        left:  { fill: '#FFBA3B', face: '😊', lblColor: 'rgba(255,255,255,0.88)' },
+        right: { fill: '#FFBA3B', face: '😊', lblColor: 'rgba(255,255,255,0.88)' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 22px rgba(255,186,59,0.85))',
+    },
+    top: {
+      tooltipClass: 'danger', icon: '', title: 'Too close to DevEx',
+      body: 'Ship fast, break rules. Compliance is panicking. Legal costs incoming.',
+      nodes: {
+        top:   { fill: '#FFBA3B', lblColor: '#FFBA3B', face: '🤩' },
+        left:  { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+        right: { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
+    },
+    left: {
+      tooltipClass: 'danger', icon: '', title: 'Too close to Finance',
+      body: "Everything's underfunded. Devs are frustrated. Compliance is a spreadsheet note.",
+      nodes: {
+        top:   { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+        left:  { fill: '#FFBA3B', lblColor: '#FFBA3B', face: '🤩' },
+        right: { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
+    },
+    right: {
+      tooltipClass: 'danger', icon: '', title: 'Too close to Compliance',
+      body: 'Developers are drowning in tickets. Projects stall. Finance sees the bill.',
+      nodes: {
+        top:   { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+        left:  { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+        right: { fill: '#FFBA3B', lblColor: '#FFBA3B', face: '🤩' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
+    },
+    mid: {
+      tooltipClass: '', icon: '', title: '', body: '',
+      nodes: {
+        top:   { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: '😊' },
+        left:  { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: '😊' },
+        right: { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: '😊' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 18px rgba(255,186,59,0.45))',
+    },
+  };
+
+  function dist(a, b) { return Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)); }
+
+  function clampToTriangle(p) {
+    var a = V.top, b = V.left, c = V.right;
+    var denom = (b.y-c.y)*(a.x-c.x) + (c.x-b.x)*(a.y-c.y);
+    var w1 = ((b.y-c.y)*(p.x-c.x) + (c.x-b.x)*(p.y-c.y)) / denom;
+    var w2 = ((c.y-a.y)*(p.x-c.x) + (a.x-c.x)*(p.y-c.y)) / denom;
+    var w3 = 1 - w1 - w2;
+    if (w1>=0 && w2>=0 && w3>=0) return p;
+    w1=Math.max(0,w1); w2=Math.max(0,w2); w3=Math.max(0,w3);
+    var s=w1+w2+w3;
+    return { x:(w1/s)*a.x+(w2/s)*b.x+(w3/s)*c.x, y:(w1/s)*a.y+(w2/s)*b.y+(w3/s)*c.y };
+  }
+
+  function svgToScreen(sx, sy) {
+    var r = wrapper.getBoundingClientRect();
+    return { x:(sx/VB)*r.width, y:(sy/VB)*r.height };
+  }
+
+  function screenToSvg(cx, cy) {
+    var r = wrapper.getBoundingClientRect();
+    return { x:((cx-r.left)/r.width)*VB, y:((cy-r.top)/r.height)*VB };
+  }
+
+  function applyNodeState(node, lbl, data) {
+    var dark = document.documentElement.classList.contains('dark');
+    var fillColor = (data.fill === 'white') ? (dark ? 'white' : 'rgba(20,20,50,0.65)') : data.fill;
+    var lblColor  = (data.lblColor === 'rgba(255,255,255,0.88)') ? (dark ? 'rgba(255,255,255,0.88)' : 'rgba(0,0,0,0.72)') : data.lblColor;
+    var isRed = fillColor === '#f87171';
+    node.setAttribute('fill', fillColor);
+    node.setAttribute('r', data.fill === 'white' ? '10' : '12');
+    if (isRed) node.setAttribute('filter', 'url(#dlz-glow-danger)');
+    else if (fillColor === '#FFBA3B') node.setAttribute('filter', 'url(#dlz-glow-happy)');
+    else node.removeAttribute('filter');
+    node.setAttribute('opacity', '0.95');
+    lbl.setAttribute('fill', lblColor);
+  }
+
+  var panelHover = false;
+  var heroPanel = wrapper.closest('.dlz-hero-panel') || wrapper;
+  heroPanel.addEventListener('mouseenter', function() { panelHover = true;  });
+  heroPanel.addEventListener('mouseleave', function() { panelHover = false; });
+
+  function render() {
+    var ox = dragging ? 0 : ORBIT_R * Math.sin(orbitAngle);
+    var oy = dragging ? 0 : -ORBIT_R * Math.cos(orbitAngle);
+    var sp = svgToScreen(pos.x, pos.y);
+    hexWrap.style.left = (sp.x + ox) + 'px';
+    hexWrap.style.top  = (sp.y + oy) + 'px';
+    dcLogo.style.left  = (sp.x + ox) + 'px';
+    dcLogo.style.top   = (sp.y + oy + 22) + 'px';
+
+    dTop.setAttribute('x1', pos.x);   dTop.setAttribute('y1', pos.y);
+    dLeft.setAttribute('x1', pos.x);  dLeft.setAttribute('y1', pos.y);
+    dRight.setAttribute('x1', pos.x); dRight.setAttribute('y1', pos.y);
+
+    var distMax    = dist(V.top, V.left);
+    var DANGER     = distMax * 0.38;
+    var SWEET      = distMax * 0.13;
+    var distCenter = dist(pos, CENTER);
+
+    var state = 'mid';
+    if (distCenter < SWEET)              state = 'sweet';
+    else if (dist(pos, V.top)   < DANGER) state = 'top';
+    else if (dist(pos, V.left)  < DANGER) state = 'left';
+    else if (dist(pos, V.right) < DANGER) state = 'right';
+
+    var s         = SCENARIOS[state];
+    var dark      = document.documentElement.classList.contains('dark');
+    var isDanger  = (state === 'top' || state === 'left' || state === 'right');
+
+    applyNodeState(nodeTop,   lblTop,   s.nodes.top);
+    applyNodeState(nodeLeft,  lblLeft,  s.nodes.left);
+    applyNodeState(nodeRight, lblRight, s.nodes.right);
+
+    if (panelHover) {
+      faceTop.textContent   = s.nodes.top.face;
+      faceLeft.textContent  = s.nodes.left.face;
+      faceRight.textContent = s.nodes.right.face;
+    }
+    faceTop.style.opacity   = panelHover ? '1' : '0';
+    faceLeft.style.opacity  = panelHover ? '1' : '0';
+    faceRight.style.opacity = panelHover ? '1' : '0';
+    if (isDanger) {
+      hexPoly.style.fill   = '#f87171';
+      hexPoly.style.stroke = 'rgba(248,113,113,0.5)';
+    } else {
+      hexPoly.style.fill   = dark ? '#1e2235' : 'rgba(240,242,250,0.95)';
+      hexPoly.style.stroke = dark ? 'rgba(255,186,59,0.35)' : 'rgba(255,186,59,0.7)';
+    }
+    hexIconSvg.style.opacity = isDanger ? '0' : '1';
+    hexEmoji.style.opacity   = isDanger ? '1' : '0';
+    hexWrap.style.filter = s.hexFilter;
+
+    if (state === 'sweet') hexWrap.classList.add('sweet-anim');
+    else hexWrap.classList.remove('sweet-anim');
+
+    dcLogo.style.opacity = state === 'sweet' ? '1' : '0';
+
+    if (state !== 'mid') {
+      tooltip.style.left = (sp.x + ox) + 'px';
+      tooltip.style.top  = (sp.y + oy) + 'px';
+      tooltip.className  = s.tooltipClass;
+      ttIcon.textContent  = s.icon;
+      ttTitle.textContent = s.title;
+      ttBody.textContent  = s.body;
+      tooltip.classList.add('visible');
+    } else {
+      tooltip.classList.remove('visible');
+      tooltip.className = '';
+    }
+
+    if ((state === 'top' || state === 'left' || state === 'right') && state !== lastState) {
+      hexWrap.classList.remove('shaking');
+      void hexWrap.offsetWidth;
+      hexWrap.classList.add('shaking');
+      setTimeout(function() { hexWrap.classList.remove('shaking'); }, 500);
+    }
+
+    if (dragging) hint.style.opacity = '0';
+    lastState = state;
+  }
+
+  // Unified animation loop: advances orbit angle + lerps position back to center
+  var animLastTime = null;
+  function animStep(now) {
+    var dt = animLastTime !== null ? now - animLastTime : 0;
+    animLastTime = now;
+    if (!dragging) {
+      orbitAngle += (2 * Math.PI / ORBIT_MS) * dt;
+      pos.x += (CENTER.x - pos.x) * 0.12;
+      pos.y += (CENTER.y - pos.y) * 0.12;
+      if (Math.abs(pos.x - CENTER.x) < 0.3) pos.x = CENTER.x;
+      if (Math.abs(pos.y - CENTER.y) < 0.3) pos.y = CENTER.y;
+    }
+    render();
+    requestAnimationFrame(animStep);
+  }
+  requestAnimationFrame(animStep);
+
+  hexWrap.addEventListener('mousedown', function(e) {
+    dragging = true;
+    e.preventDefault();
+  });
+  hexWrap.addEventListener('touchstart', function(e) {
+    dragging = true;
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    pos = clampToTriangle(screenToSvg(e.clientX, e.clientY));
+  });
+  window.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    pos = clampToTriangle(screenToSvg(e.touches[0].clientX, e.touches[0].clientY));
+  }, { passive: false });
+
+  window.addEventListener('mouseup',  function() { if (dragging) { dragging = false; } });
+  window.addEventListener('touchend', function() { if (dragging) { dragging = false; } });
+})();
+</script>
+
+<script is:inline>
+(function () {
   // Inject data-anim + stagger delays onto repeated elements
   var staggerGroups = [
     ['.dlz-stakeholder-col', 150],
@@ -343,37 +842,42 @@ import '../styles/landing.css';
     });
   }
 
-  // Typing animation for elements with data-typing (skip if user prefers reduced motion)
+  // Character blur animation (letter-by-letter, 30ms stagger, blur+scale)
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('[data-typing]').forEach(function (el) {
-    if (reducedMotion) { el.style.opacity = '1'; return; }
-    var full = el.textContent.trim();
+  document.querySelectorAll('[data-char-anim]').forEach(function (el) {
+    var text = el.textContent.trim();
     el.textContent = '';
-    var cursor = document.createElement('span');
-    cursor.className = 'dlz-cursor';
-    cursor.setAttribute('aria-hidden', 'true');
-    el.appendChild(cursor);
-
-    var started = false;
-    var ioT = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting || started) return;
-      started = true;
-      ioT.disconnect();
-      el.style.opacity = '1';
-      var i = 0;
-      var interval = setInterval(function () {
-        el.insertBefore(document.createTextNode(full[i]), cursor);
-        i++;
-        if (i >= full.length) {
-          clearInterval(interval);
-          setTimeout(function () {
-            cursor.style.animation = 'none';
-            cursor.style.opacity = '0';
-          }, 1800);
-        }
-      }, 28);
-    }, { threshold: 0.5 });
-    ioT.observe(el);
+    el.setAttribute('aria-label', text);
+    var delay = 0;
+    text.split(' ').forEach(function (word, wi, words) {
+      var wordSpan = document.createElement('span');
+      wordSpan.style.cssText = 'display:inline-block;white-space:nowrap';
+      word.split('').forEach(function (char) {
+        var span = document.createElement('span');
+        span.className = 'dlz-char';
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = char;
+        if (!reducedMotion) span.style.transitionDelay = delay + 'ms';
+        delay += 30;
+        wordSpan.appendChild(span);
+      });
+      el.appendChild(wordSpan);
+      if (wi < words.length - 1) {
+        var space = document.createElement('span');
+        space.className = 'dlz-char';
+        space.setAttribute('aria-hidden', 'true');
+        space.textContent = ' ';
+        if (!reducedMotion) space.style.transitionDelay = delay + 'ms';
+        delay += 30;
+        el.appendChild(space);
+      }
+    });
+    var ioC = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      ioC.disconnect();
+      el.classList.add('in-view');
+    }, { threshold: 0.4, rootMargin: '-80px 0px' });
+    ioC.observe(el);
   });
 })();
 </script>

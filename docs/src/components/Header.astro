@@ -2,6 +2,7 @@
 // @ts-nocheck — virtual:starlight/* modules have no type declarations
 import Search from 'virtual:starlight/components/Search';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import SearchBar from './SearchBar.astro';
 import type { Props } from '@astrojs/starlight/props';
 ---
 
@@ -26,7 +27,7 @@ import type { Props } from '@astrojs/starlight/props';
 
   <!-- Search (centred via flex-grow) -->
   <div class="dlz-docs-search">
-    <Search {...Astro.props} />
+    <SearchBar variant="docs"><Search {...Astro.props} /></SearchBar>
   </div>
 
   <!-- Right: GitHub + theme toggle -->
@@ -66,22 +67,7 @@ import type { Props } from '@astrojs/starlight/props';
     min-width: 0;
   }
 
-  /* Override Starlight search to match the landing page pill style */
-  .dlz-docs-search :global(button[data-open-modal]) {
-    background: var(--sl-color-gray-6, #eef2ff);
-    border-radius: 9999px;
-    border: 1px solid var(--sl-color-gray-5);
-    padding: 0.5rem 1rem;
-    font-family: var(--sl-font);
-    font-size: 0.875rem;
-    width: 100%;
-    max-width: 280px;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    color: var(--sl-color-gray-3);
-  }
-
-  .dlz-docs-right {
+.dlz-docs-right {
     align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
@@ -130,6 +116,18 @@ import type { Props } from '@astrojs/starlight/props';
   :global([data-theme='light']) .dlz-theme-moon        { display: none; }
   :global([data-theme='light']) .dlz-theme-label-light { display: inline; }
   :global([data-theme='light']) .dlz-theme-label-dark  { display: none; }
+
+  /* Mobile: icon-only theme toggle */
+  @media (max-width: 50rem) {
+    .dlz-theme-btn {
+      padding: 0.5rem;
+      min-width: 36px;
+    }
+    .dlz-theme-label-dark,
+    .dlz-theme-label-light {
+      display: none !important;
+    }
+  }
 </style>
 
 <script>
