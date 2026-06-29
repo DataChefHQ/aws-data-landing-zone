@@ -1,0 +1,961 @@
+---
+import Navbar from '../components/Navbar.astro';
+import '../styles/landing.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Landing Zone &mdash; DevEx, Finance, Compliance. Balanced by design.</title>
+  <meta name="description" content="An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:title" content="Data Landing Zone" />
+  <meta property="og:description" content="DevEx, Finance, Compliance. Balanced by design." />
+  <meta property="og:image" content="/dlz-dark-og.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" />
+
+  <script is:inline>
+    (function() {
+      var stored = localStorage.getItem('starlight-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    })();
+  </script>
+
+  <style is:inline>
+    .dlz-balance-tri {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+    .dlz-balance-tri::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 16px 16px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #dlz-tri-main {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: visible;
+    }
+    #dlz-hex-wrap {
+      position: absolute;
+      z-index: 20;
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      touch-action: none;
+      user-select: none;
+      transition: filter 0.35s ease;
+      filter: drop-shadow(0 4px 18px rgba(255,186,59,0.45));
+    }
+    #dlz-hex-wrap:active { cursor: grabbing; }
+    #dlz-tooltip {
+      position: absolute;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -100%) translateY(-18px);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      width: clamp(180px, 32vw, 280px);
+    }
+    #dlz-tooltip.visible {
+      opacity: 1;
+      transform: translate(-50%, -100%) translateY(-26px);
+    }
+    #dlz-tooltip.below {
+      transform: translate(-50%, 0%) translateY(18px);
+    }
+    #dlz-tooltip.below.visible {
+      transform: translate(-50%, 0%) translateY(26px);
+    }
+    #dlz-tooltip.below .tt-inner::after {
+      bottom: auto;
+      top: -7px;
+      border-top: none;
+      border-bottom: 7px solid rgba(15,20,35,0.97);
+    }
+    #dlz-tooltip .tt-inner {
+      background: rgba(15, 20, 35, 0.97);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 16px 12px;
+      position: relative;
+      backdrop-filter: blur(8px);
+    }
+    #dlz-tooltip .tt-inner::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid rgba(15,20,35,0.97);
+    }
+    #dlz-tooltip .tt-icon {
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+      text-align: center;
+    }
+    #dlz-tooltip .tt-icon:empty { display: none; margin-bottom: 0; }
+    #dlz-tooltip .tt-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    #dlz-tooltip .tt-body {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.55;
+      text-align: center;
+    }
+    #dlz-tooltip.danger .tt-inner { border-color: rgba(248,113,113,0.3); }
+    #dlz-tooltip.danger .tt-title { color: #f87171; }
+    #dlz-tooltip.happy .tt-inner  { border-color: rgba(245,167,35,0.4); }
+    #dlz-tooltip.happy .tt-title  { color: #FFBA3B; }
+    @media (max-width: 600px) {
+      #dlz-tooltip .tt-body { display: none; }
+      #dlz-tooltip .tt-icon { display: none; }
+    }
+    #dlz-dc-logo {
+      position: absolute;
+      z-index: 15;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+    #dlz-dc-logo .dc-text {
+      font-size: clamp(9px, 1.3vw, 11px);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.9);
+      background: rgba(245,167,35,0.12);
+      border: 1px solid rgba(245,167,35,0.4);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 46px;
+      display: inline-block;
+    }
+    #dlz-hint {
+      position: absolute;
+      bottom: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(10px, 1.4vw, 12px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      pointer-events: none;
+      width: 80%;
+      transition: opacity 0.6s ease;
+    }
+    @keyframes dlz-shake {
+      0%,100% { transform: translate(-50%,-50%) rotate(0deg); }
+      20%      { transform: translate(-50%,-50%) rotate(-4deg); }
+      40%      { transform: translate(-50%,-50%) rotate(4deg); }
+      60%      { transform: translate(-50%,-50%) rotate(-3deg); }
+      80%      { transform: translate(-50%,-50%) rotate(3deg); }
+    }
+    #dlz-hex-wrap.shaking { animation: dlz-shake 0.45s ease; }
+    @keyframes dlz-sweet-pulse {
+      0%, 100% { filter: drop-shadow(0 4px 22px rgba(255,186,59,0.7)); }
+      50%       { filter: drop-shadow(0 4px 36px rgba(255,186,59,1)); }
+    }
+    #dlz-hex-wrap.sweet-anim { animation: dlz-sweet-pulse 1.6s ease-in-out infinite; }
+    #dlz-hex-wrap svg { display: block; }
+
+    /* ── Light mode overrides ── */
+    html:not(.dark) .dlz-balance-tri::before {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px);
+    }
+    html:not(.dark) #dlz-tri-main line {
+      stroke: rgba(0,0,0,0.18) !important;
+    }
+    html:not(.dark) #dlz-tooltip .tt-inner {
+      background: rgba(255,255,255,0.97);
+      border-color: rgba(0,0,0,0.1);
+    }
+    html:not(.dark) #dlz-tooltip .tt-body {
+      color: rgba(0,0,0,0.6);
+    }
+    html:not(.dark) #dlz-tooltip.danger .tt-inner { border-color: rgba(248,113,113,0.4); }
+    html:not(.dark) #dlz-tooltip .tt-inner::after  { border-top-color: rgba(255,255,255,0.97); }
+    html:not(.dark) #dlz-dc-logo .dc-text {
+      color: #7a5200 !important;
+      background: rgba(255,186,59,0.18) !important;
+      border-color: rgba(255,186,59,0.55) !important;
+    }
+    html:not(.dark) #dlz-hint { color: rgba(0,0,0,0.3); }
+    html:not(.dark) #dlz-hex-wrap {
+      filter: drop-shadow(0 4px 18px rgba(200,140,0,0.3));
+    }
+    html:not(.dark) #dlz-hex-wrap svg path[fill="white"] {
+      fill: rgba(20,28,60,0.55) !important;
+    }
+
+    /* ── Search dialog overrides ── */
+    site-search button[data-close-modal] { display: none !important; }
+    /* Make dialog full-screen so it IS the backdrop — backdrop clicks hit the dialog element */
+    site-search dialog {
+      width: 100% !important; max-width: 100% !important;
+      height: 100% !important; max-height: 100% !important;
+      margin: 0 !important;
+      border: none !important; box-shadow: none !important; padding: 0 !important;
+      background: hsla(223, 13%, 10%, 0.66) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+      backdrop-filter: blur(4px) !important;
+      display: flex; align-items: flex-start; justify-content: center;
+    }
+    site-search dialog::backdrop { background: transparent !important; }
+    /* Visual content card */
+    site-search .dialog-frame {
+      background: #23293b !important;
+      color: #fff !important;
+      margin-top: 4rem !important;
+      width: 90% !important; max-width: 40rem !important;
+      border-radius: 0.5rem !important;
+      border: 1px solid hsl(224, 10%, 23%) !important;
+      min-height: 15rem !important;
+      max-height: calc(100vh - 8rem) !important;
+      flex-grow: 0 !important; flex-shrink: 0 !important;
+      overflow: auto !important;
+    }
+    site-search .dialog-frame * { color: #fff !important; }
+  </style>
+</head>
+
+<body class="dlz-page">
+
+<Navbar />
+
+<main>
+<section class="dlz-section" style="z-index:8; position:relative;">
+  <div class="dlz-full-row dlz-border-b">
+    <div class="dlz-container">
+      <div class="dlz-spacer-sm dlz-side-borders"></div>
+    </div>
+  </div>
+  <div class="dlz-full-row">
+    <div class="dlz-container">
+      <div class="dlz-hero-grid dlz-side-borders">
+        <div class="dlz-hero-text">
+          <p class="dlz-eyebrow" data-hero-anim style="animation-delay:0.1s">Data Landing Zone</p>
+          <h1 class="dlz-hero-title" data-hero-anim style="animation-delay:0.25s">DevEx, Finance, Compliance.<br />Balanced by design.</h1>
+          <p class="dlz-hero-body" data-hero-anim style="animation-delay:0.4s">
+            After working across large AWS environments with hundreds of accounts, we saw the same tension again and again:<br />
+            <span class="dlz-highlight">finance</span> wants control, <span class="dlz-highlight">compliance</span> wants certainty, and <span class="dlz-highlight">engineers</span> want speed.
+          </p>
+          <p class="dlz-hero-subline" data-hero-anim style="animation-delay:0.5s">
+            Everyone told us to pick one.<br />
+            <span class="dlz-highlight dlz-hero-punchline">We didn&rsquo;t.</span>
+          </p>
+          <div class="dlz-hero-ctas" data-hero-anim style="animation-delay:0.65s">
+            <a href="/introduction" class="dlz-btn-primary">
+              Introduction
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </a>
+            <a href="/getting-started" class="dlz-btn-ghost-hero">Get Started</a>
+          </div>
+        </div>
+        <div class="dlz-hero-panel" data-hero-anim style="animation-delay:0.35s">
+          <div class="dlz-balance-tri" id="dlz-tri-wrapper">
+
+            <svg id="dlz-tri-main" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <filter id="dlz-glow-happy" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="dlz-glow-danger" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <line x1="350" y1="115" x2="118" y2="555" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+              <line x1="350" y1="115" x2="582" y2="555" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+              <line x1="118" y1="555" x2="582" y2="555" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+              <line id="dlz-d-top"   x1="350" y1="330" x2="350" y2="115" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
+              <line id="dlz-d-left"  x1="350" y1="330" x2="118" y2="555" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
+              <line id="dlz-d-right" x1="350" y1="330" x2="582" y2="555" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
+              <circle id="dlz-node-top"   cx="350" cy="115" r="10" fill="white" opacity="0.92" style="transition:opacity 0.3s ease"/>
+              <circle id="dlz-node-left"  cx="118" cy="555" r="10" fill="white" opacity="0.92" style="transition:opacity 0.3s ease"/>
+              <circle id="dlz-node-right" cx="582" cy="555" r="10" fill="white" opacity="0.92" style="transition:opacity 0.3s ease"/>
+              <image id="dlz-face-top"   x="328" y="93"  width="44" height="44" href="/emojis/Smiling.svg" style="opacity:0;transition:opacity 0.3s ease"/>
+              <image id="dlz-face-left"  x="96"  y="533" width="44" height="44" href="/emojis/Smiling.svg" style="opacity:0;transition:opacity 0.3s ease"/>
+              <image id="dlz-face-right" x="560" y="533" width="44" height="44" href="/emojis/Smiling.svg" style="opacity:0;transition:opacity 0.3s ease"/>
+              <text id="dlz-lbl-top"   x="350" y="88" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">DevEx</text>
+              <text id="dlz-lbl-left"  x="115"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Finance</text>
+              <text id="dlz-lbl-right" x="580" y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Compliance</text>
+            </svg>
+
+            <div id="dlz-tooltip">
+              <div class="tt-inner">
+                <span class="tt-icon" id="dlz-tt-icon">⚠️</span>
+                <div class="tt-title" id="dlz-tt-title">Warning</div>
+                <div class="tt-body"  id="dlz-tt-body">Something is wrong here.</div>
+              </div>
+            </div>
+
+            <div id="dlz-dc-logo">
+              <div class="dc-text">DataChef DLZ</div>
+            </div>
+
+            <div id="dlz-hex-wrap">
+              <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
+                <polygon id="dlz-hex-poly" points="34,4 62,19 62,49 34,64 6,49 6,19" fill="#1e2235" stroke="rgba(255,186,59,0.35)" stroke-width="1.2"/>
+                <svg id="dlz-hex-emoji" x="16" y="16" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0;transition:opacity 0.2s ease">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+                  <path d="M12 9v4"/>
+                  <path d="M12 17h.01"/>
+                </svg>
+                <svg id="dlz-hex-icon-svg" x="19" y="16" width="30" height="35" viewBox="0 0 34.2126 39.9248" style="opacity:1;transition:opacity 0.2s ease">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FFBA3B"/>
+                  <path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="white"/>
+                  <path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="white"/>
+                  <path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="white"/>
+                  <path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="white"/>
+                  <path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="white"/>
+                </svg>
+              </svg>
+            </div>
+
+            <div id="dlz-hint">Drag the hexagon — find the balance</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-border-t">
+    <div class="dlz-container">
+      <div class="dlz-spacer-xs dlz-side-borders"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-border-t" style="z-index:7; padding: 160px 0;">
+  <div class="dlz-container dlz-px">
+    <div class="dlz-prose-wide">
+      <h2 class="dlz-section-title-lg" data-anim>The problem</h2>
+      <p class="dlz-body-lg" data-anim data-delay="120">
+        Cloud bills double overnight. Privacy audits land badly. Every workload reinvents the same governance, and engineers ship slower for it. By the time anyone notices the pattern, the architecture has already hardened around it, and remediation means changing things teams now depend on.
+      </p>
+      <p class="dlz-body-lg" data-anim data-delay="240" style="margin-top: 0;">
+        The order is predictable. Privacy gets addressed first because regulation forces the conversation. FinOps gets addressed last, after the first billing shock. AI is now landing in the same sequence, except the spend curve is steeper than the regulatory one.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-border-t" style="z-index:6;">
+  <div class="dlz-full-row">
+    <div class="dlz-container">
+      <div class="dlz-quote-box dlz-side-borders">
+        <div class="dlz-quote-inner">
+          <p class="dlz-quote-text" data-anim>
+            &ldquo;Surveyed companies reported average monthly AI budgets rising <span class="dlz-highlight">36%</span> in 2025, with only <span class="dlz-highlight">51%</span> confident they can measure the ROI of that spend.&rdquo;
+          </p>
+          <div class="dlz-quote-attr" data-anim data-delay="200">
+            <p class="dlz-quote-source">CloudZero</p>
+            <p class="dlz-quote-subtitle">The State of AI Costs, May 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-accent-border-t" style="z-index:5;">
+  <div class="dlz-full-row">
+    <div class="dlz-container">
+      <div class="dlz-bridge-wrap">
+        <p class="dlz-bridge-text" data-char-anim>The Data Landing Zone closes these gaps before the first workload lands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-accent-border-t" style="z-index:4;">
+  <div class="dlz-full-row dlz-accent-border-t">
+    <div class="dlz-container">
+      <div class="dlz-spacer-md dlz-accent-side-borders"></div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t" style="padding: 32px 0;">
+    <div class="dlz-container dlz-px">
+      <div class="dlz-section-header" data-anim>
+        <h2 class="dlz-section-title-xl">Built for three stakeholders at once</h2>
+        <p class="dlz-section-subtitle">Data platforms usually pick one of these audiences to serve well. The DLZ aims to serve all three.</p>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container dlz-px" style="padding-top: 24px; padding-bottom: 24px;">
+      <div class="dlz-three-cols">
+        <div class="dlz-stakeholder-col">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-stake-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 18V6"></path></svg>
+          <h3 class="dlz-stake-title">CFO &amp; Finance</h3>
+          <p class="dlz-stake-desc">Cost attribution is part of provisioning. Budgets and anomaly alerts ship as code alongside the workload they monitor, and every resource carries the tags needed to roll spend up to a team, product, or environment. Chargeback becomes a query rather than a reconciliation project.</p>
+        </div>
+        <div class="dlz-stakeholder-col">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-stake-icon" aria-hidden="true"><path d="M12 7v14"></path><path d="M16 12h2"></path><path d="M16 8h2"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path><path d="M6 12h2"></path><path d="M6 8h2"></path></svg>
+          <h3 class="dlz-stake-title">Compliance Office</h3>
+          <p class="dlz-stake-desc">The controls regulators look for are owned by the platform: GDPR alignment, data classification, access logging, audit trails. When an audit lands, the evidence is already in the same place it was last quarter.</p>
+        </div>
+        <div class="dlz-stakeholder-col">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-stake-icon" aria-hidden="true"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+          <h3 class="dlz-stake-title">Engineers</h3>
+          <p class="dlz-stake-desc">Engineers get a paved road. Common requests like a new account, a new pipeline, or access to a dataset resolve through self-service against guardrails the platform already enforces. Policy is checked at deploy and audit time, so PRs don&rsquo;t run into governance walls in the middle of code review.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t">
+    <div class="dlz-container dlz-px" style="padding-top: 24px; padding-bottom: 24px;">
+      <div class="dlz-design-principle-wrap" data-anim>
+        <h4 class="dlz-design-principle-label">Design principle.</h4>
+        <p class="dlz-design-principle-text">The compliant path should be the convenient one. When following policy is the fastest way to ship, engineers do it by default, and working around it stops being worth the effort.</p>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t">
+    <div class="dlz-container">
+      <div class="dlz-spacer-md dlz-accent-side-borders"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section dlz-accent-border-t dlz-finops-section" style="z-index:3;">
+  <div class="dlz-container dlz-px">
+    <div class="dlz-finops-grid">
+      <div class="dlz-finops-left">
+        <div class="dlz-finops-left-inner">
+          <h2 class="dlz-finops-title" data-anim>How the DLZ delivers on FinOps</h2>
+          <p class="dlz-finops-subtitle" data-anim data-delay="100">FinOps tends to arrive last, after the first billing shock makes it urgent. The DLZ ships the cost-management capability ready to use, in four layers.</p>
+          <a href="/introduction" class="dlz-btn-finops" data-anim data-delay="200">
+            Introduction
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </a>
+        </div>
+      </div>
+      <div class="dlz-finops-right">
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h8"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path d="m3 17 2 2 4-4"></path><path d="m3 7 2 2 4-4"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Instrumentation</h3>
+            <p class="dlz-finops-item-desc">Every service emits cost and usage data in a consistent form. CUR 2.0 is the system of record, written to a dedicated FinOps account and queryable from Athena.</p>
+          </div>
+        </div>
+        <div class="dlz-finops-separator"></div>
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"></path><path d="m9 10 2 2 4-4"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Attribution</h3>
+            <p class="dlz-finops-item-desc">A mandatory tag set is enforced at deploy time. Tag policies, SCPs, and DLZ-side validation all check it before a resource ships. Anything that can&rsquo;t be attributed to an owner doesn&rsquo;t reach production.</p>
+          </div>
+        </div>
+        <div class="dlz-finops-separator"></div>
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Guardrails</h3>
+            <p class="dlz-finops-item-desc">Budgets alert when usage approaches the threshold and stop spend when it crosses the limit. An LLM gateway applies per-team and per-project token caps in real time, so a runaway agent burns minutes of budget rather than days.</p>
+          </div>
+        </div>
+        <div class="dlz-finops-separator"></div>
+        <div class="dlz-finops-item">
+          <div class="dlz-finops-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg></div>
+          <div class="dlz-finops-item-text">
+            <h3 class="dlz-finops-item-title">Reporting</h3>
+            <p class="dlz-finops-item-desc">Each role gets the view it needs: engineers see service-level burn, product owners see feature cost, finance sees the chargeback rollup. Cost-per-unit-of-work turns &ldquo;we should optimise&rdquo; into a number.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dlz-section" style="z-index:2;">
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container">
+      <div class="dlz-spacer-lg dlz-accent-side-borders"></div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t" style="padding: 32px 0 48px;">
+    <div class="dlz-container dlz-px">
+      <h2 class="dlz-section-title-xl" data-anim>What is the Data Landing Zone?</h2>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container">
+      <div class="dlz-features-grid dlz-accent-side-borders">
+        <div class="dlz-feature-col dlz-feature-col-right-border">
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"></path><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path></svg>
+            <h3 class="dlz-feature-title">Accelerator</h3>
+            <p class="dlz-feature-desc">A landing zone tailored for AI, data-driven, data mesh, and cloud projects, so teams can experiment fast without building governance from scratch.</p>
+          </div>
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            <h3 class="dlz-feature-title">All-in-one CDK component</h3>
+            <p class="dlz-feature-desc">A CDK construct published in TypeScript and Python that orchestrates AWS accounts and the resources needed for a multi-account data platform.</p>
+          </div>
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <h3 class="dlz-feature-title">Standards &amp; best practices</h3>
+            <p class="dlz-feature-desc">Aligned with the AWS Well-Architected Framework for multi-account strategy, security, and compliance.</p>
+          </div>
+        </div>
+        <div class="dlz-feature-col dlz-feature-col-offset">
+          <div class="dlz-feature-item dlz-feature-border-t dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg>
+            <h3 class="dlz-feature-title">Lessons in the defaults</h3>
+            <p class="dlz-feature-desc">Years of operational lessons about regulators, billing, and incident response are encoded as defaults in the platform. New workloads inherit them without anyone having to remember to apply them.</p>
+          </div>
+          <div class="dlz-feature-item dlz-feature-border-b">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+            <h3 class="dlz-feature-title">FinOps as a platform concern</h3>
+            <p class="dlz-feature-desc">Mandatory cost-allocation tags enforced at deploy time. Budgets and anomaly controls as code. CUR centralised in a dedicated FinOps account. An LLM gateway that blocks token spend before it reaches the model.</p>
+          </div>
+          <div class="dlz-feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dlz-feature-icon" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path></svg>
+            <h3 class="dlz-feature-title">Ease of use</h3>
+            <p class="dlz-feature-desc">Data engineers can deploy it using the defaults. Cloud engineers can customise the parts their organisation needs to fine-tune.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dlz-full-row dlz-accent-border-t dlz-accent-border-b">
+    <div class="dlz-container">
+      <div class="dlz-spacer-lg dlz-accent-side-borders"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="dlz-footer dlz-border-t" style="z-index:1;">
+  <div class="dlz-footer-inner">
+    <div class="dlz-footer-top">
+      <a href="/" aria-label="Data Landing Zone home" class="dlz-logo-link">
+        <svg class="dlz-logo" xmlns="http://www.w3.org/2000/svg" width="90" height="40" viewBox="0 0 90 40" fill="none" aria-label="DLZ"><g clip-path="url(#dlz-ftr)"><path d="M80.9902 26.3561H89.8767V29.6956H76.4054V26.6391L85.2353 13.2809H76.4054V9.94141H89.8767V12.9979L80.9902 26.3561Z" fill="currentColor"/><path d="M67.9155 26.5542H74.4248V29.6956H63.9534V9.94141H67.9155V26.5542Z" fill="currentColor"/><path d="M50.5727 9.94141C52.6481 9.94141 54.4688 10.3471 56.0348 11.1584C57.6196 11.9697 58.8366 13.13 59.6856 14.6394C60.5535 16.1299 60.9875 17.8657 60.9875 19.8468C60.9875 21.8279 60.5535 23.5637 59.6856 25.0542C58.8366 26.5259 57.6196 27.6674 56.0348 28.4787C54.4688 29.29 52.6481 29.6956 50.5727 29.6956H43.6672V9.94141H50.5727ZM50.4311 26.3278C52.5066 26.3278 54.1103 25.7617 55.2423 24.6297C56.3744 23.4977 56.9404 21.9034 56.9404 19.8468C56.9404 17.7903 56.3744 16.1865 55.2423 15.0356C54.1103 13.8658 52.5066 13.2809 50.4311 13.2809H47.6293V26.3278H50.4311Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FFBA3B"/><path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="currentColor"/><path d="M-6.10352e-05 15.5205L3.87486 17.7415V22.1835L-6.10352e-05 24.4045V15.5205Z" fill="currentColor"/><path d="M34.2126 15.5205V24.4045L30.3377 22.1835V17.7415L34.2126 15.5205Z" fill="currentColor"/><path d="M17.1063 4.65145L20.9812 2.43046L17.1063 0.209473L13.2314 2.43046L17.1063 4.65145Z" fill="currentColor"/><path d="M17.1063 15.5205L20.9812 17.7415V22.1835L17.1063 24.4045L13.2314 22.1835V17.7415L17.1063 15.5205Z" fill="currentColor"/></g><defs><clipPath id="dlz-ftr"><rect width="90" height="39.9248" fill="white"/></clipPath></defs></svg>
+      </a>
+      <nav class="dlz-footer-nav">
+        <span class="dlz-footer-link">Home</span>
+        <a href="https://datachef.co/" target="_blank" rel="noopener" class="dlz-footer-link dlz-footer-link-underline">DataChef.co</a>
+      </nav>
+    </div>
+    <div class="dlz-footer-sep"></div>
+    <div class="dlz-footer-bottom">
+      <a href="https://datachef.co/" target="_blank" rel="noopener" aria-label="DataChef">
+        <svg class="dlz-datachef-logo dlz-logo-light" xmlns="http://www.w3.org/2000/svg" width="139" height="24" viewBox="0 0 139 24" fill="none"><g clip-path="url(#dc-fl)"><path d="M50.3232 15.5381C50.3232 19.9007 47.2605 22.9009 42.4968 22.9009H36.9033V8.1748H42.4971C47.2605 8.1748 50.3232 11.1541 50.3232 15.5381ZM42.263 19.7965C45.0064 19.7965 46.6227 18.2442 46.6227 15.5381C46.6227 12.8319 45.0065 11.2375 42.263 11.2375H40.5402V19.7965H42.263Z" fill="#1A237E"/><path d="M56.812 11.0269C58.5772 11.0269 59.8323 11.8238 60.4702 12.8521V11.1953H64.1071V22.9006H60.4702V21.2433C59.8111 22.271 58.5556 23.0681 56.7909 23.0681C53.8985 23.0681 51.5802 20.7188 51.5802 17.0267C51.5802 13.3346 53.8984 11.0269 56.812 11.0269ZM57.8757 14.1525C56.5147 14.1525 55.2806 15.1597 55.2806 17.0264C55.2806 18.893 56.5147 19.9428 57.8757 19.9428C59.2581 19.9428 60.4702 18.9141 60.4702 17.0478C60.4702 15.1815 59.2581 14.1525 57.8757 14.1525Z" fill="#1A237E"/><path d="M67.1853 14.1736H65.7392V11.1951H67.1853V8.34229H70.8222V11.1951H73.2041V14.1736H70.8222V18.8725C70.8222 19.5654 71.1197 19.8584 71.9279 19.8584H73.2253V22.9005H71.3753C68.908 22.9005 67.1853 21.8728 67.1853 18.8307V14.1736Z" fill="#1A237E"/><path d="M79.5478 11.0269C81.3124 11.0269 82.5676 11.8238 83.2058 12.8521V11.1953H86.8424V22.9006H83.2058V21.2433C82.5463 22.271 81.2912 23.0681 79.5266 23.0681C76.634 23.0681 74.3159 20.7188 74.3159 17.0267C74.3159 13.3346 76.634 11.0269 79.5478 11.0269ZM80.611 14.1525C79.25 14.1525 78.0159 15.1597 78.0159 17.0264C78.0159 18.893 79.2493 19.9428 80.611 19.9428C81.9933 19.9428 83.2061 18.9141 83.2061 17.0478C83.2061 15.1815 81.9933 14.1525 80.611 14.1525Z" fill="#1A237E"/><path d="M96.3154 8.00684C99.8678 8.00684 102.547 9.97911 103.398 13.1671H99.3993C98.7826 11.9088 97.6553 11.2792 96.273 11.2792C94.04 11.2792 92.5087 12.9156 92.5087 15.5169C92.5087 18.1182 94.04 19.7545 96.273 19.7545C97.6553 19.7545 98.7826 19.1249 99.3993 17.8664H103.398C102.547 21.0547 99.8674 23.006 96.3154 23.006C91.9132 23.006 88.8081 19.9219 88.8081 15.5169C88.8081 11.1119 91.9132 8.00684 96.3154 8.00684Z" fill="#1A237E"/><path d="M105.352 7.37744H108.989V12.7685C109.711 11.7618 111.009 11.0694 112.647 11.0694C115.347 11.0694 117.155 12.9155 117.155 16.0619V22.9007H113.54V16.5446C113.54 14.9504 112.647 14.0692 111.264 14.0692C109.881 14.0692 108.989 14.9504 108.989 16.5446V22.9007H105.352V7.37744Z" fill="#1A237E"/><path d="M124.804 23.0681C121.316 23.0681 118.806 20.7606 118.806 17.0475C118.806 13.3343 121.273 11.0269 124.804 11.0269C128.271 11.0269 130.717 13.2924 130.717 16.8582C130.716 17.209 130.694 17.5595 130.652 17.9078H122.422C122.55 19.4386 123.506 20.152 124.676 20.152C125.697 20.152 126.272 19.6489 126.569 19.0192H130.44C129.866 21.3065 127.76 23.0681 124.804 23.0681ZM122.443 15.9153H126.994C126.994 14.6351 125.973 13.9013 124.761 13.9013C123.571 13.9013 122.656 14.6145 122.443 15.9153Z" fill="#1A237E"/><path d="M132.807 14.1741H131.489V11.1957H132.807V10.8599C132.807 7.79725 134.722 6.28691 138.337 6.47572V9.5174C136.933 9.43366 136.444 9.85314 136.444 11.0906V11.1957H138.401V14.1741H136.444V22.901H132.807V14.1741Z" fill="#1A237E"/><path d="M25.8315 19.3784V23.069H7.37771V19.3784H25.8315Z" fill="#F44336"/><path d="M11.8975 1.2931C13.6271 0.266395 15.6451-0.166683 17.6437 0.0603858C19.6423 0.287502 21.5123 1.16216 22.9675 2.55085C24.4227 3.93951 25.3835 5.76626 25.7039 7.75204C26.3338 7.50914 27.003 7.38392 27.6781 7.38285C29.1464 7.38285 30.5545 7.96654 31.5928 9.00478C32.631 10.043 33.2147 11.4512 33.2147 12.9194C33.2147 14.3877 32.631 15.7959 31.5928 16.8341C30.5546 17.8722 29.1463 18.4554 27.6781 18.4554H6.45599C5.53961 18.4558 4.63379 18.2609 3.79845 17.8841C2.96303 17.5072 2.21707 16.957 1.61085 16.2697C1.00473 15.5824 0.551896 14.7739 0.282396 13.8981C0.0128969 13.0221-0.0672633 12.0985 0.0477423 11.1893C0.162753 10.28 0.470333 9.4056 0.94944 8.62432C1.42854 7.84312 2.06848 7.17297 2.82667 6.65824C3.58494 6.14346 4.44422 5.79588 5.34717 5.6389C6.25008 5.48194 7.17606 5.51914 8.06353 5.74778C8.82127 3.88445 10.1678 2.31987 11.8975 1.2931Z" fill="#F44336"/><path d="M16.6047 5.76855C18.5156 5.76855 20.065 7.31795 20.065 9.22892C20.065 9.44925 20.0431 9.66455 20.0037 9.87344L26.1304 11.9159C26.4593 11.4088 27.0297 11.073 27.6791 11.073C28.6982 11.0731 29.5244 11.8992 29.5244 12.9183C29.5244 13.9374 28.6981 14.7635 27.6791 14.7636C26.6599 14.7636 25.8338 13.9375 25.8338 12.9183C25.8338 12.8756 25.8372 12.8333 25.84 12.7913L19.7127 10.7489C19.1499 11.8975 17.97 12.6887 16.6047 12.6887C15.1715 12.6886 13.9418 11.8174 13.4165 10.5755L8.52817 11.909C8.52937 11.9379 8.53067 11.9673 8.53067 11.9966C8.53051 13.143 7.60094 14.0722 6.45445 14.0722C5.30805 14.0721 4.3784 13.143 4.37823 11.9966C4.37823 10.8501 5.30795 9.92046 6.45445 9.92037C7.24745 9.92037 7.93638 10.365 8.28601 11.0186L13.175 9.68509C13.1553 9.5358 13.1449 9.38358 13.1449 9.22892C13.1449 7.31797 14.6937 5.76859 16.6047 5.76855Z" fill="white"/></g><defs><clipPath id="dc-fl"><rect width="138.405" height="23.0674" fill="white"/></clipPath></defs></svg>
+        <svg class="dlz-datachef-logo dlz-logo-dark" xmlns="http://www.w3.org/2000/svg" width="139" height="24" viewBox="0 0 139 24" fill="none"><g clip-path="url(#dc-fd)"><path d="M50.3233 15.5381C50.3233 19.9007 47.2606 22.9009 42.4968 22.9009H36.9033V8.1748H42.4972C47.2606 8.1748 50.3233 11.1541 50.3233 15.5381ZM42.263 19.7965C45.0064 19.7965 46.6228 18.2442 46.6228 15.5381C46.6228 12.8319 45.0066 11.2375 42.263 11.2375H40.5403V19.7965H42.263Z" fill="white"/><path d="M56.8121 11.0269C58.5774 11.0269 59.8325 11.8238 60.4703 12.8521V11.1953H64.1072V22.9006H60.4703V21.2433C59.8112 22.271 58.5557 23.0681 56.791 23.0681C53.8986 23.0681 51.5803 20.7188 51.5803 17.0267C51.5803 13.3346 53.8985 11.0269 56.8121 11.0269ZM57.8758 14.1525C56.5148 14.1525 55.2807 15.1597 55.2807 17.0264C55.2807 18.893 56.5148 19.9428 57.8758 19.9428C59.2582 19.9428 60.4703 18.9141 60.4703 17.0478C60.4703 15.1815 59.2582 14.1525 57.8758 14.1525Z" fill="white"/><path d="M67.1854 14.1736H65.7393V11.1951H67.1854V8.34229H70.8223V11.1951H73.2041V14.1736H70.8223V18.8725C70.8223 19.5654 71.1197 19.8584 71.9279 19.8584H73.2253V22.9005H71.3753C68.908 22.9005 67.1854 21.8728 67.1854 18.8307V14.1736Z" fill="white"/><path d="M79.5478 11.0269C81.3125 11.0269 82.5676 11.8238 83.2059 12.8521V11.1953H86.8425V22.9006H83.2059V21.2433C82.5464 22.271 81.2913 23.0681 79.5266 23.0681C76.6341 23.0681 74.3159 20.7188 74.3159 17.0267C74.3159 13.3346 76.6341 11.0269 79.5478 11.0269ZM80.611 14.1525C79.25 14.1525 78.0159 15.1597 78.0159 17.0264C78.0159 18.893 79.2494 19.9428 80.611 19.9428C81.9933 19.9428 83.2061 18.9141 83.2061 17.0478C83.2061 15.1815 81.9933 14.1525 80.611 14.1525Z" fill="white"/><path d="M96.3154 8.00684C99.8678 8.00684 102.547 9.97911 103.398 13.1671H99.3993C98.7826 11.9088 97.6553 11.2792 96.273 11.2792C94.04 11.2792 92.5087 12.9156 92.5087 15.5169C92.5087 18.1182 94.04 19.7545 96.273 19.7545C97.6553 19.7545 98.7826 19.1249 99.3993 17.8664H103.398C102.547 21.0547 99.8674 23.006 96.3154 23.006C91.9132 23.006 88.8081 19.9219 88.8081 15.5169C88.8081 11.1119 91.9132 8.00684 96.3154 8.00684Z" fill="white"/><path d="M105.352 7.37744H108.989V12.7685C109.712 11.7618 111.009 11.0694 112.647 11.0694C115.348 11.0694 117.156 12.9155 117.156 16.0619V22.9007H113.54V16.5446C113.54 14.9504 112.647 14.0692 111.264 14.0692C109.881 14.0692 108.989 14.9504 108.989 16.5446V22.9007H105.352V7.37744Z" fill="white"/><path d="M124.804 23.0681C121.316 23.0681 118.806 20.7606 118.806 17.0475C118.806 13.3343 121.274 11.0269 124.804 11.0269C128.271 11.0269 130.717 13.2924 130.717 16.8582C130.716 17.209 130.694 17.5595 130.653 17.9078H122.422C122.55 19.4386 123.506 20.152 124.676 20.152C125.697 20.152 126.272 19.6489 126.569 19.0192H130.44C129.866 21.3065 127.76 23.0681 124.804 23.0681ZM122.443 15.9153H126.994C126.994 14.6351 125.973 13.9013 124.761 13.9013C123.571 13.9013 122.656 14.6145 122.443 15.9153Z" fill="white"/><path d="M132.807 14.1741H131.489V11.1957H132.807V10.8599C132.807 7.79725 134.722 6.28691 138.337 6.47572V9.5174C136.934 9.43366 136.444 9.85314 136.444 11.0906V11.1957H138.401V14.1741H136.445V22.901H132.807V14.1741Z" fill="white"/><path d="M25.8316 19.3784V23.069H7.37777V19.3784H25.8316Z" fill="#F44336"/><path d="M11.8975 1.2931C13.6272 0.266395 15.6452-0.166683 17.6437 0.0603858C19.6424 0.287502 21.5123 1.16216 22.9676 2.55085C24.4228 3.93951 25.3836 5.76626 25.704 7.75204C26.3339 7.50914 27.0031 7.38392 27.6782 7.38285C29.1465 7.38285 30.5546 7.96654 31.5928 9.00478C32.6311 10.043 33.2148 11.4512 33.2148 12.9194C33.2147 14.3877 32.631 15.7959 31.5928 16.8341C30.5546 17.8722 29.1464 18.4554 27.6782 18.4554H6.45605C5.53967 18.4558 4.63385 18.2609 3.79852 17.8841C2.96309 17.5072 2.21713 16.957 1.61091 16.2697C1.00479 15.5824 0.551957 14.7739 0.282457 13.8981C0.012958 13.0221-0.0672023 12.0985 0.0478033 11.1893C0.162814 10.28 0.470394 9.4056 0.949501 8.62432C1.4286 7.84312 2.06854 7.17297 2.82673 6.65824C3.585 6.14346 4.44428 5.79588 5.34723 5.6389C6.25014 5.48194 7.17612 5.51914 8.06359 5.74778C8.82133 3.88445 10.1678 2.31987 11.8975 1.2931Z" fill="#F44336"/><path d="M16.6046 5.76855C18.5156 5.76855 20.065 7.31795 20.065 9.22892C20.0649 9.44925 20.043 9.66455 20.0036 9.87344L26.1303 11.9159C26.4592 11.4088 27.0296 11.073 27.679 11.073C28.6981 11.0731 29.5243 11.8992 29.5243 12.9183C29.5243 13.9374 28.6981 14.7635 27.679 14.7636C26.6599 14.7636 25.8337 13.9375 25.8337 12.9183C25.8337 12.8756 25.8371 12.8333 25.84 12.7913L19.7127 10.7489C19.1498 11.8975 17.97 12.6887 16.6046 12.6887C15.1714 12.6886 13.9417 11.8174 13.4164 10.5755L8.52811 11.909C8.52931 11.9379 8.53061 11.9673 8.53061 11.9966C8.53045 13.143 7.60087 14.0722 6.45439 14.0722C5.30799 14.0721 4.37834 13.143 4.37817 11.9966C4.37817 10.8501 5.30789 9.92046 6.45439 9.92037C7.24739 9.92037 7.93632 10.365 8.28595 11.0186L13.1749 9.68509C13.1552 9.5358 13.1449 9.38358 13.1449 9.22892C13.1449 7.31797 14.6937 5.76859 16.6046 5.76855Z" fill="white"/></g><defs><clipPath id="dc-fd"><rect width="138.405" height="23.0674" fill="white"/></clipPath></defs></svg>
+      </a>
+      <p class="dlz-copyright">Copyright 2026 &copy; DataChef</p>
+    </div>
+  </div>
+</footer>
+
+
+
+<script is:inline>
+(function () {
+  var VB = 700;
+  var V = { top: {x:350,y:115}, left: {x:118,y:555}, right: {x:582,y:555} };
+  var CENTER = {
+    x: (V.top.x + V.left.x + V.right.x) / 3,
+    y: (V.top.y + V.left.y + V.right.y) / 3 - 40,
+  };
+  var pos = { x: CENTER.x, y: CENTER.y };
+  var dragging = false;
+  var lastState = '';
+  var orbitAngle = 0;
+  var ORBIT_R    = 7;
+  var ORBIT_MS   = 4000;
+
+  var wrapper     = document.getElementById('dlz-tri-wrapper');
+  var hexWrap     = document.getElementById('dlz-hex-wrap');
+  var hexPoly     = document.getElementById('dlz-hex-poly');
+  var hexIconSvg  = document.getElementById('dlz-hex-icon-svg');
+  var hexEmoji    = document.getElementById('dlz-hex-emoji');
+  var dcLogo   = document.getElementById('dlz-dc-logo');
+  var hint     = document.getElementById('dlz-hint');
+  var tooltip  = document.getElementById('dlz-tooltip');
+  var ttIcon   = document.getElementById('dlz-tt-icon');
+  var ttTitle  = document.getElementById('dlz-tt-title');
+  var ttBody   = document.getElementById('dlz-tt-body');
+  var dTop     = document.getElementById('dlz-d-top');
+  var dLeft    = document.getElementById('dlz-d-left');
+  var dRight   = document.getElementById('dlz-d-right');
+  var nodeTop  = document.getElementById('dlz-node-top');
+  var nodeLeft = document.getElementById('dlz-node-left');
+  var nodeRight= document.getElementById('dlz-node-right');
+  var faceTop  = document.getElementById('dlz-face-top');
+  var faceLeft = document.getElementById('dlz-face-left');
+  var faceRight= document.getElementById('dlz-face-right');
+  var lblTop   = document.getElementById('dlz-lbl-top');
+  var lblLeft  = document.getElementById('dlz-lbl-left');
+  var lblRight = document.getElementById('dlz-lbl-right');
+
+  if (!wrapper) return;
+
+  var SCENARIOS = {
+    sweet: {
+      tooltipClass: 'happy', icon: '', title: 'Perfect Balance',
+      body: 'DataChef keeps DevEx, Finance and Compliance aligned. Velocity meets governance meets value.',
+      nodes: {
+        top:   { fill: '#FFBA3B', face: 'Smiling', lblColor: 'rgba(255,255,255,0.88)' },
+        left:  { fill: '#FFBA3B', face: 'Smiling', lblColor: 'rgba(255,255,255,0.88)' },
+        right: { fill: '#FFBA3B', face: 'Smiling', lblColor: 'rgba(255,255,255,0.88)' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 22px rgba(255,186,59,0.85))',
+    },
+    top: {
+      tooltipClass: 'danger', icon: '', title: 'Too close to DevEx',
+      body: 'Ship fast, break rules. Compliance is panicking. Legal costs incoming.',
+      nodes: {
+        top:   { fill: '#FFBA3B', lblColor: '#FFBA3B', face: 'Shine'  },
+        left:  { fill: '#f87171', lblColor: '#f87171', face: 'Scared' },
+        right: { fill: '#f87171', lblColor: '#f87171', face: 'Shout'  },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
+    },
+    left: {
+      tooltipClass: 'danger', icon: '', title: 'Too close to Finance',
+      body: "Everything's underfunded. Devs are frustrated. Compliance is a spreadsheet note.",
+      nodes: {
+        top:   { fill: '#f87171', lblColor: '#f87171', face: 'Shout'  },
+        left:  { fill: '#FFBA3B', lblColor: '#FFBA3B', face: 'Shine'  },
+        right: { fill: '#f87171', lblColor: '#f87171', face: 'Shock'  },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
+    },
+    right: {
+      tooltipClass: 'danger', icon: '', title: 'Too close to Compliance',
+      body: 'Developers are drowning in tickets. Projects stall. Finance sees the bill.',
+      nodes: {
+        top:   { fill: '#f87171', lblColor: '#f87171', face: 'Crying' },
+        left:  { fill: '#f87171', lblColor: '#f87171', face: 'Shock'  },
+        right: { fill: '#FFBA3B', lblColor: '#FFBA3B', face: 'Shine'  },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
+    },
+    mid: {
+      tooltipClass: '', icon: '', title: '', body: '',
+      nodes: {
+        top:   { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: 'Smiling' },
+        left:  { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: 'Smiling' },
+        right: { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: 'Smiling' },
+      },
+      hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 18px rgba(255,186,59,0.45))',
+    },
+  };
+
+  function dist(a, b) { return Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)); }
+
+  function clampToTriangle(p) {
+    var a = V.top, b = V.left, c = V.right;
+    var denom = (b.y-c.y)*(a.x-c.x) + (c.x-b.x)*(a.y-c.y);
+    var w1 = ((b.y-c.y)*(p.x-c.x) + (c.x-b.x)*(p.y-c.y)) / denom;
+    var w2 = ((c.y-a.y)*(p.x-c.x) + (a.x-c.x)*(p.y-c.y)) / denom;
+    var w3 = 1 - w1 - w2;
+    if (w1>=0 && w2>=0 && w3>=0) return p;
+    w1=Math.max(0,w1); w2=Math.max(0,w2); w3=Math.max(0,w3);
+    var s=w1+w2+w3;
+    return { x:(w1/s)*a.x+(w2/s)*b.x+(w3/s)*c.x, y:(w1/s)*a.y+(w2/s)*b.y+(w3/s)*c.y };
+  }
+
+  function svgToScreen(sx, sy) {
+    var r = wrapper.getBoundingClientRect();
+    return { x:(sx/VB)*r.width, y:(sy/VB)*r.height };
+  }
+
+  function screenToSvg(cx, cy) {
+    var r = wrapper.getBoundingClientRect();
+    return { x:((cx-r.left)/r.width)*VB, y:((cy-r.top)/r.height)*VB };
+  }
+
+  function applyNodeState(node, lbl, data) {
+    var dark = document.documentElement.classList.contains('dark');
+    var fillColor = (data.fill === 'white') ? (dark ? 'white' : 'rgba(20,20,50,0.65)') : data.fill;
+    var lblColor  = (data.lblColor === 'rgba(255,255,255,0.88)') ? (dark ? 'rgba(255,255,255,0.88)' : 'rgba(0,0,0,0.72)') : data.lblColor;
+    var isRed = fillColor === '#f87171';
+    node.setAttribute('fill', fillColor);
+    node.setAttribute('r', data.fill === 'white' ? '10' : '12');
+    if (isRed) node.setAttribute('filter', 'url(#dlz-glow-danger)');
+    else if (fillColor === '#FFBA3B') node.setAttribute('filter', 'url(#dlz-glow-happy)');
+    else node.removeAttribute('filter');
+    node.setAttribute('opacity', '0.95');
+    lbl.setAttribute('fill', lblColor);
+  }
+
+  var panelHover = false;
+  var heroPanel = wrapper.closest('.dlz-hero-panel') || wrapper;
+  heroPanel.addEventListener('mouseenter', function() { panelHover = true;  });
+  heroPanel.addEventListener('mouseleave', function() { panelHover = false; });
+
+  function render() {
+    var ox = dragging ? 0 : ORBIT_R * Math.sin(orbitAngle);
+    var oy = dragging ? 0 : -ORBIT_R * Math.cos(orbitAngle);
+    var sp = svgToScreen(pos.x, pos.y);
+    hexWrap.style.left = (sp.x + ox) + 'px';
+    hexWrap.style.top  = (sp.y + oy) + 'px';
+    dcLogo.style.left  = (sp.x + ox) + 'px';
+    dcLogo.style.top   = (sp.y + oy + 22) + 'px';
+
+    dTop.setAttribute('x1', pos.x);   dTop.setAttribute('y1', pos.y);
+    dLeft.setAttribute('x1', pos.x);  dLeft.setAttribute('y1', pos.y);
+    dRight.setAttribute('x1', pos.x); dRight.setAttribute('y1', pos.y);
+
+    var distMax    = dist(V.top, V.left);
+    var DANGER     = distMax * 0.38;
+    var SWEET      = distMax * 0.13;
+    var distCenter = dist(pos, CENTER);
+
+    var state = 'mid';
+    if (distCenter < SWEET)              state = 'sweet';
+    else if (dist(pos, V.top)   < DANGER) state = 'top';
+    else if (dist(pos, V.left)  < DANGER) state = 'left';
+    else if (dist(pos, V.right) < DANGER) state = 'right';
+
+    var s         = SCENARIOS[state];
+    var dark      = document.documentElement.classList.contains('dark');
+    var isDanger  = (state === 'top' || state === 'left' || state === 'right');
+
+    applyNodeState(nodeTop,   lblTop,   s.nodes.top);
+    applyNodeState(nodeLeft,  lblLeft,  s.nodes.left);
+    applyNodeState(nodeRight, lblRight, s.nodes.right);
+
+    var showEmojis = panelHover || window.innerWidth <= 600;
+    if (showEmojis) {
+      faceTop.setAttribute('href',   '/emojis/' + s.nodes.top.face   + '.svg');
+      faceLeft.setAttribute('href',  '/emojis/' + s.nodes.left.face  + '.svg');
+      faceRight.setAttribute('href', '/emojis/' + s.nodes.right.face + '.svg');
+    }
+    faceTop.style.opacity   = showEmojis ? '1' : '0';
+    faceLeft.style.opacity  = showEmojis ? '1' : '0';
+    faceRight.style.opacity = showEmojis ? '1' : '0';
+    nodeTop.style.opacity   = showEmojis ? '0' : '';
+    nodeLeft.style.opacity  = showEmojis ? '0' : '';
+    nodeRight.style.opacity = showEmojis ? '0' : '';
+    if (isDanger) {
+      hexPoly.style.fill   = '#f87171';
+      hexPoly.style.stroke = 'rgba(248,113,113,0.5)';
+    } else {
+      hexPoly.style.fill   = dark ? '#1e2235' : 'rgba(240,242,250,0.95)';
+      hexPoly.style.stroke = dark ? 'rgba(255,186,59,0.35)' : 'rgba(255,186,59,0.7)';
+    }
+    hexIconSvg.style.opacity = isDanger ? '0' : '1';
+    hexEmoji.style.opacity   = isDanger ? '1' : '0';
+    hexWrap.style.filter = s.hexFilter;
+
+    if (state === 'sweet') hexWrap.classList.add('sweet-anim');
+    else hexWrap.classList.remove('sweet-anim');
+
+    dcLogo.style.opacity = state === 'sweet' ? '1' : '0';
+
+    var showTooltip  = isDanger || panelHover;
+    var tooltipS     = isDanger ? s : SCENARIOS['sweet'];
+    var tooltipState = isDanger ? state : 'sweet';
+    if (showTooltip) {
+      tooltip.style.left = (sp.x + ox) + 'px';
+      tooltip.style.top  = (sp.y + oy) + 'px';
+      tooltip.className  = tooltipS.tooltipClass;
+      if (tooltipState === 'top') tooltip.classList.add('below');
+      ttIcon.textContent  = tooltipS.icon;
+      ttTitle.textContent = tooltipS.title;
+      ttBody.textContent  = tooltipS.body;
+      tooltip.classList.add('visible');
+    } else {
+      tooltip.classList.remove('visible');
+      tooltip.className = '';
+    }
+
+    if ((state === 'top' || state === 'left' || state === 'right') && state !== lastState) {
+      hexWrap.classList.remove('shaking');
+      void hexWrap.offsetWidth;
+      hexWrap.classList.add('shaking');
+      setTimeout(function() { hexWrap.classList.remove('shaking'); }, 500);
+    }
+
+    if (dragging) hint.style.opacity = '0';
+    lastState = state;
+  }
+
+  // Unified animation loop: advances orbit angle + lerps position back to center
+  var animLastTime = null;
+  function animStep(now) {
+    var dt = animLastTime !== null ? now - animLastTime : 0;
+    animLastTime = now;
+    if (!dragging) {
+      orbitAngle += (2 * Math.PI / ORBIT_MS) * dt;
+      pos.x += (CENTER.x - pos.x) * 0.12;
+      pos.y += (CENTER.y - pos.y) * 0.12;
+      if (Math.abs(pos.x - CENTER.x) < 0.3) pos.x = CENTER.x;
+      if (Math.abs(pos.y - CENTER.y) < 0.3) pos.y = CENTER.y;
+    }
+    render();
+    requestAnimationFrame(animStep);
+  }
+  requestAnimationFrame(animStep);
+
+  hexWrap.addEventListener('mousedown', function(e) {
+    dragging = true;
+    e.preventDefault();
+  });
+  hexWrap.addEventListener('touchstart', function(e) {
+    dragging = true;
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    pos = clampToTriangle(screenToSvg(e.clientX, e.clientY));
+  });
+  window.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    pos = clampToTriangle(screenToSvg(e.touches[0].clientX, e.touches[0].clientY));
+  }, { passive: false });
+
+  window.addEventListener('mouseup',  function() { if (dragging) { dragging = false; } });
+  window.addEventListener('touchend', function() { if (dragging) { dragging = false; } });
+})();
+</script>
+
+<script is:inline>
+(function () {
+  // Inject data-anim + stagger delays onto repeated elements
+  var staggerGroups = [
+    ['.dlz-stakeholder-col', 150],
+    ['.dlz-finops-item',     150],
+    ['.dlz-feature-item',    100],
+  ];
+  staggerGroups.forEach(function (g) {
+    document.querySelectorAll(g[0]).forEach(function (el, i) {
+      el.setAttribute('data-anim', '');
+      el.dataset.delay = String(i * g[1]);
+    });
+  });
+
+  // Scroll-reveal via IntersectionObserver
+  var io;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var d = parseInt(el.dataset.delay || '0', 10);
+        if (d) {
+          setTimeout(function () { el.classList.add('in-view'); }, d);
+        } else {
+          el.classList.add('in-view');
+        }
+        io.unobserve(el);
+      });
+    }, { threshold: 0.1, rootMargin: '-40px 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('[data-anim]').forEach(function (el) {
+      el.classList.add('in-view');
+    });
+  }
+
+  // Character blur animation (letter-by-letter, 30ms stagger, blur+scale)
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-char-anim]').forEach(function (el) {
+    var text = el.textContent.trim();
+    el.textContent = '';
+    el.setAttribute('aria-label', text);
+    var delay = 0;
+    text.split(' ').forEach(function (word, wi, words) {
+      var wordSpan = document.createElement('span');
+      wordSpan.style.cssText = 'display:inline-block;white-space:nowrap';
+      word.split('').forEach(function (char) {
+        var span = document.createElement('span');
+        span.className = 'dlz-char';
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = char;
+        if (!reducedMotion) span.style.transitionDelay = delay + 'ms';
+        delay += 30;
+        wordSpan.appendChild(span);
+      });
+      el.appendChild(wordSpan);
+      if (wi < words.length - 1) {
+        var space = document.createElement('span');
+        space.className = 'dlz-char';
+        space.setAttribute('aria-hidden', 'true');
+        space.textContent = ' ';
+        if (!reducedMotion) space.style.transitionDelay = delay + 'ms';
+        delay += 30;
+        el.appendChild(space);
+      }
+    });
+    var ioC = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      ioC.disconnect();
+      el.classList.add('in-view');
+    }, { threshold: 0.4, rootMargin: '-80px 0px' });
+    ioC.observe(el);
+  });
+})();
+</script>
+
+<script is:inline>
+(function () {
+  function attachSearchDialogClose() {
+    var siteSearch = document.querySelector('site-search');
+    if (!siteSearch) return;
+    var dialog = siteSearch.querySelector('dialog');
+    if (!dialog) return;
+    document.addEventListener('click', function (e) {
+      if (!dialog.open) return;
+      var frame = siteSearch.querySelector('.dialog-frame');
+      if (frame && frame.contains(e.target)) return;
+      dialog.close();
+    }, true);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachSearchDialogClose);
+  } else {
+    attachSearchDialogClose();
+  }
+})();
+</script>
+
+</body>
+</html>

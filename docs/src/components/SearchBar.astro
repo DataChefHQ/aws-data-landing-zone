@@ -1,0 +1,202 @@
+---
+interface Props {
+  variant: 'landing' | 'docs';
+}
+const { variant } = Astro.props;
+---
+
+{variant === 'landing' ? (
+  <button class="dlz-searchbar" id="dlz-landing-search" aria-label="Open search">
+    <svg class="dlz-searchbar-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <span class="dlz-searchbar-label">Search</span>
+    <kbd class="dlz-searchbar-kbd">⌘ K</kbd>
+  </button>
+) : (
+  <div class="dlz-searchbar dlz-searchbar--docs">
+    <slot />
+  </div>
+)}
+
+<style is:global>
+  /* ── Shared pill shape ── */
+  .dlz-searchbar,
+  .dlz-searchbar--docs button[data-open-modal] {
+    background: var(--muted, var(--sl-color-gray-6));
+    border: 1px solid var(--border, var(--sl-color-gray-5));
+    border-radius: 9999px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--muted-foreground, var(--sl-color-gray-3));
+    transition: border-color 0.15s;
+  }
+
+  /* Landing pill width */
+  .dlz-searchbar:not(.dlz-searchbar--docs) {
+    width: 260px;
+  }
+
+  /* Docs pill: button fills wrapper */
+  .dlz-searchbar--docs {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    max-width: 280px;
+  }
+  .dlz-searchbar--docs button[data-open-modal] {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Dark mode — landing (.dark) and docs ([data-theme='dark']) */
+  .dark .dlz-searchbar,
+  .dark .dlz-searchbar--docs button[data-open-modal],
+  [data-theme='dark'] .dlz-searchbar,
+  [data-theme='dark'] .dlz-searchbar--docs button[data-open-modal] {
+    background: oklch(0.284 0.034 269.915);
+    border-color: oklch(1 0 0 / 0.1);
+  }
+
+  /* Icon */
+  .dlz-searchbar-icon,
+  .dlz-searchbar--docs button[data-open-modal] svg {
+    color: var(--muted-foreground, var(--sl-color-gray-3));
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Label text */
+  .dlz-searchbar-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+
+  /* ⌘K badge — landing */
+  .dlz-searchbar-kbd {
+    font-size: 12px;
+    color: var(--muted-foreground, var(--sl-color-gray-3));
+    background: transparent;
+    border: 1px solid var(--border, var(--sl-color-gray-5));
+    border-radius: 6px;
+    padding: 1px 6px;
+    font-family: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .dark .dlz-searchbar-kbd,
+  [data-theme='dark'] .dlz-searchbar-kbd {
+    border-color: oklch(1 0 0 / 0.15);
+  }
+
+  /* Ctrl+K badge — docs (Starlight renders <kbd><kbd>Ctrl</kbd><kbd>K</kbd></kbd>) */
+  /* Outer kbd = the single bordered pill; inner kbds = plain text */
+  .dlz-searchbar--docs button[data-open-modal] > kbd {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: transparent;
+    border: 1px solid var(--border, var(--sl-color-gray-5));
+    border-radius: 6px;
+    padding: 1px 6px;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--muted-foreground, var(--sl-color-gray-3));
+    flex-shrink: 0;
+  }
+  .dark .dlz-searchbar--docs button[data-open-modal] > kbd,
+  [data-theme='dark'] .dlz-searchbar--docs button[data-open-modal] > kbd {
+    border-color: oklch(1 0 0 / 0.15);
+  }
+  .dlz-searchbar--docs button[data-open-modal] > kbd > kbd {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-family: inherit;
+    font-size: 12px;
+    color: inherit;
+  }
+
+  /* Starlight hides text/kbd on mobile via sl-hidden — preserve that */
+  .dlz-searchbar--docs button[data-open-modal] .sl-hidden {
+    display: none;
+  }
+  @media (min-width: 50rem) {
+    .dlz-searchbar--docs button[data-open-modal] .md\:sl-block {
+      display: block;
+      flex: 1;
+      text-align: left;
+    }
+    .dlz-searchbar--docs button[data-open-modal] .md\:sl-flex {
+      display: flex;
+    }
+  }
+
+  /* Docs search: icon-only on mobile (Starlight breakpoint: 50rem = 800px) */
+  @media (max-width: 50rem) {
+    .dlz-searchbar--docs button[data-open-modal] {
+      background: transparent;
+      border: none;
+      padding: 0.5rem;
+      width: auto;
+      max-width: none;
+      border-radius: 0.75rem;
+    }
+  }
+
+  /* Landing responsive: narrow on tablet, icon-only on mobile */
+  @media (max-width: 768px) {
+    .dlz-searchbar:not(.dlz-searchbar--docs) { width: 160px; }
+  }
+  @media (max-width: 480px) {
+    .dlz-searchbar:not(.dlz-searchbar--docs) {
+      width: auto;
+      background: transparent;
+      border: none;
+      padding: 8px;
+      border-radius: 12px;
+    }
+    .dark .dlz-searchbar:not(.dlz-searchbar--docs) {
+      background: transparent;
+    }
+    .dlz-searchbar:not(.dlz-searchbar--docs) .dlz-searchbar-label,
+    .dlz-searchbar:not(.dlz-searchbar--docs) .dlz-searchbar-kbd {
+      display: none;
+    }
+    .dlz-searchbar:not(.dlz-searchbar--docs) .dlz-searchbar-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--muted-foreground, var(--sl-color-gray-3));
+    }
+    .dlz-searchbar:not(.dlz-searchbar--docs):hover {
+      background: var(--accent);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var btn = document.getElementById('dlz-landing-search');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var siteSearch = document.querySelector('site-search');
+      if (siteSearch) {
+        var openBtn = siteSearch.querySelector('button[data-open-modal]') as HTMLElement | null;
+        if (openBtn) {
+          openBtn.click();
+        }
+      } else {
+        window.location.href = '/introduction';
+      }
+    });
+  })();
+</script>

@@ -1,3 +1,68 @@
+/* ── DLZ brand: Starlight CSS variable overrides ─────────── */
+:root {
+  --sl-font: 'Poppins', system-ui, sans-serif;
+  --sl-nav-height: 4.5rem;
+}
+
+/* Light mode — must use [data-theme='light'] (specificity 0,2,0) to override
+   Starlight's own [data-theme='light'] block which wins over :root (0,1,0) */
+:root[data-theme='light'] {
+  /* Accent: amber/orange — matches --primary */
+  --sl-color-accent-low:  oklch(0.94 0.06 78);
+  --sl-color-accent:      oklch(0.833 0.156 78.070);
+  --sl-color-accent-high: oklch(0.60 0.19 78.07);
+
+  /* Gray scale — mapped to design system :root tokens */
+  --sl-color-gray-1: oklch(0.222 0.034 261.473);   /* --foreground */
+  --sl-color-gray-2: oklch(0.400 0.033 262);        /* between foreground and muted-foreground */
+  --sl-color-gray-3: oklch(0.683 0.033 275.367);   /* --muted-foreground */
+  --sl-color-gray-4: oklch(0.785 0.032 273.530);   /* --ring */
+  --sl-color-gray-5: oklch(0.940 0.029 275.154);   /* --border */
+  --sl-color-gray-6: oklch(0.978 0.007 260.732);   /* --card / --muted */
+  --sl-color-gray-7: oklch(1 0 0);                 /* --background */
+
+  /* Explicit backgrounds */
+  --sl-color-bg:         oklch(1 0 0);              /* --background */
+  --sl-color-bg-sidebar: oklch(0.985 0 0);          /* --sidebar */
+  --sl-color-bg-nav:     oklch(1 0 0 / 0.85);
+}
+
+:root[data-theme='dark'] {
+  /* Accent: amber/orange — same primary, adjusted contrast */
+  --sl-color-accent-low:  oklch(0.32 0.09 78);
+  --sl-color-accent:      oklch(0.833 0.156 78.070);
+  --sl-color-accent-high: oklch(0.92 0.14 78.07);
+
+  /* Gray scale — mapped to design system .dark tokens */
+  --sl-color-gray-1: oklch(0.978 0.007 260.732);   /* --foreground */
+  --sl-color-gray-2: oklch(0.880 0.015 265);        /* secondary text */
+  --sl-color-gray-3: oklch(0.785 0.032 273.530);   /* --muted-foreground */
+  --sl-color-gray-4: oklch(0.683 0.033 275.367);   /* --ring */
+  --sl-color-gray-5: oklch(0.478 0.033 274.083);   /* --sidebar-ring */
+  --sl-color-gray-6: oklch(0.284 0.034 269.915);   /* --muted / --accent */
+  --sl-color-gray-7: oklch(0.222 0.034 261.473);   /* --background */
+
+  /* Explicit backgrounds */
+  --sl-color-bg:         oklch(0.222 0.034 261.473);  /* --background */
+  --sl-color-bg-sidebar: oklch(0.235 0.031 262.556);  /* --card */
+  --sl-color-bg-nav:     oklch(0.222 0.034 261.473 / 0.8);
+}
+
+/* ── DLZ logo letter fill — exact brand colors per theme ── */
+:root[data-theme='light'] .dlz-docs-logo { color: #121B2B; }
+:root[data-theme='dark']  .dlz-docs-logo { color: white; }
+
+/* ── Header: frosted glass matching landing page navbar ─── */
+header.header {
+  padding-inline: 1.5rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid oklch(0.94 0.029 275.154);
+}
+
+:root[data-theme='dark'] header.header {
+  border-bottom-color: oklch(1 0 0 / 0.1);
+}
 
 /* https://github.com/withastro/starlight/issues/1321#issuecomment-2504085488 */
 th, td {
@@ -230,6 +295,129 @@ th, td {
     }
 }
 
+/* Custom hero — replaces the splash template hero so the full vision block fits above the fold */
+/* Suppress the splash auto-rendered <h1 id="_top">{title}</h1> when our custom hero is present */
+main:has(.dlz-hero) > .content-panel:first-child {
+    display: none;
+}
+
+.dlz-hero {
+    margin: -1rem calc(50% - 50vw) 3rem;
+    padding: 1rem clamp(1.25rem, 4vw, 3rem) 2.5rem;
+}
+
+.dlz-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    max-width: 84rem;
+    margin: 0 auto;
+}
+
+.dlz-hero-text {
+    min-width: 0;
+}
+
+.dlz-hero-title {
+    font-size: clamp(1.75rem, 3.6vw, 2.9rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--sl-color-white);
+    margin: 0 0 1.75rem !important;
+}
+
+.dlz-hero-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--sl-color-gray-5);
+    opacity: 0.6;
+    margin-bottom: 1.75rem;
+}
+
+.dlz-hero-lede {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--sl-color-white);
+    margin: 0 0 1.25rem !important;
+}
+
+.dlz-hero-body {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--sl-color-gray-2);
+    margin: 0 0 2rem !important;
+}
+
+.dlz-accent {
+    color: #e85a5a;
+    font-weight: 500;
+}
+
+.dlz-hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.dlz-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.dlz-cta-primary {
+    background: var(--sl-color-accent, #e85a5a);
+    color: var(--sl-color-white) !important;
+}
+
+.dlz-cta-primary:hover {
+    opacity: 0.9;
+}
+
+.dlz-cta-ghost {
+    background: transparent;
+    color: var(--sl-color-white) !important;
+    border: 1px solid var(--sl-color-gray-5);
+}
+
+.dlz-cta-ghost:hover {
+    background: var(--sl-color-gray-6);
+}
+
+.dlz-hero-visual {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.dlz-hero-visual .balance-triangle {
+    width: 100%;
+    max-width: 34rem;
+}
+
+@media (max-width: 900px) {
+    .dlz-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .dlz-hero-visual {
+        order: -1;
+    }
+
+    .dlz-hero-visual .balance-triangle {
+        max-width: 22rem;
+    }
+}
+
 /* Balance triangle — hero visual showing DevEx / Finance / Compliance equilibrium */
 .balance-triangle {
     width: 100%;
@@ -289,4 +477,64 @@ th, td {
 
 :root[data-theme='light'] .bt-check {
     stroke: var(--sl-color-white);
+}
+
+/* ── Pagination prev / next ─────────────────────────────── */
+.pagination-links {
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pagination-links a {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  gap: 1rem;
+  box-shadow: none;
+  color: var(--sl-color-gray-3);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pagination-links a:hover {
+  border-color: var(--sl-color-accent);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--sl-color-accent) 20%, transparent),
+              0 8px 24px -4px color-mix(in oklch, var(--sl-color-accent) 12%, transparent);
+}
+
+/* Arrow icon — amber, animates on hover */
+.pagination-links a svg {
+  color: var(--sl-color-accent);
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pagination-links a[rel="prev"]:hover svg { transform: translateX(-5px); }
+.pagination-links a:not([rel="prev"]):hover svg { transform: translateX(5px); }
+
+/* "Previous" / "Next" label — small uppercase */
+.pagination-links a > span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--sl-color-gray-3);
+}
+
+/* Page title — prominent */
+.pagination-links .link-title {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--sl-color-white);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+:root[data-theme='light'] .pagination-links .link-title {
+  color: var(--sl-color-gray-1);
 }
