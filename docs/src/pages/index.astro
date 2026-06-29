@@ -252,6 +252,14 @@ import '../styles/landing.css';
       overflow: auto !important;
     }
     site-search .dialog-frame * { color: #fff !important; }
+    site-search .dialog-frame input,
+    site-search .dialog-frame input[type="search"] {
+      background: #1a2035 !important;
+      color: #fff !important;
+      border-color: hsl(224, 10%, 28%) !important;
+    }
+    site-search .dialog-frame input::placeholder { color: rgba(255,255,255,0.45) !important; }
+    site-search .dialog-frame mark { background: rgba(255,186,59,0.25) !important; color: #fff !important; }
   </style>
 </head>
 
@@ -942,12 +950,24 @@ import '../styles/landing.css';
     if (!siteSearch) return;
     var dialog = siteSearch.querySelector('dialog');
     if (!dialog) return;
-    document.addEventListener('click', function (e) {
+
+    var handler = function(e) {
       if (!dialog.open) return;
       var frame = siteSearch.querySelector('.dialog-frame');
-      if (frame && frame.contains(e.target)) return;
+      if (!frame) { dialog.close(); return; }
+      var r = frame.getBoundingClientRect();
+      if (e.clientX >= r.left && e.clientX <= r.right &&
+          e.clientY >= r.top  && e.clientY <= r.bottom) return;
       dialog.close();
-    }, true);
+    };
+
+    new MutationObserver(function() {
+      if (dialog.open) {
+        setTimeout(function() { document.addEventListener('mousedown', handler); }, 50);
+      } else {
+        document.removeEventListener('mousedown', handler);
+      }
+    }).observe(dialog, { attributes: true, attributeFilter: ['open'] });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', attachSearchDialogClose);
