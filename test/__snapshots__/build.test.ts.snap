@@ -2780,22 +2780,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "Content": {
           "Statement": [
             {
-              "Action": [
-                "eks:*",
-                "ecs:*",
-              ],
-              "Condition": {
-                "ArnNotLike": {
-                  "aws:PrincipalARN": [
-                    "arn:aws:iam::*:role/AWSControlTowerExecution",
-                  ],
-                },
-              },
-              "Effect": "Deny",
-              "Resource": "*",
-              "Sid": "DenyServiceActions",
-            },
-            {
               "Action": "cloudformation:CreateStack",
               "Condition": {
                 "Null": {
@@ -2838,22 +2822,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
       "Properties": {
         "Content": {
           "Statement": [
-            {
-              "Action": [
-                "eks:*",
-                "ecs:*",
-              ],
-              "Condition": {
-                "ArnNotLike": {
-                  "aws:PrincipalARN": [
-                    "arn:aws:iam::*:role/AWSControlTowerExecution",
-                  ],
-                },
-              },
-              "Effect": "Deny",
-              "Resource": "*",
-              "Sid": "DenyServiceActions",
-            },
             {
               "Action": "cloudformation:CreateStack",
               "Condition": {

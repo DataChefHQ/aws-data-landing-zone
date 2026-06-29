@@ -49,11 +49,6 @@ const configBase: DataLandingZoneProps = {
     global: Region.EU_WEST_1,
     regional: [Region.US_EAST_1],
   },
-  denyServiceList: [
-    ...Defaults.denyServiceList(),
-    'eks:*',
-    'ecs:*',
-  ],
   mandatoryTags: {
     owner: [],
     project: undefined,

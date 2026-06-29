@@ -61,13 +61,12 @@ const dlz = new DataLandingZone(app, {
       emails: ['you@org.com'],
     }),
   ],
-  denyServiceList: ['ecs:*'],
-  // For full control over the deny-services baseline, use scpBaselineStatements
-  // instead. Cannot be combined with denyServiceList. Mandatory-tags SCP is
-  // always appended after these statements.
+  // Optional: replace the deny-services portion of the org SCP baseline.
+  // The mandatory-tags SCP is always appended after these statements.
   // scpBaselineStatements: [
   //   ScpDenyRootUserActions.statement(),
   //   ScpDenyLeavingOrganization.statement(),
+  //   ScpDenyServiceActions.statement(['ecs:*']),
   // ],
   // SCP statements applied to every workload account of a given type, layered on
   // top of the org-wide baseline (deny-services + mandatory-tags SCP).
@@ -398,7 +397,7 @@ scp_statements_by_account_type=dlz.ScpStatementsByAccountType(
 
 | Preset | What it denies | Risk |
 |---|---|---|
-| `ScpDenyServiceActions(serviceActions)` | A caller-supplied list of service actions across all resources. Backs `DataLandingZoneProps.denyServiceList` (and the default deny-services portion of `scpBaselineStatements`). | 🟢 |
+| `ScpDenyServiceActions(serviceActions)` | A caller-supplied list of service actions across all resources. Compose into `scpBaselineStatements` to deny specific services org-wide. | 🟢 |
 | `ScpDenyCfnStacksWithoutStandardTags(tags)` | `cloudformation:CreateStack` unless every required tag is present. Backs the mandatory-tags SCP. | 🟡 |
 | `ScpDenyIamWithoutPermissionsBoundary` | Creating/modifying IAM users or roles unless the `IamPolicyPermissionBoundaryPolicy` boundary is attached (4 statements). Pairs with `iamPolicyPermissionBoundary` prop. | 🟡 |
 

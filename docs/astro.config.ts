@@ -61,6 +61,14 @@ if(trackAnalytics) {
             defer: true,
         },
     });
+    head.push({
+        tag: 'script',
+        attrs: {
+            src: 'https://analytics.ahrefs.com/analytics.js',
+            'data-key': 'Wh1PimduiuUMCcjXU/fyVA',
+            async: true,
+        },
+    });
 }
 
 export default defineConfig({
