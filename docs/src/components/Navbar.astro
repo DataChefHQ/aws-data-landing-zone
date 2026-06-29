@@ -68,8 +68,11 @@ const { showNavLinks = true } = Astro.props;
   <!-- Hidden search trigger: injects <site-search> so Cmd+K and click work on landing page.
        NOTE: no `pointer-events:none` here — it is an inherited property and would propagate
        into the <dialog> (a DOM descendant), making the modal unclickable. The 0×0 size +
-       opacity:0 + overflow:hidden already hide the trigger button. -->
-  <div style="position:absolute;width:0;height:0;overflow:hidden;opacity:0" aria-hidden="true">
+       opacity:0 + overflow:hidden already hide the trigger button.
+       NOTE: no `aria-hidden` here — the modal dialog is a DOM descendant, and hiding it from
+       assistive tech while it holds focus throws a "blocked aria-hidden on focused element"
+       error. The trigger button is hidden visually; the dialog stays accessible. -->
+  <div style="position:absolute;width:0;height:0;overflow:hidden;opacity:0">
     <Search />
   </div>
 </header>
