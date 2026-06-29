@@ -82,6 +82,18 @@ import '../styles/landing.css';
       opacity: 1;
       transform: translate(-50%, -100%) translateY(-26px);
     }
+    #dlz-tooltip.below {
+      transform: translate(-50%, 0%) translateY(18px);
+    }
+    #dlz-tooltip.below.visible {
+      transform: translate(-50%, 0%) translateY(26px);
+    }
+    #dlz-tooltip.below .tt-inner::after {
+      bottom: auto;
+      top: -7px;
+      border-top: none;
+      border-bottom: 7px solid rgba(15,20,35,0.97);
+    }
     #dlz-tooltip .tt-inner {
       background: rgba(15, 20, 35, 0.97);
       border: 1px solid rgba(255,255,255,0.1);
@@ -211,6 +223,35 @@ import '../styles/landing.css';
     html:not(.dark) #dlz-hex-wrap svg path[fill="white"] {
       fill: rgba(20,28,60,0.55) !important;
     }
+
+    /* ── Search dialog overrides ── */
+    site-search button[data-close-modal] { display: none !important; }
+    /* Make dialog full-screen so it IS the backdrop — backdrop clicks hit the dialog element */
+    site-search dialog {
+      width: 100% !important; max-width: 100% !important;
+      height: 100% !important; max-height: 100% !important;
+      margin: 0 !important;
+      border: none !important; box-shadow: none !important; padding: 0 !important;
+      background: hsla(223, 13%, 10%, 0.66) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+      backdrop-filter: blur(4px) !important;
+      display: flex; align-items: flex-start; justify-content: center;
+    }
+    site-search dialog::backdrop { background: transparent !important; }
+    /* Visual content card */
+    site-search .dialog-frame {
+      background: #23293b !important;
+      color: #fff !important;
+      margin-top: 4rem !important;
+      width: 90% !important; max-width: 40rem !important;
+      border-radius: 0.5rem !important;
+      border: 1px solid hsl(224, 10%, 23%) !important;
+      min-height: 15rem !important;
+      max-height: calc(100vh - 8rem) !important;
+      flex-grow: 0 !important; flex-shrink: 0 !important;
+      overflow: auto !important;
+    }
+    site-search .dialog-frame * { color: #fff !important; }
   </style>
 </head>
 
@@ -267,15 +308,15 @@ import '../styles/landing.css';
               <line id="dlz-d-top"   x1="350" y1="330" x2="350" y2="115" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
               <line id="dlz-d-left"  x1="350" y1="330" x2="118" y2="555" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
               <line id="dlz-d-right" x1="350" y1="330" x2="582" y2="555" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6,5"/>
-              <circle id="dlz-node-top"   cx="350" cy="115" r="10" fill="white" opacity="0.92"/>
-              <circle id="dlz-node-left"  cx="118" cy="555" r="10" fill="white" opacity="0.92"/>
-              <circle id="dlz-node-right" cx="582" cy="555" r="10" fill="white" opacity="0.92"/>
-              <text id="dlz-face-top"   x="350" y="68"  text-anchor="middle" font-size="38" style="opacity:0;transition:opacity 0.3s ease">😊</text>
-              <text id="dlz-face-left"  x="90"  y="610" text-anchor="middle" font-size="38" style="opacity:0;transition:opacity 0.3s ease">😊</text>
-              <text id="dlz-face-right" x="618" y="610" text-anchor="middle" font-size="38" style="opacity:0;transition:opacity 0.3s ease">😊</text>
-              <text id="dlz-lbl-top"   x="350" y="88"  text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">DevEx</text>
-              <text id="dlz-lbl-left"  x="80"  y="632" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Finance</text>
-              <text id="dlz-lbl-right" x="628" y="632" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Compliance</text>
+              <circle id="dlz-node-top"   cx="350" cy="115" r="10" fill="white" opacity="0.92" style="transition:opacity 0.3s ease"/>
+              <circle id="dlz-node-left"  cx="118" cy="555" r="10" fill="white" opacity="0.92" style="transition:opacity 0.3s ease"/>
+              <circle id="dlz-node-right" cx="582" cy="555" r="10" fill="white" opacity="0.92" style="transition:opacity 0.3s ease"/>
+              <image id="dlz-face-top"   x="328" y="93"  width="44" height="44" href="/emojis/Smiling.svg" style="opacity:0;transition:opacity 0.3s ease"/>
+              <image id="dlz-face-left"  x="96"  y="533" width="44" height="44" href="/emojis/Smiling.svg" style="opacity:0;transition:opacity 0.3s ease"/>
+              <image id="dlz-face-right" x="560" y="533" width="44" height="44" href="/emojis/Smiling.svg" style="opacity:0;transition:opacity 0.3s ease"/>
+              <text id="dlz-lbl-top"   x="350" y="88" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">DevEx</text>
+              <text id="dlz-lbl-left"  x="115"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Finance</text>
+              <text id="dlz-lbl-right" x="580" y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="400" fill="currentColor" style="transition:fill 0.3s ease">Compliance</text>
             </svg>
 
             <div id="dlz-tooltip">
@@ -293,7 +334,11 @@ import '../styles/landing.css';
             <div id="dlz-hex-wrap">
               <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
                 <polygon id="dlz-hex-poly" points="34,4 62,19 62,49 34,64 6,49 6,19" fill="#1e2235" stroke="rgba(255,186,59,0.35)" stroke-width="1.2"/>
-                <text id="dlz-hex-emoji" x="34" y="46" text-anchor="middle" font-size="32" fill="white" style="opacity:0;transition:opacity 0.2s ease">⚠️</text>
+                <svg id="dlz-hex-emoji" x="16" y="16" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0;transition:opacity 0.2s ease">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+                  <path d="M12 9v4"/>
+                  <path d="M12 17h.01"/>
+                </svg>
                 <svg id="dlz-hex-icon-svg" x="19" y="16" width="30" height="35" viewBox="0 0 34.2126 39.9248" style="opacity:1;transition:opacity 0.2s ease">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M34.2126 10.0862V11.1632L26.5573 15.551V24.3741L34.2126 28.7618V29.8389L24.7546 35.2995L17.1063 30.9158L9.45788 35.2995L-6.10352e-05 29.8389V28.7618L7.65527 24.3741V15.551L-6.10352e-05 11.1632V10.0862L9.45816 4.62549L17.1063 9.00914L24.7543 4.62549L34.2126 10.0862ZM9.45096 15.5509V24.374L17.1063 28.7618L24.7616 24.374V15.5509L17.1063 11.1631L9.45096 15.5509Z" fill="#FFBA3B"/>
                   <path d="M17.1063 39.7149L20.9812 37.4939L17.1063 35.2729L13.2314 37.4939L17.1063 39.7149Z" fill="white"/>
@@ -550,7 +595,7 @@ import '../styles/landing.css';
   var V = { top: {x:350,y:115}, left: {x:118,y:555}, right: {x:582,y:555} };
   var CENTER = {
     x: (V.top.x + V.left.x + V.right.x) / 3,
-    y: (V.top.y + V.left.y + V.right.y) / 3,
+    y: (V.top.y + V.left.y + V.right.y) / 3 - 40,
   };
   var pos = { x: CENTER.x, y: CENTER.y };
   var dragging = false;
@@ -587,12 +632,12 @@ import '../styles/landing.css';
 
   var SCENARIOS = {
     sweet: {
-      tooltipClass: 'happy', icon: '🎉', title: 'Perfect Balance',
+      tooltipClass: 'happy', icon: '', title: 'Perfect Balance',
       body: 'DataChef keeps DevEx, Finance and Compliance aligned. Velocity meets governance meets value.',
       nodes: {
-        top:   { fill: '#FFBA3B', face: '😊', lblColor: 'rgba(255,255,255,0.88)' },
-        left:  { fill: '#FFBA3B', face: '😊', lblColor: 'rgba(255,255,255,0.88)' },
-        right: { fill: '#FFBA3B', face: '😊', lblColor: 'rgba(255,255,255,0.88)' },
+        top:   { fill: '#FFBA3B', face: 'Smiling', lblColor: 'rgba(255,255,255,0.88)' },
+        left:  { fill: '#FFBA3B', face: 'Smiling', lblColor: 'rgba(255,255,255,0.88)' },
+        right: { fill: '#FFBA3B', face: 'Smiling', lblColor: 'rgba(255,255,255,0.88)' },
       },
       hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 22px rgba(255,186,59,0.85))',
     },
@@ -600,9 +645,9 @@ import '../styles/landing.css';
       tooltipClass: 'danger', icon: '', title: 'Too close to DevEx',
       body: 'Ship fast, break rules. Compliance is panicking. Legal costs incoming.',
       nodes: {
-        top:   { fill: '#FFBA3B', lblColor: '#FFBA3B', face: '🤩' },
-        left:  { fill: '#f87171', lblColor: '#f87171', face: '😟' },
-        right: { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+        top:   { fill: '#FFBA3B', lblColor: '#FFBA3B', face: 'Shine'  },
+        left:  { fill: '#f87171', lblColor: '#f87171', face: 'Scared' },
+        right: { fill: '#f87171', lblColor: '#f87171', face: 'Shout'  },
       },
       hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
     },
@@ -610,9 +655,9 @@ import '../styles/landing.css';
       tooltipClass: 'danger', icon: '', title: 'Too close to Finance',
       body: "Everything's underfunded. Devs are frustrated. Compliance is a spreadsheet note.",
       nodes: {
-        top:   { fill: '#f87171', lblColor: '#f87171', face: '😟' },
-        left:  { fill: '#FFBA3B', lblColor: '#FFBA3B', face: '🤩' },
-        right: { fill: '#f87171', lblColor: '#f87171', face: '😟' },
+        top:   { fill: '#f87171', lblColor: '#f87171', face: 'Shout'  },
+        left:  { fill: '#FFBA3B', lblColor: '#FFBA3B', face: 'Shine'  },
+        right: { fill: '#f87171', lblColor: '#f87171', face: 'Shock'  },
       },
       hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
     },
@@ -620,18 +665,18 @@ import '../styles/landing.css';
       tooltipClass: 'danger', icon: '', title: 'Too close to Compliance',
       body: 'Developers are drowning in tickets. Projects stall. Finance sees the bill.',
       nodes: {
-        top:   { fill: '#f87171', lblColor: '#f87171', face: '😟' },
-        left:  { fill: '#f87171', lblColor: '#f87171', face: '😟' },
-        right: { fill: '#FFBA3B', lblColor: '#FFBA3B', face: '🤩' },
+        top:   { fill: '#f87171', lblColor: '#f87171', face: 'Crying' },
+        left:  { fill: '#f87171', lblColor: '#f87171', face: 'Shock'  },
+        right: { fill: '#FFBA3B', lblColor: '#FFBA3B', face: 'Shine'  },
       },
       hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 20px rgba(248,113,113,0.7))',
     },
     mid: {
       tooltipClass: '', icon: '', title: '', body: '',
       nodes: {
-        top:   { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: '😊' },
-        left:  { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: '😊' },
-        right: { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: '😊' },
+        top:   { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: 'Smiling' },
+        left:  { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: 'Smiling' },
+        right: { fill: 'white', lblColor: 'rgba(255,255,255,0.88)', face: 'Smiling' },
       },
       hexColor: '#1e2235', hexFilter: 'drop-shadow(0 4px 18px rgba(255,186,59,0.45))',
     },
@@ -712,14 +757,18 @@ import '../styles/landing.css';
     applyNodeState(nodeLeft,  lblLeft,  s.nodes.left);
     applyNodeState(nodeRight, lblRight, s.nodes.right);
 
-    if (panelHover) {
-      faceTop.textContent   = s.nodes.top.face;
-      faceLeft.textContent  = s.nodes.left.face;
-      faceRight.textContent = s.nodes.right.face;
+    var showEmojis = panelHover || window.innerWidth <= 600;
+    if (showEmojis) {
+      faceTop.setAttribute('href',   '/emojis/' + s.nodes.top.face   + '.svg');
+      faceLeft.setAttribute('href',  '/emojis/' + s.nodes.left.face  + '.svg');
+      faceRight.setAttribute('href', '/emojis/' + s.nodes.right.face + '.svg');
     }
-    faceTop.style.opacity   = panelHover ? '1' : '0';
-    faceLeft.style.opacity  = panelHover ? '1' : '0';
-    faceRight.style.opacity = panelHover ? '1' : '0';
+    faceTop.style.opacity   = showEmojis ? '1' : '0';
+    faceLeft.style.opacity  = showEmojis ? '1' : '0';
+    faceRight.style.opacity = showEmojis ? '1' : '0';
+    nodeTop.style.opacity   = showEmojis ? '0' : '';
+    nodeLeft.style.opacity  = showEmojis ? '0' : '';
+    nodeRight.style.opacity = showEmojis ? '0' : '';
     if (isDanger) {
       hexPoly.style.fill   = '#f87171';
       hexPoly.style.stroke = 'rgba(248,113,113,0.5)';
@@ -736,13 +785,17 @@ import '../styles/landing.css';
 
     dcLogo.style.opacity = state === 'sweet' ? '1' : '0';
 
-    if (state !== 'mid') {
+    var showTooltip  = isDanger || panelHover;
+    var tooltipS     = isDanger ? s : SCENARIOS['sweet'];
+    var tooltipState = isDanger ? state : 'sweet';
+    if (showTooltip) {
       tooltip.style.left = (sp.x + ox) + 'px';
       tooltip.style.top  = (sp.y + oy) + 'px';
-      tooltip.className  = s.tooltipClass;
-      ttIcon.textContent  = s.icon;
-      ttTitle.textContent = s.title;
-      ttBody.textContent  = s.body;
+      tooltip.className  = tooltipS.tooltipClass;
+      if (tooltipState === 'top') tooltip.classList.add('below');
+      ttIcon.textContent  = tooltipS.icon;
+      ttTitle.textContent = tooltipS.title;
+      ttBody.textContent  = tooltipS.body;
       tooltip.classList.add('visible');
     } else {
       tooltip.classList.remove('visible');
@@ -879,6 +932,28 @@ import '../styles/landing.css';
     }, { threshold: 0.4, rootMargin: '-80px 0px' });
     ioC.observe(el);
   });
+})();
+</script>
+
+<script is:inline>
+(function () {
+  function attachSearchDialogClose() {
+    var siteSearch = document.querySelector('site-search');
+    if (!siteSearch) return;
+    var dialog = siteSearch.querySelector('dialog');
+    if (!dialog) return;
+    document.addEventListener('click', function (e) {
+      if (!dialog.open) return;
+      var frame = siteSearch.querySelector('.dialog-frame');
+      if (frame && frame.contains(e.target)) return;
+      dialog.close();
+    }, true);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachSearchDialogClose);
+  } else {
+    attachSearchDialogClose();
+  }
 })();
 </script>
 
