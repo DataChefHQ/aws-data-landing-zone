@@ -236,7 +236,10 @@ import '../styles/landing.css';
       -webkit-backdrop-filter: blur(4px) !important;
       backdrop-filter: blur(4px) !important;
       display: flex; align-items: flex-start; justify-content: center;
+      pointer-events: auto !important;
     }
+    /* Reset the inherited pointer-events from the hidden trigger wrapper onto the modal subtree */
+    site-search dialog * { pointer-events: auto; }
     site-search dialog::backdrop { background: transparent !important; }
     /* Visual content card */
     site-search .dialog-frame {
@@ -286,7 +289,7 @@ import '../styles/landing.css';
           </p>
           <p class="dlz-hero-subline" data-hero-anim style="animation-delay:0.5s">
             Everyone told us to pick one.<br />
-            <span class="dlz-highlight dlz-hero-punchline">We didn&rsquo;t.</span>
+            <span class="dlz-highlight dlz-hero-punchline">We did NOT.</span>
           </p>
           <div class="dlz-hero-ctas" data-hero-anim style="animation-delay:0.65s">
             <a href="/introduction" class="dlz-btn-primary">
@@ -940,40 +943,6 @@ import '../styles/landing.css';
     }, { threshold: 0.4, rootMargin: '-80px 0px' });
     ioC.observe(el);
   });
-})();
-</script>
-
-<script is:inline>
-(function () {
-  function attachSearchDialogClose() {
-    var siteSearch = document.querySelector('site-search');
-    if (!siteSearch) return;
-    var dialog = siteSearch.querySelector('dialog');
-    if (!dialog) return;
-
-    var handler = function(e) {
-      if (!dialog.open) return;
-      var frame = siteSearch.querySelector('.dialog-frame');
-      if (!frame) { dialog.close(); return; }
-      var r = frame.getBoundingClientRect();
-      if (e.clientX >= r.left && e.clientX <= r.right &&
-          e.clientY >= r.top  && e.clientY <= r.bottom) return;
-      dialog.close();
-    };
-
-    new MutationObserver(function() {
-      if (dialog.open) {
-        setTimeout(function() { document.addEventListener('mousedown', handler); }, 50);
-      } else {
-        document.removeEventListener('mousedown', handler);
-      }
-    }).observe(dialog, { attributes: true, attributeFilter: ['open'] });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachSearchDialogClose);
-  } else {
-    attachSearchDialogClose();
-  }
 })();
 </script>
 

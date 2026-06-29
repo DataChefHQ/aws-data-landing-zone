@@ -155,7 +155,7 @@ html { scroll-behavior: smooth; }
 .dlz-hero-title { font-size: 48px; line-height: 60px; font-weight: 600; color: var(--foreground); margin: 0; }
 .dlz-hero-body { font-size: 16px; line-height: 24px; color: var(--foreground); margin: 0; font-weight: 400; }
 .dlz-hero-subline { font-size: 16px; line-height: 24px; color: var(--foreground); margin: 0; }
-.dlz-hero-punchline { font-size: 20px; line-height: 28px; font-weight: 400; }
+.dlz-hero-punchline { font-size: 24px; line-height: 28px; font-weight: 400; color: rgba(248, 113, 113, 0.90) !important; }
 .dlz-highlight { color: var(--primary); }
 .dlz-hero-ctas { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
 .dlz-hero-ctas svg, .dlz-btn-finops svg { stroke-width: 1.5; }
