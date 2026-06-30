@@ -60,6 +60,7 @@ where required.
 | `ScpDenySavingsPlanPurchases`                         | Block purchasing Savings Plans.                                         |
 | `ScpDenyBedrockProvisionedThroughput`                 | Block creating Bedrock Provisioned Throughput.                          |
 | `ScpDenyCfnStacksWithoutStandardTags`                 | Require mandatory tags on CloudFormation stacks (always appended).      |
+| `ScpDenyResourceCreationWithoutStandardTags`          | Require mandatory tags on direct resource creation (opt-in; see below).  |
 
 ## Defining a baseline
 
@@ -221,6 +222,71 @@ Use `scpStatements` on a `DLzAccount` for one-off restrictions that only apply t
     ```
   </Fragment>
 </DualCode>
+
+## Enforcing mandatory tags on resource creation
+
+`mandatoryTags` has three enforcement layers, and none is a blanket "every resource must be tagged" gate:
+
+- **Tag policy.** Enforces allowed *values* on tagging operations for supported services. It cannot require a tag to be *present* at creation, so an untagged resource is still allowed.
+- **`ScpDenyCfnStacksWithoutStandardTags`.** Hard-denies, but only `cloudformation:CreateStack`. Resources created directly via console, CLI, or SDK never hit `CreateStack`, so they bypass it.
+- **AWS Config `REQUIRED_TAGS` rule.** Detective only. It flags non-compliant resources after the fact.
+
+To make tag presence a hard stop on direct resource creation, add the opt-in `ScpDenyResourceCreationWithoutStandardTags` preset. It emits one `Deny` per tag key (so a single missing tag blocks the request) over a list of create actions you supply, and it exempts the Control Tower execution role.
+
+It is **not** part of the baseline. You add it deliberately, because it takes three conscious choices:
+
+- **Which actions to gate.** Only include create actions that support `aws:RequestTag` at creation. An action that cannot carry request tags would have the tag permanently absent and be denied outright. `iam:CreateGroup` is one such case (its reference row lists no tag condition keys), which is why it is excluded from the IAM set below. The preset ships four ready-made action sets (in the table below), each verified against the [AWS Service Authorization Reference](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html). Verify anything you add the same way.
+- **Body size.** The rendered policy grows with `actions` × `tagKeys`. DLZ packs the entire baseline + account-type + per-account tier into a **single** SCP per account and validates that one body against the 5120-byte limit at synth (see [Validation](#validation)); it does not auto-split. Each action set fits its own SCP, but two large sets in one account will overflow, so plan to pick one or split across account tiers.
+- **Value enforcement stays with the tag policy.** This preset checks presence only.
+
+The preset exposes four verified action sets (each a `public static readonly string[]`). Spread the ones you want into `statements()`:
+
+| Action set | Covers | Approx. SCP body (×5 tag keys) |
+|---|---|---|
+| `CORE_TAG_ON_CREATE_ACTIONS` | Core compute/data (EC2, RDS, DynamoDB, Lambda, EKS/ECS, SQS/SNS, KMS, Secrets Manager, ELB, Redshift) | ~2.8 KB |
+| `DATA_PLATFORM_TAG_ON_CREATE_ACTIONS` | Analytics/ML (Glue, Athena, EMR, Firehose, MSK, OpenSearch `es:CreateDomain`, Redshift Serverless, Step Functions, SageMaker, Bedrock) | ~4.1 KB |
+| `INFRA_TAG_ON_CREATE_ACTIONS` | Networking/storage/compute (CloudWatch Logs, ECR, EFS, ElastiCache, Auto Scaling, extra EC2, EKS node groups, RDS sub-resources) | ~3.8 KB |
+| `IAM_TAG_ON_CREATE_ACTIONS` | `iam:CreateUser`, `iam:CreateRole`, `iam:CreatePolicy` (excludes `iam:CreateGroup`, which has no tag support) | ~1.4 KB |
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    import {
+      DataLandingZone,
+      ScpDenyResourceCreationWithoutStandardTags,
+    } from 'aws-data-landing-zone';
+
+    const Preset = ScpDenyResourceCreationWithoutStandardTags;
+    const dlz = new DataLandingZone(app, {
+      scpBaselineStatements: [
+        ...Preset.statements([
+          ...Preset.CORE_TAG_ON_CREATE_ACTIONS,
+          ...Preset.IAM_TAG_ON_CREATE_ACTIONS,
+        ]),
+      ],
+     ...
+    });
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    import aws_data_landing_zone as dlz
+
+    preset = dlz.ScpDenyResourceCreationWithoutStandardTags
+    dlz.DataLandingZone(app,
+        scp_baseline_statements=[
+            *preset.statements([
+                *preset.CORE_TAG_ON_CREATE_ACTIONS,
+                *preset.IAM_TAG_ON_CREATE_ACTIONS,
+            ]),
+        ],
+        ...
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+By default it requires the five canonical mandatory tag keys (`Owner`, `Project`, `Environment`, `CostCenter`, `Domain`). Pass a second argument to require a different set, e.g. when you also gate `additionalMandatoryTags`.
 
 ## Validation
 
