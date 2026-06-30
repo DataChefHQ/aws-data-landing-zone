@@ -13,6 +13,7 @@ import {
   ScpDenyLeavingOrganization,
   ScpDenyMarketplaceSubscriptions,
   ScpDenyReservedCapacityPurchases,
+  ScpDenyResourceCreationWithoutStandardTags,
   ScpDenyRootCredentialsManagementInMemberAccounts,
   ScpDenyRootUserActions,
   ScpDenyS3ObjectLockAndRetention,
@@ -179,6 +180,80 @@ describe('SCP presets', () => {
     expect(json.Action).toBe('cloudformation:CreateStack');
     expect(json.Condition?.Null?.['aws:RequestTag/Owner']).toEqual(['team-a']);
     expect(json.Condition?.Null?.['aws:RequestTag/Project']).toBe(true);
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags emits one presence Deny per tag key by default', () => {
+    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:RunInstances']);
+    expect(statements).toHaveLength(ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS.length);
+
+    const sids = statements.map(s => s.toJSON().Sid);
+    expect(sids).toEqual([
+      'DenyCreateWithoutOwnerTag',
+      'DenyCreateWithoutProjectTag',
+      'DenyCreateWithoutEnvironmentTag',
+      'DenyCreateWithoutCostCenterTag',
+      'DenyCreateWithoutDomainTag',
+    ]);
+
+    for (const statement of statements) {
+      const json = statement.toJSON();
+      expect(json.Effect).toBe('Deny');
+      expect(json.Action).toBe('ec2:RunInstances');
+      expect(json.Condition?.ArnNotLike?.['aws:PrincipalARN']).toContain(CT_ROLE);
+    }
+
+    const ownerJson = statements[0].toJSON();
+    expect(ownerJson.Condition?.Null?.['aws:RequestTag/Owner']).toBe(true);
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags honours a custom tag-key list', () => {
+    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(
+      ['ec2:RunInstances'],
+      ['Owner', 'team:name'],
+    );
+    expect(statements.map(s => s.toJSON().Sid)).toEqual([
+      'DenyCreateWithoutOwnerTag',
+      'DenyCreateWithoutteamnameTag',
+    ]);
+    expect(statements[1].toJSON().Condition?.Null?.['aws:RequestTag/team:name']).toBe(true);
+  });
+
+  test.each([
+    ['CORE_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.CORE_TAG_ON_CREATE_ACTIONS],
+    ['DATA_PLATFORM_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS],
+    ['INFRA_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.INFRA_TAG_ON_CREATE_ACTIONS],
+    ['IAM_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.IAM_TAG_ON_CREATE_ACTIONS],
+  ])('ScpDenyResourceCreationWithoutStandardTags %s is non-empty and fits its own SCP under 5120 bytes', (_name, actions) => {
+    expect(actions.length).toBeGreaterThan(0);
+    const merged = ScpMerge.resolve({
+      baseline: ScpDenyResourceCreationWithoutStandardTags.statements(actions),
+      accountExtras: [],
+    });
+    expect(() => ScpMerge.validate('any-account', merged, 1)).not.toThrow();
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags example lists exclude actions that lack tag-on-create support', () => {
+    const all = [
+      ...ScpDenyResourceCreationWithoutStandardTags.CORE_TAG_ON_CREATE_ACTIONS,
+      ...ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS,
+      ...ScpDenyResourceCreationWithoutStandardTags.INFRA_TAG_ON_CREATE_ACTIONS,
+      ...ScpDenyResourceCreationWithoutStandardTags.IAM_TAG_ON_CREATE_ACTIONS,
+    ];
+    expect(all).not.toContain('iam:CreateGroup');
+    expect(all).not.toContain('opensearch:CreateDomain');
+    expect(all).toContain('es:CreateDomain');
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags combining the data-platform and infra lists overflows one SCP', () => {
+    const merged = ScpMerge.resolve({
+      baseline: ScpDenyResourceCreationWithoutStandardTags.statements([
+        ...ScpDenyResourceCreationWithoutStandardTags.CORE_TAG_ON_CREATE_ACTIONS,
+        ...ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS,
+      ]),
+      accountExtras: [],
+    });
+    expect(() => ScpMerge.validate('any-account', merged, 1))
+      .toThrow(/SCP body of \d+ bytes.*maximum of 5120/);
   });
 
   test('ScpDenyRootCredentialsManagementInMemberAccounts allows AssumedRoot but blocks direct root', () => {

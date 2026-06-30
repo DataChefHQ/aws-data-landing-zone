@@ -11,6 +11,7 @@ export * from './deny-iam-without-permissions-boundary';
 export * from './deny-leaving-organization';
 export * from './deny-marketplace-subscriptions';
 export * from './deny-reserved-capacity-purchases';
+export * from './deny-resource-creation-without-standard-tags';
 export * from './deny-root-credentials-management-in-member-accounts';
 export * from './deny-root-user-actions';
 export * from './deny-s3-object-lock-and-retention';
