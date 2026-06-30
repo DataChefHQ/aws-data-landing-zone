@@ -31649,6 +31649,140 @@ ScpDenyReservedCapacityPurchases.statement()
 
 
 
+### ScpDenyResourceCreationWithoutStandardTags <a name="ScpDenyResourceCreationWithoutStandardTags" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags"></a>
+
+Opt-in SCP statements that deny the given create actions unless every mandatory tag is present at creation (`aws:RequestTag`).
+
+This covers direct console/CLI/SDK creation, which `ScpDenyCfnStacksWithoutStandardTags`
+(CloudFormation only) does not. Tag presence is checked, not values; values stay with the tag policy. It is
+not in the baseline, so add it yourself.
+
+`statements()` returns one Deny per tag key on purpose: IAM joins keys in a single `Null` block with AND, so
+one combined statement would only deny when every tag is absent. Gate only actions that support
+`aws:RequestTag` at creation. The action-set constants below are composable (spread the ones you want into
+`statements()`) and were verified against the AWS Service Authorization Reference.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.Initializer"></a>
+
+```typescript
+import { ScpDenyResourceCreationWithoutStandardTags } from 'aws-data-landing-zone'
+
+new ScpDenyResourceCreationWithoutStandardTags()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements">statements</a></code> | One Deny per tag key over `actions`. |
+
+---
+
+##### `statements` <a name="statements" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements"></a>
+
+```typescript
+import { ScpDenyResourceCreationWithoutStandardTags } from 'aws-data-landing-zone'
+
+ScpDenyResourceCreationWithoutStandardTags.statements(actions: string[], tagKeys?: string[])
+```
+
+One Deny per tag key over `actions`.
+
+Tag keys default to {@link DEFAULT_TAG_KEYS}.
+
+###### `actions`<sup>Required</sup> <a name="actions" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements.parameter.actions"></a>
+
+- *Type:* string[]
+
+---
+
+###### `tagKeys`<sup>Optional</sup> <a name="tagKeys" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements.parameter.tagKeys"></a>
+
+- *Type:* string[]
+
+---
+
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.CORE_TAG_ON_CREATE_ACTIONS">CORE_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | Core compute and data create actions. |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS">DATA_PLATFORM_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | Analytics and ML create actions. |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.DEFAULT_TAG_KEYS">DEFAULT_TAG_KEYS</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.IAM_TAG_ON_CREATE_ACTIONS">IAM_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | IAM create actions. |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.INFRA_TAG_ON_CREATE_ACTIONS">INFRA_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | Networking, storage, and compute create actions. |
+
+---
+
+##### `CORE_TAG_ON_CREATE_ACTIONS`<sup>Required</sup> <a name="CORE_TAG_ON_CREATE_ACTIONS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.CORE_TAG_ON_CREATE_ACTIONS"></a>
+
+```typescript
+public readonly CORE_TAG_ON_CREATE_ACTIONS: string[];
+```
+
+- *Type:* string[]
+
+Core compute and data create actions.
+
+---
+
+##### `DATA_PLATFORM_TAG_ON_CREATE_ACTIONS`<sup>Required</sup> <a name="DATA_PLATFORM_TAG_ON_CREATE_ACTIONS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS"></a>
+
+```typescript
+public readonly DATA_PLATFORM_TAG_ON_CREATE_ACTIONS: string[];
+```
+
+- *Type:* string[]
+
+Analytics and ML create actions.
+
+OpenSearch uses `es:CreateDomain`; `opensearch:CreateDomain` does not exist.
+
+---
+
+##### `DEFAULT_TAG_KEYS`<sup>Required</sup> <a name="DEFAULT_TAG_KEYS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.DEFAULT_TAG_KEYS"></a>
+
+```typescript
+public readonly DEFAULT_TAG_KEYS: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `IAM_TAG_ON_CREATE_ACTIONS`<sup>Required</sup> <a name="IAM_TAG_ON_CREATE_ACTIONS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.IAM_TAG_ON_CREATE_ACTIONS"></a>
+
+```typescript
+public readonly IAM_TAG_ON_CREATE_ACTIONS: string[];
+```
+
+- *Type:* string[]
+
+IAM create actions.
+
+`iam:CreateGroup` is excluded: it carries no tag keys, so gating it would deny all group creation.
+
+---
+
+##### `INFRA_TAG_ON_CREATE_ACTIONS`<sup>Required</sup> <a name="INFRA_TAG_ON_CREATE_ACTIONS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.INFRA_TAG_ON_CREATE_ACTIONS"></a>
+
+```typescript
+public readonly INFRA_TAG_ON_CREATE_ACTIONS: string[];
+```
+
+- *Type:* string[]
+
+Networking, storage, and compute create actions.
+
+---
+
 ### ScpDenyRootCredentialsManagementInMemberAccounts <a name="ScpDenyRootCredentialsManagementInMemberAccounts" id="aws-data-landing-zone.ScpDenyRootCredentialsManagementInMemberAccounts"></a>
 
 Denies member-account root actions while allowing AWS Organizations centralized-root sessions (`aws:AssumedRoot`).
