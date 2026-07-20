@@ -29,6 +29,7 @@ import { DlzTagPolicy } from '../../../constructs/organization-policies/tag-poli
 import {
   DataLandingZoneProps,
   DlzAccountType,
+  DlzStandaloneScp,
   GlobalVariables,
   Ou,
   Region,
@@ -51,6 +52,7 @@ export class ManagementGlobalStack extends DlzStack {
     this.iamPermissionBoundary();
 
     this.workloadAccountsOrgPolicies();
+    this.workloadsOuPolicies();
     this.suspendedOuPolicies();
 
     if (this.props.organization.ous.sharedServices?.accounts.finOps) {
@@ -169,7 +171,13 @@ export class ManagementGlobalStack extends DlzStack {
         accountTypeExtras: accountTypeStatements[dlzAccount.type] ?? [],
         accountExtras: dlzAccount.scpStatements ?? [],
       });
-      ScpMerge.validate(dlzAccount.name, statements, 1);
+
+      // Slot budget for AWS's per-target SCP limit (`ScpLimits.MAX_PER_TARGET`, counted per
+      // policy type): the AWS-managed `FullAWSAccess` (always attached) + the merged DLZ SCP
+      // below + one policy per standalone entry. FullAWSAccess is counted conservatively —
+      // DLZ never detaches it.
+      const scpSlotsUsed = 1 /* FullAWSAccess */ + 1 /* merged SCP */ + (dlzAccount.standaloneScps?.length ?? 0);
+      ScpMerge.validate(dlzAccount.name, statements, scpSlotsUsed);
 
       const dlzScp = new DlzServiceControlPolicy(this,
         this.resourceName(`scp-${dlzAccount.name}-account`), {
@@ -189,13 +197,83 @@ export class ManagementGlobalStack extends DlzStack {
       Report.addReportForAccountRegion(dlzAccount.name, '*', dlzScp.reportResource);
       Report.addReportForAccountRegion(dlzAccount.name, '*', dlzTagPolicy.reportResource);
 
+      const standalonePolicies = this.createStandaloneScps({
+        label: dlzAccount.name,
+        targetId: dlzAccount.accountId,
+        scps: dlzAccount.standaloneScps ?? [],
+        scpSlotsUsed,
+        reservedSuffixes: ['account'], // used by the merged per-account SCP above
+      });
+
       for (const prev of previousPolicies) {
         dlzScp.policy.node.addDependency(prev);
         dlzTagPolicy.policy.node.addDependency(prev);
+        for (const standalone of standalonePolicies) {
+          standalone.node.addDependency(prev);
+        }
       }
       previousPolicies.length = 0;
-      previousPolicies.push(dlzScp.policy, dlzTagPolicy.policy);
+      previousPolicies.push(dlzScp.policy, dlzTagPolicy.policy, ...standalonePolicies);
     }
+  }
+
+  /**
+   * Standalone SCPs attached to the Workloads OU, inherited by every workload account.
+   * Preferred over per-account SCPs for a rule that applies uniformly org-wide: one policy,
+   * no per-account duplication, and inherited SCPs don't consume any account's slots.
+   */
+  workloadsOuPolicies() {
+    const scps = this.props.organization.ous.workloads.standaloneScps ?? [];
+    if (scps.length === 0) {
+      return;
+    }
+    // Slot budget: FullAWSAccess (always attached to the OU) + our standalone SCPs. SCPs
+    // attached out-of-band (e.g. Control Tower guardrails) aren't visible to DLZ and aren't
+    // counted here; `ScpLimits.MAX_PER_TARGET` leaves ample room.
+    this.createStandaloneScps({
+      label: 'workloads-ou',
+      targetId: this.props.organization.ous.workloads.ouId,
+      scps,
+      scpSlotsUsed: 1 /* FullAWSAccess */ + scps.length,
+    });
+  }
+
+  /**
+   * Emits one `AWS::Organizations::Policy` per standalone SCP, attached to `targetId` (an
+   * account or an OU) — never merged into another policy. `ScpMerge.validate` checks each
+   * policy's body size; the slot budget (`scpSlotsUsed`) is validated once by the caller.
+   * `reservedSuffixes` blocks nameSuffixes that would collide with other DLZ policies on the
+   * same target (e.g. `account`, used by the merged per-account SCP).
+   */
+  private createStandaloneScps(params: {
+    readonly label: string;
+    readonly targetId: string;
+    readonly scps: DlzStandaloneScp[];
+    readonly scpSlotsUsed: number;
+    readonly reservedSuffixes?: string[];
+  }): organizations.CfnPolicy[] {
+    const seenSuffixes = new Set<string>(params.reservedSuffixes ?? []);
+    return params.scps.map((scp, index) => {
+      const suffix = scp.nameSuffix ?? `standalone-${index}`;
+      if (seenSuffixes.has(suffix)) {
+        throw new Error(
+          `${params.label} standalone SCP nameSuffix "${suffix}" is duplicated or reserved ` +
+          '(a reserved suffix is used by another DLZ policy on the same target); use a unique nameSuffix.',
+        );
+      }
+      seenSuffixes.add(suffix);
+      ScpMerge.validate(`${params.label} (standalone "${suffix}")`, scp.statements, params.scpSlotsUsed);
+
+      const policyName = this.resourceName(`scp-${params.label}-${suffix}`);
+      const policy = new DlzServiceControlPolicy(this, policyName, {
+        name: policyName,
+        description: `Standalone SCP "${suffix}" applied to ${params.label}`,
+        targetIds: [params.targetId],
+        statements: scp.statements,
+      });
+      Report.addReportForAccountRegion(params.label, '*', policy.reportResource);
+      return policy.policy;
+    });
   }
 
   private resolveScpStatementsByAccountType(

@@ -192,7 +192,7 @@ describe('SCP presets', () => {
       'DenyCreateWithoutProjectTag',
       'DenyCreateWithoutEnvironmentTag',
       'DenyCreateWithoutCostCenterTag',
-      'DenyCreateWithoutDomainTag',
+      'DenyCreateWithoutNameTag',
     ]);
 
     for (const statement of statements) {
@@ -223,7 +223,7 @@ describe('SCP presets', () => {
     ['DATA_PLATFORM_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS],
     ['INFRA_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.INFRA_TAG_ON_CREATE_ACTIONS],
     ['IAM_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.IAM_TAG_ON_CREATE_ACTIONS],
-  ])('ScpDenyResourceCreationWithoutStandardTags %s is non-empty and fits its own SCP under 5120 bytes', (_name, actions) => {
+  ])('ScpDenyResourceCreationWithoutStandardTags %s is non-empty and fits its own SCP under 10,240 bytes', (_name, actions) => {
     expect(actions.length).toBeGreaterThan(0);
     const merged = ScpMerge.resolve({
       baseline: ScpDenyResourceCreationWithoutStandardTags.statements(actions),
@@ -244,16 +244,17 @@ describe('SCP presets', () => {
     expect(all).toContain('es:CreateDomain');
   });
 
-  test('ScpDenyResourceCreationWithoutStandardTags combining the data-platform and infra lists overflows one SCP', () => {
+  test('ScpDenyResourceCreationWithoutStandardTags combining all action groups fits one SCP under 10,240 bytes', () => {
     const merged = ScpMerge.resolve({
       baseline: ScpDenyResourceCreationWithoutStandardTags.statements([
         ...ScpDenyResourceCreationWithoutStandardTags.CORE_TAG_ON_CREATE_ACTIONS,
         ...ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS,
+        ...ScpDenyResourceCreationWithoutStandardTags.INFRA_TAG_ON_CREATE_ACTIONS,
+        ...ScpDenyResourceCreationWithoutStandardTags.IAM_TAG_ON_CREATE_ACTIONS,
       ]),
       accountExtras: [],
     });
-    expect(() => ScpMerge.validate('any-account', merged, 1))
-      .toThrow(/SCP body of \d+ bytes.*maximum of 5120/);
+    expect(() => ScpMerge.validate('any-account', merged, 1)).not.toThrow();
   });
 
   test('ScpDenyRootCredentialsManagementInMemberAccounts allows AssumedRoot but blocks direct root', () => {
@@ -275,7 +276,7 @@ describe('SCP presets', () => {
     expect(json.Condition?.ArnNotLike?.['aws:PrincipalARN']).toContain(CT_ROLE);
   });
 
-  test('all presets except ScpDenyActionsOutsideRegions compose under the 5120-byte limit', () => {
+  test('all presets except ScpDenyActionsOutsideRegions compose under the 10,240-byte limit', () => {
     const merged = ScpMerge.resolve({
       baseline: [],
       accountExtras: cases.map(c => c.statement),
@@ -283,7 +284,7 @@ describe('SCP presets', () => {
     expect(() => ScpMerge.validate('any-account', merged, 1)).not.toThrow();
   });
 
-  test('ScpDenyActionsOutsideRegions alone is well under the 5120-byte limit', () => {
+  test('ScpDenyActionsOutsideRegions alone is well under the 10,240-byte limit', () => {
     const merged = ScpMerge.resolve({
       baseline: [],
       accountExtras: [ScpDenyActionsOutsideRegions.statement(['eu-west-1', 'us-east-1'])],
@@ -291,7 +292,7 @@ describe('SCP presets', () => {
     expect(() => ScpMerge.validate('any-account', merged, 1)).not.toThrow();
   });
 
-  test('combining ALL presets exceeds the 5120-byte limit (documented constraint)', () => {
+  test('combining ALL presets composes under the 10,240-byte limit', () => {
     const merged = ScpMerge.resolve({
       baseline: [],
       accountExtras: [
@@ -299,7 +300,6 @@ describe('SCP presets', () => {
         ScpDenyActionsOutsideRegions.statement(['eu-west-1', 'us-east-1']),
       ],
     });
-    expect(() => ScpMerge.validate('any-account', merged, 1))
-      .toThrow(/SCP body of \d+ bytes.*maximum of 5120/);
+    expect(() => ScpMerge.validate('any-account', merged, 1)).not.toThrow();
   });
 });

@@ -10876,6 +10876,7 @@ new ManagementGlobalStack(scope: Construct, stackProps: ManagementGlobalStackPro
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Per-account SCPs and tag policies. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadsOuPolicies">workloadsOuPolicies</a></code> | Standalone SCPs attached to the Workloads OU, inherited by every workload account. |
 
 ---
 
@@ -11373,6 +11374,17 @@ public workloadAccountsOrgPolicies(): void
 Per-account SCPs and tag policies.
 
 Tiers: baseline -> account-type -> per-account (additive).
+
+##### `workloadsOuPolicies` <a name="workloadsOuPolicies" id="aws-data-landing-zone.ManagementGlobalStack.workloadsOuPolicies"></a>
+
+```typescript
+public workloadsOuPolicies(): void
+```
+
+Standalone SCPs attached to the Workloads OU, inherited by every workload account.
+
+Preferred over per-account SCPs for a rule that applies uniformly org-wide: one policy,
+no per-account duplication, and inherited SCPs don't consume any account's slots.
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -21925,6 +21937,7 @@ const dLzAccount: DLzAccount = { ... }
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.macieEnabled">macieEnabled</a></code> | <code>boolean</code> | Explicitly enroll this existing account in Macie via CreateMember. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.monthlyBudget">monthlyBudget</a></code> | <code>number</code> | Monthly budget cap in USD. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.scpStatements">scpStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Additional per-account SCP statements layered on top of the org baseline and account-type tier. |
+| <code><a href="#aws-data-landing-zone.DLzAccount.property.standaloneScps">standaloneScps</a></code> | <code><a href="#aws-data-landing-zone.DlzStandaloneScp">DlzStandaloneScp</a>[]</code> | Standalone SCPs attached directly to this account, each emitted as its OWN `AWS::Organizations::Policy` instead of being merged into the account's single baseline + account-type + per-account SCP. |
 | <code><a href="#aws-data-landing-zone.DLzAccount.property.vpcs">vpcs</a></code> | <code><a href="#aws-data-landing-zone.DlzVpcProps">DlzVpcProps</a>[]</code> | *No description.* |
 
 ---
@@ -22126,6 +22139,27 @@ public readonly scpStatements: PolicyStatement[];
 Additional per-account SCP statements layered on top of the org baseline and account-type tier.
 
 Additive only.
+
+---
+
+##### `standaloneScps`<sup>Optional</sup> <a name="standaloneScps" id="aws-data-landing-zone.DLzAccount.property.standaloneScps"></a>
+
+```typescript
+public readonly standaloneScps: DlzStandaloneScp[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzStandaloneScp">DlzStandaloneScp</a>[]
+- *Default:* no standalone SCPs
+
+Standalone SCPs attached directly to this account, each emitted as its OWN `AWS::Organizations::Policy` instead of being merged into the account's single baseline + account-type + per-account SCP.
+
+Use this to give a distinct rule set its own
+10,240-char budget (rather than sharing the merged document) — each entry becomes one SCP.
+
+All SCPs directly attached to the account (the AWS-managed `FullAWSAccess` + the merged
+DLZ SCP + these standalone entries) must total <= 10 (AWS's per-target limit); synth
+fails otherwise. For a uniform rule across many accounts, prefer attaching one SCP at
+the OU level instead — inherited SCPs don't consume any account's slots.
 
 ---
 
@@ -23794,6 +23828,7 @@ const dlzFinOpsAccountTags: DlzFinOpsAccountTags = { ... }
 | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags.property.costCenter">costCenter</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags.property.domain">domain</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags.property.environment">environment</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags.property.owner">owner</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzFinOpsAccountTags.property.project">project</a></code> | <code>string</code> | *No description.* |
 
@@ -23829,6 +23864,17 @@ public readonly environment: string;
 
 - *Type:* string
 - *Default:* DlzAccountType.PRODUCTION ('production')
+
+---
+
+##### `name`<sup>Optional</sup> <a name="name" id="aws-data-landing-zone.DlzFinOpsAccountTags.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+- *Default:* 'dlz'
 
 ---
 
@@ -25239,6 +25285,66 @@ public readonly stage: ExpressStage;
 ```
 
 - *Type:* cdk-express-pipeline.ExpressStage
+
+---
+
+### DlzStandaloneScp <a name="DlzStandaloneScp" id="aws-data-landing-zone.DlzStandaloneScp"></a>
+
+A standalone Service Control Policy attached directly to an account, emitted as its OWN `AWS::Organizations::Policy` — NOT merged into the account's single baseline + account-type + per-account SCP document.
+
+Use this to keep a distinct rule set
+(e.g. tag-on-create enforcement) in its own policy so it has its own 10,240-char budget
+instead of competing for space in the merged document. If one policy's statements exceed
+that limit, split them across multiple entries — each entry becomes a separate SCP.
+
+Every SCP directly attached to the account counts toward AWS's limit of 10 per target —
+that includes the AWS-managed `FullAWSAccess`, the merged DLZ SCP, and each of these
+standalone entries. (SCPs inherited from a parent OU do NOT count.)
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzStandaloneScp.Initializer"></a>
+
+```typescript
+import { DlzStandaloneScp } from 'aws-data-landing-zone'
+
+const dlzStandaloneScp: DlzStandaloneScp = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzStandaloneScp.property.statements">statements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Statements for this one SCP. |
+| <code><a href="#aws-data-landing-zone.DlzStandaloneScp.property.nameSuffix">nameSuffix</a></code> | <code>string</code> | Suffix for the policy name/id (`scp-<account>-<nameSuffix>`). |
+
+---
+
+##### `statements`<sup>Required</sup> <a name="statements" id="aws-data-landing-zone.DlzStandaloneScp.property.statements"></a>
+
+```typescript
+public readonly statements: PolicyStatement[];
+```
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+
+Statements for this one SCP.
+
+Rendered as a single policy document, which must be
+<= 10,240 characters. Synth fails otherwise — split into another entry.
+
+---
+
+##### `nameSuffix`<sup>Optional</sup> <a name="nameSuffix" id="aws-data-landing-zone.DlzStandaloneScp.property.nameSuffix"></a>
+
+```typescript
+public readonly nameSuffix: string;
+```
+
+- *Type:* string
+- *Default:* the entry's index in the list (e.g. `standalone-0`)
+
+Suffix for the policy name/id (`scp-<account>-<nameSuffix>`).
+
+Must be unique within the account.
 
 ---
 
@@ -28482,6 +28588,7 @@ const orgOuWorkloads: OrgOuWorkloads = { ... }
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.OrgOuWorkloads.property.accounts">accounts</a></code> | <code><a href="#aws-data-landing-zone.DLzAccount">DLzAccount</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.OrgOuWorkloads.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.OrgOuWorkloads.property.standaloneScps">standaloneScps</a></code> | <code><a href="#aws-data-landing-zone.DlzStandaloneScp">DlzStandaloneScp</a>[]</code> | Standalone SCPs attached to the Workloads OU itself, each emitted as its own `AWS::Organizations::Policy` targeting the OU. |
 
 ---
 
@@ -28502,6 +28609,25 @@ public readonly ouId: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `standaloneScps`<sup>Optional</sup> <a name="standaloneScps" id="aws-data-landing-zone.OrgOuWorkloads.property.standaloneScps"></a>
+
+```typescript
+public readonly standaloneScps: DlzStandaloneScp[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzStandaloneScp">DlzStandaloneScp</a>[]
+- *Default:* no OU-level standalone SCPs
+
+Standalone SCPs attached to the Workloads OU itself, each emitted as its own `AWS::Organizations::Policy` targeting the OU.
+
+Every workload account **inherits** these,
+and inherited SCPs do NOT count toward any account's per-target SCP limit — so this is
+the right place for a rule that applies uniformly to all workload accounts (one policy,
+no per-account duplication). For a rule specific to one account, use
+`DLzAccount.standaloneScps` instead.
 
 ---
 
@@ -32103,7 +32229,12 @@ CDK custom resources need it — tighten via permission boundaries, not SCPs.
 
 ### ScpLimits <a name="ScpLimits" id="aws-data-landing-zone.ScpLimits"></a>
 
-AWS Organizations service quotas for SCPs.
+AWS Organizations service quotas for SCPs (raised by AWS — see the reference below): - max policy document size = 10,240 characters (was 5,120) - max SCPs directly attached to a single root / OU / account = 10 (was 5)  Note: SCPs inherited from a parent OU or the root do NOT count toward a target's per-node limit — only directly-attached policies do.
+
+So attaching one SCP to an OU
+covers every account under it at zero per-account slot cost.
+
+> [https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html)
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpLimits.Initializer"></a>
 

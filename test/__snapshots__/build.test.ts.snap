@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "c2e811015266b66382390161e2c04d57c8831692780a563c7d3ca2ecec52c324.zip",
+          "S3Key": "005da2f9476ce8a2c4b70e8f5865faaa7835ca0a0ff0ba8e5378a1e8fe87d551.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "3df72285f20033a52178fceb96c47269500a57389c74d7fdcce9f73ab643ba78.zip",
+          "S3Key": "3cfd5448ca3740c7b87360da84a4d869b9d2125ca61aaf714f09c709270dafc9.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -238,6 +238,10 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -271,6 +275,10 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -351,6 +359,10 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -384,6 +396,10 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -587,6 +603,10 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -618,6 +638,10 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -736,6 +760,10 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -767,6 +795,10 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -880,6 +912,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -901,6 +934,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -922,6 +956,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -938,6 +973,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -958,6 +994,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -973,6 +1010,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -989,6 +1027,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -1010,6 +1049,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -1031,6 +1071,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -1052,6 +1093,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -1073,6 +1115,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -1088,6 +1131,7 @@ exports[`Build Local snapshot testing: globalIamIdentityCenter snapshot 1`] = `
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -1422,6 +1466,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1487,6 +1535,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1513,6 +1565,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1545,6 +1601,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1571,6 +1631,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1603,6 +1667,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1629,6 +1697,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1661,6 +1733,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1687,6 +1763,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1719,6 +1799,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1745,6 +1829,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1789,6 +1877,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1827,6 +1919,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1871,6 +1967,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1909,6 +2009,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -1953,6 +2057,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -1991,6 +2099,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -2035,6 +2147,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -2073,6 +2189,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -2117,6 +2237,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -2155,6 +2279,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -2199,6 +2327,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -2240,6 +2372,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -2278,6 +2414,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -2423,6 +2563,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -2484,6 +2628,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -2727,6 +2875,10 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -3661,6 +3813,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase1Sta
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -3727,6 +3880,10 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase1Sta
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -3813,6 +3970,10 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -3864,6 +4025,10 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -4005,6 +4170,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -4049,7 +4215,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
           },
           {
             "Key": "Name",
-            "Value": "project-1-development.eu-west-1.default-to-project-1-production.us-east-1.default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -4180,6 +4346,10 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -4231,6 +4401,10 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -4494,6 +4668,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -4545,6 +4723,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -4745,6 +4927,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -4769,6 +4955,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -4805,6 +4995,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -4920,7 +5114,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "dlz-global-bastion-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -4987,6 +5181,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -5015,6 +5213,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -5060,6 +5262,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5080,6 +5283,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5104,6 +5308,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -5198,6 +5406,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -5227,7 +5439,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5269,7 +5481,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-igw-vpc-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5290,6 +5502,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5310,6 +5523,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5330,6 +5544,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5350,6 +5565,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5370,6 +5586,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5390,6 +5607,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5410,6 +5628,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5430,6 +5649,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5450,6 +5670,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -5480,7 +5701,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5516,7 +5737,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5563,7 +5784,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5610,7 +5831,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5684,7 +5905,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
           {
             "Key": "Name",
-            "Value": "vpc-project-1-development-eu-west-1-internet-access-nati",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5727,7 +5948,7 @@ sudo service iptables save",
           },
           {
             "Key": "Name",
-            "Value": "vpc-project-1-development-eu-west-1-internet-access-nati-eip",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5818,6 +6039,10 @@ sudo service iptables save",
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -5852,7 +6077,7 @@ sudo service iptables save",
           },
           {
             "Key": "Name",
-            "Value": "vpc-public",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5888,7 +6113,7 @@ sudo service iptables save",
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5935,7 +6160,7 @@ sudo service iptables save",
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -5982,7 +6207,7 @@ sudo service iptables save",
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6076,6 +6301,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6100,6 +6326,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -6184,6 +6414,10 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -6213,7 +6447,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6255,7 +6489,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-igw-vpc-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6276,6 +6510,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6296,6 +6531,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6316,6 +6552,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6336,6 +6573,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6356,6 +6594,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6376,6 +6615,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6396,6 +6636,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6416,6 +6657,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6436,6 +6678,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -6466,7 +6709,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6502,7 +6745,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6549,7 +6792,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6596,7 +6839,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6658,7 +6901,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-project-1-production-eu-west-1-internet-access-nat",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6690,7 +6933,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-project-1-production-eu-west-1-internet-access-nat-eip",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6755,7 +6998,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-public",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6791,7 +7034,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6838,7 +7081,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -6885,7 +7128,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7102,6 +7345,10 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
             "Value": "dlz",
           },
           {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
             "Key": "Owner",
             "Value": "infra",
           },
@@ -7153,6 +7400,10 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
           },
           {
             "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
             "Value": "dlz",
           },
           {
@@ -7368,6 +7619,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7394,7 +7646,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7415,6 +7667,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7435,6 +7688,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7455,6 +7709,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7475,6 +7730,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7495,6 +7751,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7515,6 +7772,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7535,6 +7793,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7555,6 +7814,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7575,6 +7835,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -7605,7 +7866,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7641,7 +7902,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7688,7 +7949,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7735,7 +7996,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7780,7 +8041,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7816,7 +8077,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7863,7 +8124,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -7910,7 +8171,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8005,6 +8266,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8031,7 +8293,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-default",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8052,6 +8314,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8072,6 +8335,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8092,6 +8356,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8112,6 +8377,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8132,6 +8398,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8152,6 +8419,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8172,6 +8440,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8192,6 +8461,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8212,6 +8482,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           "CostCenter": "dlz",
           "Domain": "foundation",
           "Environment": "dlz",
+          "Name": "dlz",
           "Owner": "infra",
           "Project": "dlz",
         },
@@ -8242,7 +8513,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8278,7 +8549,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8325,7 +8596,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8372,7 +8643,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-private-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8417,7 +8688,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8453,7 +8724,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-1",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8500,7 +8771,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-2",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
@@ -8547,7 +8818,7 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
           },
           {
             "Key": "Name",
-            "Value": "vpc-public-3",
+            "Value": "dlz",
           },
           {
             "Key": "Owner",
