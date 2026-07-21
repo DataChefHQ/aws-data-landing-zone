@@ -18,7 +18,7 @@ export class ScpDenyResourceCreationWithoutStandardTags {
     'Project',
     'Environment',
     'CostCenter',
-    'Domain',
+    'Name',
   ];
 
   /** Core compute and data create actions. */

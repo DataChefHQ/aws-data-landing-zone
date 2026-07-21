@@ -1,9 +1,18 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 
-/** AWS Organizations service quotas for SCPs. */
+/**
+ * AWS Organizations service quotas for SCPs (raised by AWS — see the reference below):
+ * - max policy document size = 10,240 characters (was 5,120)
+ * - max SCPs directly attached to a single root / OU / account = 10 (was 5)
+ *
+ * Note: SCPs inherited from a parent OU or the root do NOT count toward a target's
+ * per-node limit — only directly-attached policies do. So attaching one SCP to an OU
+ * covers every account under it at zero per-account slot cost.
+ * @see https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
+ */
 export class ScpLimits {
-  public static readonly MAX_BODY_SIZE = 5120;
-  public static readonly MAX_PER_TARGET = 5;
+  public static readonly MAX_BODY_SIZE = 10240;
+  public static readonly MAX_PER_TARGET = 10;
 }
 
 export interface ResolveScpInput {

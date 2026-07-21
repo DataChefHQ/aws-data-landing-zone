@@ -447,6 +447,32 @@ export interface DLzIamProps {
   readonly userGroups?: DLzIamUserGroup[];
 }
 
+/**
+ * A standalone Service Control Policy attached directly to an account, emitted as its
+ * OWN `AWS::Organizations::Policy` — NOT merged into the account's single
+ * baseline + account-type + per-account SCP document. Use this to keep a distinct rule set
+ * (e.g. tag-on-create enforcement) in its own policy so it has its own 10,240-char budget
+ * instead of competing for space in the merged document. If one policy's statements exceed
+ * that limit, split them across multiple entries — each entry becomes a separate SCP.
+ *
+ * Every SCP directly attached to the account counts toward AWS's limit of 10 per target —
+ * that includes the AWS-managed `FullAWSAccess`, the merged DLZ SCP, and each of these
+ * standalone entries. (SCPs inherited from a parent OU do NOT count.)
+ */
+export interface DlzStandaloneScp {
+  /**
+   * Suffix for the policy name/id (`scp-<account>-<nameSuffix>`). Must be unique within the account.
+   * @default - the entry's index in the list (e.g. `standalone-0`)
+   */
+  readonly nameSuffix?: string;
+
+  /**
+   * Statements for this one SCP. Rendered as a single policy document, which must be
+   * <= 10,240 characters. Synth fails otherwise — split into another entry.
+   */
+  readonly statements: PolicyStatement[];
+}
+
 export interface DLzAccount {
   readonly accountId: string;
   readonly name: string;
@@ -516,6 +542,20 @@ export interface DLzAccount {
   readonly scpStatements?: PolicyStatement[];
 
   /**
+   * Standalone SCPs attached directly to this account, each emitted as its OWN
+   * `AWS::Organizations::Policy` instead of being merged into the account's single
+   * baseline + account-type + per-account SCP. Use this to give a distinct rule set its own
+   * 10,240-char budget (rather than sharing the merged document) — each entry becomes one SCP.
+   *
+   * All SCPs directly attached to the account (the AWS-managed `FullAWSAccess` + the merged
+   * DLZ SCP + these standalone entries) must total <= 10 (AWS's per-target limit); synth
+   * fails otherwise. For a uniform rule across many accounts, prefer attaching one SCP at
+   * the OU level instead — inherited SCPs don't consume any account's slots.
+   * @default - no standalone SCPs
+   */
+  readonly standaloneScps?: DlzStandaloneScp[];
+
+  /**
    * Cost center identifier. Populates the `CostCenter` tag and feeds `DlzAccountBudgets`
    * cost-center roll-ups.
    */
@@ -562,6 +602,17 @@ export interface OrgOuSecurity {
 export interface OrgOuWorkloads {
   readonly ouId: string;
   readonly accounts: DLzAccount[];
+
+  /**
+   * Standalone SCPs attached to the Workloads OU itself, each emitted as its own
+   * `AWS::Organizations::Policy` targeting the OU. Every workload account **inherits** these,
+   * and inherited SCPs do NOT count toward any account's per-target SCP limit — so this is
+   * the right place for a rule that applies uniformly to all workload accounts (one policy,
+   * no per-account duplication). For a rule specific to one account, use
+   * `DLzAccount.standaloneScps` instead.
+   * @default - no OU-level standalone SCPs
+   */
+  readonly standaloneScps?: DlzStandaloneScp[];
 }
 
 export interface OrgOuSuspended {
@@ -921,6 +972,8 @@ export interface DlzFinOpsAccountTags {
   readonly costCenter?: string;
   /** @default 'foundation' */
   readonly domain?: string;
+  /** @default 'dlz' */
+  readonly name?: string;
 }
 
 export interface ManagementStacks {

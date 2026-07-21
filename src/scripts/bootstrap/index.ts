@@ -2,7 +2,7 @@ import { DataLandingZoneProps, DlzAllRegions } from '../../data-landing-zone-typ
 import { assumeRole, runCommand } from '../lib/helpers';
 import { synth } from '../synth';
 
-const tags = '--tags Owner=infra --tags Project=dlz --tags Environment=dlz';
+const tags = '--tags Owner=infra --tags Project=dlz --tags Environment=dlz --tags CostCenter=dlz --tags Domain=foundation --tags Name=dlz';
 
 async function bootstrapChildAccount(props: DataLandingZoneProps, bootstrapRoleName: string, accountId: string, region: string) {
   const accountRole = `arn:aws:iam::${accountId}:role/${bootstrapRoleName}`;

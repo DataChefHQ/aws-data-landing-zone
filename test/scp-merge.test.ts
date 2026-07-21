@@ -117,14 +117,14 @@ describe('ScpMerge.validate', () => {
 
   test('throws when attachment count exceeds the per-target limit', () => {
     expect(() => ScpMerge.validate('prod-account', [denyEks], ScpLimits.MAX_PER_TARGET + 1))
-      .toThrow(/prod-account.*SCPs attached.*maximum of 5/);
+      .toThrow(/prod-account.*SCPs attached.*maximum of 10/);
   });
 
   test('passes at exactly the per-target limit', () => {
     expect(() => ScpMerge.validate('prod-account', [denyEks], ScpLimits.MAX_PER_TARGET)).not.toThrow();
   });
 
-  test('throws when the merged body exceeds 5120 bytes', () => {
+  test('throws when the merged body exceeds 10240 bytes', () => {
     const giantSids = Array.from({ length: 200 }, (_, i) => new iam.PolicyStatement({
       sid: `Deny${i.toString().padStart(4, '0')}`,
       effect: iam.Effect.DENY,
@@ -138,6 +138,6 @@ describe('ScpMerge.validate', () => {
     }));
 
     expect(() => ScpMerge.validate('prod-bloated', giantSids, 1))
-      .toThrow(/prod-bloated.*SCP body.*bytes.*maximum of 5120 bytes/);
+      .toThrow(/prod-bloated.*SCP body.*bytes.*maximum of 10240 bytes/);
   });
 });

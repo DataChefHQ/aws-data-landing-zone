@@ -16,6 +16,7 @@ export class FinOpsGlobalStack extends DlzStack {
     Tags.of(this).add('Environment', overrides.environment ?? DlzAccountType.PRODUCTION);
     Tags.of(this).add('CostCenter', overrides.costCenter ?? 'dlz');
     Tags.of(this).add('Domain', overrides.domain ?? 'foundation');
+    Tags.of(this).add('Name', overrides.name ?? 'dlz');
 
     if (this.props.finOps?.dataExports) {
       this.curDataPlane();
