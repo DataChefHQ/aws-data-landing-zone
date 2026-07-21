@@ -163,6 +163,8 @@ export class ManagementGlobalStack extends DlzStack {
     const sortedAccounts = [...this.props.organization.ous.workloads.accounts]
       .sort((a, b) => a.name.localeCompare(b.name));
 
+    const mergedScpSuffix = 'account';
+
     const previousPolicies: organizations.CfnPolicy[] = [];
 
     for (const dlzAccount of sortedAccounts) {
@@ -180,8 +182,8 @@ export class ManagementGlobalStack extends DlzStack {
       ScpMerge.validate(dlzAccount.name, statements, scpSlotsUsed);
 
       const dlzScp = new DlzServiceControlPolicy(this,
-        this.resourceName(`scp-${dlzAccount.name}-account`), {
-          name: this.resourceName(`scp-${dlzAccount.name}-account`),
+        this.resourceName(`scp-${dlzAccount.name}-${mergedScpSuffix}`), {
+          name: this.resourceName(`scp-${dlzAccount.name}-${mergedScpSuffix}`),
           description: `SCP statements applied to the ${dlzAccount.name} account`,
           targetIds: [dlzAccount.accountId],
           statements: statements,
@@ -202,7 +204,7 @@ export class ManagementGlobalStack extends DlzStack {
         targetId: dlzAccount.accountId,
         scps: dlzAccount.standaloneScps ?? [],
         scpSlotsUsed,
-        reservedSuffixes: ['account'], // used by the merged per-account SCP above
+        reservedSuffixes: [mergedScpSuffix], // reserved by the merged per-account SCP above
       });
 
       for (const prev of previousPolicies) {
