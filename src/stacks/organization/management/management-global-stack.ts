@@ -163,6 +163,7 @@ export class ManagementGlobalStack extends DlzStack {
     const sortedAccounts = [...this.props.organization.ous.workloads.accounts]
       .sort((a, b) => a.name.localeCompare(b.name));
 
+    // Suffix of the merged per-account SCP; single-sourced so the reserved-suffix guard can't drift.
     const mergedScpSuffix = 'account';
 
     const previousPolicies: organizations.CfnPolicy[] = [];
