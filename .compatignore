@@ -59,3 +59,9 @@ removed:aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.cons
 removed:aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeReference
 removed:aws-data-landing-zone.WorkloadRegionalStack.consumeListReference
 removed:aws-data-landing-zone.WorkloadRegionalStack.consumeReference
+
+# Per-account tag-compliance alert removed in favor of the centralized tagComplianceCentralAlert
+removed:aws-data-landing-zone.DlzTagComplianceAlert
+removed:aws-data-landing-zone.DlzTagComplianceAlertProps
+removed:aws-data-landing-zone.DlzTagComplianceAlertSubscribers
+removed:aws-data-landing-zone.DataLandingZoneProps.tagComplianceAlerts
