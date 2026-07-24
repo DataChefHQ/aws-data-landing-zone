@@ -218,6 +218,26 @@ describe('SCP presets', () => {
     expect(statements[1].toJSON().Condition?.Null?.['aws:RequestTag/team:name']).toBe(true);
   });
 
+  test('ScpDenyResourceCreationWithoutStandardTags omits aws:ViaAWSService by default', () => {
+    const [statement] = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:RunInstances']);
+    expect(statement.toJSON().Condition?.BoolIfExists).toBeUndefined();
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags exempts service-forwarded calls when opted in', () => {
+    const [statement] = ScpDenyResourceCreationWithoutStandardTags.statements(
+      ['ec2:RunInstances'], undefined, { exemptAwsServiceCalls: true },
+    );
+    expect(statement.toJSON().Condition?.BoolIfExists).toEqual({ 'aws:ViaAWSService': 'false' });
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags INFRA list excludes service-auto-created actions', () => {
+    const infra = ScpDenyResourceCreationWithoutStandardTags.INFRA_TAG_ON_CREATE_ACTIONS;
+    for (const action of ['logs:CreateLogGroup', 'ec2:CreateSnapshot', 'ec2:CreateSecurityGroup',
+      'ec2:AllocateAddress', 'rds:CreateDBSnapshot', 'autoscaling:CreateAutoScalingGroup']) {
+      expect(infra).not.toContain(action);
+    }
+  });
+
   test.each([
     ['CORE_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.CORE_TAG_ON_CREATE_ACTIONS],
     ['DATA_PLATFORM_TAG_ON_CREATE_ACTIONS', ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS],

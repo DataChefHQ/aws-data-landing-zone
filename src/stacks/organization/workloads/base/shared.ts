@@ -1,7 +1,7 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { DlzStack, DlzVpc } from '../../../../constructs';
+import { DlzStack, DlzTagComplianceAlert, DlzVpc } from '../../../../constructs';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
 import { DlzConfigRule } from '../../../../constructs/dlz-config-rule';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
@@ -25,17 +25,27 @@ export class Shared {
       tagIndex++;
     }
 
-    const rule = new DlzConfigRule(this.stack,
-      this.stack.resourceName('dlz-config-required-tags'), {
-        configRuleName: this.stack.resourceName('dlz-config-required-tags'),
-        identifier: config.ManagedRuleIdentifiers.REQUIRED_TAGS,
-        inputParameters: inputParameters,
-        reportItem: {
-          description: 'Checks resources for tags: ' + tags.map(tag => tag.name).join(', '),
-          externalLink: 'https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html',
-        },
-      });
+    const ruleName = this.stack.resourceName('dlz-config-required-tags');
+    const rule = new DlzConfigRule(this.stack, ruleName, {
+      configRuleName: ruleName,
+      identifier: config.ManagedRuleIdentifiers.REQUIRED_TAGS,
+      inputParameters: inputParameters,
+      reportItem: {
+        description: 'Checks resources for tags: ' + tags.map(tag => tag.name).join(', '),
+        externalLink: 'https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html',
+      },
+    });
     Report.addReportForAccountRegion(this.stack.accountName, this.stack.region, rule.reportResource);
+
+    // Detective alerting: email the team when this rule flags a resource. Created per region,
+    // same as the rule, so every region's non-compliance is covered.
+    if (this.props.tagComplianceAlerts) {
+      new DlzTagComplianceAlert(this.stack, this.stack.resourceName('dlz-tag-compliance-alert'), {
+        configRuleNames: [ruleName],
+        emails: this.props.tagComplianceAlerts.emails,
+        slacks: this.props.tagComplianceAlerts.slacks,
+      });
+    }
   }
 
 
