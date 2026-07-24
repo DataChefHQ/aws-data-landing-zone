@@ -20,6 +20,7 @@ export enum ReportType {
   GUARDDUTY = 'GuardDuty',
   MACIE_DELEGATED_ADMIN = 'Macie Delegated Admin',
   MACIE = 'Macie',
+  TAG_COMPLIANCE_ALERT = 'Tag Compliance Alert',
 }
 
 export interface ReportResource {

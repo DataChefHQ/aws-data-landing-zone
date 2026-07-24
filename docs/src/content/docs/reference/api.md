@@ -21594,7 +21594,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.scpBaselineStatements">scpBaselineStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Replaces the deny-services portion of the org SCP baseline applied to every workload account. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.scpStatementsByAccountType">scpStatementsByAccountType</a></code> | <code><a href="#aws-data-landing-zone.ScpStatementsByAccountType">ScpStatementsByAccountType</a></code> | Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras. |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.tagComplianceAlerts">tagComplianceAlerts</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers">DlzTagComplianceAlertSubscribers</a></code> | Email alerts when AWS Config finds resources missing their mandatory tags — the detective layer that complements the tag-on-create SCP. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.tagComplianceCentralAlert">tagComplianceCentralAlert</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers">DlzTagComplianceCentralAlertSubscribers</a></code> | Centralized, org-wide alerting for AWS Config tag non-compliance. |
 
 ---
 
@@ -21858,19 +21858,24 @@ Additive only.
 
 ---
 
-##### `tagComplianceAlerts`<sup>Optional</sup> <a name="tagComplianceAlerts" id="aws-data-landing-zone.DataLandingZoneProps.property.tagComplianceAlerts"></a>
+##### `tagComplianceCentralAlert`<sup>Optional</sup> <a name="tagComplianceCentralAlert" id="aws-data-landing-zone.DataLandingZoneProps.property.tagComplianceCentralAlert"></a>
 
 ```typescript
-public readonly tagComplianceAlerts: DlzTagComplianceAlertSubscribers;
+public readonly tagComplianceCentralAlert: DlzTagComplianceCentralAlertSubscribers;
 ```
 
-- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers">DlzTagComplianceAlertSubscribers</a>
-- *Default:* no tag-compliance alerts
+- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers">DlzTagComplianceCentralAlertSubscribers</a>
+- *Default:* no centralized tag-compliance alert
 
-Email alerts when AWS Config finds resources missing their mandatory tags — the detective layer that complements the tag-on-create SCP.
+Centralized, org-wide alerting for AWS Config tag non-compliance.
 
-Wired per region alongside the built-in
-required-tags Config rule.
+When set, every workload
+account × region forwards its NON_COMPLIANT findings to a single EventBridge bus in the
+management account, which fans out to Slack (via Chatbot) and/or email — one topic, one place,
+modeled on budget alerts.
+
+The Config required-tags rule still runs per account × region (detection is local); only the
+alerting is centralized.
 
 ---
 
@@ -25683,27 +25688,27 @@ Specifying an empty array or undefined still enforces the tag presence but does 
 
 ---
 
-### DlzTagComplianceAlertProps <a name="DlzTagComplianceAlertProps" id="aws-data-landing-zone.DlzTagComplianceAlertProps"></a>
+### DlzTagComplianceCentralAlertProps <a name="DlzTagComplianceCentralAlertProps" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps"></a>
 
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceAlertProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps.Initializer"></a>
 
 ```typescript
-import { DlzTagComplianceAlertProps } from 'aws-data-landing-zone'
+import { DlzTagComplianceCentralAlertProps } from 'aws-data-landing-zone'
 
-const dlzTagComplianceAlertProps: DlzTagComplianceAlertProps = { ... }
+const dlzTagComplianceCentralAlertProps: DlzTagComplianceCentralAlertProps = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when a resource is found without its mandatory tags. |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps.property.configRuleNames">configRuleNames</a></code> | <code>string[]</code> | AWS Config rule names to watch. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when any workload account has a resource missing mandatory tags. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.organizationId">organizationId</a></code> | <code>string</code> | The AWS Organizations id (e.g. `o-xxxxxxxxxx`). Scopes the central bus resource policy so that any account in the organization — and only those accounts — may forward events to the bus. |
 
 ---
 
-##### `emails`<sup>Optional</sup> <a name="emails" id="aws-data-landing-zone.DlzTagComplianceAlertProps.property.emails"></a>
+##### `emails`<sup>Optional</sup> <a name="emails" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.emails"></a>
 
 ```typescript
 public readonly emails: string[];
@@ -25711,11 +25716,11 @@ public readonly emails: string[];
 
 - *Type:* string[]
 
-Emails that receive an alert when a resource is found without its mandatory tags.
+Emails that receive an alert when any workload account has a resource missing mandatory tags.
 
 ---
 
-##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.DlzTagComplianceAlertProps.property.slacks"></a>
+##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.slacks"></a>
 
 ```typescript
 public readonly slacks: SlackChannel[];
@@ -25725,9 +25730,103 @@ public readonly slacks: SlackChannel[];
 
 Slack channels that receive the alert (notify-only).
 
+Uses Chatbot in the management account.
+
 ---
 
-##### `configRuleNames`<sup>Required</sup> <a name="configRuleNames" id="aws-data-landing-zone.DlzTagComplianceAlertProps.property.configRuleNames"></a>
+##### `organizationId`<sup>Required</sup> <a name="organizationId" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.organizationId"></a>
+
+```typescript
+public readonly organizationId: string;
+```
+
+- *Type:* string
+
+The AWS Organizations id (e.g. `o-xxxxxxxxxx`). Scopes the central bus resource policy so that any account in the organization — and only those accounts — may forward events to the bus.
+
+---
+
+### DlzTagComplianceCentralAlertSubscribers <a name="DlzTagComplianceCentralAlertSubscribers" id="aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers"></a>
+
+Where the centralized tag-compliance alert is sent.
+
+Consumer-facing prop on `DataLandingZoneProps`.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers.Initializer"></a>
+
+```typescript
+import { DlzTagComplianceCentralAlertSubscribers } from 'aws-data-landing-zone'
+
+const dlzTagComplianceCentralAlertSubscribers: DlzTagComplianceCentralAlertSubscribers = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when any workload account has a resource missing mandatory tags. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers.property.emails"></a>
+
+```typescript
+public readonly emails: string[];
+```
+
+- *Type:* string[]
+
+Emails that receive an alert when any workload account has a resource missing mandatory tags.
+
+---
+
+##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.DlzTagComplianceCentralAlertSubscribers.property.slacks"></a>
+
+```typescript
+public readonly slacks: SlackChannel[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]
+
+Slack channels that receive the alert (notify-only).
+
+Uses Chatbot in the management account.
+
+---
+
+### DlzTagComplianceForwardingRuleProps <a name="DlzTagComplianceForwardingRuleProps" id="aws-data-landing-zone.DlzTagComplianceForwardingRuleProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceForwardingRuleProps.Initializer"></a>
+
+```typescript
+import { DlzTagComplianceForwardingRuleProps } from 'aws-data-landing-zone'
+
+const dlzTagComplianceForwardingRuleProps: DlzTagComplianceForwardingRuleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceForwardingRuleProps.property.centralBusArn">centralBusArn</a></code> | <code>string</code> | ARN of the central event bus in the management account (see `DlzTagComplianceCentralAlert.busArn`). |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceForwardingRuleProps.property.configRuleNames">configRuleNames</a></code> | <code>string[]</code> | AWS Config rule names to watch. |
+
+---
+
+##### `centralBusArn`<sup>Required</sup> <a name="centralBusArn" id="aws-data-landing-zone.DlzTagComplianceForwardingRuleProps.property.centralBusArn"></a>
+
+```typescript
+public readonly centralBusArn: string;
+```
+
+- *Type:* string
+
+ARN of the central event bus in the management account (see `DlzTagComplianceCentralAlert.busArn`).
+
+---
+
+##### `configRuleNames`<sup>Required</sup> <a name="configRuleNames" id="aws-data-landing-zone.DlzTagComplianceForwardingRuleProps.property.configRuleNames"></a>
 
 ```typescript
 public readonly configRuleNames: string[];
@@ -25737,55 +25836,7 @@ public readonly configRuleNames: string[];
 
 AWS Config rule names to watch.
 
-A resource turning NON_COMPLIANT on any of them raises
-an alert. AWS Config is regional, so this construct only covers the region it is created in.
-
----
-
-### DlzTagComplianceAlertSubscribers <a name="DlzTagComplianceAlertSubscribers" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers"></a>
-
-Where tag-compliance alerts are sent.
-
-Consumer-facing prop on `DataLandingZoneProps`.
-
-#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers.Initializer"></a>
-
-```typescript
-import { DlzTagComplianceAlertSubscribers } from 'aws-data-landing-zone'
-
-const dlzTagComplianceAlertSubscribers: DlzTagComplianceAlertSubscribers = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when a resource is found without its mandatory tags. |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
-
----
-
-##### `emails`<sup>Optional</sup> <a name="emails" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.emails"></a>
-
-```typescript
-public readonly emails: string[];
-```
-
-- *Type:* string[]
-
-Emails that receive an alert when a resource is found without its mandatory tags.
-
----
-
-##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.slacks"></a>
-
-```typescript
-public readonly slacks: SlackChannel[];
-```
-
-- *Type:* <a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]
-
-Slack channels that receive the alert (notify-only).
+A resource turning NON_COMPLIANT on any of them is forwarded.
 
 ---
 
@@ -30941,59 +30992,100 @@ produce a CDK diff every time.
 
 
 
-### DlzTagComplianceAlert <a name="DlzTagComplianceAlert" id="aws-data-landing-zone.DlzTagComplianceAlert"></a>
+### DlzTagComplianceCentralAlert <a name="DlzTagComplianceCentralAlert" id="aws-data-landing-zone.DlzTagComplianceCentralAlert"></a>
 
-Detective alerting for AWS Config tag rules: routes NON_COMPLIANT findings to email and/or Slack.
+Central, org-wide sink for AWS Config tag non-compliance, created once in the management account.
 
-AWS Config emits a "Config Rules Compliance Change" event (per region) whenever a rule's
-compliance flips. An EventBridge rule forwards only the NON_COMPLIANT ones for the given rules
-to an SNS topic, which fans out to the subscribers. Detect-only — it never touches the resource.
+Owns a dedicated EventBridge event bus that every workload account forwards its NON_COMPLIANT
+findings to (see `DlzTagComplianceForwardingRule`), plus one SNS topic and the Slack/email fan-out.
+Modeled on budget alerts: a single account, a single topic, Chatbot for Slack. One topic and one
+Slack config for the whole org, instead of one per workload account × region.
 
-#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer"></a>
 
 ```typescript
-import { DlzTagComplianceAlert } from 'aws-data-landing-zone'
+import { DlzTagComplianceCentralAlert } from 'aws-data-landing-zone'
 
-new DlzTagComplianceAlert(scope: Construct, id: string, props: DlzTagComplianceAlertProps)
+new DlzTagComplianceCentralAlert(scope: Construct, id: string, props: DlzTagComplianceCentralAlertProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps">DlzTagComplianceAlertProps</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps">DlzTagComplianceCentralAlertProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceAlertProps">DlzTagComplianceAlertProps</a>
+- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps">DlzTagComplianceCentralAlertProps</a>
 
 ---
 
 
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.busArn">busArn</a></code> | ARN of the central bus, derived from the management account id and the global region. |
+
+---
+
+##### `busArn` <a name="busArn" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.busArn"></a>
+
+```typescript
+import { DlzTagComplianceCentralAlert } from 'aws-data-landing-zone'
+
+DlzTagComplianceCentralAlert.busArn(managementAccountId: string, globalRegion: string)
+```
+
+ARN of the central bus, derived from the management account id and the global region.
+
+###### `managementAccountId`<sup>Required</sup> <a name="managementAccountId" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.busArn.parameter.managementAccountId"></a>
+
+- *Type:* string
+
+---
+
+###### `globalRegion`<sup>Required</sup> <a name="globalRegion" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.busArn.parameter.globalRegion"></a>
+
+- *Type:* string
+
+---
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.property.bus">bus</a></code> | <code>aws-cdk-lib.aws_events.EventBus</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
 
 ---
 
-##### `topic`<sup>Required</sup> <a name="topic" id="aws-data-landing-zone.DlzTagComplianceAlert.property.topic"></a>
+##### `bus`<sup>Required</sup> <a name="bus" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.property.bus"></a>
+
+```typescript
+public readonly bus: EventBus;
+```
+
+- *Type:* aws-cdk-lib.aws_events.EventBus
+
+---
+
+##### `topic`<sup>Required</sup> <a name="topic" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.property.topic"></a>
 
 ```typescript
 public readonly topic: Topic;
@@ -31002,6 +31094,74 @@ public readonly topic: Topic;
 - *Type:* aws-cdk-lib.aws_sns.Topic
 
 ---
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlert.property.BUS_NAME">BUS_NAME</a></code> | <code>string</code> | Fixed name of the central event bus. |
+
+---
+
+##### `BUS_NAME`<sup>Required</sup> <a name="BUS_NAME" id="aws-data-landing-zone.DlzTagComplianceCentralAlert.property.BUS_NAME"></a>
+
+```typescript
+public readonly BUS_NAME: string;
+```
+
+- *Type:* string
+
+Fixed name of the central event bus.
+
+Single-sourced so the workload-side forwarding rules can
+build the bus ARN (via `busArn`) without a cross-stack reference.
+
+---
+
+### DlzTagComplianceForwardingRule <a name="DlzTagComplianceForwardingRule" id="aws-data-landing-zone.DlzTagComplianceForwardingRule"></a>
+
+Workload-side half of the centralized alert.
+
+Created per account × region: an EventBridge rule
+that matches this region's NON_COMPLIANT tag findings and forwards them to the central event bus
+in the management account (cross-account, cross-region — a single hop). No local SNS/Chatbot.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer"></a>
+
+```typescript
+import { DlzTagComplianceForwardingRule } from 'aws-data-landing-zone'
+
+new DlzTagComplianceForwardingRule(scope: Construct, id: string, props: DlzTagComplianceForwardingRuleProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceForwardingRuleProps">DlzTagComplianceForwardingRuleProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzTagComplianceForwardingRule.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceForwardingRuleProps">DlzTagComplianceForwardingRuleProps</a>
+
+---
+
+
+
 
 
 ### DlzTagPolicy <a name="DlzTagPolicy" id="aws-data-landing-zone.DlzTagPolicy"></a>
@@ -33440,6 +33600,7 @@ Hyderabad No Control Tower SecurityHub Standard support.
 | <code><a href="#aws-data-landing-zone.ReportType.GUARDDUTY">GUARDDUTY</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.MACIE_DELEGATED_ADMIN">MACIE_DELEGATED_ADMIN</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ReportType.MACIE">MACIE</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.ReportType.TAG_COMPLIANCE_ALERT">TAG_COMPLIANCE_ALERT</a></code> | *No description.* |
 
 ---
 
@@ -33519,6 +33680,11 @@ Hyderabad No Control Tower SecurityHub Standard support.
 
 
 ##### `MACIE` <a name="MACIE" id="aws-data-landing-zone.ReportType.MACIE"></a>
+
+---
+
+
+##### `TAG_COMPLIANCE_ALERT` <a name="TAG_COMPLIANCE_ALERT" id="aws-data-landing-zone.ReportType.TAG_COMPLIANCE_ALERT"></a>
 
 ---
 

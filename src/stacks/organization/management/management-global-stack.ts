@@ -17,6 +17,7 @@ import {
   ControlTowerControlMappings,
   DlzStack,
   DlzStackProps, SlackChannel,
+  DlzTagComplianceCentralAlert,
 } from '../../../constructs/index';
 import {
   DlzServiceControlPolicy,
@@ -37,7 +38,7 @@ import {
 } from '../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../defaults';
 import { limitCfnExecutions } from '../../../lib/cdk-utils';
-import { Report } from '../../../lib/report';
+import { Report, ReportType } from '../../../lib/report';
 
 export interface ManagementGlobalStackProps extends DlzStackProps {
   readonly globalVariables: GlobalVariables;
@@ -69,6 +70,10 @@ export class ManagementGlobalStack extends DlzStack {
 
     if (this.props.finOps?.costAnomalyDetection) {
       this.costAnomalyDetection();
+    }
+
+    if (this.props.tagComplianceCentralAlert) {
+      this.tagComplianceCentralAlert();
     }
 
     if (this.props.guardDuty) {
@@ -338,6 +343,25 @@ export class ManagementGlobalStack extends DlzStack {
     for (const budget of budgets) {
       new DlzBudget(this, this.resourceName(`budget-${budget.name}`), budget, this.stackProps.globalVariables.budgetSnsCache);
     }
+  }
+
+  /**
+   * Central sink for org-wide tag-compliance alerts: one event bus + SNS topic + Slack/email in
+   * the management account. Workload accounts forward their findings here (see
+   * `DlzTagComplianceForwardingRule`). Deployed here because the Slack workspace is authorized in
+   * this account (like budgets) and one topic means one subscription confirmation.
+   */
+  private tagComplianceCentralAlert() {
+    const alert = new DlzTagComplianceCentralAlert(this, this.resourceName('dlz-tag-compliance-central-alert'), {
+      organizationId: this.props.organization.organizationId,
+      emails: this.props.tagComplianceCentralAlert!.emails,
+      slacks: this.props.tagComplianceCentralAlert!.slacks,
+    });
+    Report.addReportForAccountRegion('management', this.props.regions.global, {
+      type: ReportType.TAG_COMPLIANCE_ALERT,
+      name: alert.bus.eventBusName,
+      description: 'Central event bus that receives tag NON_COMPLIANT findings from all workload accounts',
+    });
   }
 
   /**
