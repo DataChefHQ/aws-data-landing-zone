@@ -5,6 +5,10 @@
 import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
 import EditLink from '@astrojs/starlight/components/EditLink.astro';
 import Pagination from '@astrojs/starlight/components/Pagination.astro';
+import CookieConsent from './CookieConsent.astro';
+import ClarityTracking from './ClarityTracking.astro';
+
+const trackAnalytics = process.env.CF_PAGES_BRANCH === 'main';
 ---
 
 <footer class="sl-flex">
@@ -18,6 +22,9 @@ import Pagination from '@astrojs/starlight/components/Pagination.astro';
     </div>
 
 </footer>
+
+{trackAnalytics && <CookieConsent />}
+{trackAnalytics && <ClarityTracking />}
 
 <style>
     .made-with {

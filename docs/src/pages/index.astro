@@ -1,6 +1,10 @@
 ---
 import Navbar from '../components/Navbar.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import ClarityTracking from '../components/ClarityTracking.astro';
 import '../styles/landing.css';
+
+const trackAnalytics = process.env.CF_PAGES_BRANCH === 'main';
 ---
 
 <!DOCTYPE html>
@@ -945,6 +949,9 @@ import '../styles/landing.css';
   });
 })();
 </script>
+
+{trackAnalytics && <CookieConsent />}
+{trackAnalytics && <ClarityTracking />}
 
 </body>
 </html>

@@ -1,0 +1,165 @@
+---
+---
+
+<div id="cookie-consent-banner" style="display: none;">
+  <div class="cookie-consent-inner">
+    <p class="cookie-consent-text">
+      We use cookies to understand how you use our site and improve your experience. By clicking "Accept", you
+      consent to our use of analytics cookies.
+    </p>
+    <div class="cookie-consent-actions">
+      <button id="cookie-consent-reject" type="button" class="cookie-consent-btn cookie-consent-btn--secondary">
+        Reject
+      </button>
+      <button id="cookie-consent-accept" type="button" class="cookie-consent-btn cookie-consent-btn--primary">
+        Accept
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  #cookie-consent-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    background: oklch(1 0 0);
+    color: oklch(0.222 0.034 261.473);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
+    padding: 18px 8px;
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  :global([data-theme='dark']) #cookie-consent-banner,
+  :global(.dark) #cookie-consent-banner {
+    background: oklch(0.235 0.031 262.556);
+    color: oklch(0.978 0.007 260.732);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .cookie-consent-inner {
+    max-width: 1220px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 40px;
+    row-gap: 10px;
+    flex-wrap: nowrap;
+    text-align: center;
+  }
+
+  .cookie-consent-text {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 14px;
+  }
+
+  .cookie-consent-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .cookie-consent-btn {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+      background-color 0.2s ease,
+      opacity 0.15s;
+  }
+
+  .cookie-consent-btn--primary {
+    background: oklch(0.833 0.156 78.07);
+    color: oklch(0.222 0.034 261.473);
+    border: 1px solid oklch(0.833 0.156 78.07);
+  }
+
+  .cookie-consent-btn--primary:hover {
+    opacity: 0.9;
+  }
+
+  .cookie-consent-btn--secondary {
+    background: transparent;
+    color: inherit;
+    border: 1px solid oklch(0.683 0.033 275.367 / 0.5);
+  }
+
+  .cookie-consent-btn--secondary:hover {
+    background: oklch(0.5 0 0 / 0.08);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-consent-inner {
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const CONSENT_KEY = 'dc_cookie_consent';
+
+    const getConsent = () => {
+      try {
+        return window.localStorage.getItem(CONSENT_KEY);
+      } catch {
+        return null;
+      }
+    };
+
+    const setConsent = (status) => {
+      try {
+        window.localStorage.setItem(CONSENT_KEY, status);
+      } catch {
+        // localStorage unavailable (e.g. private browsing) - consent will be asked again next visit.
+      }
+      window.dispatchEvent(new CustomEvent('dc-cookie-consent', { detail: { status } }));
+    };
+
+    const init = () => {
+      const banner = document.getElementById('cookie-consent-banner');
+      const acceptBtn = document.getElementById('cookie-consent-accept');
+      const rejectBtn = document.getElementById('cookie-consent-reject');
+
+      if (!banner || !acceptBtn || !rejectBtn) {
+        return;
+      }
+
+      const existingConsent = getConsent();
+      if (existingConsent === 'accepted' || existingConsent === 'rejected') {
+        // Consent already recorded - notify listeners (e.g. Clarity) without showing the banner again.
+        window.dispatchEvent(new CustomEvent('dc-cookie-consent', { detail: { status: existingConsent } }));
+        return;
+      }
+
+      banner.style.display = 'block';
+
+      acceptBtn.addEventListener('click', () => {
+        banner.style.display = 'none';
+        setConsent('accepted');
+      });
+
+      rejectBtn.addEventListener('click', () => {
+        banner.style.display = 'none';
+        setConsent('rejected');
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
