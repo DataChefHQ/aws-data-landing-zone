@@ -16,6 +16,7 @@ import {
   DlzSsmReaderStackCache,
   DlzStackProps,
   DlzTag,
+  DlzTagComplianceAlertSubscribers,
   DlzVpcProps,
   IamIdentityCenterProps, IamPasswordPolicyProps,
   NetworkAddress,
@@ -915,6 +916,14 @@ export interface DataLandingZoneProps {
   readonly macie?: DlzMacieProps;
 
   readonly securityHubNotifications: SecurityHubNotification[];
+
+  /**
+   * Email alerts when AWS Config finds resources missing their mandatory tags — the detective
+   * layer that complements the tag-on-create SCP. Wired per region alongside the built-in
+   * required-tags Config rule.
+   * @default - no tag-compliance alerts
+   */
+  readonly tagComplianceAlerts?: DlzTagComplianceAlertSubscribers;
 
   readonly deploymentPlatform?: DeploymentPlatform;
 

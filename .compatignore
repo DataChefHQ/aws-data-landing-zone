@@ -2,6 +2,26 @@
 removed:aws-data-landing-zone.Defaults.denyServiceList
 removed:aws-data-landing-zone.DataLandingZoneProps.denyServiceList
 
+# addStackDependency (inherited CDK Stack method) removed by aws-cdk-lib bump
+removed:aws-data-landing-zone.AuditGlobalStack.addStackDependency
+removed:aws-data-landing-zone.AuditRegionalStack.addStackDependency
+removed:aws-data-landing-zone.DlzStack.addStackDependency
+removed:aws-data-landing-zone.FinOpsGlobalStack.addStackDependency
+removed:aws-data-landing-zone.LogGlobalStack.addStackDependency
+removed:aws-data-landing-zone.LogRegionalStack.addStackDependency
+removed:aws-data-landing-zone.ManagementDataExportsStack.addStackDependency
+removed:aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addStackDependency
+removed:aws-data-landing-zone.ManagementGlobalStack.addStackDependency
+removed:aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadGlobalStack.addStackDependency
+removed:aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addStackDependency
+removed:aws-data-landing-zone.WorkloadRegionalStack.addStackDependency
+
 # consumeReference and consumeListReference removed from all Stack classes
 removed:aws-data-landing-zone.AuditGlobalStack.consumeListReference
 removed:aws-data-landing-zone.AuditGlobalStack.consumeReference

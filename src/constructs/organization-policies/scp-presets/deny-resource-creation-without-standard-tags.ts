@@ -1,6 +1,15 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { ControlTowerExemption } from './control-tower-exemption';
 
+export interface ScpDenyResourceCreationTagOptions {
+  /**
+   * Exempt creates that an AWS service makes on your behalf with *forwarded credentials*
+   * (e.g. CloudFormation) by adding `aws:ViaAWSService` to each Deny — so only direct
+   * console/CLI/SDK/IaC creates are blocked.
+   */
+  readonly exemptAwsServiceCalls?: boolean;
+}
+
 /**
  * Opt-in SCP statements that deny the given create actions unless every mandatory tag is present at creation
  * (`aws:RequestTag`). This covers direct console/CLI/SDK creation, which `ScpDenyCfnStacksWithoutStandardTags`
@@ -65,26 +74,27 @@ export class ScpDenyResourceCreationWithoutStandardTags {
     'bedrock:CreateModelCustomizationJob',
   ];
 
-  /** Networking, storage, and compute create actions. */
+  /**
+   * Networking, storage, and compute create actions.
+   *
+   * Deliberately excludes resources that AWS services auto-create, untagged, at runtime
+   * (CloudWatch log groups, EBS/RDS snapshots, default/managed security groups, EIPs,
+   * auto-scaling groups). Those calls carry no `aws:RequestTag`, so gating them can't be
+   * satisfied and only breaks normal operation (e.g. Lambda logging, backups, EKS scaling).
+   * Catch tag gaps on those with AWS Config instead of an SCP.
+   */
   public static readonly INFRA_TAG_ON_CREATE_ACTIONS: string[] = [
-    'logs:CreateLogGroup',
     'ecr:CreateRepository',
     'elasticfilesystem:CreateFileSystem',
     'elasticache:CreateReplicationGroup',
     'elasticache:CreateCacheCluster',
     'elasticache:CreateServerlessCache',
-    'autoscaling:CreateAutoScalingGroup',
-    'ec2:CreateSecurityGroup',
     'ec2:CreateVpc',
     'ec2:CreateSubnet',
-    'ec2:CreateSnapshot',
     'ec2:CreateLaunchTemplate',
     'ec2:CreateNatGateway',
-    'ec2:AllocateAddress',
     'eks:CreateNodegroup',
     'eks:CreateFargateProfile',
-    'rds:CreateDBSnapshot',
-    'rds:CreateDBClusterSnapshot',
     'rds:CreateDBSubnetGroup',
     'rds:CreateDBParameterGroup',
   ];
@@ -97,8 +107,19 @@ export class ScpDenyResourceCreationWithoutStandardTags {
   ];
 
   /** One Deny per tag key over `actions`. Tag keys default to {@link DEFAULT_TAG_KEYS}. */
-  public static statements(actions: string[], tagKeys?: string[]): iam.PolicyStatement[] {
+  public static statements(
+    actions: string[],
+    tagKeys?: string[],
+    options?: ScpDenyResourceCreationTagOptions,
+  ): iam.PolicyStatement[] {
     const keys = tagKeys ?? ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS;
+
+    // `BoolIfExists` keeps the deny strict when the key is absent, and only lifts it for
+    // genuine service-forwarded calls (`aws:ViaAWSService` = true).
+    const viaServiceExemption = options?.exemptAwsServiceCalls
+      ? { BoolIfExists: { 'aws:ViaAWSService': 'false' } }
+      : {};
+
     return keys.map((key) => new iam.PolicyStatement({
       sid: `DenyCreateWithout${key.replace(/[^a-zA-Z0-9]/g, '')}Tag`,
       effect: iam.Effect.DENY,
@@ -106,6 +127,7 @@ export class ScpDenyResourceCreationWithoutStandardTags {
       resources: ['*'],
       conditions: {
         ...ControlTowerExemption.arnNotLike(),
+        ...viaServiceExemption,
         Null: {
           [`aws:RequestTag/${key}`]: true,
         },

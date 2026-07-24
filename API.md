@@ -21590,6 +21590,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.saveReport">saveReport</a></code> | <code>boolean</code> | Save the raw report items and the reports grouped by account to a `./.dlz-reports` folder. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.scpBaselineStatements">scpBaselineStatements</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Replaces the deny-services portion of the org SCP baseline applied to every workload account. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.scpStatementsByAccountType">scpStatementsByAccountType</a></code> | <code><a href="#aws-data-landing-zone.ScpStatementsByAccountType">ScpStatementsByAccountType</a></code> | Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras. |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.tagComplianceAlerts">tagComplianceAlerts</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers">DlzTagComplianceAlertSubscribers</a></code> | Email alerts when AWS Config finds resources missing their mandatory tags — the detective layer that complements the tag-on-create SCP. |
 
 ---
 
@@ -21850,6 +21851,22 @@ public readonly scpStatementsByAccountType: ScpStatementsByAccountType;
 Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras.
 
 Additive only.
+
+---
+
+##### `tagComplianceAlerts`<sup>Optional</sup> <a name="tagComplianceAlerts" id="aws-data-landing-zone.DataLandingZoneProps.property.tagComplianceAlerts"></a>
+
+```typescript
+public readonly tagComplianceAlerts: DlzTagComplianceAlertSubscribers;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers">DlzTagComplianceAlertSubscribers</a>
+- *Default:* no tag-compliance alerts
+
+Email alerts when AWS Config finds resources missing their mandatory tags — the detective layer that complements the tag-on-create SCP.
+
+Wired per region alongside the built-in
+required-tags Config rule.
 
 ---
 
@@ -25662,6 +25679,112 @@ Specifying an empty array or undefined still enforces the tag presence but does 
 
 ---
 
+### DlzTagComplianceAlertProps <a name="DlzTagComplianceAlertProps" id="aws-data-landing-zone.DlzTagComplianceAlertProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceAlertProps.Initializer"></a>
+
+```typescript
+import { DlzTagComplianceAlertProps } from 'aws-data-landing-zone'
+
+const dlzTagComplianceAlertProps: DlzTagComplianceAlertProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when a resource is found without its mandatory tags. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps.property.configRuleNames">configRuleNames</a></code> | <code>string[]</code> | AWS Config rule names to watch. |
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="aws-data-landing-zone.DlzTagComplianceAlertProps.property.emails"></a>
+
+```typescript
+public readonly emails: string[];
+```
+
+- *Type:* string[]
+
+Emails that receive an alert when a resource is found without its mandatory tags.
+
+---
+
+##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.DlzTagComplianceAlertProps.property.slacks"></a>
+
+```typescript
+public readonly slacks: SlackChannel[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]
+
+Slack channels that receive the alert (notify-only).
+
+---
+
+##### `configRuleNames`<sup>Required</sup> <a name="configRuleNames" id="aws-data-landing-zone.DlzTagComplianceAlertProps.property.configRuleNames"></a>
+
+```typescript
+public readonly configRuleNames: string[];
+```
+
+- *Type:* string[]
+
+AWS Config rule names to watch.
+
+A resource turning NON_COMPLIANT on any of them raises
+an alert. AWS Config is regional, so this construct only covers the region it is created in.
+
+---
+
+### DlzTagComplianceAlertSubscribers <a name="DlzTagComplianceAlertSubscribers" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers"></a>
+
+Where tag-compliance alerts are sent.
+
+Consumer-facing prop on `DataLandingZoneProps`.
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers.Initializer"></a>
+
+```typescript
+import { DlzTagComplianceAlertSubscribers } from 'aws-data-landing-zone'
+
+const dlzTagComplianceAlertSubscribers: DlzTagComplianceAlertSubscribers = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when a resource is found without its mandatory tags. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
+
+---
+
+##### `emails`<sup>Optional</sup> <a name="emails" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.emails"></a>
+
+```typescript
+public readonly emails: string[];
+```
+
+- *Type:* string[]
+
+Emails that receive an alert when a resource is found without its mandatory tags.
+
+---
+
+##### `slacks`<sup>Optional</sup> <a name="slacks" id="aws-data-landing-zone.DlzTagComplianceAlertSubscribers.property.slacks"></a>
+
+```typescript
+public readonly slacks: SlackChannel[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]
+
+Slack channels that receive the alert (notify-only).
+
+---
+
 ### DlzTagPolicyProps <a name="DlzTagPolicyProps" id="aws-data-landing-zone.DlzTagPolicyProps"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzTagPolicyProps.Initializer"></a>
@@ -28973,6 +29096,36 @@ Control Tower Controls applied to all the OUs in the organization.
 
 ---
 
+### ScpDenyResourceCreationTagOptions <a name="ScpDenyResourceCreationTagOptions" id="aws-data-landing-zone.ScpDenyResourceCreationTagOptions"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.ScpDenyResourceCreationTagOptions.Initializer"></a>
+
+```typescript
+import { ScpDenyResourceCreationTagOptions } from 'aws-data-landing-zone'
+
+const scpDenyResourceCreationTagOptions: ScpDenyResourceCreationTagOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationTagOptions.property.exemptAwsServiceCalls">exemptAwsServiceCalls</a></code> | <code>boolean</code> | Exempt creates that an AWS service makes on your behalf with *forwarded credentials* (e.g. CloudFormation) by adding `aws:ViaAWSService` to each Deny — so only direct console/CLI/SDK/IaC creates are blocked. |
+
+---
+
+##### `exemptAwsServiceCalls`<sup>Optional</sup> <a name="exemptAwsServiceCalls" id="aws-data-landing-zone.ScpDenyResourceCreationTagOptions.property.exemptAwsServiceCalls"></a>
+
+```typescript
+public readonly exemptAwsServiceCalls: boolean;
+```
+
+- *Type:* boolean
+
+Exempt creates that an AWS service makes on your behalf with *forwarded credentials* (e.g. CloudFormation) by adding `aws:ViaAWSService` to each Deny — so only direct console/CLI/SDK/IaC creates are blocked.
+
+---
+
 ### ScpFinOpsAccountBaselineOptions <a name="ScpFinOpsAccountBaselineOptions" id="aws-data-landing-zone.ScpFinOpsAccountBaselineOptions"></a>
 
 #### Initializer <a name="Initializer" id="aws-data-landing-zone.ScpFinOpsAccountBaselineOptions.Initializer"></a>
@@ -30784,6 +30937,69 @@ produce a CDK diff every time.
 
 
 
+### DlzTagComplianceAlert <a name="DlzTagComplianceAlert" id="aws-data-landing-zone.DlzTagComplianceAlert"></a>
+
+Detective alerting for AWS Config tag rules: routes NON_COMPLIANT findings to email and/or Slack.
+
+AWS Config emits a "Config Rules Compliance Change" event (per region) whenever a rule's
+compliance flips. An EventBridge rule forwards only the NON_COMPLIANT ones for the given rules
+to an SNS topic, which fans out to the subscribers. Detect-only — it never touches the resource.
+
+#### Initializers <a name="Initializers" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer"></a>
+
+```typescript
+import { DlzTagComplianceAlert } from 'aws-data-landing-zone'
+
+new DlzTagComplianceAlert(scope: Construct, id: string, props: DlzTagComplianceAlertProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.props">props</a></code> | <code><a href="#aws-data-landing-zone.DlzTagComplianceAlertProps">DlzTagComplianceAlertProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-data-landing-zone.DlzTagComplianceAlert.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.DlzTagComplianceAlertProps">DlzTagComplianceAlertProps</a>
+
+---
+
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceAlert.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.Topic</code> | *No description.* |
+
+---
+
+##### `topic`<sup>Required</sup> <a name="topic" id="aws-data-landing-zone.DlzTagComplianceAlert.property.topic"></a>
+
+```typescript
+public readonly topic: Topic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.Topic
+
+---
+
+
 ### DlzTagPolicy <a name="DlzTagPolicy" id="aws-data-landing-zone.DlzTagPolicy"></a>
 
 - *Implements:* <a href="#aws-data-landing-zone.IReportResource">IReportResource</a>
@@ -31811,7 +32027,7 @@ new ScpDenyResourceCreationWithoutStandardTags()
 ```typescript
 import { ScpDenyResourceCreationWithoutStandardTags } from 'aws-data-landing-zone'
 
-ScpDenyResourceCreationWithoutStandardTags.statements(actions: string[], tagKeys?: string[])
+ScpDenyResourceCreationWithoutStandardTags.statements(actions: string[], tagKeys?: string[], options?: ScpDenyResourceCreationTagOptions)
 ```
 
 One Deny per tag key over `actions`.
@@ -31827,6 +32043,12 @@ Tag keys default to {@link DEFAULT_TAG_KEYS}.
 ###### `tagKeys`<sup>Optional</sup> <a name="tagKeys" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements.parameter.tagKeys"></a>
 
 - *Type:* string[]
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements.parameter.options"></a>
+
+- *Type:* <a href="#aws-data-landing-zone.ScpDenyResourceCreationTagOptions">ScpDenyResourceCreationTagOptions</a>
 
 ---
 
@@ -31902,6 +32124,12 @@ public readonly INFRA_TAG_ON_CREATE_ACTIONS: string[];
 - *Type:* string[]
 
 Networking, storage, and compute create actions.
+
+Deliberately excludes resources that AWS services auto-create, untagged, at runtime
+(CloudWatch log groups, EBS/RDS snapshots, default/managed security groups, EIPs,
+auto-scaling groups). Those calls carry no `aws:RequestTag`, so gating them can't be
+satisfied and only breaks normal operation (e.g. Lambda logging, backups, EKS scaling).
+Catch tag gaps on those with AWS Config instead of an SCP.
 
 ---
 
