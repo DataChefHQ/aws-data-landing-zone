@@ -1,7 +1,12 @@
 import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { DlzStack, DlzTagComplianceAlert, DlzVpc } from '../../../../constructs';
+import {
+  DlzStack,
+  DlzTagComplianceCentralAlert,
+  DlzTagComplianceForwardingRule,
+  DlzVpc,
+} from '../../../../constructs';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
 import { DlzConfigRule } from '../../../../constructs/dlz-config-rule';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
@@ -37,13 +42,16 @@ export class Shared {
     });
     Report.addReportForAccountRegion(this.stack.accountName, this.stack.region, rule.reportResource);
 
-    // Detective alerting: email the team when this rule flags a resource. Created per region,
-    // same as the rule, so every region's non-compliance is covered.
-    if (this.props.tagComplianceAlerts) {
-      new DlzTagComplianceAlert(this.stack, this.stack.resourceName('dlz-tag-compliance-alert'), {
+    // Detective alerting: forward this region's NON_COMPLIANT findings to the single event bus in
+    // the management account. The bus ARN is derived from a shared constant, so no cross-stack
+    // reference is needed. The central sink (topic + Slack/email) lives in `ManagementGlobalStack`.
+    if (this.props.tagComplianceCentralAlert) {
+      new DlzTagComplianceForwardingRule(this.stack, this.stack.resourceName('dlz-tag-compliance-forward'), {
         configRuleNames: [ruleName],
-        emails: this.props.tagComplianceAlerts.emails,
-        slacks: this.props.tagComplianceAlerts.slacks,
+        centralBusArn: DlzTagComplianceCentralAlert.busArn(
+          this.props.organization.root.accounts.management.accountId,
+          this.props.regions.global,
+        ),
       });
     }
   }

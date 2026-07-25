@@ -1,4 +1,3 @@
-import { Stack } from 'aws-cdk-lib';
 import * as chatbot from 'aws-cdk-lib/aws-chatbot';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
@@ -8,40 +7,133 @@ import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
 import { SlackChannel } from '../account-chatbots';
 
-/** Where tag-compliance alerts are sent. Consumer-facing prop on `DataLandingZoneProps`. */
-export interface DlzTagComplianceAlertSubscribers {
-  /** Emails that receive an alert when a resource is found without its mandatory tags. */
+/** Where the centralized tag-compliance alert is sent. Consumer-facing prop on `DataLandingZoneProps`. */
+export interface DlzTagComplianceCentralAlertSubscribers {
+  /** Emails that receive an alert when any workload account has a resource missing mandatory tags. */
   readonly emails?: string[];
-  /** Slack channels that receive the alert (notify-only). */
+  /** Slack channels that receive the alert (notify-only). Uses Chatbot in the management account. */
   readonly slacks?: SlackChannel[];
 }
 
-export interface DlzTagComplianceAlertProps extends DlzTagComplianceAlertSubscribers {
+export interface DlzTagComplianceCentralAlertProps extends DlzTagComplianceCentralAlertSubscribers {
   /**
-   * AWS Config rule names to watch. A resource turning NON_COMPLIANT on any of them raises
-   * an alert. AWS Config is regional, so this construct only covers the region it is created in.
+   * The AWS Organizations id (e.g. `o-xxxxxxxxxx`). Scopes the central bus resource policy so that
+   * any account in the organization — and only those accounts — may forward events to the bus.
    */
-  readonly configRuleNames: string[];
+  readonly organizationId: string;
 }
 
 /**
- * Detective alerting for AWS Config tag rules: routes NON_COMPLIANT findings to email and/or Slack.
+ * Central, org-wide sink for AWS Config tag non-compliance, created once in the management account.
  *
- * AWS Config emits a "Config Rules Compliance Change" event (per region) whenever a rule's
- * compliance flips. An EventBridge rule forwards only the NON_COMPLIANT ones for the given rules
- * to an SNS topic, which fans out to the subscribers. Detect-only — it never touches the resource.
+ * Owns a dedicated EventBridge event bus that every workload account forwards its NON_COMPLIANT
+ * findings to (see `DlzTagComplianceForwardingRule`), plus one SNS topic and the Slack/email fan-out.
+ * Modeled on budget alerts: a single account, a single topic, Chatbot for Slack. One topic and one
+ * Slack config for the whole org, instead of one per workload account × region.
  */
-export class DlzTagComplianceAlert {
+export class DlzTagComplianceCentralAlert {
+  /**
+   * Fixed name of the central event bus. Single-sourced so the workload-side forwarding rules can
+   * build the bus ARN (via `busArn`) without a cross-stack reference.
+   */
+  public static readonly BUS_NAME = 'dlz-tag-compliance-central-alert-bus';
+
+  /** ARN of the central bus, derived from the management account id and the global region. */
+  public static busArn(managementAccountId: string, globalRegion: string): string {
+    return `arn:aws:events:${globalRegion}:${managementAccountId}:event-bus/${DlzTagComplianceCentralAlert.BUS_NAME}`;
+  }
+
+  public readonly bus: events.EventBus;
   public readonly topic: sns.Topic;
 
-  constructor(scope: Construct, id: string, props: DlzTagComplianceAlertProps) {
+  constructor(scope: Construct, id: string, props: DlzTagComplianceCentralAlertProps) {
     const emails = props.emails ?? [];
     const slacks = props.slacks ?? [];
     if (emails.length === 0 && slacks.length === 0) {
-      throw new Error(`${id}: tagComplianceAlerts needs at least one email or slack channel.`);
+      throw new Error(`${id}: tagComplianceCentralAlert needs at least one email or slack channel.`);
     }
 
+    this.bus = new events.EventBus(scope, `${id}-bus`, {
+      eventBusName: DlzTagComplianceCentralAlert.BUS_NAME,
+    });
+    // Allow every account in the organization (and only those) to forward events to this bus.
+    // New accounts are covered automatically — no per-account grant.
+    this.bus.addToResourcePolicy(new iam.PolicyStatement({
+      sid: 'AllowOrgAccountsToPutEvents',
+      effect: iam.Effect.ALLOW,
+      principals: [new iam.AnyPrincipal()],
+      actions: ['events:PutEvents'],
+      resources: [this.bus.eventBusArn],
+      conditions: { StringEquals: { 'aws:PrincipalOrgID': props.organizationId } },
+    }));
+
     this.topic = new sns.Topic(scope, `${id}-topic`, { topicName: `${id}-topic` });
+
+    // Forwarded events keep their original envelope, so the source account/region and the
+    // rule/resource in `detail` identify who/where/what. Chatbot renders the event for Slack.
+    new events.Rule(scope, `${id}-rule`, {
+      ruleName: `${id}-rule`,
+      eventBus: this.bus,
+      eventPattern: {
+        source: ['aws.config'],
+        detailType: ['Config Rules Compliance Change'],
+        detail: {
+          messageType: ['ComplianceChangeNotification'],
+          newEvaluationResult: { complianceType: ['NON_COMPLIANT'] },
+        },
+      },
+      targets: [new targets.SnsTopic(this.topic)],
+    });
+
+    for (const email of emails) {
+      this.topic.addSubscription(new subscriptions.EmailSubscription(email));
+    }
+
+    // Single account + single region, so no region-scoped name is needed (unlike the per-account
+    // alert). Deny-all guardrail keeps it notify-only (no commands from Slack).
+    if (slacks.length > 0) {
+      const guardrail = new iam.ManagedPolicy(scope, `${id}-chatbot-guardrail`, {
+        statements: [new iam.PolicyStatement({ effect: iam.Effect.DENY, actions: ['*'], resources: ['*'] })],
+      });
+      slacks.forEach((slack, index) => {
+        new chatbot.SlackChannelConfiguration(scope, `${id}-slack-${index}`, {
+          slackChannelConfigurationName: slack.slackChannelConfigurationName,
+          slackWorkspaceId: slack.slackWorkspaceId,
+          slackChannelId: slack.slackChannelId,
+          notificationTopics: [this.topic],
+          guardrailPolicies: [guardrail],
+        });
+      });
+    }
+  }
+}
+
+export interface DlzTagComplianceForwardingRuleProps {
+  /** AWS Config rule names to watch. A resource turning NON_COMPLIANT on any of them is forwarded. */
+  readonly configRuleNames: string[];
+  /** ARN of the central event bus in the management account (see `DlzTagComplianceCentralAlert.busArn`). */
+  readonly centralBusArn: string;
+}
+
+/**
+ * Workload-side half of the centralized alert. Created per account × region: an EventBridge rule
+ * that matches this region's NON_COMPLIANT tag findings and forwards them to the central event bus
+ * in the management account (cross-account, cross-region — a single hop). No local SNS/Chatbot.
+ */
+export class DlzTagComplianceForwardingRule {
+  constructor(scope: Construct, id: string, props: DlzTagComplianceForwardingRuleProps) {
+    const centralBus = events.EventBus.fromEventBusArn(scope, `${id}-central-bus`, props.centralBusArn);
+
+    // EventBridge assumes this role to PutEvents on the central bus. A dedicated role scoped to the
+    // one target bus is mandatory for cross-account event-bus targets.
+    const role = new iam.Role(scope, `${id}-role`, {
+      assumedBy: new iam.ServicePrincipal('events.amazonaws.com'),
+    });
+    role.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['events:PutEvents'],
+      resources: [props.centralBusArn],
+    }));
 
     new events.Rule(scope, `${id}-rule`, {
       ruleName: `${id}-rule`,
@@ -54,29 +146,7 @@ export class DlzTagComplianceAlert {
           newEvaluationResult: { complianceType: ['NON_COMPLIANT'] },
         },
       },
-      targets: [new targets.SnsTopic(this.topic)],
+      targets: [new targets.EventBus(centralBus, { role })],
     });
-
-    for (const email of emails) {
-      this.topic.addSubscription(new subscriptions.EmailSubscription(email));
-    }
-
-    // Chatbot channel configs are account-global, so the name is region-scoped to stay unique
-    // when this construct runs in every region. Deny-all guardrail = notify-only (no commands).
-    if (slacks.length > 0) {
-      const region = Stack.of(scope).region;
-      const guardrail = new iam.ManagedPolicy(scope, `${id}-chatbot-guardrail`, {
-        statements: [new iam.PolicyStatement({ effect: iam.Effect.DENY, actions: ['*'], resources: ['*'] })],
-      });
-      slacks.forEach((slack, index) => {
-        new chatbot.SlackChannelConfiguration(scope, `${id}-slack-${index}`, {
-          slackChannelConfigurationName: `${slack.slackChannelConfigurationName}-${region}`,
-          slackWorkspaceId: slack.slackWorkspaceId,
-          slackChannelId: slack.slackChannelId,
-          notificationTopics: [this.topic],
-          guardrailPolicies: [guardrail],
-        });
-      });
-    }
   }
 }

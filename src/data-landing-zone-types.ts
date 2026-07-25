@@ -16,7 +16,7 @@ import {
   DlzSsmReaderStackCache,
   DlzStackProps,
   DlzTag,
-  DlzTagComplianceAlertSubscribers,
+  DlzTagComplianceCentralAlertSubscribers,
   DlzVpcProps,
   IamIdentityCenterProps, IamPasswordPolicyProps,
   NetworkAddress,
@@ -918,12 +918,16 @@ export interface DataLandingZoneProps {
   readonly securityHubNotifications: SecurityHubNotification[];
 
   /**
-   * Email alerts when AWS Config finds resources missing their mandatory tags — the detective
-   * layer that complements the tag-on-create SCP. Wired per region alongside the built-in
-   * required-tags Config rule.
-   * @default - no tag-compliance alerts
+   * Centralized, org-wide alerting for AWS Config tag non-compliance. When set, every workload
+   * account × region forwards its NON_COMPLIANT findings to a single EventBridge bus in the
+   * management account, which fans out to Slack (via Chatbot) and/or email — one topic, one place,
+   * modeled on budget alerts.
+   *
+   * The Config required-tags rule still runs per account × region (detection is local); only the
+   * alerting is centralized.
+   * @default - no centralized tag-compliance alert
    */
-  readonly tagComplianceAlerts?: DlzTagComplianceAlertSubscribers;
+  readonly tagComplianceCentralAlert?: DlzTagComplianceCentralAlertSubscribers;
 
   readonly deploymentPlatform?: DeploymentPlatform;
 
