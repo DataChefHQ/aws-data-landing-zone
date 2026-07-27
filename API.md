@@ -10874,6 +10874,7 @@ new ManagementGlobalStack(scope: Construct, stackProps: ManagementGlobalStackPro
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.budgets">budgets</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.deploymentPlatformGitHub">deploymentPlatformGitHub</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.iamPermissionBoundary">iamPermissionBoundary</a></code> | IAM Policy Permission Boundary. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.sharedServicesOuPolicies">sharedServicesOuPolicies</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.suspendedOuPolicies">suspendedOuPolicies</a></code> | Service Control Policies and Tag Policies  applied at the OU level because we won't need any customizations per account. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadAccountsOrgPolicies">workloadAccountsOrgPolicies</a></code> | Per-account SCPs and tag policies. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.workloadsOuPolicies">workloadsOuPolicies</a></code> | Standalone SCPs attached to the Workloads OU, inherited by every workload account. |
@@ -11356,6 +11357,12 @@ public iamPermissionBoundary(): void
 ```
 
 IAM Policy Permission Boundary.
+
+##### `sharedServicesOuPolicies` <a name="sharedServicesOuPolicies" id="aws-data-landing-zone.ManagementGlobalStack.sharedServicesOuPolicies"></a>
+
+```typescript
+public sharedServicesOuPolicies(): void
+```
 
 ##### `suspendedOuPolicies` <a name="suspendedOuPolicies" id="aws-data-landing-zone.ManagementGlobalStack.suspendedOuPolicies"></a>
 
@@ -28654,6 +28661,7 @@ const orgOuSharedServices: OrgOuSharedServices = { ... }
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.OrgOuSharedServices.property.accounts">accounts</a></code> | <code><a href="#aws-data-landing-zone.OrgOuSharedServicesAccounts">OrgOuSharedServicesAccounts</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.OrgOuSharedServices.property.ouId">ouId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.OrgOuSharedServices.property.standaloneScps">standaloneScps</a></code> | <code><a href="#aws-data-landing-zone.DlzStandaloneScp">DlzStandaloneScp</a>[]</code> | Standalone SCPs attached to the Shared Services OU, inherited by every account in it. |
 
 ---
 
@@ -28674,6 +28682,19 @@ public readonly ouId: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `standaloneScps`<sup>Optional</sup> <a name="standaloneScps" id="aws-data-landing-zone.OrgOuSharedServices.property.standaloneScps"></a>
+
+```typescript
+public readonly standaloneScps: DlzStandaloneScp[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzStandaloneScp">DlzStandaloneScp</a>[]
+- *Default:* no OU-level standalone SCPs
+
+Standalone SCPs attached to the Shared Services OU, inherited by every account in it.
 
 ---
 

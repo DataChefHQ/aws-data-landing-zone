@@ -21,7 +21,11 @@ function denyStatement(sid: string, action: string): iam.PolicyStatement {
   });
 }
 
-function configWith(standaloneScps?: DlzStandaloneScp[], ouScps?: DlzStandaloneScp[]): DataLandingZoneProps {
+function configWith(
+  standaloneScps?: DlzStandaloneScp[],
+  ouScps?: DlzStandaloneScp[],
+  sharedServicesOuScps?: DlzStandaloneScp[],
+): DataLandingZoneProps {
   return {
     localProfile: 'ct-sandbox-exported',
     regions: {
@@ -69,6 +73,13 @@ function configWith(standaloneScps?: DlzStandaloneScp[], ouScps?: DlzStandaloneS
         suspended: {
           ouId: 'ou-test-suspended',
         },
+        ...(sharedServicesOuScps ? {
+          sharedServices: {
+            ouId: 'ou-test-shared-services',
+            accounts: {},
+            standaloneScps: sharedServicesOuScps,
+          },
+        } : {}),
       },
     },
   };
@@ -110,6 +121,19 @@ describe('DLzAccount.standaloneScps', () => {
       Type: 'SERVICE_CONTROL_POLICY',
       Name: Match.stringLikeRegexp('scp-workloads-ou-tag-on-create$'),
       TargetIds: ['ou-test-workloads'],
+    }));
+  });
+
+  test('emits an OU-level SCP attached to the Shared Services OU (not to any account)', () => {
+    const app = new App();
+    const dlz = new DataLandingZone(app, configWith(undefined, undefined, [
+      { nameSuffix: 'tag-on-create', statements: [denyStatement('DenyShared', 's3:DeleteBucket')] },
+    ]));
+    const template = Template.fromStack(dlz.managementStacks.global);
+    template.hasResourceProperties('AWS::Organizations::Policy', Match.objectLike({
+      Type: 'SERVICE_CONTROL_POLICY',
+      Name: Match.stringLikeRegexp('scp-shared-services-ou-tag-on-create$'),
+      TargetIds: ['ou-test-shared-services'],
     }));
   });
 
