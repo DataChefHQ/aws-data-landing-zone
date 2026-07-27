@@ -54,6 +54,7 @@ export class ManagementGlobalStack extends DlzStack {
 
     this.workloadAccountsOrgPolicies();
     this.workloadsOuPolicies();
+    this.sharedServicesOuPolicies();
     this.suspendedOuPolicies();
 
     if (this.props.organization.ous.sharedServices?.accounts.finOps) {
@@ -241,6 +242,21 @@ export class ManagementGlobalStack extends DlzStack {
     this.createStandaloneScps({
       label: 'workloads-ou',
       targetId: this.props.organization.ous.workloads.ouId,
+      scps,
+      scpSlotsUsed: 1 /* FullAWSAccess */ + scps.length,
+    });
+  }
+
+  // Standalone SCPs attached to the Shared Services OU
+  sharedServicesOuPolicies() {
+    const sharedServices = this.props.organization.ous.sharedServices;
+    const scps = sharedServices?.standaloneScps ?? [];
+    if (!sharedServices || scps.length === 0) {
+      return;
+    }
+    this.createStandaloneScps({
+      label: 'shared-services-ou',
+      targetId: sharedServices.ouId,
       scps,
       scpSlotsUsed: 1 /* FullAWSAccess */ + scps.length,
     });

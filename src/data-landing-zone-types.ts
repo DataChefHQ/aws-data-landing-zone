@@ -636,6 +636,12 @@ export interface OrgOuSharedServicesAccounts {
 export interface OrgOuSharedServices {
   readonly ouId: string;
   readonly accounts: OrgOuSharedServicesAccounts;
+
+  /**
+   * Standalone SCPs attached to the Shared Services OU, inherited by every account in it.
+   * @default - no OU-level standalone SCPs
+   */
+  readonly standaloneScps?: DlzStandaloneScp[];
 }
 
 export interface OrgOus {
