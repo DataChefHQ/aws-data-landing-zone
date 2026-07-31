@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "c2e811015266b66382390161e2c04d57c8831692780a563c7d3ca2ecec52c324.zip",
+          "S3Key": "9f31af4b8265656da5a0f2d77effd00fb0308003ddded2157acd55bb4384a21e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "3df72285f20033a52178fceb96c47269500a57389c74d7fdcce9f73ab643ba78.zip",
+          "S3Key": "cbe142d52fa971b5fe0e71932b0786c4ea1fcbc08ad6c71af798aecab9e9bf62.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -5276,6 +5276,25 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
       },
       "Type": "AWS::SSM::Parameter",
     },
+    "dlzglobalconfigrequiredtags82E6E246": {
+      "Properties": {
+        "ConfigRuleName": "dlz-global-config-required-tags",
+        "InputParameters": {
+          "tag1Key": "Owner",
+          "tag2Key": "Project",
+          "tag3Key": "Environment",
+          "tag3Value": "dlz,development,staging,production",
+          "tag4Key": "CostCenter",
+          "tag4Value": "dlz,test",
+          "tag5Key": "Domain",
+        },
+        "Source": {
+          "Owner": "AWS",
+          "SourceIdentifier": "REQUIRED_TAGS",
+        },
+      },
+      "Type": "AWS::Config::ConfigRule",
+    },
     "dlzglobaldefaultnotificationnotificationid7DFC637C": {
       "Properties": {
         "Name": "/dlz/sns/default-notification/arn",
@@ -5336,25 +5355,6 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
         },
       },
       "Type": "AWS::SNS::Subscription",
-    },
-    "dlzglobaldlzconfigrequiredtags5C8C14DF": {
-      "Properties": {
-        "ConfigRuleName": "dlz-global-dlz-config-required-tags",
-        "InputParameters": {
-          "tag1Key": "Owner",
-          "tag2Key": "Project",
-          "tag3Key": "Environment",
-          "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "CostCenter",
-          "tag4Value": "dlz,test",
-          "tag5Key": "Domain",
-        },
-        "Source": {
-          "Owner": "AWS",
-          "SourceIdentifier": "REQUIRED_TAGS",
-        },
-      },
-      "Type": "AWS::Config::ConfigRule",
     },
     "dlzglobaldlzssmcrossaccountassumerole144F4F2E": {
       "Properties": {
@@ -6294,6 +6294,25 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
       },
       "Type": "AWS::IAM::ManagedPolicy",
     },
+    "dlzglobalconfigrequiredtags82E6E246": {
+      "Properties": {
+        "ConfigRuleName": "dlz-global-config-required-tags",
+        "InputParameters": {
+          "tag1Key": "Owner",
+          "tag2Key": "Project",
+          "tag3Key": "Environment",
+          "tag3Value": "dlz,development,staging,production",
+          "tag4Key": "CostCenter",
+          "tag4Value": "dlz,test",
+          "tag5Key": "Domain",
+        },
+        "Source": {
+          "Owner": "AWS",
+          "SourceIdentifier": "REQUIRED_TAGS",
+        },
+      },
+      "Type": "AWS::Config::ConfigRule",
+    },
     "dlzglobaldefaultnotificationnotificationid7DFC637C": {
       "Properties": {
         "Name": "/dlz/sns/default-notification/arn",
@@ -6344,25 +6363,6 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
         "TopicName": "dlz-global-default-notification-topic",
       },
       "Type": "AWS::SNS::Topic",
-    },
-    "dlzglobaldlzconfigrequiredtags5C8C14DF": {
-      "Properties": {
-        "ConfigRuleName": "dlz-global-dlz-config-required-tags",
-        "InputParameters": {
-          "tag1Key": "Owner",
-          "tag2Key": "Project",
-          "tag3Key": "Environment",
-          "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "CostCenter",
-          "tag4Value": "dlz,test",
-          "tag5Key": "Domain",
-        },
-        "Source": {
-          "Owner": "AWS",
-          "SourceIdentifier": "REQUIRED_TAGS",
-        },
-      },
-      "Type": "AWS::Config::ConfigRule",
     },
     "dlzglobaldlzssmcrossaccountassumerole144F4F2E": {
       "Properties": {
@@ -7593,9 +7593,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
     },
   },
   "Resources": {
-    "dlzregionaldlzconfigrequiredtagsB46681B2": {
+    "dlzregionalconfigrequiredtags3C5687C3": {
       "Properties": {
-        "ConfigRuleName": "dlz-regional-dlz-config-required-tags",
+        "ConfigRuleName": "dlz-regional-config-required-tags",
         "InputParameters": {
           "tag1Key": "Owner",
           "tag2Key": "Project",
@@ -8240,9 +8240,9 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
     },
   },
   "Resources": {
-    "dlzregionaldlzconfigrequiredtagsB46681B2": {
+    "dlzregionalconfigrequiredtags3C5687C3": {
       "Properties": {
-        "ConfigRuleName": "dlz-regional-dlz-config-required-tags",
+        "ConfigRuleName": "dlz-regional-config-required-tags",
         "InputParameters": {
           "tag1Key": "Owner",
           "tag2Key": "Project",

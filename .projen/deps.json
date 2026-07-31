@@ -153,6 +153,11 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/client-sns",
+      "version": "^3.1049.0",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-sso-admin",
       "version": "^3.1049.0",
       "type": "bundled"

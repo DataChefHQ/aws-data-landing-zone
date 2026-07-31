@@ -30,7 +30,7 @@ export class Shared {
       tagIndex++;
     }
 
-    const ruleName = this.stack.resourceName('dlz-config-required-tags');
+    const ruleName = this.stack.resourceName('config-required-tags');
     const rule = new DlzConfigRule(this.stack, ruleName, {
       configRuleName: ruleName,
       identifier: config.ManagedRuleIdentifiers.REQUIRED_TAGS,
