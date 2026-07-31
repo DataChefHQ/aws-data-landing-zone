@@ -1,4 +1,7 @@
-import { DescribeAccountCommand, OrganizationsClient } from '@aws-sdk/client-organizations';
+import {
+  DescribeAccountCommand,
+  OrganizationsClient,
+} from '@aws-sdk/client-organizations';
 import { PublishCommand, SNSClient } from '@aws-sdk/client-sns';
 
 /**
@@ -27,7 +30,9 @@ async function accountName(accountId: string): Promise<string> {
     return nameCache[accountId];
   }
   try {
-    const res = await org.send(new DescribeAccountCommand({ AccountId: accountId }));
+    const res = await org.send(
+      new DescribeAccountCommand({ AccountId: accountId }),
+    );
     const name = res.Account?.Name ?? accountId;
     nameCache[accountId] = name;
     return name;
@@ -39,11 +44,16 @@ async function accountName(accountId: string): Promise<string> {
 export async function handler(event: ConfigComplianceEvent): Promise<void> {
   const id = event.account;
   const name = await accountName(id);
-  const d = event.detail ?? {};
+  const detail = event.detail ?? {};
   const description = [
-    `⚠️ Tag compliance — ${name} (${id}, ${event.region})`,
-    `Resource: ${d.resourceType ?? '?'} ${d.resourceId ?? '?'}`,
-    `Rule: ${d.configRuleName ?? '?'} is NON_COMPLIANT`,
+    '⚠️ Tag compliance Issue',
+    `Account Name: ${name}`,
+    `Account ID: ${id}`,
+    `Region: ${event.region}`,
+    `Resource Type: ${detail.resourceType ?? 'unknown'}`,
+    `Resource ID: ${detail.resourceId ?? 'unknown'}`,
+    'Message: This Resource doesn\'t have mandatory Tags.',
+    '🔎 Please Check it and if it\'s Possible Tag it ',
   ].join('\n');
 
   const message = JSON.stringify({
@@ -52,5 +62,7 @@ export async function handler(event: ConfigComplianceEvent): Promise<void> {
     content: { title: 'Tag compliance alert', description },
   });
 
-  await sns.send(new PublishCommand({ TopicArn: process.env.TOPIC_ARN, Message: message }));
+  await sns.send(
+    new PublishCommand({ TopicArn: process.env.TOPIC_ARN, Message: message }),
+  );
 }
