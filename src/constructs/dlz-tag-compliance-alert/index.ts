@@ -1,7 +1,11 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import { Duration } from 'aws-cdk-lib';
 import * as chatbot from 'aws-cdk-lib/aws-chatbot';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
@@ -43,6 +47,15 @@ export class DlzTagComplianceCentralAlert {
     return `arn:aws:events:${globalRegion}:${managementAccountId}:event-bus/${DlzTagComplianceCentralAlert.BUS_NAME}`;
   }
 
+  /** Formatter Lambda code dir: the compiled handler in dev, else the projen-bundled asset. */
+  private static formatterCodeDirectory(): string {
+    const dir = path.join(__dirname, 'lambda', 'tag-alert-formatter');
+    if (fs.existsSync(path.join(dir, 'index.js'))) {
+      return dir;
+    }
+    return path.join(__dirname, '..', '..', '..', 'assets', 'constructs', 'dlz-tag-compliance-alert', 'lambda', 'tag-alert-formatter');
+  }
+
   public readonly bus: events.EventBus;
   public readonly topic: sns.Topic;
 
@@ -69,8 +82,24 @@ export class DlzTagComplianceCentralAlert {
 
     this.topic = new sns.Topic(scope, `${id}-topic`, { topicName: `${id}-topic` });
 
-    // Forwarded events keep their original envelope, so the source account/region and the
-    // rule/resource in `detail` identify who/where/what. Chatbot renders the event for Slack.
+    // Formatter Lambda: resolves the source account id -> name and publishes a readable Chatbot
+    // message to the topic. Sits between the rule and SNS because the name isn't on the forwarded
+    // event (handler: lambda/tag-alert-formatter). Least-privilege: DescribeAccount + publish only.
+    const formatter = new lambda.Function(scope, `${id}-formatter`, {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'index.handler',
+      code: lambda.Code.fromAsset(DlzTagComplianceCentralAlert.formatterCodeDirectory()),
+      timeout: Duration.seconds(15),
+      environment: { TOPIC_ARN: this.topic.topicArn },
+    });
+    this.topic.grantPublish(formatter);
+    formatter.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['organizations:DescribeAccount'],
+      resources: ['*'],
+    }));
+
+    // The rule targets the formatter (not the topic directly) so the alert shows the account name.
     new events.Rule(scope, `${id}-rule`, {
       ruleName: `${id}-rule`,
       eventBus: this.bus,
@@ -82,7 +111,7 @@ export class DlzTagComplianceCentralAlert {
           newEvaluationResult: { complianceType: ['NON_COMPLIANT'] },
         },
       },
-      targets: [new targets.SnsTopic(this.topic)],
+      targets: [new targets.LambdaFunction(formatter)],
     });
 
     for (const email of emails) {

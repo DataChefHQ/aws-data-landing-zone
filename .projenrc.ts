@@ -65,6 +65,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-guardduty@^3.1049.0',
     '@aws-sdk/client-macie2@^3.1049.0',
     '@aws-sdk/client-organizations@^3.1049.0',
+    '@aws-sdk/client-sns@^3.1049.0',
     'js-yaml@^4.1',
     '@types/js-yaml',
     'table',
@@ -127,6 +128,12 @@ project.bundler.addBundle('./src/constructs/dlz-macie/lambda/macie-members/', {
   externals: ['aws-sdk'],
 });
 project.bundler.addBundle('./src/constructs/dlz-data-exports/lambda/tag-activation/', {
+  platform: 'node',
+  target: 'node22',
+  sourcemap: true,
+  externals: ['aws-sdk'],
+});
+project.bundler.addBundle('./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/', {
   platform: 'node',
   target: 'node22',
   sourcemap: true,

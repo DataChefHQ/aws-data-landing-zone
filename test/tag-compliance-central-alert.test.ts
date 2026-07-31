@@ -49,6 +49,29 @@ describe('DlzTagComplianceCentralAlert', () => {
     }));
   });
 
+  test('formats via a Lambda that looks up the account name and publishes to the topic', () => {
+    const t = centralTemplate({ emails: ['tags@example.com'] });
+    // Formatter Lambda on Node 22 with the topic ARN in its env.
+    t.hasResourceProperties('AWS::Lambda::Function', Match.objectLike({
+      Runtime: 'nodejs22.x',
+      Handler: 'index.handler',
+      Environment: { Variables: Match.objectLike({ TOPIC_ARN: Match.anyValue() }) },
+    }));
+    // Least-privilege: can resolve the account id -> name.
+    t.hasResourceProperties('AWS::IAM::Policy', Match.objectLike({
+      PolicyDocument: Match.objectLike({
+        Statement: Match.arrayWith([
+          Match.objectLike({ Action: 'organizations:DescribeAccount', Effect: 'Allow', Resource: '*' }),
+        ]),
+      }),
+    }));
+    // The rule targets the Lambda -> EventBridge is granted permission to invoke it.
+    t.hasResourceProperties('AWS::Lambda::Permission', Match.objectLike({
+      Action: 'lambda:InvokeFunction',
+      Principal: 'events.amazonaws.com',
+    }));
+  });
+
   test('subscribes every email to the topic', () => {
     const t = centralTemplate({ emails: ['a@example.com', 'b@example.com'] });
     t.resourceCountIs('AWS::SNS::Subscription', 2);
@@ -86,7 +109,7 @@ describe('DlzTagComplianceForwardingRule', () => {
   function forwardingTemplate() {
     const stack = new Stack(new App(), 'test', { env: { account: '111111111111', region: 'eu-central-1' } });
     new DlzTagComplianceForwardingRule(stack, 'forward', {
-      configRuleNames: ['dlz-config-required-tags'],
+      configRuleNames: ['config-required-tags'],
       centralBusArn,
     });
     return Template.fromStack(stack);
@@ -100,7 +123,7 @@ describe('DlzTagComplianceForwardingRule', () => {
         'detail-type': ['Config Rules Compliance Change'],
         'detail': {
           messageType: ['ComplianceChangeNotification'],
-          configRuleName: ['dlz-config-required-tags'],
+          configRuleName: ['config-required-tags'],
           newEvaluationResult: { complianceType: ['NON_COMPLIANT'] },
         },
       }),

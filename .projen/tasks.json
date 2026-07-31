@@ -74,6 +74,9 @@
           "spawn": "bundle:constructs/dlz-data-exports/lambda/tag-activation"
         },
         {
+          "spawn": "bundle:constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter"
+        },
+        {
           "spawn": "bundle:constructs/dlz-data-exports/lambda/data-export-manager"
         }
       ]
@@ -219,6 +222,24 @@
       "steps": [
         {
           "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-org-config/index.js\" --external:aws-sdk --sourcemap --watch"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter": {
+      "name": "bundle:constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter",
+      "description": "Create a JavaScript bundle from ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/index.js\" --external:aws-sdk --sourcemap"
+        }
+      ]
+    },
+    "bundle:constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter:watch": {
+      "name": "bundle:constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter:watch",
+      "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/",
+      "steps": [
+        {
+          "exec": "esbuild --bundle ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/index.js\" --external:aws-sdk --sourcemap --watch"
         }
       ]
     },
@@ -524,7 +545,7 @@
           "exec": "npm install"
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-bcm-data-exports @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-guardduty @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-macie2 @aws-sdk/client-organizations @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
+          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-bcm-data-exports @aws-sdk/client-cloudformation @aws-sdk/client-cost-explorer @aws-sdk/client-guardduty @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-macie2 @aws-sdk/client-organizations @aws-sdk/client-sns @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
