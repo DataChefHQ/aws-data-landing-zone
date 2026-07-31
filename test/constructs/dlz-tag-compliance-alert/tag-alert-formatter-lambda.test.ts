@@ -18,7 +18,7 @@ const baseEvent = {
   region: 'eu-west-1',
   detail: {
     resourceType: 'AWS::DynamoDB::Table',
-    resourceId: 'amir-test-table',
+    resourceId: 'test-table',
     configRuleName: 'dlz-global-config-required-tags',
   },
 };
@@ -37,7 +37,7 @@ describe('tag-alert-formatter Lambda', () => {
   });
 
   test('resolves the account name and publishes a Chatbot custom message to the topic', async () => {
-    orgSend.mockResolvedValueOnce({ Account: { Name: 'sandbox-amir' } });
+    orgSend.mockResolvedValueOnce({ Account: { Name: 'sandbox' } });
 
     await handler({ ...baseEvent, account: '111111111111' });
 
@@ -47,11 +47,11 @@ describe('tag-alert-formatter Lambda', () => {
 
     const msg = lastPublishedMessage();
     expect(msg.source).toBe('custom');
-    expect(msg.content.description).toContain('sandbox-amir');
-    expect(msg.content.description).toContain('111111111111');
-    expect(msg.content.description).toContain('eu-west-1');
-    expect(msg.content.description).toContain('AWS::DynamoDB::Table amir-test-table');
-    expect(msg.content.description).toContain('dlz-global-config-required-tags is NON_COMPLIANT');
+    expect(msg.content.description).toContain('Account Name: sandbox');
+    expect(msg.content.description).toContain('Account ID: 111111111111');
+    expect(msg.content.description).toContain('Region: eu-west-1');
+    expect(msg.content.description).toContain('Resource Type: AWS::DynamoDB::Table');
+    expect(msg.content.description).toContain('Resource ID: test-table');
   });
 
   test('falls back to the account id when the name lookup fails, and still publishes', async () => {
@@ -74,11 +74,13 @@ describe('tag-alert-formatter Lambda', () => {
     expect(snsSend).toHaveBeenCalledTimes(2);
   });
 
-  test('renders "?" for missing resource/rule fields', async () => {
+  test('renders "unknown" for missing resource fields', async () => {
     orgSend.mockResolvedValueOnce({ Account: { Name: 'n' } });
 
     await handler({ account: '444444444444', region: 'eu-west-1' } as any);
 
-    expect(lastPublishedMessage().content.description).toContain('?');
+    const description = lastPublishedMessage().content.description;
+    expect(description).toContain('Resource Type: unknown');
+    expect(description).toContain('Resource ID: unknown');
   });
 });
