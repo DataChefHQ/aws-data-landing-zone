@@ -62,10 +62,10 @@ describe('tag-alert-formatter Lambda', () => {
     expect(msg.content.title).toContain('sandbox');
 
     const lines = (msg.content.description as string).split('\n');
-    expect(lines[0]).toBe('- Account: **sandbox** (111111111111)');
-    expect(lines[1]).toBe('- Resource Type: AWS::DynamoDB::Table');
-    expect(lines[2]).toBe('- Resource ID: **test-table**');
-    expect(msg.content.description).toContain('- Region: eu-west-1');
+    expect(lines[0]).toBe('• Account: *sandbox* (111111111111)');
+    expect(lines[1]).toBe('• Resource Type: AWS::DynamoDB::Table');
+    expect(lines[2]).toBe('• Resource ID: *test-table*');
+    expect(msg.content.description).toContain('• Region: eu-west-1');
   });
 
   test('mentions a user (U…) with <@…>', async () => {
@@ -103,7 +103,7 @@ describe('tag-alert-formatter Lambda', () => {
 
     await handler({ ...baseEvent, account: '555555555555' });
 
-    expect(lastPublishedMessage().content.description).toContain('- Account: **555555555555** (555555555555)');
+    expect(lastPublishedMessage().content.description).toContain('• Account: *555555555555* (555555555555)');
   });
 
   test('caches account info so repeated events cost one lookup each', async () => {
@@ -125,7 +125,7 @@ describe('tag-alert-formatter Lambda', () => {
     await handler({ account: '777777777777', region: 'eu-west-1' } as any);
 
     const d = lastPublishedMessage().content.description;
-    expect(d).toContain('- Resource Type: unknown');
-    expect(d).toContain('- Resource ID: **unknown**');
+    expect(d).toContain('• Resource Type: unknown');
+    expect(d).toContain('• Resource ID: *unknown*');
   });
 });
