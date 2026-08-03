@@ -57,11 +57,15 @@ describe('DlzTagComplianceCentralAlert', () => {
       Handler: 'index.handler',
       Environment: { Variables: Match.objectLike({ TOPIC_ARN: Match.anyValue() }) },
     }));
-    // Least-privilege: can resolve the account id -> name.
+    // Least-privilege: can resolve the account id -> name and owner (SlackId tag).
     t.hasResourceProperties('AWS::IAM::Policy', Match.objectLike({
       PolicyDocument: Match.objectLike({
         Statement: Match.arrayWith([
-          Match.objectLike({ Action: 'organizations:DescribeAccount', Effect: 'Allow', Resource: '*' }),
+          Match.objectLike({
+            Action: ['organizations:DescribeAccount', 'organizations:ListTagsForResource'],
+            Effect: 'Allow',
+            Resource: '*',
+          }),
         ]),
       }),
     }));
