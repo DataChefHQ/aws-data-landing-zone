@@ -73,16 +73,14 @@ export async function handler(event: ConfigComplianceEvent): Promise<void> {
   const resourceId = detail.resourceId ?? 'unknown';
   const mention = slackMention(slackId);
 
-  // client-markdown: `**` = bold, `- ` = bullet. Lead with the two facts read first (account,
-  // resource) as a bulleted list, account name bold.
   const lines = [
-    `- Account: **${accountName}** (${id})`,
-    `- Resource Type: ${resourceType}`,
-    `- Resource ID: **${resourceId}**`,
-    `- Region: ${event.region}`,
+    `• Account: *${accountName}* (${id})`,
+    `• Resource Type: ${resourceType}`,
+    `• Resource ID: *${resourceId}*`,
+    `• Region: ${event.region}`,
   ];
   if (mention) {
-    lines.push(`- Owner: ${mention}`);
+    lines.push(`• Owner: ${mention}`);
   }
   lines.push('', 'This resource is missing mandatory tags. Please tag it.');
 
