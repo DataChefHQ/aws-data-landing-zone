@@ -1,4 +1,4 @@
-import { DescribeAccountCommand, OrganizationsClient } from '@aws-sdk/client-organizations';
+import { DescribeAccountCommand, ListTagsForResourceCommand, OrganizationsClient } from '@aws-sdk/client-organizations';
 import { PublishCommand, SNSClient } from '@aws-sdk/client-sns';
 import { handler } from '../../../src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter';
 
@@ -14,7 +14,6 @@ SNSClient.prototype.send = snsSend as any;
 process.env.TOPIC_ARN = 'arn:aws:sns:eu-west-1:999999999999:dlz-tag-alert';
 
 const baseEvent = {
-  account: '111111111111',
   region: 'eu-west-1',
   detail: {
     resourceType: 'AWS::DynamoDB::Table',
@@ -22,6 +21,19 @@ const baseEvent = {
     configRuleName: 'dlz-global-config-required-tags',
   },
 };
+
+/** Default Organizations mock: DescribeAccount -> name, ListTagsForResource -> optional SlackId tag. */
+function mockOrg({ name = 'sandbox', slackId }: { name?: string; slackId?: string } = {}) {
+  orgSend.mockImplementation((cmd: any) => {
+    if (cmd instanceof DescribeAccountCommand) {
+      return Promise.resolve({ Account: { Name: name } });
+    }
+    if (cmd instanceof ListTagsForResourceCommand) {
+      return Promise.resolve({ Tags: slackId ? [{ Key: 'SlackId', Value: slackId }] : [] });
+    }
+    return Promise.resolve({});
+  });
+}
 
 /** The parsed body of the most recent SNS publish. */
 function lastPublishedMessage(): any {
@@ -36,51 +48,84 @@ describe('tag-alert-formatter Lambda', () => {
     snsSend.mockResolvedValue({});
   });
 
-  test('resolves the account name and publishes a Chatbot custom message to the topic', async () => {
-    orgSend.mockResolvedValueOnce({ Account: { Name: 'sandbox' } });
+  test('leads with account then resource, and publishes a client-markdown Chatbot message', async () => {
+    mockOrg({ name: 'sandbox', slackId: 'U123' });
 
     await handler({ ...baseEvent, account: '111111111111' });
 
-    expect(orgSend).toHaveBeenCalledWith(expect.any(DescribeAccountCommand));
     const publish = snsSend.mock.calls.at(-1)![0] as PublishCommand;
     expect(publish.input.TopicArn).toBe(process.env.TOPIC_ARN);
 
     const msg = lastPublishedMessage();
     expect(msg.source).toBe('custom');
-    expect(msg.content.description).toContain('Account Name: sandbox');
-    expect(msg.content.description).toContain('Account ID: 111111111111');
-    expect(msg.content.description).toContain('Region: eu-west-1');
-    expect(msg.content.description).toContain('Resource Type: AWS::DynamoDB::Table');
-    expect(msg.content.description).toContain('Resource ID: test-table');
+    expect(msg.content.textType).toBe('client-markdown');
+    expect(msg.content.title).toContain('sandbox');
+
+    const lines = (msg.content.description as string).split('\n');
+    expect(lines[0]).toBe('- Account: **sandbox** (111111111111)');
+    expect(lines[1]).toBe('- Resource Type: AWS::DynamoDB::Table');
+    expect(lines[2]).toBe('- Resource ID: **test-table**');
+    expect(msg.content.description).toContain('- Region: eu-west-1');
   });
 
-  test('falls back to the account id when the name lookup fails, and still publishes', async () => {
-    orgSend.mockRejectedValueOnce(new Error('AccessDenied'));
+  test('mentions a user (U…) with <@…>', async () => {
+    mockOrg({ slackId: 'U08RF04QQPQ' });
 
     await handler({ ...baseEvent, account: '222222222222' });
 
-    expect(snsSend).toHaveBeenCalledWith(expect.any(PublishCommand));
-    expect(lastPublishedMessage().content.description).toContain('222222222222');
+    expect(lastPublishedMessage().content.description).toContain('Owner: <@U08RF04QQPQ>');
   });
 
-  test('caches the name so repeated events cost one lookup', async () => {
-    orgSend.mockResolvedValue({ Account: { Name: 'cached' } });
+  test('mentions a user group (S…) with <!subteam^…>', async () => {
+    mockOrg({ slackId: 'S053XJ1E5KJ' });
 
     await handler({ ...baseEvent, account: '333333333333' });
-    await handler({ ...baseEvent, account: '333333333333' });
 
-    const lookups = orgSend.mock.calls.filter(([c]) => c instanceof DescribeAccountCommand);
-    expect(lookups).toHaveLength(1);
+    expect(lastPublishedMessage().content.description).toContain('Owner: <!subteam^S053XJ1E5KJ>');
+  });
+
+  test('omits the owner line when the account has no SlackId tag, and still publishes', async () => {
+    mockOrg({ name: 'no-owner' });
+
+    await handler({ ...baseEvent, account: '444444444444' });
+
+    expect(snsSend).toHaveBeenCalledWith(expect.any(PublishCommand));
+    expect(lastPublishedMessage().content.description).not.toContain('Owner:');
+  });
+
+  test('falls back to the account id when the name lookup fails, and still publishes', async () => {
+    orgSend.mockImplementation((cmd: any) => {
+      if (cmd instanceof DescribeAccountCommand) {
+        return Promise.reject(new Error('AccessDenied'));
+      }
+      return Promise.resolve({ Tags: [] });
+    });
+
+    await handler({ ...baseEvent, account: '555555555555' });
+
+    expect(lastPublishedMessage().content.description).toContain('- Account: **555555555555** (555555555555)');
+  });
+
+  test('caches account info so repeated events cost one lookup each', async () => {
+    mockOrg({ name: 'cached', slackId: 'U1' });
+
+    await handler({ ...baseEvent, account: '666666666666' });
+    await handler({ ...baseEvent, account: '666666666666' });
+
+    const describes = orgSend.mock.calls.filter(([c]) => c instanceof DescribeAccountCommand);
+    const tagLookups = orgSend.mock.calls.filter(([c]) => c instanceof ListTagsForResourceCommand);
+    expect(describes).toHaveLength(1);
+    expect(tagLookups).toHaveLength(1);
     expect(snsSend).toHaveBeenCalledTimes(2);
   });
 
   test('renders "unknown" for missing resource fields', async () => {
-    orgSend.mockResolvedValueOnce({ Account: { Name: 'n' } });
+    mockOrg({ name: 'n' });
 
-    await handler({ account: '444444444444', region: 'eu-west-1' } as any);
+    await handler({ account: '777777777777', region: 'eu-west-1' } as any);
 
-    const description = lastPublishedMessage().content.description;
-    expect(description).toContain('Resource Type: unknown');
-    expect(description).toContain('Resource ID: unknown');
+    const d = lastPublishedMessage().content.description;
+    expect(d).toContain('- Resource Type: unknown');
+    expect(d).toContain('- Resource ID: **unknown**');
   });
 });

@@ -82,9 +82,10 @@ export class DlzTagComplianceCentralAlert {
 
     this.topic = new sns.Topic(scope, `${id}-topic`, { topicName: `${id}-topic` });
 
-    // Formatter Lambda: resolves the source account id -> name and publishes a readable Chatbot
-    // message to the topic. Sits between the rule and SNS because the name isn't on the forwarded
-    // event (handler: lambda/tag-alert-formatter). Least-privilege: DescribeAccount + publish only.
+    // Formatter Lambda: resolves the source account id -> name and owner (SlackId tag) and publishes
+    // a readable Chatbot message to the topic. Sits between the rule and SNS because neither the name
+    // nor the owner is on the forwarded event (handler: lambda/tag-alert-formatter). Least-privilege:
+    // DescribeAccount + ListTagsForResource + publish only.
     const formatter = new lambda.Function(scope, `${id}-formatter`, {
       runtime: lambda.Runtime.NODEJS_22_X,
       handler: 'index.handler',
@@ -95,7 +96,7 @@ export class DlzTagComplianceCentralAlert {
     this.topic.grantPublish(formatter);
     formatter.addToRolePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
-      actions: ['organizations:DescribeAccount'],
+      actions: ['organizations:DescribeAccount', 'organizations:ListTagsForResource'],
       resources: ['*'],
     }));
 
