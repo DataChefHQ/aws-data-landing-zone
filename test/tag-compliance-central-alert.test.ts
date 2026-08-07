@@ -5,10 +5,13 @@ import {
   DlzTagComplianceForwardingRule,
 } from '../src/constructs/dlz-tag-compliance-alert';
 
+const MANDATORY_TAG_KEYS = ['Owner', 'Project', 'Environment', 'CostCenter', 'Name'];
+
 function centralTemplate(props: { emails?: string[]; slacks?: any[] }) {
   const stack = new Stack(new App(), 'test', { env: { account: '111111111111', region: 'eu-west-1' } });
   new DlzTagComplianceCentralAlert(stack, 'central', {
     organizationId: 'o-abcd1234',
+    mandatoryTagKeys: MANDATORY_TAG_KEYS,
     emails: props.emails,
     slacks: props.slacks,
   });
@@ -55,7 +58,13 @@ describe('DlzTagComplianceCentralAlert', () => {
     t.hasResourceProperties('AWS::Lambda::Function', Match.objectLike({
       Runtime: 'nodejs22.x',
       Handler: 'index.handler',
-      Environment: { Variables: Match.objectLike({ TOPIC_ARN: Match.anyValue() }) },
+      Environment: {
+        Variables: Match.objectLike({
+          TOPIC_ARN: Match.anyValue(),
+          READ_ROLE_NAME: Match.anyValue(),
+          MANDATORY_TAG_KEYS: 'Owner,Project,Environment,CostCenter,Name',
+        }),
+      },
     }));
     // Least-privilege: can resolve the account id -> name and owner (SlackId tag).
     t.hasResourceProperties('AWS::IAM::Policy', Match.objectLike({
@@ -69,11 +78,35 @@ describe('DlzTagComplianceCentralAlert', () => {
         ]),
       }),
     }));
-    // The rule targets the Lambda -> EventBridge is granted permission to invoke it.
-    t.hasResourceProperties('AWS::Lambda::Permission', Match.objectLike({
-      Action: 'lambda:InvokeFunction',
-      Principal: 'events.amazonaws.com',
+    // Can assume the read role in any account that reports a finding, and nothing else.
+    t.hasResourceProperties('AWS::IAM::Policy', Match.objectLike({
+      PolicyDocument: Match.objectLike({
+        Statement: Match.arrayWith([
+          Match.objectLike({
+            Action: 'sts:AssumeRole',
+            Effect: 'Allow',
+            Resource: Match.stringLikeRegexp('^arn:aws:iam::\\*:role/dlz-'),
+          }),
+        ]),
+      }),
     }));
+  });
+
+  test('holds findings in a delay queue with a dead-letter queue, and reads them from there', () => {
+    const t = centralTemplate({ emails: ['tags@example.com'] });
+    t.hasResourceProperties('AWS::SQS::Queue', Match.objectLike({
+      DelaySeconds: 120,
+      RedrivePolicy: Match.objectLike({ maxReceiveCount: 3 }),
+    }));
+    t.resourceCountIs('AWS::Lambda::EventSourceMapping', 1);
+  });
+
+  test('the central rule targets the queue, not the formatter directly', () => {
+    const t = centralTemplate({ emails: ['tags@example.com'] });
+    const rules = t.findResources('AWS::Events::Rule');
+    const targets = Object.values(rules).flatMap(rule => rule.Properties.Targets);
+    expect(targets).toHaveLength(1);
+    expect(targets[0].Arn['Fn::GetAtt'][0]).toMatch(/findings/i);
   });
 
   test('subscribes every email to the topic', () => {
@@ -97,8 +130,10 @@ describe('DlzTagComplianceCentralAlert', () => {
 
   test('throws when no email or slack channel is given', () => {
     const stack = new Stack(new App(), 'test');
-    expect(() => new DlzTagComplianceCentralAlert(stack, 'central', { organizationId: 'o-abcd1234' }))
-      .toThrow(/at least one email or slack channel/);
+    expect(() => new DlzTagComplianceCentralAlert(stack, 'central', {
+      organizationId: 'o-abcd1234',
+      mandatoryTagKeys: MANDATORY_TAG_KEYS,
+    })).toThrow(/at least one email or slack channel/);
   });
 
   test('busArn is built from the management account id and global region', () => {

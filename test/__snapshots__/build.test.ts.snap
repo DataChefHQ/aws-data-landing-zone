@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "199e47e5bb4b4dfe50f13789dcee1dde379e12ea10e2da18284f726bc2c82a85.zip",
+          "S3Key": "1a9b256b0a01e73af204cba4cf157ffb0dfec4bff2a2a01fc289d671323967b2.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "9a8ec0497cf21575e774db841c3096b017c87fd515fedd073af598cb1fe23ccd.zip",
+          "S3Key": "548c5690587cf02dbc908977ea437d934b9f77657d735792304156f2de1d0a65.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -2939,13 +2939,13 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                     "dlz",
                     "test",
                   ],
-                  "aws:RequestTag/Domain": true,
                   "aws:RequestTag/Environment": [
                     "dlz",
                     "development",
                     "staging",
                     "production",
                   ],
+                  "aws:RequestTag/Name": true,
                   "aws:RequestTag/Owner": true,
                   "aws:RequestTag/Project": true,
                 },
@@ -2982,13 +2982,13 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                     "dlz",
                     "test",
                   ],
-                  "aws:RequestTag/Domain": true,
                   "aws:RequestTag/Environment": [
                     "dlz",
                     "development",
                     "staging",
                     "production",
                   ],
+                  "aws:RequestTag/Name": true,
                   "aws:RequestTag/Owner": true,
                   "aws:RequestTag/Project": true,
                 },
@@ -3116,68 +3116,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                 ],
               },
             },
-            "Domain": {
-              "enforced_for": {
-                "@@assign": [
-                  "appmesh:*",
-                  "athena:*",
-                  "acm:*",
-                  "cloudfront:*",
-                  "cloudtrail:*",
-                  "cloudwatch:*",
-                  "codebuild:*",
-                  "codecommit:*",
-                  "codepipeline:*",
-                  "cognito-identity:*",
-                  "cognito-idp:*",
-                  "comprehend:*",
-                  "config:*",
-                  "dms:*",
-                  "directconnect:*",
-                  "dynamodb:*",
-                  "elasticfilesystem:*",
-                  "events:*",
-                  "elasticloadbalancing:*",
-                  "fsx:*",
-                  "iotanalytics:*",
-                  "iotevents:*",
-                  "kms:*",
-                  "kinesisanalytics:*",
-                  "firehose:*",
-                  "lambda:*",
-                  "redshift:*",
-                  "ram:*",
-                  "resource-groups:*",
-                  "route53resolver:*",
-                  "secretsmanager:*",
-                  "states:*",
-                  "storagegateway:*",
-                  "workspaces:*",
-                  "backup:backup-plan",
-                  "batch:job",
-                  "logs:log-group",
-                  "ec2:elastic-ip",
-                  "ec2:instance",
-                  "ec2:vpc",
-                  "ec2:security-group",
-                  "ecr:repository",
-                  "ecs:service",
-                  "eks:cluster",
-                  "es:domain",
-                  "elasticmapreduce:cluster",
-                  "elasticache:cluster",
-                  "iam:policy",
-                  "network-firewall:firewall",
-                  "rds:secgrp",
-                  "s3:bucket",
-                  "sns:topic",
-                  "sqs:queue",
-                ],
-              },
-              "tag_key": {
-                "@@assign": "Domain",
-              },
-            },
             "Environment": {
               "enforced_for": {
                 "@@assign": [
@@ -3246,6 +3184,68 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                   "staging",
                   "production",
                 ],
+              },
+            },
+            "Name": {
+              "enforced_for": {
+                "@@assign": [
+                  "appmesh:*",
+                  "athena:*",
+                  "acm:*",
+                  "cloudfront:*",
+                  "cloudtrail:*",
+                  "cloudwatch:*",
+                  "codebuild:*",
+                  "codecommit:*",
+                  "codepipeline:*",
+                  "cognito-identity:*",
+                  "cognito-idp:*",
+                  "comprehend:*",
+                  "config:*",
+                  "dms:*",
+                  "directconnect:*",
+                  "dynamodb:*",
+                  "elasticfilesystem:*",
+                  "events:*",
+                  "elasticloadbalancing:*",
+                  "fsx:*",
+                  "iotanalytics:*",
+                  "iotevents:*",
+                  "kms:*",
+                  "kinesisanalytics:*",
+                  "firehose:*",
+                  "lambda:*",
+                  "redshift:*",
+                  "ram:*",
+                  "resource-groups:*",
+                  "route53resolver:*",
+                  "secretsmanager:*",
+                  "states:*",
+                  "storagegateway:*",
+                  "workspaces:*",
+                  "backup:backup-plan",
+                  "batch:job",
+                  "logs:log-group",
+                  "ec2:elastic-ip",
+                  "ec2:instance",
+                  "ec2:vpc",
+                  "ec2:security-group",
+                  "ecr:repository",
+                  "ecs:service",
+                  "eks:cluster",
+                  "es:domain",
+                  "elasticmapreduce:cluster",
+                  "elasticache:cluster",
+                  "iam:policy",
+                  "network-firewall:firewall",
+                  "rds:secgrp",
+                  "s3:bucket",
+                  "sns:topic",
+                  "sqs:queue",
+                ],
+              },
+              "tag_key": {
+                "@@assign": "Name",
               },
             },
             "Owner": {
@@ -3459,68 +3459,6 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                 ],
               },
             },
-            "Domain": {
-              "enforced_for": {
-                "@@assign": [
-                  "appmesh:*",
-                  "athena:*",
-                  "acm:*",
-                  "cloudfront:*",
-                  "cloudtrail:*",
-                  "cloudwatch:*",
-                  "codebuild:*",
-                  "codecommit:*",
-                  "codepipeline:*",
-                  "cognito-identity:*",
-                  "cognito-idp:*",
-                  "comprehend:*",
-                  "config:*",
-                  "dms:*",
-                  "directconnect:*",
-                  "dynamodb:*",
-                  "elasticfilesystem:*",
-                  "events:*",
-                  "elasticloadbalancing:*",
-                  "fsx:*",
-                  "iotanalytics:*",
-                  "iotevents:*",
-                  "kms:*",
-                  "kinesisanalytics:*",
-                  "firehose:*",
-                  "lambda:*",
-                  "redshift:*",
-                  "ram:*",
-                  "resource-groups:*",
-                  "route53resolver:*",
-                  "secretsmanager:*",
-                  "states:*",
-                  "storagegateway:*",
-                  "workspaces:*",
-                  "backup:backup-plan",
-                  "batch:job",
-                  "logs:log-group",
-                  "ec2:elastic-ip",
-                  "ec2:instance",
-                  "ec2:vpc",
-                  "ec2:security-group",
-                  "ecr:repository",
-                  "ecs:service",
-                  "eks:cluster",
-                  "es:domain",
-                  "elasticmapreduce:cluster",
-                  "elasticache:cluster",
-                  "iam:policy",
-                  "network-firewall:firewall",
-                  "rds:secgrp",
-                  "s3:bucket",
-                  "sns:topic",
-                  "sqs:queue",
-                ],
-              },
-              "tag_key": {
-                "@@assign": "Domain",
-              },
-            },
             "Environment": {
               "enforced_for": {
                 "@@assign": [
@@ -3589,6 +3527,68 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
                   "staging",
                   "production",
                 ],
+              },
+            },
+            "Name": {
+              "enforced_for": {
+                "@@assign": [
+                  "appmesh:*",
+                  "athena:*",
+                  "acm:*",
+                  "cloudfront:*",
+                  "cloudtrail:*",
+                  "cloudwatch:*",
+                  "codebuild:*",
+                  "codecommit:*",
+                  "codepipeline:*",
+                  "cognito-identity:*",
+                  "cognito-idp:*",
+                  "comprehend:*",
+                  "config:*",
+                  "dms:*",
+                  "directconnect:*",
+                  "dynamodb:*",
+                  "elasticfilesystem:*",
+                  "events:*",
+                  "elasticloadbalancing:*",
+                  "fsx:*",
+                  "iotanalytics:*",
+                  "iotevents:*",
+                  "kms:*",
+                  "kinesisanalytics:*",
+                  "firehose:*",
+                  "lambda:*",
+                  "redshift:*",
+                  "ram:*",
+                  "resource-groups:*",
+                  "route53resolver:*",
+                  "secretsmanager:*",
+                  "states:*",
+                  "storagegateway:*",
+                  "workspaces:*",
+                  "backup:backup-plan",
+                  "batch:job",
+                  "logs:log-group",
+                  "ec2:elastic-ip",
+                  "ec2:instance",
+                  "ec2:vpc",
+                  "ec2:security-group",
+                  "ecr:repository",
+                  "ecs:service",
+                  "eks:cluster",
+                  "es:domain",
+                  "elasticmapreduce:cluster",
+                  "elasticache:cluster",
+                  "iam:policy",
+                  "network-firewall:firewall",
+                  "rds:secgrp",
+                  "s3:bucket",
+                  "sns:topic",
+                  "sqs:queue",
+                ],
+              },
+              "tag_key": {
+                "@@assign": "Name",
               },
             },
             "Owner": {
@@ -5279,18 +5279,34 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
     "dlzglobalconfigrequiredtags82E6E246": {
       "Properties": {
         "ConfigRuleName": "dlz-global-config-required-tags",
-        "InputParameters": {
-          "tag1Key": "Owner",
-          "tag2Key": "Project",
-          "tag3Key": "Environment",
-          "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "CostCenter",
-          "tag4Value": "dlz,test",
-          "tag5Key": "Domain",
-        },
+        "Description": "Checks that resources carry the mandatory tags: Owner, Project, Environment, CostCenter, Name",
         "Source": {
-          "Owner": "AWS",
-          "SourceIdentifier": "REQUIRED_TAGS",
+          "CustomPolicyDetails": {
+            "PolicyRuntime": "guard-2.x.x",
+            "PolicyText": "rule resource_has_tags {
+    tags !empty <<Resource carries no tags>>
+}
+
+rule resource_has_mandatory_tags when resource_has_tags {
+    tags.Owner !empty <<Missing mandatory tag: Owner>>
+    tags.Project !empty <<Missing mandatory tag: Project>>
+    tags.Environment !empty <<Missing mandatory tag: Environment>>
+    tags.CostCenter !empty <<Missing mandatory tag: CostCenter>>
+    tags.Name !empty <<Missing mandatory tag: Name>>
+}
+",
+          },
+          "Owner": "CUSTOM_POLICY",
+          "SourceDetails": [
+            {
+              "EventSource": "aws.config",
+              "MessageType": "ConfigurationItemChangeNotification",
+            },
+            {
+              "EventSource": "aws.config",
+              "MessageType": "OversizedConfigurationItemChangeNotification",
+            },
+          ],
         },
       },
       "Type": "AWS::Config::ConfigRule",
@@ -5392,6 +5408,81 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
           },
         ],
         "RoleName": "dlz-global-dlz-ssm-cross-account-assume-role",
+        "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "dlzglobaldlztagalertreadcrossaccountassumeroleE4E74FF9": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::882070149987:root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "Role assumed by the central tag-compliance alert to read tags and CloudTrail history in this account",
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "config:GetResourceConfigHistory",
+                    "tag:GetResources",
+                    "cloudtrail:LookupEvents",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "tagAlertRead",
+          },
+        ],
+        "RoleName": "dlz-global-dlz-tag-alert-read-cross-account-assume-role",
         "Tags": [
           {
             "Key": "CostCenter",
@@ -6297,18 +6388,34 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
     "dlzglobalconfigrequiredtags82E6E246": {
       "Properties": {
         "ConfigRuleName": "dlz-global-config-required-tags",
-        "InputParameters": {
-          "tag1Key": "Owner",
-          "tag2Key": "Project",
-          "tag3Key": "Environment",
-          "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "CostCenter",
-          "tag4Value": "dlz,test",
-          "tag5Key": "Domain",
-        },
+        "Description": "Checks that resources carry the mandatory tags: Owner, Project, Environment, CostCenter, Name",
         "Source": {
-          "Owner": "AWS",
-          "SourceIdentifier": "REQUIRED_TAGS",
+          "CustomPolicyDetails": {
+            "PolicyRuntime": "guard-2.x.x",
+            "PolicyText": "rule resource_has_tags {
+    tags !empty <<Resource carries no tags>>
+}
+
+rule resource_has_mandatory_tags when resource_has_tags {
+    tags.Owner !empty <<Missing mandatory tag: Owner>>
+    tags.Project !empty <<Missing mandatory tag: Project>>
+    tags.Environment !empty <<Missing mandatory tag: Environment>>
+    tags.CostCenter !empty <<Missing mandatory tag: CostCenter>>
+    tags.Name !empty <<Missing mandatory tag: Name>>
+}
+",
+          },
+          "Owner": "CUSTOM_POLICY",
+          "SourceDetails": [
+            {
+              "EventSource": "aws.config",
+              "MessageType": "ConfigurationItemChangeNotification",
+            },
+            {
+              "EventSource": "aws.config",
+              "MessageType": "OversizedConfigurationItemChangeNotification",
+            },
+          ],
         },
       },
       "Type": "AWS::Config::ConfigRule",
@@ -6400,6 +6507,81 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 2`
           },
         ],
         "RoleName": "dlz-global-dlz-ssm-cross-account-assume-role",
+        "Tags": [
+          {
+            "Key": "CostCenter",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Domain",
+            "Value": "foundation",
+          },
+          {
+            "Key": "Environment",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Name",
+            "Value": "dlz",
+          },
+          {
+            "Key": "Owner",
+            "Value": "infra",
+          },
+          {
+            "Key": "Project",
+            "Value": "dlz",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "dlzglobaldlztagalertreadcrossaccountassumeroleE4E74FF9": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::882070149987:root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "Role assumed by the central tag-compliance alert to read tags and CloudTrail history in this account",
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "config:GetResourceConfigHistory",
+                    "tag:GetResources",
+                    "cloudtrail:LookupEvents",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "tagAlertRead",
+          },
+        ],
+        "RoleName": "dlz-global-dlz-tag-alert-read-cross-account-assume-role",
         "Tags": [
           {
             "Key": "CostCenter",
@@ -7596,18 +7778,34 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
     "dlzregionalconfigrequiredtags3C5687C3": {
       "Properties": {
         "ConfigRuleName": "dlz-regional-config-required-tags",
-        "InputParameters": {
-          "tag1Key": "Owner",
-          "tag2Key": "Project",
-          "tag3Key": "Environment",
-          "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "CostCenter",
-          "tag4Value": "dlz,test",
-          "tag5Key": "Domain",
-        },
+        "Description": "Checks that resources carry the mandatory tags: Owner, Project, Environment, CostCenter, Name",
         "Source": {
-          "Owner": "AWS",
-          "SourceIdentifier": "REQUIRED_TAGS",
+          "CustomPolicyDetails": {
+            "PolicyRuntime": "guard-2.x.x",
+            "PolicyText": "rule resource_has_tags {
+    tags !empty <<Resource carries no tags>>
+}
+
+rule resource_has_mandatory_tags when resource_has_tags {
+    tags.Owner !empty <<Missing mandatory tag: Owner>>
+    tags.Project !empty <<Missing mandatory tag: Project>>
+    tags.Environment !empty <<Missing mandatory tag: Environment>>
+    tags.CostCenter !empty <<Missing mandatory tag: CostCenter>>
+    tags.Name !empty <<Missing mandatory tag: Name>>
+}
+",
+          },
+          "Owner": "CUSTOM_POLICY",
+          "SourceDetails": [
+            {
+              "EventSource": "aws.config",
+              "MessageType": "ConfigurationItemChangeNotification",
+            },
+            {
+              "EventSource": "aws.config",
+              "MessageType": "OversizedConfigurationItemChangeNotification",
+            },
+          ],
         },
       },
       "Type": "AWS::Config::ConfigRule",
@@ -8243,18 +8441,34 @@ exports[`Build Local snapshot testing: workloadRegionalStacksTemplates snapshot 
     "dlzregionalconfigrequiredtags3C5687C3": {
       "Properties": {
         "ConfigRuleName": "dlz-regional-config-required-tags",
-        "InputParameters": {
-          "tag1Key": "Owner",
-          "tag2Key": "Project",
-          "tag3Key": "Environment",
-          "tag3Value": "dlz,development,staging,production",
-          "tag4Key": "CostCenter",
-          "tag4Value": "dlz,test",
-          "tag5Key": "Domain",
-        },
+        "Description": "Checks that resources carry the mandatory tags: Owner, Project, Environment, CostCenter, Name",
         "Source": {
-          "Owner": "AWS",
-          "SourceIdentifier": "REQUIRED_TAGS",
+          "CustomPolicyDetails": {
+            "PolicyRuntime": "guard-2.x.x",
+            "PolicyText": "rule resource_has_tags {
+    tags !empty <<Resource carries no tags>>
+}
+
+rule resource_has_mandatory_tags when resource_has_tags {
+    tags.Owner !empty <<Missing mandatory tag: Owner>>
+    tags.Project !empty <<Missing mandatory tag: Project>>
+    tags.Environment !empty <<Missing mandatory tag: Environment>>
+    tags.CostCenter !empty <<Missing mandatory tag: CostCenter>>
+    tags.Name !empty <<Missing mandatory tag: Name>>
+}
+",
+          },
+          "Owner": "CUSTOM_POLICY",
+          "SourceDetails": [
+            {
+              "EventSource": "aws.config",
+              "MessageType": "ConfigurationItemChangeNotification",
+            },
+            {
+              "EventSource": "aws.config",
+              "MessageType": "OversizedConfigurationItemChangeNotification",
+            },
+          ],
         },
       },
       "Type": "AWS::Config::ConfigRule",

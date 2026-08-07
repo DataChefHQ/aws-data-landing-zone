@@ -8,18 +8,18 @@ The Data Landing Zone implements a mandatory tagging strategy across all account
 This ensures that resource costs can be tracked and the responsible creators can be identified.
 
 The following AWS services are utilized to enforce an effective tagging strategy:
-1. An AWS Organization Tag Policy at the account level.
+1. An AWS Organization Tag Policy at the account level, which constrains the allowed values.
 2. A Service Control Policy (SCP) at the account level, which enforces that all CloudFormation (CFN) Stacks
 must include these tags upon creation.
-3. An AWS Config rule that checks for these tags on supported resources. While the rule does not support all
-resources, it ensures that key resources, such as `AWS::CloudFormation::Stack`, will inherently apply tags
-to the resources they create. For more information, refer to the config rule [required-tags](https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html).
+3. An AWS Config rule that checks every resource type the configuration recorder records for these
+tags, and reports the ones that are missing. See
+[Tag Compliance Alerts](/components/account-management/tag-compliance-alerts).
 
 :::note
-It is not possible to enforce tags on all resources universally. The strategy outlined here represents
-the best possible effort. The Config Rule will report any untagged resources to Security Hub, where they
-can be tracked. It is then necessary to identify the responsible party and ensure the tags are applied
-to the resources.
+Prevention can never be complete: an SCP can only gate API calls that accept tags at creation, and
+some resources are created by AWS itself rather than by you. That is why detection sits alongside
+it — [Tag Compliance Alerts](/components/account-management/tag-compliance-alerts) finds what slips
+through and names the owner who should fix it.
 :::
 
 ## Default Mandatory Tags
@@ -29,14 +29,16 @@ The mandatory tags all begin with a capital letter, but the underlying code prop
 - `Project` — Specifies the project to which the resource belongs.
 - `Environment` — Defines the environment of the resource, such as `development`, `staging`, or `production`.
 - `CostCenter` — Used by FinOps tooling for chargeback / showback.
-- `Domain` — Data-platform domain marker. Foundation enforces presence only; the platform overlay may later constrain values to `raw` / `curated` / `serving` / `inference`.
+- `Name` — Human-readable resource name. This is the same key that
+  [`ScpDenyResourceCreationWithoutStandardTags`](/components/security/scps) requires at creation,
+  so the prevent and detect layers enforce an identical set of five keys.
 
 The DLZ construct automatically applies these defaults to its own resources:
 - `Owner`: `infra`
 - `Project`: `dlz`
 - `Environment`: `dlz`
 - `CostCenter`: `dlz`
-- `Domain`: `foundation`
+- `Name`: `dlz`
 
 These tag values can be customized by providing an array of values for each tag in `mandatoryTags`.
 Note that while the code property is lowercase, the tags created will follow the capitalized format outlined above.
@@ -62,7 +64,7 @@ Instead, we include all `:*` actions and focus on "major" services to ensure the
         project: undefined,
         environment: ['development', 'staging', 'production'],
         costCenter: [],
-        domain: ['raw', 'curated', 'serving', 'inference'],
+        name: [],
       },
      ...
     });
@@ -80,7 +82,7 @@ Instead, we include all `:*` actions and focus on "major" services to ensure the
             "project": dlz.ANY_TAG_VALUE,
             "environment": ["development", "staging", "production"],
             "cost_center": None,
-            "domain": ["raw", "curated", "serving", "inference"],
+            "name": None,
         },
         ...
     )
@@ -148,7 +150,7 @@ In CUR and the downstream Glue tables they appear as columns prefixed with
 | `Project` | `tag_project` |
 | `Environment` | `tag_environment` |
 | `CostCenter` | `tag_cost_center` |
-| `Domain` | `tag_domain` |
+| `Name` | `tag_name` |
 
 These are the canonical chargeback / showback dimensions DLZ uses everywhere:
 [budgets](/components/account-management/budgets), [account budgets](/components/finops/account-budgets),

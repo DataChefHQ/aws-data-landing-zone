@@ -17,10 +17,13 @@ When `org.ous.sharedServices.accounts.finOps` is configured,
 [`ScpFinOpsAccountBaseline`](/components/finops/finops-account-baseline) is
 auto-attached to keep the account scoped to its purpose.
 
-Mandatory tags (`Owner`, `Project`, `Environment`, `CostCenter`, `Domain`) are enforced
-by tag policy + SCP and applied app-wide. `CostCenter` and `Domain` populate from
-`DLzAccount.costCenter` / `DLzAccount.domain`; `finOps.dataExports` activates them as
-Cost Allocation Tags automatically.
+Mandatory tags (`Owner`, `Project`, `Environment`, `CostCenter`, `Name`) are enforced
+by tag policy + SCP and applied app-wide. `CostCenter` populates from
+`DLzAccount.costCenter`; `finOps.dataExports` activates them as Cost Allocation Tags
+automatically.
+
+`DLzAccount.domain` still sets a `Domain` tag on the account, and it remains an active Cost
+Allocation Tag, but it is no longer one of the five enforced keys.
 
 Out of scope: dashboards, chargeback, and optimization recommendations. DLZ
 delivers the raw cost data. What you do with it downstream is a separate layer.

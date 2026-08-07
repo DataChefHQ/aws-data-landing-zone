@@ -142,10 +142,10 @@ export class Defaults {
         ...props.mandatoryTags.costCenter,
       ] : undefined,
     }, {
-      name: 'Domain',
-      values: props.mandatoryTags.domain && props.mandatoryTags.domain.length > 0 ? [
-        'foundation',
-        ...props.mandatoryTags.domain,
+      name: 'Name',
+      values: props.mandatoryTags.name && props.mandatoryTags.name.length > 0 ? [
+        'dlz',
+        ...props.mandatoryTags.name,
       ] : undefined,
     }];
   }

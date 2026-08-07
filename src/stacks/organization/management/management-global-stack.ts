@@ -370,6 +370,7 @@ export class ManagementGlobalStack extends DlzStack {
   private tagComplianceCentralAlert() {
     const alert = new DlzTagComplianceCentralAlert(this, this.resourceName('dlz-tag-compliance-central-alert'), {
       organizationId: this.props.organization.organizationId,
+      mandatoryTagKeys: PropsOrDefaults.getOrganizationTags(this.props).map(tag => tag.name),
       emails: this.props.tagComplianceCentralAlert!.emails,
       slacks: this.props.tagComplianceCentralAlert!.slacks,
     });

@@ -1,4 +1,3 @@
-import * as config from 'aws-cdk-lib/aws-config';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../../../../constructs';
 import { DlzBastionHost } from '../../../../constructs/dlz-bastion-host';
 import { DlzConfigRule } from '../../../../constructs/dlz-config-rule';
+import { mandatoryTagsPolicy } from '../../../../constructs/dlz-config-rule/mandatory-tags-policy';
 import { DataLandingZoneProps, DLzAccount, GlobalVariables } from '../../../../data-landing-zone-types';
 import { PropsOrDefaults } from '../../../../defaults';
 import { Report } from '../../../../lib/report';
@@ -19,25 +19,19 @@ export class Shared {
   }
 
   public configRuleRequiredTags() {
-    const tags = PropsOrDefaults.getOrganizationTags(this.props);
-    const inputParameters: Record<string, string> = {};
-    let tagIndex = 1;
-    for (const key in tags) {
-      inputParameters[`tag${tagIndex}Key`] = tags[key].name;
-      if (tags[key].values) {
-        inputParameters[`tag${tagIndex}Value`] = tags[key].values!.join(',');
-      }
-      tagIndex++;
-    }
+    const tagKeys = PropsOrDefaults.getOrganizationTags(this.props).map(tag => tag.name);
 
+    // A Custom Policy rule with no `ruleScope` evaluates every resource type the configuration
+    // recorder records, so Lambda, KMS and any type AWS adds later are covered without a list to
+    // maintain here. The managed `REQUIRED_TAGS` rule this replaces was limited to 31 types.
     const ruleName = this.stack.resourceName('config-required-tags');
     const rule = new DlzConfigRule(this.stack, ruleName, {
       configRuleName: ruleName,
-      identifier: config.ManagedRuleIdentifiers.REQUIRED_TAGS,
-      inputParameters: inputParameters,
+      policyText: mandatoryTagsPolicy(tagKeys),
+      description: `Checks that resources carry the mandatory tags: ${tagKeys.join(', ')}`,
       reportItem: {
-        description: 'Checks resources for tags: ' + tags.map(tag => tag.name).join(', '),
-        externalLink: 'https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html',
+        description: 'Checks resources for tags: ' + tagKeys.join(', '),
+        externalLink: 'https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules_cfn-guard.html',
       },
     });
     Report.addReportForAccountRegion(this.stack.accountName, this.stack.region, rule.reportResource);

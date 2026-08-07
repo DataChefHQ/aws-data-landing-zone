@@ -6,10 +6,14 @@ import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as eventsources from 'aws-cdk-lib/aws-lambda-event-sources';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
+import * as sqs from 'aws-cdk-lib/aws-sqs';
 import { Construct } from 'constructs';
+import { TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME } from '../../stacks/organization/constants';
 import { SlackChannel } from '../account-chatbots';
+import { ScpDenyResourceCreationWithoutStandardTags } from '../organization-policies/scp-presets';
 
 /** Where the centralized tag-compliance alert is sent. Consumer-facing prop on `DataLandingZoneProps`. */
 export interface DlzTagComplianceCentralAlertSubscribers {
@@ -25,6 +29,22 @@ export interface DlzTagComplianceCentralAlertProps extends DlzTagComplianceCentr
    * any account in the organization — and only those accounts — may forward events to the bus.
    */
   readonly organizationId: string;
+
+  /**
+   * The tag keys a resource must carry. The formatter reports which of these are missing, and drops
+   * the finding when the resource turns out to carry them all.
+   *
+   * @default ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS
+   */
+  readonly mandatoryTagKeys?: string[];
+
+  /**
+   * How long a finding is held before the formatter reads it. The delay lets tags applied moments
+   * after creation land before the alert is decided, so IaC deploys do not alert on themselves.
+   *
+   * @default Duration.minutes(2)
+   */
+  readonly alertDelay?: Duration;
 }
 
 /**
@@ -90,8 +110,14 @@ export class DlzTagComplianceCentralAlert {
       runtime: lambda.Runtime.NODEJS_22_X,
       handler: 'index.handler',
       code: lambda.Code.fromAsset(DlzTagComplianceCentralAlert.formatterCodeDirectory()),
-      timeout: Duration.seconds(15),
-      environment: { TOPIC_ARN: this.topic.topicArn },
+      timeout: Duration.seconds(60),
+      environment: {
+        TOPIC_ARN: this.topic.topicArn,
+        READ_ROLE_NAME: TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME,
+        MANDATORY_TAG_KEYS: (
+          props.mandatoryTagKeys ?? ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS
+        ).join(','),
+      },
     });
     this.topic.grantPublish(formatter);
     formatter.addToRolePolicy(new iam.PolicyStatement({
@@ -99,8 +125,36 @@ export class DlzTagComplianceCentralAlert {
       actions: ['organizations:DescribeAccount', 'organizations:ListTagsForResource'],
       resources: ['*'],
     }));
+    // Reads the resource's current tags and its creation event in the account that reported the
+    // finding. Any account in the organization may report, so the resource is the role name in
+    // every account rather than an enumerated list.
+    formatter.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['sts:AssumeRole'],
+      resources: [`arn:aws:iam::*:role/${TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME}`],
+    }));
 
-    // The rule targets the formatter (not the topic directly) so the alert shows the account name.
+    // Config evaluates a resource the moment it is created, which is often before the tags land.
+    // Holding each finding briefly lets the formatter re-read the live tags and drop the alert if
+    // the resource was tagged in the meantime. The queue also brings retries and a dead-letter
+    // queue, which a direct Lambda target does not.
+    const findings = new sqs.Queue(scope, `${id}-findings`, {
+      queueName: `${id}-findings`,
+      deliveryDelay: props.alertDelay ?? Duration.minutes(2),
+      visibilityTimeout: Duration.minutes(5),
+      retentionPeriod: Duration.days(4),
+      deadLetterQueue: {
+        maxReceiveCount: 3,
+        queue: new sqs.Queue(scope, `${id}-findings-dlq`, {
+          queueName: `${id}-findings-dlq`,
+          retentionPeriod: Duration.days(14),
+        }),
+      },
+    });
+    formatter.addEventSource(new eventsources.SqsEventSource(findings, { batchSize: 1 }));
+
+    // The rule targets the queue (not the topic) so the alert shows the account name and skips
+    // findings that are no longer valid by the time they are read.
     new events.Rule(scope, `${id}-rule`, {
       ruleName: `${id}-rule`,
       eventBus: this.bus,
@@ -112,7 +166,7 @@ export class DlzTagComplianceCentralAlert {
           newEvaluationResult: { complianceType: ['NON_COMPLIANT'] },
         },
       },
-      targets: [new targets.LambdaFunction(formatter)],
+      targets: [new targets.SqsQueue(findings)],
     });
 
     for (const email of emails) {

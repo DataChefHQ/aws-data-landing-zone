@@ -123,6 +123,7 @@ export default defineConfig({
                             { label: 'Accounts',  slug: 'components/account-management/accounts'},
                             { label: 'Regions',  slug: 'components/account-management/regions'},
                             { label: 'Tagging',  slug: 'components/account-management/tagging'},
+                            { label: 'Tag Compliance Alerts',  slug: 'components/account-management/tag-compliance-alerts'},
                             { label: 'Budgets',  slug: 'components/account-management/budgets'},
                             // { label: 'Default Notifications',  slug: 'components/account-management/budgets'}, //TODO Later
                         ]

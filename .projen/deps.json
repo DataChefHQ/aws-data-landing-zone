@@ -123,6 +123,16 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/client-cloudtrail",
+      "version": "^3.1049.0",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/client-config-service",
+      "version": "^3.1049.0",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-cost-explorer",
       "version": "^3.1049.0",
       "type": "bundled"
@@ -149,6 +159,11 @@
     },
     {
       "name": "@aws-sdk/client-organizations",
+      "version": "^3.1049.0",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/client-resource-groups-tagging-api",
       "version": "^3.1049.0",
       "type": "bundled"
     },

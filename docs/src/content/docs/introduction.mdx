@@ -82,11 +82,11 @@ Resources that cannot be attributed to an owner do not deploy to production.
 
 | Tag | Purpose |
 | --- | --- |
-| `team` | Owning team |
-| `project` | Workload or product identifier |
-| `env` | Environment (dev / staging / prod) |
-| `domain` | Data domain (raw / curated / serving / inference) |
-| `cost-center` | Finance cost centre for chargeback |
+| `Owner` | Team or individual responsible for the resource |
+| `Project` | Workload or product identifier |
+| `Environment` | Environment (dev / staging / prod) |
+| `CostCenter` | Finance cost centre for chargeback |
+| `Name` | Human-readable resource name |
 
 Enforcement layers compose: Organization Tag Policy, SCP at deploy time, AWS Config rule for
 detection, and the DLZ's own validation before synthesis.
@@ -356,7 +356,7 @@ The DLZ adheres to the following principles:
 - **AWS Budgets:** Per-team and per-project budgets defined as code, with soft alerts at 80% and hard actions at 100%. Notifications via Slack, Teams, or email.
 - **AWS Cost and Usage Report (CUR 2.0):** Centralised in a dedicated FinOps account with a Glue catalog and Athena workgroup — the master ledger for all cost queries.
 - **AWS Cost Anomaly Detection:** Active across major service categories to catch unexpected spend patterns before the billing cycle closes.
-- **Cost Allocation Tags:** Mandatory tag set (`team`, `project`, `env`, `domain`, `cost-center`) activated automatically and enforced at deploy time.
+- **Cost Allocation Tags:** Mandatory tag set (`Owner`, `Project`, `Environment`, `CostCenter`, `Name`) activated automatically and enforced at deploy time.
 - **LLM Gateway:** Per-team and per-project token-spend caps, with real-time blocking before requests reach the model. Required because token-based costs spike non-linearly.
 - **Service Control Policies (SCPs):** Manage service deny lists; enforce tag presence at deploy time.
 - **Tag Policies:** Enforce resource tagging for spend tracking and ownership.

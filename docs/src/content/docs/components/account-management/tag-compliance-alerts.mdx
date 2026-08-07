@@ -1,0 +1,186 @@
+---
+title: Tag Compliance Alerts
+description: Detect resources created without the mandatory tags and tell their owner in Slack
+---
+import DualCode from '../../../../components/DualCode.astro';
+
+The [tagging strategy](/components/account-management/tagging) can prevent most untagged
+resources, but not all of them — an SCP can only gate API calls that accept tags at creation.
+Whatever slips through needs to be found and fixed, which is what this component does.
+
+An AWS Config rule in every workload account checks each resource against the
+[mandatory tag keys](/components/account-management/tagging#default-mandatory-tags). When one is
+missing, a single alert lands in Slack naming the account, the resource, and the person to talk to.
+
+```
+⚠️ Untagged resource in sandbox
+
+• Account: sandbox (account_id)
+• Resource Type: AWS::Lambda::Function
+• Resource ID: order-processor
+• Region: eu-west-1
+• Owner: @owner (Account owner)
+• Created by: owner (role: AWSAdministratorAccess)
+• Missing tags: Project, CostCenter
+```
+
+## What it covers
+
+The rule is an AWS Config **Custom Policy** rule written in
+[CloudFormation Guard](https://docs.aws.amazon.com/cfn-guard/latest/ug/what-is-guard.html). It
+names no resource type, so AWS Config evaluates it against **every type the configuration recorder
+records** — including types AWS adds in future.
+
+That matters because the AWS-managed
+[`required-tags`](https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html) rule
+this replaces was limited to a fixed list of 31 resource types. Lambda functions, KMS keys, ECR
+repositories, SQS queues, Step Functions state machines and Bedrock resources were all invisible to
+it.
+
+A resource is compliant when it carries every mandatory tag key with a non-empty value. A key
+present with an empty value — `Owner=""`, which is what an unset variable in a CDK or Terraform
+deployment produces — counts as missing.
+
+:::note
+AWS Config does not record tag data for every resource type. Where a type does not report its tags,
+the rule cannot see them, and the alert path falls back to reading the resource's live tags before
+deciding. See [Why an alert might not arrive](#why-an-alert-might-not-arrive).
+:::
+
+## Alerts you will not receive
+
+Most resources in an AWS account are created by AWS itself — the network interface behind a NAT
+gateway, the key an S3 bucket encrypts with, the role a service links to itself. Nobody can tag
+those, so alerting on them is pure noise.
+
+Before an alert is sent, the resource's creation event is read from CloudTrail. If
+`userIdentity.invokedBy` is present, an AWS service made the call — the field is
+[documented](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)
+to appear only in that case, and it covers forward access sessions, service principals,
+service-linked roles and service roles. Those findings are dropped.
+
+Resources created by **your** pipeline are **not** dropped. If a deployment role creates something
+untagged, that is a gap in your IaC and worth knowing about.
+
+## When alerts arrive
+
+At creation, and only at creation.
+
+AWS Config raises a compliance-change notification when a resource's compliance **changes**, so a
+resource that is already non-compliant does not alert again. There is no daily or weekly sweep, and
+no repeated nagging about the same resource.
+
+Each finding is held briefly before it is judged, because AWS Config evaluates a resource the
+moment it appears — often before its tags have been applied. During that pause the resource's live
+tags are read again, and the alert is dropped if the tags have since landed. Without it, every
+CloudFormation deployment would alert on itself.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    tagComplianceCentralAlert: {
+      emails: ['cloud-team@example.com'],
+      slacks: [{
+        slackChannelConfigurationName: 'aws-tag-alerts',
+        slackWorkspaceId: 'T0123456789',
+        slackChannelId: 'C0123456789',
+      }],
+    }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    tag_compliance_central_alert=dlz.DlzTagComplianceCentralAlertSubscribers(
+        emails=["cloud-team@example.com"],
+        slacks=[dlz.SlackChannel(
+            slack_channel_configuration_name="aws-tag-alerts",
+            slack_workspace_id="T0123456789",
+            slack_channel_id="C0123456789",
+        )],
+    )
+    ```
+  </Fragment>
+</DualCode>
+
+Leave `tagComplianceCentralAlert` unset and the rule still runs — findings show up in the AWS Config
+console, they just do not reach Slack.
+
+## How the pieces fit together
+
+Detection has to be local, because an AWS Config rule only sees its own account and region.
+Everything else is central, so there is one Lambda and one Slack channel to configure rather than
+one per account.
+
+```
+workload account × region
+  AWS Config rule  ──►  NON_COMPLIANT
+        │
+        ▼  forwarding rule
+management account
+  event bus  ──►  delay queue  ──►  formatter  ──►  SNS  ──►  Slack / email
+                                        │
+                                        └─ reads the member account through a
+                                           read-only role to decide
+```
+
+Each workload account gets a read-only role that the formatter assumes. It is trusted by the
+management account alone and allows three read actions:
+`config:GetResourceConfigHistory`, `tag:GetResources` and `cloudtrail:LookupEvents`.
+
+## Mentioning the owner
+
+The `• Owner:` line comes from the **account's own tags**, not from the resource. The formatter
+reads them with `organizations:ListTagsForResource` and looks for a key called `SlackId`.
+
+DLZ does not set account tags — they belong to your organisation's own definition of who owns what.
+Tag each account yourself:
+
+```bash
+aws organizations tag-resource \
+  --resource-id 111111111111 \
+  --tags Key=SlackId,Value=U01234567
+```
+
+Use a Slack **member ID** (`U…`) to mention a person, or a **user group ID** (`S…`) to mention a
+group — the formatter picks the right mention syntax from the first letter.
+
+Without the tag the alert still arrives, just without the mention. Nothing breaks, so tagging
+accounts can follow later.
+
+:::note
+Organizations rejects tag values containing characters outside letters, numbers, whitespace and
+`_ . : / = + - @`. Commas, parentheses and em-dashes fail with `INVALID_PATTERN`.
+:::
+
+## Why an alert might not arrive
+
+The alert path deliberately discards findings, so a quiet channel is ambiguous. Every decision is
+counted in CloudWatch under the `DlzTagCompliance` namespace:
+
+| Metric | Meaning |
+|---|---|
+| `alert_sent` | An alert reached Slack |
+| `dropped_already_tagged` | The tags had landed by the time the finding was judged |
+| `dropped_aws_service` | An AWS service created the resource |
+| `dropped_no_event` | No creation event found, so the resource is not new |
+| `dropped_not_recorded` | AWS Config holds no configuration item for it |
+| `lookup_failed` | The cross-account read failed — check the role exists |
+
+If `dropped_no_event` or `lookup_failed` climbs, real findings are being lost. Everything else
+rising is the filters doing their job.
+
+## Cost
+
+AWS Config charges per rule evaluation, and this rule evaluates on every recorded configuration
+change rather than on changes to 31 types. Evaluations are billed at $0.001 each for the first
+100,000 per month.
+
+The driver is how often resources change, not how many you own. A thousand untouched buckets cost
+nothing; one resource recreated hourly does. If the number surprises you, look for high-churn
+accounts first — the same change is billed twice, once as a recorded configuration item and once as
+an evaluation.
+
+## API References
+
+- [`DlzTagComplianceCentralAlertSubscribers`](/reference/api#dlztagcompliancecentralalertsubscribers)
+- [`DataLandingZoneProps.tagComplianceCentralAlert`](/reference/api#datalandingzoneprops)

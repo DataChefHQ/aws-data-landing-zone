@@ -9,7 +9,11 @@ import { AccountChatbots, DlzStack, IamPasswordPolicy, SlackChannel } from '../.
 import { IamAccountAlias } from '../../../../constructs/iam/iam-account-alias';
 import { DataLandingZoneProps, WorkloadAccountProps, DLzIamProps } from '../../../../data-landing-zone-types';
 import { Report, ReportType } from '../../../../lib';
-import { SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME, SSM_PARAMETER_DLZ_PREFIX } from '../../constants';
+import {
+  SSM_ASSUME_CROSS_ACCOUNT_ROLE_NAME,
+  SSM_PARAMETER_DLZ_PREFIX,
+  TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME,
+} from '../../constants';
 
 export class WorkloadGlobalStack extends DlzStack {
 
@@ -27,6 +31,7 @@ export class WorkloadGlobalStack extends DlzStack {
     }
 
     this.ssmAssumeCrossAccountRole();
+    this.tagAlertReadCrossAccountRole();
     this.defaultNotifications();
   }
 
@@ -220,6 +225,34 @@ export class WorkloadGlobalStack extends DlzStack {
 
     const slackChannel = AccountChatbots.findSlackChannel(this, channel);
     slackChannel.addNotificationTopic(topic);
+  }
+
+  /**
+   * Lets the central tag-alert formatter in the management account read enough of this account to
+   * decide whether a tag finding is worth a Slack message: the resource's current tags, and who
+   * created it. Trusted by the management account only — unlike the SSM reader role, no other
+   * account has a reason to assume it.
+   */
+  private tagAlertReadCrossAccountRole() {
+    new iam.Role(this, TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME, {
+      roleName: TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME,
+      description: 'Role assumed by the central tag-compliance alert to read tags and CloudTrail history in this account',
+      assumedBy: new iam.AccountPrincipal(this.props.organization.root.accounts.management.accountId),
+      inlinePolicies: {
+        tagAlertRead: new iam.PolicyDocument({
+          statements: [
+            new iam.PolicyStatement({
+              actions: [
+                'config:GetResourceConfigHistory',
+                'tag:GetResources',
+                'cloudtrail:LookupEvents',
+              ],
+              resources: ['*'],
+            }),
+          ],
+        }),
+      },
+    });
   }
 
   private ssmAssumeCrossAccountRole() {

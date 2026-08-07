@@ -173,8 +173,16 @@ surface tags differently:
   - `tag_CostCenter`
   - `tag_Domain`
 
-These are the same physical tags DLZ applies via `mandatoryTags`, surfaced
-through two schemas. The 5 are auto-activated by `dlz-data-exports` and
+These are the cost dimensions DLZ activates as Cost Allocation Tags, surfaced
+through two schemas.
+
+`Domain` is no longer one of the five enforced `mandatoryTags` keys — it is set by
+`DLzAccount.domain` and stays an active Cost Allocation Tag, so it remains a useful
+dashboard dimension. `mandatoryTags`' fifth key is now `Name`, which is deliberately
+**not** listed here: it is unique per resource, so filtering by it produces one value
+per resource rather than a grouping.
+
+They are auto-activated by `dlz-data-exports` and
 used everywhere else in the platform: budgets, anomaly detection,
 chargeback. See [Mandatory Tags](/components/account-management/tagging#default-mandatory-tags)
 for the enforcement story.
