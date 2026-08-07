@@ -15,6 +15,7 @@ import { ScpDenyCfnStacksWithoutStandardTags } from './constructs/organization-p
 import { DlzTag } from './constructs/organization-policies/tag-policy';
 
 import { DataLandingZoneProps, ForceNoPythonArgumentLifting, Region } from './data-landing-zone-types';
+import { DLZ_MANDATORY_TAG_KEYS } from './mandatory-tags';
 
 export enum IamIdentityAccounts {
   ROOT = 'dlz:root',
@@ -117,37 +118,24 @@ export class Defaults {
    * Mandatory tags for the organization
    */
   public static mandatoryTags(props: DataLandingZoneProps): DlzTag[] {
-    return [{
-      name: 'Owner',
-      values: props.mandatoryTags.owner && props.mandatoryTags.owner.length > 0 ? [
-        'infra',
-        ...props.mandatoryTags.owner,
-      ]: undefined,
-    }, {
-      name: 'Project',
-      values: props.mandatoryTags.project && props.mandatoryTags.project.length > 0 ? [
-        'dlz',
-        ...props.mandatoryTags.project,
-      ]: undefined,
-    }, {
-      name: 'Environment',
-      values: props.mandatoryTags.environment && props.mandatoryTags.environment.length > 0 ? [
-        'dlz',
-        ...props.mandatoryTags.environment,
-      ] : undefined,
-    }, {
-      name: 'CostCenter',
-      values: props.mandatoryTags.costCenter && props.mandatoryTags.costCenter.length > 0 ? [
-        'dlz',
-        ...props.mandatoryTags.costCenter,
-      ] : undefined,
-    }, {
-      name: 'Name',
-      values: props.mandatoryTags.name && props.mandatoryTags.name.length > 0 ? [
-        'dlz',
-        ...props.mandatoryTags.name,
-      ] : undefined,
-    }];
+    // Keyed by tag name because MandatoryTags is a jsii struct, so its properties can not be
+    // iterated at runtime. The list of keys itself stays in DLZ_MANDATORY_TAG_KEYS.
+    const suppliedValues: Record<string, string[] | undefined> = {
+      Owner: props.mandatoryTags.owner,
+      Project: props.mandatoryTags.project,
+      Environment: props.mandatoryTags.environment,
+      CostCenter: props.mandatoryTags.costCenter,
+      Name: props.mandatoryTags.name,
+    };
+
+    return DLZ_MANDATORY_TAG_KEYS.map((name) => {
+      const values = suppliedValues[name];
+      const dlzValue = name === 'Owner' ? 'infra' : 'dlz';
+      return {
+        name,
+        values: values && values.length > 0 ? [dlzValue, ...values] : undefined,
+      };
+    });
   }
 
   /**

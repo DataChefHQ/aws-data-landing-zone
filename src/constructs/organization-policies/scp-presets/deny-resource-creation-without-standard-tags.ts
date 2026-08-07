@@ -1,5 +1,6 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { ControlTowerExemption } from './control-tower-exemption';
+import { DLZ_MANDATORY_TAG_KEYS } from '../../../mandatory-tags';
 
 export interface ScpDenyResourceCreationTagOptions {
   /**
@@ -22,13 +23,7 @@ export interface ScpDenyResourceCreationTagOptions {
  * `statements()`) and were verified against the AWS Service Authorization Reference.
  */
 export class ScpDenyResourceCreationWithoutStandardTags {
-  public static readonly DEFAULT_TAG_KEYS: string[] = [
-    'Owner',
-    'Project',
-    'Environment',
-    'CostCenter',
-    'Name',
-  ];
+  public static readonly DEFAULT_TAG_KEYS: string[] = [...DLZ_MANDATORY_TAG_KEYS];
 
   /** Core compute and data create actions. */
   public static readonly CORE_TAG_ON_CREATE_ACTIONS: string[] = [
