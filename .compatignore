@@ -65,3 +65,8 @@ removed:aws-data-landing-zone.DlzTagComplianceAlert
 removed:aws-data-landing-zone.DlzTagComplianceAlertProps
 removed:aws-data-landing-zone.DlzTagComplianceAlertSubscribers
 removed:aws-data-landing-zone.DataLandingZoneProps.tagComplianceAlerts
+
+# mandatoryTags.domain replaced by mandatoryTags.name, so the tag policy, both SCPs and the AWS
+# Config rule enforce one identical set of five keys. Consumers rename `domain` to `name` and add a
+# `Name` tag before upgrading — see the Tagging docs "Migrating from domain to name".
+removed:aws-data-landing-zone.MandatoryTags.domain

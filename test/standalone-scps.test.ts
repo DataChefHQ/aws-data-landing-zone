@@ -37,7 +37,7 @@ function configWith(
       project: undefined,
       environment: [],
       costCenter: [],
-      domain: undefined,
+      name: undefined,
     },
     guardDuty: {
       autoEnableOrgMembers: 'ALL',

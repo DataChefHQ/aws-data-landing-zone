@@ -54,7 +54,7 @@ const configBase: DataLandingZoneProps = {
     project: undefined,
     environment: ['development', 'staging', 'production'],
     costCenter: ['test'],
-    domain: undefined,
+    name: undefined,
   },
   additionalMandatoryTags: [],
   finOps: {

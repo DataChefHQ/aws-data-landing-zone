@@ -21587,7 +21587,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.organization">organization</a></code> | <code><a href="#aws-data-landing-zone.DLzOrganization">DLzOrganization</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#aws-data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#aws-data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
-| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Domain). |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Name). |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a></code> | Cost-management capabilities. |
@@ -21633,7 +21633,7 @@ public readonly mandatoryTags: MandatoryTags;
 Allowed values for the five baseline mandatory tags.
 
 DLZ resources use Owner=infra,
-Project=dlz, Environment=dlz, CostCenter=dlz, Domain=foundation — leave those in the
+Project=dlz, Environment=dlz, CostCenter=dlz, Name=dlz — leave those in the
 allowed-values lists when overriding.
 
 ---
@@ -21677,13 +21677,13 @@ public readonly additionalMandatoryTags: DlzTag[];
 - *Type:* <a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]
 - *Default:* Defaults.mandatoryTags()
 
-Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Domain).
+Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Name).
 
 Tag policy + SCP + an AWS Config rule enforce presence; tag
 support is best-effort because not every AWS resource accepts tags.
 
 DLZ-created stacks are tagged Owner=infra, Project=dlz, Environment=dlz, CostCenter=dlz,
-Domain=foundation.
+Name=dlz.
 
 ---
 
@@ -21881,8 +21881,13 @@ account × region forwards its NON_COMPLIANT findings to a single EventBridge bu
 management account, which fans out to Slack (via Chatbot) and/or email — one topic, one place,
 modeled on budget alerts.
 
-The Config required-tags rule still runs per account × region (detection is local); only the
-alerting is centralized.
+The tag rule still runs per account × region, because an AWS Config rule only sees its own
+account and region; only the alerting is centralized.
+
+Before an alert is sent, the finding is re-checked against the resource's live tags and its
+CloudTrail creation event, so resources tagged moments after creation and resources created by
+an AWS service are dropped. That needs a read-only role in each workload account, which DLZ
+creates. Leave this unset and the rule still evaluates — findings simply stay in AWS Config.
 
 ---
 
@@ -25712,6 +25717,8 @@ const dlzTagComplianceCentralAlertProps: DlzTagComplianceCentralAlertProps = { .
 | <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.emails">emails</a></code> | <code>string[]</code> | Emails that receive an alert when any workload account has a resource missing mandatory tags. |
 | <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.slacks">slacks</a></code> | <code><a href="#aws-data-landing-zone.SlackChannel">SlackChannel</a>[]</code> | Slack channels that receive the alert (notify-only). |
 | <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.organizationId">organizationId</a></code> | <code>string</code> | The AWS Organizations id (e.g. `o-xxxxxxxxxx`). Scopes the central bus resource policy so that any account in the organization — and only those accounts — may forward events to the bus. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.alertDelay">alertDelay</a></code> | <code>aws-cdk-lib.Duration</code> | How long a finding is held before the formatter reads it. |
+| <code><a href="#aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.mandatoryTagKeys">mandatoryTagKeys</a></code> | <code>string[]</code> | The tag keys a resource must carry. |
 
 ---
 
@@ -25750,6 +25757,38 @@ public readonly organizationId: string;
 - *Type:* string
 
 The AWS Organizations id (e.g. `o-xxxxxxxxxx`). Scopes the central bus resource policy so that any account in the organization — and only those accounts — may forward events to the bus.
+
+---
+
+##### `alertDelay`<sup>Optional</sup> <a name="alertDelay" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.alertDelay"></a>
+
+```typescript
+public readonly alertDelay: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* Duration.minutes(2)
+
+How long a finding is held before the formatter reads it.
+
+The delay lets tags applied moments
+after creation land before the alert is decided, so IaC deploys do not alert on themselves.
+
+---
+
+##### `mandatoryTagKeys`<sup>Optional</sup> <a name="mandatoryTagKeys" id="aws-data-landing-zone.DlzTagComplianceCentralAlertProps.property.mandatoryTagKeys"></a>
+
+```typescript
+public readonly mandatoryTagKeys: string[];
+```
+
+- *Type:* string[]
+- *Default:* ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS
+
+The tag keys a resource must carry.
+
+The formatter reports which of these are missing, and drops
+the finding when the resource turns out to carry them all.
 
 ---
 
@@ -27959,8 +27998,8 @@ const mandatoryTags: MandatoryTags = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-data-landing-zone.MandatoryTags.property.costCenter">costCenter</a></code> | <code>string[]</code> | Used by FinOps tooling for chargeback / showback. |
-| <code><a href="#aws-data-landing-zone.MandatoryTags.property.domain">domain</a></code> | <code>string[]</code> | Foundation enforces presence only. |
 | <code><a href="#aws-data-landing-zone.MandatoryTags.property.environment">environment</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.MandatoryTags.property.name">name</a></code> | <code>string[]</code> | Human-readable resource name. |
 | <code><a href="#aws-data-landing-zone.MandatoryTags.property.owner">owner</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.MandatoryTags.property.project">project</a></code> | <code>string[]</code> | *No description.* |
 
@@ -27978,21 +28017,6 @@ Used by FinOps tooling for chargeback / showback.
 
 ---
 
-##### `domain`<sup>Optional</sup> <a name="domain" id="aws-data-landing-zone.MandatoryTags.property.domain"></a>
-
-```typescript
-public readonly domain: string[];
-```
-
-- *Type:* string[]
-
-Foundation enforces presence only.
-
-The platform overlay may later constrain values to
-`['raw', 'curated', 'serving', 'inference']` via a value-restricted tag policy.
-
----
-
 ##### `environment`<sup>Optional</sup> <a name="environment" id="aws-data-landing-zone.MandatoryTags.property.environment"></a>
 
 ```typescript
@@ -28000,6 +28024,22 @@ public readonly environment: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+##### `name`<sup>Optional</sup> <a name="name" id="aws-data-landing-zone.MandatoryTags.property.name"></a>
+
+```typescript
+public readonly name: string[];
+```
+
+- *Type:* string[]
+
+Human-readable resource name.
+
+Matches the `Name` key that
+`ScpDenyResourceCreationWithoutStandardTags` requires at creation, so the prevent and
+detect layers enforce the same five keys.
 
 ---
 

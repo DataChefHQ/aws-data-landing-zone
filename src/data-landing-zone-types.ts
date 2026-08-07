@@ -681,10 +681,11 @@ export interface MandatoryTags {
   /** Used by FinOps tooling for chargeback / showback. */
   readonly costCenter: string[] | undefined;
   /**
-   * Foundation enforces presence only. The platform overlay may later constrain values to
-   * `['raw', 'curated', 'serving', 'inference']` via a value-restricted tag policy.
+   * Human-readable resource name. Matches the `Name` key that
+   * `ScpDenyResourceCreationWithoutStandardTags` requires at creation, so the prevent and
+   * detect layers enforce the same five keys.
    */
-  readonly domain: string[] | undefined;
+  readonly name: string[] | undefined;
 }
 
 export interface SecurityHubNotificationProps {
@@ -868,11 +869,11 @@ export interface DataLandingZoneProps {
 
   /**
    * Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment,
-   * CostCenter, Domain). Tag policy + SCP + an AWS Config rule enforce presence; tag
+   * CostCenter, Name). Tag policy + SCP + an AWS Config rule enforce presence; tag
    * support is best-effort because not every AWS resource accepts tags.
    *
    * DLZ-created stacks are tagged Owner=infra, Project=dlz, Environment=dlz, CostCenter=dlz,
-   * Domain=foundation.
+   * Name=dlz.
    *
    * @default Defaults.mandatoryTags()
    */
@@ -880,7 +881,7 @@ export interface DataLandingZoneProps {
 
   /**
    * Allowed values for the five baseline mandatory tags. DLZ resources use Owner=infra,
-   * Project=dlz, Environment=dlz, CostCenter=dlz, Domain=foundation — leave those in the
+   * Project=dlz, Environment=dlz, CostCenter=dlz, Name=dlz — leave those in the
    * allowed-values lists when overriding.
    */
   readonly mandatoryTags: MandatoryTags;
@@ -929,8 +930,14 @@ export interface DataLandingZoneProps {
    * management account, which fans out to Slack (via Chatbot) and/or email — one topic, one place,
    * modeled on budget alerts.
    *
-   * The Config required-tags rule still runs per account × region (detection is local); only the
-   * alerting is centralized.
+   * The tag rule still runs per account × region, because an AWS Config rule only sees its own
+   * account and region; only the alerting is centralized.
+   *
+   * Before an alert is sent, the finding is re-checked against the resource's live tags and its
+   * CloudTrail creation event, so resources tagged moments after creation and resources created by
+   * an AWS service are dropped. That needs a read-only role in each workload account, which DLZ
+   * creates. Leave this unset and the rule still evaluates — findings simply stay in AWS Config.
+   *
    * @default - no centralized tag-compliance alert
    */
   readonly tagComplianceCentralAlert?: DlzTagComplianceCentralAlertSubscribers;
