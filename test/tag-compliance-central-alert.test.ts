@@ -1,5 +1,6 @@
 import { App, Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
+import { AccountChatbots } from '../src/constructs/account-chatbots';
 import {
   DlzTagComplianceCentralAlert,
   DlzTagComplianceForwardingRule,
@@ -19,6 +20,10 @@ function centralTemplate(props: { emails?: string[]; slacks?: any[] }) {
 }
 
 describe('DlzTagComplianceCentralAlert', () => {
+  // The Slack channel registry is static (shared across constructs); reset it so each test starts
+  // with no pre-registered channels.
+  beforeEach(() => { AccountChatbots.slackChatBots = {}; });
+
   test('creates a dedicated event bus with the shared constant name', () => {
     const t = centralTemplate({ emails: ['tags@example.com'] });
     t.hasResourceProperties('AWS::Events::EventBus', Match.objectLike({
@@ -121,11 +126,29 @@ describe('DlzTagComplianceCentralAlert', () => {
     const t = centralTemplate({
       slacks: [{ slackChannelConfigurationName: 'aws-tags-alerts', slackWorkspaceId: 'T1', slackChannelId: 'C1' }],
     });
+    t.resourceCountIs('AWS::Chatbot::SlackChannelConfiguration', 1);
     t.hasResourceProperties('AWS::Chatbot::SlackChannelConfiguration', Match.objectLike({
       SlackChannelId: 'C1',
       SlackWorkspaceId: 'T1',
       ConfigurationName: 'aws-tags-alerts',
     }));
+  });
+
+  test('reuses an existing configuration for the same channel instead of creating a duplicate', () => {
+    const stack = new Stack(new App(), 'test', { env: { account: '111111111111', region: 'eu-west-1' } });
+    const slack = { slackChannelConfigurationName: 'aws-budget-costs', slackWorkspaceId: 'T1', slackChannelId: 'C1' };
+    // A prior subscriber (e.g. budgets) already registered a configuration for this channel.
+    AccountChatbots.addSlackChannel(stack, 'budget-bot', { ...slack });
+    new DlzTagComplianceCentralAlert(stack, 'central', {
+      organizationId: 'o-abcd1234',
+      mandatoryTagKeys: MANDATORY_TAG_KEYS,
+      slacks: [{ ...slack, slackChannelConfigurationName: 'aws-tags-alerts' }],
+    });
+    const t = Template.fromStack(stack);
+    // Same channel -> one shared configuration, carrying both the budget and the tag SNS topics.
+    t.resourceCountIs('AWS::Chatbot::SlackChannelConfiguration', 1);
+    const configs = t.findResources('AWS::Chatbot::SlackChannelConfiguration');
+    expect(Object.values(configs)[0].Properties.SnsTopicArns).toHaveLength(1);
   });
 
   test('throws when no email or slack channel is given', () => {
