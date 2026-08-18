@@ -19,7 +19,9 @@ export interface ScpDenyResourceCreationTagOptions {
  *
  * `statements()` returns one Deny per tag key on purpose: IAM joins keys in a single `Null` block with AND, so
  * one combined statement would only deny when every tag is absent. Gate only actions that support
- * `aws:RequestTag` at creation. The action-set constants below are composable (spread the ones you want into
+ * `aws:RequestTag` at creation, and note that supporting it is not sufficient on its own: actions
+ * authorized against more than one resource need their Deny scoped to the resource that receives
+ * the tags, or it fires on the untagged one — see {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}. The action-set constants below are composable (spread the ones you want into
  * `statements()`) and were verified against the AWS Service Authorization Reference.
  */
 export class ScpDenyResourceCreationWithoutStandardTags {
@@ -101,6 +103,37 @@ export class ScpDenyResourceCreationWithoutStandardTags {
     'iam:CreatePolicy',
   ];
 
+  /**
+   * Create actions whose authorization also evaluates a resource that is *not* the one being
+   * tagged: `ec2:CreateSubnet` is authorized against the VPC, `ec2:RunInstances` against the image
+   * and subnet, `ecs:CreateService` against the cluster. `aws:RequestTag/*` is absent from those
+   * evaluations, so a `Resource: '*'` Deny matches unconditionally and blocks the call however it
+   * is tagged. {@link statements} scopes these to {@link MULTI_RESOURCE_TAGGED_ARNS} instead.
+   */
+  public static readonly MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS: string[] = [
+    'ec2:RunInstances',
+    'ec2:CreateSubnet',
+    'ec2:CreateNatGateway',
+    'ecs:CreateService',
+    'eks:CreateNodegroup',
+    'eks:CreateFargateProfile',
+  ];
+
+  /**
+   * Taggable ARNs for {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}, as a single union: each action
+   * is only ever authorized against its own resource type, so the union cannot cross-apply.
+   * Deliberately omits `volume/*` for `ec2:RunInstances` — an instance tagged without matching
+   * volume tag specifications would otherwise be denied on the volume evaluation.
+   */
+  public static readonly MULTI_RESOURCE_TAGGED_ARNS: string[] = [
+    'arn:aws:ec2:*:*:instance/*',
+    'arn:aws:ec2:*:*:subnet/*',
+    'arn:aws:ec2:*:*:natgateway/*',
+    'arn:aws:ecs:*:*:service/*',
+    'arn:aws:eks:*:*:nodegroup/*',
+    'arn:aws:eks:*:*:fargateprofile/*',
+  ];
+
   /** One Deny per tag key over `actions`. Tag keys default to {@link DEFAULT_TAG_KEYS}. */
   public static statements(
     actions: string[],
@@ -115,11 +148,15 @@ export class ScpDenyResourceCreationWithoutStandardTags {
       ? { BoolIfExists: { 'aws:ViaAWSService': 'false' } }
       : {};
 
-    return keys.map((key) => new iam.PolicyStatement({
-      sid: `DenyCreateWithout${key.replace(/[^a-zA-Z0-9]/g, '')}Tag`,
+    const multiResource = ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS;
+    const scoped = actions.filter((action) => multiResource.includes(action));
+    const unscoped = actions.filter((action) => !multiResource.includes(action));
+
+    const deny = (sid: string, denyActions: string[], resources: string[], key: string) => new iam.PolicyStatement({
+      sid,
       effect: iam.Effect.DENY,
-      actions,
-      resources: ['*'],
+      actions: denyActions,
+      resources,
       conditions: {
         ...ControlTowerExemption.arnNotLike(),
         ...viaServiceExemption,
@@ -127,6 +164,21 @@ export class ScpDenyResourceCreationWithoutStandardTags {
           [`aws:RequestTag/${key}`]: true,
         },
       },
-    }));
+    });
+
+    return keys.flatMap((key) => {
+      const sid = key.replace(/[^a-zA-Z0-9]/g, '');
+      return [
+        ...(unscoped.length > 0 ? [deny(`DenyCreateWithout${sid}Tag`, unscoped, ['*'], key)] : []),
+        ...(scoped.length > 0
+          ? [deny(
+            `DenyCreateWithout${sid}TagScoped`,
+            scoped,
+            ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAGGED_ARNS,
+            key,
+          )]
+          : []),
+      ];
+    });
   }
 }
