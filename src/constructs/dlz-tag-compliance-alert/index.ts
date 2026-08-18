@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { Duration } from 'aws-cdk-lib';
-import * as chatbot from 'aws-cdk-lib/aws-chatbot';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
@@ -12,7 +11,7 @@ import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import { Construct } from 'constructs';
 import { TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME } from '../../stacks/organization/constants';
-import { SlackChannel } from '../account-chatbots';
+import { AccountChatbots, SlackChannel } from '../account-chatbots';
 import { ScpDenyResourceCreationWithoutStandardTags } from '../organization-policies/scp-presets';
 
 /** Where the centralized tag-compliance alert is sent. Consumer-facing prop on `DataLandingZoneProps`. */
@@ -63,7 +62,10 @@ export class DlzTagComplianceCentralAlert {
   public static readonly BUS_NAME = 'dlz-tag-compliance-central-alert-bus';
 
   /** ARN of the central bus, derived from the management account id and the global region. */
-  public static busArn(managementAccountId: string, globalRegion: string): string {
+  public static busArn(
+    managementAccountId: string,
+    globalRegion: string,
+  ): string {
     return `arn:aws:events:${globalRegion}:${managementAccountId}:event-bus/${DlzTagComplianceCentralAlert.BUS_NAME}`;
   }
 
@@ -73,17 +75,33 @@ export class DlzTagComplianceCentralAlert {
     if (fs.existsSync(path.join(dir, 'index.js'))) {
       return dir;
     }
-    return path.join(__dirname, '..', '..', '..', 'assets', 'constructs', 'dlz-tag-compliance-alert', 'lambda', 'tag-alert-formatter');
+    return path.join(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'assets',
+      'constructs',
+      'dlz-tag-compliance-alert',
+      'lambda',
+      'tag-alert-formatter',
+    );
   }
 
   public readonly bus: events.EventBus;
   public readonly topic: sns.Topic;
 
-  constructor(scope: Construct, id: string, props: DlzTagComplianceCentralAlertProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    props: DlzTagComplianceCentralAlertProps,
+  ) {
     const emails = props.emails ?? [];
     const slacks = props.slacks ?? [];
     if (emails.length === 0 && slacks.length === 0) {
-      throw new Error(`${id}: tagComplianceCentralAlert needs at least one email or slack channel.`);
+      throw new Error(
+        `${id}: tagComplianceCentralAlert needs at least one email or slack channel.`,
+      );
     }
 
     this.bus = new events.EventBus(scope, `${id}-bus`, {
@@ -91,16 +109,22 @@ export class DlzTagComplianceCentralAlert {
     });
     // Allow every account in the organization (and only those) to forward events to this bus.
     // New accounts are covered automatically — no per-account grant.
-    this.bus.addToResourcePolicy(new iam.PolicyStatement({
-      sid: 'AllowOrgAccountsToPutEvents',
-      effect: iam.Effect.ALLOW,
-      principals: [new iam.AnyPrincipal()],
-      actions: ['events:PutEvents'],
-      resources: [this.bus.eventBusArn],
-      conditions: { StringEquals: { 'aws:PrincipalOrgID': props.organizationId } },
-    }));
+    this.bus.addToResourcePolicy(
+      new iam.PolicyStatement({
+        sid: 'AllowOrgAccountsToPutEvents',
+        effect: iam.Effect.ALLOW,
+        principals: [new iam.AnyPrincipal()],
+        actions: ['events:PutEvents'],
+        resources: [this.bus.eventBusArn],
+        conditions: {
+          StringEquals: { 'aws:PrincipalOrgID': props.organizationId },
+        },
+      }),
+    );
 
-    this.topic = new sns.Topic(scope, `${id}-topic`, { topicName: `${id}-topic` });
+    this.topic = new sns.Topic(scope, `${id}-topic`, {
+      topicName: `${id}-topic`,
+    });
 
     // Formatter Lambda: resolves the source account id -> name and owner (SlackId tag) and publishes
     // a readable Chatbot message to the topic. Sits between the rule and SNS because neither the name
@@ -109,30 +133,42 @@ export class DlzTagComplianceCentralAlert {
     const formatter = new lambda.Function(scope, `${id}-formatter`, {
       runtime: lambda.Runtime.NODEJS_22_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(DlzTagComplianceCentralAlert.formatterCodeDirectory()),
+      code: lambda.Code.fromAsset(
+        DlzTagComplianceCentralAlert.formatterCodeDirectory(),
+      ),
       timeout: Duration.seconds(60),
       environment: {
         TOPIC_ARN: this.topic.topicArn,
         READ_ROLE_NAME: TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME,
         MANDATORY_TAG_KEYS: (
-          props.mandatoryTagKeys ?? ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS
+          props.mandatoryTagKeys ??
+          ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS
         ).join(','),
       },
     });
     this.topic.grantPublish(formatter);
-    formatter.addToRolePolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: ['organizations:DescribeAccount', 'organizations:ListTagsForResource'],
-      resources: ['*'],
-    }));
+    formatter.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          'organizations:DescribeAccount',
+          'organizations:ListTagsForResource',
+        ],
+        resources: ['*'],
+      }),
+    );
     // Reads the resource's current tags and its creation event in the account that reported the
     // finding. Any account in the organization may report, so the resource is the role name in
     // every account rather than an enumerated list.
-    formatter.addToRolePolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: ['sts:AssumeRole'],
-      resources: [`arn:aws:iam::*:role/${TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME}`],
-    }));
+    formatter.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: ['sts:AssumeRole'],
+        resources: [
+          `arn:aws:iam::*:role/${TAG_ALERT_READ_CROSS_ACCOUNT_ROLE_NAME}`,
+        ],
+      }),
+    );
 
     // Config evaluates a resource the moment it is created, which is often before the tags land.
     // Holding each finding briefly lets the formatter re-read the live tags and drop the alert if
@@ -151,7 +187,9 @@ export class DlzTagComplianceCentralAlert {
         }),
       },
     });
-    formatter.addEventSource(new eventsources.SqsEventSource(findings, { batchSize: 1 }));
+    formatter.addEventSource(
+      new eventsources.SqsEventSource(findings, { batchSize: 1 }),
+    );
 
     // The rule targets the queue (not the topic) so the alert shows the account name and skips
     // findings that are no longer valid by the time they are read.
@@ -173,20 +211,37 @@ export class DlzTagComplianceCentralAlert {
       this.topic.addSubscription(new subscriptions.EmailSubscription(email));
     }
 
-    // Single account + single region, so no region-scoped name is needed (unlike the per-account
-    // alert). Deny-all guardrail keeps it notify-only (no commands from Slack).
+    // Reuse one Slack channel configuration per channel (shared via AccountChatbots) so budgets and
+    // tag alerts can post to the same channel: an existing configuration just gets this topic added,
+    // otherwise it is created. Deny-all guardrail keeps a newly created one notify-only.
     if (slacks.length > 0) {
-      const guardrail = new iam.ManagedPolicy(scope, `${id}-chatbot-guardrail`, {
-        statements: [new iam.PolicyStatement({ effect: iam.Effect.DENY, actions: ['*'], resources: ['*'] })],
-      });
+      const guardrail = new iam.ManagedPolicy(
+        scope,
+        `${id}-chatbot-guardrail`,
+        {
+          statements: [
+            new iam.PolicyStatement({
+              effect: iam.Effect.DENY,
+              actions: ['*'],
+              resources: ['*'],
+            }),
+          ],
+        },
+      );
       slacks.forEach((slack, index) => {
-        new chatbot.SlackChannelConfiguration(scope, `${id}-slack-${index}`, {
-          slackChannelConfigurationName: slack.slackChannelConfigurationName,
-          slackWorkspaceId: slack.slackWorkspaceId,
-          slackChannelId: slack.slackChannelId,
-          notificationTopics: [this.topic],
-          guardrailPolicies: [guardrail],
-        });
+        if (AccountChatbots.existsSlackChannel(scope, slack)) {
+          AccountChatbots.findSlackChannel(scope, slack).addNotificationTopic(
+            this.topic,
+          );
+        } else {
+          AccountChatbots.addSlackChannel(scope, `${id}-slack-${index}`, {
+            slackChannelConfigurationName: slack.slackChannelConfigurationName,
+            slackWorkspaceId: slack.slackWorkspaceId,
+            slackChannelId: slack.slackChannelId,
+            notificationTopics: [this.topic],
+            guardrailPolicies: [guardrail],
+          });
+        }
       });
     }
   }
@@ -205,19 +260,29 @@ export interface DlzTagComplianceForwardingRuleProps {
  * in the management account (cross-account, cross-region — a single hop). No local SNS/Chatbot.
  */
 export class DlzTagComplianceForwardingRule {
-  constructor(scope: Construct, id: string, props: DlzTagComplianceForwardingRuleProps) {
-    const centralBus = events.EventBus.fromEventBusArn(scope, `${id}-central-bus`, props.centralBusArn);
+  constructor(
+    scope: Construct,
+    id: string,
+    props: DlzTagComplianceForwardingRuleProps,
+  ) {
+    const centralBus = events.EventBus.fromEventBusArn(
+      scope,
+      `${id}-central-bus`,
+      props.centralBusArn,
+    );
 
     // EventBridge assumes this role to PutEvents on the central bus. A dedicated role scoped to the
     // one target bus is mandatory for cross-account event-bus targets.
     const role = new iam.Role(scope, `${id}-role`, {
       assumedBy: new iam.ServicePrincipal('events.amazonaws.com'),
     });
-    role.addToPolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: ['events:PutEvents'],
-      resources: [props.centralBusArn],
-    }));
+    role.addToPolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: ['events:PutEvents'],
+        resources: [props.centralBusArn],
+      }),
+    );
 
     new events.Rule(scope, `${id}-rule`, {
       ruleName: `${id}-rule`,
