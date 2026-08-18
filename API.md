@@ -32218,7 +32218,9 @@ not in the baseline, so add it yourself.
 
 `statements()` returns one Deny per tag key on purpose: IAM joins keys in a single `Null` block with AND, so
 one combined statement would only deny when every tag is absent. Gate only actions that support
-`aws:RequestTag` at creation. The action-set constants below are composable (spread the ones you want into
+`aws:RequestTag` at creation, and note that supporting it is not sufficient on its own: actions
+authorized against more than one resource need their Deny scoped to the resource that receives
+the tags, or it fires on the untagged one — see {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}. The action-set constants below are composable (spread the ones you want into
 `statements()`) and were verified against the AWS Service Authorization Reference.
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.Initializer"></a>
@@ -32283,6 +32285,8 @@ Tag keys default to {@link DEFAULT_TAG_KEYS}.
 | <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.DEFAULT_TAG_KEYS">DEFAULT_TAG_KEYS</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.IAM_TAG_ON_CREATE_ACTIONS">IAM_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | IAM create actions. |
 | <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.INFRA_TAG_ON_CREATE_ACTIONS">INFRA_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | Networking, storage, and compute create actions. |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS">MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS</a></code> | <code>string[]</code> | Create actions whose authorization also evaluates a resource that is *not* the one being tagged: `ec2:CreateSubnet` is authorized against the VPC, `ec2:RunInstances` against the image and subnet, `ecs:CreateService` against the cluster. |
+| <code><a href="#aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.MULTI_RESOURCE_TAGGED_ARNS">MULTI_RESOURCE_TAGGED_ARNS</a></code> | <code>string[]</code> | Taggable ARNs for {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}, as a single union: each action is only ever authorized against its own resource type, so the union cannot cross-apply. |
 
 ---
 
@@ -32351,6 +32355,37 @@ Deliberately excludes resources that AWS services auto-create, untagged, at runt
 auto-scaling groups). Those calls carry no `aws:RequestTag`, so gating them can't be
 satisfied and only breaks normal operation (e.g. Lambda logging, backups, EKS scaling).
 Catch tag gaps on those with AWS Config instead of an SCP.
+
+---
+
+##### `MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS`<sup>Required</sup> <a name="MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS"></a>
+
+```typescript
+public readonly MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS: string[];
+```
+
+- *Type:* string[]
+
+Create actions whose authorization also evaluates a resource that is *not* the one being tagged: `ec2:CreateSubnet` is authorized against the VPC, `ec2:RunInstances` against the image and subnet, `ecs:CreateService` against the cluster.
+
+`aws:RequestTag/*` is absent from those
+evaluations, so a `Resource: '*'` Deny matches unconditionally and blocks the call however it
+is tagged. {@link statements} scopes these to {@link MULTI_RESOURCE_TAGGED_ARNS} instead.
+
+---
+
+##### `MULTI_RESOURCE_TAGGED_ARNS`<sup>Required</sup> <a name="MULTI_RESOURCE_TAGGED_ARNS" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.property.MULTI_RESOURCE_TAGGED_ARNS"></a>
+
+```typescript
+public readonly MULTI_RESOURCE_TAGGED_ARNS: string[];
+```
+
+- *Type:* string[]
+
+Taggable ARNs for {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}, as a single union: each action is only ever authorized against its own resource type, so the union cannot cross-apply.
+
+Deliberately omits `volume/*` for `ec2:RunInstances` — an instance tagged without matching
+volume tag specifications would otherwise be denied on the volume evaluation.
 
 ---
 

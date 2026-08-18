@@ -183,7 +183,7 @@ describe('SCP presets', () => {
   });
 
   test('ScpDenyResourceCreationWithoutStandardTags emits one presence Deny per tag key by default', () => {
-    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:RunInstances']);
+    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:CreateVolume']);
     expect(statements).toHaveLength(ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS.length);
 
     const sids = statements.map(s => s.toJSON().Sid);
@@ -198,7 +198,7 @@ describe('SCP presets', () => {
     for (const statement of statements) {
       const json = statement.toJSON();
       expect(json.Effect).toBe('Deny');
-      expect(json.Action).toBe('ec2:RunInstances');
+      expect(json.Action).toBe('ec2:CreateVolume');
       expect(json.Condition?.ArnNotLike?.['aws:PrincipalARN']).toContain(CT_ROLE);
     }
 
@@ -208,7 +208,7 @@ describe('SCP presets', () => {
 
   test('ScpDenyResourceCreationWithoutStandardTags honours a custom tag-key list', () => {
     const statements = ScpDenyResourceCreationWithoutStandardTags.statements(
-      ['ec2:RunInstances'],
+      ['ec2:CreateVolume'],
       ['Owner', 'team:name'],
     );
     expect(statements.map(s => s.toJSON().Sid)).toEqual([
@@ -219,15 +219,52 @@ describe('SCP presets', () => {
   });
 
   test('ScpDenyResourceCreationWithoutStandardTags omits aws:ViaAWSService by default', () => {
-    const [statement] = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:RunInstances']);
+    const [statement] = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:CreateVolume']);
     expect(statement.toJSON().Condition?.BoolIfExists).toBeUndefined();
   });
 
   test('ScpDenyResourceCreationWithoutStandardTags exempts service-forwarded calls when opted in', () => {
     const [statement] = ScpDenyResourceCreationWithoutStandardTags.statements(
-      ['ec2:RunInstances'], undefined, { exemptAwsServiceCalls: true },
+      ['ec2:CreateVolume'], undefined, { exemptAwsServiceCalls: true },
     );
     expect(statement.toJSON().Condition?.BoolIfExists).toEqual({ 'aws:ViaAWSService': 'false' });
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags scopes multi-resource actions to the tagged ARNs', () => {
+    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(['ec2:CreateSubnet'], ['Owner']);
+
+    expect(statements).toHaveLength(1);
+    const json = statements[0].toJSON();
+    expect(json.Sid).toBe('DenyCreateWithoutOwnerTagScoped');
+    expect(json.Resource).toEqual(ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAGGED_ARNS);
+    expect(json.Resource).not.toContain('*');
+    expect(json.Condition?.Null?.['aws:RequestTag/Owner']).toBe(true);
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags never puts a multi-resource action under Resource *', () => {
+    const all = [
+      ...ScpDenyResourceCreationWithoutStandardTags.CORE_TAG_ON_CREATE_ACTIONS,
+      ...ScpDenyResourceCreationWithoutStandardTags.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS,
+      ...ScpDenyResourceCreationWithoutStandardTags.INFRA_TAG_ON_CREATE_ACTIONS,
+      ...ScpDenyResourceCreationWithoutStandardTags.IAM_TAG_ON_CREATE_ACTIONS,
+    ];
+    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(all, ['Owner']);
+
+    // One unscoped Deny plus one scoped Deny, per tag key.
+    expect(statements).toHaveLength(2);
+    const wildcard = statements.map(s => s.toJSON()).find(j => j.Resource === '*' || j.Resource?.includes('*'))!;
+    for (const action of ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS) {
+      expect(wildcard.Action).not.toContain(action);
+    }
+  });
+
+  test('ScpDenyResourceCreationWithoutStandardTags emits only the wildcard Deny for single-resource actions', () => {
+    const statements = ScpDenyResourceCreationWithoutStandardTags.statements(
+      ScpDenyResourceCreationWithoutStandardTags.IAM_TAG_ON_CREATE_ACTIONS, ['Owner'],
+    );
+    expect(statements).toHaveLength(1);
+    expect(statements[0].toJSON().Sid).toBe('DenyCreateWithoutOwnerTag');
+    expect(statements[0].toJSON().Resource).toBe('*');
   });
 
   test('ScpDenyResourceCreationWithoutStandardTags INFRA list excludes service-auto-created actions', () => {
