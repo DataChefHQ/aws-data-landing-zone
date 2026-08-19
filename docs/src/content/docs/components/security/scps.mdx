@@ -30,7 +30,8 @@ flowchart LR
 ```
 
 :::note
-AWS Organizations limits each target to **5 attached SCPs**, with a maximum body size of **5120 bytes per policy**.
+AWS Organizations limits each target to **10 attached SCPs**, with a maximum body size of **10,240 characters per policy**
+(whitespace is counted when the policy is deployed via CloudFormation; inherited SCPs don't count toward the per-target limit).
 DLZ validates these limits at synthesis time and fails fast with a clear error.
 :::
 
@@ -236,7 +237,7 @@ To make tag presence a hard stop on direct resource creation, add the opt-in `Sc
 It is **not** part of the baseline. You add it deliberately, because it takes three conscious choices:
 
 - **Which actions to gate.** Only include create actions that support `aws:RequestTag` at creation. An action that cannot carry request tags would have the tag permanently absent and be denied outright. `iam:CreateGroup` is one such case (its reference row lists no tag condition keys), which is why it is excluded from the IAM set below. The preset ships four ready-made action sets (in the table below), each verified against the [AWS Service Authorization Reference](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html). Verify anything you add the same way.
-- **Body size.** The rendered policy grows with `actions` × `tagKeys`. DLZ packs the entire baseline + account-type + per-account tier into a **single** SCP per account and validates that one body against the 5120-byte limit at synth (see [Validation](#validation)); it does not auto-split. Each action set fits its own SCP, but two large sets in one account will overflow, so plan to pick one or split across account tiers.
+- **Body size.** The rendered policy grows with `actions` × `tagKeys`, and AWS counts whitespace when the policy is deployed via CloudFormation. DLZ validates each SCP body against the 10,240-character limit at synth (see [Validation](#validation)) and does not auto-split. **All four action sets in one SCP do not fit** (~10.7 KB with `exemptAwsServiceCalls`), so split them across two SCPs — see the caution below.
 - **Value enforcement stays with the tag policy.** This preset checks presence only, as does the AWS Config rule. Values belong to one owner, and that owner is the tag policy.
 
 The preset exposes four verified action sets (each a `public static readonly string[]`). Spread the ones you want into `statements()`:
@@ -247,6 +248,50 @@ The preset exposes four verified action sets (each a `public static readonly str
 | `DATA_PLATFORM_TAG_ON_CREATE_ACTIONS` | Analytics/ML (Glue, Athena, EMR, Firehose, MSK, OpenSearch `es:CreateDomain`, Redshift Serverless, Step Functions, SageMaker, Bedrock) | ~4.1 KB |
 | `INFRA_TAG_ON_CREATE_ACTIONS` | Networking/storage/compute (CloudWatch Logs, ECR, EFS, ElastiCache, Auto Scaling, extra EC2, EKS node groups, RDS sub-resources) | ~3.8 KB |
 | `IAM_TAG_ON_CREATE_ACTIONS` | `iam:CreateUser`, `iam:CreateRole`, `iam:CreatePolicy` (excludes `iam:CreateGroup`, which has no tag support) | ~1.4 KB |
+
+:::caution[Split the full set across two SCPs]
+An SCP can hold **at most 10,240 characters**, and AWS counts the whitespace when the policy is
+deployed through CloudFormation (only the console strips it). Spreading **all four action sets into
+one SCP is ~10.7 KB — over the limit**, so the deploy fails with *"exceeded the maximum policy
+size"*. DLZ catches this at synth and tells you to split.
+
+Put the actions in **two** standalone SCPs instead — for example **CORE + INFRA + IAM** in one and
+**DATA_PLATFORM** in the other. A target can have up to 10 attached SCPs and inherited SCPs don't
+count, so two on one OU is safe.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    const Preset = ScpDenyResourceCreationWithoutStandardTags;
+    const tagOnCreateScps = [
+      { nameSuffix: 'tag-on-create-core', statements: Preset.statements([
+        ...Preset.CORE_TAG_ON_CREATE_ACTIONS,
+        ...Preset.INFRA_TAG_ON_CREATE_ACTIONS,
+        ...Preset.IAM_TAG_ON_CREATE_ACTIONS,
+      ], undefined, { exemptAwsServiceCalls: true }) },
+      { nameSuffix: 'tag-on-create-data', statements: Preset.statements(
+        Preset.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS, undefined, { exemptAwsServiceCalls: true }) },
+    ];
+    // attach on the OU: workloads: { standaloneScps: tagOnCreateScps, ... }
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    preset = dlz.ScpDenyResourceCreationWithoutStandardTags
+    tag_on_create_scps = [
+        dlz.DlzStandaloneScp(name_suffix="tag-on-create-core", statements=preset.statements([
+            *preset.CORE_TAG_ON_CREATE_ACTIONS,
+            *preset.INFRA_TAG_ON_CREATE_ACTIONS,
+            *preset.IAM_TAG_ON_CREATE_ACTIONS,
+        ], exempt_aws_service_calls=True)),
+        dlz.DlzStandaloneScp(name_suffix="tag-on-create-data", statements=preset.statements(
+            preset.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS, exempt_aws_service_calls=True)),
+    ]
+    # attach on the OU: workloads=dlz.OrgOuWorkloads(standalone_scps=tag_on_create_scps, ...)
+    ```
+  </Fragment>
+</DualCode>
+:::
 
 <DualCode>
   <Fragment slot="ts">
@@ -293,8 +338,8 @@ By default it requires the five canonical mandatory tag keys (`Owner`, `Project`
 DLZ validates each account's resolved SCP at synthesis time and fails with a clear error if:
 
 - the resolved policy is empty (AWS rejects empty policies)
-- more than 5 SCPs would be attached to the account
-- the policy body exceeds 5120 bytes
+- more than 10 SCPs would be attached to the account
+- the policy body exceeds 10,240 characters (measured the way AWS counts it — whitespace included)
 
 This catches misconfiguration before any CloudFormation deployment runs.
 

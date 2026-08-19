@@ -32224,8 +32224,17 @@ not in the baseline, so add it yourself.
 one combined statement would only deny when every tag is absent. Gate only actions that support
 `aws:RequestTag` at creation, and note that supporting it is not sufficient on its own: actions
 authorized against more than one resource need their Deny scoped to the resource that receives
-the tags, or it fires on the untagged one — see {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}. The action-set constants below are composable (spread the ones you want into
+the tags, or it fires on the untagged one — see {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}.
+The action-set constants below are composable (spread the ones you want into
 `statements()`) and were verified against the AWS Service Authorization Reference.
+
+⚠️ **Size limit — spreading all four action sets into ONE SCP does not fit.** An SCP document is
+capped at 10,240 characters, and Organizations counts whitespace when the policy is deployed via
+CloudFormation. With `exemptAwsServiceCalls`, all four action sets × five tag keys is ~10,700
+characters — over the limit. Split them across **two** {@link DlzStandaloneScp }: e.g. one with
+CORE + INFRA + IAM actions and one with DATA_PLATFORM actions. Up to 10 SCPs may be attached per
+target and inherited SCPs do not count, so two standalone SCPs on one OU is safe. Building an
+over-size document throws at synth (see `ScpMerge.validate`).
 
 #### Initializers <a name="Initializers" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.Initializer"></a>
 
@@ -32260,6 +32269,8 @@ ScpDenyResourceCreationWithoutStandardTags.statements(actions: string[], tagKeys
 One Deny per tag key over `actions`.
 
 Tag keys default to {@link DEFAULT_TAG_KEYS}.
+⚠️ All four action sets at once exceed one SCP's 10,240-char limit — split across two
+{@link DlzStandaloneScp } (see the class doc).
 
 ###### `actions`<sup>Required</sup> <a name="actions" id="aws-data-landing-zone.ScpDenyResourceCreationWithoutStandardTags.statements.parameter.actions"></a>
 
@@ -32738,6 +32749,35 @@ new ScpLimits()
 ---
 
 
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.ScpLimits.bodySize">bodySize</a></code> | The document size AWS actually counts for an SCP. |
+
+---
+
+##### `bodySize` <a name="bodySize" id="aws-data-landing-zone.ScpLimits.bodySize"></a>
+
+```typescript
+import { ScpLimits } from 'aws-data-landing-zone'
+
+ScpLimits.bodySize(statements: PolicyStatement[])
+```
+
+The document size AWS actually counts for an SCP.
+
+Organizations counts the policy as
+serialized by the SDK/CloudFormation, which keeps a space after every structural `:` and `,`
+(only the console strips whitespace). Separators inside string values (e.g. ARNs) are not
+structural, so they are skipped. Measuring the minified length instead under-counts and lets an
+over-limit policy pass synth only to fail at deploy with "exceeded the maximum policy size".
+
+###### `statements`<sup>Required</sup> <a name="statements" id="aws-data-landing-zone.ScpLimits.bodySize.parameter.statements"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement[]
+
+---
 
 
 #### Constants <a name="Constants" id="Constants"></a>
