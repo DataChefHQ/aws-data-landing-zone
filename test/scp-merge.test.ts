@@ -1,5 +1,6 @@
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { ScpLimits, ScpMerge } from '../src/constructs/organization-policies/scp-merge';
+import { ScpDenyResourceCreationWithoutStandardTags as TagScp } from '../src/constructs/organization-policies/scp-presets';
 
 const denyEks = new iam.PolicyStatement({
   sid: 'DenyEks',
@@ -139,5 +140,55 @@ describe('ScpMerge.validate', () => {
 
     expect(() => ScpMerge.validate('prod-bloated', giantSids, 1))
       .toThrow(/prod-bloated.*SCP body.*bytes.*maximum of 10240 bytes/);
+  });
+});
+
+describe('ScpLimits.bodySize', () => {
+  test('counts the whitespace AWS keeps when deployed via CloudFormation (more than minified)', () => {
+    const minified = JSON.stringify(new iam.PolicyDocument({ statements: [denyEks, denyEcs] }).toJSON()).length;
+    expect(ScpLimits.bodySize([denyEks, denyEcs])).toBeGreaterThan(minified);
+  });
+
+  test('does not count colons/commas inside string values (e.g. ARNs)', () => {
+    const arnHeavy = new iam.PolicyStatement({
+      sid: 'ArnHeavy',
+      effect: iam.Effect.DENY,
+      actions: ['s3:GetObject'],
+      resources: ['arn:aws:s3:::a/*', 'arn:aws:s3:::b/*', 'arn:aws:s3:::c/*'],
+    });
+    const minified = JSON.stringify(new iam.PolicyDocument({ statements: [arnHeavy] }).toJSON());
+    const structuralSeparators = ScpLimits.bodySize([arnHeavy]) - minified.length;
+    // Only structural ':' / ',' add a space; the many ':' inside the ARNs must not be counted.
+    const totalSeparators = (minified.match(/[:,]/g) ?? []).length;
+    expect(structuralSeparators).toBeLessThan(totalSeparators);
+  });
+});
+
+describe('tag-on-create SCP sizing (real preset)', () => {
+  const ALL_ACTIONS = [
+    ...TagScp.CORE_TAG_ON_CREATE_ACTIONS,
+    ...TagScp.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS,
+    ...TagScp.INFRA_TAG_ON_CREATE_ACTIONS,
+    ...TagScp.IAM_TAG_ON_CREATE_ACTIONS,
+  ];
+
+  test('all four action sets in one SCP exceed the limit and throw with split guidance', () => {
+    const statements = TagScp.statements(ALL_ACTIONS, undefined, { exemptAwsServiceCalls: true });
+    expect(ScpLimits.bodySize(statements)).toBeGreaterThan(ScpLimits.MAX_BODY_SIZE);
+    expect(() => ScpMerge.validate('workloads-ou', statements, 1))
+      .toThrow(/maximum of 10240 bytes.*[Ss]plit.*standalone SCPs/s);
+  });
+
+  test('splitting into two standalone SCPs keeps each under the limit', () => {
+    const first = TagScp.statements(
+      [...TagScp.CORE_TAG_ON_CREATE_ACTIONS, ...TagScp.INFRA_TAG_ON_CREATE_ACTIONS, ...TagScp.IAM_TAG_ON_CREATE_ACTIONS],
+      undefined,
+      { exemptAwsServiceCalls: true },
+    );
+    const second = TagScp.statements(TagScp.DATA_PLATFORM_TAG_ON_CREATE_ACTIONS, undefined, { exemptAwsServiceCalls: true });
+    expect(ScpLimits.bodySize(first)).toBeLessThanOrEqual(ScpLimits.MAX_BODY_SIZE);
+    expect(ScpLimits.bodySize(second)).toBeLessThanOrEqual(ScpLimits.MAX_BODY_SIZE);
+    expect(() => ScpMerge.validate('workloads-ou', first, 2)).not.toThrow();
+    expect(() => ScpMerge.validate('workloads-ou', second, 2)).not.toThrow();
   });
 });

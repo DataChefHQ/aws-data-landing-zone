@@ -21,11 +21,22 @@ export interface ScpDenyResourceCreationTagOptions {
  * one combined statement would only deny when every tag is absent. Gate only actions that support
  * `aws:RequestTag` at creation, and note that supporting it is not sufficient on its own: actions
  * authorized against more than one resource need their Deny scoped to the resource that receives
- * the tags, or it fires on the untagged one — see {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}. The action-set constants below are composable (spread the ones you want into
+ * the tags, or it fires on the untagged one — see {@link MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS}.
+ * The action-set constants below are composable (spread the ones you want into
  * `statements()`) and were verified against the AWS Service Authorization Reference.
+ *
+ * ⚠️ **Size limit — spreading all four action sets into ONE SCP does not fit.** An SCP document is
+ * capped at 10,240 characters, and Organizations counts whitespace when the policy is deployed via
+ * CloudFormation. With `exemptAwsServiceCalls`, all four action sets × five tag keys is ~10,700
+ * characters — over the limit. Split them across **two** {@link DlzStandaloneScp}: e.g. one with
+ * CORE + INFRA + IAM actions and one with DATA_PLATFORM actions. Up to 10 SCPs may be attached per
+ * target and inherited SCPs do not count, so two standalone SCPs on one OU is safe. Building an
+ * over-size document throws at synth (see `ScpMerge.validate`).
  */
 export class ScpDenyResourceCreationWithoutStandardTags {
-  public static readonly DEFAULT_TAG_KEYS: string[] = [...DLZ_MANDATORY_TAG_KEYS];
+  public static readonly DEFAULT_TAG_KEYS: string[] = [
+    ...DLZ_MANDATORY_TAG_KEYS,
+  ];
 
   /** Core compute and data create actions. */
   public static readonly CORE_TAG_ON_CREATE_ACTIONS: string[] = [
@@ -134,13 +145,18 @@ export class ScpDenyResourceCreationWithoutStandardTags {
     'arn:aws:eks:*:*:fargateprofile/*',
   ];
 
-  /** One Deny per tag key over `actions`. Tag keys default to {@link DEFAULT_TAG_KEYS}. */
+  /**
+   * One Deny per tag key over `actions`. Tag keys default to {@link DEFAULT_TAG_KEYS}.
+   * ⚠️ All four action sets at once exceed one SCP's 10,240-char limit — split across two
+   * {@link DlzStandaloneScp} (see the class doc).
+   */
   public static statements(
     actions: string[],
     tagKeys?: string[],
     options?: ScpDenyResourceCreationTagOptions,
   ): iam.PolicyStatement[] {
-    const keys = tagKeys ?? ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS;
+    const keys =
+      tagKeys ?? ScpDenyResourceCreationWithoutStandardTags.DEFAULT_TAG_KEYS;
 
     // `BoolIfExists` keeps the deny strict when the key is absent, and only lifts it for
     // genuine service-forwarded calls (`aws:ViaAWSService` = true).
@@ -148,35 +164,48 @@ export class ScpDenyResourceCreationWithoutStandardTags {
       ? { BoolIfExists: { 'aws:ViaAWSService': 'false' } }
       : {};
 
-    const multiResource = ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS;
+    const multiResource =
+      ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAG_ON_CREATE_ACTIONS;
     const scoped = actions.filter((action) => multiResource.includes(action));
-    const unscoped = actions.filter((action) => !multiResource.includes(action));
+    const unscoped = actions.filter(
+      (action) => !multiResource.includes(action),
+    );
 
-    const deny = (sid: string, denyActions: string[], resources: string[], key: string) => new iam.PolicyStatement({
-      sid,
-      effect: iam.Effect.DENY,
-      actions: denyActions,
-      resources,
-      conditions: {
-        ...ControlTowerExemption.arnNotLike(),
-        ...viaServiceExemption,
-        Null: {
-          [`aws:RequestTag/${key}`]: true,
+    const deny = (
+      sid: string,
+      denyActions: string[],
+      resources: string[],
+      key: string,
+    ) =>
+      new iam.PolicyStatement({
+        sid,
+        effect: iam.Effect.DENY,
+        actions: denyActions,
+        resources,
+        conditions: {
+          ...ControlTowerExemption.arnNotLike(),
+          ...viaServiceExemption,
+          Null: {
+            [`aws:RequestTag/${key}`]: true,
+          },
         },
-      },
-    });
+      });
 
     return keys.flatMap((key) => {
       const sid = key.replace(/[^a-zA-Z0-9]/g, '');
       return [
-        ...(unscoped.length > 0 ? [deny(`DenyCreateWithout${sid}Tag`, unscoped, ['*'], key)] : []),
+        ...(unscoped.length > 0
+          ? [deny(`DenyCreateWithout${sid}Tag`, unscoped, ['*'], key)]
+          : []),
         ...(scoped.length > 0
-          ? [deny(
-            `DenyCreateWithout${sid}TagScoped`,
-            scoped,
-            ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAGGED_ARNS,
-            key,
-          )]
+          ? [
+            deny(
+              `DenyCreateWithout${sid}TagScoped`,
+              scoped,
+              ScpDenyResourceCreationWithoutStandardTags.MULTI_RESOURCE_TAGGED_ARNS,
+              key,
+            ),
+          ]
           : []),
       ];
     });
