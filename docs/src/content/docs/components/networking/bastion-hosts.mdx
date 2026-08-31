@@ -12,7 +12,7 @@ To add a Bastion Host to the `network` section of the configuration, the followi
 multiple bastion hosts in the same stack (account and region combination).
 - `location`: Specifies the **Subnet** [Network Address](/reference/network-address) to deploy the Bastion host in.
 We recommend using a private subnet to reduce the attack surface. Ensure the private subnet has internet access
-through a [NAT](nats).
+through a [NAT](/components/networking/nats).
 - `instanceType`: Defines the size of the EC2 instance. The image used will be Amazon Linux 2023.
 
 <DualCode>
