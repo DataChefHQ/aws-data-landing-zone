@@ -5,6 +5,10 @@ import ClarityTracking from '../components/ClarityTracking.astro';
 import '../styles/landing.css';
 
 const trackAnalytics = process.env.CF_PAGES_BRANCH === 'main';
+
+// Self-referencing canonical (site + pathname, ignoring query strings such as
+// ?ref=...) so tracked variants of the homepage don't register as duplicates.
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 ---
 
 <!DOCTYPE html>
@@ -15,10 +19,12 @@ const trackAnalytics = process.env.CF_PAGES_BRANCH === 'main';
   <title>Data Landing Zone &mdash; DevEx, Finance, Compliance. Balanced by design.</title>
   <meta name="description" content="An opinionated AWS landing zone for AI and data workloads, with security, privacy, and cost governance owned by the platform rather than each team." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  {canonical && <link rel="canonical" href={canonical} />}
 
   <meta property="og:title" content="Data Landing Zone" />
   <meta property="og:description" content="DevEx, Finance, Compliance. Balanced by design." />
   <meta property="og:image" content="/dlz-dark-og.png" />
+  {canonical && <meta property="og:url" content={canonical} />}
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
