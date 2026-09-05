@@ -1,4 +1,8 @@
 {
+  "manifestVersion": 3,
+  "env": {
+    "PATH": "$(npx -c \"node --print process.env.PATH\")"
+  },
   "tasks": {
     "build": {
       "name": "build",
@@ -37,10 +41,32 @@
       },
       "steps": [
         {
-          "builtin": "release/bump-version"
+          "builtin": "release/resolve-latest-tag",
+          "outputEnv": "LATEST_TAG"
+        },
+        {
+          "spawn": "bump:releasable-commits",
+          "outputEnv": "RELEASABLE_COMMITS",
+          "condition": "git rev-parse --verify --quiet \"refs/tags/$LATEST_TAG\""
+        },
+        {
+          "builtin": "release/suggest-version-bump",
+          "outputEnv": "SUGGESTED_BUMP"
+        },
+        {
+          "builtin": "release/apply-version-bump"
         }
       ],
-      "condition": "git log --oneline -1 | grep -qv \"chore(release):\""
+      "condition": "git log --oneline -1 | grep -v \"chore(release):\" > /dev/null"
+    },
+    "bump:releasable-commits": {
+      "name": "bump:releasable-commits",
+      "description": "Print the releasable commits since the latest release",
+      "steps": [
+        {
+          "exec": "git log --oneline $LATEST_TAG..HEAD"
+        }
+      ]
     },
     "bundle": {
       "name": "bundle",
@@ -86,7 +112,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/data-export-manager/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/data-export-manager/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/data-export-manager/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-data-exports/lambda/data-export-manager/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-data-exports/lambda/data-export-manager/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -95,7 +130,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/data-export-manager/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/data-export-manager/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/data-export-manager/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-data-exports/lambda/data-export-manager/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-data-exports/lambda/data-export-manager/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -104,7 +149,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/tag-activation/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/tag-activation/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-data-exports/lambda/tag-activation/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-data-exports/lambda/tag-activation/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -113,7 +167,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-data-exports/lambda/tag-activation/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-data-exports/lambda/tag-activation/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-data-exports/lambda/tag-activation/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-data-exports/lambda/tag-activation/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-data-exports/lambda/tag-activation/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -122,7 +186,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -131,7 +204,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-guardduty/lambda/guardduty-delegated-admin/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -140,7 +223,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-member-features/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-guardduty/lambda/guardduty-member-features/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-guardduty/lambda/guardduty-member-features/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -149,7 +241,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-member-features/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-member-features/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-guardduty/lambda/guardduty-member-features/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-guardduty/lambda/guardduty-member-features/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -158,7 +260,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-guardduty/lambda/guardduty-org-config/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -167,7 +278,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-guardduty/lambda/guardduty-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-guardduty/lambda/guardduty-org-config/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-guardduty/lambda/guardduty-org-config/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -176,7 +297,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-delegated-admin/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-delegated-admin/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-macie/lambda/macie-delegated-admin/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-macie/lambda/macie-delegated-admin/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -185,7 +315,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-delegated-admin/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-delegated-admin/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-delegated-admin/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-macie/lambda/macie-delegated-admin/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-macie/lambda/macie-delegated-admin/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -194,7 +334,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-members/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-members/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-members/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-macie/lambda/macie-members/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-macie/lambda/macie-members/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -203,7 +352,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-members/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-members/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-members/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-macie/lambda/macie-members/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-macie/lambda/macie-members/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -212,7 +371,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-org-config/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-org-config/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-macie/lambda/macie-org-config/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-macie/lambda/macie-org-config/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -221,7 +389,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-macie/lambda/macie-org-config/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-macie/lambda/macie-org-config/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-macie/lambda/macie-org-config/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-macie/lambda/macie-org-config/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-macie/lambda/macie-org-config/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -230,7 +408,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -239,7 +426,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/dlz-tag-compliance-alert/lambda/tag-alert-formatter/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -248,7 +445,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/iam-identity-center/identity-store-user-lambda/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/iam-identity-center/identity-store-user-lambda/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -257,7 +463,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/iam-identity-center/identity-store-user-lambda/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam-identity-center/identity-store-user-lambda/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam-identity-center/identity-store-user-lambda/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/iam-identity-center/identity-store-user-lambda/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/iam-identity-center/identity-store-user-lambda/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -266,7 +482,16 @@
       "description": "Create a JavaScript bundle from ./src/constructs/iam/lambda/iam-account-alias/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/iam/lambda/iam-account-alias/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/iam/lambda/iam-account-alias/index.js",
+            "--external:aws-sdk",
+            "--sourcemap"
+          ]
         }
       ]
     },
@@ -275,7 +500,17 @@
       "description": "Continuously update the JavaScript bundle from ./src/constructs/iam/lambda/iam-account-alias/",
       "steps": [
         {
-          "exec": "esbuild --bundle ./src/constructs/iam/lambda/iam-account-alias/ --target=\"node22\" --platform=\"node\" --outfile=\"assets/constructs/iam/lambda/iam-account-alias/index.js\" --external:aws-sdk --sourcemap --watch"
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "./src/constructs/iam/lambda/iam-account-alias/",
+            "--target=node22",
+            "--platform=node",
+            "--outfile=assets/constructs/iam/lambda/iam-account-alias/index.js",
+            "--external:aws-sdk",
+            "--sourcemap",
+            "--watch"
+          ]
         }
       ]
     },
@@ -295,22 +530,35 @@
       },
       "steps": [
         {
-          "exec": "git checkout -b scratch",
+          "execArgs": [
+            "git",
+            "checkout",
+            "-b",
+            "scratch"
+          ],
           "name": "save current HEAD in \"scratch\" branch"
         },
         {
-          "exec": "git checkout $BRANCH"
+          "exec": "git checkout \"$BRANCH\""
         },
         {
-          "exec": "git fetch origin",
+          "execArgs": [
+            "git",
+            "fetch",
+            "origin"
+          ],
           "name": "fetch latest changes from origin"
         },
         {
-          "exec": "git reset --hard origin/$BRANCH",
+          "exec": "git reset --hard \"origin/$BRANCH\"",
           "name": "hard reset to origin commit"
         },
         {
-          "exec": "git clean -fdx",
+          "execArgs": [
+            "git",
+            "clean",
+            "-fdx"
+          ],
           "name": "clean all untracked files"
         },
         {
@@ -324,7 +572,13 @@
       "description": "Perform API compatibility check against latest version",
       "steps": [
         {
-          "exec": "jsii-diff npm:$(node -p \"require('./package.json').name\") -k --ignore-file .compatignore || (echo \"\nUNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .compatignore to skip.\n\" && exit 1)"
+          "execArgs": [
+            "jsii-diff",
+            "npm:aws-data-landing-zone",
+            "-k",
+            "--ignore-file",
+            ".compatignore"
+          ]
         }
       ]
     },
@@ -334,6 +588,9 @@
       "steps": [
         {
           "exec": "jsii --silence-warnings=reserved-word"
+        },
+        {
+          "spawn": "compat"
         }
       ]
     },
@@ -342,7 +599,12 @@
       "description": "Synthesize project files",
       "steps": [
         {
-          "exec": "ts-node --project tsconfig.dev.json .projenrc.ts"
+          "execArgs": [
+            "ts-node",
+            "--project",
+            "projenrc/tsconfig.json",
+            ".projenrc.ts"
+          ]
         }
       ]
     },
@@ -351,7 +613,11 @@
       "description": "Generate API.md from .jsii manifest",
       "steps": [
         {
-          "exec": "jsii-docgen -o API.md"
+          "execArgs": [
+            "jsii-docgen",
+            "-o",
+            "API.md"
+          ]
         },
         {
           "exec": "bash post-docgen.sh"
@@ -379,7 +645,19 @@
       },
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+          "execArgs": [
+            "eslint",
+            "--ext",
+            ".ts,.tsx",
+            "--fix",
+            "--no-error-on-unmatched-pattern",
+            "$@",
+            "src",
+            "test",
+            "build-tools",
+            "projenrc",
+            ".projenrc.ts"
+          ],
           "receiveArgs": true
         }
       ]
@@ -433,7 +711,12 @@
       "description": "Create js language bindings",
       "steps": [
         {
-          "exec": "jsii-pacmak -v --target js"
+          "execArgs": [
+            "jsii-pacmak",
+            "-v",
+            "--target",
+            "js"
+          ]
         }
       ]
     },
@@ -442,7 +725,12 @@
       "description": "Create python language bindings",
       "steps": [
         {
-          "exec": "jsii-pacmak -v --target python"
+          "execArgs": [
+            "jsii-pacmak",
+            "-v",
+            "--target",
+            "python"
+          ]
         }
       ]
     },
@@ -476,7 +764,11 @@
       },
       "steps": [
         {
-          "exec": "rm -fr dist"
+          "execArgs": [
+            "rm",
+            "-fr",
+            "dist"
+          ]
         },
         {
           "spawn": "bump"
@@ -497,7 +789,11 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --updateSnapshot",
+          "execArgs": [
+            "jest",
+            "--passWithNoTests",
+            "--updateSnapshot"
+          ],
           "receiveArgs": true
         },
         {
@@ -510,7 +806,10 @@
       "description": "Run jest in watch mode",
       "steps": [
         {
-          "exec": "jest --watch"
+          "execArgs": [
+            "jest",
+            "--watch"
+          ]
         }
       ]
     },
@@ -539,13 +838,70 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/aws-lambda,@types/aws-sdk,@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@types/js-yaml,table"
+          "execArgs": [
+            "npx",
+            "npm-check-updates@20",
+            "--upgrade",
+            "--target=minor",
+            "--peer",
+            "--no-deprecated",
+            "--dep=dev,prod,peer,optional",
+            "--filter=@types/aws-lambda,@types/aws-sdk,@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,husky,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,@types/js-yaml,table"
+          ]
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/aws-lambda @types/aws-sdk @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-express-pipeline commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint husky jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript @aws-sdk/client-bcm-data-exports @aws-sdk/client-cloudformation @aws-sdk/client-cloudtrail @aws-sdk/client-config-service @aws-sdk/client-cost-explorer @aws-sdk/client-guardduty @aws-sdk/client-iam @aws-sdk/client-identitystore @aws-sdk/client-macie2 @aws-sdk/client-organizations @aws-sdk/client-resource-groups-tagging-api @aws-sdk/client-sns @aws-sdk/client-sso-admin @aws-sdk/client-sts @aws-sdk/credential-providers @types/js-yaml js-yaml table aws-cdk-lib constructs"
+          "execArgs": [
+            "npm",
+            "update",
+            "@stylistic/eslint-plugin",
+            "@types/aws-lambda",
+            "@types/aws-sdk",
+            "@types/jest",
+            "@types/node",
+            "@typescript-eslint/eslint-plugin",
+            "@typescript-eslint/parser",
+            "cdk-express-pipeline",
+            "commit-and-tag-version",
+            "esbuild",
+            "eslint-import-resolver-typescript",
+            "eslint-plugin-import",
+            "eslint",
+            "husky",
+            "jest",
+            "jest-junit",
+            "jsii-diff",
+            "jsii-docgen",
+            "jsii-pacmak",
+            "jsii-rosetta",
+            "jsii",
+            "projen",
+            "ts-jest",
+            "ts-node",
+            "typescript",
+            "@aws-sdk/client-bcm-data-exports",
+            "@aws-sdk/client-cloudformation",
+            "@aws-sdk/client-cloudtrail",
+            "@aws-sdk/client-config-service",
+            "@aws-sdk/client-cost-explorer",
+            "@aws-sdk/client-guardduty",
+            "@aws-sdk/client-iam",
+            "@aws-sdk/client-identitystore",
+            "@aws-sdk/client-macie2",
+            "@aws-sdk/client-organizations",
+            "@aws-sdk/client-resource-groups-tagging-api",
+            "@aws-sdk/client-sns",
+            "@aws-sdk/client-sso-admin",
+            "@aws-sdk/client-sts",
+            "@aws-sdk/credential-providers",
+            "@types/js-yaml",
+            "js-yaml",
+            "table",
+            "aws-cdk-lib",
+            "constructs"
+          ]
         },
         {
           "exec": "npx projen"
@@ -564,9 +920,6 @@
         }
       ]
     }
-  },
-  "env": {
-    "PATH": "$(npx -c \"node --print process.env.PATH\")"
   },
   "//": "~~ Generated by projen. To modify, edit .projenrc.ts and run \"npx projen\"."
 }
