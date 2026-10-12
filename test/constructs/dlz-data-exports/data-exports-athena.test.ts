@@ -44,10 +44,11 @@ describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
     });
   });
 
-  test('creates the results bucket with BPA, no versioning, and short expiration', () => {
+  test('keeps results private and versioned with bounded version retention', () => {
     const t = synth(baseProps);
     t.hasResourceProperties('AWS::S3::Bucket', {
       BucketName: 'dlz-finops-athena-results-111111111111-us-east-1',
+      VersioningConfiguration: { Status: 'Enabled' },
       PublicAccessBlockConfiguration: {
         BlockPublicAcls: true,
         BlockPublicPolicy: true,
@@ -59,6 +60,7 @@ describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
           Match.objectLike({
             Id: 'dlz-finops-athena-results-expiration',
             ExpirationInDays: 30,
+            NoncurrentVersionExpiration: { NoncurrentDays: 30 },
             Status: 'Enabled',
           }),
         ]),
@@ -120,7 +122,7 @@ describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
     expect(wg.Properties.WorkGroupConfiguration.BytesScannedCutoffPerQuery).toBeUndefined();
   });
 
-  test('uses custom expiration days when provided', () => {
+  test('uses custom expiration days for current and noncurrent results', () => {
     const t = synth({
       ...baseProps,
       dataPlaneConfig: { athena: { resultsExpirationDays: 7 } },
@@ -129,7 +131,10 @@ describe('DlzDataExportsAthena (composed by DlzDataExportsDataPlane)', () => {
       BucketName: 'dlz-finops-athena-results-111111111111-us-east-1',
       LifecycleConfiguration: {
         Rules: Match.arrayWith([
-          Match.objectLike({ ExpirationInDays: 7 }),
+          Match.objectLike({
+            ExpirationInDays: 7,
+            NoncurrentVersionExpiration: { NoncurrentDays: 7 },
+          }),
         ]),
       },
     });

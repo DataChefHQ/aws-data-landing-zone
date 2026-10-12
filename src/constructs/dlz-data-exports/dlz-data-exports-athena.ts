@@ -51,7 +51,7 @@ export class DlzDataExportsAthena extends Construct {
     this.workgroupName = cfg.workgroupName ?? DLZ_DATA_EXPORTS_DEFAULTS.athena.workgroupName;
     this.resultsBucket = new s3.Bucket(this, 'results-bucket', {
       bucketName,
-      versioned: false,
+      versioned: true,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       enforceSSL: true,
       encryption: props.encryption.kind,
@@ -61,6 +61,7 @@ export class DlzDataExportsAthena extends Construct {
         id: 'dlz-finops-athena-results-expiration',
         enabled: true,
         expiration: Duration.days(expirationDays),
+        noncurrentVersionExpiration: Duration.days(expirationDays),
         abortIncompleteMultipartUploadAfter: Duration.days(1),
       }],
     });

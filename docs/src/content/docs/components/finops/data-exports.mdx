@@ -579,7 +579,8 @@ query result location in Amazon S3" prompt.
 - Workgroup with `EnforceWorkGroupConfiguration: true` — users can't override
   the result location or encryption client-side
 - Results bucket `dlz-finops-athena-results-{accountId}-{region}` with BPA,
-  SSL-only access, 30-day expiration (results are scratch data)
+  SSL-only access, versioning, and 30-day expiration for current results.
+  Old versions expire 30 days after becoming noncurrent (results are scratch data).
 - Encryption mirrors the shared data bucket
 - Athena engine v3
 
@@ -637,6 +638,11 @@ only consulted at *delete* time, using the value that was deployed — if you
 flip it to `true` and immediately try to rename the workgroup in the same
 deploy, the old workgroup's deployed value still applies. Flip first, deploy,
 then rename in a subsequent deploy.
+
+`resultsExpirationDays` controls both current-result expiration and the retention
+of versions after they become noncurrent. With the default of 30 days, an
+untouched result becomes noncurrent after 30 days and expires after another
+30 days, subject to S3's asynchronous lifecycle processing.
 
 ### Opting out
 
