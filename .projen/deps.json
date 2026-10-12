@@ -33,6 +33,11 @@
       "type": "build"
     },
     {
+      "name": "aws-cdk",
+      "version": "2.1145.0",
+      "type": "build"
+    },
+    {
       "name": "cdk-express-pipeline",
       "version": "2.3.1",
       "type": "build"

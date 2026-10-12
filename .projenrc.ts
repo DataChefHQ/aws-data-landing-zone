@@ -72,7 +72,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/js-yaml',
     'table',
   ],
-  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node@^22', 'cdk-express-pipeline@2.3.1'],
+  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node@^22', 'cdk-express-pipeline@2.3.1', 'aws-cdk@2.1145.0'],
   jestOptions: {
     jestConfig: {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
