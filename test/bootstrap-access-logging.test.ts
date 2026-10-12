@@ -5,14 +5,15 @@ import { join } from 'node:path';
 import { STS } from '@aws-sdk/client-sts';
 import { DataLandingZoneProps, Region } from '../src/data-landing-zone-types';
 import { Scripts } from '../src/scripts';
-import { writeBootstrapAccessLoggingTemplate } from '../src/scripts/lib/bootstrap-template';
 
 test('bootstrap assets log to a private retained bucket without changing the vendor deployment contract', () => {
   const directory = mkdtempSync(join(tmpdir(), 'dlz-bootstrap-test-'));
   try {
-    const baseline = JSON.parse(execFileSync('cdk', ['bootstrap', '--show-template', '--json'], { encoding: 'utf8' }));
+    const baseline = JSON.parse(execFileSync('cdk', ['bootstrap', '--show-template', '--json', '--ci=false'], { encoding: 'utf8' }));
     const path = join(directory, 'template.json');
-    writeBootstrapAccessLoggingTemplate(path);
+    // Run the real generator in CI mode: recent CDK CLIs otherwise mix info with JSON.
+    execFileSync(process.execPath, ['-r', 'ts-node/register', '-e',
+      'require("./src/scripts/lib/bootstrap-template").writeBootstrapAccessLoggingTemplate(process.argv[1])', path], { env: { ...process.env, CI: 'true' } });
     const template = JSON.parse(readFileSync(path, 'utf8'));
     const source = template.Resources.StagingBucket;
     expect(source.Properties.LoggingConfiguration).toEqual({
@@ -57,7 +58,7 @@ test('bootstrap keeps defaults, applies logging to every environment, and refuse
   const directory = mkdtempSync(join(tmpdir(), 'dlz-bootstrap-script-test-'));
   const originalCwd = process.cwd();
   const originalPath = process.env.PATH;
-  const template = execFileSync('cdk', ['bootstrap', '--show-template', '--json'], { encoding: 'utf8' });
+  const template = execFileSync('cdk', ['bootstrap', '--show-template', '--json', '--ci=false'], { encoding: 'utf8' });
   const trace = join(directory, 'commands.jsonl');
   writeFileSync(join(directory, 'vendor.json'), template);
   // A local CLI substitute records inputs; only the AWS STS boundary is mocked.

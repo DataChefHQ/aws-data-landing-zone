@@ -2,7 +2,8 @@ import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 
 export function writeBootstrapAccessLoggingTemplate(path: string): void {
-  const template = JSON.parse(execFileSync('cdk', ['bootstrap', '--show-template', '--json'], { encoding: 'utf8' }));
+  // CLI CI mode sends informational logs to stdout, contaminating template JSON.
+  const template = JSON.parse(execFileSync('cdk', ['bootstrap', '--show-template', '--json', '--ci=false'], { encoding: 'utf8' }));
   const source = template.Resources?.StagingBucket;
   if (source?.Type !== 'AWS::S3::Bucket' || !source.Properties?.BucketName || source.Properties.LoggingConfiguration ||
       template.Resources.FileAssetsAccessLogsBucket ||
