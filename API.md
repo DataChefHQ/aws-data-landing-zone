@@ -21584,6 +21584,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#aws-data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#aws-data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Name). |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.bootstrapAccessLogging">bootstrapAccessLogging</a></code> | <code>boolean</code> | Enable S3 server access logging for CDK bootstrap file asset buckets in every account and region visited by Scripts.boostrapAll. Requires a bootstrap run; ordinary DLZ deployment does not update CDKToolkit. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a></code> | Cost-management capabilities. |
@@ -21680,6 +21681,19 @@ support is best-effort because not every AWS resource accepts tags.
 
 DLZ-created stacks are tagged Owner=infra, Project=dlz, Environment=dlz, CostCenter=dlz,
 Name=dlz.
+
+---
+
+##### `bootstrapAccessLogging`<sup>Optional</sup> <a name="bootstrapAccessLogging" id="aws-data-landing-zone.DataLandingZoneProps.property.bootstrapAccessLogging"></a>
+
+```typescript
+public readonly bootstrapAccessLogging: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Enable S3 server access logging for CDK bootstrap file asset buckets in every account and region visited by Scripts.boostrapAll. Requires a bootstrap run; ordinary DLZ deployment does not update CDKToolkit.
 
 ---
 

@@ -45,7 +45,27 @@ The `bootstrap` script, however, requires elevated permissions. The specified pr
 to the Management account and the ability to assume the `AWSControlTowerExecution` role created by AWS
 Control Tower. These permissions are highly privileged and should be handled with caution.
 
-### Usage
+### Bootstrap asset access logging
+
+Set `bootstrapAccessLogging: true` in the TypeScript DLZ configuration, or
+`bootstrap_access_logging=True` in Python, then run `Scripts.boostrapAll` /
+`Scripts().boostrap_all(config)` through your existing bootstrap workflow.
+The option defaults to `false` and applies to every account and region visited
+by that script. An ordinary DLZ deployment does not update the bootstrap stack.
+
+The script obtains the installed CDK CLI's current bootstrap template and adds
+server access logging to its file asset bucket. CDKToolkit owns the destination
+bucket and policy, so deployment roles, asset encryption, and existing lifecycle
+settings stay in the same stack. Logs use SSE-S3, block public access, require TLS,
+disable ACLs, and expire current and noncurrent versions after 365 days. The log
+destination is retained when the stack is deleted and does not log to itself.
+
+Continue using the DLZ bootstrap workflow with the option enabled for subsequent
+bootstrap updates. A bare `cdk bootstrap` uses the vendor template and can remove
+this customization. The script preserves CDK's variant and version checks, and
+does not use `--force` to bypass them.
+
+### Usage examples
 
 Usage is demonstrated below for both TypeScript and Python.
 
@@ -93,7 +113,7 @@ Usage is demonstrated below for both TypeScript and Python.
     including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
     management, security audit, security log, and workload accounts, ensuring they all trust the Management account.
 
-    #### Available Scripts
+#### Available Scripts
 
     - `boostrapAll(props: DataLandingZoneProps)` - Bootstraps all accounts (management, security audit, security log,
       and workload accounts) in all regions.
@@ -153,7 +173,7 @@ Usage is demonstrated below for both TypeScript and Python.
     including details such as AWS profiles, account IDs, and regions. It orchestrates the bootstrapping process for the
     management, security audit, security log, and workload accounts, ensuring they all trust the Management account.
 
-    #### Available Scripts
+#### Available Scripts
 
     - `boostrap_all(props: DataLandingZoneProps)` - Bootstraps all accounts (management, security audit, security log,
       and workload accounts) in all regions.
@@ -181,8 +201,6 @@ Usage is demonstrated below for both TypeScript and Python.
 
   </Fragment>
 </DualCode>
-
-
 
 ## Commands (manual)
 

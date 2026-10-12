@@ -834,6 +834,13 @@ export interface DataLandingZoneProps {
    * but the `bootstrap` script requires full admin access.
    */
   readonly localProfile: string;
+  /**
+   * Enable S3 server access logging for CDK bootstrap file asset buckets in every
+   * account and region visited by Scripts.boostrapAll. Requires a bootstrap run;
+   * ordinary DLZ deployment does not update CDKToolkit.
+   * @default false
+   */
+  readonly bootstrapAccessLogging?: boolean;
   readonly organization: DLzOrganization;
   readonly regions: DlzRegions;
   /**
