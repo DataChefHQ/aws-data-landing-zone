@@ -30,8 +30,7 @@
       "jest",
       "node",
       "js-yaml"
-    ],
-    "sourceMap": true
+    ]
   },
   "include": [
     "src/**/*.ts",

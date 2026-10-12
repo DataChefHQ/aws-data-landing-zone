@@ -17,7 +17,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/DataChefHQ/aws-data-landing-zone.git',
   tsconfig: {
     compilerOptions: {
-      sourceMap: true,
       inlineSourceMap: true,
     },
   },
