@@ -494,7 +494,7 @@ table name must be unique within the map — DLZ validates this at synth.
         dataPlaneConfig: {
           encryption: {},                        // SSE-S3; pass kmsKeyArn for SSE-KMS
           versioning: true,
-          accessLogging: true,
+          accessLogging: true,                   // opt-in; default false
           glueDatabaseName: 'acme_finops',         // default 'dlz_finops'
           glueCrawlerSchedule: 'cron(0 6 * * ? *)',
           additionalReadAccountIds: ['111...'],
@@ -520,7 +520,7 @@ table name must be unique within the map — DLZ validates this at synth.
             data_plane_config=dlz.DlzDataExportsDataPlaneConfig(
                 encryption=dlz.DlzDataExportsBucketEncryption(),
                 versioning=True,
-                access_logging=True,
+                access_logging=True,  # opt-in; default False
                 glue_database_name="acme_finops",
                 glue_crawler_schedule="cron(0 6 * * ? *)",
                 additional_read_account_ids=["111..."],
@@ -537,6 +537,21 @@ table name must be unique within the map — DLZ validates this at synth.
     ```
   </Fragment>
 </DualCode>
+
+`dataPlaneConfig.accessLogging: true` enables S3 server access logging for both
+the shared export-data bucket and the Athena results bucket, when Athena is
+enabled. DLZ creates one dedicated log bucket in the FinOps account and
+destination Region, with separate `data/` and `athena/` prefixes. The destination
+uses SSE-S3 even when the source buckets use SSE-KMS, as required by S3 log
+delivery. It blocks public access, requires TLS, disables ACLs, and permits log
+delivery only from the source buckets in the FinOps account.
+
+Logging is disabled by default. The log bucket is versioned and retained when
+the stack is removed. Current logs expire after 365 days; noncurrent versions
+expire 365 days after becoming noncurrent. The destination does not log its own
+requests, avoiding recursive log delivery. Log objects incur S3 storage costs,
+and delivery can take a few hours after enabling logging. See
+[AWS's server access logging guidance](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html).
 
 ## Per-entry overrides
 

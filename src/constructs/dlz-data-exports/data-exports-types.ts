@@ -126,6 +126,7 @@ export interface DlzDataExportsAthenaConfig {
 export interface DlzDataExportsDataPlaneConfig {
   readonly encryption?: DlzDataExportsBucketEncryption;
   readonly versioning?: boolean;
+  /** Log data and Athena results bucket requests to a dedicated SSE-S3 bucket. Default false. */
   readonly accessLogging?: boolean;
   readonly lifecycle?: DlzDataExportsLifecycleConfig;
   readonly glueCrawlerSchedule?: string;

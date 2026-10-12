@@ -93,6 +93,91 @@ describe('DlzDataExportsDataPlane — shared bucket', () => {
   });
 });
 
+describe('DlzDataExportsDataPlane — server access logging', () => {
+  test.each([undefined, false])('keeps logging opt-in when accessLogging is %s', accessLogging => {
+    const t = synth({ dataPlaneConfig: { accessLogging } });
+    t.resourceCountIs('AWS::S3::Bucket', 2);
+    for (const bucket of Object.values(t.findResources('AWS::S3::Bucket'))) {
+      expect(bucket.Properties.LoggingConfiguration).toBeUndefined();
+    }
+  });
+
+  test.each([undefined, 'arn:aws:kms:us-east-1:111111111111:key/00000000-0000-0000-0000-000000000000'])(
+    'logs both source buckets to a protected SSE-S3 destination with source encryption %s', kmsKeyArn => {
+      const t = synth({ dataPlaneConfig: { accessLogging: true, encryption: { kmsKeyArn } } });
+      t.resourceCountIs('AWS::S3::Bucket', 3);
+      const logBuckets = Object.entries(t.findResources('AWS::S3::Bucket'))
+        .filter(([, bucket]) => !bucket.Properties.BucketName);
+      expect(logBuckets).toHaveLength(1);
+      const [logId, logBucket] = logBuckets[0];
+      expect(logBucket.DeletionPolicy).toBe('Retain');
+      expect(logBucket.Properties).toMatchObject({
+        BucketEncryption: {
+          ServerSideEncryptionConfiguration: [{ ServerSideEncryptionByDefault: { SSEAlgorithm: 'AES256' } }],
+        },
+        VersioningConfiguration: { Status: 'Enabled' },
+        PublicAccessBlockConfiguration: {
+          BlockPublicAcls: true,
+          BlockPublicPolicy: true,
+          IgnorePublicAcls: true,
+          RestrictPublicBuckets: true,
+        },
+        OwnershipControls: { Rules: [{ ObjectOwnership: 'BucketOwnerEnforced' }] },
+        LifecycleConfiguration: {
+          Rules: [{ Status: 'Enabled', ExpirationInDays: 365, NoncurrentVersionExpiration: { NoncurrentDays: 365 } }],
+        },
+      });
+      expect(logBucket.Properties.LoggingConfiguration).toBeUndefined();
+      t.hasResourceProperties('AWS::S3::BucketPolicy', {
+        Bucket: { Ref: logId },
+        PolicyDocument: {
+          Statement: Match.arrayWith([
+            Match.objectLike({ Effect: 'Deny', Condition: { Bool: { 'aws:SecureTransport': 'false' } } }),
+          ]),
+        },
+      });
+
+      for (const [bucketName, prefix] of [
+        ['dlz-finops-111111111111-us-east-1', 'data/'],
+        ['dlz-finops-athena-results-111111111111-us-east-1', 'athena/'],
+      ]) {
+        const [sourceId] = Object.keys(t.findResources('AWS::S3::Bucket', { Properties: { BucketName: bucketName } }));
+        t.hasResourceProperties('AWS::S3::Bucket', {
+          BucketName: bucketName,
+          LoggingConfiguration: { DestinationBucketName: { Ref: logId }, LogFilePrefix: prefix },
+        });
+        t.hasResourceProperties('AWS::S3::BucketPolicy', {
+          Bucket: { Ref: logId },
+          PolicyDocument: {
+            Statement: Match.arrayWith([
+              Match.objectLike({
+                Effect: 'Allow',
+                Principal: { Service: 'logging.s3.amazonaws.com' },
+                Action: 's3:PutObject',
+                Resource: { 'Fn::Join': ['', [{ 'Fn::GetAtt': [logId, 'Arn'] }, `/${prefix}*`]] },
+                Condition: {
+                  ArnLike: { 'aws:SourceArn': { 'Fn::GetAtt': [sourceId, 'Arn'] } },
+                  StringEquals: { 'aws:SourceAccount': '111111111111' },
+                },
+              }),
+            ]),
+          },
+        });
+      }
+    },
+  );
+
+  test('logs the data bucket when Athena is disabled', () => {
+    const t = synth({ dataPlaneConfig: { accessLogging: true, athena: { enabled: false } } });
+    t.resourceCountIs('AWS::S3::Bucket', 2);
+    t.hasResourceProperties('AWS::S3::Bucket', {
+      BucketName: 'dlz-finops-111111111111-us-east-1',
+      LoggingConfiguration: { DestinationBucketName: Match.anyValue(), LogFilePrefix: 'data/' },
+    });
+    t.resourceCountIs('AWS::Athena::WorkGroup', 0);
+  });
+});
+
 describe('DlzDataExportsDataPlane — shared Glue DB + multi-target crawler', () => {
   test('creates exactly one shared Glue database', () => {
     const t = synth({

@@ -65,6 +65,10 @@ export class DlzDataExportsDataPlane extends Construct {
     super(scope, id);
 
     const dpCfg = props.dataPlaneConfig ?? {};
+    if (dpCfg.accessLogging) {
+      // Keep log delivery compatible with ACL-disabled buckets, independent of app feature flags.
+      this.node.setContext('@aws-cdk/aws-s3:serverAccessLogsUseBucketPolicy', true);
+    }
     const lifecycleCfg = dpCfg.lifecycle ?? {};
     const lifecycleEnabled = lifecycleCfg.enabled ?? true;
     const accountId = Stack.of(scope).account;
@@ -88,6 +92,20 @@ export class DlzDataExportsDataPlane extends Construct {
     const encryption = this.resolveEncryption(dpCfg);
     this.resolvedEncryption = encryption;
 
+    const accessLogsBucket = dpCfg.accessLogging ? new s3.Bucket(this, 'access-logs-bucket', {
+      versioned: true,
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      enforceSSL: true,
+      objectOwnership: s3.ObjectOwnership.BUCKET_OWNER_ENFORCED,
+      // S3 server access log delivery requires SSE-S3, even when source buckets use KMS.
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      removalPolicy: RemovalPolicy.RETAIN,
+      lifecycleRules: [{
+        expiration: Duration.days(365),
+        noncurrentVersionExpiration: Duration.days(365),
+      }],
+    }) : undefined;
+
     this.bucket = new s3.Bucket(this, 'cur-bucket', {
       bucketName,
       versioned: dpCfg.versioning ?? true,
@@ -95,6 +113,8 @@ export class DlzDataExportsDataPlane extends Construct {
       enforceSSL: true,
       encryption: encryption.kind,
       encryptionKey: encryption.key,
+      serverAccessLogsBucket: accessLogsBucket,
+      serverAccessLogsPrefix: accessLogsBucket ? 'data/' : undefined,
       removalPolicy: RemovalPolicy.RETAIN,
       lifecycleRules: lifecycleEnabled ? this.lifecycleRules(lifecycleCfg) : [],
     });
@@ -191,6 +211,7 @@ export class DlzDataExportsDataPlane extends Construct {
         accountId,
         region: props.destinationRegion,
         encryption,
+        serverAccessLogsBucket: accessLogsBucket,
         config: dpCfg.athena,
       });
     }
