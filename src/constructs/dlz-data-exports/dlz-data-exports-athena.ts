@@ -17,6 +17,8 @@ export interface DlzDataExportsAthenaProps {
   readonly region: string;
   /** Resolved by the data plane so encryption stays consistent with the CUR bucket. */
   readonly encryption: DlzDataExportsAthenaResolvedEncryption;
+  /** Shared log destination owned by the data plane when access logging is enabled. */
+  readonly serverAccessLogsBucket?: s3.IBucket;
   readonly config?: DlzDataExportsAthenaConfig;
 }
 
@@ -56,6 +58,8 @@ export class DlzDataExportsAthena extends Construct {
       enforceSSL: true,
       encryption: props.encryption.kind,
       encryptionKey: props.encryption.key,
+      serverAccessLogsBucket: props.serverAccessLogsBucket,
+      serverAccessLogsPrefix: props.serverAccessLogsBucket ? 'athena/' : undefined,
       removalPolicy: RemovalPolicy.RETAIN,
       lifecycleRules: [{
         id: 'dlz-finops-athena-results-expiration',

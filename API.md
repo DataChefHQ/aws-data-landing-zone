@@ -23324,6 +23324,7 @@ const dlzDataExportsAthenaProps: DlzDataExportsAthenaProps = { ... }
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.encryption">encryption</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaResolvedEncryption">DlzDataExportsAthenaResolvedEncryption</a></code> | Resolved by the data plane so encryption stays consistent with the CUR bucket. |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.region">region</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.config">config</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaProps.property.serverAccessLogsBucket">serverAccessLogsBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | Shared log destination owned by the data plane when access logging is enabled. |
 
 ---
 
@@ -23366,6 +23367,18 @@ public readonly config: DlzDataExportsAthenaConfig;
 ```
 
 - *Type:* <a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a>
+
+---
+
+##### `serverAccessLogsBucket`<sup>Optional</sup> <a name="serverAccessLogsBucket" id="aws-data-landing-zone.DlzDataExportsAthenaProps.property.serverAccessLogsBucket"></a>
+
+```typescript
+public readonly serverAccessLogsBucket: IBucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+Shared log destination owned by the data plane when access logging is enabled.
 
 ---
 
@@ -23454,7 +23467,7 @@ const dlzDataExportsDataPlaneConfig: DlzDataExportsDataPlaneConfig = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.accessLogging">accessLogging</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.accessLogging">accessLogging</a></code> | <code>boolean</code> | Log data and Athena results bucket requests to a dedicated SSE-S3 bucket. |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.additionalReadAccountIds">additionalReadAccountIds</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.athena">athena</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsAthenaConfig">DlzDataExportsAthenaConfig</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DlzDataExportsDataPlaneConfig.property.encryption">encryption</a></code> | <code><a href="#aws-data-landing-zone.DlzDataExportsBucketEncryption">DlzDataExportsBucketEncryption</a></code> | *No description.* |
@@ -23472,6 +23485,10 @@ public readonly accessLogging: boolean;
 ```
 
 - *Type:* boolean
+
+Log data and Athena results bucket requests to a dedicated SSE-S3 bucket.
+
+Default false.
 
 ---
 
