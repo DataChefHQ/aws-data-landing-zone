@@ -106,6 +106,54 @@ describe('DlzTagComplianceCentralAlert', () => {
     t.resourceCountIs('AWS::Lambda::EventSourceMapping', 1);
   });
 
+  test('alerts on stalled findings and dead letters through the existing notification topic', () => {
+    const t = centralTemplate({ emails: ['tags@example.com'] });
+    const queues = t.findResources('AWS::SQS::Queue');
+    const topicId = Object.keys(t.findResources('AWS::SNS::Topic'))[0];
+    t.resourceCountIs('AWS::CloudWatch::Alarm', 4);
+    t.resourceCountIs('AWS::SNS::Topic', 1);
+
+    for (const [queueName, age, backlog, period, evaluationPeriods] of [
+      ['central-findings', 900, 100, 300, 2],
+      ['central-findings-dlq', 300, 1, 60, 1],
+    ] as const) {
+      const queueId = Object.keys(queues).find(key => queues[key].Properties.QueueName === queueName);
+      expect(queueId).toBeDefined();
+      for (const [metric, threshold] of [
+        ['ApproximateAgeOfOldestMessage', age],
+        ['ApproximateNumberOfMessagesVisible', backlog],
+      ] as const) {
+        t.hasResourceProperties('AWS::CloudWatch::Alarm', {
+          Namespace: 'AWS/SQS',
+          MetricName: metric,
+          Dimensions: [{ Name: 'QueueName', Value: { 'Fn::GetAtt': [queueId, 'QueueName'] } }],
+          Statistic: 'Maximum',
+          Period: period,
+          EvaluationPeriods: evaluationPeriods,
+          Threshold: threshold,
+          ComparisonOperator: 'GreaterThanOrEqualToThreshold',
+          TreatMissingData: 'notBreaching',
+          AlarmActions: [{ Ref: topicId }],
+        });
+      }
+    }
+
+    const alarmArns = Object.keys(t.findResources('AWS::CloudWatch::Alarm'))
+      .map(alarmId => ({ 'Fn::GetAtt': [alarmId, 'Arn'] }));
+    t.hasResourceProperties('AWS::SNS::TopicPolicy', {
+      Topics: [{ Ref: topicId }],
+      PolicyDocument: Match.objectLike({
+        Statement: Match.arrayWith([Match.objectLike({
+          Effect: 'Allow',
+          Principal: { Service: 'cloudwatch.amazonaws.com' },
+          Action: 'sns:Publish',
+          Resource: { Ref: topicId },
+          Condition: { ArnEquals: { 'aws:SourceArn': alarmArns } },
+        })]),
+      }),
+    });
+  });
+
   test('the central rule targets the queue, not the formatter directly', () => {
     const t = centralTemplate({ emails: ['tags@example.com'] });
     const rules = t.findResources('AWS::Events::Rule');
