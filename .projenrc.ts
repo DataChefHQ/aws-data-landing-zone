@@ -91,6 +91,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
 project.addDevDeps('eslint-import-resolver-typescript@^4.4.5');
 
+// Use release tags for generated GitHub Actions instead of projen's commit hashes.
+project.github!.actions.set('actions/checkout', 'actions/checkout@v7.0.1');
+project.github!.actions.set('actions/upload-artifact', 'actions/upload-artifact@v7.0.1');
+project.github!.actions.set('actions/download-artifact', 'actions/download-artifact@v8.0.1');
+project.github!.actions.set('amannn/action-semantic-pull-request', 'amannn/action-semantic-pull-request@v6.1.1');
+
 project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',
   target: 'node22',
