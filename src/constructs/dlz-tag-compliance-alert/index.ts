@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { Duration } from 'aws-cdk-lib';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
+import * as actions from 'aws-cdk-lib/aws-cloudwatch-actions';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
@@ -174,6 +176,10 @@ export class DlzTagComplianceCentralAlert {
     // Holding each finding briefly lets the formatter re-read the live tags and drop the alert if
     // the resource was tagged in the meantime. The queue also brings retries and a dead-letter
     // queue, which a direct Lambda target does not.
+    const deadLetters = new sqs.Queue(scope, `${id}-findings-dlq`, {
+      queueName: `${id}-findings-dlq`,
+      retentionPeriod: Duration.days(14),
+    });
     const findings = new sqs.Queue(scope, `${id}-findings`, {
       queueName: `${id}-findings`,
       deliveryDelay: props.alertDelay ?? Duration.minutes(2),
@@ -181,15 +187,42 @@ export class DlzTagComplianceCentralAlert {
       retentionPeriod: Duration.days(4),
       deadLetterQueue: {
         maxReceiveCount: 3,
-        queue: new sqs.Queue(scope, `${id}-findings-dlq`, {
-          queueName: `${id}-findings-dlq`,
-          retentionPeriod: Duration.days(14),
-        }),
+        queue: deadLetters,
       },
     });
     formatter.addEventSource(
       new eventsources.SqsEventSource(findings, { batchSize: 1 }),
     );
+
+    const alarms: cloudwatch.Alarm[] = [];
+    for (const { queue, age, backlog, period, evaluationPeriods } of [
+      // Allow the intentional delivery delay and transient bursts before alerting.
+      { queue: findings, age: 900, backlog: 100, period: Duration.minutes(5), evaluationPeriods: 2 },
+      { queue: deadLetters, age: 300, backlog: 1, period: Duration.minutes(1), evaluationPeriods: 1 },
+    ]) {
+      for (const { name, metricName, threshold } of [
+        { name: 'message-age', metricName: 'ApproximateAgeOfOldestMessage', threshold: age },
+        { name: 'visible-messages', metricName: 'ApproximateNumberOfMessagesVisible', threshold: backlog },
+      ]) {
+        const alarm = new cloudwatch.Alarm(scope, `${queue.node.id}-${name}`, {
+          alarmDescription: `Tag-compliance queue ${queue.queueName}: ${metricName} >= ${threshold}. Inspect the queue and formatter logs.`,
+          metric: queue.metric(metricName, { statistic: 'Maximum', period }),
+          threshold,
+          evaluationPeriods,
+          comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+          treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+        });
+        alarm.addAlarmAction(new actions.SnsAction(this.topic));
+        alarms.push(alarm);
+      }
+    }
+    this.topic.addToResourcePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      principals: [new iam.ServicePrincipal('cloudwatch.amazonaws.com')],
+      actions: ['sns:Publish'],
+      resources: [this.topic.topicArn],
+      conditions: { ArnEquals: { 'aws:SourceArn': alarms.map(alarm => alarm.alarmArn) } },
+    }));
 
     // The rule targets the queue (not the topic) so the alert shows the account name and skips
     // findings that are no longer valid by the time they are read.
