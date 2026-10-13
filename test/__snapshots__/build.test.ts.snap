@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = `
 {
@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "cfe026166779b15212b1135b37b3fc08b5d42b3902a74956e4085acb44574876.zip",
+          "S3Key": "1d7936a77c2e0aea3b22e20d6deea6f643a71ea56a1b11633bffc3ad3f4e44ff.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "253da769114feff3111f05b2116331cb27a96d3cdf3bc34f6a0a0913dc24fad2.zip",
+          "S3Key": "846b2a3afb4048394f657a93a1092e4e4488ddfbd6ec40046b27fe2409863f22.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -1212,7 +1212,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -2899,7 +2899,7 @@ exports[`Build Local snapshot testing: managementTemplate snapshot 1`] = `
         "ClientIDList": [
           "sts.amazonaws.com",
         ],
-        "CodeHash": "d75c48c9f82cde63e9bf414df335e84e8ac24f11eb34889be255b702aec71e50",
+        "CodeHash": "c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d",
         "RejectUnauthorized": false,
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -3946,7 +3946,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
+          "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -3955,7 +3955,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase2Sta
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Tags": [
           {
             "Key": "CostCenter",
@@ -4322,7 +4322,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-381491899779-eu-west-1",
-          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
+          "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -4331,7 +4331,7 @@ exports[`Build Local snapshot testing: workloadGlobalNetworkConnectionsPhase3Sta
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Tags": [
           {
             "Key": "CostCenter",
@@ -4653,7 +4653,7 @@ exports[`Build Local snapshot testing: workloadGlobalStacksTemplates snapshot 1`
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Tags": [
           {
             "Key": "CostCenter",
@@ -7503,7 +7503,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-234567890123-us-east-1",
-          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
+          "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -7512,7 +7512,7 @@ exports[`Build Local snapshot testing: workloadRegionalNetworkConnectionsPhase3S
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Tags": [
           {
             "Key": "CostCenter",

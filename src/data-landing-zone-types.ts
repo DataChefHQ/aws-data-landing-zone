@@ -1,10 +1,5 @@
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import { InstanceType } from 'aws-cdk-lib/aws-ec2/lib/instance-types';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import { IManagedPolicy } from 'aws-cdk-lib/aws-iam/lib/managed-policy';
-import { PolicyDocument } from 'aws-cdk-lib/aws-iam/lib/policy-document';
-import { PolicyStatement } from 'aws-cdk-lib/aws-iam/lib/policy-statement';
-import { IPrincipal } from 'aws-cdk-lib/aws-iam/lib/principals';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import { Duration, SecretValue } from 'aws-cdk-lib/core';
 import {
@@ -213,9 +208,9 @@ export enum DlzAccountType {
 /** Additional SCP statements per `DlzAccountType`, layered between the org baseline and per-account extras. Additive only. */
 export interface ScpStatementsByAccountType {
   /** @default - no statements */
-  readonly development?: PolicyStatement[];
+  readonly development?: iam.PolicyStatement[];
   /** @default - no statements */
-  readonly production?: PolicyStatement[];
+  readonly production?: iam.PolicyStatement[];
 }
 
 export interface DLzManagementAccount {
@@ -231,7 +226,7 @@ export interface DLzFinOpsAccount extends DLzManagementAccount {
    * Extra per-account SCP statements appended to `ScpFinOpsAccountBaseline`.
    * @default - no additional statements
    */
-  readonly scpStatements?: PolicyStatement[];
+  readonly scpStatements?: iam.PolicyStatement[];
 }
 
 export interface DLzIamUserGroup {
@@ -269,7 +264,7 @@ export interface DlzIamPolicy {
    *
    * @default - No statements.
    */
-  readonly statements?: PolicyStatement[];
+  readonly statements?: iam.PolicyStatement[];
   /**
    * Initial PolicyDocument to use for this Policy. If omited, any
    * `PolicyStatement` provided in the `statements` property will be applied
@@ -277,7 +272,7 @@ export interface DlzIamPolicy {
    *
    * @default - An empty policy.
    */
-  readonly document?: PolicyDocument;
+  readonly document?: iam.PolicyDocument;
 }
 
 export interface DlzIamRole {
@@ -295,7 +290,7 @@ export interface DlzIamRole {
    * You can later modify the assume role policy document by accessing it via
    * the `assumeRolePolicy` property.
    */
-  readonly assumedBy: IPrincipal;
+  readonly assumedBy: iam.IPrincipal;
   /**
    * List of IDs that the role assumer needs to provide one of when assuming this role
    *
@@ -317,7 +312,7 @@ export interface DlzIamRole {
    * dependencies that could otherwise be introduced)..
    */
   readonly inlinePolicies?: {
-    [name: string]: PolicyDocument;
+    [name: string]: iam.PolicyDocument;
   };
   /**
    * AWS supports permissions boundaries for IAM entities (users or roles).
@@ -332,7 +327,7 @@ export interface DlzIamRole {
    *
    * @default - No permissions boundary.
    */
-  readonly permissionsBoundary?: IManagedPolicy;
+  readonly permissionsBoundary?: iam.IManagedPolicy;
   /**
    * The maximum session duration that you want to set for the specified role.
    * This setting can have a value from 1 hour (3600sec) to 12 (43200sec) hours.
@@ -384,7 +379,7 @@ export interface DlzIamUser {
    * @link https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-permissionsboundary
    * @link https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
    */
-  readonly permissionsBoundary?: IManagedPolicy;
+  readonly permissionsBoundary?: iam.IManagedPolicy;
   /**
    * The password for the user. This is required so the user can access the
    * AWS Management Console.
@@ -471,7 +466,7 @@ export interface DlzStandaloneScp {
    * Statements for this one SCP. Rendered as a single policy document, which must be
    * <= 10,240 characters. Synth fails otherwise — split into another entry.
    */
-  readonly statements: PolicyStatement[];
+  readonly statements: iam.PolicyStatement[];
 }
 
 export interface DLzAccount {
@@ -540,7 +535,7 @@ export interface DLzAccount {
    * Additional per-account SCP statements layered on top of the org baseline and account-type tier. Additive only.
    * @default - no additional statements
    */
-  readonly scpStatements?: PolicyStatement[];
+  readonly scpStatements?: iam.PolicyStatement[];
 
   /**
    * Standalone SCPs attached directly to this account, each emitted as its OWN
@@ -772,7 +767,7 @@ export interface NetworkNatGateway {
 
 export interface NetworkNatInstance {
   readonly eip?: ec2.CfnEIPProps;
-  readonly instanceType: InstanceType;
+  readonly instanceType: ec2.InstanceType;
 }
 
 export interface NetworkNatType {
@@ -816,7 +811,7 @@ export interface BastionHost {
   /**
    * The bastion instance EC2 type
    */
-  readonly instanceType: InstanceType;
+  readonly instanceType: ec2.InstanceType;
 }
 
 export interface Network {
@@ -859,7 +854,7 @@ export interface DataLandingZoneProps {
    *
    * @default - only the mandatory-tags SCP is applied
    */
-  readonly scpBaselineStatements?: PolicyStatement[];
+  readonly scpBaselineStatements?: iam.PolicyStatement[];
 
   /**
    * Per-`DlzAccountType` SCP statements layered between the org baseline and per-account extras. Additive only.

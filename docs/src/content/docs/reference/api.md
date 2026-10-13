@@ -50,6 +50,7 @@ new AuditGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLan
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.AuditGlobalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -142,6 +143,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.AuditGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.AuditGlobalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.AuditGlobalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.AuditGlobalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -539,6 +569,8 @@ public securityHubNotifications(): void
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.AuditGlobalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.AuditGlobalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.AuditGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -573,6 +605,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.AuditGlobalStack.consumeListReference"></a>
+
+```typescript
+import { AuditGlobalStack } from 'aws-data-landing-zone'
+
+AuditGlobalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.AuditGlobalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.AuditGlobalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.AuditGlobalStack.consumeReference"></a>
+
+```typescript
+import { AuditGlobalStack } from 'aws-data-landing-zone'
+
+AuditGlobalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.AuditGlobalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.AuditGlobalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -1073,6 +1182,7 @@ new AuditRegionalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.AuditRegionalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -1164,6 +1274,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.AuditRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.AuditRegionalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.AuditRegionalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.AuditRegionalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -1555,6 +1694,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.AuditRegionalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.AuditRegionalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.AuditRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -1589,6 +1730,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.AuditRegionalStack.consumeListReference"></a>
+
+```typescript
+import { AuditRegionalStack } from 'aws-data-landing-zone'
+
+AuditRegionalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.AuditRegionalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.AuditRegionalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.AuditRegionalStack.consumeReference"></a>
+
+```typescript
+import { AuditRegionalStack } from 'aws-data-landing-zone'
+
+AuditRegionalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.AuditRegionalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.AuditRegionalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -3137,6 +3355,7 @@ new DlzStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.DlzStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.DlzStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.DlzStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.DlzStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -3228,6 +3447,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.DlzStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.DlzStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.DlzStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.DlzStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -3619,6 +3867,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.DlzStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.DlzStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.DlzStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.DlzStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.DlzStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -3653,6 +3903,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.DlzStack.consumeListReference"></a>
+
+```typescript
+import { DlzStack } from 'aws-data-landing-zone'
+
+DlzStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.DlzStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.DlzStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.DlzStack.consumeReference"></a>
+
+```typescript
+import { DlzStack } from 'aws-data-landing-zone'
+
+DlzStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.DlzStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.DlzStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -4162,6 +4489,7 @@ new FinOpsGlobalStack(scope: Construct, stackProps: DlzStackProps, props: DataLa
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -4253,6 +4581,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.FinOpsGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.FinOpsGlobalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.FinOpsGlobalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.FinOpsGlobalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -4644,6 +5001,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.FinOpsGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -4678,6 +5037,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.FinOpsGlobalStack.consumeListReference"></a>
+
+```typescript
+import { FinOpsGlobalStack } from 'aws-data-landing-zone'
+
+FinOpsGlobalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.FinOpsGlobalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.FinOpsGlobalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.FinOpsGlobalStack.consumeReference"></a>
+
+```typescript
+import { FinOpsGlobalStack } from 'aws-data-landing-zone'
+
+FinOpsGlobalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.FinOpsGlobalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.FinOpsGlobalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -6283,6 +6719,7 @@ new LogGlobalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.LogGlobalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -6374,6 +6811,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.LogGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.LogGlobalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.LogGlobalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.LogGlobalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -6765,6 +7231,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.LogGlobalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.LogGlobalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.LogGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -6799,6 +7267,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.LogGlobalStack.consumeListReference"></a>
+
+```typescript
+import { LogGlobalStack } from 'aws-data-landing-zone'
+
+LogGlobalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.LogGlobalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.LogGlobalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.LogGlobalStack.consumeReference"></a>
+
+```typescript
+import { LogGlobalStack } from 'aws-data-landing-zone'
+
+LogGlobalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.LogGlobalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.LogGlobalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -7299,6 +7844,7 @@ new LogRegionalStack(scope: Construct, props: DlzStackProps)
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.LogRegionalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -7390,6 +7936,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.LogRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.LogRegionalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.LogRegionalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.LogRegionalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -7781,6 +8356,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.LogRegionalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.LogRegionalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.LogRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -7815,6 +8392,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.LogRegionalStack.consumeListReference"></a>
+
+```typescript
+import { LogRegionalStack } from 'aws-data-landing-zone'
+
+LogRegionalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.LogRegionalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.LogRegionalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.LogRegionalStack.consumeReference"></a>
+
+```typescript
+import { LogRegionalStack } from 'aws-data-landing-zone'
+
+LogRegionalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.LogRegionalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.LogRegionalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -8812,6 +9466,7 @@ new ManagementDataExportsStack(scope: Construct, stackProps: DlzStackProps, prop
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -8903,6 +9558,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementDataExportsStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.ManagementDataExportsStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementDataExportsStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementDataExportsStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -9294,6 +9978,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.ManagementDataExportsStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -9328,6 +10014,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.ManagementDataExportsStack.consumeListReference"></a>
+
+```typescript
+import { ManagementDataExportsStack } from 'aws-data-landing-zone'
+
+ManagementDataExportsStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementDataExportsStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.ManagementDataExportsStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.ManagementDataExportsStack.consumeReference"></a>
+
+```typescript
+import { ManagementDataExportsStack } from 'aws-data-landing-zone'
+
+ManagementDataExportsStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementDataExportsStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.ManagementDataExportsStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -9835,6 +10598,7 @@ new ManagementGlobalIamIdentityCenterStack(scope: Construct, stackProps: DlzStac
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -9926,6 +10690,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -10317,6 +11110,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -10351,6 +11146,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeListReference"></a>
+
+```typescript
+import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
+
+ManagementGlobalIamIdentityCenterStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeReference"></a>
+
+```typescript
+import { ManagementGlobalIamIdentityCenterStack } from 'aws-data-landing-zone'
+
+ManagementGlobalIamIdentityCenterStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.ManagementGlobalIamIdentityCenterStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -10858,6 +11730,7 @@ new ManagementGlobalStack(scope: Construct, stackProps: ManagementGlobalStackPro
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -10956,6 +11829,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.ManagementGlobalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.ManagementGlobalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.ManagementGlobalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -11402,6 +12304,8 @@ no per-account duplication, and inherited SCPs don't consume any account's slots
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.ManagementGlobalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.ManagementGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -11436,6 +12340,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.ManagementGlobalStack.consumeListReference"></a>
+
+```typescript
+import { ManagementGlobalStack } from 'aws-data-landing-zone'
+
+ManagementGlobalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.ManagementGlobalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.ManagementGlobalStack.consumeReference"></a>
+
+```typescript
+import { ManagementGlobalStack } from 'aws-data-landing-zone'
+
+ManagementGlobalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.ManagementGlobalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.ManagementGlobalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -11936,6 +12917,7 @@ new WorkloadGlobalDataServicesPhase1Stack(scope: Construct, workloadAccountProps
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -12027,6 +13009,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -12418,6 +13429,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -12452,6 +13465,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadGlobalDataServicesPhase1Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalDataServicesPhase1Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadGlobalDataServicesPhase1Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalDataServicesPhase1Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalDataServicesPhase1Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -12959,6 +14049,7 @@ new WorkloadGlobalNetworkConnectionsPhase1Stack(scope: Construct, workloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -13051,6 +14142,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -13460,6 +14580,8 @@ public createPeeringRole(from: DlzAccountNetwork, to: DlzAccountNetwork): void
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -13494,6 +14616,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase1Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase1Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase1Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase1Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase1Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -14001,6 +15200,7 @@ new WorkloadGlobalNetworkConnectionsPhase2Stack(scope: Construct, workloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -14092,6 +15292,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -14483,6 +15712,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -14517,6 +15748,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase2Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase2Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase2Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase2Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase2Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -15024,6 +16332,7 @@ new WorkloadGlobalNetworkConnectionsPhase3Stack(scope: Construct, workloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -15115,6 +16424,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -15506,6 +16844,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -15540,6 +16880,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase3Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase3Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadGlobalNetworkConnectionsPhase3Stack } from 'aws-data-landing-zone'
+
+WorkloadGlobalNetworkConnectionsPhase3Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalNetworkConnectionsPhase3Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -16047,6 +17464,7 @@ new WorkloadGlobalStack(scope: Construct, workloadAccountProps: WorkloadAccountP
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -16138,6 +17556,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadGlobalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadGlobalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadGlobalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -16529,6 +17976,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadGlobalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -16563,6 +18012,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadGlobalStack.consumeListReference"></a>
+
+```typescript
+import { WorkloadGlobalStack } from 'aws-data-landing-zone'
+
+WorkloadGlobalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadGlobalStack.consumeReference"></a>
+
+```typescript
+import { WorkloadGlobalStack } from 'aws-data-landing-zone'
+
+WorkloadGlobalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadGlobalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadGlobalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -17063,6 +18589,7 @@ new WorkloadRegionalDataServicesPhase1Stack(scope: Construct, workloadAccountPro
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -17154,6 +18681,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -17545,6 +19101,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -17579,6 +19137,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadRegionalDataServicesPhase1Stack } from 'aws-data-landing-zone'
+
+WorkloadRegionalDataServicesPhase1Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadRegionalDataServicesPhase1Stack } from 'aws-data-landing-zone'
+
+WorkloadRegionalDataServicesPhase1Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalDataServicesPhase1Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -18086,6 +19721,7 @@ new WorkloadRegionalNetworkConnectionsPhase2Stack(scope: Construct, workloadAcco
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -18177,6 +19813,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -18568,6 +20233,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -18602,6 +20269,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase2Stack } from 'aws-data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase2Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase2Stack } from 'aws-data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase2Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase2Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -19109,6 +20853,7 @@ new WorkloadRegionalNetworkConnectionsPhase3Stack(scope: Construct, workloadAcco
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -19200,6 +20945,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -19591,6 +21365,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -19625,6 +21401,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeListReference"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase3Stack } from 'aws-data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase3Stack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeReference"></a>
+
+```typescript
+import { WorkloadRegionalNetworkConnectionsPhase3Stack } from 'aws-data-landing-zone'
+
+WorkloadRegionalNetworkConnectionsPhase3Stack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalNetworkConnectionsPhase3Stack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
@@ -20132,6 +21985,7 @@ new WorkloadRegionalStack(scope: Construct, workloadAccountProps: WorkloadAccoun
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addDependency">addDependency</a></code> | Use `addDependency` for dependencies between stacks in an ExpressStage. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addMetadata">addMetadata</a></code> | Adds an arbitrary key-value pair, with information you want to record about the stack. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addStackDependency">addStackDependency</a></code> | Add a dependency between this stack and another stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addStackTag">addStackTag</a></code> | Configure a stack tag. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.addTransform">addTransform</a></code> | Add a Transform to this stack. A Transform is a macro that AWS CloudFormation uses to process your template. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.exportStringListValue">exportStringListValue</a></code> | Create a CloudFormation Export for a string list value. |
@@ -20223,6 +22077,35 @@ These get translated to the Metadata section of the generated template.
 ###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalStack.addMetadata.parameter.value"></a>
 
 - *Type:* any
+
+---
+
+##### `addStackDependency` <a name="addStackDependency" id="aws-data-landing-zone.WorkloadRegionalStack.addStackDependency"></a>
+
+```typescript
+public addStackDependency(target: Stack, reason?: string): void
+```
+
+Add a dependency between this stack and another stack.
+
+This can be used to define dependencies between any two stacks within an
+app, and also supports nested stacks.
+
+Stack dependencies may not cross Stage boundaries.
+
+This method only adds dependencies between stacks. If you are looking
+for a generic construct-to-construct dependency mechanism, use
+`construct.node.addDependency` instead.
+
+###### `target`<sup>Required</sup> <a name="target" id="aws-data-landing-zone.WorkloadRegionalStack.addStackDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.Stack
+
+---
+
+###### `reason`<sup>Optional</sup> <a name="reason" id="aws-data-landing-zone.WorkloadRegionalStack.addStackDependency.parameter.reason"></a>
+
+- *Type:* string
 
 ---
 
@@ -20614,6 +22497,8 @@ Create unique ResourceNames.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.consumeListReference">consumeListReference</a></code> | Override the reference strength for a specific cross-stack string list reference. |
+| <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.consumeReference">consumeReference</a></code> | Override the reference strength for a specific cross-stack reference value. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.isStack">isStack</a></code> | Return whether the given object is a Stack. |
 | <code><a href="#aws-data-landing-zone.WorkloadRegionalStack.of">of</a></code> | Looks up the first stack scope in which `construct` is defined. |
 
@@ -20648,6 +22533,83 @@ this type-testing method instead.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `consumeListReference` <a name="consumeListReference" id="aws-data-landing-zone.WorkloadRegionalStack.consumeListReference"></a>
+
+```typescript
+import { WorkloadRegionalStack } from 'aws-data-landing-zone'
+
+WorkloadRegionalStack.consumeListReference(value: string[], strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack string list reference.
+
+This is the string list equivalent of `consumeReference`.
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalStack.consumeListReference.parameter.value"></a>
+
+- *Type:* string[]
+
+A tokenized string list reference.
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalStack.consumeListReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
+
+---
+
+##### `consumeReference` <a name="consumeReference" id="aws-data-landing-zone.WorkloadRegionalStack.consumeReference"></a>
+
+```typescript
+import { WorkloadRegionalStack } from 'aws-data-landing-zone'
+
+WorkloadRegionalStack.consumeReference(value: string, strength?: ReferenceStrength)
+```
+
+Override the reference strength for a specific cross-stack reference value.
+
+Use this to weaken (or strengthen) an individual reference without
+affecting other references to the same resource. For example:
+
+```ts
+// producerStack defines an SNS topic
+declare const topic: sns.Topic;
+
+// consumerStack subscribes to it with a weak reference,
+// so the producer can be torn down without blocking on this consumer
+const consumerStack = new Stack(app, 'Consumer', {
+  env: { account: '123456789012', region: 'us-east-1' },
+});
+new sns.Subscription(consumerStack, 'Subscription', {
+  topic: sns.Topic.fromTopicArn(consumerStack, 'Topic', Stack.consumeReference(topic.topicArn)),
+  endpoint: 'https://example.com/webhook',
+  protocol: sns.SubscriptionProtocol.HTTPS,
+});
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.WorkloadRegionalStack.consumeReference.parameter.value"></a>
+
+- *Type:* string
+
+A tokenized string reference (e.g. `bucket.bucketArn`).
+
+---
+
+###### `strength`<sup>Optional</sup> <a name="strength" id="aws-data-landing-zone.WorkloadRegionalStack.consumeReference.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use.
+
+Defaults to `BOTH`.
 
 ---
 
