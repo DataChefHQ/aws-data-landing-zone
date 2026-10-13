@@ -30,15 +30,19 @@ process.env.MANDATORY_TAG_KEYS = 'Owner,Project,Environment,CostCenter,Name';
 const RESOURCE_ARN = 'arn:aws:dynamodb:eu-west-1:111111111111:table/test-table';
 
 // The formatter caches assumed credentials per account, so each test uses its own account id.
-function findingFrom(accountId: string) {
+function findingFrom(
+  accountId: string,
+  resourceType = 'AWS::DynamoDB::Table',
+  resourceId = 'test-table',
+) {
   return {
     Records: [{
       body: JSON.stringify({
         account: accountId,
         region: 'eu-west-1',
         detail: {
-          resourceType: 'AWS::DynamoDB::Table',
-          resourceId: 'test-table',
+          resourceType,
+          resourceId,
           configRuleName: 'dlz-global-config-required-tags',
         },
       }),
@@ -164,6 +168,53 @@ describe('tag-alert-formatter Lambda', () => {
     await handler(findingFrom('666666666666'));
 
     expect(snsSend).not.toHaveBeenCalled();
+  });
+
+  test('acknowledges the AWS-generated Internet Resolver finding without AWS lookups', async () => {
+    configSend.mockResolvedValue({
+      configurationItems: [{
+        arn: 'arn:aws:route53resolver:eu-west-1::autodefined-rule/rslvr-autodefined-rr-internet-resolver',
+        tags: {},
+      }],
+    });
+    taggingSend.mockRejectedValue(Object.assign(new Error('invalid AmazonResourceName'), {
+      name: 'InvalidParameterException',
+    }));
+
+    await expect(handler(findingFrom(
+      '100000000001', 'AWS::Route53Resolver::ResolverRule', 'rslvr-autodefined-rr-internet-resolver',
+    ))).resolves.toBeUndefined();
+
+    for (const send of [stsSend, configSend, taggingSend, cloudTrailSend, orgSend, snsSend]) {
+      expect(send).not.toHaveBeenCalled();
+    }
+  });
+
+  test.each([false, true])('still processes a custom resolver rule (tag lookup fails: %s)', async (lookupFails) => {
+    configSend.mockResolvedValue({
+      configurationItems: [{
+        arn: 'arn:aws:route53resolver:eu-west-1:100000000002:resolver-rule/rslvr-rr-custom',
+        resourceName: 'custom-resolver',
+        tags: {},
+      }],
+    });
+    if (lookupFails) {
+      taggingSend.mockRejectedValue(Object.assign(new Error('invalid AmazonResourceName'), {
+        name: 'InvalidParameterException',
+      }));
+    }
+
+    const result = handler(findingFrom(
+      lookupFails ? '100000000003' : '100000000002',
+      'AWS::Route53Resolver::ResolverRule', 'rslvr-rr-custom',
+    ));
+    if (lookupFails) {
+      await expect(result).rejects.toThrow('invalid AmazonResourceName');
+      expect(snsSend).not.toHaveBeenCalled();
+    } else {
+      await result;
+      expect(lastPublishedMessage().content.description).toContain('• Resource ID: *rslvr-rr-custom*');
+    }
   });
 
   test('stays silent for a service-linked role session', async () => {
