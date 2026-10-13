@@ -95,6 +95,14 @@ async function handleFinding(event: ConfigComplianceEvent): Promise<void> {
   const resourceId = detail.resourceId ?? 'unknown';
   const context = { accountId, region, resourceType, resourceId };
 
+  // AWS owns the default Internet Resolver rule; its accountless ARN cannot be read by the
+  // tagging API. Acknowledge its Config finding before attempting any cross-account lookup.
+  if (resourceType === 'AWS::Route53Resolver::ResolverRule'
+    && resourceId === 'rslvr-autodefined-rr-internet-resolver') {
+    recordOutcome('dropped_aws_service', context);
+    return;
+  }
+
   const requiredKeys = (process.env.MANDATORY_TAG_KEYS ?? '').split(',').filter(Boolean);
   let credentials;
   let recorded;
