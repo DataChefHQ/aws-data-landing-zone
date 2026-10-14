@@ -4,12 +4,15 @@ import { ArrowParens, TrailingComma } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'DataChefHQ',
   authorAddress: 'hi@datachef.co',
-  cdkVersion: '2.253.1',
+  cdkVersion: '2.273.0',
   defaultReleaseBranch: 'main',
-  constructsVersion: '10.6.0',
+  constructsVersion: '10.8.1',
   cdkVersionPinning: false,
-  jsiiVersion: '^5.9.37',
-  typescriptVersion: '^5.9',
+  projenVersion: '^0.104.5',
+  bumpPackage: 'commit-and-tag-version@^13.2.2',
+  jsiiVersion: '^6.0.18',
+  // Keep TypeScript aligned with the compiler supported by jsii and ts-jest.
+  typescriptVersion: '~6.0.3',
   name: 'aws-data-landing-zone',
   description: 'AWS CDK Data Landing Zone construct',
   packageManager: javascript.NodePackageManager.NPM,
@@ -53,33 +56,46 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk-express-pipeline@2.3.1',
   ],
   bundledDeps: [
-    '@aws-sdk/client-sts@^3.1049.0',
-    '@aws-sdk/credential-providers@^3.1049.0',
-    '@aws-sdk/client-bcm-data-exports@^3.1049.0',
-    '@aws-sdk/client-cost-explorer@^3.1049.0',
-    '@aws-sdk/client-identitystore@^3.1049.0',
-    '@aws-sdk/client-sso-admin@^3.1049.0',
-    '@aws-sdk/client-iam@^3.1049.0',
-    '@aws-sdk/client-cloudformation@^3.1049.0',
-    '@aws-sdk/client-guardduty@^3.1049.0',
-    '@aws-sdk/client-macie2@^3.1049.0',
-    '@aws-sdk/client-organizations@^3.1049.0',
-    '@aws-sdk/client-sns@^3.1049.0',
-    '@aws-sdk/client-cloudtrail@^3.1049.0',
-    '@aws-sdk/client-config-service@^3.1049.0',
-    '@aws-sdk/client-resource-groups-tagging-api@^3.1049.0',
-    'js-yaml@^4.1',
-    '@types/js-yaml',
+    '@aws-sdk/client-sts@^3.1150.0',
+    '@aws-sdk/credential-providers@^3.1150.0',
+    '@aws-sdk/client-bcm-data-exports@^3.1150.0',
+    '@aws-sdk/client-cost-explorer@^3.1150.0',
+    '@aws-sdk/client-identitystore@^3.1150.0',
+    '@aws-sdk/client-sso-admin@^3.1150.0',
+    '@aws-sdk/client-iam@^3.1150.0',
+    '@aws-sdk/client-cloudformation@^3.1150.0',
+    '@aws-sdk/client-guardduty@^3.1150.0',
+    '@aws-sdk/client-macie2@^3.1150.0',
+    '@aws-sdk/client-organizations@^3.1150.0',
+    '@aws-sdk/client-sns@^3.1150.0',
+    '@aws-sdk/client-cloudtrail@^3.1150.0',
+    '@aws-sdk/client-config-service@^3.1150.0',
+    '@aws-sdk/client-resource-groups-tagging-api@^3.1150.0',
+    'js-yaml@^5.4.3',
     'table',
   ],
-  devDeps: ['husky', '@types/aws-lambda', '@types/aws-sdk', '@types/node@^22', 'cdk-express-pipeline@2.3.1'],
+  devDeps: [
+    'husky',
+    '@types/aws-lambda',
+    '@types/node@^22',
+    'cdk-express-pipeline@2.3.1',
+    'jsii-docgen@^10.12.7',
+  ],
   jestOptions: {
+    jestVersion: '^30',
     jestConfig: {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'], // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
     },
   },
 });
 
+project.addDevDeps('eslint-import-resolver-typescript@^4.4.5');
+
+// Use release tags for generated GitHub Actions instead of projen's commit hashes.
+project.github!.actions.set('actions/checkout', 'actions/checkout@v7.0.1');
+project.github!.actions.set('actions/upload-artifact', 'actions/upload-artifact@v7.0.1');
+project.github!.actions.set('actions/download-artifact', 'actions/download-artifact@v8.0.1');
+project.github!.actions.set('amannn/action-semantic-pull-request', 'amannn/action-semantic-pull-request@v6.1.1');
 
 project.bundler.addBundle('./src/constructs/iam-identity-center/identity-store-user-lambda/', {
   platform: 'node',
@@ -176,5 +192,36 @@ project.tasks.tryFind('docgen')?.exec('bash post-docgen.sh');
 
 const ghReleaseWorkflow = project.tryFindObjectFile('.github/workflows/release.yml');
 ghReleaseWorkflow?.patch(JsonPatch.add('/on/push/paths-ignore', ['docs/**']));
+
+// Quote shell variables in generated workflows so actionlint's ShellCheck checks pass.
+project.tryFindObjectFile('.github/workflows/build.yml')?.patch(JsonPatch.replace('/jobs/build/steps/4/run', [
+  'git add .',
+  'git diff --staged --patch --exit-code > repo.patch || echo "self_mutation_happened=true" >> "$GITHUB_OUTPUT"',
+].join('\n')));
+project.tryFindObjectFile('.github/workflows/upgrade-main.yml')?.patch(JsonPatch.replace('/jobs/upgrade/steps/4/run', [
+  'git add .',
+  'git diff --staged --patch --exit-code > repo.patch || echo "patch_created=true" >> "$GITHUB_OUTPUT"',
+].join('\n')));
+ghReleaseWorkflow?.patch(
+  JsonPatch.replace('/jobs/release/steps/5/run', [
+    'TAG=$(cat dist/releasetag.txt)',
+    'if [ -n "$TAG" ] && git ls-remote -q --exit-code --tags origin "$TAG"; then',
+    '  echo "exists=true" >> "$GITHUB_OUTPUT"',
+    'else',
+    '  echo "exists=false" >> "$GITHUB_OUTPUT"',
+    'fi',
+    'cat "$GITHUB_OUTPUT"',
+  ].join('\n')),
+  JsonPatch.replace('/jobs/release/steps/6/run', [
+    'echo "latest_commit=$(git ls-remote origin -h "$GITHUB_REF" | cut -f1)" >> "$GITHUB_OUTPUT"',
+    'cat "$GITHUB_OUTPUT"',
+  ].join('\n')),
+  JsonPatch.replace('/jobs/release_github/steps/3/run', [
+    'tag=$(cat "$RELEASE_TAG_FILE")',
+    'if ! gh release view "$tag" -R "$GITHUB_REPOSITORY" 2>/dev/null; then',
+    '  gh release create "$tag" -R "$GITHUB_REPOSITORY" -F "$CHANGELOG_FILE" -t "$tag" --target "$GITHUB_SHA"',
+    'fi',
+  ].join('\n')),
+);
 
 project.synth();

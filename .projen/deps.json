@@ -10,11 +10,8 @@
       "type": "build"
     },
     {
-      "name": "@types/aws-sdk",
-      "type": "build"
-    },
-    {
       "name": "@types/jest",
+      "version": "^30",
       "type": "build"
     },
     {
@@ -39,7 +36,7 @@
     },
     {
       "name": "commit-and-tag-version",
-      "version": "^12",
+      "version": "^13.2.2",
       "type": "build"
     },
     {
@@ -48,6 +45,7 @@
     },
     {
       "name": "eslint-import-resolver-typescript",
+      "version": "^4.4.5",
       "type": "build"
     },
     {
@@ -64,12 +62,13 @@
       "type": "build"
     },
     {
-      "name": "jest",
+      "name": "jest-junit",
+      "version": "^17",
       "type": "build"
     },
     {
-      "name": "jest-junit",
-      "version": "^17",
+      "name": "jest",
+      "version": "^30",
       "type": "build"
     },
     {
@@ -78,7 +77,7 @@
     },
     {
       "name": "jsii-docgen",
-      "version": "^10.5.0",
+      "version": "^10.12.7",
       "type": "build"
     },
     {
@@ -87,20 +86,22 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "^5.9.37",
+      "version": "^6.0.18",
       "type": "build"
     },
     {
       "name": "jsii",
-      "version": "^5.9.37",
+      "version": "^6.0.18",
       "type": "build"
     },
     {
       "name": "projen",
+      "version": "^0.104.5",
       "type": "build"
     },
     {
       "name": "ts-jest",
+      "version": "^29",
       "type": "build"
     },
     {
@@ -109,91 +110,87 @@
     },
     {
       "name": "typescript",
-      "version": "^5.9",
+      "version": "~6.0.3",
       "type": "build"
     },
     {
       "name": "@aws-sdk/client-bcm-data-exports",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-cloudformation",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-cloudtrail",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-config-service",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-cost-explorer",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-guardduty",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-iam",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-identitystore",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-macie2",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-organizations",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-resource-groups-tagging-api",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sns",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sso-admin",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/client-sts",
-      "version": "^3.1049.0",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "@aws-sdk/credential-providers",
-      "version": "^3.1049.0",
-      "type": "bundled"
-    },
-    {
-      "name": "@types/js-yaml",
+      "version": "^3.1150.0",
       "type": "bundled"
     },
     {
       "name": "js-yaml",
-      "version": "^4.1",
+      "version": "^5.4.3",
       "type": "bundled"
     },
     {
@@ -202,7 +199,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.253.1",
+      "version": "^2.273.0",
       "type": "peer"
     },
     {
@@ -212,7 +209,7 @@
     },
     {
       "name": "constructs",
-      "version": "^10.6.0",
+      "version": "^10.8.1",
       "type": "peer"
     },
     {

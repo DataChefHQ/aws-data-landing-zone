@@ -2,7 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import * as sso from 'aws-cdk-lib/aws-sso';
-import { CfnPermissionSet } from 'aws-cdk-lib/aws-sso/lib/sso.generated';
+import { CfnPermissionSet } from 'aws-cdk-lib/aws-sso';
 import { Construct } from 'constructs';
 import { IamIdentityCenterGroup, IamIdentityCenterGroupUser } from './iam-identity-center-group';
 import { IdentityStoreUser, IdentityStoreUserProps } from './identity-store-user';

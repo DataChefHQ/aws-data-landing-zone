@@ -1,5 +1,4 @@
-import { ExportValueOptions } from 'aws-cdk-lib';
-import { Environment } from 'aws-cdk-lib/core/lib/environment';
+import { Environment, ExportValueOptions } from 'aws-cdk-lib';
 import { ExpressStage, ExpressStack } from 'cdk-express-pipeline';
 import { Construct } from 'constructs';
 

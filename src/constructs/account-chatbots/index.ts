@@ -1,6 +1,6 @@
 import { Stack } from 'aws-cdk-lib';
 import * as chatbot from 'aws-cdk-lib/aws-chatbot';
-import { SlackChannelConfigurationProps } from 'aws-cdk-lib/aws-chatbot/lib/slack-channel-configuration';
+import { SlackChannelConfigurationProps } from 'aws-cdk-lib/aws-chatbot';
 import { Construct } from 'constructs';
 
 export interface SlackChannel {
