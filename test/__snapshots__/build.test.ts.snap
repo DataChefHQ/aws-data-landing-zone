@@ -17,7 +17,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "1d7936a77c2e0aea3b22e20d6deea6f643a71ea56a1b11633bffc3ad3f4e44ff.zip",
+          "S3Key": "b341ecc559a424d7a8b9fe437a2b4baa927deb85f0e93c41878bc414b4d3c8e7.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -85,7 +85,7 @@ exports[`Build Local snapshot testing: auditStacksGlobalTemplate snapshot 1`] = 
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-851725452335-eu-west-1",
-          "S3Key": "846b2a3afb4048394f657a93a1092e4e4488ddfbd6ec40046b27fe2409863f22.zip",
+          "S3Key": "abd71cabc63a2612f68c1613aacc59f790c02a9e28113409a28de9e67cff6d48.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
