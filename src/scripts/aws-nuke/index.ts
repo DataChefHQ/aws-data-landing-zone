@@ -88,12 +88,6 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       value: 'dlz',
     },
   ];
-  const consumerFilters = (props.awsNuke?.filters ?? []).map(filter => ({
-    ...(filter.property ? { property: filter.property } : {}),
-    ...(filter.type ? { type: filter.type } : {}),
-    value: filter.value,
-  }));
-
   if (workloadAccount) {
     if (workloadAccount.type === DlzAccountType.PRODUCTION && !dryRun) {
       throw new Error(`Refusing to nuke ${accountName} (${workloadAccount.accountId}) because it is a production account. ` +
@@ -107,7 +101,7 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       ...controlTowerFilters,
       ...cdkFilters,
       ...dlzFilters,
-      ...consumerFilters,
+      ...(props.awsNuke?.filters ?? []),
     ];
   } else if (suspendedAccount) {
     accountId = suspendedAccount.accountId;
@@ -195,7 +189,7 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       ],
     },
   };
-  const nukeConfigYaml = dump(nukeConfig);
+  const nukeConfigYaml = dump(nukeConfig, { skipInvalid: true }); // Omits the unset optional filter fields
   await writeFile(path.resolve(relativeDir, 'aws-nuke-config.yml'), nukeConfigYaml);
 
   const accountRole = `arn:aws:iam::${accountId}:role/AWSControlTowerExecution`;
