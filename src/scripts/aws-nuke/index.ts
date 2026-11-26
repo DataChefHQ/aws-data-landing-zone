@@ -1,7 +1,7 @@
 import { writeFile } from 'fs/promises';
 import * as path from 'path';
 import { dump } from 'js-yaml';
-import { DataLandingZoneProps } from '../../data-landing-zone-types';
+import { DataLandingZoneProps, DlzAccountType } from '../../data-landing-zone-types';
 import { assumeRole, runCommand } from '../lib/helpers';
 
 export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, awsNukeBinary: string, accountName: string, dryRun: boolean = true) {
@@ -22,10 +22,6 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
     {
       type: 'contains',
       value: 'AWSControlTower',
-    },
-    {
-      type: 'contains',
-      value: 'aws-controltower',
     },
 
     //Some AWS SSO and IAM Identity Center resources should nto be deleted, grouping them with the ControlTower filters
@@ -67,11 +63,6 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       property: 'tag:aws:aws-cdk:bootstrap-role',
       value: 'deploy',
     },
-    {
-      property: 'tag:aws:aws:cloudformation:stack-id',
-      type: 'glob',
-      value: '*CDK*',
-    },
   ];
   const dlzFilters = [
     {
@@ -79,9 +70,10 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       value: 'dlz-',
     },
     {
+      // Keeps resources of DLZ stacks even when the consumer overrides the DLZ `Environment` tag
       property: 'tag:aws:cloudformation:stack-name',
       type: 'glob',
-      value: 'dlz-',
+      value: 'dlz-*',
     },
     {
       property: 'tag:Environment',
@@ -96,16 +88,26 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       value: 'dlz',
     },
   ];
+  const consumerFilters = (props.awsNuke?.filters ?? []).map(filter => ({
+    ...(filter.property ? { property: filter.property } : {}),
+    ...(filter.type ? { type: filter.type } : {}),
+    value: filter.value,
+  }));
 
   if (workloadAccount) {
+    if (workloadAccount.type === DlzAccountType.PRODUCTION && !dryRun) {
+      throw new Error(`Refusing to nuke ${accountName} (${workloadAccount.accountId}) because it is a production account. ` +
+        'A dry run is still allowed. To empty the account, move it to the Suspended OU first.');
+    }
     accountId = workloadAccount.accountId;
     console.log(`Account: ${accountName} (${accountId})`);
     console.log('OU: Workloads');
-    console.log('Target: ALL resources except: ControlTower, CDK Bootstrap and DLZ resources.');
+    console.log('Target: ALL resources except: ControlTower, CDK Bootstrap, DLZ resources and the props.awsNuke filters.');
     globalFilters = [
       ...controlTowerFilters,
       ...cdkFilters,
       ...dlzFilters,
+      ...consumerFilters,
     ];
   } else if (suspendedAccount) {
     accountId = suspendedAccount.accountId;
@@ -126,7 +128,7 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
       ...props.regions.regional,
       'global',
     ],
-    'account-blocklist': [
+    'blocklist': [
       '000000000000', // Just to make it happy that we listed something
     ],
     'bypass-alias-check-accounts': [
@@ -174,6 +176,22 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
         'RedshiftServerlessWorkgroup', // Deprecated service
         'ElasticTranscoderPreset', // Deprecated service
         'ElasticTranscoderPipeline', // Deprecated service
+        'GuardDutyDetector', // Managed by the DLZ GuardDuty organization setup, member accounts can not delete it
+        'ShieldProtection', // Listing fails without a Shield Advanced subscription
+        'ShieldProtectionGroup', // Listing fails without a Shield Advanced subscription
+        'LexBot', // Lex V1, retired service
+        'LexIntent', // Lex V1, retired service
+        'LexSlotType', // Lex V1, retired service
+        'LexModelBuildingServiceBotAlias', // Lex V1, retired service
+        'InspectorAssessmentRun', // Inspector Classic, retired service
+        'InspectorAssessmentTarget', // Inspector Classic, retired service
+        'InspectorAssessmentTemplate', // Inspector Classic, retired service
+        'GlueDevEndpoint', // AWS disabled the GetDevEndpoints operation
+        'CloudDirectoryDirectory', // Closed to new customers
+        'CloudDirectorySchema', // Closed to new customers
+        'AWS::Timestream::Database', // Timestream for LiveAnalytics is closed to new customers
+        'AWS::Timestream::ScheduledQuery', // Timestream for LiveAnalytics is closed to new customers
+        'AWS::Timestream::Table', // Timestream for LiveAnalytics is closed to new customers
       ],
     },
   };
@@ -192,16 +210,19 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
   if (!dryRun) {
     nukeArgs.push('--no-dry-run');
   }
-  await runCommand(awsNukeBinary, nukeArgs.join(' '), {
-    cwd: relativeDir,
-    env: {
-      AWS_PROFILE: '',
-      AWS_DEFAULT_REGION: props.regions.global,
-      AWS_ACCESS_KEY_ID: accountCreds.AccessKeyId!,
-      AWS_SECRET_ACCESS_KEY: accountCreds.SecretAccessKey!,
-      AWS_SESSION_TOKEN: accountCreds.SessionToken!,
-    },
-  });
+  try {
+    await runCommand(awsNukeBinary, nukeArgs.join(' '), {
+      cwd: relativeDir,
+      env: {
+        AWS_PROFILE: '',
+        AWS_DEFAULT_REGION: props.regions.global,
+        AWS_ACCESS_KEY_ID: accountCreds.AccessKeyId!,
+        AWS_SECRET_ACCESS_KEY: accountCreds.SecretAccessKey!,
+        AWS_SESSION_TOKEN: accountCreds.SessionToken!,
+      },
+    }, '', true, false);
+  } catch {
+    // Exiting the process here would break the jsii bridge, and Python would show a JSONDecodeError instead of this
+    throw new Error(`AWS Nuke failed on ${accountName} (${accountId}). The output above shows the resources it could not remove.`);
+  }
 }
-
-

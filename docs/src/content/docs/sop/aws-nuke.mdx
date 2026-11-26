@@ -17,12 +17,64 @@ The generated configuration file varies based on the account's Organizational Un
     - ControlTower resources
     - CDK Bootstrap resources
     - DLZ-defined resources
+    - Resources that match the `awsNuke.filters` in your DLZ config, see [Keep your own resources](#keep-your-own-resources)
 - **Suspended OU**: Will delete all resources except:
     - ControlTower resources
     - CDK Bootstrap resources
 
 Refer to the [Account Management / Accounts](/components/account-management/accounts#suspended-ou) page for instructions
 on moving an account from the Workloads OU to the Suspended OU.
+
+The script refuses to delete resources in a Workloads OU account of type `PRODUCTION`. A dry run still works. To empty
+a production account, move it to the Suspended OU first.
+
+The script never deletes the GuardDuty detector, because the DLZ GuardDuty organization setup manages it and member
+accounts can not delete it. It also skips resource types of retired or closed AWS services, whose listing only fails.
+
+Use AWS Nuke v3.68.3 or later. Older versions try to delete the `default.iam-user` and `default.iam-user-group`
+ElastiCache resources that AWS creates in every region, which always fails.
+
+## Keep your own resources
+
+Stacks and StackSets that you deploy into workload accounts outside the DLZ are deleted unless you add a filter for
+them. AWS Nuke keeps every resource that matches one of the `awsNuke.filters` in your DLZ config. Without a `property`,
+a filter compares against the resource identifier that AWS Nuke prints in its output, such as the role or stack name.
+See the [AWS Nuke filtering docs](https://ekristen.github.io/aws-nuke/config-filtering/) for how each type matches.
+
+<DualCode>
+  <Fragment slot="ts">
+    ```ts
+    awsNuke: {
+      filters: [
+        { type: DlzAwsNukeFilterType.GLOB, value: 'prowler-scan-access-*' },
+        { property: 'tag:Owner', value: 'security' },
+      ],
+    },
+    ```
+  </Fragment>
+  <Fragment slot="python">
+    ```python
+    aws_nuke=dlz.DlzAwsNukeProps(
+        filters=[
+            dlz.DlzAwsNukeFilter(type=dlz.DlzAwsNukeFilterType.GLOB, value="prowler-scan-access-*"),
+            dlz.DlzAwsNukeFilter(property="tag:Owner", value="security"),
+        ],
+    ),
+    ```
+  </Fragment>
+</DualCode>
+
+Run a dry run and check that these resources show as `filtered by config` before you run it with `--no-dry-run`.
+
+## Resources to remove by hand
+
+AWS Nuke can not remove these resources, and the run fails while they exist:
+
+- **A CloudFront distribution on a flat-rate pricing plan.** Cancel the pricing plan in the CloudFront console, then run
+  AWS Nuke again. The `CreatedByCloudFront-*` WAF web ACL of that distribution is deleted after the distribution is gone.
+
+When a run fails, the script throws an error that names the account. The resources AWS Nuke could not remove are
+listed above it in the output, each followed by the AWS error.
 
 ## Usage
 
@@ -188,7 +240,7 @@ jobs:
       - name: Download the aws-nuke binary
         run: |
           cd scripts
-          curl -L -o aws-nuke.tar.gz https://github.com/ekristen/aws-nuke/releases/download/v3.44.0/aws-nuke-v3.44.0-linux-amd64.tar.gz
+          curl -L -o aws-nuke.tar.gz https://github.com/ekristen/aws-nuke/releases/download/v3.69.1/aws-nuke-v3.69.1-linux-amd64.tar.gz
           tar -xzf aws-nuke.tar.gz
       - name: Run AWS Nuke
         run: npm run aws-nuke -- ${{ inputs.account-name }} ${{ inputs.dry-run == 'false' && '--no-dry-run' || '' }}
