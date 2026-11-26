@@ -217,6 +217,6 @@ export async function awsNuke(props: DataLandingZoneProps, relativeDir: string, 
     }, '', true, false);
   } catch {
     // Exiting the process here would break the jsii bridge, and Python would show a JSONDecodeError instead of this
-    throw new Error(`AWS Nuke failed on ${accountName} (${accountId}). The output above shows the resources it could not remove.`);
+    throw new Error(`AWS Nuke failed on ${accountName} (${accountId}). See the AWS Nuke output above for the cause.`);
   }
 }

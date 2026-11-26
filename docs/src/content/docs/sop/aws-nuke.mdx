@@ -73,8 +73,8 @@ AWS Nuke can not remove these resources, and the run fails while they exist:
 - **A CloudFront distribution on a flat-rate pricing plan.** Cancel the pricing plan in the CloudFront console, then run
   AWS Nuke again. The `CreatedByCloudFront-*` WAF web ACL of that distribution is deleted after the distribution is gone.
 
-When a run fails, the script throws an error that names the account. The resources AWS Nuke could not remove are
-listed above it in the output, each followed by the AWS error.
+When a run fails, the script throws an error that names the account. The AWS Nuke output above it shows the cause,
+such as the resources it could not remove, each followed by the AWS error.
 
 ## Usage
 
