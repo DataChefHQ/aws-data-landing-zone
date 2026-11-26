@@ -23550,6 +23550,7 @@ const dataLandingZoneProps: DataLandingZoneProps = { ... }
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.regions">regions</a></code> | <code><a href="#aws-data-landing-zone.DlzRegions">DlzRegions</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.securityHubNotifications">securityHubNotifications</a></code> | <code><a href="#aws-data-landing-zone.SecurityHubNotification">SecurityHubNotification</a>[]</code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.additionalMandatoryTags">additionalMandatoryTags</a></code> | <code><a href="#aws-data-landing-zone.DlzTag">DlzTag</a>[]</code> | Extra tags appended to the five baseline mandatory tags (Owner, Project, Environment, CostCenter, Name). |
+| <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.awsNuke">awsNuke</a></code> | <code><a href="#aws-data-landing-zone.DlzAwsNukeProps">DlzAwsNukeProps</a></code> | Settings for the `awsNuke` script. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.defaultNotification">defaultNotification</a></code> | <code><a href="#aws-data-landing-zone.NotificationDetailsProps">NotificationDetailsProps</a></code> | Default notification settings for the organization. |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.deploymentPlatform">deploymentPlatform</a></code> | <code><a href="#aws-data-landing-zone.DeploymentPlatform">DeploymentPlatform</a></code> | *No description.* |
 | <code><a href="#aws-data-landing-zone.DataLandingZoneProps.property.finOps">finOps</a></code> | <code><a href="#aws-data-landing-zone.DlzFinOpsProps">DlzFinOpsProps</a></code> | Cost-management capabilities. |
@@ -23646,6 +23647,19 @@ support is best-effort because not every AWS resource accepts tags.
 
 DLZ-created stacks are tagged Owner=infra, Project=dlz, Environment=dlz, CostCenter=dlz,
 Name=dlz.
+
+---
+
+##### `awsNuke`<sup>Optional</sup> <a name="awsNuke" id="aws-data-landing-zone.DataLandingZoneProps.property.awsNuke"></a>
+
+```typescript
+public readonly awsNuke: DlzAwsNukeProps;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzAwsNukeProps">DlzAwsNukeProps</a>
+- *Default:* keep only the Control Tower, CDK bootstrap and DLZ resources
+
+Settings for the `awsNuke` script.
 
 ---
 
@@ -24394,6 +24408,104 @@ public readonly tagKey: string;
 Cost-allocation tag key to scope the monitor to.
 
 Mutually exclusive with `dimension`.
+
+---
+
+### DlzAwsNukeFilter <a name="DlzAwsNukeFilter" id="aws-data-landing-zone.DlzAwsNukeFilter"></a>
+
+An AWS Nuke filter that applies to all resource types.
+
+AWS Nuke keeps the resources that match it.
+See https://ekristen.github.io/aws-nuke/config-filtering/
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzAwsNukeFilter.Initializer"></a>
+
+```typescript
+import { DlzAwsNukeFilter } from 'aws-data-landing-zone'
+
+const dlzAwsNukeFilter: DlzAwsNukeFilter = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilter.property.value">value</a></code> | <code>string</code> | The value to compare with. |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilter.property.property">property</a></code> | <code>string</code> | The resource property to compare, for example `tag:Owner`. |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilter.property.type">type</a></code> | <code><a href="#aws-data-landing-zone.DlzAwsNukeFilterType">DlzAwsNukeFilterType</a></code> | How to compare the value. |
+
+---
+
+##### `value`<sup>Required</sup> <a name="value" id="aws-data-landing-zone.DlzAwsNukeFilter.property.value"></a>
+
+```typescript
+public readonly value: string;
+```
+
+- *Type:* string
+
+The value to compare with.
+
+---
+
+##### `property`<sup>Optional</sup> <a name="property" id="aws-data-landing-zone.DlzAwsNukeFilter.property.property"></a>
+
+```typescript
+public readonly property: string;
+```
+
+- *Type:* string
+- *Default:* the resource identifier that AWS Nuke prints, such as the role or stack name
+
+The resource property to compare, for example `tag:Owner`.
+
+---
+
+##### `type`<sup>Optional</sup> <a name="type" id="aws-data-landing-zone.DlzAwsNukeFilter.property.type"></a>
+
+```typescript
+public readonly type: DlzAwsNukeFilterType;
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzAwsNukeFilterType">DlzAwsNukeFilterType</a>
+- *Default:* DlzAwsNukeFilterType.EXACT
+
+How to compare the value.
+
+---
+
+### DlzAwsNukeProps <a name="DlzAwsNukeProps" id="aws-data-landing-zone.DlzAwsNukeProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-data-landing-zone.DlzAwsNukeProps.Initializer"></a>
+
+```typescript
+import { DlzAwsNukeProps } from 'aws-data-landing-zone'
+
+const dlzAwsNukeProps: DlzAwsNukeProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeProps.property.filters">filters</a></code> | <code><a href="#aws-data-landing-zone.DlzAwsNukeFilter">DlzAwsNukeFilter</a>[]</code> | Extra AWS Nuke filters for Workloads OU accounts. |
+
+---
+
+##### `filters`<sup>Optional</sup> <a name="filters" id="aws-data-landing-zone.DlzAwsNukeProps.property.filters"></a>
+
+```typescript
+public readonly filters: DlzAwsNukeFilter[];
+```
+
+- *Type:* <a href="#aws-data-landing-zone.DlzAwsNukeFilter">DlzAwsNukeFilter</a>[]
+- *Default:* no extra filters
+
+Extra AWS Nuke filters for Workloads OU accounts.
+
+AWS Nuke keeps every resource that matches
+a filter. Use them for resources your own stacks or StackSets deploy into workload accounts,
+next to the Control Tower, CDK bootstrap and DLZ resources that are always kept.
 
 ---
 
@@ -35256,6 +35368,39 @@ public readonly reportResource: ReportResource;
 
 
 ##### `PRODUCTION` <a name="PRODUCTION" id="aws-data-landing-zone.DlzAccountType.PRODUCTION"></a>
+
+---
+
+
+### DlzAwsNukeFilterType <a name="DlzAwsNukeFilterType" id="aws-data-landing-zone.DlzAwsNukeFilterType"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilterType.EXACT">EXACT</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilterType.CONTAINS">CONTAINS</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilterType.GLOB">GLOB</a></code> | *No description.* |
+| <code><a href="#aws-data-landing-zone.DlzAwsNukeFilterType.REGEX">REGEX</a></code> | *No description.* |
+
+---
+
+##### `EXACT` <a name="EXACT" id="aws-data-landing-zone.DlzAwsNukeFilterType.EXACT"></a>
+
+---
+
+
+##### `CONTAINS` <a name="CONTAINS" id="aws-data-landing-zone.DlzAwsNukeFilterType.CONTAINS"></a>
+
+---
+
+
+##### `GLOB` <a name="GLOB" id="aws-data-landing-zone.DlzAwsNukeFilterType.GLOB"></a>
+
+---
+
+
+##### `REGEX` <a name="REGEX" id="aws-data-landing-zone.DlzAwsNukeFilterType.REGEX"></a>
 
 ---
 

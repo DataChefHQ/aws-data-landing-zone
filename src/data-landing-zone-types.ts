@@ -949,6 +949,56 @@ export interface DataLandingZoneProps {
    * @default - no FinOps capabilities enabled
    */
   readonly finOps?: DlzFinOpsProps;
+
+  /**
+   * Settings for the `awsNuke` script.
+   *
+   * @default - keep only the Control Tower, CDK bootstrap and DLZ resources
+   */
+  readonly awsNuke?: DlzAwsNukeProps;
+}
+
+export interface DlzAwsNukeProps {
+  /**
+   * Extra AWS Nuke filters for Workloads OU accounts. AWS Nuke keeps every resource that matches
+   * a filter. Use them for resources your own stacks or StackSets deploy into workload accounts,
+   * next to the Control Tower, CDK bootstrap and DLZ resources that are always kept.
+   *
+   * @default - no extra filters
+   */
+  readonly filters?: DlzAwsNukeFilter[];
+}
+
+/**
+ * An AWS Nuke filter that applies to all resource types. AWS Nuke keeps the resources that match it.
+ * See https://ekristen.github.io/aws-nuke/config-filtering/
+ */
+export interface DlzAwsNukeFilter {
+  /**
+   * The value to compare with.
+   */
+  readonly value: string;
+
+  /**
+   * How to compare the value.
+   *
+   * @default DlzAwsNukeFilterType.EXACT
+   */
+  readonly type?: DlzAwsNukeFilterType;
+
+  /**
+   * The resource property to compare, for example `tag:Owner`.
+   *
+   * @default - the resource identifier that AWS Nuke prints, such as the role or stack name
+   */
+  readonly property?: string;
+}
+
+export enum DlzAwsNukeFilterType {
+  EXACT = 'exact',
+  CONTAINS = 'contains',
+  GLOB = 'glob',
+  REGEX = 'regex',
 }
 
 export interface DlzFinOpsProps {

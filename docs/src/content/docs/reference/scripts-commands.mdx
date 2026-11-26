@@ -106,7 +106,8 @@ Usage is demonstrated below for both TypeScript and Python.
     - `awsNuke(props: DataLandingZoneProps, relativeDir: string, awsNukeBinary: string, accountName: string, dryRun: boolean = true): Promise<void>;`
        Runs AWS Nuke on the specified account. If the account is in the Suspended OU, it will delete all resources but
        EXCLUDE the ControlTower and CDK Bootstrap resources. If the account is in the Workloads OU, it will additionally
-       EXCLUDE the DLZ resources. Parameters:
+       EXCLUDE the DLZ resources and the resources that match `props.awsNuke.filters`, and it refuses to run without
+       a dry run on a `PRODUCTION` account. See the [AWS Nuke SOP](/sop/aws-nuke). Parameters:
         - `props` - The DLZ configuration.
         - `relativeDir` - The directory of the script, used to build the full path to the AWS Nuke binary.
         - `awsNukeBinary` - The path of the AWS Nuke binary, relative to the `relativeDir` parameter.
@@ -166,7 +167,8 @@ Usage is demonstrated below for both TypeScript and Python.
     - `aws_nuke(props: DataLandingZoneProps, relative_dir: str, aws_nuke_binary: str, account_name: str, dry_run: bool = True) -> None:`
       Runs AWS Nuke on the specified account. If the account is in the Suspended OU, it will delete all resources but
       EXCLUDE the ControlTower and CDK Bootstrap resources. If the account is in the Workloads OU, it will additionally
-      EXCLUDE the DLZ resources. Parameters:
+      EXCLUDE the DLZ resources and the resources that match `props.aws_nuke.filters`, and it refuses to run without
+      a dry run on a `PRODUCTION` account. See the [AWS Nuke SOP](/sop/aws-nuke). Parameters:
       - `props` - The DLZ configuration.
       - `relative_dir` - The directory of the script, used to build the full path to the AWS Nuke binary.
       - `aws_nuke_binary` - The path of the AWS Nuke binary, relative to the `relative_dir` parameter.
