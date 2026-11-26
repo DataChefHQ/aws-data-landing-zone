@@ -73,7 +73,7 @@ test('keeps the resources that match the awsNuke filters', async () => {
   await writeAwsNukeStub(0);
   const awsNuke = {
     filters: [
-      { value: 'prowler-scan-access-*', type: DlzAwsNukeFilterType.GLOB },
+      { value: 'security-baseline-*', type: DlzAwsNukeFilterType.GLOB },
       { value: 'infra', property: 'tag:Owner' },
     ],
   };
@@ -82,7 +82,7 @@ test('keeps the resources that match the awsNuke filters', async () => {
 
   const config = load(await readFile(path.join(dir, 'aws-nuke-config.yml'), 'utf8')) as any;
   expect(config.accounts[SANDBOX_ID].filters.__global__).toEqual(expect.arrayContaining([
-    { type: 'glob', value: 'prowler-scan-access-*' },
+    { type: 'glob', value: 'security-baseline-*' },
     { property: 'tag:Owner', value: 'infra' },
   ]));
 });

@@ -46,7 +46,7 @@ See the [AWS Nuke filtering docs](https://ekristen.github.io/aws-nuke/config-fil
     ```ts
     awsNuke: {
       filters: [
-        { type: DlzAwsNukeFilterType.GLOB, value: 'prowler-scan-access-*' },
+        { type: DlzAwsNukeFilterType.GLOB, value: 'security-baseline-*' },
         { property: 'tag:Owner', value: 'security' },
       ],
     },
@@ -56,7 +56,7 @@ See the [AWS Nuke filtering docs](https://ekristen.github.io/aws-nuke/config-fil
     ```python
     aws_nuke=dlz.DlzAwsNukeProps(
         filters=[
-            dlz.DlzAwsNukeFilter(type=dlz.DlzAwsNukeFilterType.GLOB, value="prowler-scan-access-*"),
+            dlz.DlzAwsNukeFilter(type=dlz.DlzAwsNukeFilterType.GLOB, value="security-baseline-*"),
             dlz.DlzAwsNukeFilter(property="tag:Owner", value="security"),
         ],
     ),
